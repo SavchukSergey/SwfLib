@@ -65,15 +65,18 @@ namespace Code.SwfLib.SwfMill {
         }
 
         public object Visit(ExportTag tag) {
-            return new XElement(XName.Get("Export"),
+            return new XElement(XName.Get(SwfTagNameMapping.EXPORT_TAG),
                                 new XElement(XName.Get("symbols"), tag.Symbols.Select(item => GetSymbol(item))));
         }
 
         public object Visit(FileAttributesTag tag) {
-            var res = new XElement(XName.Get("FileAttributes"),
+            var res = new XElement(XName.Get(SwfTagNameMapping.FILE_ATTRIBUTES_TAG),
                                    new XAttribute(XName.Get("hasMetaData"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.HasMetadata)),
                                    new XAttribute(XName.Get("useNetwork"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.UseNetwork)),
-                                   new XAttribute(XName.Get("allowABC"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.AllowAbc))
+                                   new XAttribute(XName.Get("allowABC"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.AllowAbc)),
+                                   new XAttribute(XName.Get("suppressCrossDomainCaching"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.SupressCrossDomainCaching)),
+                                   new XAttribute(XName.Get("swfRelativeURLs"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.SwfRelativeUrls))
+                                   
                 );
             //TODO: other attributes
             if (_version >= 10) {
@@ -85,11 +88,11 @@ namespace Code.SwfLib.SwfMill {
         }
 
         public object Visit(MetadataTag tag) {
-            return new XElement(XName.Get("Metadata"), tag.Metadata);
+            return new XElement(XName.Get(SwfTagNameMapping.METADATA_TAG), tag.Metadata);
         }
 
         public object Visit(PlaceObject2Tag tag) {
-            var res = new XElement(XName.Get("PlaceObject2"));
+            var res = new XElement(XName.Get(SwfTagNameMapping.PLACE_OBJECT2_TAG));
             if (tag.ObjectID.HasValue) {
                 res.Add(new XAttribute(XName.Get("objectID"), tag.ObjectID.Value));
             }
@@ -102,7 +105,7 @@ namespace Code.SwfLib.SwfMill {
         }
 
         public object Visit(SetBackgroundColorTag tag) {
-            return new XElement(XName.Get("SetBackgroundColor"),
+            return new XElement(XName.Get(SwfTagNameMapping.SET_BACKGROUND_COLOR_TAG),
                                 new XElement(XName.Get("color"), GetColor(tag.Color)));
         }
 
@@ -112,7 +115,7 @@ namespace Code.SwfLib.SwfMill {
 
         //TODO: Check format
         public object Visit(UnknownTag tag) {
-            return new XElement(XName.Get("UnknownTag"),
+            return new XElement(XName.Get(SwfTagNameMapping.UNKNOWN_TAG),
                                 new XAttribute(XName.Get("id"), string.Format("0x{0:x}", (int)tag.RawData.Type)),
                                 new XElement(XName.Get("data"), Convert.ToBase64String(tag.RawData.Data
                 //, Base64FormattingOptions.InsertLineBreaks
@@ -203,5 +206,62 @@ namespace Code.SwfLib.SwfMill {
                                 new XAttribute(XName.Get("glyph"), entry.Index),
                                 new XAttribute(XName.Get("advance"), entry.Advance));
         }
+
+
+        #region ISwfTagVisitor Members
+
+        object ISwfTagVisitor.Visit(CSMTextSettingsTag tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(DefineFontNameTag tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(DefineSpriteTag tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(DefineTextTag tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(EndTag tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(ExportTag tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(FileAttributesTag tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(MetadataTag tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(PlaceObject2Tag tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(SetBackgroundColorTag tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(ShowFrameTag tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(SwfTagBase tag) {
+            throw new NotImplementedException();
+        }
+
+        object ISwfTagVisitor.Visit(UnknownTag tag) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

@@ -20,6 +20,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill", "Code
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill.Tests", "Code.SwfLib.SwfMill.Tests\Code.SwfLib.SwfMill.Tests.csproj", "{4EAE1D32-3036-493F-8699-1A9A7D65B277}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nUnit", "nUnit", "{242E2CE4-A110-4F8C-AECF-FDF29547B943}"
+	ProjectSection(SolutionItems) = preProject
+		References\nUnit\nunit.framework.dll = References\nUnit\nunit.framework.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "swfmill", "swfmill", "{3850D393-CC9A-44E6-BCE0-DD94AB5DCECD}"
+	ProjectSection(SolutionItems) = preProject
+		References\swfmill\swfmill.exe = References\swfmill\swfmill.exe
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,5 +55,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{242E2CE4-A110-4F8C-AECF-FDF29547B943} = {AFFA8CD0-B0EC-44C2-AB6D-64943CF12F3B}
+		{3850D393-CC9A-44E6-BCE0-DD94AB5DCECD} = {AFFA8CD0-B0EC-44C2-AB6D-64943CF12F3B}
 	EndGlobalSection
 EndGlobal

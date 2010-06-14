@@ -16,6 +16,20 @@ namespace Code.SwfLib.SwfMill {
             return doc;
         }
 
+        public SwfFile ReadFromXml(XDocument doc) {
+            var root = doc.Root;
+            SwfFile file = new SwfFile();
+            SwfFileInfo fileInfo;
+            if (root == null || root.Name.LocalName != "swf") {
+                throw new FormatException("Expected swf as root");
+            }
+            fileInfo.Version = byte.Parse(root.Attribute(XName.Get("version")).Value);
+            fileInfo.Format = root.Attribute(XName.Get("compressed")).Value == "1" ? "CWS" : "FWS";
+            fileInfo.FileLength = 0;
+            file.FileInfo = fileInfo;
+            return file;
+        }
+
         private XElement GetRoot(SwfFile file) {
             return new XElement(XName.Get("swf"),
                                 new XAttribute(XName.Get("version"), file.FileInfo.Version),
@@ -61,5 +75,6 @@ namespace Code.SwfLib.SwfMill {
                     throw new InvalidOperationException();
             }
         }
+
     }
 }
