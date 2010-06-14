@@ -49,8 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumerableExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SwfXmlUtilsTest.cs" />
+    <Compile Include="SwfMillFacadeTest.cs" />
+    <Compile Include="XmlComparision.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Code.SwfLib.SwfMill\Code.SwfLib.SwfMill.csproj">
@@ -66,10 +68,10 @@
     <EmbeddedResource Include="FlashTest.swf" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BackgroundTest.swf" />
+    <EmbeddedResource Include="Resources\SimpleBackground.swf" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <EmbeddedResource Include="Resources\SimpleBackground.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

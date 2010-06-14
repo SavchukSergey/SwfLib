@@ -5,21 +5,22 @@ using Code.SwfLib.Data;
 namespace Code.SwfLib {
     public static class SwfStreamWriterExt {
 
-        public static void WriteSwfFileInfo(this Stream stream, SwfFileInfo fileInfo) {
+        public static void WriteSwfFileInfo(this SwfStreamWriter writer, SwfFileInfo fileInfo)
+        {
             string format = fileInfo.Format;
             if (format == null || format.Length != 3)
                 throw new InvalidOperationException("Format should be of length 3");
-            stream.WriteByte((byte) format[0]);
-            stream.WriteByte((byte) format[1]);
-            stream.WriteByte((byte) format[2]);
+            writer.WriteByte((byte)format[0]);
+            writer.WriteByte((byte)format[1]);
+            writer.WriteByte((byte)format[2]);
 
-            stream.WriteByte(fileInfo.Version);
+            writer.WriteByte(fileInfo.Version);
 
             var len = fileInfo.FileLength;
-            stream.WriteByte((byte)((len >> 0) & 0xff));
-            stream.WriteByte((byte)((len >> 8) & 0xff));
-            stream.WriteByte((byte)((len >> 16) & 0xff));
-            stream.WriteByte((byte)((len >> 24) & 0xff));
+            writer.WriteByte((byte)((len >> 0) & 0xff));
+            writer.WriteByte((byte)((len >> 8) & 0xff));
+            writer.WriteByte((byte)((len >> 16) & 0xff));
+            writer.WriteByte((byte)((len >> 24) & 0xff));
         }
 
         public static void WriteSwfHeader(this SwfStreamWriter writer, SwfHeader header) {

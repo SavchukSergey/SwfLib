@@ -15,7 +15,8 @@ namespace Code.SwfLib.Tests {
                 FileLength = 0x12345678
             };
             var mem = new MemoryStream();
-            mem.WriteSwfFileInfo(fileInfo);
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteSwfFileInfo(fileInfo);
 
             mem.Seek(0, SeekOrigin.Begin);
 

@@ -1,21 +1,20 @@
 ﻿using System;
-using System.IO;
 using Code.SwfLib.Data;
 
 namespace Code.SwfLib {
     public static class SwfStreamReaderExt {
 
-        public static SwfFileInfo ReadSwfFileInfo(this Stream stream) {
+        public static SwfFileInfo ReadSwfFileInfo(this SwfStreamReader writer)
+        {
             SwfFileInfo header;
-            header.Format = new string(new[] {(char)stream.ReadByte(), (char)stream.ReadByte(), (char)stream.ReadByte()});
-            header.Version = (byte) stream.ReadByte();
+            header.Format = new string(new[] {(char)writer.ReadByte(), (char)writer.ReadByte(), (char)writer.ReadByte()});
+            header.Version = writer.ReadByte();
             uint len = 0;
-            len = len | ((uint)stream.ReadByte() << 0);
-            len = len | ((uint)stream.ReadByte() << 8);
-            len = len | ((uint)stream.ReadByte() << 16);
-            len = len | ((uint)stream.ReadByte() << 24);
+            len = len | ((uint)writer.ReadByte() << 0);
+            len = len | ((uint)writer.ReadByte() << 8);
+            len = len | ((uint)writer.ReadByte() << 16);
+            len = len | ((uint)writer.ReadByte() << 24);
             header.FileLength = len;
-            stream.Seek(8, SeekOrigin.Begin);
             return header;
         }
 

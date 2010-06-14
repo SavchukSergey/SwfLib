@@ -21,7 +21,8 @@ namespace Code.SwfLib.Tests {
             mem.WriteByte(0x12);
             mem.Seek(0, SeekOrigin.Begin);
 
-            var fileInfo = mem.ReadSwfFileInfo();
+            var reader = new SwfStreamReader(mem);
+            var fileInfo = reader.ReadSwfFileInfo();
             Assert.AreEqual("CWS", fileInfo.Format);
             Assert.AreEqual(10, fileInfo.Version);
             Assert.AreEqual(0x12345678, fileInfo.FileLength);

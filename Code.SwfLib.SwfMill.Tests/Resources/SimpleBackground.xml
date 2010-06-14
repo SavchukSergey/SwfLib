@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<swf version="8" compressed="0">
+  <Header framerate="20" frames="1">
+    <size>
+      <Rectangle left="0" right="100" top="0" bottom="100"/>
+    </size>
+    <tags>
+      <FileAttributes hasMetaData="0" allowABC="0" suppressCrossDomainCaching="0" swfRelativeURLs="0" useNetwork="1"/>
+      <SetBackgroundColor>
+        <color>
+          <Color red="10" green="224" blue="224"/>
+        </color>
+      </SetBackgroundColor>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

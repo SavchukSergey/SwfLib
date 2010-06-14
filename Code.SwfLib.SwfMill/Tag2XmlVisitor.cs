@@ -72,7 +72,8 @@ namespace Code.SwfLib.SwfMill {
         public object Visit(FileAttributesTag tag) {
             var res = new XElement(XName.Get("FileAttributes"),
                                    new XAttribute(XName.Get("hasMetaData"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.HasMetadata)),
-                                   new XAttribute(XName.Get("useNetwork"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.UseNetwork))
+                                   new XAttribute(XName.Get("useNetwork"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.UseNetwork)),
+                                   new XAttribute(XName.Get("allowABC"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.AllowAbc))
                 );
             //TODO: other attributes
             if (_version >= 10) {

@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="AssertExt.cs" />
     <Compile Include="BitsCountTest.cs" />
-    <Compile Include="SwfModelTest.cs" />
+    <Compile Include="SwfFileTest.cs" />
     <Compile Include="SwfStreamReaderExtTest.cs" />
     <Compile Include="SwfStreamReaderTest.cs" />
     <Compile Include="SwfStreamWriterExtTest.cs" />
