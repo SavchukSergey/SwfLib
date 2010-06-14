@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Code.SwfLib</RootNamespace>
+    <AssemblyName>Code.SwfLib</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="zlib.net, Version=1.0.3.0, Culture=neutral, PublicKeyToken=47d7877cb3620160">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\zlib.net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BitsCount.cs" />
+    <Compile Include="Data\SwfAnyFilter.cs" />
+    <Compile Include="Data\SwfColorTransform.cs" />
+    <Compile Include="Data\SwfTextEntry.cs" />
+    <Compile Include="Data\SwfTextRecord.cs" />
+    <Compile Include="Data\SwfTextRecordEndEntry.cs" />
+    <Compile Include="Data\SwfTextRecordEntry.cs" />
+    <Compile Include="Data\SwfTextRecordGlyphEntry.cs" />
+    <Compile Include="Data\SwfTextRecordSetupEntry.cs" />
+    <Compile Include="Data\SwfTextRecordSetupEntryFlags.cs" />
+    <Compile Include="SwfFile.cs" />
+    <Compile Include="SwfFileInfo.cs" />
+    <Compile Include="Data\SwfHeader.cs" />
+    <Compile Include="SwfModel.cs" />
+    <Compile Include="Data\SwfMatrix.cs" />
+    <Compile Include="Data\SwfRect.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data\SwfRGB.cs" />
+    <Compile Include="SwfStreamReader.cs" />
+    <Compile Include="SwfStreamReaderExt.cs" />
+    <Compile Include="SwfStreamWriter.cs" />
+    <Compile Include="SwfStreamWriterExt.cs" />
+    <Compile Include="Tag2BinaryVisitor.cs" />
+    <Compile Include="Tags\CSMTextSettingsTag.cs" />
+    <Compile Include="Tags\DefineBitsJPEG2Tag.cs" />
+    <Compile Include="Tags\DefineFontNameTag.cs" />
+    <Compile Include="Tags\DefineSpriteTag.cs" />
+    <Compile Include="Tags\DefineTextTag.cs" />
+    <Compile Include="Tags\EndTag.cs" />
+    <Compile Include="Tags\ExportTag.cs" />
+    <Compile Include="Tags\ISwfTagVisitor.cs" />
+    <Compile Include="Tags\PlaceObject3Flags.cs" />
+    <Compile Include="Tags\PlaceObject2Tag.cs" />
+    <Compile Include="Tags\PlaceObject2Flags.cs" />
+    <Compile Include="Tags\ShowFrameTag.cs" />
+    <Compile Include="Tags\SwfFileAttributes.cs" />
+    <Compile Include="Tags\SwfTagBase.cs" />
+    <Compile Include="Tags\DebugIDTag.cs" />
+    <Compile Include="Tags\DoABCDefineTag.cs" />
+    <Compile Include="Tags\DoABCTag.cs" />
+    <Compile Include="Tags\FileAttributesTag.cs" />
+    <Compile Include="Tags\FrameLabelTag.cs" />
+    <Compile Include="Tags\MetadataTag.cs" />
+    <Compile Include="Tags\ProductInfoTag.cs" />
+    <Compile Include="Tags\ProtectDebug2Tag.cs" />
+    <Compile Include="Tags\ScriptLimitsTag.cs" />
+    <Compile Include="Tags\SetBackgroundColorTag.cs" />
+    <Compile Include="Data\SwfSymbolReference.cs" />
+    <Compile Include="Tags\SwfTagData.cs" />
+    <Compile Include="SwfTagReader.cs" />
+    <Compile Include="Tags\SwfTagType.cs" />
+    <Compile Include="Tags\SymbolClassTag.cs" />
+    <Compile Include="Tags\UnknownTag.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
