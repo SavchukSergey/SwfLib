@@ -8,6 +8,16 @@ namespace Code.SwfLib.Tests {
     public class SwfTagReaderTest {
 
         [Test]
+        public void ReadTagTest() {
+
+            Assert.IsAssignableFrom(typeof(FileAttributesTag), ReadTagBase("FileAttributesTag.bin"));
+            Assert.IsAssignableFrom(typeof(EndTag), ReadTagBase("EndTag.bin"));
+            Assert.IsAssignableFrom(typeof(MetadataTag), ReadTagBase("MetadataTag.bin"));
+            Assert.IsAssignableFrom(typeof(SetBackgroundColorTag), ReadTagBase("SetBackgroundColorTag.bin"));
+            Assert.IsAssignableFrom(typeof(ShowFrameTag), ReadTagBase("ShowFrameTag.bin"));
+        }
+
+        [Test]
         public void ReadFileAttributesTagTest() {
             FileAttributesTag tag = ReadTag("FileAttributesTag.bin", data => new SwfTagReader(9).ReadFileAttributesTag(data));
             Assert.IsNotNull(tag);
@@ -45,13 +55,22 @@ namespace Code.SwfLib.Tests {
             Assert.IsAssignableFrom(typeof(ShowFrameTag), tag);
         }
 
-        private T ReadTag<T>(string resourceName, Func<SwfTagData, T> readerFunction) where T : SwfTagBase
-        {
+        private T ReadTag<T>(string resourceName, Func<SwfTagData, T> readerFunction) where T : SwfTagBase {
             var source = GetType().Assembly.GetManifestResourceStream("Code.SwfLib.Tests.Resources.SwfTagReader." + resourceName);
             if (source == null) throw new Exception("Source stream not found");
             var reader = new SwfStreamReader(source);
             var tagData = reader.ReadTagData();
             return readerFunction(tagData);
         }
+
+        private SwfTagBase ReadTagBase(string resourceName) {
+            var source = GetType().Assembly.GetManifestResourceStream("Code.SwfLib.Tests.Resources.SwfTagReader." + resourceName);
+            if (source == null) throw new Exception("Source stream not found");
+            var reader = new SwfStreamReader(source);
+            var tagReader = new SwfTagReader(10);
+            return tagReader.ReadTag(reader);
+        }
+
+
     }
 }

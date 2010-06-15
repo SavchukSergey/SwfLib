@@ -7,6 +7,7 @@ namespace Code.SwfLib.SwfMill {
         private readonly ushort _version;
 
         private CSMTextSettingsTagFormatter _csmTextSettingsFormatter;
+        private DefineFontNameTagFormatter _defineFontNameFormater;
         private FileAttributesTagFormatter _fileAttributesFormatter;
         private ShowFrameTagFormatter _showFrameFormatter;
 
@@ -28,7 +29,10 @@ namespace Code.SwfLib.SwfMill {
         }
 
         object ISwfTagVisitor.Visit(DefineFontNameTag tag) {
-            return new DefineFontNameTagFormatter();
+            if (_defineFontNameFormater == null) {
+                _defineFontNameFormater = new DefineFontNameTagFormatter();
+            }
+            return _defineFontNameFormater;
         }
 
         object ISwfTagVisitor.Visit(DefineSpriteTag tag) {
