@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
-using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.FontTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting
+namespace Code.SwfLib.SwfMill.TagFormatting.FontTags
 {
     public class DefineFontAlignZonesTagFormatter : TagFormatterBase<DefineFontAlignZonesTag>
     {
-        public const string OBJECT_ID_ATTRIB = "objectID";
-
         public override void AcceptAttribute(DefineFontAlignZonesTag tag, XAttribute attrib)
         {
             switch (attrib.Name.LocalName)

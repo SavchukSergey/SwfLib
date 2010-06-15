@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Tags.DisplayListTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
+namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
+{
     public class PlaceObject2TagFormatter : TagFormatterBase<PlaceObject2Tag> {
 
         private const string REPLACE_ATTRIB = "replace";

@@ -81,8 +81,8 @@
     <Compile Include="Tags\BitmapTags\DefineBitsLosslessTag.cs" />
     <Compile Include="Tags\DefineButton2Tag.cs" />
     <Compile Include="Tags\DynamicTextTags\DefineEditTextTag.cs" />
-    <Compile Include="Tags\DefineFont3Tag.cs" />
-    <Compile Include="Tags\DefineFontAlignZonesTag.cs" />
+    <Compile Include="Tags\FontTags\DefineFont3Tag.cs" />
+    <Compile Include="Tags\FontTags\DefineFontAlignZonesTag.cs" />
     <Compile Include="Tags\DefineFontNameTag.cs" />
     <Compile Include="Tags\DefineShape3Tag.cs" />
     <Compile Include="Tags\DefineShapeTag.cs" />

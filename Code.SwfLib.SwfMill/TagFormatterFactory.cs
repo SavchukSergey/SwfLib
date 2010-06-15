@@ -2,12 +2,15 @@
 using Code.SwfLib.SwfMill.TagFormatting;
 using Code.SwfLib.SwfMill.TagFormatting.BitmapTags;
 using Code.SwfLib.SwfMill.TagFormatting.ControlTags;
+using Code.SwfLib.SwfMill.TagFormatting.DisplayListTags;
 using Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags;
+using Code.SwfLib.SwfMill.TagFormatting.FontTags;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.BitmapTags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.DynamicTextTags;
+using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill
 {

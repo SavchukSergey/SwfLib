@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
-using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.FontTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting
+namespace Code.SwfLib.SwfMill.TagFormatting.FontTags
 {
     public class DefineFont3TagFormatter : TagFormatterBase<DefineFont3Tag>
     {
-
-        public const string OBJECT_ID_ATTRIB = "objectID";
 
         public override void AcceptAttribute(DefineFont3Tag tag, XAttribute attrib)
         {
@@ -39,7 +34,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting
         public override XElement FormatTag(DefineFont3Tag tag)
         {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_3_TAG),
-                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ObjectID));
+                                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ObjectID));
         }
     }
 }

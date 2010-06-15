@@ -6,6 +6,7 @@ using Code.SwfLib.Tags.BitmapTags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.DynamicTextTags;
+using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib {
     public class SwfTagReader {
