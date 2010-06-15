@@ -23,6 +23,7 @@
         /// Defines a text of characters displayed using a font. This definition doesn't support any transparency.
         /// </summary>
         DefineText = 11,
+        DefineBitsJPEG2 = 21,
         /// <summary>
         /// Declaration of complex 2D shapes. 
         /// </summary>
@@ -80,6 +81,7 @@
         /// Define whether CSM text should be used in a previous DefineText, DefineText2 or DefineEditText.
         /// </summary>
         CSMTextSettings = 74,
+        DefineFont3 = 75,
         /// <summary>
         /// Instantiate objects from a set of classes. 
         /// </summary>

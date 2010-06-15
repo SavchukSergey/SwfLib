@@ -5,7 +5,13 @@
 
         object Visit(CSMTextSettingsTag tag);
 
+        object Visit(DefineBitsJPEG2Tag tag);
+
+        object Visit(DefineFont3Tag tag);
+
         object Visit(DefineFontNameTag tag);
+
+        object Visit(DefineShapeTag tag);
 
         object Visit(DefineSpriteTag tag);
 

@@ -51,7 +51,10 @@
     <Compile Include="SwfMillFacade.cs" />
     <Compile Include="SwfTagNameMapping.cs" />
     <Compile Include="TagFormatting\CSMTextSettingsTagFormatter.cs" />
+    <Compile Include="TagFormatting\DefineBitsJPEG2TagFormatter.cs" />
+    <Compile Include="TagFormatting\DefineFont3TagFormatter.cs" />
     <Compile Include="TagFormatting\DefineFontNameTagFormatter.cs" />
+    <Compile Include="TagFormatting\DefineShapeTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineSpriteTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineTextTagFormatter.cs" />
     <Compile Include="TagFormatting\ExportTagFormatter.cs" />

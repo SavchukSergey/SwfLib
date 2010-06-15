@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
 
@@ -122,10 +123,6 @@ namespace Code.SwfLib {
             return new EndTag { RawData = data };
         }
 
-        public ShowFrameTag ReadShowFrameTag(SwfTagData data) {
-            return new ShowFrameTag { RawData = data };
-        }
-
         public FileAttributesTag ReadFileAttributesTag(SwfTagData tagData) {
             var tag = new FileAttributesTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
@@ -157,13 +154,35 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public static DefineFontNameTag ReadDefineFontNameTag(SwfTagData tagData) {
+        public static DefineBitsJPEG2Tag ReadDefineBitsJPEG2Tag(SwfTagData tagData)
+        {
+            var tag = new DefineBitsJPEG2Tag { RawData = tagData };
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.ObjectID = reader.ReadUInt16();
+            //TODO: Read other fields
+            tag.ImageData = new byte[] {0};
+            return tag;
+        }
+
+        public static DefineFontNameTag ReadDefineFontNameTag(SwfTagData tagData)
+        {
             var tag = new DefineFontNameTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.FontNameId = reader.ReadUInt16();
             tag.DisplayName = reader.ReadString();
             tag.Copyright = reader.ReadString();
+            return tag;
+        }
+
+        public static DefineFont3Tag ReadDefineFont3Tag(SwfTagData tagData)
+        {
+            var tag = new DefineFont3Tag { RawData = tagData };
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.ObjectID = reader.ReadUInt16();
+            //TODO: read other fields
             return tag;
         }
 
@@ -219,13 +238,22 @@ namespace Code.SwfLib {
             return tag;
         }
 
+        public ShowFrameTag ReadShowFrameTag(SwfTagData data)
+        {
+            return new ShowFrameTag { RawData = data };
+        }
+
         public SwfTagBase ReadTag(SwfStreamReader reader) {
             var tagData = reader.ReadTagData();
             switch (tagData.Type) {
                 case SwfTagType.CSMTextSettings:
                     return ReadCSMTextSettingsTag(tagData);
+                case SwfTagType.DefineBitsJPEG2:
+                    return ReadDefineBitsJPEG2Tag(tagData);
                 case SwfTagType.DefineFontName:
                     return ReadDefineFontNameTag(tagData);
+                case SwfTagType.DefineFont3:
+                    return ReadDefineFont3Tag(tagData);
                 case SwfTagType.DefineSprite:
                     return ReadDefineSpriteTag(tagData);
                 case SwfTagType.DefineText:

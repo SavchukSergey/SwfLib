@@ -23,7 +23,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         public override XElement FormatTag(DefineFontNameTag tag) {
-            return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONE_NAME_TAG),
+            return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_NAME_TAG),
                                new XAttribute(XName.Get("objectID"), tag.FontNameId),
                                new XAttribute(XName.Get("name"), tag.DisplayName),
                                new XAttribute(XName.Get("copyright"), tag.Copyright));

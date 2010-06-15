@@ -17,6 +17,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         public override void AcceptElement(MetadataTag tag, XElement element) {
             switch (element.Name.LocalName) {
+                case "RDF":
+                    tag.Metadata = element.ToString();
+                    break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }

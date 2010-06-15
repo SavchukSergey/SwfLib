@@ -8,7 +8,10 @@ namespace Code.SwfLib.SwfMill {
         private static readonly Dictionary<string, Func<SwfTagBase>> _tagMap = new Dictionary<string, Func<SwfTagBase>>();
 
         public const string CSM_TEXT_SETTINGS_TAG = "CSMTextSettings";
-        public const string DEFINE_FONE_NAME_TAG = "DefineFontName";
+        public const string DEFINE_BITS_JPEG2_TAG = "DefineBitsJPEG2";
+        public const string DEFINE_FONT_3_TAG = "DefineFont3";
+        public const string DEFINE_FONT_NAME_TAG = "DefineFontName";
+        public const string DEFINE_SHAPE_TAG = "DefineShape";
         public const string DEFINE_SPRITE_TAG = "DefineSprite";
         public const string DEFINE_TEXT_TAG = "DefineText";
         public const string END_TAG = "End";
@@ -22,7 +25,10 @@ namespace Code.SwfLib.SwfMill {
 
         static SwfTagNameMapping() {
             _tagMap[CSM_TEXT_SETTINGS_TAG] = () => new CSMTextSettingsTag();
-            _tagMap[DEFINE_FONE_NAME_TAG] = () => new DefineFontNameTag();
+            _tagMap[DEFINE_BITS_JPEG2_TAG] = () => new DefineBitsJPEG2Tag();
+            _tagMap[DEFINE_FONT_3_TAG] = () => new DefineFont3Tag();
+            _tagMap[DEFINE_FONT_NAME_TAG] = () => new DefineFontNameTag();
+            _tagMap[DEFINE_SHAPE_TAG] = () => new DefineShapeTag();
             _tagMap[DEFINE_SPRITE_TAG] = () => new DefineSpriteTag();
             _tagMap[DEFINE_TEXT_TAG] = () => new DefineTextTag();
             _tagMap[END_TAG] = () => new EndTag();

@@ -74,7 +74,9 @@
     <Compile Include="Tag2BinaryVisitor.cs" />
     <Compile Include="Tags\CSMTextSettingsTag.cs" />
     <Compile Include="Tags\DefineBitsJPEG2Tag.cs" />
+    <Compile Include="Tags\DefineFont3Tag.cs" />
     <Compile Include="Tags\DefineFontNameTag.cs" />
+    <Compile Include="Tags\DefineShapeTag.cs" />
     <Compile Include="Tags\DefineSpriteTag.cs" />
     <Compile Include="Tags\DefineTextTag.cs" />
     <Compile Include="Tags\EndTag.cs" />
