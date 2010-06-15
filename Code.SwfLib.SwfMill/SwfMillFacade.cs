@@ -8,10 +8,10 @@ using Code.SwfLib.Tags;
 namespace Code.SwfLib.SwfMill {
     public class SwfMillFacade {
 
-        private ISwfTagVisitor _tag2XmlBuilder;
+        private TagFormatterFactory _formatterFactory;
 
         public XDocument ConvertToXml(SwfFile file) {
-            _tag2XmlBuilder = new Tag2XmlVisitor(file.FileInfo.Version);
+            _formatterFactory = new TagFormatterFactory(file.FileInfo.Version);
             XDocument doc = new XDocument(GetRoot(file));
             return doc;
         }
@@ -38,12 +38,11 @@ namespace Code.SwfLib.SwfMill {
             foreach (var tagElem in tags.Elements()) {
                 var tag = SwfTagNameMapping.CreateTagByXmlName(tagElem.Name.LocalName);
                 var formatter = formatterFactory.GetFormatter(tag);
-                formatter.AcceptTag(tag);
                 foreach (var attrib in tagElem.Attributes()) {
-                    formatter.AcceptAttribute(attrib);
+                    formatter.AcceptAttribute(tag, attrib);
                 }
                 foreach (var elem in tagElem.Elements()) {
-                    formatter.AcceptElement(elem);
+                    formatter.AcceptElement(tag, elem);
                 }
                 file.Tags.Add(tag);
             }
@@ -74,7 +73,8 @@ namespace Code.SwfLib.SwfMill {
         }
 
         private XElement BuildTagXml(SwfTagBase tag) {
-            return (XElement)tag.AcceptVistor(_tag2XmlBuilder);
+            var formatter = _formatterFactory.GetFormatter(tag);
+            return formatter.FormatTag(tag);
         }
 
 

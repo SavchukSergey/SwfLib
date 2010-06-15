@@ -10,25 +10,26 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         private const string COLOR_ELEM = "color";
 
-        public override void AcceptAttribute(XAttribute attrib) {
+        public override void AcceptAttribute(SetBackgroundColorTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
             }
         }
 
-        public override void AcceptElement(XElement element) {
+        public override void AcceptElement(SetBackgroundColorTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case COLOR_ELEM:
-                    _tag.Color = ParseRGBFromFirstChild(element);
+                    tag.Color = ParseRGBFromFirstChild(element);
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
         }
 
-        protected override XElement FormatTag(SetBackgroundColorTag tag) {
-            throw new NotImplementedException();
+        public override XElement FormatTag(SetBackgroundColorTag tag) {
+            return new XElement(XName.Get(SwfTagNameMapping.SET_BACKGROUND_COLOR_TAG),
+                                new XElement(XName.Get("color"), GetColor(tag.Color)));
         }
     }
 }

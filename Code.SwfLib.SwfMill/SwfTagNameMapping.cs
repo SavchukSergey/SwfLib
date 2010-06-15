@@ -7,6 +7,10 @@ namespace Code.SwfLib.SwfMill {
 
         private static readonly Dictionary<string, Func<SwfTagBase>> _tagMap = new Dictionary<string, Func<SwfTagBase>>();
 
+        public const string CSM_TEXT_SETTINGS_TAG = "CSMTextSettings";
+        public const string DEFINE_FONE_NAME_TAG = "DefineFontName";
+        public const string DEFINE_SPRITE_TAG = "DefineSprite";
+        public const string DEFINE_TEXT_TAG = "DefineText";
         public const string END_TAG = "End";
         public const string EXPORT_TAG = "Export";
         public const string FILE_ATTRIBUTES_TAG = "FileAttributes";
@@ -17,6 +21,10 @@ namespace Code.SwfLib.SwfMill {
         public const string UNKNOWN_TAG = "UnknownTag";
 
         static SwfTagNameMapping() {
+            _tagMap[CSM_TEXT_SETTINGS_TAG] = () => new CSMTextSettingsTag();
+            _tagMap[DEFINE_FONE_NAME_TAG] = () => new DefineFontNameTag();
+            _tagMap[DEFINE_SPRITE_TAG] = () => new DefineSpriteTag();
+            _tagMap[DEFINE_TEXT_TAG] = () => new DefineTextTag();
             _tagMap[END_TAG] = () => new EndTag();
             _tagMap[EXPORT_TAG] = () => new ExportTag();
             _tagMap[FILE_ATTRIBUTES_TAG] = () => new FileAttributesTag();

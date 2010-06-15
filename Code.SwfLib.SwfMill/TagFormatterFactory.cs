@@ -6,30 +6,37 @@ namespace Code.SwfLib.SwfMill {
     public class TagFormatterFactory : ISwfTagVisitor {
         private readonly ushort _version;
 
+        private CSMTextSettingsTagFormatter _csmTextSettingsFormatter;
+        private FileAttributesTagFormatter _fileAttributesFormatter;
+        private ShowFrameTagFormatter _showFrameFormatter;
+
         public TagFormatterFactory(ushort version) {
             _version = version;
         }
 
-        public TagFormatterBase GetFormatter(SwfTagBase tag) {
-            return (TagFormatterBase)tag.AcceptVistor(this);
+        public ITagFormatter GetFormatter(SwfTagBase tag) {
+            return (ITagFormatter)tag.AcceptVistor(this);
         }
 
         #region ISwfTagVisitor Members
 
         object ISwfTagVisitor.Visit(CSMTextSettingsTag tag) {
-            throw new NotImplementedException();
+            if (_csmTextSettingsFormatter == null) {
+                _csmTextSettingsFormatter = new CSMTextSettingsTagFormatter();
+            }
+            return _csmTextSettingsFormatter;
         }
 
         object ISwfTagVisitor.Visit(DefineFontNameTag tag) {
-            throw new NotImplementedException();
+            return new DefineFontNameTagFormatter();
         }
 
         object ISwfTagVisitor.Visit(DefineSpriteTag tag) {
-            throw new NotImplementedException();
+            return new DefineSpriteTagFormatter(_version);
         }
 
         object ISwfTagVisitor.Visit(DefineTextTag tag) {
-            throw new NotImplementedException();
+            return new DefineTextTagFormatter();
         }
 
         object ISwfTagVisitor.Visit(EndTag tag) {
@@ -37,19 +44,22 @@ namespace Code.SwfLib.SwfMill {
         }
 
         object ISwfTagVisitor.Visit(ExportTag tag) {
-            throw new NotImplementedException();
+            return new ExportTagFormatter();
         }
 
         object ISwfTagVisitor.Visit(FileAttributesTag tag) {
-            return new FileAttributesTagFormatter(_version);
+            if (_fileAttributesFormatter == null) {
+                _fileAttributesFormatter = new FileAttributesTagFormatter(_version);
+            }
+            return _fileAttributesFormatter;
         }
 
         object ISwfTagVisitor.Visit(MetadataTag tag) {
-            throw new NotImplementedException();
+            return new MetadataTagFormatter();
         }
 
         object ISwfTagVisitor.Visit(PlaceObject2Tag tag) {
-            throw new NotImplementedException();
+            return new PlaceObject2TagFormatter();
         }
 
         object ISwfTagVisitor.Visit(SetBackgroundColorTag tag) {
@@ -57,15 +67,18 @@ namespace Code.SwfLib.SwfMill {
         }
 
         object ISwfTagVisitor.Visit(ShowFrameTag tag) {
-            return new ShowFrameTagFormatter();
+            if (_showFrameFormatter == null) {
+                _showFrameFormatter = new ShowFrameTagFormatter();
+            }
+            return _showFrameFormatter;
         }
 
         object ISwfTagVisitor.Visit(SwfTagBase tag) {
-            throw new NotImplementedException();
+            throw new InvalidOperationException("Couldn't create formatter for unregistered tag");
         }
 
         object ISwfTagVisitor.Visit(UnknownTag tag) {
-            throw new NotImplementedException();
+            return new UnknownTagFormatter();
         }
 
         #endregion
