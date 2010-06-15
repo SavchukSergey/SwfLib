@@ -5,9 +5,10 @@ using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Tags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
-    public class PlaceObject2TagFormatter : TagFormatterBase<PlaceObject2Tag> {
-
+namespace Code.SwfLib.SwfMill.TagFormatting
+{
+    public class PlaceObject3TagFormatter : TagFormatterBase<PlaceObject3Tag> 
+    {
         private const string REPLACE_ATTRIB = "replace";
         private const string DEPTH_ATTRIB = "depth";
         private const string MORPH_ATTRIB = "morph";
@@ -15,10 +16,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         private const string ALL_FLAGS1_ATTRIB = "allflags1";
         private const string ALL_FLAGS2_ATTRIB = "allflags2";
         private const string TRANSFORM_ELEM = "transform";
+        private const string FILTERS_ELEM = "filters";
         private const string EVENTS_ELEM = "events";
 
-        public override void AcceptAttribute(PlaceObject2Tag tag, XAttribute attrib) {
-            switch (attrib.Name.LocalName) {
+        public override void AcceptAttribute(PlaceObject3Tag tag, XAttribute attrib)
+        {
+            switch (attrib.Name.LocalName)
+            {
                 case OBJECT_ID_ATTRIB:
                     tag.ObjectID = SwfMillPrimitives.ParseObjectID(attrib);
                     break;
@@ -45,10 +49,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        public override void AcceptElement(PlaceObject2Tag tag, XElement element) {
-            switch (element.Name.LocalName) {
+        public override void AcceptElement(PlaceObject3Tag tag, XElement element)
+        {
+            switch (element.Name.LocalName)
+            {
                 case TRANSFORM_ELEM:
                     //TODO: Read transform
+                    break;
+                case FILTERS_ELEM:
+                    //TODO: Read filters
                     break;
                 case EVENTS_ELEM:
                     //TODO: Read transform
@@ -58,18 +67,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        public override XElement FormatTag(PlaceObject2Tag tag)
+        public override XElement FormatTag(PlaceObject3Tag tag)
         {
-            var res = new XElement(XName.Get(SwfTagNameMapping.PLACE_OBJECT2_TAG));
-            if (tag.ObjectID.HasValue) {
-                res.Add(new XAttribute(XName.Get("objectID"), tag.ObjectID.Value));
-            }
-            res.Add(new XAttribute(XName.Get("depth"), tag.Depth));
-            if (tag.Matrix != null) {
-                res.Add(new XElement(XName.Get("transform"), GetTransformXml(tag.Matrix)));
-            }
-            //TODO: Put other fields
-            return res;
+            return new XElement(XName.Get(SwfTagNameMapping.PLACE_OBJECT3_TAG));
         }
     }
 }

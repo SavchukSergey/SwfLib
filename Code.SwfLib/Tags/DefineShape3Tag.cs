@@ -1,21 +1,17 @@
-﻿using Code.SwfLib.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Tags
 {
-    public class DefineTextTag : SwfTagBase
+    public class DefineShape3Tag : SwfTagBase
     {
 
         public ushort ObjectID;
 
         public SwfRect Bounds;
-
-        public SwfMatrix Matrix;
-
-        public byte GlyphBits;
-
-        public byte AdvanceBits;
-
-        public SwfTextRecord Records;
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {

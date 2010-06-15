@@ -17,6 +17,16 @@ namespace Code.SwfLib
             throw new NotImplementedException();
         }
 
+        public object Visit(DefineBitsLosslessTag tag)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Visit(DefineButton2Tag tag)
+        {
+            throw new NotImplementedException();
+        }
+
         public object Visit(DefineEditTextTag tag)
         {
             throw new NotImplementedException();
@@ -42,12 +52,27 @@ namespace Code.SwfLib
             throw new NotImplementedException();
         }
 
+        public object Visit(DefineShape3Tag tag)
+        {
+            throw new NotImplementedException();
+        }
+
         public object Visit(DefineSpriteTag tag)
         {
             throw new NotImplementedException();
         }
 
         public object Visit(DefineTextTag tag)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Visit(DoActionTag tag)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Visit(DoInitActionTag tag)
         {
             throw new NotImplementedException();
         }
@@ -70,6 +95,11 @@ namespace Code.SwfLib
             return new SwfTagData { Type = SwfTagType.FileAttributes, Data = mem.ToArray() };
         }
 
+        public object Visit(FrameLabelTag tag)
+        {
+            throw new NotImplementedException();
+        }
+
         public object Visit(MetadataTag tag)
         {
             var mem = new MemoryStream();
@@ -79,6 +109,16 @@ namespace Code.SwfLib
         }
 
         public object Visit(PlaceObject2Tag tag)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Visit(PlaceObject3Tag tag)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Visit(RemoveObject2Tag tag)
         {
             throw new NotImplementedException();
         }

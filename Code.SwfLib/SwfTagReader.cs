@@ -35,8 +35,8 @@ namespace Code.SwfLib {
             var tag = new DefineTextTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
-            tag.TextID = reader.ReadUInt16();
-            tag.Rectangle = reader.ReadRect();
+            tag.ObjectID = reader.ReadUInt16();
+            tag.Bounds = reader.ReadRect();
             tag.Matrix = reader.ReadMatrix();
             tag.GlyphBits = reader.ReadByte();
             tag.AdvanceBits = reader.ReadByte();

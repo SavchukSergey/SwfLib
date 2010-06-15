@@ -21,5 +21,10 @@ namespace Code.SwfLib.SwfMill
             //TODO: Implement;
             return new SwfShapeWithStyle();
         }
+
+        public static ushort ParseObjectID(XAttribute attrib)
+        {
+            return ushort.Parse(attrib.Value);
+        }
     }
 }

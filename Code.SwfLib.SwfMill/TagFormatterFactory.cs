@@ -10,12 +10,21 @@ namespace Code.SwfLib.SwfMill
 
         private CSMTextSettingsTagFormatter _csmTextSettingsFormatter;
         private DefineBitsJPEG2TagFormatter _defineBitsJpeg2Formatter;
+        private DefineBitsLosslessTagFormatter _defineBitsLosslessFormatter;
+        private DefineButton2TagFormatter _defineButton2TagFormatter;
         private DefineEditTextTagFormatter _defineEditTextFormatter;
         private DefineFontAlignZonesTagFormatter _defineFontAlignZonesFormatter;
         private DefineFontNameTagFormatter _defineFontNameFormater;
         private DefineFont3TagFormatter _defineFont3Formater;
         private DefineShapeTagFormatter _defineShapeFormater;
+        private DefineShape3TagFormatter _defineShape3Formater;
+        private DoActionTagFormatter _doActionTagFormatter;
+        private DoInitActionTagFormatter _doInitActionTagFormatter;
         private FileAttributesTagFormatter _fileAttributesFormatter;
+        private FrameLabelTagFormater _frameLabelFormatter;
+        private PlaceObject2TagFormatter _placeObject2Formatter;
+        private PlaceObject3TagFormatter _placeObject3Formatter;
+        private RemoveObject2TagFormatter _removeObject2Formatter;
         private ShowFrameTagFormatter _showFrameFormatter;
 
         public TagFormatterFactory(ushort version)
@@ -39,7 +48,7 @@ namespace Code.SwfLib.SwfMill
             return _csmTextSettingsFormatter;
         }
 
-        public object Visit(DefineBitsJPEG2Tag tag)
+        object ISwfTagVisitor.Visit(DefineBitsJPEG2Tag tag)
         {
             if (_defineBitsJpeg2Formatter == null)
             {
@@ -48,7 +57,25 @@ namespace Code.SwfLib.SwfMill
             return _defineBitsJpeg2Formatter;
         }
 
-        public object Visit(DefineEditTextTag tag)
+        object ISwfTagVisitor.Visit(DefineBitsLosslessTag tag)
+        {
+            if (_defineBitsLosslessFormatter == null)
+            {
+                _defineBitsLosslessFormatter = new DefineBitsLosslessTagFormatter();
+            }
+            return _defineBitsLosslessFormatter;
+        }
+
+        object ISwfTagVisitor.Visit(DefineButton2Tag tag)
+        {
+            if (_defineButton2TagFormatter == null)
+            {
+                _defineButton2TagFormatter = new DefineButton2TagFormatter();
+            }
+            return _defineButton2TagFormatter;
+        }
+
+        object ISwfTagVisitor.Visit(DefineEditTextTag tag)
         {
             if (_defineEditTextFormatter == null)
             {
@@ -57,7 +84,7 @@ namespace Code.SwfLib.SwfMill
             return _defineEditTextFormatter;
         }
 
-        public object Visit(DefineFont3Tag tag)
+        object ISwfTagVisitor.Visit(DefineFont3Tag tag)
         {
             if (_defineFont3Formater == null)
             {
@@ -66,7 +93,7 @@ namespace Code.SwfLib.SwfMill
             return _defineFont3Formater;
         }
 
-        public object Visit(DefineFontAlignZonesTag tag)
+        object ISwfTagVisitor.Visit(DefineFontAlignZonesTag tag)
         {
             if (_defineFontAlignZonesFormatter == null)
             {
@@ -84,13 +111,22 @@ namespace Code.SwfLib.SwfMill
             return _defineFontNameFormater;
         }
 
-        public object Visit(DefineShapeTag tag)
+        object ISwfTagVisitor.Visit(DefineShapeTag tag)
         {
             if (_defineShapeFormater == null)
             {
                 _defineShapeFormater = new DefineShapeTagFormatter();
             }
             return _defineShapeFormater;
+        }
+
+        object ISwfTagVisitor.Visit(DefineShape3Tag tag)
+        {
+            if (_defineShape3Formater == null)
+            {
+                _defineShape3Formater = new DefineShape3TagFormatter();
+            }
+            return _defineShape3Formater;
         }
 
         object ISwfTagVisitor.Visit(DefineSpriteTag tag)
@@ -101,6 +137,24 @@ namespace Code.SwfLib.SwfMill
         object ISwfTagVisitor.Visit(DefineTextTag tag)
         {
             return new DefineTextTagFormatter();
+        }
+
+        object ISwfTagVisitor.Visit(DoActionTag tag)
+        {
+            if (_doActionTagFormatter == null)
+            {
+                _doActionTagFormatter = new DoActionTagFormatter();
+            }
+            return _doActionTagFormatter;
+        }
+
+        object ISwfTagVisitor.Visit(DoInitActionTag tag)
+        {
+            if (_doInitActionTagFormatter == null)
+            {
+                _doInitActionTagFormatter = new DoInitActionTagFormatter();
+            }
+            return _doInitActionTagFormatter;
         }
 
         object ISwfTagVisitor.Visit(EndTag tag)
@@ -122,6 +176,15 @@ namespace Code.SwfLib.SwfMill
             return _fileAttributesFormatter;
         }
 
+        object ISwfTagVisitor.Visit(FrameLabelTag tag)
+        {
+            if (_frameLabelFormatter == null)
+            {
+                _frameLabelFormatter = new FrameLabelTagFormater();
+            }
+            return _frameLabelFormatter;
+        }
+
         object ISwfTagVisitor.Visit(MetadataTag tag)
         {
             return new MetadataTagFormatter();
@@ -129,7 +192,29 @@ namespace Code.SwfLib.SwfMill
 
         object ISwfTagVisitor.Visit(PlaceObject2Tag tag)
         {
-            return new PlaceObject2TagFormatter();
+            if (_placeObject2Formatter == null)
+            {
+                _placeObject2Formatter = new PlaceObject2TagFormatter();
+            }
+            return _placeObject2Formatter;
+        }
+
+        object ISwfTagVisitor.Visit(PlaceObject3Tag tag)
+        {
+            if (_placeObject3Formatter == null)
+            {
+                _placeObject3Formatter = new PlaceObject3TagFormatter();
+            }
+            return _placeObject3Formatter;
+        }
+
+        object ISwfTagVisitor.Visit(RemoveObject2Tag tag)
+        {
+            if (_removeObject2Formatter == null)
+            {
+                _removeObject2Formatter = new RemoveObject2TagFormatter();
+            }
+            return _removeObject2Formatter;
         }
 
         object ISwfTagVisitor.Visit(SetBackgroundColorTag tag)

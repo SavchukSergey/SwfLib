@@ -8,6 +8,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
     public abstract class TagFormatterBase<T> : ITagFormatter<T> where T : SwfTagBase {
 
         protected const string DATA_TAG = "data";
+        protected const string OBJECT_ID_ATTRIB = "objectID";
 
         #region ITagFormatter
         
