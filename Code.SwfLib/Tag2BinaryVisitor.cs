@@ -17,7 +17,17 @@ namespace Code.SwfLib
             throw new NotImplementedException();
         }
 
+        public object Visit(DefineEditTextTag tag)
+        {
+            throw new NotImplementedException();
+        }
+
         public object Visit(DefineFont3Tag tag)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Visit(DefineFontAlignZonesTag tag)
         {
             throw new NotImplementedException();
         }

@@ -7,12 +7,11 @@ using Code.SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting
 {
-    public class DefineFont3TagFormatter : TagFormatterBase<DefineFont3Tag>
+    public class DefineFontAlignZonesTagFormatter : TagFormatterBase<DefineFontAlignZonesTag>
     {
-
         public const string OBJECT_ID_ATTRIB = "objectID";
 
-        public override void AcceptAttribute(DefineFont3Tag tag, XAttribute attrib)
+        public override void AcceptAttribute(DefineFontAlignZonesTag tag, XAttribute attrib)
         {
             switch (attrib.Name.LocalName)
             {
@@ -24,7 +23,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting
             }
         }
 
-        public override void AcceptElement(DefineFont3Tag tag, XElement element)
+        public override void AcceptElement(DefineFontAlignZonesTag tag, XElement element)
         {
             switch (element.Name.LocalName)
             {
@@ -36,10 +35,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting
             }
         }
 
-        public override XElement FormatTag(DefineFont3Tag tag)
+        public override XElement FormatTag(DefineFontAlignZonesTag tag)
         {
-            return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_3_TAG),
-                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ObjectID));
+            return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_ALIGN_ZONES_TAG));
         }
     }
 }

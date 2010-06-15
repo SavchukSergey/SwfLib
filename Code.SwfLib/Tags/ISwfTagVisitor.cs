@@ -7,7 +7,11 @@
 
         object Visit(DefineBitsJPEG2Tag tag);
 
+        object Visit(DefineEditTextTag tag);
+
         object Visit(DefineFont3Tag tag);
+
+        object Visit(DefineFontAlignZonesTag tag);
 
         object Visit(DefineFontNameTag tag);
 

@@ -7,6 +7,8 @@ using Code.SwfLib.Tags;
 namespace Code.SwfLib.SwfMill.TagFormatting {
     public abstract class TagFormatterBase<T> : ITagFormatter<T> where T : SwfTagBase {
 
+        protected const string DATA_TAG = "data";
+
         #region ITagFormatter
         
         XElement ITagFormatter.FormatTag(SwfTagBase tag) {
@@ -26,6 +28,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         public abstract void AcceptElement(T tag, XElement element);
 
         #endregion
+
+        protected void ProcessRawData(T tag, XElement dataElement)
+        {
+            //TODO: implement;
+        }
 
         protected uint SetFlagsValue(uint flags, uint shiftedBitFlags, bool flag) {
             if (flag) {

@@ -161,7 +161,6 @@ namespace Code.SwfLib {
             var reader = new SwfStreamReader(stream);
             tag.ObjectID = reader.ReadUInt16();
             //TODO: Read other fields
-            tag.ImageData = new byte[] {0};
             return tag;
         }
 

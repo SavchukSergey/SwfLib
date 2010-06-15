@@ -10,6 +10,8 @@ namespace Code.SwfLib.SwfMill
 
         private CSMTextSettingsTagFormatter _csmTextSettingsFormatter;
         private DefineBitsJPEG2TagFormatter _defineBitsJpeg2Formatter;
+        private DefineEditTextTagFormatter _defineEditTextFormatter;
+        private DefineFontAlignZonesTagFormatter _defineFontAlignZonesFormatter;
         private DefineFontNameTagFormatter _defineFontNameFormater;
         private DefineFont3TagFormatter _defineFont3Formater;
         private DefineShapeTagFormatter _defineShapeFormater;
@@ -46,6 +48,15 @@ namespace Code.SwfLib.SwfMill
             return _defineBitsJpeg2Formatter;
         }
 
+        public object Visit(DefineEditTextTag tag)
+        {
+            if (_defineEditTextFormatter == null)
+            {
+                _defineEditTextFormatter = new DefineEditTextTagFormatter();
+            }
+            return _defineEditTextFormatter;
+        }
+
         public object Visit(DefineFont3Tag tag)
         {
             if (_defineFont3Formater == null)
@@ -53,6 +64,15 @@ namespace Code.SwfLib.SwfMill
                 _defineFont3Formater = new DefineFont3TagFormatter();
             }
             return _defineFont3Formater;
+        }
+
+        public object Visit(DefineFontAlignZonesTag tag)
+        {
+            if (_defineFontAlignZonesFormatter == null)
+            {
+                _defineFontAlignZonesFormatter = new DefineFontAlignZonesTagFormatter();
+            }
+            return _defineFontAlignZonesFormatter;
         }
 
         object ISwfTagVisitor.Visit(DefineFontNameTag tag)

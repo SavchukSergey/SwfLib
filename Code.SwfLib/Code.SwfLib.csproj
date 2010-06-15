@@ -52,6 +52,8 @@
     <Compile Include="BitsCount.cs" />
     <Compile Include="Data\SwfAnyFilter.cs" />
     <Compile Include="Data\SwfColorTransform.cs" />
+    <Compile Include="Data\SwfMorphShapeWithStyle.cs" />
+    <Compile Include="Data\SwfShapeWithStyle.cs" />
     <Compile Include="Data\SwfTextEntry.cs" />
     <Compile Include="Data\SwfTextRecord.cs" />
     <Compile Include="Data\SwfTextRecordEndEntry.cs" />
@@ -74,7 +76,9 @@
     <Compile Include="Tag2BinaryVisitor.cs" />
     <Compile Include="Tags\CSMTextSettingsTag.cs" />
     <Compile Include="Tags\DefineBitsJPEG2Tag.cs" />
+    <Compile Include="Tags\DefineEditTextTag.cs" />
     <Compile Include="Tags\DefineFont3Tag.cs" />
+    <Compile Include="Tags\DefineFontAlignZonesTag.cs" />
     <Compile Include="Tags\DefineFontNameTag.cs" />
     <Compile Include="Tags\DefineShapeTag.cs" />
     <Compile Include="Tags\DefineSpriteTag.cs" />

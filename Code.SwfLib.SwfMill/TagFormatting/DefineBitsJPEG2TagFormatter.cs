@@ -28,8 +28,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting
         {
             switch (element.Name.LocalName)
             {
-                case "data":
-                    tag.ImageData = ReadBase64(element.Element(XName.Get("data")));
+                case DATA_TAG:
+                    ProcessRawData(tag, element);
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
@@ -39,8 +39,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting
         public override XElement FormatTag(DefineBitsJPEG2Tag tag)
         {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_BITS_JPEG2_TAG),
-                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ObjectID),
-                new XElement(XName.Get("data"), GetBinary(tag.ImageData))
+                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ObjectID)
+               //TODO: store image data
                 );
         }
     }

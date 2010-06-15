@@ -49,10 +49,13 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SwfMillFacade.cs" />
+    <Compile Include="SwfMillPrimitives.cs" />
     <Compile Include="SwfTagNameMapping.cs" />
     <Compile Include="TagFormatting\CSMTextSettingsTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineBitsJPEG2TagFormatter.cs" />
+    <Compile Include="TagFormatting\DefineEditTextTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineFont3TagFormatter.cs" />
+    <Compile Include="TagFormatting\DefineFontAlignZonesTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineFontNameTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineShapeTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineSpriteTagFormatter.cs" />

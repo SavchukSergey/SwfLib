@@ -9,7 +9,9 @@ namespace Code.SwfLib.SwfMill {
 
         public const string CSM_TEXT_SETTINGS_TAG = "CSMTextSettings";
         public const string DEFINE_BITS_JPEG2_TAG = "DefineBitsJPEG2";
+        public const string DEFINE_EDIT_TEXT_TAG = "DefineEditText";
         public const string DEFINE_FONT_3_TAG = "DefineFont3";
+        public const string DEFINE_FONT_ALIGN_ZONES_TAG = "DefineFontInfo3";
         public const string DEFINE_FONT_NAME_TAG = "DefineFontName";
         public const string DEFINE_SHAPE_TAG = "DefineShape";
         public const string DEFINE_SPRITE_TAG = "DefineSprite";
@@ -26,7 +28,9 @@ namespace Code.SwfLib.SwfMill {
         static SwfTagNameMapping() {
             _tagMap[CSM_TEXT_SETTINGS_TAG] = () => new CSMTextSettingsTag();
             _tagMap[DEFINE_BITS_JPEG2_TAG] = () => new DefineBitsJPEG2Tag();
+            _tagMap[DEFINE_EDIT_TEXT_TAG] = () => new DefineEditTextTag();
             _tagMap[DEFINE_FONT_3_TAG] = () => new DefineFont3Tag();
+            _tagMap[DEFINE_FONT_ALIGN_ZONES_TAG] = () => new DefineFontAlignZonesTag();
             _tagMap[DEFINE_FONT_NAME_TAG] = () => new DefineFontNameTag();
             _tagMap[DEFINE_SHAPE_TAG] = () => new DefineShapeTag();
             _tagMap[DEFINE_SPRITE_TAG] = () => new DefineSpriteTag();

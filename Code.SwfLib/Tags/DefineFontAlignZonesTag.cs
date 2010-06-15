@@ -1,6 +1,11 @@
-﻿namespace Code.SwfLib.Tags
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Code.SwfLib.Tags
 {
-    public class DefineBitsJPEG2Tag : SwfTagBase
+    public class DefineFontAlignZonesTag : SwfTagBase
     {
 
         public ushort ObjectID;
