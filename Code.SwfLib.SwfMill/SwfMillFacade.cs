@@ -13,6 +13,7 @@ namespace Code.SwfLib.SwfMill {
         public XDocument ConvertToXml(SwfFile file) {
             _formatterFactory = new TagFormatterFactory(file.FileInfo.Version);
             XDocument doc = new XDocument(GetRoot(file));
+            doc.Declaration = new XDeclaration("1.0", "utf-8", "yes");
             return doc;
         }
 

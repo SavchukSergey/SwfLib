@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "swfmill", "swfmill", "{3850
 		References\swfmill\swfmill.exe = References\swfmill\swfmill.exe
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill.Console", "Code.SwfLib.SwfMill.Console\Code.SwfLib.SwfMill.Console.csproj", "{2E388FCB-F463-4A46-8799-F31B521036A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{4EAE1D32-3036-493F-8699-1A9A7D65B277}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EAE1D32-3036-493F-8699-1A9A7D65B277}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EAE1D32-3036-493F-8699-1A9A7D65B277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E388FCB-F463-4A46-8799-F31B521036A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E388FCB-F463-4A46-8799-F31B521036A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E388FCB-F463-4A46-8799-F31B521036A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E388FCB-F463-4A46-8799-F31B521036A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
