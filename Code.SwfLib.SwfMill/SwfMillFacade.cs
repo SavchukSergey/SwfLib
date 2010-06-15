@@ -27,7 +27,38 @@ namespace Code.SwfLib.SwfMill {
             fileInfo.Format = root.Attribute(XName.Get("compressed")).Value == "1" ? "CWS" : "FWS";
             fileInfo.FileLength = 0;
             file.FileInfo = fileInfo;
+
+            var hdr = root.Element(XName.Get("Header"));
+            file.Header.FrameRate = double.Parse(hdr.Attribute(XName.Get("framerate")).Value);
+            file.Header.FrameCount = ushort.Parse(hdr.Attribute(XName.Get("frames")).Value);
+            file.Header.FrameSize = ParseRect(hdr.Element(XName.Get("size")).Element(XName.Get("Rectangle")));
+
+            var formatterFactory = new TagFormatterFactory(fileInfo.Version);
+            var tags = hdr.Element(XName.Get("tags"));
+            foreach (var tagElem in tags.Elements()) {
+                var tag = SwfTagNameMapping.CreateTagByXmlName(tagElem.Name.LocalName);
+                var formatter = formatterFactory.GetFormatter(tag);
+                formatter.AcceptTag(tag);
+                foreach (var attrib in tagElem.Attributes()) {
+                    formatter.AcceptAttribute(attrib);
+                }
+                foreach (var elem in tagElem.Elements()) {
+                    formatter.AcceptElement(elem);
+                }
+                file.Tags.Add(tag);
+            }
             return file;
+        }
+
+
+        private static SwfRect ParseRect(XElement elem) {
+            if (elem.Name.LocalName != "Rectangle") throw new FormatException("Invalid rectangle");
+            SwfRect rect;
+            rect.XMin = int.Parse(elem.Attribute(XName.Get("left")).Value);
+            rect.YMin = int.Parse(elem.Attribute(XName.Get("top")).Value);
+            rect.XMax = int.Parse(elem.Attribute(XName.Get("right")).Value);
+            rect.YMax = int.Parse(elem.Attribute(XName.Get("bottom")).Value);
+            return rect;
         }
 
         private XElement GetRoot(SwfFile file) {

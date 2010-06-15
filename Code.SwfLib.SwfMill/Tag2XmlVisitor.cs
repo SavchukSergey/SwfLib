@@ -61,7 +61,7 @@ namespace Code.SwfLib.SwfMill {
         }
 
         public object Visit(EndTag tag) {
-            return new XElement(XName.Get("End"));
+            return new XElement(XName.Get(SwfTagNameMapping.END_TAG));
         }
 
         public object Visit(ExportTag tag) {
@@ -110,7 +110,7 @@ namespace Code.SwfLib.SwfMill {
         }
 
         public object Visit(ShowFrameTag tag) {
-            return new XElement(XName.Get("ShowFrame"));
+            return new XElement(XName.Get(SwfTagNameMapping.SHOW_FRAME_TAG));
         }
 
         //TODO: Check format

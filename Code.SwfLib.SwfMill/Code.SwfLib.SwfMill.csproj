@@ -52,6 +52,12 @@
     <Compile Include="SwfTagNameMapping.cs" />
     <Compile Include="SwfTagParser.cs" />
     <Compile Include="Tag2XmlVisitor.cs" />
+    <Compile Include="TagFormatting\EndTagFormatter.cs" />
+    <Compile Include="TagFormatting\FileAttributesTagFormatter.cs" />
+    <Compile Include="TagFormatting\SetBackgroundColorTagFormatter.cs" />
+    <Compile Include="TagFormatting\ShowFrameTagFormatter.cs" />
+    <Compile Include="TagFormatting\TagFormatterBase.cs" />
+    <Compile Include="TagFormatterFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Code.SwfLib\Code.SwfLib.csproj">
