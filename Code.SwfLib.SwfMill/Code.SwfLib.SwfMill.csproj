@@ -53,10 +53,10 @@
     <Compile Include="SwfMillFacade.cs" />
     <Compile Include="SwfMillPrimitives.cs" />
     <Compile Include="SwfTagNameMapping.cs" />
-    <Compile Include="TagFormatting\CSMTextSettingsTagFormatter.cs" />
-    <Compile Include="TagFormatting\DefineBitsJPEG2TagFormatter.cs" />
-    <Compile Include="TagFormatting\DefineBitsLosslessTagFormatter.cs" />
-    <Compile Include="TagFormatting\DefineEditTextTagFormatter.cs" />
+    <Compile Include="TagFormatting\DynamicTextTags\CSMTextSettingsTagFormatter.cs" />
+    <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG2TagFormatter.cs" />
+    <Compile Include="TagFormatting\BitmapTags\DefineBitsLosslessTagFormatter.cs" />
+    <Compile Include="TagFormatting\DynamicTextTags\DefineEditTextTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineFont3TagFormatter.cs" />
     <Compile Include="TagFormatting\DefineFontAlignZonesTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineFontNameTagFormatter.cs" />
@@ -74,7 +74,7 @@
     <Compile Include="TagFormatting\UnknownTagFormatter.cs" />
     <Compile Include="TagFormatting\EndTagFormatter.cs" />
     <Compile Include="TagFormatting\FileAttributesTagFormatter.cs" />
-    <Compile Include="TagFormatting\MetadataTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\MetadataTagFormatter.cs" />
     <Compile Include="TagFormatting\SetBackgroundColorTagFormatter.cs" />
     <Compile Include="TagFormatting\ShowFrameTagFormatter.cs" />
     <Compile Include="TagFormatting\TagFormatterBase.cs" />

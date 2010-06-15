@@ -1,8 +1,11 @@
-﻿namespace Code.SwfLib.Tags
+﻿namespace Code.SwfLib.Tags.BitmapTags
 {
-    public class DefineButton2Tag : SwfTagBase
+    public class DefineBitsJPEG2Tag : DefineBitsBaseTag
     {
+
         public ushort ObjectID;
+
+        public byte[] ImageData;
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {

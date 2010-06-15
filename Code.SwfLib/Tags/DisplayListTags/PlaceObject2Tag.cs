@@ -1,8 +1,8 @@
 ﻿using Code.SwfLib.Data;
 
-namespace Code.SwfLib.Tags
+namespace Code.SwfLib.Tags.DisplayListTags
 {
-    public class PlaceObject2Tag : SwfTagBase
+    public class PlaceObject2Tag : DisplayListBaseTag
     {
 
         public ushort? ObjectID;
@@ -23,7 +23,7 @@ namespace Code.SwfLib.Tags
         public SwfColorTransform ColorTransform;
 
         public ushort? MorphPosition;
-        
+
         public ushort ActionsReserved;
 
         public uint ActionsFlags;

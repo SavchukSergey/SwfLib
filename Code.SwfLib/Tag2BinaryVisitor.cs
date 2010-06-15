@@ -1,6 +1,10 @@
 ﻿using System;
 using System.IO;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.BitmapTags;
+using Code.SwfLib.Tags.ControlTags;
+using Code.SwfLib.Tags.DisplayListTags;
+using Code.SwfLib.Tags.DynamicTextTags;
 
 namespace Code.SwfLib
 {
@@ -14,7 +18,11 @@ namespace Code.SwfLib
 
         public object Visit(DefineBitsJPEG2Tag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt32(tag.ObjectID);
+            writer.WriteBytes(tag.ImageData);
+            return new SwfTagData { Type = SwfTagType.FileAttributes, Data = mem.ToArray() };
         }
 
         public object Visit(DefineBitsLosslessTag tag)

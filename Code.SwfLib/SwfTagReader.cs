@@ -2,6 +2,10 @@
 using System.IO;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.BitmapTags;
+using Code.SwfLib.Tags.ControlTags;
+using Code.SwfLib.Tags.DisplayListTags;
+using Code.SwfLib.Tags.DynamicTextTags;
 
 namespace Code.SwfLib {
     public class SwfTagReader {
@@ -143,7 +147,7 @@ namespace Code.SwfLib {
             var tag = new CSMTextSettingsTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
-            tag.TextId = reader.ReadUInt16();
+            tag.ObjectID = reader.ReadUInt16();
             var flags = reader.ReadByte();
             tag.UseType = (byte)((flags >> 6) & 0x03);
             tag.GridFit = (byte)((flags >> 3) & 0x07);
@@ -160,7 +164,8 @@ namespace Code.SwfLib {
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.ObjectID = reader.ReadUInt16();
-            //TODO: Read other fields
+            var imageLength = stream.Length - stream.Position;
+            tag.ImageData = reader.ReadBytes((int) imageLength);
             return tag;
         }
 

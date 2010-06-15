@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Code.SwfLib.Tags
+namespace Code.SwfLib.Tags.DisplayListTags
 {
     [Flags]
     public enum PlaceObject3Flags : byte
@@ -17,5 +14,4 @@ namespace Code.SwfLib.Tags
         BlendMode = 0x02,
         HasFilters = 0x01
     }
-
 }

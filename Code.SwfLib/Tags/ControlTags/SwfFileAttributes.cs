@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.SwfLib.Tags
+namespace Code.SwfLib.Tags.ControlTags
 {
     [Flags]
     public enum SwfFileAttributes : uint

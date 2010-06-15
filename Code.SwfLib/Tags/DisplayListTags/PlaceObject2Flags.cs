@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Code.SwfLib.Tags
+namespace Code.SwfLib.Tags.DisplayListTags
 {
     [Flags]
     public enum PlaceObject2Flags : byte

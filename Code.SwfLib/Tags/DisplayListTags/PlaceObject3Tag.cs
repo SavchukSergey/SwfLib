@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Code.SwfLib.Tags
+﻿namespace Code.SwfLib.Tags.DisplayListTags
 {
-    public class PlaceObject3Tag : SwfTagBase
+    public class PlaceObject3Tag : DisplayListBaseTag
     {
 
         public ushort ObjectID;

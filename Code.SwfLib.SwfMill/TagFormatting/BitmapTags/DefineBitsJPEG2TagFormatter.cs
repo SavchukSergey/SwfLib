@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
-using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.BitmapTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting
+namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags
 {
     public class DefineBitsJPEG2TagFormatter : TagFormatterBase<DefineBitsJPEG2Tag>
     {
-
-        private const string OBJECT_ID_ATTRIB = "objectID";
 
         public override void AcceptAttribute(DefineBitsJPEG2Tag tag, XAttribute attrib)
         {
@@ -29,7 +26,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting
             switch (element.Name.LocalName)
             {
                 case DATA_TAG:
-                    ProcessRawData(tag, element);
+                    //TODO: navigate to tag correctly
+                    tag.ImageData = Convert.FromBase64String(element.Elements().First().Value.Trim());
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
@@ -39,8 +37,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting
         public override XElement FormatTag(DefineBitsJPEG2Tag tag)
         {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_BITS_JPEG2_TAG),
-                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ObjectID)
-               //TODO: store image data
+                                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ObjectID)
+                //TODO: store image data
                 );
         }
     }

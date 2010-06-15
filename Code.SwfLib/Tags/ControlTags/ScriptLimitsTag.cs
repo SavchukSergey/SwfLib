@@ -1,6 +1,7 @@
-﻿namespace Code.SwfLib.Tags
+﻿namespace Code.SwfLib.Tags.ControlTags
 {
-    public class ScriptLimitsTag : SwfTagBase{
+    public class ScriptLimitsTag : ControlBaseTag
+    {
 
         public ushort MaxRecursionDepth;
 

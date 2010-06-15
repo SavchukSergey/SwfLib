@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.ControlTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
+namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags
+{
     public class MetadataTagFormatter : TagFormatterBase<MetadataTag> {
 
         public override void AcceptAttribute(MetadataTag tag, XAttribute attrib) {

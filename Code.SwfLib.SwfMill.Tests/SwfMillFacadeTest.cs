@@ -37,6 +37,16 @@ namespace Code.SwfLib.SwfMill.Tests
         }
 
         [Test]
+        public void ReadHugeXml2()
+        {
+            var sourceStream = OpenEmbeddedResource("HugeSwfXml2.xml");
+            var xml = XDocument.Load(new StreamReader(sourceStream));
+            var file = new SwfMillFacade().ReadFromXml(xml);
+            var mem = new MemoryStream();
+            file.WriteTo(mem);
+        }
+
+        [Test]
         public void SimpleBackgroundToXmlTest()
         {
             ReadSwfConvertToXmlAndCompare("SimpleBackground.swf", "SimpleBackground.xml");

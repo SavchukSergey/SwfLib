@@ -1,6 +1,7 @@
 ﻿using System;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.ControlTags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {

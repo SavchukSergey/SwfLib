@@ -1,8 +1,9 @@
-﻿namespace Code.SwfLib.Tags
+﻿namespace Code.SwfLib.Tags.ControlTags
 {
-    public class DefineButton2Tag : SwfTagBase
+    public class MetadataTag : ControlBaseTag
     {
-        public ushort ObjectID;
+
+        public string Metadata;
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {

@@ -1,8 +1,8 @@
 ﻿using Code.SwfLib.Data;
 
-namespace Code.SwfLib.Tags
+namespace Code.SwfLib.Tags.ControlTags
 {
-    public class SymbolClassTag : SwfTagBase
+    public class SymbolClassTag : ControlBaseTag
     {
         public SwfSymbolReference[] References;
         

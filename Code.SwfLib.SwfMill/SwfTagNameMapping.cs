@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.BitmapTags;
+using Code.SwfLib.Tags.ControlTags;
+using Code.SwfLib.Tags.DisplayListTags;
+using Code.SwfLib.Tags.DynamicTextTags;
 
 namespace Code.SwfLib.SwfMill {
     public static class SwfTagNameMapping {

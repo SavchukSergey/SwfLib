@@ -1,5 +1,6 @@
-﻿namespace Code.SwfLib.Tags {
-    public class FileAttributesTag : SwfTagBase {
+﻿namespace Code.SwfLib.Tags.ControlTags
+{
+    public class FileAttributesTag : ControlBaseTag {
 
         public SwfFileAttributes Attributes;
 
@@ -7,5 +8,4 @@
             return visitor.Visit(this);
         }
     }
-
 }

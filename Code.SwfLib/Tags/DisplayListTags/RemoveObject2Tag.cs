@@ -1,9 +1,7 @@
-﻿namespace Code.SwfLib.Tags
+﻿namespace Code.SwfLib.Tags.DisplayListTags
 {
-    public class MetadataTag : SwfTagBase{
-
-        public string Metadata;
-
+    public class RemoveObject2Tag : DisplayListBaseTag
+    {
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {
             return visitor.Visit(this);

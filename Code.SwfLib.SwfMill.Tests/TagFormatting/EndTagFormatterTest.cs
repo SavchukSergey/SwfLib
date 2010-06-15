@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Code.SwfLib.Data;
-using Code.SwfLib.SwfMill.TagFormatting;
-using Code.SwfLib.Tags;
+﻿using Code.SwfLib.SwfMill.TagFormatting;
+using Code.SwfLib.Tags.ControlTags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.SwfMill.Tests.TagFormatting {

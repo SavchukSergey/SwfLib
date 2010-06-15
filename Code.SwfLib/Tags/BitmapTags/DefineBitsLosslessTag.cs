@@ -1,6 +1,6 @@
-﻿namespace Code.SwfLib.Tags
+﻿namespace Code.SwfLib.Tags.BitmapTags
 {
-    public class DefineBitsJPEG2Tag : SwfTagBase
+    public class DefineBitsLosslessTag : DefineBitsBaseTag
     {
 
         public ushort ObjectID;

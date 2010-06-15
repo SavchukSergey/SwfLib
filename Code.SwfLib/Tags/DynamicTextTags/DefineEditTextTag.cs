@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Code.SwfLib.Tags
+﻿namespace Code.SwfLib.Tags.DynamicTextTags
 {
-    public class DefineBitsLosslessTag : SwfTagBase
+    public class DefineEditTextTag : SwfTagBase
     {
 
         public ushort ObjectID;
+
+        public bool WordWrap;
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {

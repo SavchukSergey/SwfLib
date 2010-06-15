@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.DynamicTextTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting
+namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
 {
     public class DefineEditTextTagFormatter : TagFormatterBase<DefineEditTextTag>
     {
@@ -123,7 +123,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting
         public override XElement FormatTag(DefineEditTextTag tag)
         {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_EDIT_TEXT_TAG),
-                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ObjectID));
+                                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ObjectID));
         }
     }
 }

@@ -1,10 +1,7 @@
-﻿namespace Code.SwfLib.Tags
+﻿namespace Code.SwfLib.Tags.ControlTags
 {
-    public class FrameLabelTag : SwfTagBase
+    public class EndTag : ControlBaseTag
     {
-
-        public string Name { get; set; }
-
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {
             return visitor.Visit(this);
