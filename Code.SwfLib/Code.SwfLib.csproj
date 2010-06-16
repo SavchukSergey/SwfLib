@@ -73,6 +73,7 @@
     <Compile Include="SwfStreamReaderExt.cs" />
     <Compile Include="SwfStreamWriter.cs" />
     <Compile Include="SwfStreamWriterExt.cs" />
+    <Compile Include="SwfZip.cs" />
     <Compile Include="Tag2BinaryVisitor.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsBaseTag.cs" />
     <Compile Include="Tags\ControlTags\ControlBaseTag.cs" />

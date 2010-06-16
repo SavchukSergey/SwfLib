@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.BitmapTags;
@@ -10,19 +11,24 @@ namespace Code.SwfLib.Tests {
     [TestFixture]
     public class Tag2BinaryVisitorTest : TestFixtureBase {
 
-        //[Test]
-        //public void Define()
-        //{
-        //    var file = SwfFile.ReadFrom(OpenEmbeddedResource("DefineBitsJPEG2.swf"));
-        //    var tag = new DefineBitsJPEG2Tag();
-        //    tag.ObjectID = 6;
-        //    tag.ImageData = GetEmbeddedResourceData("DefineBitsJPEG2.jpg");
-        //    var visitor = new Tag2BinaryVisitor();
-        //    var res = visitor.GetTagData(tag);
-        //    var mem = new MemoryStream();
-        //    var writer = new SwfStreamWriter(mem);
-        //    writer.WriteTagData(res);
-        //}
+        [Test]
+        public void DefineBitsJPEG2Test()
+        {
+            var tag = new DefineBitsJPEG2Tag();
+            tag.ObjectID = 6;
+            tag.ImageData = GetEmbeddedResourceData("DefineBitsJPEG2.jpg");
+            var visitor = new Tag2BinaryVisitor();
+            var res = visitor.GetTagData(tag);
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteTagData(res);
+
+            var etalon = GetTagBinariesFromSwfResource("DefineBitsJPEG2.swf")
+                .FirstOrDefault(item => item.Type == SwfTagType.DefineBitsJPEG2);
+            if (etalon.Binary == null) throw new InvalidOperationException("Couldn't find etalon tag");
+
+            AssertExt.AreEqual(etalon.Binary, mem.ToArray(), "Checking DefineBitsJPEG2");
+        }
 
         [Test]
         public void EndTagTest() {

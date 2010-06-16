@@ -23,7 +23,6 @@ namespace Code.SwfLib {
             file.Header = reader.ReadSwfHeader();
             ReadTags(file, reader);
             return file;
-
         }
 
         public void WriteTo(Stream stream)
@@ -62,16 +61,7 @@ namespace Code.SwfLib {
             {
                 case "CWS":
                     MemoryStream mem = new MemoryStream();
-                    byte[] headerStub = new byte[8];
-                    mem.Write(headerStub, 0, headerStub.Length);
-                    ZOutputStream zip = new ZOutputStream(mem);
-                    int readBytes = 1;
-                    byte[] buffer = new byte[512];
-                    while (readBytes > 0)
-                    {
-                        readBytes = stream.Read(buffer, 0, buffer.Length);
-                        zip.Write(buffer, 0, readBytes);
-                    }
+                    SwfZip.Decompress(stream, mem);
                     mem.Seek(8, SeekOrigin.Begin);
                     return new SwfStreamReader(mem);
                 case "FWS":
