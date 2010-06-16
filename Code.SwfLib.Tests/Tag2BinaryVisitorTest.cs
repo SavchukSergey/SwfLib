@@ -2,12 +2,27 @@
 using System.IO;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.BitmapTags;
 using Code.SwfLib.Tags.ControlTags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
     [TestFixture]
-    public class Tag2BinaryVisitorTest {
+    public class Tag2BinaryVisitorTest : TestFixtureBase {
+
+        //[Test]
+        //public void Define()
+        //{
+        //    var file = SwfFile.ReadFrom(OpenEmbeddedResource("DefineBitsJPEG2.swf"));
+        //    var tag = new DefineBitsJPEG2Tag();
+        //    tag.ObjectID = 6;
+        //    tag.ImageData = GetEmbeddedResourceData("DefineBitsJPEG2.jpg");
+        //    var visitor = new Tag2BinaryVisitor();
+        //    var res = visitor.GetTagData(tag);
+        //    var mem = new MemoryStream();
+        //    var writer = new SwfStreamWriter(mem);
+        //    writer.WriteTagData(res);
+        //}
 
         [Test]
         public void EndTagTest() {
@@ -57,6 +72,12 @@ namespace Code.SwfLib.Tests {
             byte[] etalon = new byte[etalonStream.Length];
             etalonStream.Read(etalon, 0, etalon.Length);
             AssertExt.AreEqual(etalon, mem.ToArray(), "Checking with etalon data");
+        }
+
+        protected override string EmbeddedResourceFolder {
+            get {
+                return "Tag2Binary";
+            }
         }
     }
 }

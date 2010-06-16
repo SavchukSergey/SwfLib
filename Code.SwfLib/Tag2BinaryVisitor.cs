@@ -12,12 +12,17 @@ namespace Code.SwfLib
     public class Tag2BinaryVisitor : ISwfTagVisitor
     {
 
+        public SwfTagData GetTagData(SwfTagBase tag)
+        {
+            return (SwfTagData) tag.AcceptVistor(this);
+        }
+
         public object Visit(CSMTextSettingsTag tag)
         {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineBitsJPEG2Tag tag)
+        object ISwfTagVisitor.Visit(DefineBitsJPEG2Tag tag)
         {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
