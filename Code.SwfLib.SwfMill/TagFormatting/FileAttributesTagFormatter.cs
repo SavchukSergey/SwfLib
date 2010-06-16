@@ -22,19 +22,19 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         public override void AcceptAttribute(FileAttributesTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case HAS_METADATA_ATTRIB:
-                    tag.Attributes = (SwfFileAttributes)SetFlagsValue((uint)tag.Attributes, (uint)SwfFileAttributes.HasMetadata, ParseBoolFromDigit(attrib));
+                    tag.HasMetadata = ParseBoolFromDigit(attrib);
                     break;
                 case ALLOW_ABC_ATTRIB:
-                    tag.Attributes = (SwfFileAttributes)SetFlagsValue((uint)tag.Attributes, (uint)SwfFileAttributes.AllowAbc, ParseBoolFromDigit(attrib));
+                    tag.AllowAbc = ParseBoolFromDigit(attrib);
                     break;
                 case SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB:
-                    tag.Attributes = (SwfFileAttributes)SetFlagsValue((uint)tag.Attributes, (uint)SwfFileAttributes.SupressCrossDomainCaching, ParseBoolFromDigit(attrib));
+                    tag.SupressCrossDomainCaching = ParseBoolFromDigit(attrib);
                     break;
                 case SWF_RELATIVE_URLS_ATTRIB:
-                    tag.Attributes = (SwfFileAttributes)SetFlagsValue((uint)tag.Attributes, (uint)SwfFileAttributes.SwfRelativeUrls, ParseBoolFromDigit(attrib));
+                    tag.SwfRelativeUrls = ParseBoolFromDigit(attrib);
                     break;
                 case USE_NETWORK_ATTRIB:
-                    tag.Attributes = (SwfFileAttributes)SetFlagsValue((uint)tag.Attributes, (uint)SwfFileAttributes.UseNetwork, ParseBoolFromDigit(attrib));
+                    tag.UseNetwork = ParseBoolFromDigit(attrib);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -50,11 +50,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         public override XElement FormatTag(FileAttributesTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.FILE_ATTRIBUTES_TAG),
-                                    new XAttribute(XName.Get(HAS_METADATA_ATTRIB), CheckFileAttribute(tag.Attributes, SwfFileAttributes.HasMetadata)),
-                                    new XAttribute(XName.Get(USE_NETWORK_ATTRIB), CheckFileAttribute(tag.Attributes, SwfFileAttributes.UseNetwork)),
-                                    new XAttribute(XName.Get(ALLOW_ABC_ATTRIB), CheckFileAttribute(tag.Attributes, SwfFileAttributes.AllowAbc)),
-                                    new XAttribute(XName.Get(SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB), CheckFileAttribute(tag.Attributes, SwfFileAttributes.SupressCrossDomainCaching)),
-                                    new XAttribute(XName.Get(SWF_RELATIVE_URLS_ATTRIB), CheckFileAttribute(tag.Attributes, SwfFileAttributes.SwfRelativeUrls))
+                                    new XAttribute(XName.Get(HAS_METADATA_ATTRIB), FormatBoolToDigit(tag.HasMetadata)),
+                                    new XAttribute(XName.Get(USE_NETWORK_ATTRIB), FormatBoolToDigit(tag.UseNetwork)),
+                                    new XAttribute(XName.Get(ALLOW_ABC_ATTRIB), FormatBoolToDigit(tag.AllowAbc)),
+                                    new XAttribute(XName.Get(SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB), FormatBoolToDigit(tag.SupressCrossDomainCaching)),
+                                    new XAttribute(XName.Get(SWF_RELATIVE_URLS_ATTRIB), FormatBoolToDigit(tag.SwfRelativeUrls))
 
                  );
             //TODO: other attributes

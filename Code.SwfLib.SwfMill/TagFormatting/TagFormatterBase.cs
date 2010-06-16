@@ -53,6 +53,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
+        protected string FormatBoolToDigit(bool val)
+        {
+            return val ? "1" : "0";
+        }
+
         protected SwfRGB ParseRGBFromFirstChild(XElement elem) {
             var colorElem = elem.Element(XName.Get("Color"));
             SwfRGB rgb;
