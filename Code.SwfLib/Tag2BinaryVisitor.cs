@@ -26,9 +26,9 @@ namespace Code.SwfLib
         {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteUInt32(tag.ObjectID);
+            writer.WriteUInt16(tag.ObjectID);
             writer.WriteBytes(tag.ImageData);
-            return new SwfTagData { Type = SwfTagType.FileAttributes, Data = mem.ToArray() };
+            return new SwfTagData { Type = SwfTagType.DefineBitsJPEG2, Data = mem.ToArray() };
         }
 
         public object Visit(DefineBitsLosslessTag tag)

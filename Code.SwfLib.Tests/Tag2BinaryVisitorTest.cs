@@ -15,7 +15,7 @@ namespace Code.SwfLib.Tests {
         public void DefineBitsJPEG2Test()
         {
             var tag = new DefineBitsJPEG2Tag();
-            tag.ObjectID = 6;
+            tag.ObjectID = 1;
             tag.ImageData = GetEmbeddedResourceData("DefineBitsJPEG2.jpg");
             var visitor = new Tag2BinaryVisitor();
             var res = visitor.GetTagData(tag);
