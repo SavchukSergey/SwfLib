@@ -64,6 +64,13 @@ namespace Code.SwfLib
 
         public object Visit(DefineShapeTag tag)
         {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.ObjectID);
+            writer.WriteRect(tag.Bounds);
+            writer.FlushBits();
+            //TODO: put shapes with styles
+            return new SwfTagData { Type = SwfTagType.DefineShape, Data = mem.ToArray() };
             throw new NotImplementedException();
         }
 
