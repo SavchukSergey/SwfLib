@@ -10,7 +10,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
     public class DefineEditTextTagFormatter : TagFormatterBase<DefineEditTextTag>
     {
 
-        private const string OBJECT_ID_ATTRIB = "objectID";
         private const string WORD_WRAP_ATTRIB = "wordWrap";
         private const string MULTILINE_ATTRIB = "multiLine";
         private const string PASSWORD_ATTRIB = "password";

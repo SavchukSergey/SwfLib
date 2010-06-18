@@ -60,8 +60,8 @@
     <Compile Include="TagFormatting\FontTags\DefineFont3TagFormatter.cs" />
     <Compile Include="TagFormatting\FontTags\DefineFontAlignZonesTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineFontNameTagFormatter.cs" />
-    <Compile Include="TagFormatting\DefineShape3TagFormatter.cs" />
-    <Compile Include="TagFormatting\DefineShapeTagFormatter.cs" />
+    <Compile Include="TagFormatting\ShapeTags\DefineShape3TagFormatter.cs" />
+    <Compile Include="TagFormatting\ShapeTags\DefineShapeTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineSpriteTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineTextTagFormatter.cs" />
     <Compile Include="TagFormatting\DoActionTagFormatter.cs" />

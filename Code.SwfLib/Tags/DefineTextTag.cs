@@ -9,10 +9,12 @@ namespace Code.SwfLib.Tags
 
         public SwfRect Bounds;
 
-        public SwfMatrix Matrix;
+        public SwfMatrix? Matrix;
 
+        //TODO: Remove it from here. It's fields size definition
         public byte GlyphBits;
 
+        //TODO: Remove it from here. It's fields size definition
         public byte AdvanceBits;
 
         public SwfTextRecord Records;

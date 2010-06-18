@@ -3,6 +3,7 @@ using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.DynamicTextTags;
 using Code.SwfLib.Tags.FontTags;
+using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.Tags
 {

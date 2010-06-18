@@ -214,7 +214,7 @@ namespace Code.SwfLib {
             } else {
                 tag.ObjectID = null;
             }
-            tag.Matrix = (flags & PlaceObject2Flags.HasMatrix) > 0 ? reader.ReadMatrix() : null;
+            tag.Matrix = (flags & PlaceObject2Flags.HasMatrix) > 0 ? reader.ReadMatrix() : (SwfMatrix?) null;
             tag.ColorTransform = (flags & PlaceObject2Flags.HasColorTransform) > 0 ? reader.ReadColorTransform() : null;
             if ((flags & PlaceObject2Flags.HasMorphPosition) > 0) {
                 tag.MorphPosition = reader.ReadUInt16();

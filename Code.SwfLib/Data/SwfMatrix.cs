@@ -1,19 +1,20 @@
 ﻿namespace Code.SwfLib.Data
 {
-    public class SwfMatrix
+    //TODO: Find usage. Make non - nullable. Set Scales to default values
+    public struct SwfMatrix
     {
 
-        public int ScaleX;
+        public double ScaleX;
 
-        public int ScaleY;
+        public double ScaleY;
 
-        public int RotateX;
+        public double RotateX;
 
-        public int RotateY;
+        public double RotateY;
 
-        public int TranslateX;
+        public double TranslateX;
 
-        public int TranslateY;
+        public double TranslateY;
 
     }
 }

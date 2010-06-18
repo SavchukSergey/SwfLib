@@ -26,10 +26,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         public override void AcceptElement(DefineTextTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BOUNDS_ELEM:
-                    tag.Bounds = ParseRect(element.Element(XName.Get("Rectangle")));
+                    tag.Bounds = SwfMillPrimitives.ParseRectangle(element.Element(XName.Get("Rectangle")));
                     break;
                 case TRANSFORM_ELEM:
-                    //TODO: read transform
+                    tag.Matrix = SwfMillPrimitives.ParseMatrix(element.Element(XName.Get("Transform")));
                     break;
                 case RECORDS_ELEM:
                     //TODO: read records
@@ -43,8 +43,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_TEXT_TAG),
                                    new XAttribute(XName.Get("objectID"), tag.ObjectID));
             res.Add(new XElement(XName.Get("bounds"), GetRectangleXml(tag.Bounds)));
-            if (tag.Matrix != null) {
-                res.Add(new XElement(XName.Get("transform"), GetTransformXml(tag.Matrix)));
+            if (tag.Matrix.HasValue) {
+                res.Add(new XElement(XName.Get("transform"), GetTransformXml(tag.Matrix.Value)));
             }
             //TODO: remove unnessary nested nodes. Swfmill requires them
             res.Add(new XElement(XName.Get("records"),

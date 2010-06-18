@@ -63,8 +63,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
                 res.Add(new XAttribute(XName.Get("objectID"), tag.ObjectID.Value));
             }
             res.Add(new XAttribute(XName.Get("depth"), tag.Depth));
-            if (tag.Matrix != null) {
-                res.Add(new XElement(XName.Get("transform"), GetTransformXml(tag.Matrix)));
+            if (tag.Matrix.HasValue) {
+                res.Add(new XElement(XName.Get("transform"), GetTransformXml(tag.Matrix.Value)));
             }
             //TODO: Put other fields
             return res;

@@ -10,7 +10,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         private readonly ushort _version;
         private readonly TagFormatterFactory _subFormatterFactory;
 
-        private const string OBJECT_ID_ATTRIB = "objectID";
         private const string FRAMES_ATTRIB = "frames";
         private const string TAGS_ELEMENTS = "tags";
 

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Code.SwfLib.Data;
 
-namespace Code.SwfLib.Tags
+namespace Code.SwfLib.Tags.ShapeTags
 {
     public class DefineShapeTag : SwfTagBase
     {
@@ -12,6 +9,8 @@ namespace Code.SwfLib.Tags
         public ushort ObjectID;
 
         public SwfRect Bounds;
+
+        public readonly IList<IDefineShape1FillStyle> FillStyles = new List<IDefineShape1FillStyle>();
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {

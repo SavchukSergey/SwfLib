@@ -11,7 +11,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected const string OBJECT_ID_ATTRIB = "objectID";
 
         #region ITagFormatter
-        
+
         XElement ITagFormatter.FormatTag(SwfTagBase tag) {
             return FormatTag((T)tag);
         }
@@ -30,8 +30,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         #endregion
 
-        protected void ProcessRawData(T tag, XElement dataElement)
-        {
+        protected void ProcessRawData(T tag, XElement dataElement) {
             //TODO: implement;
         }
 
@@ -53,8 +52,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        protected string FormatBoolToDigit(bool val)
-        {
+        protected string FormatBoolToDigit(bool val) {
             return val ? "1" : "0";
         }
 
@@ -148,8 +146,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                                 new XAttribute(XName.Get("advance"), entry.Advance));
         }
 
-        protected static byte[] ReadBase64(XElement data)
-        {
+        protected static byte[] ReadBase64(XElement data) {
             string val = data.Value
                 .Replace(" ", "")
                 .Replace("\r", "")
@@ -157,22 +154,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return Convert.FromBase64String(val);
         }
 
-        protected static XElement GetBinary(byte[] data)
-        {
+        protected static XElement GetBinary(byte[] data) {
             return new XElement("data", Convert.ToBase64String(data));
         }
 
-        protected static SwfRect ParseRect(XElement elem)
-        {
-            if (elem.Name.LocalName != "Rectangle") throw new FormatException("Invalid rectangle");
-            SwfRect rect;
-            rect.XMin = int.Parse(elem.Attribute(XName.Get("left")).Value);
-            rect.YMin = int.Parse(elem.Attribute(XName.Get("top")).Value);
-            rect.XMax = int.Parse(elem.Attribute(XName.Get("right")).Value);
-            rect.YMax = int.Parse(elem.Attribute(XName.Get("bottom")).Value);
-            return rect;
-        }
     }
-
-
 }

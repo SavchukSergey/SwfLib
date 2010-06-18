@@ -18,7 +18,7 @@ namespace Code.SwfLib.Tags.DisplayListTags
         /// </summary>
         public ushort Depth;
 
-        public SwfMatrix Matrix;
+        public SwfMatrix? Matrix;
 
         public SwfColorTransform ColorTransform;
 

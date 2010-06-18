@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Code.SwfLib.Data;
+﻿using Code.SwfLib.Data;
 
-namespace Code.SwfLib.Tags
+namespace Code.SwfLib.Tags.ShapeTags
 {
     public class DefineShape3Tag : SwfTagBase
     {
