@@ -75,6 +75,8 @@
     <Compile Include="Data\SwfTextRecordGlyphEntry.cs" />
     <Compile Include="Data\SwfTextRecordSetupEntry.cs" />
     <Compile Include="Data\SwfTextRecordSetupEntryFlags.cs" />
+    <Compile Include="FillStyleStreamExt.cs" />
+    <Compile Include="ShapeRecordStreamExt.cs" />
     <Compile Include="SwfFile.cs" />
     <Compile Include="SwfFileInfo.cs" />
     <Compile Include="Data\SwfHeader.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Tags\BitmapTags\DefineBitsLosslessTag.cs" />
     <Compile Include="Tags\DefineButton2Tag.cs" />
     <Compile Include="Tags\DynamicTextTags\DefineEditTextTag.cs" />
+    <Compile Include="Tags\FontTags\DefineFont3Attributes.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontAlignZonesTag.cs" />
     <Compile Include="Tags\DefineFontNameTag.cs" />

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using Code.SwfLib.Data;
+using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Tags;
 

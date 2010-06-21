@@ -36,7 +36,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags
             switch (element.Name.LocalName)
             {
                 case DATA_TAG:
-                    ProcessRawData(tag, element);
+                    //TODO: Set data
+                    FromBase64( element);
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);

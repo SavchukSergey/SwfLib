@@ -33,6 +33,7 @@ namespace Code.SwfLib {
 
         public SwfTagBase ReadDefineSpriteSubTag(SwfStreamReader reader) {
             var tag = ReadTag(reader);
+
             //TODO: Check allowed for define sprite types
             return tag;
         }
@@ -118,6 +119,11 @@ namespace Code.SwfLib {
             MemoryStream stream = new MemoryStream(tagData);
             SwfStreamReader reader = new SwfStreamReader(stream);
             tag.Name = reader.ReadString();
+            if (!reader.IsEOF)
+            {
+                var anchorFlag = reader.ReadByte();
+                tag.IsAnchor = anchorFlag != 0;
+            }
             return tag;
         }
 

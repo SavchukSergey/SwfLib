@@ -23,6 +23,7 @@
         /// Defines a text of characters displayed using a font. This definition doesn't support any transparency.
         /// </summary>
         DefineText = 11,
+        DoAction = 12,
         DefineBitsJPEG2 = 21,
         /// <summary>
         /// Declaration of complex 2D shapes. 
@@ -32,6 +33,7 @@
         /// Place an object in the current display list.
         /// </summary>
         PlaceObject2 = 26,
+        RemoveObject2 = 28,
         /// <summary>
         /// Declare a simple geometric shape.
         /// </summary>
@@ -40,10 +42,12 @@
         /// Defines a text of characters displayed using a font. Transparency is supported with this tag.
         /// </summary>
         DefineText2 = 33,
+        DefineButton2 = 34,
         /// <summary>
         /// Defines an RGBA bitmap compressed using ZLIB (similar to the PNG format). 
         /// </summary>
         DefineBitsLossless2 = 36,
+        DefineEditText = 37,
         /// <summary>
         /// Declares an animated character. This is similar to a shape with a display list so the character can be changing on its own over time. 
         /// </summary>
@@ -60,6 +64,7 @@
         /// Exports a list of definitions to other movies. You can in this way create one or more movies to hold a colection of objects to be reused by other movies without having to insert these info in each movie. A single export is enough for an entire movie (and you should have just one). 
         /// </summary>
         Export = 56,
+        DoInitAction = 59,
         /// <summary>
         /// This tag is used when debugging an SWF movie. It gives information about what debug file to load to match the SWF movie with the source. The identifier is a UUID. 
         /// </summary>
@@ -76,7 +81,9 @@
         /// Since version 8, this tag is required and needs to be the very first tag in the movie. It is used as a way to better handle security with the Flash Player.
         /// </summary>
         FileAttributes = 69,
+        PlaceObject3 = 70,
         DoAbc = 72,
+        DefineFontAlignZones = 73,
         /// <summary>
         /// Define whether CSM text should be used in a previous DefineText, DefineText2 or DefineEditText.
         /// </summary>

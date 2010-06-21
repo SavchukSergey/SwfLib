@@ -2,6 +2,7 @@
 {
     public class FrameLabelTag : ControlBaseTag
     {
+        public bool IsAnchor;
 
         public string Name { get; set; }
 

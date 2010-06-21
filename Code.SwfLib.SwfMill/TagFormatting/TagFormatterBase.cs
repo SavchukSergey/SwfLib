@@ -30,8 +30,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         #endregion
 
-        protected void ProcessRawData(T tag, XElement dataElement) {
-            //TODO: implement;
+        protected byte[] FromBase64(XElement dataElement) {
+            //TODO: why different depth??
+            var data1 = dataElement.Element("data");
+            if (data1 != null) dataElement = data1;
+            data1 = dataElement.Element("data");
+            if (data1 != null) dataElement = data1;
+            return Convert.FromBase64String(dataElement.Value);
         }
 
         protected bool ParseBoolFromDigit(XAttribute attrib) {

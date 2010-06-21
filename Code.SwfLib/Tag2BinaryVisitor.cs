@@ -34,27 +34,48 @@ namespace Code.SwfLib
 
         public object Visit(DefineBitsLosslessTag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.ObjectID);
+            //TODO: Put other fields
+            return new SwfTagData { Type = SwfTagType.DefineBitsLossless2, Data = mem.ToArray() };
         }
 
         public object Visit(DefineButton2Tag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            //TODO: put fields
+            return new SwfTagData { Type = SwfTagType.DefineButton2, Data = mem.ToArray() };
         }
 
         public object Visit(DefineEditTextTag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.ObjectID);
+            //TODO: Write other fields
+            return new SwfTagData { Type = SwfTagType.DefineEditText, Data = mem.ToArray() };
         }
 
         public object Visit(DefineFont3Tag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.ObjectID);
+            writer.WriteByte((byte) tag.Attributes);
+            //TODO: Write other fields
+            writer.FlushBits();
+            return new SwfTagData { Type = SwfTagType.DefineFont3, Data = mem.ToArray() };
         }
 
         public object Visit(DefineFontAlignZonesTag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.ObjectID);
+            //TODO: Write other fields
+            return new SwfTagData { Type = SwfTagType.DefineFontAlignZones, Data = mem.ToArray() };
         }
 
         public object Visit(DefineFontNameTag tag)
@@ -75,7 +96,10 @@ namespace Code.SwfLib
 
         public object Visit(DefineShape3Tag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            //TODO: Write other fields
+            return new SwfTagData { Type = SwfTagType.DefineShape3, Data = mem.ToArray() };
         }
 
         public object Visit(DefineSpriteTag tag)
@@ -94,17 +118,26 @@ namespace Code.SwfLib
 
         public object Visit(DefineTextTag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            //TODO: Write other fields
+            return new SwfTagData { Type = SwfTagType.DefineText, Data = mem.ToArray() };
         }
 
         public object Visit(DoActionTag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            //TODO: Write other fields
+            return new SwfTagData { Type = SwfTagType.DoAction, Data = mem.ToArray() };
         }
 
         public object Visit(DoInitActionTag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            //TODO: Write other fields
+            return new SwfTagData { Type = SwfTagType.DoInitAction, Data = mem.ToArray() };
         }
 
         public object Visit(EndTag tag)
@@ -135,7 +168,11 @@ namespace Code.SwfLib
 
         public object Visit(FrameLabelTag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteString(tag.Name);
+            if (tag.IsAnchor) writer.WriteByte(1);
+            return new SwfTagData { Type = SwfTagType.FrameLabel, Data = mem.ToArray() };
         }
 
         public object Visit(MetadataTag tag)
@@ -148,17 +185,26 @@ namespace Code.SwfLib
 
         public object Visit(PlaceObject2Tag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            //TODO: put fields
+            return new SwfTagData { Type = SwfTagType.PlaceObject2, Data = mem.ToArray() };
         }
 
         public object Visit(PlaceObject3Tag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            //TODO: put fields
+            return new SwfTagData { Type = SwfTagType.PlaceObject3, Data = mem.ToArray() };
         }
 
         public object Visit(RemoveObject2Tag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.Depth);
+            return new SwfTagData { Type = SwfTagType.RemoveObject2, Data = mem.ToArray() };
         }
 
         public object Visit(SetBackgroundColorTag tag)
@@ -181,7 +227,7 @@ namespace Code.SwfLib
 
         public object Visit(UnknownTag tag)
         {
-            throw new NotImplementedException();
+            return new SwfTagData { Type = tag.RawData.Type, Data = tag.RawData.Data };
         }
     }
 }

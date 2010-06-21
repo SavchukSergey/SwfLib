@@ -106,7 +106,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
             switch (element.Name.LocalName)
             {
                 case DATA_TAG:
-                    ProcessRawData(tag, element);
+                    //TODO: set data
+                    FromBase64(element);
                     break;
                 case SIZE_ELEM:
                     //TODO: password

@@ -12,9 +12,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         private const string ID_ATTRIB = "id";
 
         public override void AcceptAttribute(UnknownTag tag, XAttribute attrib) {
+            if (tag.RawData == null) tag.RawData = new SwfTagData();
             switch (attrib.Name.LocalName) {
                 case ID_ATTRIB:
-                  //TODO: parse id
+                    tag.RawData.Type = (SwfTagType) ParseHex(attrib.Value);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -22,9 +23,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         public override void AcceptElement(UnknownTag tag, XElement element) {
+            if (tag.RawData == null) tag.RawData = new SwfTagData();
             switch (element.Name.LocalName) {
                 case DATA_TAG:
-                    ProcessRawData(tag, element);
+                    tag.RawData.Data = FromBase64(element);
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
@@ -35,6 +37,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return new XElement(XName.Get(SwfTagNameMapping.UNKNOWN_TAG),
                                  new XAttribute(XName.Get("id"), string.Format("0x{0:x}", (int)tag.RawData.Type)),
                                  new XElement(XName.Get("data"), Convert.ToBase64String(tag.RawData.Data)));
+        }
+
+        private static uint ParseHex(string value) {
+            value = value.Replace("0x", "");
+            return uint.Parse(value, NumberStyles.HexNumber | NumberStyles.AllowHexSpecifier);
         }
     }
 }
