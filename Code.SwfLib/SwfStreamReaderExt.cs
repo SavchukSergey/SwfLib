@@ -61,11 +61,11 @@ namespace Code.SwfLib {
             if (hasRotate) {
                 var bits = (byte)reader.ReadUnsignedBits(5);
                 //TODO: check boundaries
-                matrix.RotateX = reader.ReadSignedBits(bits);
-                matrix.RotateY = reader.ReadSignedBits(bits);
+                matrix.RotateSkew0 = reader.ReadSignedBits(bits);
+                matrix.RotateSkew1 = reader.ReadSignedBits(bits);
             } else {
-                matrix.RotateX = 0;
-                matrix.RotateY = 0;
+                matrix.RotateSkew0 = 0;
+                matrix.RotateSkew1 = 0;
             }
             var translateBits = (byte)reader.ReadUnsignedBits(5);
             //TODO: check boundaries

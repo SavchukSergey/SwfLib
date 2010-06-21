@@ -50,6 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitsCount.cs" />
+    <Compile Include="Data\FillStyles\FillStyles1List.cs" />
+    <Compile Include="Data\FillStyles\FillStylesListBase.cs" />
+    <Compile Include="Data\LineStyles\LineStyleType.cs" />
+    <Compile Include="Data\LineStyles\LineStyle.cs" />
+    <Compile Include="Data\LineStyles\LineStyles1List.cs" />
+    <Compile Include="Data\LineStyles\LineStylesListBase.cs" />
     <Compile Include="Data\Shapes\CurvedEdgeShapeRecord.cs" />
     <Compile Include="Data\Shapes\EndShapeRecord.cs" />
     <Compile Include="Data\Shapes\ShapeRecord.cs" />
@@ -58,10 +64,10 @@
     <Compile Include="Data\Shapes\ShapeRecordType.cs" />
     <Compile Include="Data\Shapes\StraightEdgeShapeRecord.cs" />
     <Compile Include="Data\Shapes\StyleChangeShapeRecord.cs" />
+    <Compile Include="Data\ShapeWithStyle1.cs" />
     <Compile Include="Data\SwfAnyFilter.cs" />
     <Compile Include="Data\SwfColorTransform.cs" />
     <Compile Include="Data\SwfMorphShapeWithStyle.cs" />
-    <Compile Include="Data\SwfShapeWithStyle.cs" />
     <Compile Include="Data\SwfTextEntry.cs" />
     <Compile Include="Data\SwfTextRecord.cs" />
     <Compile Include="Data\SwfTextRecordEndEntry.cs" />
@@ -93,13 +99,12 @@
     <Compile Include="Tags\FontTags\DefineFont3Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontAlignZonesTag.cs" />
     <Compile Include="Tags\DefineFontNameTag.cs" />
-    <Compile Include="Tags\ShapeTags\ClippedBitmapFillStyle.cs" />
-    <Compile Include="Tags\ShapeTags\NonSmoothedClippedBitmapFillStyle.cs" />
+    <Compile Include="Data\FillStyles\ClippedBitmapFillStyle.cs" />
+    <Compile Include="Data\FillStyles\NonSmoothedClippedBitmapFillStyle.cs" />
     <Compile Include="Tags\ShapeTags\DefineShape3Tag.cs" />
-    <Compile Include="Tags\ShapeTags\FillStyleType.cs" />
-    <Compile Include="Tags\ShapeTags\IFillStyleVisitor.cs" />
-    <Compile Include="Tags\ShapeTags\LinearGradientFillStyle.cs" />
-    <Compile Include="Tags\ShapeTags\SolidRGBFillStyle.cs" />
+    <Compile Include="Data\FillStyles\FillStyleType.cs" />
+    <Compile Include="Data\FillStyles\LinearGradientFillStyle.cs" />
+    <Compile Include="Data\FillStyles\SolidRGBFillStyle.cs" />
     <Compile Include="Tags\ShapeTags\DefineShapeTag.cs" />
     <Compile Include="Tags\DefineSpriteTag.cs" />
     <Compile Include="Tags\DefineTextTag.cs" />
@@ -114,8 +119,7 @@
     <Compile Include="Tags\DisplayListTags\PlaceObject2Flags.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject3Tag.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObject2Tag.cs" />
-    <Compile Include="Tags\ShapeTags\IDefineShape1FillStyle.cs" />
-    <Compile Include="Tags\ShapeTags\IFillStyle.cs" />
+    <Compile Include="Data\FillStyles\FillStyle.cs" />
     <Compile Include="Tags\ShowFrameTag.cs" />
     <Compile Include="Tags\ControlTags\SwfFileAttributes.cs" />
     <Compile Include="Tags\SwfTagBase.cs" />
@@ -128,7 +132,7 @@
     <Compile Include="Tags\ProductInfoTag.cs" />
     <Compile Include="Tags\ProtectDebug2Tag.cs" />
     <Compile Include="Tags\ControlTags\ScriptLimitsTag.cs" />
-    <Compile Include="Tags\SetBackgroundColorTag.cs" />
+    <Compile Include="Tags\ControlTags\SetBackgroundColorTag.cs" />
     <Compile Include="Data\SwfSymbolReference.cs" />
     <Compile Include="Tags\SwfTagData.cs" />
     <Compile Include="SwfTagReader.cs" />

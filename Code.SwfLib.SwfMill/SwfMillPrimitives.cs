@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Data.Shapes;
-using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill {
     public static class SwfMillPrimitives {
@@ -15,10 +12,6 @@ namespace Code.SwfLib.SwfMill {
             return new SwfMorphShapeWithStyle();
         }
 
-        public static SwfShapeWithStyle ParseSwfShapeWithStyle(XElement element) {
-            //TODO: Implement;
-            return new SwfShapeWithStyle();
-        }
 
         public static ushort ParseObjectID(XAttribute attrib) {
             return ushort.Parse(attrib.Value);
@@ -26,6 +19,8 @@ namespace Code.SwfLib.SwfMill {
 
         public static SwfMatrix ParseMatrix(XElement element) {
             var matrix = new SwfMatrix();
+            matrix.ScaleX = 1.0;
+            matrix.ScaleY = 1.0;
             foreach (var attrib in element.Attributes()) {
                 switch (attrib.Name.LocalName) {
                     case "scaleX":
@@ -35,10 +30,10 @@ namespace Code.SwfLib.SwfMill {
                         matrix.ScaleY = double.Parse(attrib.Value);
                         break;
                     case "transX":
-                        matrix.TranslateX = double.Parse(attrib.Value);
+                        matrix.TranslateX = int.Parse(attrib.Value);
                         break;
                     case "transY":
-                        matrix.TranslateY = double.Parse(attrib.Value);
+                        matrix.TranslateY = int.Parse(attrib.Value);
                         break;
                     default:
                         OnUnknownAttributeFound(attrib);

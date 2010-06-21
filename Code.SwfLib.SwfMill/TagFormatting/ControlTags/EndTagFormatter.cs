@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Tags.ControlTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
+namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class EndTagFormatter : TagFormatterBase<EndTag> {
 
         public override void AcceptAttribute(EndTag tag, XAttribute attrib) {

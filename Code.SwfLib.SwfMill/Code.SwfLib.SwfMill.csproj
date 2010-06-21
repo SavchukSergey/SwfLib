@@ -67,16 +67,16 @@
     <Compile Include="TagFormatting\DoActionTagFormatter.cs" />
     <Compile Include="TagFormatting\DoInitActionTagFormatter.cs" />
     <Compile Include="TagFormatting\ExportTagFormatter.cs" />
-    <Compile Include="TagFormatting\FrameLabelTagFormater.cs" />
+    <Compile Include="TagFormatting\ControlTags\FrameLabelTagFormater.cs" />
     <Compile Include="TagFormatting\ITagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\PlaceObject2TagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\RemoveObject2TagFormatter.cs" />
     <Compile Include="TagFormatting\UnknownTagFormatter.cs" />
-    <Compile Include="TagFormatting\EndTagFormatter.cs" />
-    <Compile Include="TagFormatting\FileAttributesTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\EndTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\FileAttributesTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\MetadataTagFormatter.cs" />
-    <Compile Include="TagFormatting\SetBackgroundColorTagFormatter.cs" />
-    <Compile Include="TagFormatting\ShowFrameTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\SetBackgroundColorTagFormatter.cs" />
+    <Compile Include="TagFormatting\DisplayListTags\ShowFrameTagFormatter.cs" />
     <Compile Include="TagFormatting\TagFormatterBase.cs" />
     <Compile Include="TagFormatterFactory.cs" />
   </ItemGroup>

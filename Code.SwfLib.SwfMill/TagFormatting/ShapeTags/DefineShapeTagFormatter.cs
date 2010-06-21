@@ -43,16 +43,16 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             foreach (var styleElem in fillStyles.Elements()) {
                 switch (styleElem.Name.LocalName) {
                     case "ClippedBitmap":
-                        tag.FillStyles.Add(SwfMillPrimitives.ParseClippedBitmapFillStyle(styleElem));
+                        tag.Shapes.FillStyles.Add(SwfMillPrimitives.ParseClippedBitmapFillStyle(styleElem));
                         break;
                     case "ClippedBitmap2":
-                        tag.FillStyles.Add(SwfMillPrimitives.ParseNonSmoothedClippedBitmapFillStyle(styleElem));
+                        tag.Shapes.FillStyles.Add(SwfMillPrimitives.ParseNonSmoothedClippedBitmapFillStyle(styleElem));
                         break;
                     case "LinearGradient":
-                        tag.FillStyles.Add(SwfMillPrimitives.ParseLinearGradientFillStyle(styleElem));
+                        tag.Shapes.FillStyles.Add(SwfMillPrimitives.ParseLinearGradientFillStyle(styleElem));
                         break;
                     case "Solid":
-                        tag.FillStyles.Add(SwfMillPrimitives.ParseSolidRGBFillStyle(styleElem));
+                        tag.Shapes.FillStyles.Add(SwfMillPrimitives.ParseSolidRGBFillStyle(styleElem));
                         break;
                     default:
                         throw new FormatException("Unknown fill style " + styleElem.Name.LocalName);
@@ -69,17 +69,17 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                     case "ShapeSetup":
                         if (shapeElement.Attributes().Count() > 0)
                         {
-                            tag.Shapes.Add(SwfMillPrimitives.ReadStyleChangeShapeRecord(shapeElement));
+                            tag.Shapes.ShapeRecords.Add(SwfMillPrimitives.ReadStyleChangeShapeRecord(shapeElement));
                         } else
                         {
-                            tag.Shapes.Add(SwfMillPrimitives.ReadEndShapeRecord(shapeElement));
+                            tag.Shapes.ShapeRecords.Add(SwfMillPrimitives.ReadEndShapeRecord(shapeElement));
                         }
                         break;
                     case "LineTo":
-                        tag.Shapes.Add(SwfMillPrimitives.ReadStraightEdgeShapeRecord(shapeElement));
+                        tag.Shapes.ShapeRecords.Add(SwfMillPrimitives.ReadStraightEdgeShapeRecord(shapeElement));
                         break;
                     case "CurveTo":
-                        tag.Shapes.Add(SwfMillPrimitives.ReadCurvedEdgeShapeRecord(shapeElement));
+                        tag.Shapes.ShapeRecords.Add(SwfMillPrimitives.ReadCurvedEdgeShapeRecord(shapeElement));
                         break;
                     default:
                         throw new FormatException("Unknown shape type " + shapeElement.Name.LocalName);

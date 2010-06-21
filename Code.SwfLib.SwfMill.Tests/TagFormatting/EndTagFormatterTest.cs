@@ -1,4 +1,4 @@
-﻿using Code.SwfLib.SwfMill.TagFormatting;
+﻿using Code.SwfLib.SwfMill.TagFormatting.ControlTags;
 using Code.SwfLib.Tags.ControlTags;
 using NUnit.Framework;
 

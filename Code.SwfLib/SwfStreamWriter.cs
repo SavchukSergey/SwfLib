@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
 
 namespace Code.SwfLib
@@ -87,6 +88,7 @@ namespace Code.SwfLib
             }
         }
 
+        //TODO: rename to AlignToByte
         public void FlushBits()
         {
             if (_bitContext.BitIndex == 0) return;
@@ -129,5 +131,5 @@ namespace Code.SwfLib
             _writer.Write(terminator);
         }
 
-    }
+   }
 }

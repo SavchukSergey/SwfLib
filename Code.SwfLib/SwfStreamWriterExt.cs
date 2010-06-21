@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using Code.SwfLib.Data;
+using Code.SwfLib.Data.FillStyles;
+using Code.SwfLib.Data.LineStyles;
 using Code.SwfLib.Data.Shapes;
 
 namespace Code.SwfLib {
@@ -44,30 +46,119 @@ namespace Code.SwfLib {
             writer.WriteSignedBits(rect.YMax, (uint)bits);
         }
 
+        public static void WriteMatrix(this SwfStreamWriter writer, SwfMatrix matrix) {
+            bool hasScale = matrix.HasScale;
+            writer.WriteBit(hasScale);
+            if (hasScale) {
+                throw new NotImplementedException();
+            }
+            bool hasRotate = matrix.HasRotate;
+            if (hasRotate) {
+                throw new NotImplementedException();
+            }
+            var translateBits = new BitsCount(matrix.TranslateX, matrix.TranslateY).GetUnsignedBits();
+            writer.WriteUnsignedBits(translateBits, 5);
+            writer.WriteSignedBits(matrix.TranslateX, translateBits);
+            writer.WriteSignedBits(matrix.TranslateY, translateBits);
+        }
+
+
         public static void WriteRGB(this SwfStreamWriter writer, SwfRGB val) {
             writer.WriteByte(val.Red);
             writer.WriteByte(val.Green);
             writer.WriteByte(val.Blue);
         }
 
-        public static void WriteStyleChangeShapeRecord(this SwfStreamWriter writer, StyleChangeShapeRecord record, uint fillStylesBits, uint lineStylesBits) {
+        public static void WriteShapeWithStyle(this SwfStreamWriter writer, ShapeWithStyle1 shapeWithStyle) {
+            writer.WriteFillStyles(shapeWithStyle.FillStyles);
+            writer.WriteLineStyles(shapeWithStyle.LineStyles);
+            var fillStyleBits = new BitsCount(shapeWithStyle.FillStyles.Count).GetUnsignedBits();
+            var lineStyleBits = new BitsCount(shapeWithStyle.LineStyles.Count).GetUnsignedBits();
+            writer.WriteUnsignedBits(fillStyleBits, 4);
+            writer.WriteUnsignedBits(lineStyleBits, 4);
+            writer.WriteShapeRecords(shapeWithStyle.ShapeRecords, ref fillStyleBits, ref lineStyleBits);
+        }
+
+        public static void WriteFillStyles(this SwfStreamWriter writer, FillStyles1List styles) {
+            for (var i = 0; i < styles.Count; i++) {
+                var style = styles[i];
+                switch (style.Type) {
+                    case FillStyleType.ClippedBitmap:
+                        writer.WriteClippedBitmapFillStyle((ClippedBitmapFillStyle)style);
+                        break;
+                    default:
+                        throw new InvalidOperationException("Unknown fill style type " + style.Type);
+                }
+            }
+        }
+
+        public static void WriteLineStyles(this SwfStreamWriter writer, LineStyles1List styles) {
+            for (var i = 0; i < styles.Count; i++) {
+                var style = styles[i];
+                switch (style.Type) {
+                    default:
+                        throw new InvalidOperationException("Unknown line style type " + style.Type);
+                }
+            }
+        }
+
+        public static void WriteClippedBitmapFillStyle(this SwfStreamWriter writer, ClippedBitmapFillStyle style) {
+            writer.WriteByte(0x41);
+            writer.WriteUInt16(style.ObjectID);
+            writer.WriteMatrix(style.BitmapMatrix);
+        }
+
+        public static void WriteShapeRecords(this SwfStreamWriter writer, ShapeRecords1List shapeRecords, ref uint fillStyleBits, ref uint lineStyleBits) {
+            for (var i = 0; i < shapeRecords.Count; i++) {
+                var shapeRecord = shapeRecords[i];
+                writer.WriteShapeRecord(shapeRecord);
+            }
+        }
+
+        public static void WriteShapeRecord(this SwfStreamWriter writer, ShapeRecord shapeRecord) {
+            writer.FlushBits();
+            switch (shapeRecord.Type) {
+                case ShapeRecordType.CurvedEdgeRecord:
+                    writer.WriteCurvedEdge((CurvedEdgeShapeRecord)shapeRecord);
+                    break;
+                default:
+                    throw new InvalidOperationException("Unknown shape record type");
+            }
+        }
+
+        public static void WriteCurvedEdge(this SwfStreamWriter writer, CurvedEdgeShapeRecord record) {
+            throw new NotImplementedException();
+        }
+
+        public static void WriteStyleChangeShapeRecord(this SwfStreamWriter writer, StyleChangeShapeRecord record, ref uint fillStylesBits, ref uint lineStylesBits) {
             writer.WriteBit(false);
             writer.WriteBit(false);
-            writer.WriteBit(record.LineStyle.HasValue);
-            writer.WriteBit(record.FillStyle1.HasValue);
-            writer.WriteBit(record.FillStyle0.HasValue);
+            bool stateFillStyle0 = record.FillStyle0.HasValue;
+            bool stateFillStyle1 = record.FillStyle1.HasValue;
+            bool stateLineStyle = record.LineStyle.HasValue;
             bool stateMoveTo = record.MoveDeltaX != 0 || record.MoveDeltaY != 0;
+            writer.WriteBit(stateLineStyle);
+            writer.WriteBit(stateFillStyle1);
+            writer.WriteBit(stateFillStyle0);
             writer.WriteBit(stateMoveTo);
             if (stateMoveTo) {
-                BitsCount cnt = new BitsCount(0);
-                cnt.AddValue(record.MoveDeltaX);
-                cnt.AddValue(record.MoveDeltaY);
-                var bits = cnt.GetSignedBits();
-                writer.WriteUnsignedBits((uint) bits, 5);
-                writer.WriteSignedBits(record.MoveDeltaX, (uint)bits);
-                writer.WriteSignedBits(record.MoveDeltaY, (uint)bits);
+                BitsCount cnt = new BitsCount(record.MoveDeltaX, record.MoveDeltaY);
+                var moveBits = cnt.GetSignedBits();
+                writer.WriteUnsignedBits((uint)moveBits, 5);
+                writer.WriteSignedBits(record.MoveDeltaX, (uint)moveBits);
+                writer.WriteSignedBits(record.MoveDeltaY, (uint)moveBits);
             }
-
+            if (stateFillStyle0) {
+                writer.WriteUnsignedBits(record.FillStyle0.Value, fillStylesBits);
+            }
+            if (stateFillStyle1) {
+                writer.WriteUnsignedBits(record.FillStyle1.Value, fillStylesBits);
+            }
+            if (stateLineStyle) {
+                writer.WriteUnsignedBits(record.LineStyle.Value, lineStylesBits);
+            }
+            //TODO: Write line styles, fill styles, line/fill bits
+            throw new NotImplementedException();
         }
     }
 }

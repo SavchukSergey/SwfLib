@@ -68,6 +68,8 @@ namespace Code.SwfLib
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.ObjectID);
             writer.WriteRect(tag.Bounds);
+            writer.WriteShapeWithStyle(tag.Shapes);
+            //TODO: do we need to flush bits?
             writer.FlushBits();
             //TODO: put shapes with styles
             throw new NotImplementedException();

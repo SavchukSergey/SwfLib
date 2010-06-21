@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Tags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
+namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class ShowFrameTagFormatter : TagFormatterBase<ShowFrameTag> {
 
         public override void AcceptAttribute(ShowFrameTag tag, XAttribute attrib) {

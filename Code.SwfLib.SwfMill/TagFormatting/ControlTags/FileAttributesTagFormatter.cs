@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Tags.ControlTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
+namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class FileAttributesTagFormatter : TagFormatterBase<FileAttributesTag> {
         private readonly ushort _version;
 
@@ -50,13 +47,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         public override XElement FormatTag(FileAttributesTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.FILE_ATTRIBUTES_TAG),
-                                    new XAttribute(XName.Get(HAS_METADATA_ATTRIB), FormatBoolToDigit(tag.HasMetadata)),
-                                    new XAttribute(XName.Get(USE_NETWORK_ATTRIB), FormatBoolToDigit(tag.UseNetwork)),
-                                    new XAttribute(XName.Get(ALLOW_ABC_ATTRIB), FormatBoolToDigit(tag.AllowAbc)),
-                                    new XAttribute(XName.Get(SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB), FormatBoolToDigit(tag.SupressCrossDomainCaching)),
-                                    new XAttribute(XName.Get(SWF_RELATIVE_URLS_ATTRIB), FormatBoolToDigit(tag.SwfRelativeUrls))
+                                   new XAttribute(XName.Get(HAS_METADATA_ATTRIB), FormatBoolToDigit(tag.HasMetadata)),
+                                   new XAttribute(XName.Get(USE_NETWORK_ATTRIB), FormatBoolToDigit(tag.UseNetwork)),
+                                   new XAttribute(XName.Get(ALLOW_ABC_ATTRIB), FormatBoolToDigit(tag.AllowAbc)),
+                                   new XAttribute(XName.Get(SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB), FormatBoolToDigit(tag.SupressCrossDomainCaching)),
+                                   new XAttribute(XName.Get(SWF_RELATIVE_URLS_ATTRIB), FormatBoolToDigit(tag.SwfRelativeUrls))
 
-                 );
+                );
             //TODO: other attributes
             if (_version >= 10) {
                 res.Add(new XAttribute(XName.Get("useGPU"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.UseGPU)));
