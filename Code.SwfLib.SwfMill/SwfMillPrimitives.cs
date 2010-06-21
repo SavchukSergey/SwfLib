@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill {
@@ -151,8 +152,7 @@ namespace Code.SwfLib.SwfMill {
             return style;
         }
 
-        public static SwfRGB ParseRGBColor(XElement element)
-        {
+        public static SwfRGB ParseRGBColor(XElement element) {
             var rgb = new SwfRGB();
             foreach (var attribute in element.Attributes()) {
                 switch (attribute.Name.LocalName) {
@@ -180,8 +180,7 @@ namespace Code.SwfLib.SwfMill {
             return rgb;
         }
 
-        public static SwfRect ParseRectangle(XElement element)
-        {
+        public static SwfRect ParseRectangle(XElement element) {
             var rect = new SwfRect();
             foreach (var attribute in element.Attributes()) {
                 switch (attribute.Name.LocalName) {
@@ -221,5 +220,115 @@ namespace Code.SwfLib.SwfMill {
         }
 
 
+        public static StyleChangeShapeRecord ReadStyleChangeShapeRecord(XElement element) {
+            var result = new StyleChangeShapeRecord();
+            foreach (var attribute in element.Attributes()) {
+                switch (attribute.Name.LocalName) {
+                    case "fillStyle0":
+                        result.FillStyle0 = uint.Parse(attribute.Value);
+                        break;
+                    case "fillStyle1":
+                        result.FillStyle1 = uint.Parse(attribute.Value);
+                        break;
+                    case "x":
+                        result.MoveDeltaX = int.Parse(attribute.Value);
+                        break;
+                    case "y":
+                        result.MoveDeltaY = int.Parse(attribute.Value);
+                        break;
+                    default:
+                        OnUnknownAttributeFound(attribute);
+                        break;
+
+                }
+            }
+            foreach (var elem in element.Elements()) {
+                switch (elem.Name.LocalName) {
+                    default:
+                        OnUnknownElementFound(elem);
+                        break;
+                }
+            }
+            return result;
+        }
+
+        public static EndShapeRecord ReadEndShapeRecord(XElement element) {
+            var result = new EndShapeRecord();
+            foreach (var attribute in element.Attributes()) {
+                switch (attribute.Name.LocalName) {
+                    default:
+                        OnUnknownAttributeFound(attribute);
+                        break;
+
+                }
+            }
+            foreach (var elem in element.Elements()) {
+                switch (elem.Name.LocalName) {
+                    default:
+                        OnUnknownElementFound(elem);
+                        break;
+                }
+            }
+            return result;
+        }
+
+        public static StraightEdgeShapeRecord ReadStraightEdgeShapeRecord(XElement element) {
+            var result = new StraightEdgeShapeRecord();
+            foreach (var attribute in element.Attributes()) {
+                switch (attribute.Name.LocalName) {
+                    case "x":
+                        result.DeltaX = int.Parse(attribute.Value);
+                        break;
+                    case "y":
+                        result.DeltaY = int.Parse(attribute.Value);
+                        break;
+                    default:
+                        OnUnknownAttributeFound(attribute);
+                        break;
+
+                }
+            }
+            foreach (var elem in element.Elements()) {
+                switch (elem.Name.LocalName) {
+                    default:
+                        OnUnknownElementFound(elem);
+                        break;
+                }
+            }
+            return result;
+        }
+
+        public static CurvedEdgeShapeRecord ReadCurvedEdgeShapeRecord(XElement element) {
+            var result = new CurvedEdgeShapeRecord();
+            foreach (var attribute in element.Attributes()) {
+                switch (attribute.Name.LocalName) {
+                    //TODO:  what is x1 and x2?
+                    case "x1":
+                        result.ControlDeltaX = int.Parse(attribute.Value);
+                        break;
+                    case "y1":
+                        result.ControlDeltaY = int.Parse(attribute.Value);
+                        break;
+                    case "x2":
+                        result.AnchorDeltaX = int.Parse(attribute.Value);
+                        break;
+                    case "y2":
+                        result.AnchorDeltaY = int.Parse(attribute.Value);
+                        break;
+                    default:
+                        OnUnknownAttributeFound(attribute);
+                        break;
+
+                }
+            }
+            foreach (var elem in element.Elements()) {
+                switch (elem.Name.LocalName) {
+                    default:
+                        OnUnknownElementFound(elem);
+                        break;
+                }
+            }
+            return result;
+        }
     }
 }

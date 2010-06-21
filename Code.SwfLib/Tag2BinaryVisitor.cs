@@ -70,8 +70,8 @@ namespace Code.SwfLib
             writer.WriteRect(tag.Bounds);
             writer.FlushBits();
             //TODO: put shapes with styles
-            return new SwfTagData { Type = SwfTagType.DefineShape, Data = mem.ToArray() };
             throw new NotImplementedException();
+            return new SwfTagData { Type = SwfTagType.DefineShape, Data = mem.ToArray() };
         }
 
         public object Visit(DefineShape3Tag tag)

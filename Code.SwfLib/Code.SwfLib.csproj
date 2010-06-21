@@ -50,6 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitsCount.cs" />
+    <Compile Include="Data\Shapes\CurvedEdgeShapeRecord.cs" />
+    <Compile Include="Data\Shapes\EndShapeRecord.cs" />
+    <Compile Include="Data\Shapes\ShapeRecord.cs" />
+    <Compile Include="Data\Shapes\ShapeRecords1List.cs" />
+    <Compile Include="Data\Shapes\ShapeRecordsListBase.cs" />
+    <Compile Include="Data\Shapes\ShapeRecordType.cs" />
+    <Compile Include="Data\Shapes\StraightEdgeShapeRecord.cs" />
+    <Compile Include="Data\Shapes\StyleChangeShapeRecord.cs" />
     <Compile Include="Data\SwfAnyFilter.cs" />
     <Compile Include="Data\SwfColorTransform.cs" />
     <Compile Include="Data\SwfMorphShapeWithStyle.cs" />

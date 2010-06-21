@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -60,7 +61,30 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         }
 
         private static void ReadShapes(DefineShapeTag tag, XElement shapes) {
-            //TODO: Implement shapes reading;
+            var array = shapes.Element(XName.Get("Shape"));
+            var fillStyles = array.Element("edges");
+
+            foreach (var shapeElement in fillStyles.Elements()) {
+                switch (shapeElement.Name.LocalName) {
+                    case "ShapeSetup":
+                        if (shapeElement.Attributes().Count() > 0)
+                        {
+                            tag.Shapes.Add(SwfMillPrimitives.ReadStyleChangeShapeRecord(shapeElement));
+                        } else
+                        {
+                            tag.Shapes.Add(SwfMillPrimitives.ReadEndShapeRecord(shapeElement));
+                        }
+                        break;
+                    case "LineTo":
+                        tag.Shapes.Add(SwfMillPrimitives.ReadStraightEdgeShapeRecord(shapeElement));
+                        break;
+                    case "CurveTo":
+                        tag.Shapes.Add(SwfMillPrimitives.ReadCurvedEdgeShapeRecord(shapeElement));
+                        break;
+                    default:
+                        throw new FormatException("Unknown shape type " + shapeElement.Name.LocalName);
+                }
+            }
         }
 
         public override XElement FormatTag(DefineShapeTag tag) {
