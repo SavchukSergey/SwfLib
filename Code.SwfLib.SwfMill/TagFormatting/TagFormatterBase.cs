@@ -34,13 +34,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             //TODO: implement;
         }
 
-        protected uint SetFlagsValue(uint flags, uint shiftedBitFlags, bool flag) {
-            if (flag) {
-                return flags | shiftedBitFlags;
-            }
-            return flags & (~shiftedBitFlags);
-        }
-
         protected bool ParseBoolFromDigit(XAttribute attrib) {
             switch (attrib.Value) {
                 case "1":

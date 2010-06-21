@@ -7,7 +7,7 @@ namespace Code.SwfLib.Tests {
     public class SwfStreamReaderTest {
 
         [Test]
-        public void ReadFixedPoint16Test() {
+        public void ReadFixedPoint8Test() {
             var mem = new MemoryStream();
             const int val = 0xc3aa;
             const byte hi = val >> 8;
@@ -17,7 +17,26 @@ namespace Code.SwfLib.Tests {
             mem.WriteByte(hi);
             mem.Seek(0, SeekOrigin.Begin);
             var reader = new SwfStreamReader(mem);
-            double actual = reader.ReadFixedPoint16();
+            double actual = reader.ReadFixedPoint8();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ReadFixedPoint16FromBitsTest()
+        {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            const int val = 0x03aa4523;
+            const ushort hi = val >> 16;
+            const ushort low = val & 0xffff;
+            const double expected = hi + low / 65536.0;
+            var bits = new BitsCount(hi).GetUnsignedBits();
+            writer.WriteUnsignedBits(hi, bits);
+            writer.WriteUnsignedBits(low, 16);
+            writer.FlushBits();
+            mem.Seek(0, SeekOrigin.Begin);
+            var reader = new SwfStreamReader(mem);
+            double actual = reader.ReadFixedPoint16(bits + 16);
             Assert.AreEqual(expected, actual);
         }
 

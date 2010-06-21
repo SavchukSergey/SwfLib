@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using Code.SwfLib.Data;
+using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Tags;
 
 namespace Code.SwfLib
@@ -31,14 +32,28 @@ namespace Code.SwfLib
             WriteBytes(bytes);
         }
 
-        public void WriteFixedPoint16(double val)
+        /// <summary>
+        /// Writes Fixed point decimal in 8:8 format
+        /// </summary>
+        /// <param name="val"></param>
+        public void WriteFixedPoint8(double val)
         {
             var integer = Math.Floor(val);
-            var fracton = val - integer;
+            var fraction = val - integer;
             var hi = (byte)integer;
-            var low = (byte)(fracton * 256.0);
+            var low = (byte)(fraction * 256.0);
             WriteByte(low);
             WriteByte(hi);
+        }
+
+        public void WriteFixedPoint16(double val, uint bits)
+        {
+            var integer = Math.Floor(val);
+            var fraction = val - integer;
+            var low = (ushort)(fraction*65536);
+            var hi = (ushort) integer;
+            WriteUnsignedBits(hi, bits - 16);
+            WriteUnsignedBits(low, 16);
         }
 
         #region Bit writing
@@ -131,5 +146,5 @@ namespace Code.SwfLib
             _writer.Write(terminator);
         }
 
-   }
+    }
 }

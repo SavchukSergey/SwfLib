@@ -9,6 +9,7 @@ namespace Code.SwfLib.Tags
 
         public ushort FramesCount;
 
+        //TODO: create collection that will test added tags
         public readonly IList<SwfTagBase> Tags = new List<SwfTagBase>();
 
         public override object AcceptVistor(ISwfTagVisitor visitor)

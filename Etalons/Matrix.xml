@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<swf version="8" compressed="1">
+  <Header framerate="12" frames="1">
+    <size>
+      <Rectangle left="0" right="11000" top="0" bottom="8000"/>
+    </size>
+    <tags>
+      <FileAttributes hasMetaData="0" useNetwork="1"/>
+      <PlaceObject2 replace="0" depth="1" >
+         <transform>
+	   <Transform transX="0" transY="0" scaleX="20.5" scaleY="17.25" />
+         </transform>
+      </PlaceObject2>
+      <PlaceObject2 replace="0" depth="1" >
+         <transform>
+	   <Transform transX="0" transY="0" scaleX="0.5" scaleY="1.25" />
+         </transform>
+      </PlaceObject2>
+      <ShowFrame/>
+      <End/>
+    </tags>
+  </Header>
+</swf>

@@ -5,9 +5,9 @@ namespace Code.SwfLib.Data
     [DebuggerDisplay("Index = {Index}, Advance = {Advance}")]
     public class SwfTextEntry
     {
-        public ulong Index;
+        public uint Index;
 
-        public ulong Advance;
+        public uint Advance;
 
     }
 }

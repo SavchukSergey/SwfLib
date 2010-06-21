@@ -69,10 +69,7 @@ namespace Code.SwfLib
             writer.WriteUInt16(tag.ObjectID);
             writer.WriteRect(tag.Bounds);
             writer.WriteShapeWithStyle(tag.Shapes);
-            //TODO: do we need to flush bits?
             writer.FlushBits();
-            //TODO: put shapes with styles
-            throw new NotImplementedException();
             return new SwfTagData { Type = SwfTagType.DefineShape, Data = mem.ToArray() };
         }
 
@@ -83,7 +80,16 @@ namespace Code.SwfLib
 
         public object Visit(DefineSpriteTag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.SpriteID);
+            writer.WriteUInt16(tag.FramesCount);
+            foreach (var subtag in tag.Tags)
+            {
+                var subTagData = GetTagData(subtag);
+                writer.WriteTagData(subTagData);
+            }
+            return new SwfTagData { Type = SwfTagType.DefineSprite, Data = mem.ToArray() };
         }
 
         public object Visit(DefineTextTag tag)
@@ -108,7 +114,15 @@ namespace Code.SwfLib
 
         public object Visit(ExportTag tag)
         {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16((ushort) tag.Symbols.Count);
+            foreach (var symbolref in tag.Symbols)
+            {
+                writer.WriteUInt16(symbolref.SymbolID);
+                writer.WriteString(symbolref.SymbolName);
+            }
+            return new SwfTagData { Type = SwfTagType.Export, Data = mem.ToArray() };
         }
 
         public object Visit(FileAttributesTag tag)

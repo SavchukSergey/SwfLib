@@ -7,15 +7,34 @@ namespace Code.SwfLib.Tests {
     [TestFixture]
     public class SwfStreamWriterTest {
 
+
         [Test]
-        public void WriteFixedPoint16Test() {
+        public void WriteFixedPoint16FromBitsTest()
+        {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            const int val = 0x03aa4523;
+            const ushort hi = val >> 16;
+            const ushort low = val & 0xffff;
+            const double expected = hi + low / 65536.0;
+            var bits = new BitsCount(hi).GetUnsignedBits() + 16;
+            writer.WriteFixedPoint16(expected, bits);
+            writer.FlushBits();
+            mem.Seek(0, SeekOrigin.Begin);
+            var reader = new SwfStreamReader(mem);
+            double actual = reader.ReadFixedPoint16(bits);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void WriteFixedPoint8Test() {
             var mem = new MemoryStream();
             const int val = 0xc3aa;
             const byte hi = val >> 8;
             const byte low = val & 0xff;
             const double expected = hi + low / 256.0;
             var writer = new SwfStreamWriter(mem);
-            writer.WriteFixedPoint16(expected);
+            writer.WriteFixedPoint8(expected);
             mem.Seek(0, SeekOrigin.Begin);
             Assert.AreEqual(low, mem.ReadByte());
             Assert.AreEqual(hi, mem.ReadByte());

@@ -7,6 +7,7 @@ using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.DynamicTextTags;
 using Code.SwfLib.Tags.FontTags;
+using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib {
     public class SwfTagReader {
@@ -191,7 +192,19 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public ExportTag ReadExportTag(SwfTagData tagData) {
+        public static DefineShapeTag ReadDefineShapeTag(SwfTagData tagData)
+        {
+            var tag = new DefineShapeTag { RawData = tagData };
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.ObjectID = reader.ReadUInt16();
+            tag.Bounds = reader.ReadRect();
+            //TODO: read other fields
+            return tag;
+        }
+
+        public ExportTag ReadExportTag(SwfTagData tagData)
+        {
             var tag = new ExportTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
@@ -209,6 +222,7 @@ namespace Code.SwfLib {
             var reader = new SwfStreamReader(stream);
             var flags = (PlaceObject2Flags)reader.ReadByte();
             tag.Depth = reader.ReadUInt16();
+            //TODO: make non nullable + bit accessor roperties
             if ((flags & PlaceObject2Flags.HasIdRef) > 0) {
                 tag.ObjectID = reader.ReadUInt16();
             } else {
@@ -259,6 +273,8 @@ namespace Code.SwfLib {
                     return ReadDefineFontNameTag(tagData);
                 case SwfTagType.DefineFont3:
                     return ReadDefineFont3Tag(tagData);
+                case SwfTagType.DefineShape:
+                    return ReadDefineShapeTag(tagData);
                 case SwfTagType.DefineSprite:
                     return ReadDefineSpriteTag(tagData);
                 case SwfTagType.DefineText:

@@ -21,13 +21,13 @@ namespace Code.SwfLib {
         public static SwfHeader ReadSwfHeader(this SwfStreamReader reader) {
             SwfHeader header;
             header.FrameSize = reader.ReadRect();
-            header.FrameRate = reader.ReadFixedPoint16();
+            header.FrameRate = reader.ReadFixedPoint8();
             header.FrameCount = reader.ReadUInt16();
             return header;
         }
 
         public static SwfRect ReadRect(this SwfStreamReader reader) {
-            var bits = (uint)reader.ReadUnsignedBits(5);
+            var bits = reader.ReadUnsignedBits(5);
             SwfRect rect;
             rect.XMin = reader.ReadSignedBits(bits);
             rect.XMax = reader.ReadSignedBits(bits);
@@ -46,13 +46,13 @@ namespace Code.SwfLib {
         }
 
         public static SwfMatrix ReadMatrix(this SwfStreamReader reader) {
+            reader.AlignToByte();
             var matrix = new SwfMatrix();
             var hasScale = reader.ReadBit();
             if (hasScale) {
                 var bits = (byte)reader.ReadUnsignedBits(5);
-                //TODO: check boundaries
-                matrix.ScaleX = reader.ReadSignedBits(bits);
-                matrix.ScaleY = reader.ReadSignedBits(bits);
+                matrix.ScaleX = reader.ReadFixedPoint16(bits);
+                matrix.ScaleY = reader.ReadFixedPoint16(bits);
             } else {
                 matrix.ScaleX = 1;
                 matrix.ScaleY = 1;
@@ -60,9 +60,8 @@ namespace Code.SwfLib {
             var hasRotate = reader.ReadBit();
             if (hasRotate) {
                 var bits = (byte)reader.ReadUnsignedBits(5);
-                //TODO: check boundaries
-                matrix.RotateSkew0 = reader.ReadSignedBits(bits);
-                matrix.RotateSkew1 = reader.ReadSignedBits(bits);
+                matrix.RotateSkew0 = reader.ReadFixedPoint16(bits);
+                matrix.RotateSkew1 = reader.ReadFixedPoint16(bits);
             } else {
                 matrix.RotateSkew0 = 0;
                 matrix.RotateSkew1 = 0;

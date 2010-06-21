@@ -23,7 +23,7 @@ namespace Code.SwfLib.Tests {
             var writer = new SwfStreamWriter(mem);
             writer.WriteTagData(res);
 
-            var etalon = GetTagBinariesFromSwfResource("DefineBitsJPEG2.swf")
+            var etalon = GetTagFullBinariesFromSwfResource("DefineBitsJPEG2.swf")
                 .FirstOrDefault(item => item.Type == SwfTagType.DefineBitsJPEG2);
             if (etalon.Binary == null) throw new InvalidOperationException("Couldn't find etalon tag");
 
