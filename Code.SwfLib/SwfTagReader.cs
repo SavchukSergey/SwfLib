@@ -180,11 +180,10 @@ namespace Code.SwfLib
             var tag = new CSMTextSettingsTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
-            tag.ObjectID = reader.ReadUInt16();
-            var flags = reader.ReadByte();
-            tag.UseType = (byte)((flags >> 6) & 0x03);
-            tag.GridFit = (byte)((flags >> 3) & 0x07);
-            tag.ReservedFlags = (byte)((flags >> 0) & 0x07);
+            tag.TextID = reader.ReadUInt16();
+            tag.UseFlashType = (byte) reader.ReadUnsignedBits(2);
+            tag.GridFit = (byte) reader.ReadUnsignedBits(3);
+            tag.ReservedFlags = (byte) reader.ReadUnsignedBits(3);
             tag.Thickness = reader.ReadSingle();
             tag.Sharpness = reader.ReadSingle();
             tag.Reserved = reader.ReadByte();
@@ -202,14 +201,36 @@ namespace Code.SwfLib
             return tag;
         }
 
+        private DefineEditTextTag ReadDefineEditTextTag(SwfTagData tagData)
+        {
+            var tag = new DefineEditTextTag {RawData = tagData};
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.CharacterID = reader.ReadUInt16();
+            tag.Bounds = reader.ReadRect();
+            bool hasText = reader.ReadBit();
+            tag.WordWrap = reader.ReadBit();
+            tag.Multiline = reader.ReadBit();
+            tag.Password = reader.ReadBit();
+            tag.ReadOnly = reader.ReadBit();
+            bool hasTextColor = reader.ReadBit();
+            bool hasMaxLength = reader.ReadBit();
+            bool hasFont = reader.ReadBit();
+            bool hasFontClass = reader.ReadBit();
+            tag.AutoSize = reader.ReadBit();
+
+            //TODO: other fields
+            return tag;
+        }
+
         public static DefineFontNameTag ReadDefineFontNameTag(SwfTagData tagData)
         {
             var tag = new DefineFontNameTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
-            tag.FontNameId = reader.ReadUInt16();
-            tag.DisplayName = reader.ReadString();
-            tag.Copyright = reader.ReadString();
+            tag.FontId = reader.ReadUInt16();
+            tag.FontName = reader.ReadString();
+            tag.FontCopyright = reader.ReadString();
             return tag;
         }
 
@@ -258,35 +279,36 @@ namespace Code.SwfLib
             //TODO: make non nullable + bit accessor roperties
             if ((flags & PlaceObject2Flags.HasIdRef) > 0)
             {
-                tag.ObjectID = reader.ReadUInt16();
+                tag.CharacterID = reader.ReadUInt16();
             }
             else
             {
-                tag.ObjectID = null;
+                tag.CharacterID = null;
             }
             tag.Matrix = (flags & PlaceObject2Flags.HasMatrix) > 0 ? reader.ReadMatrix() : (SwfMatrix?)null;
-            tag.ColorTransform = (flags & PlaceObject2Flags.HasColorTransform) > 0 ? reader.ReadColorTransform() : null;
-            if ((flags & PlaceObject2Flags.HasMorphPosition) > 0)
+            tag.ColorTransform = (flags & PlaceObject2Flags.HasColorTransform) > 0 ? reader.ReadColorTransform() : (ColorTransform?) null;
+            if ((flags & PlaceObject2Flags.HasRatio) > 0)
             {
-                tag.MorphPosition = reader.ReadUInt16();
+                tag.Ratio = reader.ReadUInt16();
             }
             else
             {
-                tag.MorphPosition = null;
+                tag.Ratio = null;
             }
             tag.Name = (flags & PlaceObject2Flags.HasName) > 0 ? reader.ReadString() : null;
             if ((flags & PlaceObject2Flags.HasClippingDepth) > 0)
             {
-                tag.ClippingDepth = reader.ReadUInt16();
+                tag.ClipDepth = reader.ReadUInt16();
             }
             else
             {
-                tag.ClippingDepth = null;
+                tag.ClipDepth = null;
             }
             if ((flags & PlaceObject2Flags.HasActions) > 0)
             {
                 tag.ActionsReserved = reader.ReadUInt16();
                 tag.ActionsFlags = _version >= 6 ? reader.ReadUInt32() : reader.ReadUInt16();
+                //TODO: read other fields
             }
             //TODO: Read the others fields
             return tag;
@@ -315,6 +337,8 @@ namespace Code.SwfLib
                     return ReadCSMTextSettingsTag(tagData);
                 case SwfTagType.DefineBitsJPEG2:
                     return ReadDefineBitsJPEG2Tag(tagData);
+                case SwfTagType.DefineEditText:
+                    return ReadDefineEditTextTag(tagData);
                 case SwfTagType.DefineFontName:
                     return ReadDefineFontNameTag(tagData);
                 case SwfTagType.DefineFont3:
@@ -344,5 +368,6 @@ namespace Code.SwfLib
             }
 
         }
+
     }
 }

@@ -18,7 +18,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
         public override void AcceptAttribute(PlaceObject2Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
-                    tag.ObjectID = SwfMillPrimitives.ParseObjectID(attrib);
+                    tag.CharacterID = SwfMillPrimitives.ParseObjectID(attrib);
                     break;
                 case NAME_ATTRIB:
                     tag.Name = attrib.Value;
@@ -59,8 +59,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
         public override XElement FormatTag(PlaceObject2Tag tag)
         {
             var res = new XElement(XName.Get(SwfTagNameMapping.PLACE_OBJECT2_TAG));
-            if (tag.ObjectID.HasValue) {
-                res.Add(new XAttribute(XName.Get("objectID"), tag.ObjectID.Value));
+            if (tag.CharacterID.HasValue) {
+                res.Add(new XAttribute(XName.Get("objectID"), tag.CharacterID.Value));
             }
             res.Add(new XAttribute(XName.Get("depth"), tag.Depth));
             if (tag.Matrix.HasValue) {

@@ -3,11 +3,11 @@
     public class DefineFontNameTag : SwfTagBase
     {
 
-        public ushort FontNameId;
+        public ushort FontId;
 
-        public string DisplayName;
+        public string FontName;
 
-        public string Copyright;
+        public string FontCopyright;
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {

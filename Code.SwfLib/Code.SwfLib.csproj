@@ -66,7 +66,7 @@
     <Compile Include="Data\Shapes\StyleChangeShapeRecord.cs" />
     <Compile Include="Data\ShapeWithStyle1.cs" />
     <Compile Include="Data\SwfAnyFilter.cs" />
-    <Compile Include="Data\SwfColorTransform.cs" />
+    <Compile Include="Data\ColorTransform.cs" />
     <Compile Include="Data\SwfMorphShapeWithStyle.cs" />
     <Compile Include="Data\SwfRGBA.cs" />
     <Compile Include="Data\Text\GlyphEntry.cs" />

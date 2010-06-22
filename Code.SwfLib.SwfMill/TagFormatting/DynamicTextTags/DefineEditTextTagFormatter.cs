@@ -37,7 +37,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
             switch (attrib.Name.LocalName)
             {
                 case OBJECT_ID_ATTRIB:
-                    tag.ObjectID = ushort.Parse(attrib.Value);
+                    tag.CharacterID = ushort.Parse(attrib.Value);
                     break;
                 case WORD_WRAP_ATTRIB:
                     tag.WordWrap = SwfMillPrimitives.ParseBoolean(attrib);
@@ -52,7 +52,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
                     tag.ReadOnly = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
                 case AUTOSIZE_ATTRIB:
-                    //TODO: password
+                    tag.AutoSize = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
                 case HAS_LAYOUT_ATTRIB:
                     //TODO: password
@@ -123,7 +123,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
         public override XElement FormatTag(DefineEditTextTag tag)
         {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_EDIT_TEXT_TAG),
-                                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ObjectID));
+                                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.CharacterID),
+                                new XAttribute(XName.Get(WORD_WRAP_ATTRIB), tag.WordWrap),
+                                new XAttribute(XName.Get(MULTILINE_ATTRIB), tag.Multiline),
+                                new XAttribute(XName.Get(READONLY_ATTRIB), tag.ReadOnly),
+                                new XAttribute(XName.Get(PASSWORD_ATTRIB), tag.Password),
+                                new XAttribute(XName.Get(AUTOSIZE_ATTRIB), tag.AutoSize)
+
+            );
         }
     }
 }

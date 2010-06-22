@@ -5,9 +5,49 @@ namespace Code.SwfLib.Tags.DisplayListTags
     public class PlaceObject2Tag : DisplayListBaseTag
     {
 
-        public ushort? ObjectID;
+        public bool HasClipActions
+        {
+            //TODO: Implement
+            get { return false; }
+        }
 
-        public string Name;
+        public bool HasClipDepth
+        {
+            get { return ClipDepth.HasValue; }
+        }
+
+        public bool HasName
+        {
+            get { return !string.IsNullOrEmpty(Name); }
+        }
+
+        public bool HasRatio
+        {
+            get { return Ratio.HasValue; }
+        }
+
+        public bool HasColorTransform
+        {
+            get { return ColorTransform.HasValue; }
+        }
+
+        public bool HasMatrix
+        {
+            get { return Matrix.HasValue; }
+        }
+
+        public bool HasCharacter
+        {
+            get { return CharacterID.HasValue; }
+        }
+
+        public bool Move
+        {
+            //TODO: Implement
+            get { return false; }
+        }
+
+        public ushort? CharacterID;
 
         /// <summary>
         /// The depth value determines the stacking order of the character.
@@ -20,15 +60,20 @@ namespace Code.SwfLib.Tags.DisplayListTags
 
         public SwfMatrix? Matrix;
 
-        public SwfColorTransform ColorTransform;
+        public ColorTransform? ColorTransform;
 
-        public ushort? MorphPosition;
+        public ushort? Ratio;
 
+        public string Name;
+
+        public ushort? ClipDepth;
+
+
+
+        //TODO: move to Clip Actions
         public ushort ActionsReserved;
 
         public uint ActionsFlags;
-
-        public ushort? ClippingDepth;
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {

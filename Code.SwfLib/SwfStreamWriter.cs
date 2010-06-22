@@ -51,8 +51,8 @@ namespace Code.SwfLib
         {
             var integer = Math.Floor(val);
             var fraction = val - integer;
-            var low = (ushort)(fraction*65536);
-            var hi = (ushort) integer;
+            var low = (ushort)(fraction * 65536);
+            var hi = (ushort)integer;
             WriteUnsignedBits(hi, bits - 16);
             WriteUnsignedBits(low, 16);
         }
@@ -139,7 +139,8 @@ namespace Code.SwfLib
             _writer.Write(val);
         }
 
-        public void WriteSInt16(short val) {
+        public void WriteSInt16(short val)
+        {
             FlushBits();
             _writer.Write(val);
         }
@@ -151,6 +152,12 @@ namespace Code.SwfLib
             const byte terminator = 0x00;
             _writer.Write(terminator);
         }
+
+        public void WriteSingle(float value)
+        {
+            _writer.Write(value);
+        }
+
 
     }
 }

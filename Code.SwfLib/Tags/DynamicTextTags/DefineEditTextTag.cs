@@ -5,7 +5,7 @@ namespace Code.SwfLib.Tags.DynamicTextTags
     public class DefineEditTextTag : SwfTagBase
     {
 
-        public ushort ObjectID;
+        public ushort CharacterID;
 
         public SwfRect Bounds;
 
@@ -41,6 +41,8 @@ namespace Code.SwfLib.Tags.DynamicTextTags
         {
             get { return !string.IsNullOrEmpty(FontClass); }
         }
+
+        public bool AutoSize;
 
         public ushort? FontID;
 

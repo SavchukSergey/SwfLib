@@ -17,7 +17,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
         public override void AcceptAttribute(CSMTextSettingsTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
-                    tag.ObjectID = SwfMillPrimitives.ParseObjectID(attrib);
+                    tag.TextID = SwfMillPrimitives.ParseObjectID(attrib);
                     break;
                 case USE_FLASH_TYPE_ATTRIB:
                     //TODO: read value
@@ -45,14 +45,16 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
 
         public override XElement FormatTag(CSMTextSettingsTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.CSM_TEXT_SETTINGS_TAG),
-                                new XAttribute(XName.Get("objectID"), tag.ObjectID),
-                                new XAttribute(XName.Get("useFlashType"), tag.UseType),
+                                new XAttribute(XName.Get("objectID"), tag.TextID),
+                                new XAttribute(XName.Get("useFlashType"), tag.UseFlashType),
                                 new XAttribute(XName.Get("gridFit"), tag.GridFit),
-                                new XAttribute(XName.Get("reservedFlags"), tag.ReservedFlags),
+                                //TODO: reserved flagss
+                                //new XAttribute(XName.Get("reservedFlags"), tag.ReservedFlags),
                                 new XAttribute(XName.Get("thickness"), tag.Thickness),
-                                new XAttribute(XName.Get("sharpness"), tag.Sharpness),
+                                new XAttribute(XName.Get("sharpness"), tag.Sharpness)
                                 //TODO: hide reserved attr
-                                new XAttribute(XName.Get("reserved"), tag.Reserved));
+                                //new XAttribute(XName.Get("reserved"), tag.Reserved)
+                                );
         }
     }
 }

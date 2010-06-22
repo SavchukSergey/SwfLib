@@ -3,9 +3,9 @@
     public class CSMTextSettingsTag : SwfTagBase
     {
 
-        public ushort ObjectID;
+        public ushort TextID;
 
-        public byte UseType;
+        public byte UseFlashType;
 
         public byte GridFit;
 

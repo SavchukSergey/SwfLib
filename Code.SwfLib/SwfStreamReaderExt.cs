@@ -74,8 +74,35 @@ namespace Code.SwfLib {
             return matrix;
         }
 
-        public static SwfColorTransform ReadColorTransform(this SwfStreamReader reader) {
-            throw new NotImplementedException();
+        public static ColorTransform ReadColorTransform(this SwfStreamReader reader) {
+            ColorTransform transform;
+            reader.AlignToByte();
+            bool hasAddTerms = reader.ReadBit();
+            bool hasMultTerms = reader.ReadBit();
+            var bits = reader.ReadUnsignedBits(4);
+            if (hasMultTerms)
+            {
+                transform.RedMultTerm = (short?)reader.ReadSignedBits(bits);
+                transform.GreenMultTerm = (short?)reader.ReadSignedBits(bits);
+                transform.BlueMultTerm = (short?)reader.ReadSignedBits(bits);
+            } else
+            {
+                transform.RedMultTerm = null;
+                transform.GreenMultTerm = null;
+                transform.BlueMultTerm = null;
+            }
+            if (hasAddTerms)
+            {
+                transform.RedAddTerm = (short?)reader.ReadSignedBits(bits);
+                transform.GreenAddTerm = (short?)reader.ReadSignedBits(bits);
+                transform.BlueAddTerm = (short?)reader.ReadSignedBits(bits);
+            } else
+            {
+                transform.RedAddTerm = null;
+                transform.GreenAddTerm = null;
+                transform.BlueAddTerm = null;
+            }
+            return transform;
         }
 
         public static SwfSymbolReference ReadSymbolReference(this SwfStreamReader reader) {

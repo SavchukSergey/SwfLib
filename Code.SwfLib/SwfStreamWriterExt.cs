@@ -47,6 +47,11 @@ namespace Code.SwfLib
             writer.WriteSignedBits(rect.YMax, bits);
         }
 
+        public static void WriteColorTransform(this SwfStreamWriter writer, ColorTransform tranform)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void WriteMatrix(this SwfStreamWriter writer, SwfMatrix matrix)
         {
             bool hasScale = matrix.HasScale;
