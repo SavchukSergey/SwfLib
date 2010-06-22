@@ -12,11 +12,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         private const string TRANSFORM_ELEM = "transform";
         private const string RECORDS_ELEM = "records";
 
-        public override void AcceptAttribute(DefineTextTag tag, XAttribute attrib)
-        {
+        public override void AcceptAttribute(DefineTextTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
-                    tag.ObjectID = SwfMillPrimitives.ParseObjectID(attrib);
+                    tag.CharacterID = SwfMillPrimitives.ParseObjectID(attrib);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -26,10 +25,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         public override void AcceptElement(DefineTextTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BOUNDS_ELEM:
-                    tag.Bounds = SwfMillPrimitives.ParseRectangle(element.Element(XName.Get("Rectangle")));
+                    tag.TextBounds = SwfMillPrimitives.ParseRectangle(element.Element(XName.Get("Rectangle")));
                     break;
                 case TRANSFORM_ELEM:
-                    tag.Matrix = SwfMillPrimitives.ParseMatrix(element.Element(XName.Get("Transform")));
+                    tag.TextMatrix = SwfMillPrimitives.ParseMatrix(element.Element(XName.Get("Transform")));
                     break;
                 case RECORDS_ELEM:
                     //TODO: read records
@@ -41,16 +40,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         public override XElement FormatTag(DefineTextTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_TEXT_TAG),
-                                   new XAttribute(XName.Get("objectID"), tag.ObjectID));
-            res.Add(new XElement(XName.Get("bounds"), GetRectangleXml(tag.Bounds)));
-            if (tag.Matrix.HasValue) {
-                res.Add(new XElement(XName.Get("transform"), GetTransformXml(tag.Matrix.Value)));
-            }
+                                   new XAttribute(XName.Get("objectID"), tag.CharacterID));
+            res.Add(new XElement(XName.Get("bounds"), GetRectangleXml(tag.TextBounds)));
+            res.Add(new XElement(XName.Get("transform"), GetTransformXml(tag.TextMatrix)));
             //TODO: remove unnessary nested nodes. Swfmill requires them
             res.Add(new XElement(XName.Get("records"),
                                  new XElement(XName.Get("TextRecord"),
                                               new XElement(XName.Get("records"),
-                                                           tag.Records.Entries.Select(item => GetTextRecordEntryXml(item))
+                                                           tag.TextRecords.Select(item => GetTextRecordXml(item))
                                                   )
                                      )));
             //TODO: Other fields

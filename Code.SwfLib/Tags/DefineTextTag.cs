@@ -1,23 +1,19 @@
-﻿using Code.SwfLib.Data;
+﻿using System.Collections.Generic;
+using Code.SwfLib.Data;
+using Code.SwfLib.Data.Text;
 
 namespace Code.SwfLib.Tags
 {
     public class DefineTextTag : SwfTagBase
     {
 
-        public ushort ObjectID;
+        public ushort CharacterID;
 
-        public SwfRect Bounds;
+        public SwfRect TextBounds;
 
-        public SwfMatrix? Matrix;
+        public SwfMatrix TextMatrix;
 
-        //TODO: Remove it from here. It's fields size definition
-        public byte GlyphBits;
-
-        //TODO: Remove it from here. It's fields size definition
-        public byte AdvanceBits;
-
-        public SwfTextRecord Records;
+        public IList<TextRecord> TextRecords;
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {

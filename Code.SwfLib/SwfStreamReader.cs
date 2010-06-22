@@ -38,7 +38,7 @@ namespace Code.SwfLib
 
         public double ReadFixedPoint16(uint bits)
         {
-            uint value = ReadUnsignedBits(bits);
+            int value = ReadSignedBits(bits);
             return value / 65536.0;
         }
 

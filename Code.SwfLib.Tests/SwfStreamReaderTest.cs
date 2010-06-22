@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
     [TestFixture]
-    public class SwfStreamReaderTest {
+    public class SwfStreamReaderTest : TestFixtureBase {
 
         [Test]
         public void ReadFixedPoint8Test() {
@@ -30,7 +30,7 @@ namespace Code.SwfLib.Tests {
             const ushort hi = val >> 16;
             const ushort low = val & 0xffff;
             const double expected = hi + low / 65536.0;
-            var bits = new BitsCount(hi).GetUnsignedBits();
+            var bits = new BitsCount(hi).GetSignedBits();
             writer.WriteUnsignedBits(hi, bits);
             writer.WriteUnsignedBits(low, 16);
             writer.FlushBits();
@@ -38,6 +38,20 @@ namespace Code.SwfLib.Tests {
             var reader = new SwfStreamReader(mem);
             double actual = reader.ReadFixedPoint16(bits + 16);
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ReadNegativeFixedPoint16FromBitsTest() {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            const int val = -81920;
+            var bits = new BitsCount(val).GetSignedBits();
+            writer.WriteSignedBits(val, bits);
+            writer.FlushBits();
+            mem.Seek(0, SeekOrigin.Begin);
+            var reader = new SwfStreamReader(mem);
+            double actual = reader.ReadFixedPoint16(bits);
+            Assert.AreEqual(-1.25, actual);
         }
 
         [Test]

@@ -42,12 +42,12 @@ namespace Code.SwfLib {
             var tag = new DefineTextTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
-            tag.ObjectID = reader.ReadUInt16();
-            tag.Bounds = reader.ReadRect();
-            tag.Matrix = reader.ReadMatrix();
-            tag.GlyphBits = reader.ReadByte();
-            tag.AdvanceBits = reader.ReadByte();
-            tag.Records = reader.ReadTextRecord(tag.GlyphBits, tag.AdvanceBits);
+            tag.CharacterID = reader.ReadUInt16();
+            tag.TextBounds = reader.ReadRect();
+            tag.TextMatrix = reader.ReadMatrix();
+            uint glyphBits = reader.ReadByte();
+            uint advanceBits = reader.ReadByte();
+            tag.TextRecords = reader.ReadTextRecord(glyphBits, advanceBits);
             return tag;
         }
 

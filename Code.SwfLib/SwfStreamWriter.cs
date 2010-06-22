@@ -139,6 +139,11 @@ namespace Code.SwfLib
             _writer.Write(val);
         }
 
+        public void WriteSInt16(short val) {
+            FlushBits();
+            _writer.Write(val);
+        }
+
         public void WriteString(string val)
         {
             var bytes = Encoding.UTF8.GetBytes(val);

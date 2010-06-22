@@ -16,6 +16,11 @@
 	   <Transform transX="0" transY="0" scaleX="0.5" scaleY="1.25" />
          </transform>
       </PlaceObject2>
+      <PlaceObject2 replace="0" depth="1" >
+         <transform>
+	   <Transform transX="0" transY="0" scaleX="0.5" scaleY="-1.25" />
+         </transform>
+      </PlaceObject2>
       <ShowFrame/>
       <End/>
     </tags>

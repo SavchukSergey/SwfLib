@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.Data.Text;
 using Code.SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting {
@@ -91,57 +92,32 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                                 new XAttribute(XName.Get("name"), symbol.SymbolName));
         }
 
-        protected static XElement GetTextRecordEntryXml(SwfTextRecordEntry entry) {
-            if (entry is SwfTextRecordSetupEntry) {
-                return GetTextRecordEntryXml((SwfTextRecordSetupEntry)entry);
-            }
-            if (entry is SwfTextRecordGlyphEntry) {
-                return GetTextRecordEntryXml((SwfTextRecordGlyphEntry)entry);
-            }
-            if (entry is SwfTextRecordEndEntry) {
-                return GetTextRecordEntryXml((SwfTextRecordEndEntry)entry);
-            }
-            throw new InvalidOperationException();
-        }
-
-        private static XElement GetTextRecordEntryXml(SwfTextRecordSetupEntry entry) {
-            var res = new XElement(XName.Get("TextRecord6"), new XAttribute(XName.Get("isSetup"), "1"));
-            if (entry.FontID.HasValue) {
+        protected static XElement GetTextRecordXml(TextRecord entry) {
+            var res = new XElement(XName.Get("TextRecord6"));
+            if (entry.HasFont) {
                 res.Add(new XAttribute(XName.Get("objectID"), entry.FontID.Value));
             }
-            if (entry.MoveX.HasValue) {
-                res.Add(new XAttribute(XName.Get("x"), entry.MoveX.Value));
+            if (entry.HasXOffset) {
+                res.Add(new XAttribute(XName.Get("x"), entry.XOffset.Value));
             }
-            if (entry.MoveY.HasValue) {
-                res.Add(new XAttribute(XName.Get("y"), entry.MoveY.Value));
+            if (entry.HasYOffset) {
+                res.Add(new XAttribute(XName.Get("y"), entry.YOffset.Value));
             }
-            if (entry.FontHeight.HasValue) {
-                res.Add(new XAttribute(XName.Get("fontHeight"), entry.FontHeight.Value));
+            if (entry.HasFont) {
+                if (!entry.TextHeight.HasValue) throw new InvalidOperationException("Text Height must be specified");
+                res.Add(new XAttribute(XName.Get("fontHeight"), entry.TextHeight.Value));
             }
-            if (entry.RGB.HasValue) {
-                res.Add(new XElement(XName.Get("color"), GetColor(entry.RGB.Value)));
+            if (entry.HasColor) {
+                res.Add(new XElement(XName.Get("color"), GetColor(entry.TextColor.Value)));
             }
-            //TODO: other fields
-            return res;
-        }
-
-        private static XElement GetTextRecordEntryXml(SwfTextRecordGlyphEntry entry) {
-            var res = new XElement(XName.Get("TextRecord6"), new XAttribute(XName.Get("isSetup"), "0"));
             res.Add(new XElement(XName.Get("glyphs"), entry.Glyphs.Select(item => GetGlyphXml(item))));
-            //TODO: other fields
             return res;
         }
 
-        private static XElement GetTextRecordEntryXml(SwfTextRecordEndEntry entry) {
-            var res = new XElement(XName.Get("TextRecord6"), new XAttribute(XName.Get("isSetup"), "0"));
-            res.Add(new XElement(XName.Get("glyphs")));
-            return res;
-        }
-
-        private static XElement GetGlyphXml(SwfTextEntry entry) {
+        private static XElement GetGlyphXml(GlyphEntry entry) {
             return new XElement(XName.Get("TextEntry"),
-                                new XAttribute(XName.Get("glyph"), entry.Index),
-                                new XAttribute(XName.Get("advance"), entry.Advance));
+                                new XAttribute(XName.Get("glyph"), entry.GlyphIndex),
+                                new XAttribute(XName.Get("advance"), entry.GlyphAdvance));
         }
 
         protected static byte[] ReadBase64(XElement data) {

@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using Code.SwfLib.Data;
+using Code.SwfLib.Data.Text;
 
 namespace Code.SwfLib {
     public static class SwfStreamReaderExt {
 
-        public static SwfFileInfo ReadSwfFileInfo(this SwfStreamReader writer)
-        {
+        public static SwfFileInfo ReadSwfFileInfo(this SwfStreamReader writer) {
             SwfFileInfo header;
-            header.Format = new string(new[] {(char)writer.ReadByte(), (char)writer.ReadByte(), (char)writer.ReadByte()});
+            header.Format = new string(new[] { (char)writer.ReadByte(), (char)writer.ReadByte(), (char)writer.ReadByte() });
             header.Version = writer.ReadByte();
             uint len = 0;
             len = len | ((uint)writer.ReadByte() << 0);
@@ -67,7 +68,6 @@ namespace Code.SwfLib {
                 matrix.RotateSkew1 = 0;
             }
             var translateBits = (byte)reader.ReadUnsignedBits(5);
-            //TODO: check boundaries
             matrix.TranslateX = reader.ReadSignedBits(translateBits);
             matrix.TranslateY = reader.ReadSignedBits(translateBits);
             reader.AlignToByte();
@@ -90,53 +90,49 @@ namespace Code.SwfLib {
             throw new NotImplementedException();
         }
 
-        public static SwfTextRecord ReadTextRecord(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
+        public static IList<TextRecord> ReadTextRecord(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
             //TODO: for definetext2 a little bit different.
-            var res = new SwfTextRecord();
+            var res = new List<TextRecord>();
             byte btFlags;
             do {
+                var record = new TextRecord();
                 btFlags = reader.ReadByte();
-                if (btFlags == 0) {
-                    res.Entries.Add(new SwfTextRecordEndEntry());
-                } else if (btFlags >= 0x80) {
-                    var setupRecord = new SwfTextRecordSetupEntry();
-                    SwfTextRecordSetupEntryFlags flags;
-                    flags = (SwfTextRecordSetupEntryFlags)btFlags;
-                    setupRecord.FontID = (flags & SwfTextRecordSetupEntryFlags.HasFont) != 0
+                TextRecordFlags flags;
+                flags = (TextRecordFlags)btFlags;
+
+                record.FontID = (flags & TextRecordFlags.HasFont) != 0
+                                         ? (ushort?)reader.ReadUInt16()
+                                         : null;
+                record.TextColor = (flags & TextRecordFlags.HasColor) != 0
+                                      ? (SwfRGB?)reader.ReadRGB()
+                                      : null;
+
+                record.XOffset = (flags & TextRecordFlags.HasXOffset) != 0
+                                        ? (short?)reader.ReadUInt16()
+                                        : null;
+                record.YOffset = (flags & TextRecordFlags.HasYOffset) != 0
+                                        ? (short?)reader.ReadUInt16()
+                                        : null;
+                record.TextHeight = (flags & TextRecordFlags.HasFont) != 0
                                              ? (ushort?)reader.ReadUInt16()
                                              : null;
-                    setupRecord.RGB = (flags & SwfTextRecordSetupEntryFlags.HasColor) != 0
-                                          ? (SwfRGB?)reader.ReadRGB()
-                                          : null;
-
-                    setupRecord.MoveX = (flags & SwfTextRecordSetupEntryFlags.HasMoveX) != 0
-                                            ? (ushort?)reader.ReadUInt16()
-                                            : null;
-                    setupRecord.MoveY = (flags & SwfTextRecordSetupEntryFlags.HasMoveY) != 0
-                                            ? (ushort?)reader.ReadUInt16()
-                                            : null;
-                    setupRecord.FontHeight = (flags & SwfTextRecordSetupEntryFlags.HasFont) != 0
-                                                 ? (ushort?)reader.ReadUInt16()
-                                                 : null;
-                    res.Entries.Add(setupRecord);
-                } else {
-                    var glyphRecord = new SwfTextRecordGlyphEntry();
-                    var count = btFlags & 0x7f;
+                if (btFlags != 0) {
+                    var count = reader.ReadByte();
                     for (var i = 0; i < count; i++) {
                         var entry = reader.ReadSwfTextEntry(glyphBits, advanceBits);
-                        glyphRecord.Glyphs.Add(entry);
+                        record.Glyphs.Add(entry);
                     }
-                    res.Entries.Add(glyphRecord);
                     reader.AlignToByte();
                 }
+                res.Add(record);
             } while (btFlags != 0);
             return res;
         }
 
-        private static SwfTextEntry ReadSwfTextEntry(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
-            var entry = new SwfTextEntry {
-                Index = reader.ReadUnsignedBits(glyphBits),
-                Advance = reader.ReadUnsignedBits(advanceBits)
+        private static GlyphEntry ReadSwfTextEntry(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
+            var entry = new GlyphEntry {
+                GlyphIndex = reader.ReadUnsignedBits(glyphBits),
+                GlyphAdvance = reader.ReadSignedBits(advanceBits)
             };
             return entry;
         }

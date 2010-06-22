@@ -17,13 +17,26 @@ namespace Code.SwfLib.Tests {
             const ushort hi = val >> 16;
             const ushort low = val & 0xffff;
             const double expected = hi + low / 65536.0;
-            var bits = new BitsCount(hi).GetUnsignedBits() + 16;
+            var bits = new BitsCount(hi).GetSignedBits() + 16;
             writer.WriteFixedPoint16(expected, bits);
             writer.FlushBits();
             mem.Seek(0, SeekOrigin.Begin);
             var reader = new SwfStreamReader(mem);
             double actual = reader.ReadFixedPoint16(bits);
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void WriteNegativeFixedPoint16FromBitsTest() {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            var bits = new BitsCount(-81920).GetSignedBits();
+            writer.WriteFixedPoint16(-1.25, bits);
+            writer.FlushBits();
+            mem.Seek(0, SeekOrigin.Begin);
+            var reader = new SwfStreamReader(mem);
+            int actual = reader.ReadSignedBits(bits);
+            Assert.AreEqual(-81920, actual);
         }
 
         [Test]

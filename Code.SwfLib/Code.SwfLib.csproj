@@ -68,13 +68,9 @@
     <Compile Include="Data\SwfAnyFilter.cs" />
     <Compile Include="Data\SwfColorTransform.cs" />
     <Compile Include="Data\SwfMorphShapeWithStyle.cs" />
-    <Compile Include="Data\SwfTextEntry.cs" />
-    <Compile Include="Data\SwfTextRecord.cs" />
-    <Compile Include="Data\SwfTextRecordEndEntry.cs" />
-    <Compile Include="Data\SwfTextRecordEntry.cs" />
-    <Compile Include="Data\SwfTextRecordGlyphEntry.cs" />
-    <Compile Include="Data\SwfTextRecordSetupEntry.cs" />
-    <Compile Include="Data\SwfTextRecordSetupEntryFlags.cs" />
+    <Compile Include="Data\Text\GlyphEntry.cs" />
+    <Compile Include="Data\Text\TextRecord.cs" />
+    <Compile Include="Data\Text\TextRecordFlags.cs" />
     <Compile Include="FillStyleStreamExt.cs" />
     <Compile Include="LineStyleStreamExt.cs" />
     <Compile Include="ShapeRecordStreamExt.cs" />
@@ -143,6 +139,7 @@
     <Compile Include="Tags\SwfTagType.cs" />
     <Compile Include="Tags\ControlTags\SymbolClassTag.cs" />
     <Compile Include="Tags\UnknownTag.cs" />
+    <Compile Include="TextRecordStreamExt.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
