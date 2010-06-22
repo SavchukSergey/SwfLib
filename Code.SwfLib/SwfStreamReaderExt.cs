@@ -91,7 +91,6 @@ namespace Code.SwfLib {
         }
 
         public static IList<TextRecord> ReadTextRecord(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
-            //TODO: for definetext2 a little bit different.
             var res = new List<TextRecord>();
             byte btFlags;
             do {

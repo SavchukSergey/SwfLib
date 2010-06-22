@@ -46,6 +46,16 @@ namespace Code.SwfLib {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.ObjectID);
+            writer.WriteRect(tag.Bounds);
+            writer.WriteBit(tag.HasText);
+            writer.WriteBit(tag.WordWrap);
+            writer.WriteBit(tag.Multiline);
+            writer.WriteBit(tag.Password);
+            writer.WriteBit(tag.ReadOnly);
+            writer.WriteBit(tag.HasTextColor);
+            writer.WriteBit(tag.HasMaxLength);
+            writer.WriteBit(tag.HasFont);
+            writer.WriteBit(tag.HasFontClass);
             //TODO: Write other fields
             return new SwfTagData { Type = SwfTagType.DefineEditText, Data = mem.ToArray() };
         }
@@ -125,7 +135,6 @@ namespace Code.SwfLib {
                     writer.WriteTextRecord(textRecord, glyphBits, advanceBits);
                 }
             }
-            //TODO: if tag.TextRecord is null
             //TODO: What if end record is missed?
             return new SwfTagData { Type = SwfTagType.DefineText, Data = mem.ToArray() };
         }

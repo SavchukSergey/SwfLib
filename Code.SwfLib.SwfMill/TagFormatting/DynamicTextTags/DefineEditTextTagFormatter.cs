@@ -40,16 +40,16 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
                     tag.ObjectID = ushort.Parse(attrib.Value);
                     break;
                 case WORD_WRAP_ATTRIB:
-                    //TODO: word wrap
+                    tag.WordWrap = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
                 case MULTILINE_ATTRIB:
-                    //TODO: multiline
+                    tag.Multiline = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
                 case PASSWORD_ATTRIB:
-                    //TODO: password
+                    tag.Password = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
                 case READONLY_ATTRIB:
-                    //TODO: password
+                    tag.ReadOnly = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
                 case AUTOSIZE_ATTRIB:
                     //TODO: password
@@ -94,7 +94,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
                     //TODO: password
                     break;
                 case INITIAL_TEXT_ATTRIB:
-                    //TODO: password
+                    tag.InitialText = attrib.Value;
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -110,7 +110,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
                     FromBase64(element);
                     break;
                 case SIZE_ELEM:
-                    //TODO: password
+                    tag.Bounds = SwfMillPrimitives.ParseRectangle(element.Element("Rectangle"));
                     break;
                 case COLOR_ELEM:
                     //TODO: password

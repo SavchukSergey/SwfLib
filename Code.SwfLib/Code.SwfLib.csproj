@@ -68,6 +68,7 @@
     <Compile Include="Data\SwfAnyFilter.cs" />
     <Compile Include="Data\SwfColorTransform.cs" />
     <Compile Include="Data\SwfMorphShapeWithStyle.cs" />
+    <Compile Include="Data\SwfRGBA.cs" />
     <Compile Include="Data\Text\GlyphEntry.cs" />
     <Compile Include="Data\Text\TextRecord.cs" />
     <Compile Include="Data\Text\TextRecordFlags.cs" />

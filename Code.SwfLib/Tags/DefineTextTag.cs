@@ -13,7 +13,7 @@ namespace Code.SwfLib.Tags
 
         public SwfMatrix TextMatrix;
 
-        public IList<TextRecord> TextRecords;
+        public readonly IList<TextRecord> TextRecords = new List<TextRecord>();
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {
