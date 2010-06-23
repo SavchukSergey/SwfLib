@@ -31,12 +31,21 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                     tag.TextMatrix = SwfMillPrimitives.ParseMatrix(element.Element(XName.Get("Transform")));
                     break;
                 case RECORDS_ELEM:
-                    //TODO: read records
+                    ReadRecords(tag, element);
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
         }
+
+        private static void ReadRecords(DefineTextTag tag, XElement recordsElem) {
+            var elem = recordsElem.Element(XName.Get("TextRecord")).Element(XName.Get("records"));
+            foreach (var recordElem in elem.Elements()) {
+                tag.TextRecords.Add(SwfMillPrimitives.ParseTextRecord(recordElem));
+            }
+        }
+
+        //TODO: simulate swfmill incorrect structure of TextRecord (parsing, formating)
 
         public override XElement FormatTag(DefineTextTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_TEXT_TAG),
@@ -47,7 +56,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             res.Add(new XElement(XName.Get("records"),
                                  new XElement(XName.Get("TextRecord"),
                                               new XElement(XName.Get("records"),
-                                                           tag.TextRecords.Select(item => GetTextRecordXml(item))
+                                                           tag.TextRecords.Select(item => SwfMillPrimitives.FormatTextRecord(item))
                                                   )
                                      )));
             //TODO: Other fields

@@ -29,7 +29,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         }
 
         public override XElement FormatTag(FrameLabelTag tag) {
-            return new XElement(XName.Get(SwfTagNameMapping.FRAME_LABEL_TAG));
+            return new XElement(XName.Get(SwfTagNameMapping.FRAME_LABEL_TAG),
+                new XAttribute(XName.Get(LABEL_ATTRIB), tag.Name)
+                //TODO: Flags
+                );
         }
     }
 }

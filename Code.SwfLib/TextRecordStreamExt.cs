@@ -40,5 +40,14 @@ namespace Code.SwfLib {
             }
         }
 
+        public static GlyphEntry ReadGlyphEntry(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
+            var entry = new GlyphEntry {
+                GlyphIndex = reader.ReadUnsignedBits(glyphBits),
+                GlyphAdvance = reader.ReadSignedBits(advanceBits)
+            };
+            return entry;
+        }
+
+
     }
 }

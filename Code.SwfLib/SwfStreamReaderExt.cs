@@ -80,24 +80,20 @@ namespace Code.SwfLib {
             bool hasAddTerms = reader.ReadBit();
             bool hasMultTerms = reader.ReadBit();
             var bits = reader.ReadUnsignedBits(4);
-            if (hasMultTerms)
-            {
+            if (hasMultTerms) {
                 transform.RedMultTerm = (short?)reader.ReadSignedBits(bits);
                 transform.GreenMultTerm = (short?)reader.ReadSignedBits(bits);
                 transform.BlueMultTerm = (short?)reader.ReadSignedBits(bits);
-            } else
-            {
+            } else {
                 transform.RedMultTerm = null;
                 transform.GreenMultTerm = null;
                 transform.BlueMultTerm = null;
             }
-            if (hasAddTerms)
-            {
+            if (hasAddTerms) {
                 transform.RedAddTerm = (short?)reader.ReadSignedBits(bits);
                 transform.GreenAddTerm = (short?)reader.ReadSignedBits(bits);
                 transform.BlueAddTerm = (short?)reader.ReadSignedBits(bits);
-            } else
-            {
+            } else {
                 transform.RedAddTerm = null;
                 transform.GreenAddTerm = null;
                 transform.BlueAddTerm = null;
@@ -119,49 +115,36 @@ namespace Code.SwfLib {
 
         public static IList<TextRecord> ReadTextRecord(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
             var res = new List<TextRecord>();
-            byte btFlags;
+            bool isEnd;
             do {
                 var record = new TextRecord();
-                btFlags = reader.ReadByte();
-                TextRecordFlags flags;
-                flags = (TextRecordFlags)btFlags;
+                bool type = reader.ReadBit();
+                uint reservedFlags = reader.ReadUnsignedBits(3);
+                bool hasFont = reader.ReadBit();
+                bool hasColor = reader.ReadBit();
+                bool hasYOffset = reader.ReadBit();
+                bool hasXOffset = reader.ReadBit();
 
-                record.FontID = (flags & TextRecordFlags.HasFont) != 0
-                                         ? (ushort?)reader.ReadUInt16()
-                                         : null;
-                record.TextColor = (flags & TextRecordFlags.HasColor) != 0
-                                      ? (SwfRGB?)reader.ReadRGB()
-                                      : null;
+                isEnd = !(type || (reservedFlags != 0) || hasFont || hasColor || hasYOffset || hasXOffset);
 
-                record.XOffset = (flags & TextRecordFlags.HasXOffset) != 0
-                                        ? (short?)reader.ReadUInt16()
-                                        : null;
-                record.YOffset = (flags & TextRecordFlags.HasYOffset) != 0
-                                        ? (short?)reader.ReadUInt16()
-                                        : null;
-                record.TextHeight = (flags & TextRecordFlags.HasFont) != 0
-                                             ? (ushort?)reader.ReadUInt16()
-                                             : null;
-                if (btFlags != 0) {
+                if (!isEnd) {
+                    record.FontID = hasFont ? (ushort?)reader.ReadUInt16() : null;
+                    record.TextColor = hasColor ? (SwfRGB?)reader.ReadRGB() : null;
+                    record.XOffset = hasXOffset ? (short?)reader.ReadSInt16() : null;
+                    record.YOffset = hasYOffset ? (short?)reader.ReadSInt16() : null;
+                    record.TextHeight = hasFont ? (ushort?)reader.ReadUInt16() : null;
                     var count = reader.ReadByte();
                     for (var i = 0; i < count; i++) {
-                        var entry = reader.ReadSwfTextEntry(glyphBits, advanceBits);
+                        var entry = reader.ReadGlyphEntry(glyphBits, advanceBits);
                         record.Glyphs.Add(entry);
                     }
                     reader.AlignToByte();
                 }
                 res.Add(record);
-            } while (btFlags != 0);
+            } while (!isEnd);
             return res;
         }
 
-        private static GlyphEntry ReadSwfTextEntry(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
-            var entry = new GlyphEntry {
-                GlyphIndex = reader.ReadUnsignedBits(glyphBits),
-                GlyphAdvance = reader.ReadSignedBits(advanceBits)
-            };
-            return entry;
-        }
 
     }
 }

@@ -64,13 +64,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return rgb;
         }
 
-        protected static XElement GetColor(SwfRGB rgb) {
-            return new XElement(XName.Get("Color"),
-                                new XAttribute(XName.Get("red"), rgb.Red),
-                                new XAttribute(XName.Get("green"), rgb.Green),
-                                new XAttribute(XName.Get("blue"), rgb.Blue));
-        }
-
         protected static XElement GetTransformXml(SwfMatrix matrix) {
             //TODO: put other fields
             return new XElement(XName.Get("Transform"),
@@ -92,33 +85,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                                 new XAttribute(XName.Get("name"), symbol.SymbolName));
         }
 
-        protected static XElement GetTextRecordXml(TextRecord entry) {
-            var res = new XElement(XName.Get("TextRecord6"));
-            if (entry.HasFont) {
-                res.Add(new XAttribute(XName.Get("objectID"), entry.FontID.Value));
-            }
-            if (entry.HasXOffset) {
-                res.Add(new XAttribute(XName.Get("x"), entry.XOffset.Value));
-            }
-            if (entry.HasYOffset) {
-                res.Add(new XAttribute(XName.Get("y"), entry.YOffset.Value));
-            }
-            if (entry.HasFont) {
-                if (!entry.TextHeight.HasValue) throw new InvalidOperationException("Text Height must be specified");
-                res.Add(new XAttribute(XName.Get("fontHeight"), entry.TextHeight.Value));
-            }
-            if (entry.HasColor) {
-                res.Add(new XElement(XName.Get("color"), GetColor(entry.TextColor.Value)));
-            }
-            res.Add(new XElement(XName.Get("glyphs"), entry.Glyphs.Select(item => GetGlyphXml(item))));
-            return res;
-        }
 
-        private static XElement GetGlyphXml(GlyphEntry entry) {
-            return new XElement(XName.Get("TextEntry"),
-                                new XAttribute(XName.Get("glyph"), entry.GlyphIndex),
-                                new XAttribute(XName.Get("advance"), entry.GlyphAdvance));
-        }
 
         protected static byte[] ReadBase64(XElement data) {
             string val = data.Value

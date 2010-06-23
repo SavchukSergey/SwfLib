@@ -124,11 +124,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
         {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_EDIT_TEXT_TAG),
                                 new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.CharacterID),
-                                new XAttribute(XName.Get(WORD_WRAP_ATTRIB), tag.WordWrap),
-                                new XAttribute(XName.Get(MULTILINE_ATTRIB), tag.Multiline),
-                                new XAttribute(XName.Get(READONLY_ATTRIB), tag.ReadOnly),
-                                new XAttribute(XName.Get(PASSWORD_ATTRIB), tag.Password),
-                                new XAttribute(XName.Get(AUTOSIZE_ATTRIB), tag.AutoSize)
+                                new XAttribute(XName.Get(WORD_WRAP_ATTRIB), SwfMillPrimitives.GetStringValue(tag.WordWrap)),
+                                new XAttribute(XName.Get(MULTILINE_ATTRIB), SwfMillPrimitives.GetStringValue(tag.Multiline)),
+                                new XAttribute(XName.Get(READONLY_ATTRIB), SwfMillPrimitives.GetStringValue(tag.ReadOnly)),
+                                new XAttribute(XName.Get(PASSWORD_ATTRIB), SwfMillPrimitives.GetStringValue(tag.Password)),
+                                new XAttribute(XName.Get(AUTOSIZE_ATTRIB), SwfMillPrimitives.GetStringValue(tag.AutoSize))
 
             );
         }

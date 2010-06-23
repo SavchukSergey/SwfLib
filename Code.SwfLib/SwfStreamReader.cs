@@ -47,6 +47,10 @@ namespace Code.SwfLib
             return _reader.ReadUInt16();
         }
 
+        public short ReadSInt16() {
+            return _reader.ReadInt16();
+        }
+
         public uint ReadUInt32()
         {
             return _reader.ReadUInt32();

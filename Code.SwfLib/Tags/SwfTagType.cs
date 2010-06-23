@@ -19,6 +19,7 @@
         /// Change the background color. 
         /// </summary>
         SetBackgroundColor = 9,
+        DefineFont = 10,
         /// <summary>
         /// Defines a text of characters displayed using a font. This definition doesn't support any transparency.
         /// </summary>
