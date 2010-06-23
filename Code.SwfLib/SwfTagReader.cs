@@ -296,8 +296,8 @@ namespace Code.SwfLib {
                     return ReadDefineEditTextTag(tagData);
                 case SwfTagType.DefineFontName:
                     return ReadDefineFontNameTag(tagData);
-                //case SwfTagType.DefineFont3:
-                //    return ReadDefineFont3Tag(tagData);
+                case SwfTagType.DefineFont3:
+                    return ReadDefineFont3Tag(tagData);
                 case SwfTagType.DefineShape:
                     return ReadDefineShapeTag(tagData);
                 case SwfTagType.DefineSprite:
