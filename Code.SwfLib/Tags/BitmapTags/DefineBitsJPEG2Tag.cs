@@ -3,7 +3,7 @@
     public class DefineBitsJPEG2Tag : DefineBitsBaseTag
     {
 
-        public ushort ObjectID;
+        public ushort CharacterID;
 
         public byte[] ImageData;
 

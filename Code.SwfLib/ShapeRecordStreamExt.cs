@@ -1,15 +1,61 @@
 ﻿using System;
+using Code.SwfLib.Data;
+using Code.SwfLib.Data.FillStyles;
+using Code.SwfLib.Data.LineStyles;
 using Code.SwfLib.Data.Shapes;
 
 namespace Code.SwfLib {
     public static class ShapeRecordStreamExt {
 
-        public static void WriteShapeRecords(this SwfStreamWriter writer, ShapeRecords1List shapeRecords, ref uint fillStyleBits, ref uint lineStyleBits) {
+        public static void WriteShapeWithStyle(this SwfStreamWriter writer, ShapeWithStyle1 shapeWithStyle)
+        {
+            writer.WriteFillStyles(shapeWithStyle.FillStyles);
+            writer.WriteLineStyles(shapeWithStyle.LineStyles);
+            var fillStyleBits = new BitsCount(shapeWithStyle.FillStyles.Count).GetUnsignedBits();
+            var lineStyleBits = new BitsCount(shapeWithStyle.LineStyles.Count).GetUnsignedBits();
+            writer.WriteUnsignedBits(fillStyleBits, 4);
+            writer.WriteUnsignedBits(lineStyleBits, 4);
+            writer.WriteShapeRecords(shapeWithStyle.ShapeRecords, ref fillStyleBits, ref lineStyleBits);
+        }
+
+        public static void ReadToShapeWithStyle(this SwfStreamReader reader, ShapeWithStyle1 style)
+        {
+            reader.ReadToFillStyles(style.FillStyles);
+            reader.ReadToLineStyles(style.LineStyles);
+            var fillBitsCount = reader.ReadUnsignedBits(4);
+            var lineBitsCount = reader.ReadUnsignedBits(4);
+
+            ShapeRecord record;
+            do
+            {
+                record = reader.ReadShapeRecord1(ref fillBitsCount, ref lineBitsCount);
+            } while (!(record is EndShapeRecord));
+        }
+
+        public static void ReadToFillStyles(this SwfStreamReader reader, FillStyles1List filLStyles)
+        {
+            //TODO: read fill styles
+        }
+
+        public static void ReadToLineStyles(this SwfStreamReader reader, LineStyles1List filLStyles)
+        {
+            //TODO: read fill styles
+        }
+
+        public static void WriteShapeRecords(this SwfStreamWriter writer, ShapeRecords1List shapeRecords, ref uint fillStyleBits, ref uint lineStyleBits)
+        {
             for (var i = 0; i < shapeRecords.Count; i++) {
                 var shapeRecord = shapeRecords[i];
                 writer.WriteShapeRecord(shapeRecord, ref fillStyleBits, ref lineStyleBits);
             }
         }
+
+        public static ShapeRecord ReadShapeRecord1(this SwfStreamReader reader, ref uint fillBitsCount, ref uint lineBitsCount)
+        {
+            //TODO: Read shape records
+            return new EndShapeRecord();
+        }
+
 
         public static void WriteShapeRecord(this SwfStreamWriter writer, ShapeRecord shapeRecord, ref uint fillStyleBits, ref uint lineStyleBits) {
             writer.FlushBits();
@@ -78,9 +124,9 @@ namespace Code.SwfLib {
             if (stateMoveTo) {
                 BitsCount cnt = new BitsCount(record.MoveDeltaX, record.MoveDeltaY);
                 var moveBits = cnt.GetSignedBits();
-                writer.WriteUnsignedBits((uint)moveBits, 5);
-                writer.WriteSignedBits(record.MoveDeltaX, (uint)moveBits);
-                writer.WriteSignedBits(record.MoveDeltaY, (uint)moveBits);
+                writer.WriteUnsignedBits(moveBits, 5);
+                writer.WriteSignedBits(record.MoveDeltaX, moveBits);
+                writer.WriteSignedBits(record.MoveDeltaY, moveBits);
             }
             if (stateFillStyle0) {
                 writer.WriteUnsignedBits(record.FillStyle0.Value, fillStylesBits);

@@ -13,7 +13,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         public override void AcceptAttribute(DefineShapeTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
-                    tag.ObjectID = ushort.Parse(attrib.Value);
+                    tag.ShapeID = ushort.Parse(attrib.Value);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -23,7 +23,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         public override void AcceptElement(DefineShapeTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BOUNDS_ELEM:
-                    tag.Bounds = SwfMillPrimitives.ParseRectangle(element.Element(XName.Get("Rectangle")));
+                    tag.ShapeBounds = SwfMillPrimitives.ParseRectangle(element.Element(XName.Get("Rectangle")));
                     break;
                 case STYLES_ELEM:
                     ReadStyles(tag, element);

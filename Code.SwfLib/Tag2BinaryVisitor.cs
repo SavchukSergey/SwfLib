@@ -31,9 +31,8 @@ namespace Code.SwfLib {
         object ISwfTagVisitor.Visit(DefineBitsJPEG2Tag tag) {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteUInt16(tag.ObjectID);
+            writer.WriteUInt16(tag.CharacterID);
             if (tag.ImageData != null) writer.WriteBytes(tag.ImageData);
-            //TODO: warning that image data is empty
             return new SwfTagData { Type = SwfTagType.DefineBitsJPEG2, Data = mem.ToArray() };
         }
 
@@ -102,8 +101,8 @@ namespace Code.SwfLib {
         public object Visit(DefineShapeTag tag) {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteUInt16(tag.ObjectID);
-            writer.WriteRect(tag.Bounds);
+            writer.WriteUInt16(tag.ShapeID);
+            writer.WriteRect(tag.ShapeBounds);
             writer.WriteShapeWithStyle(tag.Shapes);
             writer.FlushBits();
             return new SwfTagData { Type = SwfTagType.DefineShape, Data = mem.ToArray() };

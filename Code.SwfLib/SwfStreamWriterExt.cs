@@ -80,17 +80,5 @@ namespace Code.SwfLib {
             writer.WriteByte(val.Blue);
         }
 
-        public static void WriteShapeWithStyle(this SwfStreamWriter writer, ShapeWithStyle1 shapeWithStyle) {
-            writer.WriteFillStyles(shapeWithStyle.FillStyles);
-            writer.WriteLineStyles(shapeWithStyle.LineStyles);
-            var fillStyleBits = new BitsCount(shapeWithStyle.FillStyles.Count).GetUnsignedBits();
-            var lineStyleBits = new BitsCount(shapeWithStyle.LineStyles.Count).GetUnsignedBits();
-            writer.WriteUnsignedBits(fillStyleBits, 4);
-            writer.WriteUnsignedBits(lineStyleBits, 4);
-            writer.WriteShapeRecords(shapeWithStyle.ShapeRecords, ref fillStyleBits, ref lineStyleBits);
-        }
-
-
-
     }
 }

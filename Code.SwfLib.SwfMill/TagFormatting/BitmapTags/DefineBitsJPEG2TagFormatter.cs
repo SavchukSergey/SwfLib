@@ -14,7 +14,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags
             switch (attrib.Name.LocalName)
             {
                 case OBJECT_ID_ATTRIB:
-                    tag.ObjectID = ushort.Parse(attrib.Value);
+                    tag.CharacterID = ushort.Parse(attrib.Value);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -37,7 +37,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags
         public override XElement FormatTag(DefineBitsJPEG2Tag tag)
         {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_BITS_JPEG2_TAG),
-                                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ObjectID)
+                                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.CharacterID),
+                                new XElement(XName.Get("data"), SwfMillPrimitives.FormatBinaryData(tag.ImageData))
                 //TODO: store image data
                 );
         }
