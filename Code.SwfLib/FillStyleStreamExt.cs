@@ -26,6 +26,13 @@ namespace Code.SwfLib {
             }
         }
 
+        public static SolidRGBFillStyle ReadSolidRGBFillStyle(this SwfStreamReader reader)
+        {
+            var style = new SolidRGBFillStyle();
+            style.Color = reader.ReadRGB();
+            return style;
+        }
+
         public static void WriteSolidRGBFillStyle(this SwfStreamWriter writer, SolidRGBFillStyle style) {
             writer.WriteByte(0x00);
             writer.WriteRGB(style.Color);
@@ -37,6 +44,14 @@ namespace Code.SwfLib {
             //TODO: Other fields
         }
 
+        public static LinearGradientFillStyle ReadLinearGradientFillStyle(this SwfStreamReader reader)
+        {
+            var style = new LinearGradientFillStyle();
+            style.GradientMatrix = reader.ReadMatrix();
+            //TODO: Read other fields
+            return style;
+        }
+
         public static void WriteNonSmoothedClippedBitmapFillStyle(this SwfStreamWriter writer, NonSmoothedClippedBitmapFillStyle style) {
             writer.WriteByte(0x42);
             //TODO: Other fields
@@ -44,9 +59,35 @@ namespace Code.SwfLib {
 
         public static void WriteClippedBitmapFillStyle(this SwfStreamWriter writer, ClippedBitmapFillStyle style) {
             writer.WriteByte(0x41);
-            writer.WriteUInt16(style.ObjectID);
+            writer.WriteUInt16(style.BitmapID);
             writer.WriteMatrix(style.BitmapMatrix);
         }
+
+        public static ClippedBitmapFillStyle ReadClippedBitmapFillStyle(this SwfStreamReader reader)
+        {
+            var style = new ClippedBitmapFillStyle();
+            style.BitmapID = reader.ReadUInt16();
+            style.BitmapMatrix = reader.ReadMatrix();
+            return style;
+        }
+
+        public static FillStyle ReadFillStyle1(this SwfStreamReader reader)
+        {
+            var type = reader.ReadByte();
+            switch (type)
+            {
+                    //TODO: Use correct enum
+                case 0x00:
+                    return reader.ReadSolidRGBFillStyle();
+                case 0x10:
+                    return reader.ReadLinearGradientFillStyle();
+                case 0x41:
+                    return reader.ReadClippedBitmapFillStyle();
+                default:
+                    throw new FormatException("Invalid fill style type " + type);
+            }
+        }
+
 
     }
 }

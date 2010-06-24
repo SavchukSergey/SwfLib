@@ -69,7 +69,7 @@ namespace Code.SwfLib.SwfMill
                 switch (attribute.Name.LocalName)
                 {
                     case "objectID":
-                        style.ObjectID = ParseObjectID(attribute);
+                        style.BitmapID = ParseObjectID(attribute);
                         break;
                     default:
                         OnUnknownAttributeFound(attribute);

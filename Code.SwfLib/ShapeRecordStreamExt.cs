@@ -4,8 +4,10 @@ using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Data.LineStyles;
 using Code.SwfLib.Data.Shapes;
 
-namespace Code.SwfLib {
-    public static class ShapeRecordStreamExt {
+namespace Code.SwfLib
+{
+    public static class ShapeRecordStreamExt
+    {
 
         public static void WriteShapeWithStyle(this SwfStreamWriter writer, ShapeWithStyle1 shapeWithStyle)
         {
@@ -20,7 +22,9 @@ namespace Code.SwfLib {
 
         public static void ReadToShapeWithStyle(this SwfStreamReader reader, ShapeWithStyle1 style)
         {
+            style.FillStyles.Clear();
             reader.ReadToFillStyles(style.FillStyles);
+            style.LineStyles.Clear();
             reader.ReadToLineStyles(style.LineStyles);
             var fillBitsCount = reader.ReadUnsignedBits(4);
             var lineBitsCount = reader.ReadUnsignedBits(4);
@@ -32,19 +36,24 @@ namespace Code.SwfLib {
             } while (!(record is EndShapeRecord));
         }
 
-        public static void ReadToFillStyles(this SwfStreamReader reader, FillStyles1List filLStyles)
+        public static void ReadToFillStyles(this SwfStreamReader reader, FillStyles1List fillStyles)
         {
-            //TODO: read fill styles
+            byte count = reader.ReadByte();
+            for (var i = 0; i < count; i++)
+            {
+                fillStyles.Add(reader.ReadFillStyle1());
+            }
         }
 
-        public static void ReadToLineStyles(this SwfStreamReader reader, LineStyles1List filLStyles)
+        public static void ReadToLineStyles(this SwfStreamReader reader, LineStyles1List lineStyles)
         {
             //TODO: read fill styles
         }
 
         public static void WriteShapeRecords(this SwfStreamWriter writer, ShapeRecords1List shapeRecords, ref uint fillStyleBits, ref uint lineStyleBits)
         {
-            for (var i = 0; i < shapeRecords.Count; i++) {
+            for (var i = 0; i < shapeRecords.Count; i++)
+            {
                 var shapeRecord = shapeRecords[i];
                 writer.WriteShapeRecord(shapeRecord, ref fillStyleBits, ref lineStyleBits);
             }
@@ -57,9 +66,11 @@ namespace Code.SwfLib {
         }
 
 
-        public static void WriteShapeRecord(this SwfStreamWriter writer, ShapeRecord shapeRecord, ref uint fillStyleBits, ref uint lineStyleBits) {
+        public static void WriteShapeRecord(this SwfStreamWriter writer, ShapeRecord shapeRecord, ref uint fillStyleBits, ref uint lineStyleBits)
+        {
             writer.FlushBits();
-            switch (shapeRecord.Type) {
+            switch (shapeRecord.Type)
+            {
                 case ShapeRecordType.CurvedEdgeRecord:
                     writer.WriteCurvedEdge((CurvedEdgeShapeRecord)shapeRecord);
                     break;
@@ -77,11 +88,13 @@ namespace Code.SwfLib {
             }
         }
 
-        public static void WriteEndShapeRecord(this SwfStreamWriter writer, EndShapeRecord record) {
+        public static void WriteEndShapeRecord(this SwfStreamWriter writer, EndShapeRecord record)
+        {
             writer.WriteUnsignedBits(0, 6);
         }
 
-        public static void WriteStraightEdge(this SwfStreamWriter writer, StraightEdgeShapeRecord record) {
+        public static void WriteStraightEdge(this SwfStreamWriter writer, StraightEdgeShapeRecord record)
+        {
             writer.WriteBit(true);
             writer.WriteBit(false);
             var numBits = new BitsCount(record.DeltaX, record.DeltaY).GetUnsignedBits();
@@ -94,7 +107,8 @@ namespace Code.SwfLib {
             if (genLineFlags || vertFlag) writer.WriteSignedBits(record.DeltaY, numBits);
         }
 
-        public static void WriteCurvedEdge(this SwfStreamWriter writer, CurvedEdgeShapeRecord record) {
+        public static void WriteCurvedEdge(this SwfStreamWriter writer, CurvedEdgeShapeRecord record)
+        {
             writer.WriteBit(true);
             writer.WriteBit(false);
             var actualBits =
@@ -110,7 +124,8 @@ namespace Code.SwfLib {
         }
 
         //TODO: Remove ref tokens. It's needed for StyleChange2 Records
-        public static void WriteStyleChangeShapeRecord(this SwfStreamWriter writer, StyleChangeShapeRecord record, ref uint fillStylesBits, ref uint lineStylesBits) {
+        public static void WriteStyleChangeShapeRecord(this SwfStreamWriter writer, StyleChangeShapeRecord record, ref uint fillStylesBits, ref uint lineStylesBits)
+        {
             writer.WriteBit(false);
             writer.WriteBit(false);
             bool stateFillStyle0 = record.FillStyle0.HasValue;
@@ -121,22 +136,27 @@ namespace Code.SwfLib {
             writer.WriteBit(stateFillStyle1);
             writer.WriteBit(stateFillStyle0);
             writer.WriteBit(stateMoveTo);
-            if (stateMoveTo) {
+            if (stateMoveTo)
+            {
                 BitsCount cnt = new BitsCount(record.MoveDeltaX, record.MoveDeltaY);
                 var moveBits = cnt.GetSignedBits();
                 writer.WriteUnsignedBits(moveBits, 5);
                 writer.WriteSignedBits(record.MoveDeltaX, moveBits);
                 writer.WriteSignedBits(record.MoveDeltaY, moveBits);
             }
-            if (stateFillStyle0) {
+            if (stateFillStyle0)
+            {
                 writer.WriteUnsignedBits(record.FillStyle0.Value, fillStylesBits);
             }
-            if (stateFillStyle1) {
+            if (stateFillStyle1)
+            {
                 writer.WriteUnsignedBits(record.FillStyle1.Value, fillStylesBits);
             }
-            if (stateLineStyle) {
+            if (stateLineStyle)
+            {
                 writer.WriteUnsignedBits(record.LineStyle.Value, lineStylesBits);
             }
         }
+
     }
 }

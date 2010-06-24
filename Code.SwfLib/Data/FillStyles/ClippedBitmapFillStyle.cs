@@ -2,7 +2,7 @@
 {
     public class ClippedBitmapFillStyle : FillStyle {
 
-        public ushort ObjectID;
+        public ushort BitmapID;
 
         public SwfMatrix BitmapMatrix;
 

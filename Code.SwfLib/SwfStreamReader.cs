@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Tags;
 
 namespace Code.SwfLib
