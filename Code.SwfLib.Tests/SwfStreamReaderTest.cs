@@ -7,21 +7,6 @@ namespace Code.SwfLib.Tests {
     public class SwfStreamReaderTest : TestFixtureBase {
 
         [Test]
-        public void ReadFixedPoint8Test() {
-            var mem = new MemoryStream();
-            const int val = 0xc3aa;
-            const byte hi = val >> 8;
-            const byte low = val & 0xff;
-            const double expected = hi + low / 256.0;
-            mem.WriteByte(low);
-            mem.WriteByte(hi);
-            mem.Seek(0, SeekOrigin.Begin);
-            var reader = new SwfStreamReader(mem);
-            double actual = reader.ReadFixedPoint8();
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
         public void ReadFixedPoint16FromBitsTest()
         {
             var mem = new MemoryStream();
@@ -41,7 +26,8 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void ReadNegativeFixedPoint16FromBitsTest() {
+        public void ReadNegativeFixedPoint16FromBitsTest()
+        {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             const int val = -81920;
@@ -52,6 +38,21 @@ namespace Code.SwfLib.Tests {
             var reader = new SwfStreamReader(mem);
             double actual = reader.ReadFixedPoint16(bits);
             Assert.AreEqual(-1.25, actual);
+        }
+
+        [Test]
+        public void ReadFixedPoint8Test() {
+            var mem = new MemoryStream();
+            const int val = 0xc3aa;
+            const byte hi = val >> 8;
+            const byte low = val & 0xff;
+            const double expected = hi + low / 256.0;
+            mem.WriteByte(low);
+            mem.WriteByte(hi);
+            mem.Seek(0, SeekOrigin.Begin);
+            var reader = new SwfStreamReader(mem);
+            double actual = reader.ReadFixedPoint8();
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -146,6 +147,19 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
+        public void ReadUInt16Test()
+        {
+            var mem = new MemoryStream();
+            mem.WriteByte(0x12);
+            mem.WriteByte(0xe7);
+            mem.Seek(0, SeekOrigin.Begin);
+            var reader = new SwfStreamReader(mem);
+            Assert.AreEqual(0xe712, reader.ReadUInt16(), "Value");
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+        [Test]
         public void ReadUInt32Test() {
             var mem = new MemoryStream();
             mem.WriteByte(0x20);
@@ -156,18 +170,6 @@ namespace Code.SwfLib.Tests {
             var reader = new SwfStreamReader(mem);
 
             Assert.AreEqual(0x456e7120, reader.ReadUInt32(), "Value");
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-        }
-
-        [Test]
-        public void ReadUInt16Test() {
-            var mem = new MemoryStream();
-            mem.WriteByte(0x12);
-            mem.WriteByte(0xe7);
-            mem.Seek(0, SeekOrigin.Begin);
-            var reader = new SwfStreamReader(mem);
-            Assert.AreEqual(0xe712, reader.ReadUInt16(), "Value");
 
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }

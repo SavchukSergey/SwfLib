@@ -1,9 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Code.SwfLib.Data;
-using Code.SwfLib.Data.FillStyles;
-using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Tags;
 
 namespace Code.SwfLib
@@ -127,13 +124,13 @@ namespace Code.SwfLib
             _writer.Write(val);
         }
 
-        public void WriteUInt32(uint val)
+        public void WriteUInt16(ushort val)
         {
             FlushBits();
             _writer.Write(val);
         }
 
-        public void WriteUInt16(ushort val)
+        public void WriteUInt32(uint val)
         {
             FlushBits();
             _writer.Write(val);

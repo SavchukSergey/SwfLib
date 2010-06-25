@@ -1,11 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Code.SwfLib.Data
+﻿namespace Code.SwfLib.Data
 {
     public struct SwfRGBA
     {
+
+        public SwfRGBA(byte red, byte green, byte blue, byte alpha)
+        {
+            Red = red;
+            Green = green;
+            Blue = blue;
+            Alpha = alpha;
+        }
+
+
+        public byte Red;
+
+        public byte Green;
+
+        public byte Blue;
+        
+        public byte Alpha;
+
     }
 }

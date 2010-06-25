@@ -54,55 +54,8 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void WriteShortTagDataTest() {
-            const SwfTagType tagType = SwfTagType.Export;
-            var data = new byte[10];
-            for (var i = 0; i < data.Length; i++) {
-                data[i] = (byte)(i & 0xff);
-            }
-            var tagData = new SwfTagData {Type = tagType, Data = data};
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-            writer.WriteTagData(tagData);
-            
-            var array = mem.ToArray();
-            var header = ((int)tagType << 6) | data.Length;
-            Assert.AreEqual((byte)(header & 0xff), array[0]);
-            Assert.AreEqual((byte)(header >> 8), array[1]);
-            array = array.Skip(2).ToArray();
-            AssertExt.AreEqual(data, array, "Data should be equal");
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-        }
-
-        [Test]
-        public void WriteLongTagDataTest() {
-            const SwfTagType tagType = SwfTagType.Export;
-            var data = new byte[4096];
-            for (var i = 0; i < data.Length; i++) {
-                data[i] = (byte)(i & 0xff);
-            }
-            var tagData = new SwfTagData { Type = tagType, Data = data };
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-            writer.WriteTagData(tagData);
-
-            var array = mem.ToArray();
-            const int header = ((int)tagType << 6) | 0x3f;
-            Assert.AreEqual(header & 0xff, array[0]);
-            Assert.AreEqual(header >> 8, array[1]);
-            var len = data.Length;
-            Assert.AreEqual((byte)((len >> 0) & 0xff), array[2]);
-            Assert.AreEqual((byte)((len >> 8) & 0xff), array[3]);
-            Assert.AreEqual((byte)((len >> 16) & 0xff), array[4]);
-            Assert.AreEqual((byte)((len >> 24) & 0xff), array[5]);
-            array = array.Skip(6).ToArray();
-            AssertExt.AreEqual(data, array, "Data should be equal");
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-        }
-
-
-        [Test]
-        public void WriteBitTest() {
+        public void WriteBitTest()
+        {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
 
@@ -156,6 +109,68 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
+        public void WriteUnsignedBitsTest()
+        {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUnsignedBits(0xaac3 >> 6, 10);
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(true);
+            writer.WriteBit(true);
+
+            mem.Seek(0, SeekOrigin.Begin);
+            Assert.AreEqual(0xaa, mem.ReadByte());
+            Assert.AreEqual(0xc3, mem.ReadByte());
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+        [Test]
+        public void WriteSignedBitsPositiveTest()
+        {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteSignedBits(171, 10);
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(true);
+            writer.WriteBit(true);
+            
+            mem.Seek(0, SeekOrigin.Begin);
+
+            Assert.AreEqual(0x2a, mem.ReadByte());
+            Assert.AreEqual(0xc3, mem.ReadByte());
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+        [Test]
+        public void WriteSignedBitsNegativeTest()
+        {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteSignedBits(-341, 10);
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(true);
+            writer.WriteBit(true);
+
+            mem.Seek(0, SeekOrigin.Begin);
+
+            Assert.AreEqual(0xaa, mem.ReadByte());
+            Assert.AreEqual(0xc3, mem.ReadByte());
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+        [Test]
         public void FlushBitsTest()
         {
             var mem = new MemoryStream();
@@ -187,67 +202,19 @@ namespace Code.SwfLib.Tests {
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }
 
-        //[Test]
-        //public void ReadUnsignedBitsTest() {
-        //    var mem = new MemoryStream();
-        //    mem.WriteByte(0xaa);
-        //    mem.WriteByte(0xc3);
-        //    mem.Seek(0, SeekOrigin.Begin);
-        //    var reader = new SwfStreamReader(mem);
+        [Test]
+        public void WriteUInt16Test()
+        {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(0xe712);
+            mem.Seek(0, SeekOrigin.Begin);
 
-        //    var bits = 10;
+            Assert.AreEqual(0x12, mem.ReadByte());
+            Assert.AreEqual(0xe7, mem.ReadByte());
 
-        //    Assert.AreEqual(0xaac3 >> (16 - bits), reader.ReadUnsignedBits((uint)bits), "Value");
-
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 10");
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 11");
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 12");
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 13");
-        //    Assert.AreEqual(true, reader.ReadBit(), "Bit 14");
-        //    Assert.AreEqual(true, reader.ReadBit(), "Bit 15");
-
-        //    Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-        //}
-
-        //[Test]
-        //public void ReadSignedBitsPositiveTest() {
-        //    var mem = new MemoryStream();
-        //    mem.WriteByte(0x2a);
-        //    mem.WriteByte(0xc3);
-        //    mem.Seek(0, SeekOrigin.Begin);
-        //    var reader = new SwfStreamReader(mem);
-
-        //    Assert.AreEqual(171, reader.ReadSignedBits(10), "Value");
-
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 10");
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 11");
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 12");
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 13");
-        //    Assert.AreEqual(true, reader.ReadBit(), "Bit 14");
-        //    Assert.AreEqual(true, reader.ReadBit(), "Bit 15");
-
-        //    Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-        //}
-
-        //[Test]
-        //public void ReadSignedBitsNegativeTest() {
-        //    var mem = new MemoryStream();
-        //    mem.WriteByte(0xaa);
-        //    mem.WriteByte(0xc3);
-        //    mem.Seek(0, SeekOrigin.Begin);
-        //    var reader = new SwfStreamReader(mem);
-
-        //    Assert.AreEqual(-341, reader.ReadSignedBits(10), "Value");
-
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 10");
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 11");
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 12");
-        //    Assert.AreEqual(false, reader.ReadBit(), "Bit 13");
-        //    Assert.AreEqual(true, reader.ReadBit(), "Bit 14");
-        //    Assert.AreEqual(true, reader.ReadBit(), "Bit 15");
-
-        //    Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-        //}
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
 
         [Test]
         public void WriteUInt32Test() {
@@ -265,15 +232,53 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void WriteUInt16Test() {
+        public void WriteShortTagDataTest()
+        {
+            const SwfTagType tagType = SwfTagType.Export;
+            var data = new byte[10];
+            for (var i = 0; i < data.Length; i++)
+            {
+                data[i] = (byte)(i & 0xff);
+            }
+            var tagData = new SwfTagData { Type = tagType, Data = data };
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteUInt16(0xe712);
-            mem.Seek(0, SeekOrigin.Begin);
+            writer.WriteTagData(tagData);
 
-            Assert.AreEqual(0x12, mem.ReadByte());
-            Assert.AreEqual(0xe7, mem.ReadByte());
+            var array = mem.ToArray();
+            var header = ((int)tagType << 6) | data.Length;
+            Assert.AreEqual((byte)(header & 0xff), array[0]);
+            Assert.AreEqual((byte)(header >> 8), array[1]);
+            array = array.Skip(2).ToArray();
+            AssertExt.AreEqual(data, array, "Data should be equal");
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
 
+        [Test]
+        public void WriteLongTagDataTest()
+        {
+            const SwfTagType tagType = SwfTagType.Export;
+            var data = new byte[4096];
+            for (var i = 0; i < data.Length; i++)
+            {
+                data[i] = (byte)(i & 0xff);
+            }
+            var tagData = new SwfTagData { Type = tagType, Data = data };
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteTagData(tagData);
+
+            var array = mem.ToArray();
+            const int header = ((int)tagType << 6) | 0x3f;
+            Assert.AreEqual(header & 0xff, array[0]);
+            Assert.AreEqual(header >> 8, array[1]);
+            var len = data.Length;
+            Assert.AreEqual((byte)((len >> 0) & 0xff), array[2]);
+            Assert.AreEqual((byte)((len >> 8) & 0xff), array[3]);
+            Assert.AreEqual((byte)((len >> 16) & 0xff), array[4]);
+            Assert.AreEqual((byte)((len >> 24) & 0xff), array[5]);
+            array = array.Skip(6).ToArray();
+            AssertExt.AreEqual(data, array, "Data should be equal");
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }
 
