@@ -2,7 +2,7 @@
 {
     public class NonSmoothedClippedBitmapFillStyle : FillStyle {
 
-        public ushort ObjectID;
+        public ushort BitmapID;
 
         public SwfMatrix BitmapMatrix;
 

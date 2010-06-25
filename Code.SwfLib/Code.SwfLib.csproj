@@ -53,6 +53,10 @@
     <Compile Include="Data\ColorTransformRGBA.cs" />
     <Compile Include="Data\FillStyles\FillStyles1List.cs" />
     <Compile Include="Data\FillStyles\FillStylesListBase.cs" />
+    <Compile Include="Data\Gradients\GradientRGB.cs" />
+    <Compile Include="Data\Gradients\GradientRecordRGB.cs" />
+    <Compile Include="Data\Gradients\InterpolationMode.cs" />
+    <Compile Include="Data\Gradients\SpreadMode.cs" />
     <Compile Include="Data\LineStyles\LineStyleType.cs" />
     <Compile Include="Data\LineStyles\LineStyle.cs" />
     <Compile Include="Data\LineStyles\LineStyles1List.cs" />
@@ -74,6 +78,7 @@
     <Compile Include="Data\Text\TextRecord.cs" />
     <Compile Include="Data\Text\TextRecordFlags.cs" />
     <Compile Include="FillStyleStreamExt.cs" />
+    <Compile Include="GradientStreamExt.cs" />
     <Compile Include="LineStyleStreamExt.cs" />
     <Compile Include="ShapeRecordStreamExt.cs" />
     <Compile Include="SwfFile.cs" />
@@ -89,7 +94,7 @@
     <Compile Include="SwfStreamWriter.cs" />
     <Compile Include="SwfStreamWriterExt.cs" />
     <Compile Include="SwfZip.cs" />
-    <Compile Include="Tag2BinaryVisitor.cs" />
+    <Compile Include="TagSerializer.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsBaseTag.cs" />
     <Compile Include="Tags\ControlTags\ControlBaseTag.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObjectTag.cs" />
@@ -107,7 +112,7 @@
     <Compile Include="Data\FillStyles\NonSmoothedClippedBitmapFillStyle.cs" />
     <Compile Include="Tags\ShapeTags\DefineShape3Tag.cs" />
     <Compile Include="Data\FillStyles\FillStyleType.cs" />
-    <Compile Include="Data\FillStyles\LinearGradientFillStyle.cs" />
+    <Compile Include="Data\FillStyles\LinearGradientRGBFillStyle.cs" />
     <Compile Include="Data\FillStyles\SolidRGBFillStyle.cs" />
     <Compile Include="Tags\ShapeTags\DefineShapeTag.cs" />
     <Compile Include="Tags\DefineSpriteTag.cs" />

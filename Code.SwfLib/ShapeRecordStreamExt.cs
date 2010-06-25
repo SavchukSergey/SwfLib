@@ -24,8 +24,10 @@ namespace Code.SwfLib
         {
             style.FillStyles.Clear();
             reader.ReadToFillStyles(style.FillStyles);
+
             style.LineStyles.Clear();
             reader.ReadToLineStyles(style.LineStyles);
+
             var fillBitsCount = reader.ReadUnsignedBits(4);
             var lineBitsCount = reader.ReadUnsignedBits(4);
 

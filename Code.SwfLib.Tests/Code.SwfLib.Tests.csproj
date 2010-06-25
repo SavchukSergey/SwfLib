@@ -61,6 +61,9 @@
     <Compile Include="SwfTagReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExternalEtalonTests\Tag2BinaryVisitorTest.cs" />
+    <Compile Include="TagSerialization\FileAttributesTagTest.cs" />
+    <Compile Include="TagSerialization\TagSerializationTestBase.cs" />
+    <Compile Include="TagSerialization\EndTagTest.cs" />
     <Compile Include="TestFixtureBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,12 +73,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Tag2Binary\EndTag.bin" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Tag2Binary\FileAttributesTag.bin" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Tag2Binary\MetadataTag.bin" />
   </ItemGroup>
   <ItemGroup>
@@ -83,12 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Tag2Binary\ShowFrameTag.bin" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\SwfTagReader\EndTag.bin" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\SwfTagReader\FileAttributesTag.bin" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\SwfTagReader\MetadataTag.bin" />

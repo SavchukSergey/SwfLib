@@ -16,7 +16,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             var tag = new DefineBitsJPEG2Tag();
             tag.CharacterID = 1;
             tag.ImageData = GetEmbeddedResourceData("DefineBitsJPEG2.jpg");
-            var visitor = new Tag2BinaryVisitor();
+            var visitor = new TagSerializer();
             var res = visitor.GetTagData(tag);
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
@@ -27,20 +27,6 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             if (etalon.Binary == null) throw new InvalidOperationException("Couldn't find etalon tag");
 
             AssertExt.AreEqual(etalon.Binary, mem.ToArray(), "Checking DefineBitsJPEG2");
-        }
-
-        [Test]
-        public void EndTagTest() {
-            var tag = new EndTag();
-            Compare(tag, "EndTag.bin");
-        }
-
-        [Test]
-        public void FileAttributesTest() {
-            var tag = new FileAttributesTag {
-                Attributes = SwfFileAttributes.HasMetadata | SwfFileAttributes.UseNetwork
-            };
-            Compare(tag, "FileAttributesTag.bin");
         }
 
         [Test]
@@ -62,7 +48,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
         }
 
         private void Compare(SwfTagBase tag, string resourceName) {
-            var visitor = new Tag2BinaryVisitor();
+            var visitor = new TagSerializer();
             var res = tag.AcceptVistor(visitor);
             Assert.IsNotNull(res, "Should return a value");
             Assert.IsTrue(res is SwfTagData, "Should return a value of SwfTagData type");

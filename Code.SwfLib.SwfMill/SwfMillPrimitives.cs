@@ -99,7 +99,7 @@ namespace Code.SwfLib.SwfMill
                 switch (attribute.Name.LocalName)
                 {
                     case "objectID":
-                        style.ObjectID = ParseObjectID(attribute);
+                        style.BitmapID = ParseObjectID(attribute);
                         break;
                     default:
                         OnUnknownAttributeFound(attribute);
@@ -121,9 +121,9 @@ namespace Code.SwfLib.SwfMill
             return style;
         }
 
-        public static LinearGradientFillStyle ParseLinearGradientFillStyle(XElement styleElement)
+        public static LinearGradientRGBFillStyle ParseLinearGradientFillStyle(XElement styleElement)
         {
-            var style = new LinearGradientFillStyle();
+            var style = new LinearGradientRGBFillStyle();
             foreach (var attribute in styleElement.Attributes())
             {
                 switch (attribute.Name.LocalName)
@@ -254,6 +254,17 @@ namespace Code.SwfLib.SwfMill
             }
             return rect;
         }
+
+        public static XElement FormatRectangle(SwfRect rect)
+        {
+            return new XElement(XName.Get("Rectangle"),
+                                new XAttribute(XName.Get("left"), rect.XMin),
+                                new XAttribute(XName.Get("right"), rect.XMax),
+                                new XAttribute(XName.Get("top"), rect.YMin),
+                                new XAttribute(XName.Get("bottom"), rect.YMax));
+        }
+
+
 
         private static void OnUnknownElementFound(XElement elem)
         {

@@ -39,6 +39,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         private static void ReadStyles(DefineShapeTag tag, XElement styleElements) {
             var array = styleElements.Element(XName.Get("StyleList"));
             var fillStyles = array.Element("fillStyles");
+            //TODO: line styles
 
             foreach (var styleElem in fillStyles.Elements()) {
                 switch (styleElem.Name.LocalName) {
@@ -88,7 +89,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         }
 
         public override XElement FormatTag(DefineShapeTag tag) {
-            return new XElement(XName.Get(SwfTagNameMapping.DEFINE_SHAPE_TAG));
+            return new XElement(XName.Get(SwfTagNameMapping.DEFINE_SHAPE_TAG),
+                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ShapeID),
+                new XElement(XName.Get(BOUNDS_ELEM), SwfMillPrimitives.FormatRectangle(tag.ShapeBounds)
+                ));
         }
     }
 }

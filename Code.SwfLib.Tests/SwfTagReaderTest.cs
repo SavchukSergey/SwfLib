@@ -8,30 +8,6 @@ namespace Code.SwfLib.Tests {
     [TestFixture]
     public class SwfTagReaderTest {
 
-        [Test]
-        public void ReadTagTest() {
-
-            Assert.IsAssignableFrom(typeof(FileAttributesTag), ReadTagBase("FileAttributesTag.bin"));
-            Assert.IsAssignableFrom(typeof(EndTag), ReadTagBase("EndTag.bin"));
-            Assert.IsAssignableFrom(typeof(MetadataTag), ReadTagBase("MetadataTag.bin"));
-            Assert.IsAssignableFrom(typeof(SetBackgroundColorTag), ReadTagBase("SetBackgroundColorTag.bin"));
-            Assert.IsAssignableFrom(typeof(ShowFrameTag), ReadTagBase("ShowFrameTag.bin"));
-        }
-
-        [Test]
-        public void ReadFileAttributesTagTest() {
-            FileAttributesTag tag = ReadTag("FileAttributesTag.bin", data => new SwfTagReader(9).ReadFileAttributesTag(data));
-            Assert.IsNotNull(tag);
-            Assert.IsAssignableFrom(typeof(FileAttributesTag), tag);
-            Assert.AreEqual(SwfFileAttributes.HasMetadata | SwfFileAttributes.UseNetwork, tag.Attributes);
-        }
-
-        [Test]
-        public void ReadEndTagTest() {
-            EndTag tag = ReadTag("EndTag.bin", data => new SwfTagReader(9).ReadEndTag(data));
-            Assert.IsNotNull(tag);
-            Assert.IsAssignableFrom(typeof(EndTag), tag);
-        }
 
         [Test]
         public void ReadMetadataTagTest() {

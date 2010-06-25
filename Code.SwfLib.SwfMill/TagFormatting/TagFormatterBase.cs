@@ -71,14 +71,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                                 new XAttribute(XName.Get("transY"), matrix.TranslateY));
         }
 
-        protected static XElement GetRectangleXml(SwfRect rect) {
-            return new XElement(XName.Get("Rectangle"),
-                                new XAttribute(XName.Get("left"), rect.XMin),
-                                new XAttribute(XName.Get("right"), rect.XMax),
-                                new XAttribute(XName.Get("top"), rect.YMin),
-                                new XAttribute(XName.Get("bottom"), rect.YMax));
-        }
-
         protected static XElement GetSymbol(SwfSymbolReference symbol) {
             return new XElement(XName.Get("Symbol"),
                                 new XAttribute(XName.Get("objectID"), symbol.SymbolID),
