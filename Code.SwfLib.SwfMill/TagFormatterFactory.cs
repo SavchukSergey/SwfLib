@@ -166,7 +166,7 @@ namespace Code.SwfLib.SwfMill {
             return new MetadataTagFormatter();
         }
 
-        public object Visit(PlaceObjectTag tag) {
+        object ISwfTagVisitor.Visit(PlaceObjectTag tag) {
             throw new NotImplementedException();
         }
 
@@ -182,6 +182,10 @@ namespace Code.SwfLib.SwfMill {
                 _placeObject3Formatter = new PlaceObject3TagFormatter();
             }
             return _placeObject3Formatter;
+        }
+
+        object ISwfTagVisitor.Visit(RemoveObjectTag tag) {
+            throw new NotImplementedException();
         }
 
         object ISwfTagVisitor.Visit(RemoveObject2Tag tag) {

@@ -289,6 +289,15 @@ namespace Code.SwfLib {
             return tag;
         }
 
+        public static RemoveObjectTag ReadRemoveObjectTag(SwfTagData tagData) {
+            RemoveObjectTag tag = new RemoveObjectTag { RawData = tagData};
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.CharacterID = reader.ReadUInt16();
+            tag.Depth = reader.ReadUInt16();
+            return tag;
+        }
+
         public SetBackgroundColorTag ReadSetBackgroundColorTag(SwfTagData tagData) {
             var tag = new SetBackgroundColorTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
@@ -336,6 +345,8 @@ namespace Code.SwfLib {
                     return ReadFileAttributesTag(tagData);
                 case SwfTagType.MetaData:
                     return ReadMetadataTag(tagData);
+                case SwfTagType.RemoveObject:
+                    return ReadRemoveObjectTag(tagData);
                 case SwfTagType.SetBackgroundColor:
                     return ReadSetBackgroundColorTag(tagData);
                 default:

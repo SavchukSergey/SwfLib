@@ -16,6 +16,7 @@
         /// </summary>
         DefineShape = 2,
         PlaceObject = 4,
+        RemoveObject = 5,
         /// <summary>
         /// Change the background color. 
         /// </summary>

@@ -206,7 +206,7 @@ namespace Code.SwfLib {
             return new SwfTagData { Type = SwfTagType.MetaData, Data = mem.ToArray() };
         }
 
-        public object Visit(PlaceObjectTag tag) {
+        object ISwfTagVisitor.Visit(PlaceObjectTag tag) {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.CharacterID);
@@ -215,7 +215,7 @@ namespace Code.SwfLib {
             if (tag.ColorTransform.HasValue) {
                 writer.WriteColorTransformRGB(tag.ColorTransform.Value);
             }
-            return new SwfTagData { Type = SwfTagType.MetaData, Data = mem.ToArray() };
+            return new SwfTagData { Type = SwfTagType.PlaceObject, Data = mem.ToArray() };
         }
 
         object ISwfTagVisitor.Visit(PlaceObject2Tag tag) {
@@ -247,6 +247,14 @@ namespace Code.SwfLib {
             var writer = new SwfStreamWriter(mem);
             //TODO: put fields
             return new SwfTagData { Type = SwfTagType.PlaceObject3, Data = mem.ToArray() };
+        }
+
+        object ISwfTagVisitor.Visit(RemoveObjectTag tag) {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.CharacterID);
+            writer.WriteUInt16(tag.Depth);
+            return new SwfTagData { Type = SwfTagType.RemoveObject, Data = mem.ToArray() };
         }
 
         public object Visit(RemoveObject2Tag tag) {

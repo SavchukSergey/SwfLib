@@ -54,6 +54,8 @@ namespace Code.SwfLib.Tags
 
         object Visit(PlaceObject3Tag tag);
 
+        object Visit(RemoveObjectTag tag);
+
         object Visit(RemoveObject2Tag tag);
 
         object Visit(SetBackgroundColorTag tag);
