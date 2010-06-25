@@ -1,6 +1,6 @@
 ﻿namespace Code.SwfLib.Data
 {
-    public struct ColorTransform
+    public struct ColorTransformRGBA
     {
 
         public short? RedMultTerm;
@@ -9,6 +9,8 @@
 
         public short? BlueMultTerm;
 
+        public short? AlphaMultTerm;
+
 
         public short? RedAddTerm;
 
@@ -16,14 +18,17 @@
 
         public short? BlueAddTerm;
 
+        public short? AlphaAddTerm;
+
+
         public bool HasAddTerms
         {
-            get { return RedAddTerm.HasValue || GreenAddTerm.HasValue || BlueAddTerm.HasValue; }
+            get { return RedAddTerm.HasValue || GreenAddTerm.HasValue || BlueAddTerm.HasValue || AlphaAddTerm.HasValue; }
         }
 
         public bool HasMultTerms
         {
-            get { return RedMultTerm.HasValue || GreenMultTerm.HasValue || BlueMultTerm.HasValue; }
+            get { return RedMultTerm.HasValue || GreenMultTerm.HasValue || BlueMultTerm.HasValue || AlphaMultTerm.HasValue; }
         }
     }
 }

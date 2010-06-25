@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="AssertExt.cs" />
     <Compile Include="BitsCountTest.cs" />
+    <Compile Include="ExternalEtalonTests\ExternalEtalonTestFixtureBase.cs" />
+    <Compile Include="ExternalEtalonTests\SwfStreamReaderExtTest.cs" />
     <Compile Include="SwfFileTest.cs" />
     <Compile Include="SwfStreamReaderExtTest.cs" />
     <Compile Include="SwfStreamReaderTest.cs" />
@@ -58,7 +60,7 @@
     <Compile Include="SwfStreamWriterTest.cs" />
     <Compile Include="SwfTagReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tag2BinaryVisitorTest.cs" />
+    <Compile Include="ExternalEtalonTests\Tag2BinaryVisitorTest.cs" />
     <Compile Include="TestFixtureBase.cs" />
   </ItemGroup>
   <ItemGroup>

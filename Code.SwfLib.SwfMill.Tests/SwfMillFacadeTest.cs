@@ -13,6 +13,7 @@ namespace Code.SwfLib.SwfMill.Tests
     {
 
         [Test]
+        [Ignore]
         public void SwfToXmlTest()
         {
             var source = this.GetType().Assembly.GetManifestResourceStream("Code.SwfLib.SwfMill.Tests.FlashTest.swf");
@@ -27,6 +28,7 @@ namespace Code.SwfLib.SwfMill.Tests
         }
 
         [Test]
+        [Ignore]
         public void ReadHugeXml()
         {
             var sourceStream = OpenEmbeddedResource("HugeSwfXml.xml");
@@ -37,6 +39,7 @@ namespace Code.SwfLib.SwfMill.Tests
         }
 
         [Test]
+        [Ignore]
         public void ReadHugeXml2()
         {
             var sourceStream = OpenEmbeddedResource("HugeSwfXml2.xml");

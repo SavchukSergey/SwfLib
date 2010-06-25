@@ -60,7 +60,7 @@ namespace Code.SwfLib.Tags.DisplayListTags
 
         public SwfMatrix? Matrix;
 
-        public ColorTransform? ColorTransform;
+        public ColorTransformRGB? ColorTransform;
 
         public ushort? Ratio;
 

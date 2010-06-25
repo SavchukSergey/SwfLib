@@ -220,7 +220,7 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.Depth);
             if (tag.HasCharacter) writer.WriteUInt16(tag.CharacterID.Value);
             if (tag.HasMatrix) writer.WriteMatrix(tag.Matrix.Value);
-            if (tag.HasColorTransform) writer.WriteColorTransform(tag.ColorTransform.Value);
+            if (tag.HasColorTransform) writer.WriteColorTransformRGB(tag.ColorTransform.Value);
             if (tag.HasRatio) writer.WriteUInt16(tag.Ratio.Value);
             if (tag.HasName) writer.WriteString(tag.Name);
             if (tag.HasClipDepth) writer.WriteUInt16(tag.ClipDepth.Value);

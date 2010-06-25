@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using Code.SwfLib.Tags;
+using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
     public class TestFixtureBase {
@@ -28,69 +27,29 @@ namespace Code.SwfLib.Tests {
             stream.Seek(0, SeekOrigin.Begin);
         }
 
-        protected struct TagBinaryInfo {
-            public SwfTagType Type;
-
-            public byte[] Binary;
-
-        }
-
-        protected IEnumerable<TagBinaryInfo> GetTagFullBinariesFromSwfResource(string resourceName) {
-            var file = new SwfFile();
-            var stream = OpenEmbeddedResource(resourceName);
-            SwfStreamReader reader = new SwfStreamReader(stream);
-            file.FileInfo = reader.ReadSwfFileInfo();
-            stream = DecompressIfNeeded(file.FileInfo, stream);
-            stream.Seek(8, SeekOrigin.Begin);
-            reader = new SwfStreamReader(stream);
-            file.Header = reader.ReadSwfHeader();
-
-            while (stream.Position < stream.Length) {
-                var position = stream.Position;
-
-                ushort typeAndSize = reader.ReadUInt16();
-                SwfTagType type = (SwfTagType)(typeAndSize >> 6);
-                int shortSize = typeAndSize & 0x3f;
-                int size = shortSize < 0x3f ? shortSize : reader.ReadInt32();
-
-                var length = stream.Position - position + size;
-
-                stream.Seek(position, SeekOrigin.Begin);
-                yield return new TagBinaryInfo { Type = type, Binary = reader.ReadBytes((int)length) };
+        protected void CheckBits(Stream stream, params string[] bits) {
+            stream.Seek(0, SeekOrigin.Begin);
+            var reader = new SwfStreamReader(stream);
+            uint bitIndex = 0;
+            foreach (var bitString in bits) {
+                foreach (var ch in bitString) {
+                    switch (ch) {
+                        case '0':
+                            Assert.AreEqual(false, reader.ReadBit(), "Checking bit " + bitIndex);
+                            bitIndex++;
+                            break;
+                        case '1':
+                            Assert.AreEqual(true, reader.ReadBit(), "Checking bit " + bitIndex);
+                            bitIndex++;
+                            break;
+                        case '.':
+                            break;
+                        default:
+                            throw new InvalidOperationException("Invalid character " + ch);
+                    }
+                }
             }
-        }
-
-        protected IEnumerable<SwfTagData> GetTagBinariesFromSwfResource(string resourceName) {
-            var file = new SwfFile();
-            var stream = OpenEmbeddedResource(resourceName);
-            SwfStreamReader reader = new SwfStreamReader(stream);
-            file.FileInfo = reader.ReadSwfFileInfo();
-            stream = DecompressIfNeeded(file.FileInfo, stream);
-            stream.Seek(8, SeekOrigin.Begin);
-            reader = new SwfStreamReader(stream);
-            file.Header = reader.ReadSwfHeader();
-
-            while (stream.Position < stream.Length) {
-                ushort typeAndSize = reader.ReadUInt16();
-                SwfTagType type = (SwfTagType)(typeAndSize >> 6);
-                int shortSize = typeAndSize & 0x3f;
-                int size = shortSize < 0x3f ? shortSize : reader.ReadInt32();
-                yield return new SwfTagData { Type = type, Data = reader.ReadBytes(size) };
-            }
-        }
-
-        private static Stream DecompressIfNeeded(SwfFileInfo info, Stream stream) {
-            switch (info.Format) {
-                case "CWS":
-                    MemoryStream mem = new MemoryStream();
-                    SwfZip.Decompress(stream, mem);
-                    mem.Seek(8, SeekOrigin.Begin);
-                    return mem;
-                case "FWS":
-                    return stream;
-                default:
-                    throw new NotSupportedException("Illegal file format");
-            }
+            Assert.AreEqual(stream.Length, stream.Position, "Should reach end of the stream");
         }
 
         protected Stream OpenEmbeddedResource(string resourceName) {

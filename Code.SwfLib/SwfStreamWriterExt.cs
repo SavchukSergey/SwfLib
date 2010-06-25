@@ -42,10 +42,6 @@ namespace Code.SwfLib {
             writer.WriteSignedBits(rect.YMax, bits);
         }
 
-        public static void WriteColorTransform(this SwfStreamWriter writer, ColorTransform tranform) {
-            throw new NotImplementedException();
-        }
-
         public static void WriteMatrix(this SwfStreamWriter writer, SwfMatrix matrix) {
             writer.FlushBits();
             bool hasScale = matrix.HasScale;
@@ -54,25 +50,93 @@ namespace Code.SwfLib {
                 var sx = (int)(matrix.ScaleX * 65536.0);
                 var sy = (int)(matrix.ScaleY * 65536.0);
                 var scaleBits = new BitsCount(sx, sy).GetSignedBits();
+                writer.WriteUnsignedBits(scaleBits, 5);
                 writer.WriteFixedPoint16(matrix.ScaleX, scaleBits);
                 writer.WriteFixedPoint16(matrix.ScaleY, scaleBits);
             }
             bool hasRotate = matrix.HasRotate;
+            writer.WriteBit(hasRotate);
             if (hasRotate) {
                 var rx = (int)(matrix.RotateSkew0 * 65536.0);
                 var ry = (int)(matrix.RotateSkew1 * 65536.0);
                 var rotateBits = new BitsCount(rx, ry).GetSignedBits();
-
+                writer.WriteUnsignedBits(rotateBits, 5);
                 writer.WriteFixedPoint16(matrix.RotateSkew0, rotateBits);
                 writer.WriteFixedPoint16(matrix.RotateSkew1, rotateBits);
             }
-            var translateBits = new BitsCount(matrix.TranslateX, matrix.TranslateY).GetUnsignedBits();
+            var translateBits = new BitsCount(matrix.TranslateX, matrix.TranslateY).GetSignedBits();
             writer.WriteUnsignedBits(translateBits, 5);
             writer.WriteSignedBits(matrix.TranslateX, translateBits);
             writer.WriteSignedBits(matrix.TranslateY, translateBits);
             writer.FlushBits();
         }
 
+        public static void WriteColorTransformRGB(this SwfStreamWriter writer, ColorTransformRGB tranform) {
+            writer.FlushBits();
+            var bitsCounter = new BitsCount(0);
+            if (tranform.HasAddTerms)
+            {
+                bitsCounter.AddValue(tranform.RedAddTerm.Value);
+                bitsCounter.AddValue(tranform.GreenAddTerm.Value);
+                bitsCounter.AddValue(tranform.BlueAddTerm.Value);
+            }
+            if (tranform.HasMultTerms)
+            {
+                bitsCounter.AddValue(tranform.RedMultTerm.Value);
+                bitsCounter.AddValue(tranform.GreenMultTerm.Value);
+                bitsCounter.AddValue(tranform.BlueMultTerm.Value);
+            }
+            writer.WriteBit(tranform.HasAddTerms);
+            writer.WriteBit(tranform.HasMultTerms);
+            var bits = bitsCounter.GetSignedBits();
+            writer.WriteUnsignedBits(bits, 4);
+            if (tranform.HasMultTerms)
+            {
+                writer.WriteSignedBits(tranform.RedMultTerm.Value, bits);
+                writer.WriteSignedBits(tranform.GreenMultTerm.Value, bits);
+                writer.WriteSignedBits(tranform.BlueMultTerm.Value, bits);
+            }
+            if (tranform.HasAddTerms) {
+                writer.WriteSignedBits(tranform.RedAddTerm.Value, bits);
+                writer.WriteSignedBits(tranform.GreenAddTerm.Value, bits);
+                writer.WriteSignedBits(tranform.BlueAddTerm.Value, bits);
+            }
+            writer.FlushBits();
+        }
+
+        public static void WriteColorTransformRGBA(this SwfStreamWriter writer, ColorTransformRGBA tranform) {
+            writer.FlushBits();
+            var bitsCounter = new BitsCount(0);
+            if (tranform.HasAddTerms) {
+                bitsCounter.AddValue(tranform.RedAddTerm.Value);
+                bitsCounter.AddValue(tranform.GreenAddTerm.Value);
+                bitsCounter.AddValue(tranform.BlueAddTerm.Value);
+                bitsCounter.AddValue(tranform.AlphaAddTerm.Value);
+            }
+            if (tranform.HasMultTerms) {
+                bitsCounter.AddValue(tranform.RedMultTerm.Value);
+                bitsCounter.AddValue(tranform.GreenMultTerm.Value);
+                bitsCounter.AddValue(tranform.BlueMultTerm.Value);
+                bitsCounter.AddValue(tranform.AlphaMultTerm.Value);
+            }
+            writer.WriteBit(tranform.HasAddTerms);
+            writer.WriteBit(tranform.HasMultTerms);
+            var bits = bitsCounter.GetSignedBits();
+            writer.WriteUnsignedBits(bits, 4);
+            if (tranform.HasMultTerms) {
+                writer.WriteSignedBits(tranform.RedMultTerm.Value, bits);
+                writer.WriteSignedBits(tranform.GreenMultTerm.Value, bits);
+                writer.WriteSignedBits(tranform.BlueMultTerm.Value, bits);
+                writer.WriteSignedBits(tranform.AlphaMultTerm.Value, bits);
+            }
+            if (tranform.HasAddTerms) {
+                writer.WriteSignedBits(tranform.RedAddTerm.Value, bits);
+                writer.WriteSignedBits(tranform.GreenAddTerm.Value, bits);
+                writer.WriteSignedBits(tranform.BlueAddTerm.Value, bits);
+                writer.WriteSignedBits(tranform.AlphaAddTerm.Value, bits);
+            }
+            writer.FlushBits();
+        }
 
         public static void WriteRGB(this SwfStreamWriter writer, SwfRGB val) {
             writer.WriteByte(val.Red);

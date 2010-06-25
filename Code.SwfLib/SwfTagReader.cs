@@ -252,7 +252,7 @@ namespace Code.SwfLib {
                 tag.CharacterID = null;
             }
             tag.Matrix = (flags & PlaceObject2Flags.HasMatrix) > 0 ? reader.ReadMatrix() : (SwfMatrix?)null;
-            tag.ColorTransform = (flags & PlaceObject2Flags.HasColorTransform) > 0 ? reader.ReadColorTransform() : (ColorTransform?)null;
+            tag.ColorTransform = (flags & PlaceObject2Flags.HasColorTransform) > 0 ? reader.ReadColorTransformRGB() : (ColorTransformRGB?)null;
             if ((flags & PlaceObject2Flags.HasRatio) > 0) {
                 tag.Ratio = reader.ReadUInt16();
             } else {

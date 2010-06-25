@@ -10,48 +10,6 @@ namespace Code.SwfLib.Tests {
     [TestFixture]
     public class SwfStreamReaderExtTest : TestFixtureBase {
 
-
-        [Test]
-        public void ReadMatrixTest() {
-            var reader = new SwfTagReader(10);
-            var tags =
-                GetTagBinariesFromSwfResource("Matrix-compiled.swf")
-                .Where(item => item.Type == SwfTagType.PlaceObject2);
-            var tagData = tags.First();
-            var tag = reader.ReadPlaceObject2Tag(tagData);
-            Assert.AreEqual(20.5, tag.Matrix.Value.ScaleX);
-            Assert.AreEqual(17.25, tag.Matrix.Value.ScaleY);
-
-            tagData = tags.Skip(1).First();
-            tag = reader.ReadPlaceObject2Tag(tagData);
-            Assert.AreEqual(0.5, tag.Matrix.Value.ScaleX);
-            Assert.AreEqual(1.25, tag.Matrix.Value.ScaleY);
-
-            tagData = tags.Skip(2).First();
-            tag = reader.ReadPlaceObject2Tag(tagData);
-            Assert.AreEqual(0.5, tag.Matrix.Value.ScaleX);
-            Assert.AreEqual(-1.25, tag.Matrix.Value.ScaleY);
-        }
-
-        [Test]
-        public void ReadMatrixFromBitsTest()
-        {
-            var mem = new MemoryStream();
-            WriteBits(mem,
-                "1", "10011", "010.10000000.00000000", "001.11000000.00000000",
-                "1", "10011", "011.01000000.00000000", "000.10000000.00000000",
-                "00110", "010000", "011000");
-            var reader = new SwfStreamReader(mem);
-            var matrix = reader.ReadMatrix();
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-            Assert.AreEqual(matrix.ScaleX, 2.5);
-            Assert.AreEqual(matrix.ScaleY, 1.75);
-            Assert.AreEqual(matrix.RotateSkew0, 3.25);
-            Assert.AreEqual(matrix.RotateSkew1, 0.5);
-            Assert.AreEqual(matrix.TranslateX, 16);
-            Assert.AreEqual(matrix.TranslateY, 24);
-        }
-
         [Test]
         public void ReadSwfFileInfoTest() {
             var mem = new MemoryStream();
@@ -129,5 +87,146 @@ namespace Code.SwfLib.Tests {
 
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }
+
+        [Test]
+        public void ReadMatrixFromBitsTest() {
+            var mem = new MemoryStream();
+            WriteBits(mem,
+                "1", "10011", "010.10000000.00000000", "001.11000000.00000000",
+                "1", "10011", "011.01000000.00000000", "000.10000000.00000000",
+                "00110", "010000", "011000");
+            var reader = new SwfStreamReader(mem);
+            var matrix = reader.ReadMatrix();
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            Assert.AreEqual(matrix.ScaleX, 2.5);
+            Assert.AreEqual(matrix.ScaleY, 1.75);
+            Assert.AreEqual(matrix.RotateSkew0, 3.25);
+            Assert.AreEqual(matrix.RotateSkew1, 0.5);
+            Assert.AreEqual(matrix.TranslateX, 16);
+            Assert.AreEqual(matrix.TranslateY, 24);
+        }
+
+        [Test]
+        public void ReadColorTransformRGBFromBitsMultTest() {
+            var mem = new MemoryStream();
+            WriteBits(mem,
+                "0", "1", "1001", "0.00001010", "0.11100000", "1.11110110");
+            var reader = new SwfStreamReader(mem);
+            var color = reader.ReadColorTransformRGB();
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            Assert.AreEqual(10, color.RedMultTerm);
+            Assert.AreEqual(224, color.GreenMultTerm);
+            Assert.AreEqual(-10, color.BlueMultTerm);
+
+            Assert.IsFalse(color.RedAddTerm.HasValue);
+            Assert.IsFalse(color.GreenAddTerm.HasValue);
+            Assert.IsFalse(color.BlueAddTerm.HasValue);
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+        [Test]
+        public void ReadColorTransformRGBFromBitsAddTest() {
+            var mem = new MemoryStream();
+            WriteBits(mem,
+                "1", "0", "1001", "0.00001010", "1.11110110", "0.11100000");
+            var reader = new SwfStreamReader(mem);
+            var color = reader.ReadColorTransformRGB();
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            Assert.AreEqual(10, color.RedAddTerm);
+            Assert.AreEqual(-10, color.GreenAddTerm);
+            Assert.AreEqual(224, color.BlueAddTerm);
+
+            Assert.IsFalse(color.RedMultTerm.HasValue);
+            Assert.IsFalse(color.GreenMultTerm.HasValue);
+            Assert.IsFalse(color.BlueMultTerm.HasValue);
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+        [Test]
+        public void ReadColorTransformRGBFromBitsMultAddTest() {
+            var mem = new MemoryStream();
+            WriteBits(mem,
+                "1", "1", "1001", "0.00001010", "1.11110110", "0.11100000", "1.11110111", "0.10000001", "0.00010000");
+            var reader = new SwfStreamReader(mem);
+            var color = reader.ReadColorTransformRGB();
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            Assert.AreEqual(10, color.RedMultTerm);
+            Assert.AreEqual(-10, color.GreenMultTerm);
+            Assert.AreEqual(224, color.BlueMultTerm);
+
+            Assert.AreEqual(-9, color.RedAddTerm);
+            Assert.AreEqual(129, color.GreenAddTerm);
+            Assert.AreEqual(16, color.BlueAddTerm);
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+        [Test]
+        public void ReadColorTransformRGBAFromBitsMultTest() {
+            var mem = new MemoryStream();
+            WriteBits(mem,
+                "0", "1", "1001", "0.00001010", "0.11100000", "1.11110110", "0.00010001");
+            var reader = new SwfStreamReader(mem);
+            var color = reader.ReadColorTransformRGBA();
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            Assert.AreEqual(10, color.RedMultTerm);
+            Assert.AreEqual(224, color.GreenMultTerm);
+            Assert.AreEqual(-10, color.BlueMultTerm);
+            Assert.AreEqual(17, color.AlphaMultTerm);
+
+            Assert.IsFalse(color.RedAddTerm.HasValue);
+            Assert.IsFalse(color.GreenAddTerm.HasValue);
+            Assert.IsFalse(color.BlueAddTerm.HasValue);
+            Assert.IsFalse(color.AlphaAddTerm.HasValue);
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+        [Test]
+        public void ReadColorTransformRGBAFromBitsAddTest() {
+            var mem = new MemoryStream();
+            WriteBits(mem,
+                "1", "0", "1001", "0.00001010", "1.11110110", "0.11100000", "0.11000000");
+            var reader = new SwfStreamReader(mem);
+            var color = reader.ReadColorTransformRGBA();
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            Assert.AreEqual(10, color.RedAddTerm);
+            Assert.AreEqual(-10, color.GreenAddTerm);
+            Assert.AreEqual(224, color.BlueAddTerm);
+            Assert.AreEqual(192, color.AlphaAddTerm);
+
+            Assert.IsFalse(color.RedMultTerm.HasValue);
+            Assert.IsFalse(color.GreenMultTerm.HasValue);
+            Assert.IsFalse(color.BlueMultTerm.HasValue);
+            Assert.IsFalse(color.AlphaMultTerm.HasValue);
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+        [Test]
+        public void ReadColorTransformRGBAFromBitsMultAddTest() {
+            var mem = new MemoryStream();
+            WriteBits(mem,
+                "1", "1", "1001", "0.00001010", "1.11110110", "0.11100000", "0.10110000",
+                                  "1.11110111", "0.10000001", "0.00010000", "0.00001111");
+            var reader = new SwfStreamReader(mem);
+            var color = reader.ReadColorTransformRGBA();
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            Assert.AreEqual(10, color.RedMultTerm);
+            Assert.AreEqual(-10, color.GreenMultTerm);
+            Assert.AreEqual(224, color.BlueMultTerm);
+            Assert.AreEqual(176, color.AlphaMultTerm);
+
+            Assert.AreEqual(-9, color.RedAddTerm);
+            Assert.AreEqual(129, color.GreenAddTerm);
+            Assert.AreEqual(16, color.BlueAddTerm);
+            Assert.AreEqual(15, color.AlphaAddTerm);
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+
     }
 }

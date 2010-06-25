@@ -8,6 +8,7 @@ namespace Code.SwfLib.Tests {
     [TestFixture]
     public class SwfFileTest {
 
+        [Ignore]
         [Test]
         public void SimpleBackgroundTest() {
 
