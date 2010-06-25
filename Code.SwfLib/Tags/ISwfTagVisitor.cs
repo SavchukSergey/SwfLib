@@ -48,6 +48,8 @@ namespace Code.SwfLib.Tags
 
         object Visit(MetadataTag tag);
 
+        object Visit(PlaceObjectTag tag);
+
         object Visit(PlaceObject2Tag tag);
 
         object Visit(PlaceObject3Tag tag);

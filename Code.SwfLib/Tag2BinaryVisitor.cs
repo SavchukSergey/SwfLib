@@ -206,6 +206,18 @@ namespace Code.SwfLib {
             return new SwfTagData { Type = SwfTagType.MetaData, Data = mem.ToArray() };
         }
 
+        public object Visit(PlaceObjectTag tag) {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.CharacterID);
+            writer.WriteUInt16(tag.Depth);
+            writer.WriteMatrix(tag.Matrix);
+            if (tag.ColorTransform.HasValue) {
+                writer.WriteColorTransformRGB(tag.ColorTransform.Value);
+            }
+            return new SwfTagData { Type = SwfTagType.MetaData, Data = mem.ToArray() };
+        }
+
         object ISwfTagVisitor.Visit(PlaceObject2Tag tag) {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);

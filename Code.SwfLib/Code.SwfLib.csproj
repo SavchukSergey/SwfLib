@@ -92,6 +92,7 @@
     <Compile Include="Tag2BinaryVisitor.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsBaseTag.cs" />
     <Compile Include="Tags\ControlTags\ControlBaseTag.cs" />
+    <Compile Include="Tags\DisplayListTags\PlaceObjectTag.cs" />
     <Compile Include="Tags\DynamicTextTags\CSMTextSettingsTag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsJPEG2Tag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsLosslessTag.cs" />

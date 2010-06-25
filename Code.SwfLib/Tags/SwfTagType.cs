@@ -15,6 +15,7 @@
         /// Define a simple geometric shape. 
         /// </summary>
         DefineShape = 2,
+        PlaceObject = 4,
         /// <summary>
         /// Change the background color. 
         /// </summary>

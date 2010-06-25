@@ -238,6 +238,22 @@ namespace Code.SwfLib {
             }
             return tag;
         }
+        public PlaceObjectTag ReadPlaceObjectTag(SwfTagData tagData) {
+            var tag = new PlaceObjectTag { RawData = tagData };
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.CharacterID = reader.ReadUInt16();
+            tag.Depth = reader.ReadUInt16();
+            tag.Matrix = reader.ReadMatrix();
+            if (!reader.IsEOF)
+            {
+                tag.ColorTransform = reader.ReadColorTransformRGB();
+            } else
+            {
+                tag.ColorTransform = null;
+            }
+            return tag;
+        }
 
         public PlaceObject2Tag ReadPlaceObject2Tag(SwfTagData tagData) {
             var tag = new PlaceObject2Tag { RawData = tagData };
@@ -291,7 +307,7 @@ namespace Code.SwfLib {
                 //case SwfTagType.CSMTextSettings:
                 //    return ReadCSMTextSettingsTag(tagData);
                 case SwfTagType.DefineBitsJPEG2:
-                   return ReadDefineBitsJPEG2Tag(tagData);
+                    return ReadDefineBitsJPEG2Tag(tagData);
                 //case SwfTagType.DefineEditText:
                 //    return ReadDefineEditTextTag(tagData);
                 case SwfTagType.DefineFontName:
@@ -310,6 +326,8 @@ namespace Code.SwfLib {
                 //    return ReadExportTag(tagData);
                 case SwfTagType.FrameLabel:
                     return ReadFrameLabelTag(tagData);
+                case SwfTagType.PlaceObject:
+                    return ReadPlaceObjectTag(tagData);
                 //case SwfTagType.PlaceObject2:
                 //    return ReadPlaceObject2Tag(tagData);
                 case SwfTagType.ShowFrame:

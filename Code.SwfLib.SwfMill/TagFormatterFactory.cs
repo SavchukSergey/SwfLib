@@ -166,6 +166,10 @@ namespace Code.SwfLib.SwfMill {
             return new MetadataTagFormatter();
         }
 
+        public object Visit(PlaceObjectTag tag) {
+            throw new NotImplementedException();
+        }
+
         object ISwfTagVisitor.Visit(PlaceObject2Tag tag) {
             if (_placeObject2Formatter == null) {
                 _placeObject2Formatter = new PlaceObject2TagFormatter();
