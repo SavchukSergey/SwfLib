@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BitsCount.cs" />
     <Compile Include="Data\ColorTransformRGBA.cs" />
+    <Compile Include="Data\FillStyles\RepeatingBitmapFillStyle.cs" />
     <Compile Include="Data\FillStyles\FillStyles1List.cs" />
     <Compile Include="Data\FillStyles\FillStylesListBase.cs" />
     <Compile Include="Data\Gradients\GradientRGB.cs" />

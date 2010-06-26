@@ -85,6 +85,29 @@
             }
         }
 
+        public bool UseGPU {
+            get { return (Attributes & SwfFileAttributes.UseGPU) > 0; }
+            set {
+                if (value) {
+                    Attributes = Attributes | SwfFileAttributes.UseGPU;
+                } else {
+                    Attributes = Attributes & (~SwfFileAttributes.UseGPU);
+                }
+            }
+        }
+
+        public bool UseDirectBlit {
+            get { return (Attributes & SwfFileAttributes.UseDirectBlit) > 0; }
+            set {
+                if (value) {
+                    Attributes = Attributes | SwfFileAttributes.UseDirectBlit;
+                } else {
+                    Attributes = Attributes & (~SwfFileAttributes.UseDirectBlit);
+                }
+            }
+        }
+
+
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {
             return visitor.Visit(this);

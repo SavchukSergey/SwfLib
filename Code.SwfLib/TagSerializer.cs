@@ -98,7 +98,7 @@ namespace Code.SwfLib {
             return new SwfTagData { Type = SwfTagType.DefineFontName, Data = mem.ToArray() };
         }
 
-        public object Visit(DefineShapeTag tag) {
+        object ISwfTagVisitor.Visit(DefineShapeTag tag) {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.ShapeID);

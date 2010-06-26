@@ -11,6 +11,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         private const string SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB = "suppressCrossDomainCaching";
         private const string SWF_RELATIVE_URLS_ATTRIB = "swfRelativeURLs";
         private const string USE_NETWORK_ATTRIB = "useNetwork";
+        private const string USE_GPU = "useGPU";
+        private const string USE_DIRECT_BLIT = "useDirectBlit";
 
         public FileAttributesTagFormatter(ushort version) {
             _version = version;
@@ -33,6 +35,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 case USE_NETWORK_ATTRIB:
                     tag.UseNetwork = ParseBoolFromDigit(attrib);
                     break;
+                case USE_GPU:
+                    tag.UseGPU = SwfMillPrimitives.ParseBoolean(attrib);
+                    break;
+                case USE_DIRECT_BLIT:
+                    tag.UseDirectBlit = SwfMillPrimitives.ParseBoolean(attrib);
+                    break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
             }
@@ -54,11 +62,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                                    new XAttribute(XName.Get(SWF_RELATIVE_URLS_ATTRIB), FormatBoolToDigit(tag.SwfRelativeUrls))
 
                 );
-            //TODO: other attributes
             if (_version >= 10) {
-                res.Add(new XAttribute(XName.Get("useGPU"), CheckFileAttribute(tag.Attributes, SwfFileAttributes.UseGPU)));
-                res.Add(new XAttribute(XName.Get("useDirectBlit"),
-                                       CheckFileAttribute(tag.Attributes, SwfFileAttributes.UseDirectBlit)));
+                res.Add(new XAttribute(XName.Get(USE_GPU), FormatBoolToDigit(tag.UseGPU)));
+                res.Add(new XAttribute(XName.Get(USE_DIRECT_BLIT), FormatBoolToDigit(tag.UseDirectBlit)));
             }
             return res;
         }

@@ -5,10 +5,10 @@ namespace Code.SwfLib.Data {
     public struct SwfRect {
 
         public SwfRect(int xMin, int yMin, int xMax, int yMax) {
-            this.XMin = xMin;
-            this.XMax = xMax;
-            this.YMin = yMin;
-            this.YMax = yMax;
+            XMin = xMin;
+            XMax = xMax;
+            YMin = yMin;
+            YMax = yMax;
         }
 
         public int XMin;

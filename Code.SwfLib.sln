@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{8CD70156-C
 	ProjectSection(SolutionItems) = preProject
 		docs\swf_file_format_spec_v10.pdf = docs\swf_file_format_spec_v10.pdf
 		docs\swf_file_format_spec_v9.pdf = docs\swf_file_format_spec_v9.pdf
+		docs\swfmill-schema.xml = docs\swfmill-schema.xml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill", "Code.SwfLib.SwfMill\Code.SwfLib.SwfMill.csproj", "{4CE22FF7-ABF5-4894-BCDE-402DBDD42B80}"

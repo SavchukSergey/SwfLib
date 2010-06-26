@@ -1,6 +1,6 @@
 ﻿namespace Code.SwfLib.Data.FillStyles
 {
-    public class RepeatingBitmapFillStyle : FillStyle {
+    public class ClippedBitmapFillStyle : FillStyle {
 
         public ushort BitmapID;
 
@@ -8,7 +8,7 @@
 
         public override FillStyleType Type
         {
-            get { return FillStyleType.RepeatingBitmap; }
+            get { return FillStyleType.ClippedBitmap; }
         }
        
     }

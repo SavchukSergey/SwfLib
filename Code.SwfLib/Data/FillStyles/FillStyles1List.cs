@@ -7,6 +7,7 @@
                 case FillStyleType.SolidRGB:
                 case FillStyleType.LinearGradient:
                 case FillStyleType.NonSmoothedClippedBitmap:
+                case FillStyleType.RepeatingBitmap:
                     return true;
                 default:
                     return false;

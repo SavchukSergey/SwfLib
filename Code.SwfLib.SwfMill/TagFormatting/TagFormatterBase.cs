@@ -3,6 +3,7 @@ using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.Text;
+using Code.SwfLib.SwfMill.DataFormatting;
 using Code.SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting {
@@ -11,7 +12,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected const string DATA_TAG = "data";
         protected const string OBJECT_ID_ATTRIB = "objectID";
 
+        protected readonly static DataFormatters _formatters = new DataFormatters();
+
         #region ITagFormatter
+
+        public void InitTag(SwfTagBase tag, XElement element) {
+            InitTag((T)tag, element);
+        }
 
         XElement ITagFormatter.FormatTag(SwfTagBase tag) {
             return FormatTag((T)tag);
@@ -23,6 +30,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         void ITagFormatter.AcceptElement(SwfTagBase tag, XElement element) {
             AcceptElement((T)tag, element);
+        }
+
+        public virtual void InitTag(T tag, XElement element) {
         }
 
         public abstract XElement FormatTag(T tag);

@@ -110,7 +110,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
                     FromBase64(element);
                     break;
                 case SIZE_ELEM:
-                    tag.Bounds = SwfMillPrimitives.ParseRectangle(element.Element("Rectangle"));
+                    _formatters.Rectangle.Parse(element.Element("Rectangle"), out tag.Bounds);
                     break;
                 case COLOR_ELEM:
                     //TODO: password

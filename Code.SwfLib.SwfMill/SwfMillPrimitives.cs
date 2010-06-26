@@ -5,6 +5,7 @@ using Code.SwfLib.Data;
 using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Data.Text;
+using Code.SwfLib.SwfMill.DataFormatting;
 
 namespace Code.SwfLib.SwfMill
 {
@@ -210,62 +211,7 @@ namespace Code.SwfLib.SwfMill
             }
             return rgb;
         }
-
-        public static XElement FormatRGBColor(SwfRGB rgb)
-        {
-            return new XElement(XName.Get("Color"),
-                                new XAttribute(XName.Get("red"), rgb.Red),
-                                new XAttribute(XName.Get("green"), rgb.Green),
-                                new XAttribute(XName.Get("blue"), rgb.Blue));
-        }
-
-        public static SwfRect ParseRectangle(XElement element)
-        {
-            var rect = new SwfRect();
-            foreach (var attribute in element.Attributes())
-            {
-                switch (attribute.Name.LocalName)
-                {
-                    case "left":
-                        rect.XMin = int.Parse(attribute.Value);
-                        break;
-                    case "top":
-                        rect.YMin = int.Parse(attribute.Value);
-                        break;
-                    case "right":
-                        rect.XMax = int.Parse(attribute.Value);
-                        break;
-                    case "bottom":
-                        rect.YMax = int.Parse(attribute.Value);
-                        break;
-                    default:
-                        OnUnknownAttributeFound(attribute);
-                        break;
-                }
-            }
-            foreach (var elem in element.Elements())
-            {
-                switch (elem.Name.LocalName)
-                {
-                    default:
-                        OnUnknownElementFound(elem);
-                        break;
-                }
-            }
-            return rect;
-        }
-
-        public static XElement FormatRectangle(SwfRect rect)
-        {
-            return new XElement(XName.Get("Rectangle"),
-                                new XAttribute(XName.Get("left"), rect.XMin),
-                                new XAttribute(XName.Get("right"), rect.XMax),
-                                new XAttribute(XName.Get("top"), rect.YMin),
-                                new XAttribute(XName.Get("bottom"), rect.YMax));
-        }
-
-
-
+      
         private static void OnUnknownElementFound(XElement elem)
         {
             throw new FormatException("Unknown element " + elem.Name.LocalName);
@@ -408,6 +354,8 @@ namespace Code.SwfLib.SwfMill
             return result;
         }
 
+        private static DataFormatters _formatters = new DataFormatters();
+
         public static XElement FormatTextRecord(TextRecord entry)
         {
             var res = new XElement(XName.Get("TextRecord6"));
@@ -430,7 +378,8 @@ namespace Code.SwfLib.SwfMill
             }
             if (entry.HasColor)
             {
-                res.Add(new XElement(XName.Get("color"), FormatRGBColor(entry.TextColor.Value)));
+                var color = entry.TextColor.Value;
+                res.Add(new XElement(XName.Get("color"), _formatters.ColorRGB.Format(ref color)));
             }
             res.Add(new XElement(XName.Get("glyphs"), entry.Glyphs.Select(item => FormatGlyphEntry(item))));
             return res;

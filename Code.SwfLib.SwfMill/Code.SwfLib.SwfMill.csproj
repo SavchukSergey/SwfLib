@@ -47,6 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataFormatting\ColorRGBFormatter.cs" />
+    <Compile Include="DataFormatting\DataFormatterBase.cs" />
+    <Compile Include="DataFormatting\DataFormatters.cs" />
+    <Compile Include="DataFormatting\RectangleDataFormatter.cs" />
     <Compile Include="TagFormatting\DefineButton2TagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\PlaceObject3TagFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +89,9 @@
       <Project>{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}</Project>
       <Name>Code.SwfLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataFormatting\Shapes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

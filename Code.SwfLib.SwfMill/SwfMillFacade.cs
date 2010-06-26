@@ -39,6 +39,7 @@ namespace Code.SwfLib.SwfMill {
             foreach (var tagElem in tags.Elements()) {
                 var tag = SwfTagNameMapping.CreateTagByXmlName(tagElem.Name.LocalName);
                 var formatter = formatterFactory.GetFormatter(tag);
+                formatter.InitTag(tag, tagElem);
                 foreach (var attrib in tagElem.Attributes()) {
                     formatter.AcceptAttribute(tag, attrib);
                 }

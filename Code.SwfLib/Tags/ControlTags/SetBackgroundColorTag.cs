@@ -3,7 +3,7 @@
 namespace Code.SwfLib.Tags.ControlTags {
     public class SetBackgroundColorTag : ControlBaseTag {
 
-        public SwfRGB Color { get; set; }
+        public SwfRGB Color;
 
         public override object AcceptVistor(ISwfTagVisitor visitor) {
             return visitor.Visit(this);

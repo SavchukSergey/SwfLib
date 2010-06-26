@@ -9,6 +9,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
     public interface ITagFormatter<T> : ITagFormatter where T : SwfTagBase {
 
+        void InitTag(T tag, XElement element);
+
         XElement FormatTag(T tag);
 
         void AcceptAttribute(T tag, XAttribute attrib);
@@ -18,6 +20,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
     }
 
     public interface ITagFormatter {
+
+        void InitTag(SwfTagBase tag, XElement element);
 
         XElement FormatTag(SwfTagBase tag);
 

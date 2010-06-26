@@ -22,7 +22,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         public override void AcceptElement(DefineShape3Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BOUNDS_ELEM:
-                    tag.Bounds = SwfMillPrimitives.ParseRectangle(element.Element(XName.Get("Rectangle")));
+                    _formatters.Rectangle.Parse(element.Element(XName.Get("Rectangle")), out tag.Bounds);
                     break;
                 case STYLES_ELEM:
                     ReadStyles(tag, element);

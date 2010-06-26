@@ -2,9 +2,9 @@
     public struct SwfRGB {
 
         public SwfRGB(byte red, byte green, byte blue) {
-            this.Red = red;
-            this.Green = green;
-            this.Blue = blue;
+            Red = red;
+            Green = green;
+            Blue = blue;
         }
 
 
