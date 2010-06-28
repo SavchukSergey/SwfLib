@@ -33,14 +33,11 @@ namespace Code.SwfLib {
             color.Blue = reader.ReadByte();
         }
 
-        public static SwfRGBA ReadRGBA(this SwfStreamReader reader) {
-            var rgb = new SwfRGBA {
-                Red = reader.ReadByte(),
-                Green = reader.ReadByte(),
-                Blue = reader.ReadByte(),
-                Alpha = reader.ReadByte()
-            };
-            return rgb;
+        public static void ReadRGBA(this SwfStreamReader reader, out SwfRGBA color) {
+            color.Red = reader.ReadByte();
+            color.Green = reader.ReadByte();
+            color.Blue = reader.ReadByte();
+            color.Alpha = reader.ReadByte();
         }
 
         public static SwfRGBA ReadARGB(this SwfStreamReader reader) {

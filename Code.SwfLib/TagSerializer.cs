@@ -74,7 +74,38 @@ namespace Code.SwfLib {
             writer.WriteBit(tag.HasFont);
             writer.WriteBit(tag.HasFontClass);
             writer.WriteBit(tag.AutoSize);
-            //TODO: Write other fields
+            writer.WriteBit(tag.HasLayout);
+            writer.WriteBit(tag.NoSelect);
+            writer.WriteBit(tag.Border);
+            writer.WriteBit(tag.WasStatic);
+            writer.WriteBit(tag.HTML);
+            writer.WriteBit(tag.UseOutlines);
+            if (tag.HasFont) {
+                writer.WriteUInt16(tag.FontID);
+            }
+            if (tag.HasFontClass) {
+                writer.WriteString(tag.FontClass);
+            }
+            if (tag.HasFont) {
+                writer.WriteUInt16(tag.FontHeight);
+            }
+            if (tag.HasTextColor) {
+                writer.WriteRGBA(ref tag.TextColor);
+            }
+            if (tag.HasMaxLength) {
+                writer.WriteUInt16(tag.MaxLength);
+            }
+            if (tag.HasLayout) {
+                writer.WriteByte(tag.Align);
+                writer.WriteUInt16(tag.LeftMargin);
+                writer.WriteUInt16(tag.RightMargin);
+                writer.WriteUInt16(tag.Indent);
+                writer.WriteSInt16(tag.Leading);
+            }
+            writer.WriteString(tag.VariableName);
+            if (tag.HasText) {
+                writer.WriteString(tag.InitialText);
+            }
             return new SwfTagData { Type = SwfTagType.DefineEditText, Data = mem.ToArray() };
         }
 

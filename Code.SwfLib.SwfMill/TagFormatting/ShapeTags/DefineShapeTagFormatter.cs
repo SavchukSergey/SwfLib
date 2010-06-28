@@ -107,8 +107,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             return fillStylesElem;
         }
 
-      
-
         private static XElement FormatEdges(IEnumerable<ShapeRecord> edges) {
             var edgesElem = new XElement(XName.Get("edges"));
 
@@ -144,19 +142,18 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         }
 
         private static XElement FormatStraightEdgeShapeRecord(StraightEdgeShapeRecord record) {
-            return new XElement(XName.Get("LineTo"),
-                new XAttribute(XName.Get("x"), record.DeltaX),
-                new XAttribute(XName.Get("y"), record.DeltaY)
+            return new XElement("LineTo",
+                new XAttribute("x", record.DeltaX),
+                new XAttribute("y", record.DeltaY)
             );
         }
 
         private static XElement FormatCurvedEdgeShapeRecord(CurvedEdgeShapeRecord record) {
-            //TODO: what is x1, y1, x2, y2
-            return new XElement(XName.Get("CurveTo"),
-                new XAttribute(XName.Get("x1"), record.ControlDeltaX),
-                new XAttribute(XName.Get("y1"), record.ControlDeltaY),
-                new XAttribute(XName.Get("x2"), record.AnchorDeltaX),
-                new XAttribute(XName.Get("y2"), record.AnchorDeltaY)
+            return new XElement("CurveTo",
+                new XAttribute("x1", record.ControlDeltaX),
+                new XAttribute("y1", record.ControlDeltaY),
+                new XAttribute("x2", record.AnchorDeltaX),
+                new XAttribute("y2", record.AnchorDeltaY)
             );
         }
 

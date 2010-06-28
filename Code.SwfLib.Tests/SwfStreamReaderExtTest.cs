@@ -1,9 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using Code.SwfLib.Data;
-using Code.SwfLib.Tags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
@@ -83,7 +79,8 @@ namespace Code.SwfLib.Tests {
             mem.WriteByte(0x12);
             mem.Seek(0, SeekOrigin.Begin);
             var reader = new SwfStreamReader(mem);
-            var val = reader.ReadRGBA();
+            SwfRGBA val;
+            reader.ReadRGBA(out val);
             Assert.AreEqual(0x0a, val.Red, "Red");
             Assert.AreEqual(0xff, val.Green, "Green");
             Assert.AreEqual(0x83, val.Blue, "Blue");

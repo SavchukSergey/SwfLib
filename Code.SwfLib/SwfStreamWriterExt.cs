@@ -33,7 +33,7 @@ namespace Code.SwfLib {
             writer.WriteByte(val.Blue);
         }
 
-        public static void WriteRGBA(this SwfStreamWriter writer, SwfRGBA val) {
+        public static void WriteRGBA(this SwfStreamWriter writer, ref SwfRGBA val) {
             writer.WriteByte(val.Red);
             writer.WriteByte(val.Green);
             writer.WriteByte(val.Blue);

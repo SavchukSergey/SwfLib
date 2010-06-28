@@ -20,7 +20,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting
             switch (attrib.Name.LocalName)
             {
                 case OBJECT_ID_ATTRIB:
-                    tag.ObjectID = SwfMillPrimitives.ParseObjectID(attrib);
+                    tag.ButtonID = SwfMillPrimitives.ParseObjectID(attrib);
                     break;
                 case MENU_ATTRIB:
                     //TODO: read menu

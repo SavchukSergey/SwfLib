@@ -2,7 +2,12 @@
 {
     public class DefineButton2Tag : SwfTagBase
     {
-        public ushort ObjectID;
+        public ushort ButtonID;
+
+        public byte ReservedFlags;
+
+        public bool TrackAsMenu;
+
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {

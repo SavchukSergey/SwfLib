@@ -188,7 +188,7 @@ namespace Code.SwfLib {
             if (tag.BitmapFormat == 3) {
                 tag.BitmapColorTableSize = reader.ReadByte();
             }
-            tag.ZlibBitmapData = reader.ReadBytes((int) reader.BytesLeft);
+            tag.ZlibBitmapData = reader.ReadBytes((int)reader.BytesLeft);
             return tag;
         }
 
@@ -198,18 +198,48 @@ namespace Code.SwfLib {
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
             reader.ReadRect(out tag.Bounds);
-            bool hasText = reader.ReadBit();
+            tag.HasText = reader.ReadBit();
             tag.WordWrap = reader.ReadBit();
             tag.Multiline = reader.ReadBit();
             tag.Password = reader.ReadBit();
             tag.ReadOnly = reader.ReadBit();
-            bool hasTextColor = reader.ReadBit();
-            bool hasMaxLength = reader.ReadBit();
-            bool hasFont = reader.ReadBit();
-            bool hasFontClass = reader.ReadBit();
+            tag.HasTextColor = reader.ReadBit();
+            tag.HasMaxLength = reader.ReadBit();
+            tag.HasFont = reader.ReadBit();
+            tag.HasFontClass = reader.ReadBit();
             tag.AutoSize = reader.ReadBit();
-
-            //TODO: other fields
+            tag.HasLayout = reader.ReadBit();
+            tag.NoSelect = reader.ReadBit();
+            tag.Border = reader.ReadBit();
+            tag.WasStatic = reader.ReadBit();
+            tag.HTML = reader.ReadBit();
+            tag.UseOutlines = reader.ReadBit();
+            if (tag.HasFont) {
+                tag.FontID = reader.ReadUInt16();
+            }
+            if (tag.HasFontClass) {
+                tag.FontClass = reader.ReadString();
+            }
+            if (tag.HasFont) {
+                tag.FontHeight = reader.ReadUInt16();
+            }
+            if (tag.HasTextColor) {
+                reader.ReadRGBA(out tag.TextColor);
+            }
+            if (tag.HasMaxLength) {
+                tag.MaxLength = reader.ReadUInt16();
+            }
+            if (tag.HasLayout) {
+                tag.Align = reader.ReadByte();
+                tag.LeftMargin = reader.ReadUInt16();
+                tag.RightMargin = reader.ReadUInt16();
+                tag.Indent = reader.ReadUInt16();
+                tag.Leading = reader.ReadSInt16();
+            }
+            tag.VariableName = reader.ReadString();
+            if (tag.HasText) {
+                tag.InitialText = reader.ReadString();
+            }
             return tag;
         }
 

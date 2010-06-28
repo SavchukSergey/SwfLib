@@ -95,7 +95,7 @@ namespace Code.SwfLib.Tests {
             var val = new SwfRGBA(0x0a, 0xff, 0x83, 0x12);
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteRGBA(val);
+            writer.WriteRGBA(ref val);
             mem.Seek(0, SeekOrigin.Begin);
 
             Assert.AreEqual(0x0a, mem.ReadByte(), "Byte 0");
