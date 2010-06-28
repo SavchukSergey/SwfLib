@@ -2,14 +2,25 @@
 
 namespace Code.SwfLib.Data.Gradients
 {
-    public class GradientRGB
+    public struct GradientRGB
     {
 
         public SpreadMode SpreadMode;
 
         public InterpolationMode InterpolationMode;
 
-        public readonly IList<GradientRecordRGB> GradientRecords = new List<GradientRecordRGB>();
+        private IList<GradientRecordRGB> _gradientRecords;
+        public IList<GradientRecordRGB> GradientRecords
+        {
+            get
+            {
+                if (_gradientRecords == null)
+                {
+                    _gradientRecords = new List<GradientRecordRGB>();
+                }
+                return _gradientRecords;
+            }
+        }
 
     }
 }

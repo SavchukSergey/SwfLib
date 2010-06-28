@@ -51,9 +51,8 @@
   <ItemGroup>
     <Compile Include="BitsCount.cs" />
     <Compile Include="Data\ColorTransformRGBA.cs" />
-    <Compile Include="Data\FillStyles\RepeatingBitmapFillStyle.cs" />
-    <Compile Include="Data\FillStyles\FillStyles1List.cs" />
-    <Compile Include="Data\FillStyles\FillStylesListBase.cs" />
+    <Compile Include="Data\FillStyles\FillStyle.cs" />
+    <Compile Include="Data\Gradients\FocalGradient.cs" />
     <Compile Include="Data\Gradients\GradientRGB.cs" />
     <Compile Include="Data\Gradients\GradientRecordRGB.cs" />
     <Compile Include="Data\Gradients\InterpolationMode.cs" />
@@ -107,12 +106,8 @@
     <Compile Include="Tags\FontTags\DefineFont3Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontAlignZonesTag.cs" />
     <Compile Include="Tags\DefineFontNameTag.cs" />
-    <Compile Include="Data\FillStyles\ClippedBitmapFillStyle.cs" />
-    <Compile Include="Data\FillStyles\NonSmoothedClippedBitmapFillStyle.cs" />
     <Compile Include="Tags\ShapeTags\DefineShape3Tag.cs" />
     <Compile Include="Data\FillStyles\FillStyleType.cs" />
-    <Compile Include="Data\FillStyles\LinearGradientRGBFillStyle.cs" />
-    <Compile Include="Data\FillStyles\SolidRGBFillStyle.cs" />
     <Compile Include="Tags\ShapeTags\DefineShapeTag.cs" />
     <Compile Include="Tags\DefineSpriteTag.cs" />
     <Compile Include="Tags\DefineTextTag.cs" />
@@ -127,7 +122,6 @@
     <Compile Include="Tags\DisplayListTags\PlaceObject2Flags.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject3Tag.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObject2Tag.cs" />
-    <Compile Include="Data\FillStyles\FillStyle.cs" />
     <Compile Include="Tags\ShowFrameTag.cs" />
     <Compile Include="Tags\ControlTags\SwfFileAttributes.cs" />
     <Compile Include="Tags\SwfTagBase.cs" />

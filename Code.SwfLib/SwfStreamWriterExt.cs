@@ -74,6 +74,7 @@ namespace Code.SwfLib {
                 var sx = (int)(matrix.ScaleX * 65536.0);
                 var sy = (int)(matrix.ScaleY * 65536.0);
                 var scaleBits = new BitsCount(sx, sy).GetSignedBits();
+                if (scaleBits < 16) scaleBits = 16;
                 writer.WriteUnsignedBits(scaleBits, 5);
                 writer.WriteFixedPoint16(matrix.ScaleX, scaleBits);
                 writer.WriteFixedPoint16(matrix.ScaleY, scaleBits);
@@ -84,6 +85,7 @@ namespace Code.SwfLib {
                 var rx = (int)(matrix.RotateSkew0 * 65536.0);
                 var ry = (int)(matrix.RotateSkew1 * 65536.0);
                 var rotateBits = new BitsCount(rx, ry).GetSignedBits();
+                if (rotateBits < 16) rotateBits = 16;
                 writer.WriteUnsignedBits(rotateBits, 5);
                 writer.WriteFixedPoint16(matrix.RotateSkew0, rotateBits);
                 writer.WriteFixedPoint16(matrix.RotateSkew1, rotateBits);

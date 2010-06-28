@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.Data.FillStyles;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
     public class ColorRGBFormatter : DataFormatterBase<SwfRGB> {
@@ -9,15 +10,34 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         protected override void InitData(XElement element, out SwfRGB data) {
-            throw new NotImplementedException();
+            data.Red = 0;
+            data.Green = 0;
+            data.Blue = 0;
         }
 
         protected override void AcceptElement(XElement element, ref SwfRGB data) {
-            throw new NotImplementedException();
+            switch (element.Name.LocalName) {
+                default:
+                    OnUnknownElementFound(element);
+                    break;
+            }
         }
 
         protected override void AcceptAttribute(XAttribute attrib, ref SwfRGB data) {
-            throw new NotImplementedException();
+            switch (attrib.Name.LocalName) {
+                case "red":
+                    data.Red = byte.Parse(attrib.Value);
+                    break;
+                case "green":
+                    data.Green = byte.Parse(attrib.Value);
+                    break;
+                case "blue":
+                    data.Blue = byte.Parse(attrib.Value);
+                    break;
+                default:
+                    OnUnknownAttributeFound(attrib);
+                    break;
+            }
         }
 
         public override XElement Format(ref SwfRGB data) {

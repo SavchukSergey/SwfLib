@@ -319,24 +319,24 @@ namespace Code.SwfLib {
                     return ReadDefineBitsJPEG2Tag(tagData);
                 //case SwfTagType.DefineEditText:
                 //    return ReadDefineEditTextTag(tagData);
-                case SwfTagType.DefineFontName:
-                    return ReadDefineFontNameTag(tagData);
+                //case SwfTagType.DefineFontName:
+                //    return ReadDefineFontNameTag(tagData);
                 //case SwfTagType.DefineFont3:
                 //    return ReadDefineFont3Tag(tagData);
                 case SwfTagType.DefineShape:
                     return ReadDefineShapeTag(tagData);
                 //case SwfTagType.DefineSprite:
                 //    return ReadDefineSpriteTag(tagData);
-                case SwfTagType.DefineText:
-                    return ReadDefineTextTag(tagData);
+                //case SwfTagType.DefineText:
+                //    return ReadDefineTextTag(tagData);
                 case SwfTagType.End:
                     return ReadEndTag(tagData);
-                //case SwfTagType.Export:
-                //    return ReadExportTag(tagData);
+                case SwfTagType.Export:
+                    return ReadExportTag(tagData);
                 case SwfTagType.FrameLabel:
                     return ReadFrameLabelTag(tagData);
-                case SwfTagType.PlaceObject:
-                    return ReadPlaceObjectTag(tagData);
+                //case SwfTagType.PlaceObject:
+                //    return ReadPlaceObjectTag(tagData);
                 //case SwfTagType.PlaceObject2:
                 //    return ReadPlaceObject2Tag(tagData);
                 case SwfTagType.ShowFrame:
@@ -345,8 +345,8 @@ namespace Code.SwfLib {
                     return ReadFileAttributesTag(tagData);
                 case SwfTagType.MetaData:
                     return ReadMetadataTag(tagData);
-                case SwfTagType.RemoveObject:
-                    return ReadRemoveObjectTag(tagData);
+                //case SwfTagType.RemoveObject:
+                //    return ReadRemoveObjectTag(tagData);
                 case SwfTagType.SetBackgroundColor:
                     return ReadSetBackgroundColorTag(tagData);
                 default:

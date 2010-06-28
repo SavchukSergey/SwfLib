@@ -7,6 +7,8 @@ using System.Xml.Linq;
 namespace Code.SwfLib.SwfMill.DataFormatting {
     public abstract class DataFormatterBase<T> where T : struct {
 
+        protected const string OBJECT_ID_ATTRIB = "objectID";
+
         protected readonly DataFormatters _formatters;
 
         protected DataFormatterBase(DataFormatters formatters) {

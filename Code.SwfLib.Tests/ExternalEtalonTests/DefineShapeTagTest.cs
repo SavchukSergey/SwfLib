@@ -96,8 +96,8 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             Assert.AreEqual(0, shape.ShapeBounds.YMin);
             Assert.AreEqual(1800, shape.ShapeBounds.YMax);
             Assert.AreEqual(1, shape.Shapes.FillStyles.Count);
-            Assert.IsAssignableFrom(typeof(SolidRGBFillStyle), shape.Shapes.FillStyles[0]);
-            Assert.AreEqual(new SwfRGB(255, 255, 255), ((SolidRGBFillStyle)shape.Shapes.FillStyles[0]).Color);
+            Assert.IsAssignableFrom(typeof(FillStyle), shape.Shapes.FillStyles[0]);
+            Assert.AreEqual(new SwfRGB(255, 255, 255), shape.Shapes.FillStyles[0].ColorRGB);
             Assert.AreEqual(0, shape.Shapes.LineStyles.Count);
             Assert.AreEqual(6, shape.Shapes.ShapeRecords.Count);
             Assert.IsAssignableFrom(typeof(StyleChangeShapeRecord), shape.Shapes.ShapeRecords[0]);

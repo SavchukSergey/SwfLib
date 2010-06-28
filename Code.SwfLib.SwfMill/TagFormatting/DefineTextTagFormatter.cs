@@ -28,7 +28,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                     _formatters.Rectangle.Parse(element.Element(XName.Get("Rectangle")), out tag.TextBounds);
                     break;
                 case TRANSFORM_ELEM:
-                    tag.TextMatrix = SwfMillPrimitives.ParseMatrix(element.Element(XName.Get("Transform")));
+                    _formatters.Matrix.Parse(element.Element(XName.Get("Transform")), out tag.TextMatrix);
                     break;
                 case RECORDS_ELEM:
                     ReadRecords(tag, element);

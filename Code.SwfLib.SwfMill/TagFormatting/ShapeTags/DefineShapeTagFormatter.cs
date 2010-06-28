@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -43,22 +45,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             //TODO: line styles
 
             foreach (var styleElem in fillStyles.Elements()) {
-                switch (styleElem.Name.LocalName) {
-                    case "ClippedBitmap":
-                        tag.Shapes.FillStyles.Add(SwfMillPrimitives.ParseClippedBitmapFillStyle(styleElem));
-                        break;
-                    case "ClippedBitmap2":
-                        tag.Shapes.FillStyles.Add(SwfMillPrimitives.ParseNonSmoothedClippedBitmapFillStyle(styleElem));
-                        break;
-                    case "LinearGradient":
-                        tag.Shapes.FillStyles.Add(SwfMillPrimitives.ParseLinearGradientFillStyle(styleElem));
-                        break;
-                    case "Solid":
-                        tag.Shapes.FillStyles.Add(SwfMillPrimitives.ParseSolidRGBFillStyle(styleElem));
-                        break;
-                    default:
-                        throw new FormatException("Unknown fill style " + styleElem.Name.LocalName);
-                }
+                FillStyle fillStyle;
+                _formatters.FillStyle1.Parse(styleElem, out fillStyle);
+                tag.Shapes.FillStyles.Add(fillStyle);
             }
         }
 
@@ -87,16 +76,43 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                 }
             }
         }
-        
+
         public override XElement FormatTag(DefineShapeTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_SHAPE_TAG),
                 new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ShapeID),
                 new XElement(XName.Get(BOUNDS_ELEM), _formatters.Rectangle.Format(ref tag.ShapeBounds))
                 );
+            var stylesElem = new XElement(XName.Get("styles"));
+            var styleListElem = new XElement(XName.Get("StyleList"));
+            styleListElem.Add(FormatFillStyles(tag.Shapes.FillStyles));
+            stylesElem.Add(styleListElem);
+            res.Add(stylesElem);
+
             var shapesElem = new XElement(XName.Get(SHAPES_ELEM));
             var shapeElem = new XElement(XName.Get("Shape"));
+            var edgesElem = FormatEdges(tag.Shapes.ShapeRecords);
+            shapeElem.Add(edgesElem);
+            shapesElem.Add(shapeElem);
+            res.Add(shapesElem);
+
+            return res;
+        }
+
+        private static XElement FormatFillStyles(IEnumerable<FillStyle> styles) {
+            var fillStylesElem = new XElement(XName.Get("fillStyles"));
+            foreach (var style in styles) {
+                var fillStyle = style;
+                fillStylesElem.Add(_formatters.FillStyle1.Format(ref fillStyle));
+            }
+            return fillStylesElem;
+        }
+
+      
+
+        private static XElement FormatEdges(IEnumerable<ShapeRecord> edges) {
             var edgesElem = new XElement(XName.Get("edges"));
-            foreach (var shape in tag.Shapes.ShapeRecords) {
+
+            foreach (var shape in edges) {
                 var styleChange = shape as StyleChangeShapeRecord;
                 if (styleChange != null) edgesElem.Add(FormatShapeSetup(styleChange));
                 var endRecord = shape as EndShapeRecord;
@@ -107,15 +123,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                 if (curvedRecord != null) edgesElem.Add(FormatCurvedEdgeShapeRecord(curvedRecord));
                 //TODO: default behavior? throw new exception
             }
-            shapeElem.Add(edgesElem);
-            shapesElem.Add(shapeElem);
-            res.Add(shapesElem);
-            return res;
+            return edgesElem;
         }
         //TODO: Simulate swfmill ShapeSetup struct bug
 
-        private static XElement FormatShapeSetup(StyleChangeShapeRecord styleChange)
-        {
+        private static XElement FormatShapeSetup(StyleChangeShapeRecord styleChange) {
             var setup = new XElement(XName.Get("ShapeSetup"));
             if (styleChange.FillStyle0.HasValue) {
                 setup.Add(new XAttribute(XName.Get("fillStyle0"), styleChange.FillStyle0.Value));
@@ -131,8 +143,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             return setup;
         }
 
-        private static XElement FormatStraightEdgeShapeRecord(StraightEdgeShapeRecord record)
-        {
+        private static XElement FormatStraightEdgeShapeRecord(StraightEdgeShapeRecord record) {
             return new XElement(XName.Get("LineTo"),
                 new XAttribute(XName.Get("x"), record.DeltaX),
                 new XAttribute(XName.Get("y"), record.DeltaY)
