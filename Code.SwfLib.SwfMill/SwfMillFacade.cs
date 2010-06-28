@@ -51,7 +51,6 @@ namespace Code.SwfLib.SwfMill {
             return file;
         }
 
-
         private static SwfRect ParseRect(XElement elem) {
             if (elem.Name.LocalName != "Rectangle") throw new FormatException("Invalid rectangle");
             SwfRect rect;

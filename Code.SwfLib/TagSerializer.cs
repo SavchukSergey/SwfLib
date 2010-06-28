@@ -129,7 +129,7 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.SpriteID);
             writer.WriteUInt16(tag.FramesCount);
             foreach (var subtag in tag.Tags) {
-                var subTagData = GetTagData(subtag);
+                SwfTagData subTagData = GetTagData(subtag);
                 writer.WriteTagData(subTagData);
             }
             return new SwfTagData { Type = SwfTagType.DefineSprite, Data = mem.ToArray() };

@@ -48,9 +48,22 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                                new XElement(XName.Get("tags"), tag.Tags.Select(item => BuildTagXml(item))));
         }
 
-        private static void ReadTags(DefineSpriteTag tag, XElement tagsElement)
-        {
-            //TODO: Implement
+        private static void ReadTags(DefineSpriteTag tag, XElement tagsElement) {
+            //TODO: Transfer version here
+            var formatterFactory = new TagFormatterFactory(10);
+            foreach (var tagElem in tagsElement.Elements()) {
+                var subTag = SwfTagNameMapping.CreateTagByXmlName(tagElem.Name.LocalName);
+                var formatter = formatterFactory.GetFormatter(subTag);
+                formatter.InitTag(subTag, tagElem);
+                foreach (var attrib in tagElem.Attributes()) {
+                    formatter.AcceptAttribute(subTag, attrib);
+                }
+                foreach (var elem in tagElem.Elements()) {
+                    formatter.AcceptElement(subTag, elem);
+                }
+                tag.Tags.Add(subTag);
+            }
+
         }
 
         protected XElement BuildTagXml(SwfTagBase tag) {
