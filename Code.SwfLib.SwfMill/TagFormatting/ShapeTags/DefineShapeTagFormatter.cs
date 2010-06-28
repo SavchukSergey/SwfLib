@@ -87,8 +87,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                 }
             }
         }
-        //TODO: Simulate swfmill ShapeSetup struct bug
-
+        
         public override XElement FormatTag(DefineShapeTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_SHAPE_TAG),
                 new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ShapeID),
@@ -99,27 +98,38 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             var edgesElem = new XElement(XName.Get("edges"));
             foreach (var shape in tag.Shapes.ShapeRecords) {
                 var styleChange = shape as StyleChangeShapeRecord;
-                if (styleChange != null) {
-                    var setup = new XElement(XName.Get("ShapeSetup"));
-                    if (styleChange.FillStyle0.HasValue) {
-                        setup.Add(new XAttribute(XName.Get("fillStyle0"), styleChange.FillStyle0.Value));
-                    }
-                    if (styleChange.FillStyle1.HasValue) {
-                        setup.Add(new XAttribute(XName.Get("fillStyle1"), styleChange.FillStyle1.Value));
-                    }
-                    //TODO: line style
-                    setup.Add(new XAttribute(XName.Get("x"), styleChange.MoveDeltaX));
-                    setup.Add(new XAttribute(XName.Get("y"), styleChange.MoveDeltaY));
-
-                    edgesElem.Add(setup);
-                    //TODO: Glyphs  
-                    continue;
-                }
+                if (styleChange != null) edgesElem.Add(FormatShapeSetup(styleChange));
+                var endRecord = shape as EndShapeRecord;
+                if (endRecord != null) edgesElem.Add(FormatEndRecord(endRecord));
             }
             shapeElem.Add(edgesElem);
             shapesElem.Add(shapeElem);
             res.Add(shapesElem);
             return res;
         }
+        //TODO: Simulate swfmill ShapeSetup struct bug
+
+        private static XElement FormatShapeSetup(StyleChangeShapeRecord styleChange)
+        {
+            var setup = new XElement(XName.Get("ShapeSetup"));
+            if (styleChange.FillStyle0.HasValue) {
+                setup.Add(new XAttribute(XName.Get("fillStyle0"), styleChange.FillStyle0.Value));
+            }
+            if (styleChange.FillStyle1.HasValue) {
+                setup.Add(new XAttribute(XName.Get("fillStyle1"), styleChange.FillStyle1.Value));
+            }
+            //TODO: line style
+            setup.Add(new XAttribute(XName.Get("x"), styleChange.MoveDeltaX));
+            setup.Add(new XAttribute(XName.Get("y"), styleChange.MoveDeltaY));
+
+            //TODO: Glyphs  
+            return setup;
+        }
+
+        private static XElement FormatEndRecord(EndShapeRecord endRecord) {
+            var setup = new XElement(XName.Get("ShapeSetup"));
+            return setup;
+        }
+
     }
 }

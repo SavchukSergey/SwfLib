@@ -1,48 +1,103 @@
 ﻿using System;
 using Code.SwfLib.Data;
-using Code.SwfLib.Data.FillStyles;
-using Code.SwfLib.Data.LineStyles;
 using Code.SwfLib.Data.Shapes;
 
 namespace Code.SwfLib {
     public static class ShapeRecordStreamExt {
 
         public static void WriteShapeWithStyle(this SwfStreamWriter writer, ShapeWithStyle1 shapeWithStyle) {
-            writer.WriteFillStyles(shapeWithStyle.FillStyles);
-            writer.WriteLineStyles(shapeWithStyle.LineStyles);
+            writer.WriteFillStyles1(shapeWithStyle.FillStyles);
+            writer.WriteLineStyles1(shapeWithStyle.LineStyles);
             var fillStyleBits = new BitsCount(shapeWithStyle.FillStyles.Count).GetUnsignedBits();
             var lineStyleBits = new BitsCount(shapeWithStyle.LineStyles.Count).GetUnsignedBits();
             writer.WriteUnsignedBits(fillStyleBits, 4);
             writer.WriteUnsignedBits(lineStyleBits, 4);
-            writer.WriteShapeRecords(shapeWithStyle.ShapeRecords, ref fillStyleBits, ref lineStyleBits);
+            writer.WriteShapeRecords1(shapeWithStyle.ShapeRecords, ref fillStyleBits, ref lineStyleBits);
         }
 
         public static void ReadToShapeWithStyle(this SwfStreamReader reader, ShapeWithStyle1 style) {
             style.FillStyles.Clear();
-            reader.ReadToFillStyles(style.FillStyles);
+            reader.ReadToFillStyles1(style.FillStyles);
 
             style.LineStyles.Clear();
-            reader.ReadToLineStyles(style.LineStyles);
+            reader.ReadToLineStyles1(style.LineStyles);
 
-            var fillBitsCount = reader.ReadUnsignedBits(4);
-            var lineBitsCount = reader.ReadUnsignedBits(4);
-
-            ShapeRecord record;
-            do {
-                record = reader.ReadShapeRecord1(ref fillBitsCount, ref lineBitsCount);
-            } while (!(record is EndShapeRecord));
+            var fillStyleBits = reader.ReadUnsignedBits(4);
+            var lineStyleBits = reader.ReadUnsignedBits(4);
+            reader.ReadToShapeRecords1(style.ShapeRecords, ref fillStyleBits, ref lineStyleBits);
         }
 
-        public static void WriteShapeRecords(this SwfStreamWriter writer, ShapeRecords1List shapeRecords, ref uint fillStyleBits, ref uint lineStyleBits) {
+        public static void WriteShapeRecords1(this SwfStreamWriter writer, ShapeRecords1List shapeRecords, ref uint fillStyleBits, ref uint lineStyleBits) {
             for (var i = 0; i < shapeRecords.Count; i++) {
                 var shapeRecord = shapeRecords[i];
                 writer.WriteShapeRecord(shapeRecord, ref fillStyleBits, ref lineStyleBits);
             }
         }
 
+        public static void ReadToShapeRecords1(this SwfStreamReader reader, ShapeRecords1List shapeRecords, ref uint fillStyleBits, ref uint lineStyleBits) {
+            reader.AlignToByte();
+            ShapeRecord record;
+            do {
+                record = reader.ReadShapeRecord1(ref fillStyleBits, ref lineStyleBits);
+                shapeRecords.Add(record);
+            } while (!(record is EndShapeRecord));
+        }
+
+
         public static ShapeRecord ReadShapeRecord1(this SwfStreamReader reader, ref uint fillBitsCount, ref uint lineBitsCount) {
-            //TODO: Read shape records
-            return new EndShapeRecord();
+            var isEdge = reader.ReadBit();
+            if (!isEdge) {
+                bool reservedFlag = reader.ReadBit();
+                bool stateLineStyle = reader.ReadBit();
+                bool stateFillStyle1 = reader.ReadBit();
+                bool stateFillStyle0 = reader.ReadBit();
+                bool stateMoveTo = reader.ReadBit();
+                if (reservedFlag || stateLineStyle || stateFillStyle1 || stateFillStyle0 || stateMoveTo) {
+                    var styleChange = new StyleChangeShapeRecord();
+                    if (stateMoveTo) {
+                        var moveBits = reader.ReadUnsignedBits(5);
+                        styleChange.MoveDeltaX = reader.ReadSignedBits(moveBits);
+                        styleChange.MoveDeltaY = reader.ReadSignedBits(moveBits);
+                    }
+                    if (stateFillStyle0) {
+                        styleChange.FillStyle0 = reader.ReadUnsignedBits(fillBitsCount);
+                    }
+                    if (stateFillStyle1) {
+                        styleChange.FillStyle1 = reader.ReadUnsignedBits(fillBitsCount);
+                    }
+                    if (stateLineStyle) {
+                        styleChange.LineStyle = reader.ReadUnsignedBits(lineBitsCount);
+                    }
+                    return styleChange;
+                } else {
+                    return new EndShapeRecord();
+                }
+            }
+            bool straight = reader.ReadBit();
+            if (straight) {
+                var record = new StraightEdgeShapeRecord();
+                var numBits = reader.ReadUnsignedBits(4) + 2;
+                var generalLineFlag = reader.ReadBit();
+                bool vertLineFlag = false;
+                if (!generalLineFlag) {
+                    vertLineFlag = reader.ReadBit();
+                }
+                if (generalLineFlag || !vertLineFlag) {
+                    record.DeltaX = reader.ReadSignedBits(numBits);
+                }
+                if (generalLineFlag || vertLineFlag) {
+                    record.DeltaY = reader.ReadSignedBits(numBits);
+                }
+                return record;
+            } else {
+                var record = new CurvedEdgeShapeRecord();
+                var numBits = reader.ReadUnsignedBits(4) + 2;
+                record.ControlDeltaX = reader.ReadSignedBits(numBits);
+                record.ControlDeltaY = reader.ReadSignedBits(numBits);
+                record.AnchorDeltaX = reader.ReadSignedBits(numBits);
+                record.AnchorDeltaY = reader.ReadSignedBits(numBits);
+                return record;
+            }
         }
 
 

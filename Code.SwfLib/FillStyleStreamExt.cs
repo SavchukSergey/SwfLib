@@ -4,15 +4,18 @@ using Code.SwfLib.Data.FillStyles;
 namespace Code.SwfLib {
     public static class FillStyleStreamExt {
 
-        public static void ReadToFillStyles(this SwfStreamReader reader, FillStyles1List fillStyles) {
+        public static void ReadToFillStyles1(this SwfStreamReader reader, FillStyles1List fillStyles) {
             byte count = reader.ReadByte();
             for (var i = 0; i < count; i++) {
                 fillStyles.Add(reader.ReadFillStyle1());
             }
         }
 
-        public static void WriteFillStyles(this SwfStreamWriter writer, FillStyles1List styles) {
-            for (var i = 0; i < styles.Count; i++) {
+        public static void WriteFillStyles1(this SwfStreamWriter writer, FillStyles1List styles) {
+            byte cnt = (byte) styles.Count;
+            //TODO: Check boundaries
+            writer.WriteByte(cnt);
+            for (var i = 0; i < cnt; i++) {
                 var style = styles[i];
                 writer.WriteFillStyle1(style);
             }
@@ -44,7 +47,7 @@ namespace Code.SwfLib {
 
         public static void WriteNonSmoothedClippedBitmapFillStyle(this SwfStreamWriter writer, NonSmoothedClippedBitmapFillStyle style) {
             writer.WriteByte(0x42);
-            //TODO: Other fields
+            throw new NotImplementedException();
         }
 
         public static void WriteClippedBitmapFillStyle(this SwfStreamWriter writer, ClippedBitmapFillStyle style) {

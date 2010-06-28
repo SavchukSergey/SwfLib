@@ -67,6 +67,7 @@ namespace Code.SwfLib
 
         public byte ReadByte()
         {
+            AlignToByte();
             return _reader.ReadByte();
         }
 

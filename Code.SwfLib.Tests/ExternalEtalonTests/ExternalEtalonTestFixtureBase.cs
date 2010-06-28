@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -71,6 +72,25 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
                 default:
                     throw new NotSupportedException("Illegal file format");
             }
+        }
+
+        protected string GetBinaryString(string resourceName) {
+            StringBuilder sb = new StringBuilder();
+            using (var stream = OpenEmbeddedResource(resourceName)) {
+                while (stream.Position != stream.Length) {
+                    var bt = stream.ReadByte();
+                    sb.Append((bt & 0x80) > 0 ? '1' : '0');
+                    sb.Append((bt & 0x40) > 0 ? '1' : '0');
+                    sb.Append((bt & 0x20) > 0 ? '1' : '0');
+                    sb.Append((bt & 0x10) > 0 ? '1' : '0');
+                    sb.Append((bt & 0x08) > 0 ? '1' : '0');
+                    sb.Append((bt & 0x04) > 0 ? '1' : '0');
+                    sb.Append((bt & 0x02) > 0 ? '1' : '0');
+                    sb.Append((bt & 0x01) > 0 ? '1' : '0');
+                    sb.Append('.');
+                }
+            }
+            return sb.ToString();
         }
     }
 }

@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="AssertExt.cs" />
     <Compile Include="BitsCountTest.cs" />
+    <Compile Include="ExternalEtalonTests\DefineShapeTagTest.cs" />
     <Compile Include="ExternalEtalonTests\ExternalEtalonTestFixtureBase.cs" />
     <Compile Include="ExternalEtalonTests\SwfStreamReaderExtTest.cs" />
     <Compile Include="SwfFileTest.cs" />
@@ -98,6 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Matrix-compiled.swf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DefineShape\DefineShape.bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DefineShape\DefineShape2.bin" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

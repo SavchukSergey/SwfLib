@@ -217,7 +217,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public static DefineShapeTag ReadDefineShapeTag(SwfTagData tagData) {
+        public DefineShapeTag ReadDefineShapeTag(SwfTagData tagData) {
             var tag = new DefineShapeTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
