@@ -101,6 +101,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                 if (styleChange != null) edgesElem.Add(FormatShapeSetup(styleChange));
                 var endRecord = shape as EndShapeRecord;
                 if (endRecord != null) edgesElem.Add(FormatEndRecord(endRecord));
+                var lineRecord = shape as StraightEdgeShapeRecord;
+                if (lineRecord != null) edgesElem.Add(FormatStraightEdgeShapeRecord(lineRecord));
+                var curvedRecord = shape as CurvedEdgeShapeRecord;
+                if (curvedRecord != null) edgesElem.Add(FormatCurvedEdgeShapeRecord(curvedRecord));
+                //TODO: default behavior? throw new exception
             }
             shapeElem.Add(edgesElem);
             shapesElem.Add(shapeElem);
@@ -124,6 +129,24 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
             //TODO: Glyphs  
             return setup;
+        }
+
+        private static XElement FormatStraightEdgeShapeRecord(StraightEdgeShapeRecord record)
+        {
+            return new XElement(XName.Get("LineTo"),
+                new XAttribute(XName.Get("x"), record.DeltaX),
+                new XAttribute(XName.Get("y"), record.DeltaY)
+            );
+        }
+
+        private static XElement FormatCurvedEdgeShapeRecord(CurvedEdgeShapeRecord record) {
+            //TODO: what is x1, y1, x2, y2
+            return new XElement(XName.Get("CurveTo"),
+                new XAttribute(XName.Get("x1"), record.ControlDeltaX),
+                new XAttribute(XName.Get("y1"), record.ControlDeltaY),
+                new XAttribute(XName.Get("x2"), record.AnchorDeltaX),
+                new XAttribute(XName.Get("y2"), record.AnchorDeltaY)
+            );
         }
 
         private static XElement FormatEndRecord(EndShapeRecord endRecord) {

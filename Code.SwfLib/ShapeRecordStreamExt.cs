@@ -28,6 +28,7 @@ namespace Code.SwfLib {
         }
 
         public static void WriteShapeRecords1(this SwfStreamWriter writer, ShapeRecords1List shapeRecords, ref uint fillStyleBits, ref uint lineStyleBits) {
+            writer.FlushBits();
             for (var i = 0; i < shapeRecords.Count; i++) {
                 var shapeRecord = shapeRecords[i];
                 writer.WriteShapeRecord(shapeRecord, ref fillStyleBits, ref lineStyleBits);
@@ -102,7 +103,6 @@ namespace Code.SwfLib {
 
 
         public static void WriteShapeRecord(this SwfStreamWriter writer, ShapeRecord shapeRecord, ref uint fillStyleBits, ref uint lineStyleBits) {
-            writer.FlushBits();
             switch (shapeRecord.Type) {
                 case ShapeRecordType.CurvedEdgeRecord:
                     writer.WriteCurvedEdge((CurvedEdgeShapeRecord)shapeRecord);
@@ -127,15 +127,17 @@ namespace Code.SwfLib {
 
         public static void WriteStraightEdge(this SwfStreamWriter writer, StraightEdgeShapeRecord record) {
             writer.WriteBit(true);
-            writer.WriteBit(false);
-            var numBits = new BitsCount(record.DeltaX, record.DeltaY).GetUnsignedBits();
+            writer.WriteBit(true);
+            var actualBits = new BitsCount(record.DeltaX, record.DeltaY).GetSignedBits();
+            if (actualBits < 2) actualBits = 2;
+            var numBits = actualBits - 2u;
             writer.WriteUnsignedBits(numBits, 4);
             bool genLineFlags = record.DeltaX != 0 && record.DeltaY != 0;
             bool vertFlag = record.DeltaY != 0;
             writer.WriteBit(genLineFlags);
             if (!genLineFlags) writer.WriteBit(vertFlag);
-            if (genLineFlags || !vertFlag) writer.WriteSignedBits(record.DeltaX, numBits);
-            if (genLineFlags || vertFlag) writer.WriteSignedBits(record.DeltaY, numBits);
+            if (genLineFlags || !vertFlag) writer.WriteSignedBits(record.DeltaX, actualBits);
+            if (genLineFlags || vertFlag) writer.WriteSignedBits(record.DeltaY, actualBits);
         }
 
         public static void WriteCurvedEdge(this SwfStreamWriter writer, CurvedEdgeShapeRecord record) {
@@ -147,10 +149,10 @@ namespace Code.SwfLib {
             if (actualBits < 2) actualBits = 2;
             var numBits = actualBits - 2u;
             writer.WriteUnsignedBits(numBits, 4);
-            writer.WriteSignedBits(record.ControlDeltaX, numBits);
-            writer.WriteSignedBits(record.ControlDeltaY, numBits);
-            writer.WriteSignedBits(record.AnchorDeltaX, numBits);
-            writer.WriteSignedBits(record.AnchorDeltaY, numBits);
+            writer.WriteSignedBits(record.ControlDeltaX, actualBits);
+            writer.WriteSignedBits(record.ControlDeltaY, actualBits);
+            writer.WriteSignedBits(record.AnchorDeltaX, actualBits);
+            writer.WriteSignedBits(record.AnchorDeltaY, actualBits);
         }
 
         //TODO: Remove ref tokens. It's needed for StyleChange2 Records
