@@ -85,7 +85,6 @@ namespace Code.SwfLib {
             }
         }
 
-        //TODO: rename to AlignToByte
         public void FlushBits() {
             if (_bitContext.BitIndex == 0) return;
             _bitContext.CachedByte <<= 8 - _bitContext.BitIndex;

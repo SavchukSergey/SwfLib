@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.Data;
 using Code.SwfLib.Tags.DisplayListTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
@@ -27,7 +28,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
                     //TODO: read replace
                     break;
                 case DEPTH_ATTRIB:
-                    //TODO: read depth
+                    tag.Depth = ushort.Parse(attrib.Value);
                     break;
                 case MORPH_ATTRIB:
                     //TODO: read morph
@@ -46,7 +47,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
         public override void AcceptElement(PlaceObject2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case TRANSFORM_ELEM:
-                    //TODO: Read transform
+                    SwfMatrix matrix;
+                    _formatters.Matrix.Parse(element, out matrix);
+                    tag.Matrix = matrix;
                     break;
                 case EVENTS_ELEM:
                     //TODO: Read transform
@@ -64,7 +67,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
             }
             res.Add(new XAttribute(XName.Get("depth"), tag.Depth));
             if (tag.Matrix.HasValue) {
-                res.Add(new XElement(XName.Get("transform"), GetTransformXml(tag.Matrix.Value)));
+                var matrix = tag.Matrix.Value;
+                res.Add(new XElement(XName.Get("transform"), _formatters.Matrix.Format(ref matrix)));
             }
             //TODO: Put other fields
             return res;

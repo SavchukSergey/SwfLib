@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.Data;
-using Code.SwfLib.Data.Text;
 using Code.SwfLib.SwfMill.DataFormatting;
 using Code.SwfLib.Tags;
 
@@ -72,13 +70,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             rgb.Green = byte.Parse(colorElem.Attribute(XName.Get("green")).Value);
             rgb.Blue = byte.Parse(colorElem.Attribute(XName.Get("blue")).Value);
             return rgb;
-        }
-
-        protected static XElement GetTransformXml(SwfMatrix matrix) {
-            //TODO: put other fields
-            return new XElement(XName.Get("Transform"),
-                                new XAttribute(XName.Get("transX"), matrix.TranslateX),
-                                new XAttribute(XName.Get("transY"), matrix.TranslateY));
         }
 
         protected static XElement GetSymbol(SwfSymbolReference symbol) {

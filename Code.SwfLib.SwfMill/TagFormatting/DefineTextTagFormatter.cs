@@ -50,8 +50,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         public override XElement FormatTag(DefineTextTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_TEXT_TAG),
                                    new XAttribute(XName.Get("objectID"), tag.CharacterID));
-            res.Add(new XElement(XName.Get("bounds"), _formatters.Rectangle.Format(ref tag.TextBounds)));
-            res.Add(new XElement(XName.Get("transform"), GetTransformXml(tag.TextMatrix)));
+            res.Add(new XElement("bounds", _formatters.Rectangle.Format(ref tag.TextBounds)));
+            res.Add(new XElement("transform", _formatters.Matrix.Format(ref tag.TextMatrix)));
             //TODO: remove unnessary nested nodes. Swfmill requires them
             res.Add(new XElement(XName.Get("records"),
                                  new XElement(XName.Get("TextRecord"),
