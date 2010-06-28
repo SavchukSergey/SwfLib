@@ -76,6 +76,11 @@ namespace Code.SwfLib
             return _reader.ReadBytes(count);
         }
 
+        public long BytesLeft
+        {
+            get { return _reader.BaseStream.Length - _reader.BaseStream.Position; }
+        }
+
         public string ReadString()
         {
             MemoryStream dataStream = new MemoryStream();

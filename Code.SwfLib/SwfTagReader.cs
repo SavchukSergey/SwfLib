@@ -177,6 +177,21 @@ namespace Code.SwfLib {
             return tag;
         }
 
+        public static DefineBitsLosslessTag ReadDefineBitsLosslessTag(SwfTagData tagData) {
+            var tag = new DefineBitsLosslessTag { RawData = tagData };
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.CharacterID = reader.ReadUInt16();
+            tag.BitmapFormat = reader.ReadByte();
+            tag.BitmapWidth = reader.ReadUInt16();
+            tag.BitmapHeight = reader.ReadUInt16();
+            if (tag.BitmapFormat == 3) {
+                tag.BitmapColorTableSize = reader.ReadByte();
+            }
+            tag.ZlibBitmapData = reader.ReadBytes((int) reader.BytesLeft);
+            return tag;
+        }
+
         public DefineEditTextTag ReadDefineEditTextTag(SwfTagData tagData) {
             var tag = new DefineEditTextTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
@@ -321,6 +336,8 @@ namespace Code.SwfLib {
                 //    return ReadCSMTextSettingsTag(tagData);
                 case SwfTagType.DefineBitsJPEG2:
                     return ReadDefineBitsJPEG2Tag(tagData);
+                case SwfTagType.DefineBitsLossless:
+                    return ReadDefineBitsLosslessTag(tagData);
                 case SwfTagType.DefineEditText:
                     return ReadDefineEditTextTag(tagData);
                 case SwfTagType.DefineFontName:

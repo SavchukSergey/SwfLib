@@ -39,9 +39,17 @@ namespace Code.SwfLib {
         object ISwfTagVisitor.Visit(DefineBitsLosslessTag tag) {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteUInt16(tag.ObjectID);
-            //TODO: Put other fields
-            return new SwfTagData { Type = SwfTagType.DefineBitsLossless2, Data = mem.ToArray() };
+            writer.WriteUInt16(tag.CharacterID);
+            writer.WriteByte(tag.BitmapFormat);
+            writer.WriteUInt16(tag.BitmapWidth);
+            writer.WriteUInt16(tag.BitmapHeight);
+            if (tag.BitmapFormat == 3) {
+                writer.WriteByte(tag.BitmapColorTableSize);
+            }
+            if (tag.ZlibBitmapData != null) {
+                writer.WriteBytes(tag.ZlibBitmapData);
+            }
+            return new SwfTagData { Type = SwfTagType.DefineBitsLossless, Data = mem.ToArray() };
         }
 
         public object Visit(DefineButton2Tag tag) {
