@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
@@ -20,16 +21,16 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
                     tag.TextID = SwfMillPrimitives.ParseObjectID(attrib);
                     break;
                 case USE_FLASH_TYPE_ATTRIB:
-                    //TODO: read value
+                    tag.UseFlashType = byte.Parse(attrib.Value);
                     break;
                 case GRID_FIT:
-                    //TODO: read value
+                    tag.GridFit = byte.Parse(attrib.Value);
                     break;
                 case THICKNESS:
-                    //TODO: read value
+                    tag.Thickness = float.Parse(attrib.Value, CultureInfo.InvariantCulture);
                     break;
                 case SHARPNESS:
-                    //TODO: read value
+                    tag.Sharpness = float.Parse(attrib.Value, CultureInfo.InvariantCulture);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -50,8 +51,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
                                 new XAttribute(XName.Get("gridFit"), tag.GridFit),
                                 //TODO: reserved flagss
                                 //new XAttribute(XName.Get("reservedFlags"), tag.ReservedFlags),
-                                new XAttribute(XName.Get("thickness"), tag.Thickness),
-                                new XAttribute(XName.Get("sharpness"), tag.Sharpness)
+                                new XAttribute(XName.Get("thickness"), tag.Thickness.ToString(CultureInfo.InvariantCulture)),
+                                new XAttribute(XName.Get("sharpness"), tag.Sharpness.ToString(CultureInfo.InvariantCulture))
                                 //TODO: hide reserved attr
                                 //new XAttribute(XName.Get("reserved"), tag.Reserved)
                                 );

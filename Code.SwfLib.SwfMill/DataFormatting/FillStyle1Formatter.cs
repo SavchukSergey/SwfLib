@@ -145,8 +145,11 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
                     throw new NotSupportedException("Fill style " + data.FillStyleType + " is not supported");
             }
         }
-        private static XElement FormatNonSmoothedClippedFillStyle(ref FillStyle style) {
-            throw new NotImplementedException();
+        private XElement FormatNonSmoothedClippedFillStyle(ref FillStyle style) {
+            var elem = new XElement(XName.Get("ClippedBitmap2"));
+            elem.Add(new XAttribute(XName.Get("objectID"), style.BitmapID));
+            elem.Add(new XElement(XName.Get("matrix"), _formatters.Matrix.Format(ref style.BitmapMatrix)));
+            return elem;
         }
 
         private XElement FormatNonSmoothedRepeatingBitmapFillStyle(ref FillStyle style) {
@@ -156,12 +159,18 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
             return elem;
         }
 
-        private static XElement FormatClippedBitmapFillStyle(ref FillStyle style) {
-            throw new NotImplementedException();
+        private XElement FormatClippedBitmapFillStyle(ref FillStyle style) {
+            var elem = new XElement(XName.Get("ClippedBitmap"));
+            elem.Add(new XAttribute(XName.Get("objectID"), style.BitmapID));
+            elem.Add(new XElement(XName.Get("matrix"), _formatters.Matrix.Format(ref style.BitmapMatrix)));
+            return elem;
         }
 
-        private static XElement FormatRepeatingBitmapFillStyle(ref FillStyle style) {
-            throw new NotImplementedException();
+        private XElement FormatRepeatingBitmapFillStyle(ref FillStyle style) {
+            var elem = new XElement(XName.Get("TiledBitmap"));
+            elem.Add(new XAttribute(XName.Get("objectID"), style.BitmapID));
+            elem.Add(new XElement(XName.Get("matrix"), _formatters.Matrix.Format(ref style.BitmapMatrix)));
+            return elem;
         }
 
         private static XElement FormatFocalGradientRGBFillStyle(ref FillStyle style) {

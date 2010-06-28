@@ -362,8 +362,8 @@ namespace Code.SwfLib {
         public SwfTagBase ReadTag(SwfStreamReader reader) {
             var tagData = reader.ReadTagData();
             switch (tagData.Type) {
-                //case SwfTagType.CSMTextSettings:
-                //    return ReadCSMTextSettingsTag(tagData);
+                case SwfTagType.CSMTextSettings:
+                    return ReadCSMTextSettingsTag(tagData);
                 case SwfTagType.DefineBitsJPEG2:
                     return ReadDefineBitsJPEG2Tag(tagData);
                 case SwfTagType.DefineBitsLossless:
