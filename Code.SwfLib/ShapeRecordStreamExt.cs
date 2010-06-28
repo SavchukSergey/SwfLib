@@ -8,7 +8,6 @@ namespace Code.SwfLib {
         public static void WriteShapeWithStyle(this SwfStreamWriter writer, ShapeWithStyle1 shapeWithStyle) {
             writer.WriteFillStyles1(shapeWithStyle.FillStyles);
             writer.WriteLineStyles1(shapeWithStyle.LineStyles);
-            Console.WriteLine("shapeWithStyle.FillStyles.Count: {0}", shapeWithStyle.FillStyles.Count);
             var fillStyleBits = new BitsCount(shapeWithStyle.FillStyles.Count).GetUnsignedBits();
             var lineStyleBits = new BitsCount(shapeWithStyle.LineStyles.Count).GetUnsignedBits();
             writer.WriteUnsignedBits(fillStyleBits, 4);

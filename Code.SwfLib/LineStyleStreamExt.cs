@@ -24,13 +24,13 @@ namespace Code.SwfLib {
         public static LineStyleRGB ReadLineStyleRGB(this SwfStreamReader reader) {
             var lineStyle = new LineStyleRGB();
             lineStyle.Width = reader.ReadUInt16();
-            lineStyle.Color = reader.ReadRGB();
+            reader.ReadRGB(out lineStyle.Color);
             return lineStyle;
         }
 
         public static void WriteLineStyleRGB(this SwfStreamWriter writer, LineStyleRGB lineStyle) {
             writer.WriteUInt16(lineStyle.Width);
-            writer.WriteRGB(lineStyle.Color);
+            writer.WriteRGB(ref lineStyle.Color);
         }
 
     }

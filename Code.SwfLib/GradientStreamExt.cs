@@ -10,7 +10,6 @@ namespace Code.SwfLib {
                 InterpolationMode = (InterpolationMode)reader.ReadUnsignedBits(2)
             };
             var count = reader.ReadUnsignedBits(4);
-            Console.WriteLine("ReadGradientRGB records: {0}", count);
             for (var i = 0; i < count; i++) {
                 GradientRecordRGB record;
                 reader.ReadGradientRecordRGB(out record);
@@ -33,12 +32,12 @@ namespace Code.SwfLib {
 
         public static void ReadGradientRecordRGB(this SwfStreamReader reader, out GradientRecordRGB record) {
             record.Ratio = reader.ReadByte();
-            record.Color = reader.ReadRGB();
+            reader.ReadRGB(out record.Color);
         }
 
         public static void WriteGradientRecordRGB(this SwfStreamWriter writer, ref GradientRecordRGB record) {
             writer.WriteByte(record.Ratio);
-            writer.WriteRGB(record.Color);
+            writer.WriteRGB(ref record.Color);
         }
 
         public static void ReadFocalGradient(this SwfStreamReader reader, out FocalGradient gradient) {

@@ -16,7 +16,8 @@ namespace Code.SwfLib {
                 writer.WriteUInt16(record.FontID.Value);
             }
             if (record.HasColor) {
-                writer.WriteRGB(record.TextColor.Value);
+                var color = record.TextColor.Value;
+                writer.WriteRGB(ref color);
             }
             if (record.HasXOffset) {
                 writer.WriteSInt16(record.XOffset.Value);

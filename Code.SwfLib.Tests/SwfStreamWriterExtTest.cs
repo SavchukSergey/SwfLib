@@ -79,7 +79,7 @@ namespace Code.SwfLib.Tests {
             var val = new SwfRGB(0x0a, 0xff, 0x83);
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteRGB(val);
+            writer.WriteRGB(ref val);
             mem.Seek(0, SeekOrigin.Begin);
 
             Assert.AreEqual(0x0a, mem.ReadByte(), "Byte 0");
@@ -133,7 +133,7 @@ namespace Code.SwfLib.Tests {
             };
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteRect(rect);
+            writer.WriteRect(ref rect);
             writer.FlushBits();
             CheckBits(mem, "01100", "0000.00000100", "0100.10001111", "0000.00001000", "0000.11101110");
             mem.Seek(0, SeekOrigin.Begin);

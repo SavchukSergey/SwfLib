@@ -43,7 +43,7 @@ namespace Code.SwfLib {
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
-            tag.TextBounds = reader.ReadRect();
+            reader.ReadRect(out tag.TextBounds);
             tag.TextMatrix = reader.ReadMatrix();
             uint glyphBits = reader.ReadByte();
             uint advanceBits = reader.ReadByte();
@@ -177,12 +177,12 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        private DefineEditTextTag ReadDefineEditTextTag(SwfTagData tagData) {
+        public DefineEditTextTag ReadDefineEditTextTag(SwfTagData tagData) {
             var tag = new DefineEditTextTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
-            tag.Bounds = reader.ReadRect();
+            reader.ReadRect(out tag.Bounds);
             bool hasText = reader.ReadBit();
             tag.WordWrap = reader.ReadBit();
             tag.Multiline = reader.ReadBit();
@@ -222,7 +222,7 @@ namespace Code.SwfLib {
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.ShapeID = reader.ReadUInt16();
-            tag.ShapeBounds = reader.ReadRect();
+            reader.ReadRect(out tag.ShapeBounds);
             reader.ReadToShapeWithStyle(tag.Shapes);
             return tag;
         }
@@ -245,11 +245,9 @@ namespace Code.SwfLib {
             tag.CharacterID = reader.ReadUInt16();
             tag.Depth = reader.ReadUInt16();
             tag.Matrix = reader.ReadMatrix();
-            if (!reader.IsEOF)
-            {
+            if (!reader.IsEOF) {
                 tag.ColorTransform = reader.ReadColorTransformRGB();
-            } else
-            {
+            } else {
                 tag.ColorTransform = null;
             }
             return tag;
@@ -290,7 +288,7 @@ namespace Code.SwfLib {
         }
 
         public static RemoveObjectTag ReadRemoveObjectTag(SwfTagData tagData) {
-            RemoveObjectTag tag = new RemoveObjectTag { RawData = tagData};
+            RemoveObjectTag tag = new RemoveObjectTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
@@ -302,7 +300,7 @@ namespace Code.SwfLib {
             var tag = new SetBackgroundColorTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
-            tag.Color = reader.ReadRGB();
+            reader.ReadRGB(out tag.Color);
             return tag;
         }
 
@@ -317,26 +315,26 @@ namespace Code.SwfLib {
                 //    return ReadCSMTextSettingsTag(tagData);
                 case SwfTagType.DefineBitsJPEG2:
                     return ReadDefineBitsJPEG2Tag(tagData);
-                //case SwfTagType.DefineEditText:
-                //    return ReadDefineEditTextTag(tagData);
-                //case SwfTagType.DefineFontName:
-                //    return ReadDefineFontNameTag(tagData);
+                case SwfTagType.DefineEditText:
+                    return ReadDefineEditTextTag(tagData);
+                case SwfTagType.DefineFontName:
+                    return ReadDefineFontNameTag(tagData);
                 //case SwfTagType.DefineFont3:
                 //    return ReadDefineFont3Tag(tagData);
                 case SwfTagType.DefineShape:
                     return ReadDefineShapeTag(tagData);
                 //case SwfTagType.DefineSprite:
                 //    return ReadDefineSpriteTag(tagData);
-                //case SwfTagType.DefineText:
-                //    return ReadDefineTextTag(tagData);
+                case SwfTagType.DefineText:
+                    return ReadDefineTextTag(tagData);
                 case SwfTagType.End:
                     return ReadEndTag(tagData);
                 case SwfTagType.Export:
                     return ReadExportTag(tagData);
                 case SwfTagType.FrameLabel:
                     return ReadFrameLabelTag(tagData);
-                //case SwfTagType.PlaceObject:
-                //    return ReadPlaceObjectTag(tagData);
+                case SwfTagType.PlaceObject:
+                    return ReadPlaceObjectTag(tagData);
                 //case SwfTagType.PlaceObject2:
                 //    return ReadPlaceObject2Tag(tagData);
                 case SwfTagType.ShowFrame:
@@ -345,8 +343,8 @@ namespace Code.SwfLib {
                     return ReadFileAttributesTag(tagData);
                 case SwfTagType.MetaData:
                     return ReadMetadataTag(tagData);
-                //case SwfTagType.RemoveObject:
-                //    return ReadRemoveObjectTag(tagData);
+                case SwfTagType.RemoveObject:
+                    return ReadRemoveObjectTag(tagData);
                 case SwfTagType.SetBackgroundColor:
                     return ReadSetBackgroundColorTag(tagData);
                 default:

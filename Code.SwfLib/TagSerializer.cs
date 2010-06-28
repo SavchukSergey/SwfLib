@@ -55,7 +55,7 @@ namespace Code.SwfLib {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.CharacterID);
-            writer.WriteRect(tag.Bounds);
+            writer.WriteRect(ref tag.Bounds);
             writer.WriteBit(tag.HasText);
             writer.WriteBit(tag.WordWrap);
             writer.WriteBit(tag.Multiline);
@@ -102,7 +102,7 @@ namespace Code.SwfLib {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.ShapeID);
-            writer.WriteRect(tag.ShapeBounds);
+            writer.WriteRect(ref tag.ShapeBounds);
             writer.WriteShapeWithStyle(tag.Shapes);
             writer.FlushBits();
             return new SwfTagData { Type = SwfTagType.DefineShape, Data = mem.ToArray() };
@@ -131,7 +131,7 @@ namespace Code.SwfLib {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.CharacterID);
-            writer.WriteRect(tag.TextBounds);
+            writer.WriteRect(ref tag.TextBounds);
             writer.WriteMatrix(tag.TextMatrix);
             var glyphBitsCounter = new BitsCount(0);
             var advanceBitsCounter = new BitsCount(0);
@@ -267,7 +267,7 @@ namespace Code.SwfLib {
         public object Visit(SetBackgroundColorTag tag) {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteRGB(tag.Color);
+            writer.WriteRGB(ref tag.Color);
             return new SwfTagData { Type = SwfTagType.SetBackgroundColor, Data = mem.ToArray() };
         }
 

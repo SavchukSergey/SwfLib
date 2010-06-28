@@ -22,36 +22,32 @@ namespace Code.SwfLib {
         }
 
         public static void WriteSwfHeader(this SwfStreamWriter writer, SwfHeader header) {
-            writer.WriteRect(header.FrameSize);
+            writer.WriteRect(ref header.FrameSize);
             writer.WriteFixedPoint8(header.FrameRate);
             writer.WriteUInt16(header.FrameCount);
         }
 
-        public static void WriteRGB(this SwfStreamWriter writer, SwfRGB val)
-        {
+        public static void WriteRGB(this SwfStreamWriter writer, ref SwfRGB val) {
             writer.WriteByte(val.Red);
             writer.WriteByte(val.Green);
             writer.WriteByte(val.Blue);
         }
 
-        public static void WriteRGBA(this SwfStreamWriter writer, SwfRGBA val)
-        {
+        public static void WriteRGBA(this SwfStreamWriter writer, SwfRGBA val) {
             writer.WriteByte(val.Red);
             writer.WriteByte(val.Green);
             writer.WriteByte(val.Blue);
             writer.WriteByte(val.Alpha);
         }
 
-        public static void WriteARGB(this SwfStreamWriter writer, SwfRGBA val)
-        {
+        public static void WriteARGB(this SwfStreamWriter writer, SwfRGBA val) {
             writer.WriteByte(val.Alpha);
             writer.WriteByte(val.Red);
             writer.WriteByte(val.Green);
             writer.WriteByte(val.Blue);
         }
 
-        public static void WriteRect(this SwfStreamWriter writer, SwfRect rect)
-        {
+        public static void WriteRect(this SwfStreamWriter writer, ref SwfRect rect) {
             BitsCount btCount = new BitsCount(0);
             btCount.AddValue(rect.XMin);
             btCount.AddValue(rect.XMax);
@@ -100,14 +96,12 @@ namespace Code.SwfLib {
         public static void WriteColorTransformRGB(this SwfStreamWriter writer, ColorTransformRGB tranform) {
             writer.FlushBits();
             var bitsCounter = new BitsCount(0);
-            if (tranform.HasAddTerms)
-            {
+            if (tranform.HasAddTerms) {
                 bitsCounter.AddValue(tranform.RedAddTerm.Value);
                 bitsCounter.AddValue(tranform.GreenAddTerm.Value);
                 bitsCounter.AddValue(tranform.BlueAddTerm.Value);
             }
-            if (tranform.HasMultTerms)
-            {
+            if (tranform.HasMultTerms) {
                 bitsCounter.AddValue(tranform.RedMultTerm.Value);
                 bitsCounter.AddValue(tranform.GreenMultTerm.Value);
                 bitsCounter.AddValue(tranform.BlueMultTerm.Value);
@@ -116,8 +110,7 @@ namespace Code.SwfLib {
             writer.WriteBit(tranform.HasMultTerms);
             var bits = bitsCounter.GetSignedBits();
             writer.WriteUnsignedBits(bits, 4);
-            if (tranform.HasMultTerms)
-            {
+            if (tranform.HasMultTerms) {
                 writer.WriteSignedBits(tranform.RedMultTerm.Value, bits);
                 writer.WriteSignedBits(tranform.GreenMultTerm.Value, bits);
                 writer.WriteSignedBits(tranform.BlueMultTerm.Value, bits);

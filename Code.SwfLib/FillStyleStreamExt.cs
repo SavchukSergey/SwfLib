@@ -30,7 +30,7 @@ namespace Code.SwfLib {
             fillStyle.FillStyleType = type;
             switch (type) {
                 case FillStyleType.SolidColor:
-                    fillStyle.ColorRGB = reader.ReadRGB();
+                    reader.ReadRGB(out fillStyle.ColorRGB);
                     break;
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
@@ -57,7 +57,7 @@ namespace Code.SwfLib {
             writer.WriteByte((byte) fillStyle.FillStyleType);
             switch (fillStyle.FillStyleType) {
                 case FillStyleType.SolidColor:
-                    writer.WriteRGB(fillStyle.ColorRGB);
+                    writer.WriteRGB(ref fillStyle.ColorRGB);
                     break;
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:

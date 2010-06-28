@@ -43,7 +43,7 @@ namespace Code.SwfLib.Tests {
                 YMin = 0x008,
                 YMax = 0x0ee
             };
-            writer.WriteRect(rect);
+            writer.WriteRect(ref rect);
             writer.WriteFixedPoint8(23.75);
             writer.WriteUInt16(20);
             mem.Seek(0, SeekOrigin.Begin);
@@ -58,15 +58,15 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void ReadRGBTest()
-        {
+        public void ReadRGBTest() {
             var mem = new MemoryStream();
             mem.WriteByte(0x0a);
             mem.WriteByte(0xff);
             mem.WriteByte(0x83);
             mem.Seek(0, SeekOrigin.Begin);
             var reader = new SwfStreamReader(mem);
-            var val = reader.ReadRGB();
+            SwfRGB val;
+            reader.ReadRGB(out val);
             Assert.AreEqual(0x0a, val.Red, "Red");
             Assert.AreEqual(0xff, val.Green, "Green");
             Assert.AreEqual(0x83, val.Blue, "Blue");
@@ -75,8 +75,7 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void ReadRGBATest()
-        {
+        public void ReadRGBATest() {
             var mem = new MemoryStream();
             mem.WriteByte(0x0a);
             mem.WriteByte(0xff);
@@ -94,8 +93,7 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void ReadARGBTest()
-        {
+        public void ReadARGBTest() {
             var mem = new MemoryStream();
             mem.WriteByte(0x12);
             mem.WriteByte(0x0a);
@@ -111,13 +109,14 @@ namespace Code.SwfLib.Tests {
 
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }
-        
+
         [Test]
         public void ReadRectTest() {
             var mem = new MemoryStream();
             WriteBits(mem, "01100", "0000.00000100", "0100.10001111", "0000.00001000", "0000.11101110");
             var reader = new SwfStreamReader(mem);
-            var rect = reader.ReadRect();
+            SwfRect rect;
+            reader.ReadRect(out rect);
             Assert.AreEqual(0x004, rect.XMin, "Left");
             Assert.AreEqual(0x48f, rect.XMax, "Right");
             Assert.AreEqual(0x008, rect.YMin, "Top");
