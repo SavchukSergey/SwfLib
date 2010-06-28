@@ -132,7 +132,7 @@ namespace Code.SwfLib {
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteRect(ref tag.TextBounds);
-            writer.WriteMatrix(tag.TextMatrix);
+            writer.WriteMatrix(ref tag.TextMatrix);
             var glyphBitsCounter = new BitsCount(0);
             var advanceBitsCounter = new BitsCount(0);
             foreach (var textRecord in tag.TextRecords) {
@@ -211,7 +211,7 @@ namespace Code.SwfLib {
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteUInt16(tag.Depth);
-            writer.WriteMatrix(tag.Matrix);
+            writer.WriteMatrix(ref tag.Matrix);
             if (tag.ColorTransform.HasValue) {
                 writer.WriteColorTransformRGB(tag.ColorTransform.Value);
             }
@@ -231,7 +231,10 @@ namespace Code.SwfLib {
             writer.WriteBit(tag.Move);
             writer.WriteUInt16(tag.Depth);
             if (tag.HasCharacter) writer.WriteUInt16(tag.CharacterID.Value);
-            if (tag.HasMatrix) writer.WriteMatrix(tag.Matrix.Value);
+            if (tag.HasMatrix) {
+                var matrix = tag.Matrix.Value;
+                writer.WriteMatrix(ref matrix);
+            }
             if (tag.HasColorTransform) writer.WriteColorTransformRGB(tag.ColorTransform.Value);
             if (tag.HasRatio) writer.WriteUInt16(tag.Ratio.Value);
             if (tag.HasName) writer.WriteString(tag.Name);

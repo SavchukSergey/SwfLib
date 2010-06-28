@@ -44,7 +44,7 @@ namespace Code.SwfLib {
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
             reader.ReadRect(out tag.TextBounds);
-            tag.TextMatrix = reader.ReadMatrix();
+            reader.ReadMatrix(out tag.TextMatrix);
             uint glyphBits = reader.ReadByte();
             uint advanceBits = reader.ReadByte();
             tag.TextRecords.Clear();
@@ -244,7 +244,7 @@ namespace Code.SwfLib {
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
             tag.Depth = reader.ReadUInt16();
-            tag.Matrix = reader.ReadMatrix();
+            reader.ReadMatrix(out tag.Matrix);
             if (!reader.IsEOF) {
                 tag.ColorTransform = reader.ReadColorTransformRGB();
             } else {
@@ -265,7 +265,13 @@ namespace Code.SwfLib {
             } else {
                 tag.CharacterID = null;
             }
-            tag.Matrix = (flags & PlaceObject2Flags.HasMatrix) > 0 ? reader.ReadMatrix() : (SwfMatrix?)null;
+            if ((flags & PlaceObject2Flags.HasMatrix) > 0) {
+                SwfMatrix matrix;
+                reader.ReadMatrix(out matrix);
+                tag.Matrix = matrix;
+            } else {
+                tag.Matrix = null;
+            }
             tag.ColorTransform = (flags & PlaceObject2Flags.HasColorTransform) > 0 ? reader.ReadColorTransformRGB() : (ColorTransformRGB?)null;
             if ((flags & PlaceObject2Flags.HasRatio) > 0) {
                 tag.Ratio = reader.ReadUInt16();

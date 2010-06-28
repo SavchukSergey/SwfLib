@@ -61,9 +61,8 @@ namespace Code.SwfLib {
             rect.YMax = reader.ReadSignedBits(bits);
         }
 
-        public static SwfMatrix ReadMatrix(this SwfStreamReader reader) {
+        public static void ReadMatrix(this SwfStreamReader reader, out SwfMatrix matrix) {
             reader.AlignToByte();
-            var matrix = new SwfMatrix();
             var hasScale = reader.ReadBit();
             if (hasScale) {
                 var bits = (byte)reader.ReadUnsignedBits(5);
@@ -86,7 +85,6 @@ namespace Code.SwfLib {
             matrix.TranslateX = reader.ReadSignedBits(translateBits);
             matrix.TranslateY = reader.ReadSignedBits(translateBits);
             reader.AlignToByte();
-            return matrix;
         }
 
         public static ColorTransformRGB ReadColorTransformRGB(this SwfStreamReader reader) {

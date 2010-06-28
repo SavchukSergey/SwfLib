@@ -151,7 +151,7 @@ namespace Code.SwfLib.Tests {
                 TranslateY = 24
             };
             var writer = new SwfStreamWriter(mem);
-            writer.WriteMatrix(matrix);
+            writer.WriteMatrix(ref matrix);
             CheckBits(mem,
                 "1", "10011", "010.10000000.00000000", "001.11000000.00000000",
                 "1", "10011", "011.01000000.00000000", "000.10000000.00000000",

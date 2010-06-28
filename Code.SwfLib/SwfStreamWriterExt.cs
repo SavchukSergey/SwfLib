@@ -62,7 +62,7 @@ namespace Code.SwfLib {
             writer.WriteSignedBits(rect.YMax, bits);
         }
 
-        public static void WriteMatrix(this SwfStreamWriter writer, SwfMatrix matrix) {
+        public static void WriteMatrix(this SwfStreamWriter writer, ref SwfMatrix matrix) {
             writer.FlushBits();
             bool hasScale = matrix.HasScale;
             writer.WriteBit(hasScale);

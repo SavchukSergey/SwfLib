@@ -34,11 +34,11 @@ namespace Code.SwfLib {
                     break;
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
-                    fillStyle.GradientMatrix = reader.ReadMatrix();
+                    reader.ReadMatrix(out fillStyle.GradientMatrix);
                     reader.ReadGradientRGB(out fillStyle.Gradient);
                     break;
                 case FillStyleType.FocalGradient:
-                    fillStyle.GradientMatrix = reader.ReadMatrix();
+                    reader.ReadMatrix(out fillStyle.GradientMatrix);
                     reader.ReadFocalGradient(out fillStyle.FocalGradient);
                     break;
                 case FillStyleType.RepeatingBitmap:
@@ -46,7 +46,7 @@ namespace Code.SwfLib {
                 case FillStyleType.NonSmoothedRepeatingBitmap:
                 case FillStyleType.NonSmoothedClippedBitmap:
                     fillStyle.BitmapID = reader.ReadUInt16();
-                    fillStyle.BitmapMatrix = reader.ReadMatrix();
+                    reader.ReadMatrix(out fillStyle.BitmapMatrix);
                     break;
                 default:
                     throw new NotSupportedException("Fill style " + type + " is not supported");
@@ -54,18 +54,18 @@ namespace Code.SwfLib {
         }
 
         public static void WriteFillStyle1(this SwfStreamWriter writer, ref FillStyle fillStyle) {
-            writer.WriteByte((byte) fillStyle.FillStyleType);
+            writer.WriteByte((byte)fillStyle.FillStyleType);
             switch (fillStyle.FillStyleType) {
                 case FillStyleType.SolidColor:
                     writer.WriteRGB(ref fillStyle.ColorRGB);
                     break;
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
-                    writer.WriteMatrix(fillStyle.GradientMatrix);
+                    writer.WriteMatrix(ref fillStyle.GradientMatrix);
                     writer.WriteGradientRGB(ref fillStyle.Gradient);
                     break;
                 case FillStyleType.FocalGradient:
-                    writer.WriteMatrix(fillStyle.GradientMatrix);
+                    writer.WriteMatrix(ref fillStyle.GradientMatrix);
                     writer.WriteFocalGradient(ref fillStyle.FocalGradient);
                     break;
                 case FillStyleType.RepeatingBitmap:
@@ -73,7 +73,7 @@ namespace Code.SwfLib {
                 case FillStyleType.NonSmoothedRepeatingBitmap:
                 case FillStyleType.NonSmoothedClippedBitmap:
                     writer.WriteUInt16(fillStyle.BitmapID);
-                    writer.WriteMatrix(fillStyle.BitmapMatrix);
+                    writer.WriteMatrix(ref fillStyle.BitmapMatrix);
                     break;
                 default:
                     throw new NotSupportedException("Fill style " + fillStyle.FillStyleType + " is not supported");
