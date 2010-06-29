@@ -72,13 +72,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return rgb;
         }
 
-        protected static XElement GetSymbol(SwfSymbolReference symbol) {
-            return new XElement(XName.Get("Symbol"),
-                                new XAttribute(XName.Get("objectID"), symbol.SymbolID),
-                                new XAttribute(XName.Get("name"), symbol.SymbolName));
-        }
-
-
 
         protected static byte[] ReadBase64(XElement data) {
             string val = data.Value

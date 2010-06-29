@@ -73,7 +73,7 @@
     <Compile Include="TagFormatting\DefineTextTagFormatter.cs" />
     <Compile Include="TagFormatting\DoActionTagFormatter.cs" />
     <Compile Include="TagFormatting\DoInitActionTagFormatter.cs" />
-    <Compile Include="TagFormatting\ExportTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\ExportTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\FrameLabelTagFormater.cs" />
     <Compile Include="TagFormatting\ITagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\PlaceObject2TagFormatter.cs" />

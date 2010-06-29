@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Tags.ControlTags;
 
@@ -37,7 +34,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         }
 
         public override XElement FormatTag(MetadataTag tag) {
-            return new XElement(XName.Get(SwfTagNameMapping.METADATA_TAG), tag.Metadata);
+            return new XElement(XName.Get(SwfTagNameMapping.METADATA_TAG), XElement.Parse(tag.Metadata));
         }
     }
 }
