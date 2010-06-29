@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.DisplayListTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
 {
-    public class PlaceObject3TagFormatter : TagFormatterBase<PlaceObject3Tag> 
+    public class PlaceObject3TagFormatter : TagFormatterBase<PlaceObject3Tag>
     {
         private const string REPLACE_ATTRIB = "replace";
         private const string DEPTH_ATTRIB = "depth";
@@ -12,6 +12,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
         private const string NAME_ATTRIB = "name";
         private const string ALL_FLAGS1_ATTRIB = "allflags1";
         private const string ALL_FLAGS2_ATTRIB = "allflags2";
+        private const string BITMAP_CACHING_ATTRIB = "bitmapCaching";
         private const string TRANSFORM_ELEM = "transform";
         private const string FILTERS_ELEM = "filters";
         private const string EVENTS_ELEM = "events";
@@ -41,6 +42,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
                 case ALL_FLAGS2_ATTRIB:
                     //TODO: read flags2
                     break;
+                case BITMAP_CACHING_ATTRIB:
+                    //TODO: check swfmill schema. Probably it's bollean
+                    tag.BitmapCache = byte.Parse(attrib.Value);
+                    break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
             }
@@ -66,7 +71,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
 
         public override XElement FormatTag(PlaceObject3Tag tag)
         {
-            return new XElement(XName.Get(SwfTagNameMapping.PLACE_OBJECT3_TAG));
+            return new XElement(SwfTagNameMapping.PLACE_OBJECT3_TAG,
+                //TODO: Other fields
+                new XAttribute(BITMAP_CACHING_ATTRIB, tag.BitmapCache)
+                );
         }
     }
 }

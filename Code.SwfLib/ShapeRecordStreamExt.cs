@@ -46,6 +46,7 @@ namespace Code.SwfLib {
 
 
         public static ShapeRecord ReadShapeRecord1(this SwfStreamReader reader, ref uint fillBitsCount, ref uint lineBitsCount) {
+            //They are not actually byte aligned as Adobe promises..
             var isEdge = reader.ReadBit();
             if (!isEdge) {
                 bool reservedFlag = reader.ReadBit();
@@ -103,7 +104,9 @@ namespace Code.SwfLib {
 
 
         public static void WriteShapeRecord(this SwfStreamWriter writer, ShapeRecord shapeRecord, ref uint fillStyleBits, ref uint lineStyleBits) {
-            switch (shapeRecord.Type) {
+            //They are not actually byte aligned as Adobe promises..
+            switch (shapeRecord.Type)
+            {
                 case ShapeRecordType.CurvedEdgeRecord:
                     writer.WriteCurvedEdge((CurvedEdgeShapeRecord)shapeRecord);
                     break;

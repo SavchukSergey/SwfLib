@@ -5,13 +5,16 @@ using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Tags.DynamicTextTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags {
-    public class DefineEditTextTagFormatter : TagFormatterBase<DefineEditTextTag> {
+namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
+{
+    public class DefineEditTextTagFormatter : TagFormatterBase<DefineEditTextTag>
+    {
 
         private const string WORD_WRAP_ATTRIB = "wordWrap";
         private const string MULTILINE_ATTRIB = "multiLine";
         private const string PASSWORD_ATTRIB = "password";
         private const string READONLY_ATTRIB = "readOnly";
+        private const string MAX_LENGTH_ATTRIB = "maxLength";
         private const string AUTOSIZE_ATTRIB = "autoSize";
         private const string HAS_LAYOUT_ATTRIB = "hasLayout";
         private const string NOT_SELECTABLE_ATTRIB = "notSelectable";
@@ -21,6 +24,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags {
         private const string FONT_REF_ATTRIB = "fontRef";
         private const string FONT_HEIGHT_ATTRIB = "fontHeight";
         private const string ALIGN_ATTRIB = "align";
+        private const string BORDER_ATTRIB = "hasBorder";
+        //private const string STATIC_ATTRIB = "wasStatic";
         private const string LEFT_MARGIN_ATTRIB = "leftMargin";
         private const string RIGHT_MARGIN_ATTRIB = "rightMargin";
         private const string INDENT_ATTRIB = "indent";
@@ -30,9 +35,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags {
         private const string SIZE_ELEM = "size";
         private const string COLOR_ELEM = "color";
 
+        //TODO: Font class name and wasStatic which is not supported by swfmill
         //TODO: check bit flags seting+check fields list
-        public override void AcceptAttribute(DefineEditTextTag tag, XAttribute attrib) {
-            switch (attrib.Name.LocalName) {
+        public override void AcceptAttribute(DefineEditTextTag tag, XAttribute attrib)
+        {
+            switch (attrib.Name.LocalName)
+            {
                 case OBJECT_ID_ATTRIB:
                     tag.CharacterID = ushort.Parse(attrib.Value);
                     break;
@@ -53,6 +61,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags {
                     break;
                 case HAS_LAYOUT_ATTRIB:
                     tag.HasLayout = SwfMillPrimitives.ParseBoolean(attrib);
+                    //TODO: why does swfmill sets it?
                     break;
                 case NOT_SELECTABLE_ATTRIB:
                     tag.NoSelect = SwfMillPrimitives.ParseBoolean(attrib);
@@ -74,20 +83,29 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags {
                     tag.FontHeight = ushort.Parse(attrib.Value);
                     tag.HasFont = true;
                     break;
+                case MAX_LENGTH_ATTRIB:
+                    tag.MaxLength = ushort.Parse(attrib.Value);
+                    tag.HasMaxLength = true;
+                    break;
                 case ALIGN_ATTRIB:
-                    //TODO: password
+                    tag.Align = byte.Parse(attrib.Value);
+                    tag.HasLayout = true;
                     break;
                 case LEFT_MARGIN_ATTRIB:
                     tag.LeftMargin = ushort.Parse(attrib.Value);
+                    tag.HasLayout = true;
                     break;
                 case RIGHT_MARGIN_ATTRIB:
                     tag.RightMargin = ushort.Parse(attrib.Value);
+                    tag.HasLayout = true;
                     break;
                 case INDENT_ATTRIB:
                     tag.Indent = ushort.Parse(attrib.Value);
+                    tag.HasLayout = true;
                     break;
                 case LEADING_ATTRIB:
                     tag.Leading = short.Parse(attrib.Value);
+                    tag.HasLayout = true;
                     break;
                 case VARIABLE_NAME_ATTRIB:
                     tag.VariableName = attrib.Value;
@@ -101,42 +119,63 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags {
             }
         }
 
-        public override void AcceptElement(DefineEditTextTag tag, XElement element) {
-            switch (element.Name.LocalName) {
-                case DATA_TAG:
-                    //TODO: set data
-                    FromBase64(element);
-                    break;
+        public override void AcceptElement(DefineEditTextTag tag, XElement element)
+        {
+            switch (element.Name.LocalName)
+            {
+                //case DATA_TAG:
+                //    //TODO: set data
+                //    FromBase64(element);
+                //    break;
                 case SIZE_ELEM:
                     _formatters.Rectangle.Parse(element.Element("Rectangle"), out tag.Bounds);
                     break;
                 case COLOR_ELEM:
-                    //TODO: password
+                    _formatters.ColorRGBA.Parse(element.Element("Color"), out tag.TextColor);
+                    tag.HasTextColor = true;
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
         }
 
-        public override XElement FormatTag(DefineEditTextTag tag) {
-            //TODO: check fields
-            var res = new XElement(SwfTagNameMapping.DEFINE_EDIT_TEXT_TAG,
-                                new XAttribute(OBJECT_ID_ATTRIB, tag.CharacterID),
-                                new XAttribute(WORD_WRAP_ATTRIB, SwfMillPrimitives.GetStringValue(tag.WordWrap)),
-                                new XAttribute(MULTILINE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Multiline)),
-                                new XAttribute(READONLY_ATTRIB, SwfMillPrimitives.GetStringValue(tag.ReadOnly)),
-                                new XAttribute(PASSWORD_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Password)),
-                                new XAttribute(AUTOSIZE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.AutoSize))
-
-            );
-            if (tag.HasLayout) {
+        public override XElement FormatTag(DefineEditTextTag tag)
+        {
+            var res = new XElement(SwfTagNameMapping.DEFINE_EDIT_TEXT_TAG);
+            res.Add(new XAttribute(OBJECT_ID_ATTRIB, tag.CharacterID));
+            res.Add(new XElement(SIZE_ELEM, _formatters.Rectangle.Format(ref tag.Bounds)));
+            res.Add(new XAttribute(WORD_WRAP_ATTRIB, SwfMillPrimitives.GetStringValue(tag.WordWrap)));
+            res.Add(new XAttribute(MULTILINE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Multiline)));
+            res.Add(new XAttribute(PASSWORD_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Password)));
+            res.Add(new XAttribute(READONLY_ATTRIB, SwfMillPrimitives.GetStringValue(tag.ReadOnly)));
+            res.Add(new XAttribute(AUTOSIZE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.AutoSize)));
+            res.Add(new XAttribute(HAS_LAYOUT_ATTRIB, FormatBoolToDigit(tag.HasLayout)));
+            res.Add(new XAttribute(NOT_SELECTABLE_ATTRIB, FormatBoolToDigit(tag.NoSelect)));
+            res.Add(new XAttribute(BORDER_ATTRIB, FormatBoolToDigit(tag.Border)));
+            //res.Add(new XAttribute(STATIC_ATTRIB, FormatBoolToDigit(tag.WasStatic)));
+            res.Add(new XAttribute(IS_HTML_ATTRIB, FormatBoolToDigit(tag.HTML)));
+            res.Add(new XAttribute(USE_OUTLINES_ATTRIB, FormatBoolToDigit(tag.UseOutlines)));
+            if (tag.HasFont)
+            {
+                res.Add(new XAttribute(FONT_REF_ATTRIB, tag.FontID));
+                res.Add(new XAttribute(FONT_HEIGHT_ATTRIB, tag.FontHeight));
+            }
+            if (tag.HasTextColor)
+            {
+                res.Add(new XElement("color", _formatters.ColorRGBA.Format(ref tag.TextColor)));
+            }
+            res.Add(new XAttribute(MAX_LENGTH_ATTRIB, tag.MaxLength));
+            if (tag.HasLayout)
+            {
+                res.Add(new XAttribute(ALIGN_ATTRIB, tag.Align));
                 res.Add(new XAttribute(LEFT_MARGIN_ATTRIB, tag.LeftMargin));
                 res.Add(new XAttribute(RIGHT_MARGIN_ATTRIB, tag.RightMargin));
                 res.Add(new XAttribute(INDENT_ATTRIB, tag.Indent));
                 res.Add(new XAttribute(LEADING_ATTRIB, tag.Leading));
             }
             res.Add(new XAttribute(VARIABLE_NAME_ATTRIB, tag.VariableName));
-            if (tag.HasText) {
+            if (tag.HasText)
+            {
                 res.Add(new XAttribute(INITIAL_TEXT_ATTRIB, tag.InitialText));
             }
             return res;

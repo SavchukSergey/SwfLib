@@ -6,6 +6,8 @@
         public ushort ObjectID;
         
         public string Name;
+        
+        public byte BitmapCache;
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {

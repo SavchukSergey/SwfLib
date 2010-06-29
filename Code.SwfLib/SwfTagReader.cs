@@ -198,6 +198,7 @@ namespace Code.SwfLib {
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
             reader.ReadRect(out tag.Bounds);
+            reader.AlignToByte();
             tag.HasText = reader.ReadBit();
             tag.WordWrap = reader.ReadBit();
             tag.Multiline = reader.ReadBit();

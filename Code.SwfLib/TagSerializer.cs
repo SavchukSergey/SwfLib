@@ -64,6 +64,7 @@ namespace Code.SwfLib {
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteRect(ref tag.Bounds);
+            writer.FlushBits();
             writer.WriteBit(tag.HasText);
             writer.WriteBit(tag.WordWrap);
             writer.WriteBit(tag.Multiline);
