@@ -48,11 +48,7 @@ namespace Code.SwfLib {
         }
 
         public static void WriteRect(this SwfStreamWriter writer, ref SwfRect rect) {
-            BitsCount btCount = new BitsCount(0);
-            btCount.AddValue(rect.XMin);
-            btCount.AddValue(rect.XMax);
-            btCount.AddValue(rect.YMin);
-            btCount.AddValue(rect.YMax);
+            BitsCount btCount = new BitsCount(rect.XMin, rect.XMax, rect.YMin, rect.YMax);
             var bits = btCount.GetSignedBits();
             if (bits < 1) bits = 1;
             writer.WriteUnsignedBits(bits, 5);

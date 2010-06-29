@@ -60,6 +60,20 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             }
         }
 
+        protected static byte[] GetTagPayload(byte[] data) {
+            ushort typeAndSize = (ushort)(data[0] | (data[1] << 8));
+            SwfTagType type = (SwfTagType)(typeAndSize >> 6);
+            int size = typeAndSize & 0x3f;
+            int startIndex = 2;
+            if (size >= 0x3f) {
+                size = (data[2] | (data[3] << 8) | (data[4] << 16) | (data[5] << 24));
+                startIndex = 6;
+            }
+            byte[] payload = new byte[size];
+            Array.Copy(data, startIndex, payload, 0, size);
+            return payload;
+        }
+
         private static Stream DecompressIfNeeded(SwfFileInfo info, Stream stream) {
             switch (info.Format) {
                 case "CWS":
