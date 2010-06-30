@@ -11,9 +11,9 @@ using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib {
     public class SwfTagReader {
-        private readonly ushort _version;
+        private readonly byte _version;
 
-        public SwfTagReader(ushort version) {
+        public SwfTagReader(byte version) {
             _version = version;
         }
 
@@ -338,10 +338,7 @@ namespace Code.SwfLib {
             }
             if (tag.HasClipActions)
             {
-                //    tag.ActionsReserved = reader.ReadUInt16();
-                //    tag.ActionsFlags = _version >= 6 ? reader.ReadUInt32() : reader.ReadUInt16();
-                //    //TODO: read other fields
-                //TODO: read actions
+                reader.ReadClipActions(_version, out tag.ClipActions);
             }
             return tag;
         }

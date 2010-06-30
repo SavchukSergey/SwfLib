@@ -11,7 +11,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags
             switch (attrib.Name.LocalName)
             {
                 case OBJECT_ID_ATTRIB:
-                    tag.ObjectID = ushort.Parse(attrib.Value);
+                    tag.FontID = ushort.Parse(attrib.Value);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);

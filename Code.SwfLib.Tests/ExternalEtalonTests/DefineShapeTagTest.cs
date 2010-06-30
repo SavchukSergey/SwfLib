@@ -104,7 +104,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests
         public void WriteTest()
         {
             var tag = GetDefineShapeTag1();
-            var serializer = new TagSerializer();
+            var serializer = new TagSerializer(10);
             var tagData = serializer.GetTagData(tag);
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
@@ -224,7 +224,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests
         public void Write2Test()
         {
             var tag = GetDefineShapeTag2();
-            var serializer = new TagSerializer();
+            var serializer = new TagSerializer(10);
             var tagData = serializer.GetTagData(tag);
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);

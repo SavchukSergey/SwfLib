@@ -16,7 +16,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             var tag = new DefineBitsJPEG2Tag();
             tag.CharacterID = 1;
             tag.ImageData = GetEmbeddedResourceData("DefineBitsJPEG2.jpg");
-            var visitor = new TagSerializer();
+            var visitor = new TagSerializer(10);
             var res = visitor.GetTagData(tag);
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
@@ -48,7 +48,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
         }
 
         private void Compare(SwfTagBase tag, string resourceName) {
-            var visitor = new TagSerializer();
+            var visitor = new TagSerializer(10);
             var res = tag.AcceptVistor(visitor);
             Assert.IsNotNull(res, "Should return a value");
             Assert.IsTrue(res is SwfTagData, "Should return a value of SwfTagData type");

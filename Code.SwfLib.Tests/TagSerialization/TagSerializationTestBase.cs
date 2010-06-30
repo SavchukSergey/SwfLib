@@ -42,7 +42,7 @@ namespace Code.SwfLib.Tests.TagSerialization
         protected Stream SerializeTag(SwfTagBase tag)
         {
             var mem = new MemoryStream();
-            var serializer = new TagSerializer();
+            var serializer = new TagSerializer(10);
             var tagData = serializer.GetTagData(tag);
             var writer = new SwfStreamWriter(mem);
             writer.WriteTagData(tagData);

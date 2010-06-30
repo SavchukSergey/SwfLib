@@ -31,7 +31,7 @@ namespace Code.SwfLib {
             var writer = new SwfStreamWriter(mem);
             writer.WriteSwfFileInfo(FileInfo);
             writer.WriteSwfHeader(Header);
-            var bin = new TagSerializer();
+            var bin = new TagSerializer(FileInfo.Version);
             foreach (var tag in Tags)
             {
                 var tagData = (SwfTagData)tag.AcceptVistor(bin);
