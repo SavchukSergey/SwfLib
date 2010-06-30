@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="AssertExt.cs" />
     <Compile Include="BitsCountTest.cs" />
+    <Compile Include="ColorTransformStreamExtTest.cs" />
     <Compile Include="ExternalEtalonTests\DefineShapeTagTest.cs" />
     <Compile Include="ExternalEtalonTests\ExternalEtalonTestFixtureBase.cs" />
     <Compile Include="ExternalEtalonTests\SwfStreamReaderExtTest.cs" />

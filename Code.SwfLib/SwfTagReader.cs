@@ -303,39 +303,46 @@ namespace Code.SwfLib {
             var tag = new PlaceObject2Tag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
-            var flags = (PlaceObject2Flags)reader.ReadByte();
+            tag.HasClipActions = reader.ReadBit(); //TODO: Check swf version
+            tag.HasClipDepth = reader.ReadBit();
+            tag.HasName = reader.ReadBit();
+            tag.HasRatio = reader.ReadBit();
+            tag.HasColorTransform = reader.ReadBit();
+            tag.HasMatrix = reader.ReadBit();
+            tag.HasCharacter = reader.ReadBit();
+            tag.Move = reader.ReadBit();
             tag.Depth = reader.ReadUInt16();
-            //TODO: make non nullable + bit accessor roperties
-            if ((flags & PlaceObject2Flags.HasIdRef) > 0) {
+            if (tag.HasCharacter)
+            {
                 tag.CharacterID = reader.ReadUInt16();
-            } else {
-                tag.CharacterID = null;
             }
-            if ((flags & PlaceObject2Flags.HasMatrix) > 0) {
-                SwfMatrix matrix;
-                reader.ReadMatrix(out matrix);
-                tag.Matrix = matrix;
-            } else {
-                tag.Matrix = null;
+            if (tag.HasMatrix)
+            {
+                reader.ReadMatrix(out tag.Matrix);
             }
-            tag.ColorTransform = (flags & PlaceObject2Flags.HasColorTransform) > 0 ? reader.ReadColorTransformRGB() : (ColorTransformRGB?)null;
-            if ((flags & PlaceObject2Flags.HasRatio) > 0) {
+            if (tag.HasColorTransform)
+            {
+                reader.ReadColorTransformRGBA(out tag.ColorTransform);
+            }
+            if (tag.HasRatio)
+            {
                 tag.Ratio = reader.ReadUInt16();
-            } else {
-                tag.Ratio = null;
             }
-            tag.Name = (flags & PlaceObject2Flags.HasName) > 0 ? reader.ReadString() : null;
-            if ((flags & PlaceObject2Flags.HasClippingDepth) > 0) {
+            if (tag.HasName)
+            {
+                tag.Name = reader.ReadString();
+            }
+            if (tag.HasClipDepth)
+            {
                 tag.ClipDepth = reader.ReadUInt16();
-            } else {
-                tag.ClipDepth = null;
             }
-            if ((flags & PlaceObject2Flags.HasActions) > 0) {
-                tag.ActionsReserved = reader.ReadUInt16();
-                tag.ActionsFlags = _version >= 6 ? reader.ReadUInt32() : reader.ReadUInt16();
-                //TODO: read other fields
+            if (tag.HasClipActions)
+            {
+                //    tag.ActionsReserved = reader.ReadUInt16();
+                //    tag.ActionsFlags = _version >= 6 ? reader.ReadUInt32() : reader.ReadUInt16();
+                //    //TODO: read other fields
+                //TODO: read actions
             }
-            //TODO: Read the others fields
             return tag;
         }
 

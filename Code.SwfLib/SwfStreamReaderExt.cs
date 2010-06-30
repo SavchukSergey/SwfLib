@@ -84,63 +84,6 @@ namespace Code.SwfLib {
             reader.AlignToByte();
         }
 
-        public static ColorTransformRGB ReadColorTransformRGB(this SwfStreamReader reader) {
-            ColorTransformRGB transform;
-            reader.AlignToByte();
-            bool hasAddTerms = reader.ReadBit();
-            bool hasMultTerms = reader.ReadBit();
-            var bits = reader.ReadUnsignedBits(4);
-            if (hasMultTerms) {
-                transform.RedMultTerm = (short?)reader.ReadSignedBits(bits);
-                transform.GreenMultTerm = (short?)reader.ReadSignedBits(bits);
-                transform.BlueMultTerm = (short?)reader.ReadSignedBits(bits);
-            } else {
-                transform.RedMultTerm = null;
-                transform.GreenMultTerm = null;
-                transform.BlueMultTerm = null;
-            }
-            if (hasAddTerms) {
-                transform.RedAddTerm = (short?)reader.ReadSignedBits(bits);
-                transform.GreenAddTerm = (short?)reader.ReadSignedBits(bits);
-                transform.BlueAddTerm = (short?)reader.ReadSignedBits(bits);
-            } else {
-                transform.RedAddTerm = null;
-                transform.GreenAddTerm = null;
-                transform.BlueAddTerm = null;
-            }
-            return transform;
-        }
-
-        public static ColorTransformRGBA ReadColorTransformRGBA(this SwfStreamReader reader) {
-            ColorTransformRGBA transform;
-            reader.AlignToByte();
-            bool hasAddTerms = reader.ReadBit();
-            bool hasMultTerms = reader.ReadBit();
-            var bits = reader.ReadUnsignedBits(4);
-            if (hasMultTerms) {
-                transform.RedMultTerm = (short?)reader.ReadSignedBits(bits);
-                transform.GreenMultTerm = (short?)reader.ReadSignedBits(bits);
-                transform.BlueMultTerm = (short?)reader.ReadSignedBits(bits);
-                transform.AlphaMultTerm = (short?)reader.ReadSignedBits(bits);
-            } else {
-                transform.RedMultTerm = null;
-                transform.GreenMultTerm = null;
-                transform.BlueMultTerm = null;
-                transform.AlphaMultTerm = null;
-            }
-            if (hasAddTerms) {
-                transform.RedAddTerm = (short?)reader.ReadSignedBits(bits);
-                transform.GreenAddTerm = (short?)reader.ReadSignedBits(bits);
-                transform.BlueAddTerm = (short?)reader.ReadSignedBits(bits);
-                transform.AlphaAddTerm = (short?)reader.ReadSignedBits(bits);
-            } else {
-                transform.RedAddTerm = null;
-                transform.GreenAddTerm = null;
-                transform.BlueAddTerm = null;
-                transform.AlphaAddTerm = null;
-            }
-            return transform;
-        }
 
         public static SwfSymbolReference ReadSymbolReference(this SwfStreamReader reader) {
             return new SwfSymbolReference {
@@ -148,10 +91,6 @@ namespace Code.SwfLib {
                 SymbolName = reader.ReadString()
             };
 
-        }
-
-        public static SwfAnyFilter ReadAnyFilter(this SwfStreamReader reader) {
-            throw new NotImplementedException();
         }
 
         public static IList<TextRecord> ReadTextRecord(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {

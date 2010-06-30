@@ -1,53 +1,26 @@
 ﻿using Code.SwfLib.Data;
+using Code.SwfLib.Data.Actions;
 
 namespace Code.SwfLib.Tags.DisplayListTags
 {
     public class PlaceObject2Tag : DisplayListBaseTag
     {
 
-        public bool HasClipActions
-        {
-            //TODO: Implement
-            get { return false; }
-        }
+        public bool HasClipActions;
 
-        public bool HasClipDepth
-        {
-            get { return ClipDepth.HasValue; }
-        }
+        public bool HasClipDepth;
 
-        public bool HasName
-        {
-            get { return !string.IsNullOrEmpty(Name); }
-        }
+        public bool HasName;
 
-        public bool HasRatio
-        {
-            get { return Ratio.HasValue; }
-        }
+        public bool HasRatio;
 
-        public bool HasColorTransform
-        {
-            get { return ColorTransform.HasValue; }
-        }
+        public bool HasColorTransform;
 
-        public bool HasMatrix
-        {
-            get { return Matrix.HasValue; }
-        }
+        public bool HasMatrix;
 
-        public bool HasCharacter
-        {
-            get { return CharacterID.HasValue; }
-        }
+        public bool HasCharacter;
 
-        public bool Move
-        {
-            //TODO: Implement
-            get { return false; }
-        }
-
-        public ushort? CharacterID;
+        public bool Move;
 
         /// <summary>
         /// The depth value determines the stacking order of the character.
@@ -58,22 +31,19 @@ namespace Code.SwfLib.Tags.DisplayListTags
         /// </summary>
         public ushort Depth;
 
-        public SwfMatrix? Matrix;
+        public ushort CharacterID;
 
-        public ColorTransformRGB? ColorTransform;
+        public SwfMatrix Matrix;
 
-        public ushort? Ratio;
+        public ColorTransformRGBA ColorTransform;
+
+        public ushort Ratio;
 
         public string Name;
 
-        public ushort? ClipDepth;
+        public ushort ClipDepth;
 
-
-
-        //TODO: move to Clip Actions
-        public ushort ActionsReserved;
-
-        public uint ActionsFlags;
+        public ClipActions ClipActions;
 
         public override object AcceptVistor(ISwfTagVisitor visitor)
         {

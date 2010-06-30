@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitsCount.cs" />
+    <Compile Include="ColorTransformStreamExt.cs" />
+    <Compile Include="Data\Actions\ClipActions.cs" />
     <Compile Include="Data\ColorTransformRGBA.cs" />
     <Compile Include="Data\FillStyles\FillStyle.cs" />
     <Compile Include="Data\Gradients\FocalGradient.cs" />
@@ -68,7 +70,6 @@
     <Compile Include="Data\Shapes\StraightEdgeShapeRecord.cs" />
     <Compile Include="Data\Shapes\StyleChangeShapeRecord.cs" />
     <Compile Include="Data\ShapeWithStyle1.cs" />
-    <Compile Include="Data\SwfAnyFilter.cs" />
     <Compile Include="Data\ColorTransformRGB.cs" />
     <Compile Include="Data\SwfMorphShapeWithStyle.cs" />
     <Compile Include="Data\SwfRGBA.cs" />
