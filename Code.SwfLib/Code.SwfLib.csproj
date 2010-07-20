@@ -77,8 +77,6 @@
     <Compile Include="Data\Text\GlyphEntry.cs" />
     <Compile Include="Data\Text\TextRecord.cs" />
     <Compile Include="Data\Text\TextRecordFlags.cs" />
-    <Compile Include="Data\ZoneData.cs" />
-    <Compile Include="Data\ZoneRecord.cs" />
     <Compile Include="FillStyleStreamExt.cs" />
     <Compile Include="GradientStreamExt.cs" />
     <Compile Include="LineStyleStreamExt.cs" />

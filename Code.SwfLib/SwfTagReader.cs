@@ -17,7 +17,18 @@ namespace Code.SwfLib {
             _version = version;
         }
 
-        public DefineSpriteTag ReadDefineSpriteTag(SwfTagData tagData) {
+        public DefineFontAlignZonesTag ReadDefineFontAlignZonesTag(SwfTagData tagData)
+        {
+            var tag = new DefineFontAlignZonesTag { RawData = tagData };
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.FontID = reader.ReadUInt16();
+            tag.Data = reader.ReadBytes((int)(stream.Length - stream.Position));
+            return tag;
+        }
+
+        public DefineSpriteTag ReadDefineSpriteTag(SwfTagData tagData)
+        {
             var tag = new DefineSpriteTag { RawData = tagData };
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
@@ -375,6 +386,8 @@ namespace Code.SwfLib {
                     return ReadDefineBitsLosslessTag(tagData);
                 case SwfTagType.DefineEditText:
                     return ReadDefineEditTextTag(tagData);
+                case SwfTagType.DefineFontAlignZones:
+                    return ReadDefineFontAlignZonesTag(tagData);
                 case SwfTagType.DefineFontName:
                     return ReadDefineFontNameTag(tagData);
                 //case SwfTagType.DefineFont3:

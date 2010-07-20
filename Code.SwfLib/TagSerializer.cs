@@ -149,22 +149,7 @@ namespace Code.SwfLib
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.FontID);
-            writer.WriteUnsignedBits(tag.CSMTableHint, 2);
-            writer.WriteUnsignedBits(tag.Reserved, 6);
-            for (var i=0; i < tag.ZoneTable.Count; i++)
-            {
-                var record = tag.ZoneTable[i];
-                //TODO: check boundaries
-                writer.WriteByte((byte) record.ZoneData.Count);
-                for (var j = 0; j < record.ZoneData.Count; j++)
-                {
-                    var zoneData = record.ZoneData[j];
-                    throw new NotImplementedException(); //TODO: Compressed data???
-                }
-                writer.WriteUnsignedBits(record.Reserved, 6);
-                writer.WriteBit(record.ZoneMaskY);
-                writer.WriteBit(record.ZoneMaskX);
-            }
+            writer.WriteBytes(tag.Data);
             return new SwfTagData { Type = SwfTagType.DefineFontAlignZones, Data = mem.ToArray() };
         }
 
