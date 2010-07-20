@@ -2,10 +2,8 @@
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.Text;
 
-namespace Code.SwfLib.Tags
-{
-    public class DefineTextTag : SwfTagBase
-    {
+namespace Code.SwfLib.Tags {
+    public class DefineTextTag : SwfTagBase {
 
         public ushort CharacterID;
 
@@ -15,8 +13,11 @@ namespace Code.SwfLib.Tags
 
         public readonly IList<TextRecord> TextRecords = new List<TextRecord>();
 
-        public override object AcceptVistor(ISwfTagVisitor visitor)
-        {
+        public override SwfTagType TagType {
+            get { return SwfTagType.DefineText; }
+        }
+
+        public override object AcceptVistor(ISwfTagVisitor visitor) {
             return visitor.Visit(this);
         }
     }

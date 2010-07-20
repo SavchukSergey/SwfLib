@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using Code.SwfLib.Data;
+using Code.SwfLib.Data.Actions;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.Actions;
 using Code.SwfLib.Tags.BitmapTags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
@@ -17,9 +19,8 @@ namespace Code.SwfLib {
             _version = version;
         }
 
-        public DefineFontAlignZonesTag ReadDefineFontAlignZonesTag(SwfTagData tagData)
-        {
-            var tag = new DefineFontAlignZonesTag { RawData = tagData };
+        public DefineFontAlignZonesTag ReadDefineFontAlignZonesTag(SwfTagData tagData) {
+            var tag = new DefineFontAlignZonesTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.FontID = reader.ReadUInt16();
@@ -27,9 +28,8 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public DefineSpriteTag ReadDefineSpriteTag(SwfTagData tagData)
-        {
-            var tag = new DefineSpriteTag { RawData = tagData };
+        public DefineSpriteTag ReadDefineSpriteTag(SwfTagData tagData) {
+            var tag = new DefineSpriteTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.SpriteID = reader.ReadUInt16();
@@ -38,7 +38,7 @@ namespace Code.SwfLib {
             do {
                 subTag = ReadDefineSpriteSubTag(reader);
                 if (subTag != null) tag.Tags.Add(subTag);
-            } while (subTag != null && subTag.RawData.Type != SwfTagType.End);
+            } while (subTag != null && subTag.TagType != SwfTagType.End);
             return tag;
         }
 
@@ -50,7 +50,7 @@ namespace Code.SwfLib {
         }
 
         public DefineTextTag ReadDefineTextTag(SwfTagData tagData) {
-            var tag = new DefineTextTag { RawData = tagData };
+            var tag = new DefineTextTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
@@ -62,6 +62,21 @@ namespace Code.SwfLib {
             foreach (var record in reader.ReadTextRecord(glyphBits, advanceBits)) {
                 tag.TextRecords.Add(record);
             }
+            return tag;
+        }
+
+        public DoActionTag ReadDoActionTag(SwfTagData tagData) {
+            var tag = new DoActionTag();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            ActionBase action = null;
+            do {
+                reader.GoBack(1);
+                action = reader.ReadAction();
+                if (action != null) {
+                    tag.ActionRecords.Add(action);
+                }
+            } while (action != null);
             return tag;
         }
 
@@ -129,7 +144,7 @@ namespace Code.SwfLib {
         }
 
         public static FrameLabelTag ReadFrameLabelTag(SwfTagData tagData) {
-            FrameLabelTag tag = new FrameLabelTag { RawData = tagData };
+            FrameLabelTag tag = new FrameLabelTag();
             MemoryStream stream = new MemoryStream(tagData.Data);
             SwfStreamReader reader = new SwfStreamReader(stream);
             tag.Name = reader.ReadString();
@@ -140,16 +155,16 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public static UnknownTag ReadUnknownTag(SwfTagData data) {
-            return new UnknownTag { RawData = data };
+        public static UnknownTag ReadUnknownTag(SwfTagData tagData) {
+            return new UnknownTag { Data = tagData.Data };
         }
 
         public EndTag ReadEndTag(SwfTagData data) {
-            return new EndTag { RawData = data };
+            return new EndTag();
         }
 
         public FileAttributesTag ReadFileAttributesTag(SwfTagData tagData) {
-            var tag = new FileAttributesTag { RawData = tagData };
+            var tag = new FileAttributesTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.Attributes = (SwfFileAttributes)reader.ReadUInt32();
@@ -157,7 +172,7 @@ namespace Code.SwfLib {
         }
 
         public MetadataTag ReadMetadataTag(SwfTagData tagData) {
-            var tag = new MetadataTag { RawData = tagData };
+            var tag = new MetadataTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.Metadata = reader.ReadString();
@@ -165,7 +180,7 @@ namespace Code.SwfLib {
         }
 
         public static CSMTextSettingsTag ReadCSMTextSettingsTag(SwfTagData tagData) {
-            var tag = new CSMTextSettingsTag { RawData = tagData };
+            var tag = new CSMTextSettingsTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.TextID = reader.ReadUInt16();
@@ -179,7 +194,7 @@ namespace Code.SwfLib {
         }
 
         public static DefineBitsJPEG2Tag ReadDefineBitsJPEG2Tag(SwfTagData tagData) {
-            var tag = new DefineBitsJPEG2Tag { RawData = tagData };
+            var tag = new DefineBitsJPEG2Tag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
@@ -189,7 +204,7 @@ namespace Code.SwfLib {
         }
 
         public static DefineBitsLosslessTag ReadDefineBitsLosslessTag(SwfTagData tagData) {
-            var tag = new DefineBitsLosslessTag { RawData = tagData };
+            var tag = new DefineBitsLosslessTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
@@ -204,7 +219,7 @@ namespace Code.SwfLib {
         }
 
         public DefineEditTextTag ReadDefineEditTextTag(SwfTagData tagData) {
-            var tag = new DefineEditTextTag { RawData = tagData };
+            var tag = new DefineEditTextTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
@@ -256,7 +271,7 @@ namespace Code.SwfLib {
         }
 
         public static DefineFontNameTag ReadDefineFontNameTag(SwfTagData tagData) {
-            var tag = new DefineFontNameTag { RawData = tagData };
+            var tag = new DefineFontNameTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.FontId = reader.ReadUInt16();
@@ -266,7 +281,7 @@ namespace Code.SwfLib {
         }
 
         public static DefineFont3Tag ReadDefineFont3Tag(SwfTagData tagData) {
-            var tag = new DefineFont3Tag { RawData = tagData };
+            var tag = new DefineFont3Tag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.ObjectID = reader.ReadUInt16();
@@ -275,7 +290,7 @@ namespace Code.SwfLib {
         }
 
         public DefineShapeTag ReadDefineShapeTag(SwfTagData tagData) {
-            var tag = new DefineShapeTag { RawData = tagData };
+            var tag = new DefineShapeTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.ShapeID = reader.ReadUInt16();
@@ -285,7 +300,7 @@ namespace Code.SwfLib {
         }
 
         public ExportTag ReadExportTag(SwfTagData tagData) {
-            var tag = new ExportTag { RawData = tagData };
+            var tag = new ExportTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             var count = reader.ReadUInt16();
@@ -296,7 +311,7 @@ namespace Code.SwfLib {
             return tag;
         }
         public PlaceObjectTag ReadPlaceObjectTag(SwfTagData tagData) {
-            var tag = new PlaceObjectTag { RawData = tagData };
+            var tag = new PlaceObjectTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
@@ -311,7 +326,7 @@ namespace Code.SwfLib {
         }
 
         public PlaceObject2Tag ReadPlaceObject2Tag(SwfTagData tagData) {
-            var tag = new PlaceObject2Tag { RawData = tagData };
+            var tag = new PlaceObject2Tag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.HasClipActions = reader.ReadBit(); //TODO: Check swf version
@@ -323,39 +338,32 @@ namespace Code.SwfLib {
             tag.HasCharacter = reader.ReadBit();
             tag.Move = reader.ReadBit();
             tag.Depth = reader.ReadUInt16();
-            if (tag.HasCharacter)
-            {
+            if (tag.HasCharacter) {
                 tag.CharacterID = reader.ReadUInt16();
             }
-            if (tag.HasMatrix)
-            {
+            if (tag.HasMatrix) {
                 reader.ReadMatrix(out tag.Matrix);
             }
-            if (tag.HasColorTransform)
-            {
+            if (tag.HasColorTransform) {
                 reader.ReadColorTransformRGBA(out tag.ColorTransform);
             }
-            if (tag.HasRatio)
-            {
+            if (tag.HasRatio) {
                 tag.Ratio = reader.ReadUInt16();
             }
-            if (tag.HasName)
-            {
+            if (tag.HasName) {
                 tag.Name = reader.ReadString();
             }
-            if (tag.HasClipDepth)
-            {
+            if (tag.HasClipDepth) {
                 tag.ClipDepth = reader.ReadUInt16();
             }
-            if (tag.HasClipActions)
-            {
+            if (tag.HasClipActions) {
                 reader.ReadClipActions(_version, out tag.ClipActions);
             }
             return tag;
         }
 
         public static RemoveObjectTag ReadRemoveObjectTag(SwfTagData tagData) {
-            RemoveObjectTag tag = new RemoveObjectTag { RawData = tagData };
+            RemoveObjectTag tag = new RemoveObjectTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
@@ -364,7 +372,7 @@ namespace Code.SwfLib {
         }
 
         public SetBackgroundColorTag ReadSetBackgroundColorTag(SwfTagData tagData) {
-            var tag = new SetBackgroundColorTag { RawData = tagData };
+            var tag = new SetBackgroundColorTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             reader.ReadRGB(out tag.Color);
@@ -372,7 +380,7 @@ namespace Code.SwfLib {
         }
 
         public ShowFrameTag ReadShowFrameTag(SwfTagData data) {
-            return new ShowFrameTag { RawData = data };
+            return new ShowFrameTag();
         }
 
         public SwfTagBase ReadTag(SwfStreamReader reader) {
@@ -398,6 +406,8 @@ namespace Code.SwfLib {
                     return ReadDefineSpriteTag(tagData);
                 case SwfTagType.DefineText:
                     return ReadDefineTextTag(tagData);
+                case SwfTagType.DoAction:
+                    return ReadDoActionTag(tagData);
                 case SwfTagType.End:
                     return ReadEndTag(tagData);
                 case SwfTagType.Export:

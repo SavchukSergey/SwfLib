@@ -11,6 +11,10 @@ namespace Code.SwfLib.Tags.DisplayListTags {
 
         public ColorTransformRGB? ColorTransform;
 
+        public override SwfTagType TagType {
+            get { return SwfTagType.PlaceObject; }
+        }
+
         public override object AcceptVistor(ISwfTagVisitor visitor) {
             return visitor.Visit(this);
         }

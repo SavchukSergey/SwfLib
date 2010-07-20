@@ -14,6 +14,10 @@
 
         public byte[] ZlibBitmapData;
 
+        public override SwfTagType TagType {
+            get { return SwfTagType.DefineBitsLossless; }
+        }
+
         public override object AcceptVistor(ISwfTagVisitor visitor) {
             return visitor.Visit(this);
         }

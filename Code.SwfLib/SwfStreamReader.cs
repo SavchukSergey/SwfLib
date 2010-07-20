@@ -156,5 +156,9 @@ namespace Code.SwfLib
 
         #endregion
 
+
+        public void GoBack(int distance) {
+            _reader.BaseStream.Seek(-distance, SeekOrigin.Current);
+        }
     }
 }

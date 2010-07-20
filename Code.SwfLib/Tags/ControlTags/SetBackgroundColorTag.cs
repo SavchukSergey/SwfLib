@@ -5,6 +5,10 @@ namespace Code.SwfLib.Tags.ControlTags {
 
         public SwfRGB Color;
 
+        public override SwfTagType TagType {
+            get { return SwfTagType.SetBackgroundColor; }
+        }
+
         public override object AcceptVistor(ISwfTagVisitor visitor) {
             return visitor.Visit(this);
         }

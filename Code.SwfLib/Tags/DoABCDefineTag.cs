@@ -1,7 +1,5 @@
-﻿namespace Code.SwfLib.Tags
-{
-    public class DoABCDefineTag : SwfTagBase
-    {
+﻿namespace Code.SwfLib.Tags {
+    public class DoABCDefineTag : SwfTagBase {
 
         public uint Flags;
 
@@ -9,8 +7,11 @@
 
         public byte[] ABCData;
 
-        public override object AcceptVistor(ISwfTagVisitor visitor)
-        {
+        public override SwfTagType TagType {
+            get { return SwfTagType.DoAbcDefine; }
+        }
+
+        public override object AcceptVistor(ISwfTagVisitor visitor) {
             return visitor.Visit(this);
         }
     }

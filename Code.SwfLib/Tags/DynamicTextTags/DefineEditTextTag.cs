@@ -64,6 +64,10 @@ namespace Code.SwfLib.Tags.DynamicTextTags {
 
         public string InitialText;
 
+        public override SwfTagType TagType {
+            get { return SwfTagType.DefineEditText; }
+        }
+
         public override object AcceptVistor(ISwfTagVisitor visitor) {
             return visitor.Visit(this);
         }

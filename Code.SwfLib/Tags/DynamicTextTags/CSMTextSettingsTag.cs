@@ -1,7 +1,5 @@
-﻿namespace Code.SwfLib.Tags.DynamicTextTags
-{
-    public class CSMTextSettingsTag : SwfTagBase
-    {
+﻿namespace Code.SwfLib.Tags.DynamicTextTags {
+    public class CSMTextSettingsTag : SwfTagBase {
 
         public ushort TextID;
 
@@ -17,8 +15,11 @@
 
         public byte Reserved;
 
-        public override object AcceptVistor(ISwfTagVisitor visitor)
-        {
+        public override SwfTagType TagType {
+            get { return SwfTagType.CSMTextSettings; }
+        }
+
+        public override object AcceptVistor(ISwfTagVisitor visitor) {
             return visitor.Visit(this);
         }
     }

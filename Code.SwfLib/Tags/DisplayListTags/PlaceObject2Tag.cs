@@ -1,10 +1,8 @@
 ﻿using Code.SwfLib.Data;
 using Code.SwfLib.Data.Actions;
 
-namespace Code.SwfLib.Tags.DisplayListTags
-{
-    public class PlaceObject2Tag : DisplayListBaseTag
-    {
+namespace Code.SwfLib.Tags.DisplayListTags {
+    public class PlaceObject2Tag : DisplayListBaseTag {
 
         public bool HasClipActions;
 
@@ -45,8 +43,11 @@ namespace Code.SwfLib.Tags.DisplayListTags
 
         public ClipActions ClipActions;
 
-        public override object AcceptVistor(ISwfTagVisitor visitor)
-        {
+        public override SwfTagType TagType {
+            get { return SwfTagType.PlaceObject2; }
+        }
+
+        public override object AcceptVistor(ISwfTagVisitor visitor) {
             return visitor.Visit(this);
         }
     }

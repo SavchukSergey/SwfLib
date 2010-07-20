@@ -49,10 +49,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionsStreamExt.cs" />
     <Compile Include="BitsCount.cs" />
     <Compile Include="ClipActionsStreamExt.cs" />
     <Compile Include="ColorTransformStreamExt.cs" />
+    <Compile Include="Data\Actions\ActionBase.cs" />
+    <Compile Include="Data\Actions\ActionCode.cs" />
+    <Compile Include="Data\Actions\ActionGetURL.cs" />
+    <Compile Include="Data\Actions\ActionGotoFrame.cs" />
+    <Compile Include="Data\Actions\ActionGoToLabel.cs" />
+    <Compile Include="Data\Actions\ActionNextFrame.cs" />
+    <Compile Include="Data\Actions\ActionPlay.cs" />
+    <Compile Include="Data\Actions\ActionPreviousFrame.cs" />
+    <Compile Include="Data\Actions\ActionSetTarget.cs" />
+    <Compile Include="Data\Actions\ActionStop.cs" />
+    <Compile Include="Data\Actions\ActionStopSounds.cs" />
+    <Compile Include="Data\Actions\ActionToggleQuality.cs" />
+    <Compile Include="Data\Actions\ActionWaitForFrame.cs" />
     <Compile Include="Data\Actions\ClipActions.cs" />
+    <Compile Include="Data\Actions\IActionVisitor.cs" />
     <Compile Include="Data\ColorTransformRGBA.cs" />
     <Compile Include="Data\FillStyles\FillStyle.cs" />
     <Compile Include="Data\Gradients\FocalGradient.cs" />
@@ -114,7 +129,7 @@
     <Compile Include="Tags\DefineSpriteTag.cs" />
     <Compile Include="Tags\DefineTextTag.cs" />
     <Compile Include="Tags\DisplayListTags\DisplayListBaseTag.cs" />
-    <Compile Include="Tags\DoActionTag.cs" />
+    <Compile Include="Tags\Actions\DoActionTag.cs" />
     <Compile Include="Tags\DoInitActionTag.cs" />
     <Compile Include="Tags\ControlTags\EndTag.cs" />
     <Compile Include="Tags\ExportTag.cs" />
