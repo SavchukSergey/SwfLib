@@ -175,6 +175,11 @@
         /// </summary>
         GetURL = 0x83,
         /// <summary>
+        /// ActionConstantPool creates a new constant pool, and replaces the old constant pool if one 
+        /// already exists.
+        /// </summary>
+        ConstantPool = 0x88,
+        /// <summary>
         /// ActionWaitForFrame instructs Flash Player to wait until the specified frame; otherwise skips 
         /// the specified number of actions.
         /// </summary>
@@ -205,6 +210,10 @@
         /// ActionGetURL2 gets a URL and is stack based.
         /// </summary>
         GetURL2 = 0x9a,
+        /// <summary>
+        /// ActionDefineFunction defines a function with a given name and body size.
+        /// </summary>
+        DefineFunction = 0x9b,
         /// <summary>
         /// ActionIf creates a conditional test and branch.
         /// </summary>

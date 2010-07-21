@@ -71,7 +71,6 @@ namespace Code.SwfLib {
             var reader = new SwfStreamReader(stream);
             ActionBase action = null;
             do {
-                reader.GoBack(1);
                 action = reader.ReadAction();
                 if (action != null) {
                     tag.ActionRecords.Add(action);

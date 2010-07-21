@@ -20,7 +20,6 @@ namespace Code.SwfLib {
             switch (code) {
                 case ActionCode.Push:
                 case ActionCode.Pop:
-                case ActionCode.Multiply:
                 case ActionCode.Divide:
                 case ActionCode.Equals:
                 case ActionCode.Less:
@@ -52,7 +51,7 @@ namespace Code.SwfLib {
                 case ActionCode.StartDrag:
                 case ActionCode.EndDrag:
                 case ActionCode.GetTime:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException(code.ToString());
 
                 case ActionCode.Empty:
                     return null;
@@ -60,6 +59,10 @@ namespace Code.SwfLib {
                     return reader.ReadActionAdd();
                 case ActionCode.Call:
                     return reader.ReadActionCall();
+                case ActionCode.ConstantPool:
+                    return reader.ReadActionConstantPool();
+                case ActionCode.DefineFunction:
+                    return reader.ReadActionDefineFunction();
                 case ActionCode.GetURL:
                     return reader.ReadActionGetURL();
                 case ActionCode.GotoFrame:
@@ -68,6 +71,8 @@ namespace Code.SwfLib {
                     return reader.ReadActionGoToLabel();
                 case ActionCode.Jump:
                     return reader.ReadActionJump();
+                case ActionCode.Multiply:
+                    return reader.ReadActionMultiply();
                 case ActionCode.NextFrame:
                     return reader.ReadActionNextFrame();
                 case ActionCode.Play:
@@ -110,6 +115,30 @@ namespace Code.SwfLib {
             return new ActionCall();
         }
 
+        public static ActionConstantPool ReadActionConstantPool(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.ConstantPool, out length);
+            ushort count = reader.ReadUInt16();
+            var pool = new string[count];
+            for (var i = 0; i < count; i++) {
+                pool[i] = reader.ReadString();
+            }
+            return new ActionConstantPool { ConstantPool = pool };
+        }
+
+        public static ActionDefineFunction ReadActionDefineFunction(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.DefineFunction, out length);
+            string name = reader.ReadString();
+            ushort count = reader.ReadUInt16();
+            var parameters = new string[count];
+            for (var i = 0; i < count; i++) {
+                parameters[i] = reader.ReadString();
+            }
+            ushort bodySize = reader.ReadUInt16();
+            return new ActionDefineFunction { FunctionName = name, Params = parameters, Body = reader.ReadBytes(bodySize) };
+        }
+
         public static ActionGetURL ReadActionGetURL(this SwfStreamReader reader) {
             ushort length;
             AssertActionCode(reader, ActionCode.GetURL, out length);
@@ -132,6 +161,12 @@ namespace Code.SwfLib {
             ushort length;
             AssertActionCode(reader, ActionCode.Jump, out length);
             return new ActionJump { BranchOffset = reader.ReadSInt16() };
+        }
+
+        public static ActionMultiply ReadActionMultiply(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.Multiply, out length);
+            return new ActionMultiply();
         }
 
         public static ActionNextFrame ReadActionNextFrame(this SwfStreamReader reader) {

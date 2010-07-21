@@ -13,6 +13,10 @@
 
         object Visit(ActionCloneSprite action);
 
+        object Visit(ActionConstantPool action);
+
+        object Visit(ActionDefineFunction action);
+
         object Visit(ActionDivide action);
 
         object Visit(ActionEndDrag action);

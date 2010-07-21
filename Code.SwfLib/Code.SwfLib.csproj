@@ -61,6 +61,8 @@
     <Compile Include="Data\Actions\ActionCharToAscii.cs" />
     <Compile Include="Data\Actions\ActionCloneSprite.cs" />
     <Compile Include="Data\Actions\ActionCode.cs" />
+    <Compile Include="Data\Actions\ActionConstantPool.cs" />
+    <Compile Include="Data\Actions\ActionDefineFunction.cs" />
     <Compile Include="Data\Actions\ActionDivide.cs" />
     <Compile Include="Data\Actions\ActionEndDrag.cs" />
     <Compile Include="Data\Actions\ActionEquals.cs" />
