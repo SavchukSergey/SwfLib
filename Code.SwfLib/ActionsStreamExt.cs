@@ -20,7 +20,6 @@ namespace Code.SwfLib {
             switch (code) {
                 case ActionCode.Push:
                 case ActionCode.Pop:
-                case ActionCode.Divide:
                 case ActionCode.Equals:
                 case ActionCode.Less:
                 case ActionCode.And:
@@ -48,7 +47,6 @@ namespace Code.SwfLib {
                 case ActionCode.SetProperty:
                 case ActionCode.CloneSprite:
                 case ActionCode.RemoveSprite:
-                case ActionCode.StartDrag:
                 case ActionCode.EndDrag:
                 case ActionCode.GetTime:
                     throw new NotImplementedException(code.ToString());
@@ -63,6 +61,8 @@ namespace Code.SwfLib {
                     return reader.ReadActionConstantPool();
                 case ActionCode.DefineFunction:
                     return reader.ReadActionDefineFunction();
+                case ActionCode.Divide:
+                    return reader.ReadActionDivide();
                 case ActionCode.GetURL:
                     return reader.ReadActionGetURL();
                 case ActionCode.GotoFrame:
@@ -83,6 +83,8 @@ namespace Code.SwfLib {
                     return reader.ReadActionRandomNumber();
                 case ActionCode.SetTarget:
                     return reader.ReadActionSetTarget();
+                case ActionCode.StartDrag:
+                    return reader.ReadActionStartDrag();
                 case ActionCode.Stop:
                     return reader.ReadActionStop();
                 case ActionCode.StopSounds:
@@ -124,6 +126,12 @@ namespace Code.SwfLib {
                 pool[i] = reader.ReadString();
             }
             return new ActionConstantPool { ConstantPool = pool };
+        }
+
+        public static ActionDivide ReadActionDivide(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.Divide, out length);
+            return new ActionDivide();
         }
 
         public static ActionDefineFunction ReadActionDefineFunction(this SwfStreamReader reader) {
@@ -199,7 +207,14 @@ namespace Code.SwfLib {
             return new ActionSetTarget { TargetName = reader.ReadString() };
         }
 
-        public static ActionStop ReadActionStop(this SwfStreamReader reader) {
+        public static ActionStartDrag ReadActionStartDrag(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.SetTarget, out length);
+            return new ActionStartDrag();
+        }
+
+        public static ActionStop ReadActionStop(this SwfStreamReader reader)
+        {
             ushort length;
             AssertActionCode(reader, ActionCode.Stop, out length);
             return new ActionStop();
