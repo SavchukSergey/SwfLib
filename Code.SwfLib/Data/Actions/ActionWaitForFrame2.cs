@@ -1,6 +1,8 @@
 ﻿namespace Code.SwfLib.Data.Actions {
     public class ActionWaitForFrame2 : ActionBase {
 
+        public byte SkipCount;
+
         public override ActionCode ActionCode {
             get { return ActionCode.WaitForFrame2; }
         }
