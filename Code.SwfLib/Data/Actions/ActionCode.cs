@@ -59,9 +59,109 @@
         /// </summary>
         Or = 0x11,
         /// <summary>
+        /// ActionNot performs a logical NOT of a number. 
+        /// </summary>
+        Not = 0x12,
+        /// <summary>
+        /// ActionStringEquals tests two strings for equality.
+        /// </summary>
+        StringEquals = 0x13,
+        /// <summary>
+        /// ActionStringLength computes the length of a string. 
+        /// </summary>
+        StringLength = 0x14,
+        /// <summary>
+        /// ActionStringExtract extracts a substring from a string.
+        /// </summary>
+        StringExtract = 0x15,
+        /// <summary>
         /// ActionPop pops a value from the stack and discards it. 
         /// </summary>
         Pop = 0x17,
+        /// <summary>
+        /// ActionToInteger converts a value to an integer. 
+        /// </summary>
+        ToInteger = 0x18,
+        /// <summary>
+        /// ActionGetVariable gets a variable’s value.
+        /// </summary>
+        GetVariable = 0x1c,
+        /// <summary>
+        /// ActionSetVariable sets a variable.
+        /// </summary>
+        SetVariable = 0x1d,
+        /// <summary>
+        /// ActionSetTarget2 sets the current context and is stack based. 
+        /// </summary>
+        SetTarget2 = 0x20,
+        /// <summary>
+        /// ActionStringAdd concatenates two strings.
+        /// </summary>
+        StringAdd = 0x21,
+        /// <summary>
+        /// ActionGetProperty gets a file property
+        /// </summary>
+        GetProperty = 0x22,
+        /// <summary>
+        /// ActionSetProperty sets a file property.
+        /// </summary>
+        SetProperty = 0x23,
+        /// <summary>
+        /// ActionCloneSprite clones a sprite.
+        /// </summary>
+        CloneSprite = 0x24,
+        /// <summary>
+        /// ActionRemoveSprite removes a clone sprite.
+        /// </summary>
+        RemoveSprite = 0x25,
+        /// <summary>
+        /// ActionTrace sends a debugging output string.
+        /// </summary>
+        Trace = 0x26,
+        /// <summary>
+        /// ActionStartDrag starts dragging a movie clip.
+        /// </summary>
+        StartDrag = 0x27,
+        /// <summary>
+        /// ActionEndDrag ends the drag operation in progress, if any.
+        /// </summary>
+        EndDrag = 0x28,
+        /// <summary>
+        /// ActionStringLess tests to see if a string is less than another string 
+        /// </summary>
+        StringLess = 0x29,
+        /// <summary>
+        /// ActionRandomNumber calculates a random number.
+        /// </summary>
+        RandomNumber = 0x30,
+        /// <summary>
+        /// ActionMBStringLength computes the length of a string and is multi-byte aware. 
+        /// </summary>
+        MBStringLength = 0x31,
+        /// <summary>
+        /// ActionCharToAscii converts character code to ASCII.
+        /// </summary>
+        CharToAscii = 0x32,
+        /// <summary>
+        /// ActionAsciiToChar converts a value to an ASCII character code.
+        /// </summary>
+        AsciiToChar = 0x33,
+        /// <summary>
+        /// ActionGetTime reports the milliseconds since Adobe Flash Player started.
+        /// </summary>
+        GetTime = 0x34,
+        /// <summary>
+        /// ActionMBStringExtract extracts a substring from a string and is multi-byte aware.
+        /// </summary>
+        MBStringExtract = 0x35,
+        /// <summary>
+        /// ActionMBCharToAscii converts character code to ASCII and is multi-byte aware.
+        /// </summary>
+        MBCharToAscii = 0x36,
+        /// <summary>
+        /// ActionMBAsciiToChar converts ASCII to character code and is multi-byte aware.
+        /// </summary>
+        MBAsciiToChar = 0x37,
         /// <summary>
         /// ActionGotoFrame instructs Flash Player to go to the specified frame in the current file. 
         /// </summary>
@@ -90,8 +190,32 @@
         /// </summary>
         GoToLabel = 0x8c,
         /// <summary>
+        /// ActionWaitForFrame2 waits for a frame to be loaded and is stack based.
+        /// </summary>
+        WaitForFrame2 = 0x8d,
+        /// <summary>
         /// ActionPush pushes one or more values to the stack. 
         /// </summary>
         Push = 0x96,
+        /// <summary>
+        /// ActionJump creates an unconditional branch.
+        /// </summary>
+        Jump = 0x99,
+        /// <summary>
+        /// ActionGetURL2 gets a URL and is stack based.
+        /// </summary>
+        GetURL2 = 0x9a,
+        /// <summary>
+        /// ActionIf creates a conditional test and branch.
+        /// </summary>
+        If = 0x9d,
+        /// <summary>
+        /// ActionCall calls a subroutine. 
+        /// </summary>
+        Call = 0x9e,
+        /// <summary>
+        /// ActionGotoFrame2 goes to a frame and is stack based.
+        /// </summary>
+        GotoFrame2 = 0x9f,
     }
 }

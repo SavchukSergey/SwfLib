@@ -1,11 +1,13 @@
 ﻿namespace Code.SwfLib.Data.Actions {
-    public class ActionToggleQuality : ActionBase {
+    public class ActionPop : ActionBase {
+
         public override ActionCode ActionCode {
-            get { return ActionCode.ToggleQuality; }
+            get { return ActionCode.Pop; }
         }
 
         public override object AcceptVisitor(IActionVisitor visitor) {
             return visitor.Visit(this);
         }
+
     }
 }

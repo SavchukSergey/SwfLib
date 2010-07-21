@@ -1,7 +1,8 @@
 ﻿namespace Code.SwfLib.Data.Actions {
-    public class ActionToggleQuality : ActionBase {
+    public class ActionCharToAscii : ActionBase {
+
         public override ActionCode ActionCode {
-            get { return ActionCode.ToggleQuality; }
+            get { return ActionCode.CharToAscii; }
         }
 
         public override object AcceptVisitor(IActionVisitor visitor) {
