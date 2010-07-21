@@ -22,10 +22,7 @@ namespace Code.SwfLib {
                 case ActionCode.Pop:
                 case ActionCode.Equals:
                 case ActionCode.Less:
-                case ActionCode.And:
-                case ActionCode.Or:
                 case ActionCode.Not:
-                case ActionCode.StringEquals:
                 case ActionCode.StringLength:
                 case ActionCode.StringAdd:
                 case ActionCode.StringExtract:
@@ -47,7 +44,6 @@ namespace Code.SwfLib {
                 case ActionCode.SetProperty:
                 case ActionCode.CloneSprite:
                 case ActionCode.RemoveSprite:
-                case ActionCode.EndDrag:
                 case ActionCode.GetTime:
                     throw new NotImplementedException(code.ToString());
 
@@ -55,6 +51,8 @@ namespace Code.SwfLib {
                     return null;
                 case ActionCode.Add:
                     return reader.ReadActionAdd();
+                case ActionCode.And:
+                    return reader.ReadActionAnd();
                 case ActionCode.Call:
                     return reader.ReadActionCall();
                 case ActionCode.ConstantPool:
@@ -63,6 +61,8 @@ namespace Code.SwfLib {
                     return reader.ReadActionDefineFunction();
                 case ActionCode.Divide:
                     return reader.ReadActionDivide();
+                case ActionCode.EndDrag:
+                    return reader.ReadActionEndDrag();
                 case ActionCode.GetURL:
                     return reader.ReadActionGetURL();
                 case ActionCode.GotoFrame:
@@ -75,6 +75,8 @@ namespace Code.SwfLib {
                     return reader.ReadActionMultiply();
                 case ActionCode.NextFrame:
                     return reader.ReadActionNextFrame();
+                case ActionCode.Or:
+                    return reader.ReadActionOr();
                 case ActionCode.Play:
                     return reader.ReadActionPlay();
                 case ActionCode.PreviousFrame:
@@ -89,6 +91,8 @@ namespace Code.SwfLib {
                     return reader.ReadActionStop();
                 case ActionCode.StopSounds:
                     return reader.ReadActionStopSounds();
+                case ActionCode.StringEquals:
+                    return reader.ReadActionStringEquals();
                 case ActionCode.Substract:
                     return reader.ReadActionSubtract();
                 case ActionCode.ToggleQuality:
@@ -111,7 +115,14 @@ namespace Code.SwfLib {
             return new ActionAdd();
         }
 
-        public static ActionCall ReadActionCall(this SwfStreamReader reader) {
+        public static ActionAnd ReadActionAnd(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.And, out length);
+            return new ActionAnd();
+        }
+
+        public static ActionCall ReadActionCall(this SwfStreamReader reader)
+        {
             ushort length;
             AssertActionCode(reader, ActionCode.Call, out length);
             return new ActionCall();
@@ -134,7 +145,14 @@ namespace Code.SwfLib {
             return new ActionDivide();
         }
 
-        public static ActionDefineFunction ReadActionDefineFunction(this SwfStreamReader reader) {
+        public static ActionEndDrag ReadActionEndDrag(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.EndDrag, out length);
+            return new ActionEndDrag();
+        }
+
+        public static ActionDefineFunction ReadActionDefineFunction(this SwfStreamReader reader)
+        {
             ushort length;
             AssertActionCode(reader, ActionCode.DefineFunction, out length);
             string name = reader.ReadString();
@@ -183,7 +201,14 @@ namespace Code.SwfLib {
             return new ActionNextFrame();
         }
 
-        public static ActionPlay ReadActionPlay(this SwfStreamReader reader) {
+        public static ActionOr ReadActionOr(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.Or, out length);
+            return new ActionOr();
+        }
+
+        public static ActionPlay ReadActionPlay(this SwfStreamReader reader)
+        {
             ushort length;
             AssertActionCode(reader, ActionCode.Play, out length);
             return new ActionPlay();
@@ -226,7 +251,14 @@ namespace Code.SwfLib {
             return new ActionStopSounds();
         }
 
-        public static ActionSubtract ReadActionSubtract(this SwfStreamReader reader) {
+        public static ActionStringEquals ReadActionStringEquals(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.StringEquals, out length);
+            return new ActionStringEquals();
+        }
+
+        public static ActionSubtract ReadActionSubtract(this SwfStreamReader reader)
+        {
             ushort length;
             AssertActionCode(reader, ActionCode.Substract, out length);
             return new ActionSubtract();
