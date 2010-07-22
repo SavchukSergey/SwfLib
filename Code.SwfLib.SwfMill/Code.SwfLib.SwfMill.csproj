@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataFormatting\ActionSerializer.cs" />
     <Compile Include="DataFormatting\ColorRGBFormatter.cs" />
     <Compile Include="DataFormatting\ColorRGBAFormatter.cs" />
     <Compile Include="DataFormatting\DataFormatterBase.cs" />

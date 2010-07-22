@@ -163,6 +163,16 @@
         /// </summary>
         MBAsciiToChar = 0x37,
         /// <summary>
+        /// ActionReturn forces the return item to be pushed off the stack and returned. If a return is not 
+        /// appropriate, the return item is discarded.
+        /// </summary>
+        Return = 0x3e,
+        /// <summary>
+        /// ActionSetMember sets a property of an object. If the property does not already exist, it is 
+        /// created. Any existing value in the property is overwritten.
+        /// </summary>
+        SetMember = 0x4f,
+        /// <summary>
         /// ActionGotoFrame instructs Flash Player to go to the specified frame in the current file. 
         /// </summary>
         GotoFrame = 0x81,

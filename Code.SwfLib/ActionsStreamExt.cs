@@ -17,8 +17,8 @@ namespace Code.SwfLib {
         public static ActionBase ReadAction(this SwfStreamReader reader) {
             var code = (ActionCode)reader.ReadByte();
             reader.GoBack(1);
+            Console.WriteLine(code);
             switch (code) {
-                case ActionCode.Push:
                 case ActionCode.Pop:
                 case ActionCode.Equals:
                 case ActionCode.Less:
@@ -35,7 +35,6 @@ namespace Code.SwfLib {
                 case ActionCode.MBCharToAscii:
                 case ActionCode.MBAsciiToChar:
                 case ActionCode.If:
-                case ActionCode.GetVariable:
                 case ActionCode.SetVariable:
                 case ActionCode.GetURL2:
                 case ActionCode.GotoFrame2:
@@ -65,6 +64,8 @@ namespace Code.SwfLib {
                     return reader.ReadActionEndDrag();
                 case ActionCode.GetURL:
                     return reader.ReadActionGetURL();
+                case ActionCode.GetVariable:
+                    return reader.ReadActionGetVariable();
                 case ActionCode.GotoFrame:
                     return reader.ReadActionGotoFrame();
                 case ActionCode.GoToLabel:
@@ -81,8 +82,12 @@ namespace Code.SwfLib {
                     return reader.ReadActionPlay();
                 case ActionCode.PreviousFrame:
                     return reader.ReadActionPreviousFrame();
+                case ActionCode.Push:
+                    return reader.ReadActionPush();
                 case ActionCode.RandomNumber:
                     return reader.ReadActionRandomNumber();
+                case ActionCode.SetMember:
+                    return reader.ReadActionSetMember();
                 case ActionCode.SetTarget:
                     return reader.ReadActionSetTarget();
                 case ActionCode.StartDrag:
@@ -121,8 +126,7 @@ namespace Code.SwfLib {
             return new ActionAnd();
         }
 
-        public static ActionCall ReadActionCall(this SwfStreamReader reader)
-        {
+        public static ActionCall ReadActionCall(this SwfStreamReader reader) {
             ushort length;
             AssertActionCode(reader, ActionCode.Call, out length);
             return new ActionCall();
@@ -151,8 +155,7 @@ namespace Code.SwfLib {
             return new ActionEndDrag();
         }
 
-        public static ActionDefineFunction ReadActionDefineFunction(this SwfStreamReader reader)
-        {
+        public static ActionDefineFunction ReadActionDefineFunction(this SwfStreamReader reader) {
             ushort length;
             AssertActionCode(reader, ActionCode.DefineFunction, out length);
             string name = reader.ReadString();
@@ -169,6 +172,12 @@ namespace Code.SwfLib {
             ushort length;
             AssertActionCode(reader, ActionCode.GetURL, out length);
             return new ActionGetURL { UrlString = reader.ReadString(), TargetString = reader.ReadString() };
+        }
+
+        public static ActionGetVariable ReadActionGetVariable(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.GetVariable, out length);
+            return new ActionGetVariable();
         }
 
         public static ActionGotoFrame ReadActionGotoFrame(this SwfStreamReader reader) {
@@ -207,8 +216,7 @@ namespace Code.SwfLib {
             return new ActionOr();
         }
 
-        public static ActionPlay ReadActionPlay(this SwfStreamReader reader)
-        {
+        public static ActionPlay ReadActionPlay(this SwfStreamReader reader) {
             ushort length;
             AssertActionCode(reader, ActionCode.Play, out length);
             return new ActionPlay();
@@ -220,10 +228,44 @@ namespace Code.SwfLib {
             return new ActionPreviousFrame();
         }
 
+        public static ActionPush ReadActionPush(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.Push, out length);
+            var position = reader.BaseStream.Position;
+            var action = new ActionPush();
+            while (reader.BaseStream.Position - position < length) {
+                var item = new ActionPushItem();
+                var type = (ActionPushItemType)reader.ReadByte();
+                Console.WriteLine(type);
+                item.Type = type;
+                switch (type) {
+                    case ActionPushItemType.Boolean:
+                        item.Boolean = reader.ReadByte();
+                        break;
+                    case ActionPushItemType.Constant8:
+                        item.Constant8 = reader.ReadByte();
+                        break;
+                    case ActionPushItemType.Constant16:
+                        item.Constant16 = reader.ReadUInt16();
+                        break;
+                    default:
+                        throw new NotSupportedException("Unknown PushData type " + type);
+                }
+                action.Items.Add(item);
+            }
+            return action;
+        }
+
         public static ActionRandomNumber ReadActionRandomNumber(this SwfStreamReader reader) {
             ushort length;
             AssertActionCode(reader, ActionCode.RandomNumber, out length);
             return new ActionRandomNumber();
+        }
+
+        public static ActionSetMember ReadActionSetMember(this SwfStreamReader reader) {
+            ushort length;
+            AssertActionCode(reader, ActionCode.SetMember, out length);
+            return new ActionSetMember();
         }
 
         public static ActionSetTarget ReadActionSetTarget(this SwfStreamReader reader) {
@@ -238,8 +280,7 @@ namespace Code.SwfLib {
             return new ActionStartDrag();
         }
 
-        public static ActionStop ReadActionStop(this SwfStreamReader reader)
-        {
+        public static ActionStop ReadActionStop(this SwfStreamReader reader) {
             ushort length;
             AssertActionCode(reader, ActionCode.Stop, out length);
             return new ActionStop();
@@ -257,8 +298,7 @@ namespace Code.SwfLib {
             return new ActionStringEquals();
         }
 
-        public static ActionSubtract ReadActionSubtract(this SwfStreamReader reader)
-        {
+        public static ActionSubtract ReadActionSubtract(this SwfStreamReader reader) {
             ushort length;
             AssertActionCode(reader, ActionCode.Substract, out length);
             return new ActionSubtract();

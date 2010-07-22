@@ -155,7 +155,9 @@ namespace Code.SwfLib {
         }
 
         public static UnknownTag ReadUnknownTag(SwfTagData tagData) {
-            return new UnknownTag { Data = tagData.Data };
+            var tag = new UnknownTag { Data = tagData.Data };
+            tag.SetTagType(tagData.Type);
+            return tag;
         }
 
         public EndTag ReadEndTag(SwfTagData data) {

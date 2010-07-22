@@ -73,6 +73,10 @@
 
         object Visit(ActionRemoveSprite action);
 
+        object Visit(ActionReturn action);
+
+        object Visit(ActionSetMember action);
+
         object Visit(ActionSetProperty action);
 
         object Visit(ActionSetTarget action);

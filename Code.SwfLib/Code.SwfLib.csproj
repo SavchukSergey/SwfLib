@@ -89,8 +89,12 @@
     <Compile Include="Data\Actions\ActionPop.cs" />
     <Compile Include="Data\Actions\ActionPreviousFrame.cs" />
     <Compile Include="Data\Actions\ActionPush.cs" />
+    <Compile Include="Data\Actions\ActionPushItem.cs" />
+    <Compile Include="Data\Actions\ActionPushItemType.cs" />
     <Compile Include="Data\Actions\ActionRandomNumber.cs" />
     <Compile Include="Data\Actions\ActionRemoveSprite.cs" />
+    <Compile Include="Data\Actions\ActionReturn.cs" />
+    <Compile Include="Data\Actions\ActionSetMember.cs" />
     <Compile Include="Data\Actions\ActionSetProperty.cs" />
     <Compile Include="Data\Actions\ActionSetTarget.cs" />
     <Compile Include="Data\Actions\ActionSetTarget2.cs" />
