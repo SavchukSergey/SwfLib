@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Code.SwfLib.SwfMill.Console {
+namespace Code.SwfLib.SwfMill {
     class Program {
         static void Main(string[] args) {
             if (args.Length < 1) {
@@ -17,15 +17,20 @@ namespace Code.SwfLib.SwfMill.Console {
             switch (command) {
                 case "help":
                     ShowUsage();
-                    return;
+                    break;
                 case "swf2xml":
                     SwfToXml(args);
-                    return;
+                    break;
                 case "xml2swf":
                     XmlToSwf(args);
-                    return;
+                    break;
+                case "decompress":
+                    Decompress(args);
+                    break;
+                default:
+                    System.Console.WriteLine("Unknown command {0}", command);
+                    break;
             }
-            System.Console.WriteLine(command);
         }
 
         static void SwfToXml(string[] args) {
@@ -68,10 +73,41 @@ namespace Code.SwfLib.SwfMill.Console {
             }
         }
 
+        static void Decompress(string[] args) {
+            string source, target;
+            if (args.Length < 2) {
+                System.Console.WriteLine("Source file wasn't specified");
+                ShowUsage();
+                return;
+            }
+            source = args[1];
+            if (args.Length < 3) {
+                target = source;
+            } else {
+                target = args[2];
+            }
+            MemoryStream mem = new MemoryStream();
+            using (var file = File.Open(source, FileMode.Open, FileAccess.Read)) {
+                var facade = new SwfMillFacade();
+                facade.Decompress(file, mem);
+            }
+            mem.Seek(0, SeekOrigin.Begin);
+            using (var file = File.Open(target, FileMode.Create, FileAccess.ReadWrite)) {
+                mem.WriteTo(file);
+            }
+        }
+
         static void ShowUsage() {
-            System.Console.WriteLine("codeswfmill is swf-xml and xml-swf conversion utility.");
-            System.Console.WriteLine("Usage:");
-            System.Console.WriteLine("\tcodeswfmill.exe [swf2xml | xml2swf | help] {sourcePath targetPath}");
+            Console.WriteLine("codeswfmill is swf-xml and xml-swf conversion utility.");
+            Console.WriteLine("Usage:");
+            Console.WriteLine("codeswfmill.exe <command> <options>");
+            Console.WriteLine("\tswf2xml <sourcePath> <targetPath>");
+            Console.WriteLine("\t\tconverts swf to xml");
+            Console.WriteLine("\txml2swf <sourcePath> <targetPath>");
+            Console.WriteLine("\t\tconverts xml to swf");
+            Console.WriteLine("\tdecompress <sourcePath> [<targetPath>]");
+            Console.WriteLine("\t\tdecompresses swf file");
+            Console.WriteLine("help show this information");
         }
     }
 }

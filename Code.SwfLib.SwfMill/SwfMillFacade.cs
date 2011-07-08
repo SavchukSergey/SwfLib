@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Xml.Linq;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
@@ -15,6 +16,10 @@ namespace Code.SwfLib.SwfMill {
             XDocument doc = new XDocument(GetRoot(file));
             doc.Declaration = new XDeclaration("1.0", "utf-8", "yes");
             return doc;
+        }
+
+        public Stream Decompress(Stream source, Stream target) {
+            throw new NotImplementedException();
         }
 
         public SwfFile ReadFromXml(XDocument doc) {
