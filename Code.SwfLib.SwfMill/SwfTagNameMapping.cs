@@ -20,7 +20,7 @@ namespace Code.SwfLib.SwfMill {
         public const string DEFINE_BUTTON2_TAG = "DefineButton2";
         public const string DEFINE_EDIT_TEXT_TAG = "DefineEditText";
         public const string DEFINE_FONT_3_TAG = "DefineFont3";
-        public const string DEFINE_FONT_ALIGN_ZONES_TAG = "DefineFontInfo3";
+        public const string DEFINE_FONT_ALIGN_ZONES_TAG = "DefineFontAlignZones";
         public const string DEFINE_FONT_NAME_TAG = "DefineFontName";
         public const string DEFINE_SHAPE_TAG = "DefineShape";
         public const string DEFINE_SHAPE3_TAG = "DefineShape3";
@@ -37,6 +37,7 @@ namespace Code.SwfLib.SwfMill {
         public const string PLACE_OBJECT3_TAG = "PlaceObject3";
         public const string REMOVE_OBJECT2_TAG = "RemoveObject2";
         public const string SET_BACKGROUND_COLOR_TAG = "SetBackgroundColor";
+        public const string SCRIPT_LIMITES_TAG = "ScriptLimits";
         public const string SHOW_FRAME_TAG = "ShowFrame";
         public const string UNKNOWN_TAG = "UnknownTag";
 
@@ -64,6 +65,7 @@ namespace Code.SwfLib.SwfMill {
             _tagMap[PLACE_OBJECT3_TAG] = () => new PlaceObject3Tag();
             _tagMap[REMOVE_OBJECT2_TAG] = () => new RemoveObject2Tag();
             _tagMap[SET_BACKGROUND_COLOR_TAG] = () => new SetBackgroundColorTag();
+            _tagMap[SCRIPT_LIMITES_TAG] = () => new ScriptLimitsTag();
             _tagMap[SHOW_FRAME_TAG] = () => new ShowFrameTag();
             _tagMap[UNKNOWN_TAG] = () => new UnknownTag();
         }

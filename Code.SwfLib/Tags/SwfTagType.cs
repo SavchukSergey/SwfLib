@@ -87,6 +87,9 @@
         FileAttributes = 69,
         PlaceObject3 = 70,
         DoAbc = 72,
+        /// <summary>
+        /// Since SWF8, this tag was added to allow a clear definition of where a glyph starts. This is a hint to ensure that glyphs are properly drawn on pixel boundaries. Note that it is only partially useful for italic fonts since only vertical hints really make a difference.
+        /// </summary>
         DefineFontAlignZones = 73,
         /// <summary>
         /// Define whether CSM text should be used in a previous DefineText, DefineText2 or DefineEditText.

@@ -11,10 +11,11 @@ using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib {
     public class TagSerializer : ISwfTagVisitor {
-        private readonly byte _version;
 
-        public TagSerializer(byte version) {
-            _version = version;
+        private readonly SwfFile _file;
+
+        public TagSerializer(SwfFile file) {
+            _file = file;
         }
 
         public SwfTagData GetTagData(SwfTagBase tag) {
@@ -121,16 +122,34 @@ namespace Code.SwfLib {
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.ObjectID);
             writer.WriteByte((byte)tag.Attributes);
+            writer.WriteByte(tag.Language);
+            writer.WriteByte((byte)tag.FontName.Length);
+            writer.WriteRawString(tag.FontName);
             //TODO: Write other fields
             writer.FlushBits();
             return new SwfTagData { Type = SwfTagType.DefineFont3, Data = mem.ToArray() };
         }
 
-        public object Visit(DefineFontAlignZonesTag tag) {
+
+        object ISwfTagVisitor.Visit(DefineFontAlignZonesTag tag) {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.FontID);
-            writer.WriteBytes(tag.Data);
+            writer.WriteByte(tag.CsmTableHint);
+
+            foreach (var zoneArray in tag.Zones) {
+                writer.WriteByte((byte)zoneArray.Data.Length);
+                foreach (var zoneData in zoneArray.Data) {
+                    writer.WriteShortFloat(zoneData.Position);
+                    writer.WriteShortFloat(zoneData.Size);
+                }
+                var flags = 0;
+                flags |= zoneArray.ZoneX ? 0x80 : 0x00;
+                flags |= zoneArray.ZoneY ? 0x40 : 0x00;
+                writer.WriteByte((byte)flags);
+            }
+
+            //TODO: serialize
             return new SwfTagData { Type = SwfTagType.DefineFontAlignZones, Data = mem.ToArray() };
         }
 
@@ -284,7 +303,7 @@ namespace Code.SwfLib {
             if (tag.HasName) writer.WriteString(tag.Name);
             if (tag.HasClipDepth) writer.WriteUInt16(tag.ClipDepth);
             if (tag.HasClipActions) {
-                writer.WriteClipActions(_version, ref tag.ClipActions);
+                writer.WriteClipActions(_file.FileInfo.Version, ref tag.ClipActions);
             }
             return new SwfTagData { Type = SwfTagType.PlaceObject2, Data = mem.ToArray() };
         }
@@ -316,6 +335,14 @@ namespace Code.SwfLib {
             var writer = new SwfStreamWriter(mem);
             writer.WriteRGB(ref tag.Color);
             return new SwfTagData { Type = SwfTagType.SetBackgroundColor, Data = mem.ToArray() };
+        }
+
+        public object Visit(ScriptLimitsTag tag) {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.MaxRecursionDepth);
+            writer.WriteUInt16(tag.ScriptTimeoutSeconds);
+            return new SwfTagData { Type = SwfTagType.ScriptLimits, Data = mem.ToArray() };
         }
 
         public object Visit(ShowFrameTag tag) {

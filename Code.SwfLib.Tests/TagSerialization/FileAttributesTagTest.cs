@@ -1,15 +1,12 @@
 ﻿using Code.SwfLib.Tags.ControlTags;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests.TagSerialization
-{
+namespace Code.SwfLib.Tests.TagSerialization {
     [TestFixture]
-    public class FileAttributesTagTest : TagSerializationTestBase
-    {
+    public class FileAttributesTagTest : TagSerializationTestBase {
 
         [Test]
-        public void SerializeTest()
-        {
+        public void SerializeTest() {
             var tag = new FileAttributesTag();
             tag.HasMetadata = true;
             tag.UseNetwork = true;
@@ -17,14 +14,12 @@ namespace Code.SwfLib.Tests.TagSerialization
         }
 
         [Test]
-        public void DeserializeTest()
-        {
+        public void DeserializeTest() {
             var tag = DeserializeTag<FileAttributesTag>("01.000100", "00010001", "00010001.00000000.00000000.00000000");
             Assert.IsTrue(tag.HasMetadata);
             Assert.IsTrue(tag.UseNetwork);
             Assert.IsFalse(tag.AllowAbc);
         }
-
 
     }
 }

@@ -7,10 +7,8 @@ namespace Code.SwfLib.Tests {
     [TestFixture]
     public class SwfStreamWriterTest {
 
-
         [Test]
-        public void WriteFixedPoint16FromBitsTest()
-        {
+        public void WriteFixedPoint16FromBitsTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             const int val = 0x03aa4523;
@@ -54,8 +52,7 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void WriteBitTest()
-        {
+        public void WriteBitTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
 
@@ -86,8 +83,7 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void WriteByteAfterBitsTest()
-        {
+        public void WriteByteAfterBitsTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
 
@@ -109,8 +105,7 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void WriteUnsignedBitsTest()
-        {
+        public void WriteUnsignedBitsTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUnsignedBits(0xaac3 >> 6, 10);
@@ -129,8 +124,7 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void WriteSignedBitsPositiveTest()
-        {
+        public void WriteSignedBitsPositiveTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteSignedBits(171, 10);
@@ -140,7 +134,7 @@ namespace Code.SwfLib.Tests {
             writer.WriteBit(false);
             writer.WriteBit(true);
             writer.WriteBit(true);
-            
+
             mem.Seek(0, SeekOrigin.Begin);
 
             Assert.AreEqual(0x2a, mem.ReadByte());
@@ -150,8 +144,7 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void WriteSignedBitsNegativeTest()
-        {
+        public void WriteSignedBitsNegativeTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteSignedBits(-341, 10);
@@ -171,8 +164,7 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void FlushBitsTest()
-        {
+        public void FlushBitsTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
 
@@ -203,8 +195,7 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void WriteUInt16Test()
-        {
+        public void WriteUInt16Test() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(0xe712);
@@ -232,12 +223,23 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void WriteShortTagDataTest()
-        {
+        public void WriteShortFloatTest() {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteShortFloat(3.43359375f);
+            mem.Seek(0, SeekOrigin.Begin);
+
+            Assert.AreEqual(0xde, mem.ReadByte());
+            Assert.AreEqual(0x42, mem.ReadByte());
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+        [Test]
+        public void WriteShortTagDataTest() {
             const SwfTagType tagType = SwfTagType.Export;
             var data = new byte[10];
-            for (var i = 0; i < data.Length; i++)
-            {
+            for (var i = 0; i < data.Length; i++) {
                 data[i] = (byte)(i & 0xff);
             }
             var tagData = new SwfTagData { Type = tagType, Data = data };
@@ -255,12 +257,10 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
-        public void WriteLongTagDataTest()
-        {
+        public void WriteLongTagDataTest() {
             const SwfTagType tagType = SwfTagType.Export;
             var data = new byte[4096];
-            for (var i = 0; i < data.Length; i++)
-            {
+            for (var i = 0; i < data.Length; i++) {
                 data[i] = (byte)(i & 0xff);
             }
             var tagData = new SwfTagData { Type = tagType, Data = data };

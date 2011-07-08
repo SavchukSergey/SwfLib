@@ -61,6 +61,8 @@ namespace Code.SwfLib.Tags
 
         object Visit(SetBackgroundColorTag tag);
 
+        object Visit(ScriptLimitsTag tag);
+
         object Visit(ShowFrameTag tag);
 
         object Visit(SwfTagBase tag);

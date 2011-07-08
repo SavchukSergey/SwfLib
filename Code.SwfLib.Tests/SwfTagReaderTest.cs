@@ -11,7 +11,9 @@ namespace Code.SwfLib.Tests {
 
         [Test]
         public void ReadMetadataTagTest() {
-            MetadataTag tag = ReadTag("MetadataTag.bin", data => new SwfTagReader(9).ReadMetadataTag(data));
+            var file = new SwfFile();
+            file.FileInfo.Version = 9;
+            MetadataTag tag = ReadTag("MetadataTag.bin", data => new SwfTagReader(file).ReadMetadataTag(data));
             Assert.IsNotNull(tag);
             Assert.IsAssignableFrom(typeof(MetadataTag), tag);
             Assert.AreEqual("Test Meta Data", tag.Metadata);
@@ -19,7 +21,9 @@ namespace Code.SwfLib.Tests {
 
         [Test]
         public void ReadSetBackgroundColorTagTest() {
-            SetBackgroundColorTag tag = ReadTag("SetBackgroundColorTag.bin", data => new SwfTagReader(9).ReadSetBackgroundColorTag(data));
+            var file = new SwfFile();
+            file.FileInfo.Version = 9;
+            SetBackgroundColorTag tag = ReadTag("SetBackgroundColorTag.bin", data => new SwfTagReader(file).ReadSetBackgroundColorTag(data));
             Assert.IsNotNull(tag);
             Assert.IsAssignableFrom(typeof(SetBackgroundColorTag), tag);
             Assert.AreEqual(new SwfRGB(0x0a, 0xc0, 0x80), tag.Color);
@@ -27,7 +31,9 @@ namespace Code.SwfLib.Tests {
 
         [Test]
         public void ReadShowFrameTagTest() {
-            ShowFrameTag tag = ReadTag("ShowFrameTag.bin", data => new SwfTagReader(9).ReadShowFrameTag(data));
+            var file = new SwfFile();
+            file.FileInfo.Version = 9;
+            ShowFrameTag tag = ReadTag("ShowFrameTag.bin", data => new SwfTagReader(file).ReadShowFrameTag(data));
             Assert.IsNotNull(tag);
             Assert.IsAssignableFrom(typeof(ShowFrameTag), tag);
         }
@@ -43,8 +49,10 @@ namespace Code.SwfLib.Tests {
         private SwfTagBase ReadTagBase(string resourceName) {
             var source = GetType().Assembly.GetManifestResourceStream("Code.SwfLib.Tests.Resources.SwfTagReader." + resourceName);
             if (source == null) throw new Exception("Source stream not found");
+            var file = new SwfFile();
+            file.FileInfo.Version = 10;
             var reader = new SwfStreamReader(source);
-            var tagReader = new SwfTagReader(10);
+            var tagReader = new SwfTagReader(file);
             return tagReader.ReadTag(reader);
         }
 

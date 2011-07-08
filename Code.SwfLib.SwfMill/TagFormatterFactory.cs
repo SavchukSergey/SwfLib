@@ -36,6 +36,7 @@ namespace Code.SwfLib.SwfMill {
         private PlaceObject2TagFormatter _placeObject2Formatter;
         private PlaceObject3TagFormatter _placeObject3Formatter;
         private RemoveObject2TagFormatter _removeObject2Formatter;
+        private ScriptLimitsTagFormatter _scriptLimitsFormatter;
         private ShowFrameTagFormatter _showFrameFormatter;
         private UnknownTagFormatter _unknownTagFormatter;
 
@@ -205,6 +206,13 @@ namespace Code.SwfLib.SwfMill {
                 _showFrameFormatter = new ShowFrameTagFormatter();
             }
             return _showFrameFormatter;
+        }
+
+        object ISwfTagVisitor.Visit(ScriptLimitsTag tag) {
+            if (_scriptLimitsFormatter == null) {
+                _scriptLimitsFormatter = new ScriptLimitsTagFormatter();
+            }
+            return _scriptLimitsFormatter;
         }
 
         object ISwfTagVisitor.Visit(SwfTagBase tag) {

@@ -85,10 +85,31 @@ namespace Code.SwfLib {
             return Encoding.UTF8.GetString(dataStream.ToArray());
         }
 
+        public string ReadRawString(int count) {
+            MemoryStream dataStream = new MemoryStream();
+            for (var i = 0; i < count; i++) {
+                var bt = _reader.ReadByte();
+                if (bt != 0) dataStream.WriteByte(bt);
+            }
+            return Encoding.UTF8.GetString(dataStream.ToArray());
+        }
+
         public float ReadSingle() {
             return _reader.ReadSingle();
         }
 
+        public float ReadShortFloat() {
+            var data = _reader.ReadUInt16();
+            if (data == 0) return 0;
+            var sign = data & 0x8000;
+            var exp = (data & 0x7c00) >> 10;
+            var m = (data & 0x3ff) | 0x400;
+            if (sign != 0) m = -m;
+            var k = 1 << exp;
+            const float bias = 1 << 25;
+            return ((float)m) * k / bias;
+        }
+        //0x42de, 3.43359375(879)
         #region Bit Reading
 
         private struct BitContext {

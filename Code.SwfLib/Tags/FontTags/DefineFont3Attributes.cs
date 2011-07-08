@@ -6,7 +6,7 @@ namespace Code.SwfLib.Tags.FontTags {
 
         HasLayout = 0x80,
         ShiftJIS = 0x40,
-        SmallText = 0x20,
+        Unicode = 0x20,
         ANSI = 0x10,
         WideOffsets = 0x08,
         WideCodes = 0x04,

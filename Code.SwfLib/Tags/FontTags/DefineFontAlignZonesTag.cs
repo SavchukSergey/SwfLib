@@ -3,7 +3,9 @@
 
         public ushort FontID;
 
-        public byte[] Data;
+        public byte CsmTableHint;
+
+        public SwfZoneArray[] Zones;
 
         public override SwfTagType TagType {
             get { return SwfTagType.DefineFontAlignZones; }

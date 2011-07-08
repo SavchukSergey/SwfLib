@@ -8,7 +8,10 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
 
         [Test]
         public void ReadMatrixTest() {
-            var reader = new SwfTagReader(10);
+            var file = new SwfFile();
+            file.FileInfo.Version = 10;
+
+            var reader = new SwfTagReader(file);
             var tags =
                 GetTagBinariesFromSwfResource("Matrix-compiled.swf")
                 .Where(item => item.Type == SwfTagType.PlaceObject2);

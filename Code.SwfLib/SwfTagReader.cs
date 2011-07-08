@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.Actions;
 using Code.SwfLib.Tags;
@@ -13,10 +14,11 @@ using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib {
     public class SwfTagReader {
-        private readonly byte _version;
 
-        public SwfTagReader(byte version) {
-            _version = version;
+        private readonly SwfFile _file;
+
+        public SwfTagReader(SwfFile file) {
+            _file = file;
         }
 
         public DefineFontAlignZonesTag ReadDefineFontAlignZonesTag(SwfTagData tagData) {
@@ -24,7 +26,31 @@ namespace Code.SwfLib {
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.FontID = reader.ReadUInt16();
-            tag.Data = reader.ReadBytes((int)(stream.Length - stream.Position));
+            tag.CsmTableHint = reader.ReadByte();
+            var fontInfo = _file.IterateTagsRecursively()
+                .OfType<DefineFont3Tag>()
+                .FirstOrDefault(item => item.ObjectID == tag.FontID);
+            if (fontInfo == null) {
+                throw new InvalidDataException("Couldn't find corresponding DefineFont3Tag");
+            }
+            tag.Zones = new SwfZoneArray[fontInfo.GlyphsCount];
+            for (var i = 0; i < tag.Zones.Length; i++) {
+                var zone = new SwfZoneArray();
+                int count = reader.ReadByte();
+                zone.Data = new SwfZoneData[count];
+                for (var j = 0; j < count; j++) {
+                    var zoneData = new SwfZoneData();
+                    zoneData.Position = reader.ReadShortFloat();
+                    zoneData.Size = reader.ReadShortFloat();
+                    zone.Data[j] = zoneData;
+                }
+                var flags = reader.ReadByte();
+                zone.ZoneX = (flags & 0x80) != 0;
+                zone.ZoneY = (flags & 0x40) != 0;
+                //TODO: reserved flags
+                tag.Zones[i] = zone;
+
+            }
             return tag;
         }
 
@@ -120,9 +146,9 @@ namespace Code.SwfLib {
             return new DebugIDTag { Data = tagData };
         }
 
-        public static ScriptLimitsTag ReadScriptLimitsTag(byte[] tagData) {
+        public static ScriptLimitsTag ReadScriptLimitsTag(SwfTagData tagData) {
             ScriptLimitsTag tag = new ScriptLimitsTag();
-            MemoryStream stream = new MemoryStream(tagData);
+            MemoryStream stream = new MemoryStream(tagData.Data);
             SwfStreamReader reader = new SwfStreamReader(stream);
             tag.MaxRecursionDepth = reader.ReadUInt16();
             tag.ScriptTimeoutSeconds = reader.ReadUInt16();
@@ -286,7 +312,13 @@ namespace Code.SwfLib {
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.ObjectID = reader.ReadUInt16();
+            tag.Attributes = (DefineFont3Attributes)reader.ReadByte();
+            tag.Language = reader.ReadByte();
+            int nameLength = reader.ReadByte();
+            tag.FontName = reader.ReadRawString(nameLength);
+            tag.GlyphsCount = reader.ReadUInt16();
             //TODO: read other fields
+            //TODO: serialize other fields
             return tag;
         }
 
@@ -358,7 +390,7 @@ namespace Code.SwfLib {
                 tag.ClipDepth = reader.ReadUInt16();
             }
             if (tag.HasClipActions) {
-                reader.ReadClipActions(_version, out tag.ClipActions);
+                reader.ReadClipActions(_file.FileInfo.Version, out tag.ClipActions);
             }
             return tag;
         }
@@ -399,8 +431,8 @@ namespace Code.SwfLib {
                     return ReadDefineFontAlignZonesTag(tagData);
                 case SwfTagType.DefineFontName:
                     return ReadDefineFontNameTag(tagData);
-                //case SwfTagType.DefineFont3:
-                //    return ReadDefineFont3Tag(tagData);
+                case SwfTagType.DefineFont3:
+                    return ReadDefineFont3Tag(tagData);
                 case SwfTagType.DefineShape:
                     return ReadDefineShapeTag(tagData);
                 case SwfTagType.DefineSprite:
@@ -429,6 +461,8 @@ namespace Code.SwfLib {
                     return ReadRemoveObjectTag(tagData);
                 case SwfTagType.SetBackgroundColor:
                     return ReadSetBackgroundColorTag(tagData);
+                case SwfTagType.ScriptLimits:
+                    return ReadScriptLimitsTag(tagData);
                 default:
                     return ReadUnknownTag(tagData);
             }

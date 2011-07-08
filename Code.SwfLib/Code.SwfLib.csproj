@@ -146,7 +146,6 @@
     <Compile Include="SwfFile.cs" />
     <Compile Include="SwfFileInfo.cs" />
     <Compile Include="Data\SwfHeader.cs" />
-    <Compile Include="SwfModel.cs" />
     <Compile Include="Data\SwfMatrix.cs" />
     <Compile Include="Data\SwfRect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -169,7 +168,9 @@
     <Compile Include="Tags\FontTags\DefineFont3Attributes.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontAlignZonesTag.cs" />
-    <Compile Include="Tags\DefineFontNameTag.cs" />
+    <Compile Include="Tags\FontTags\DefineFontNameTag.cs" />
+    <Compile Include="Tags\FontTags\SwfZoneArray.cs" />
+    <Compile Include="Tags\FontTags\SwfZoneData.cs" />
     <Compile Include="Tags\ShapeTags\DefineShape3Tag.cs" />
     <Compile Include="Data\FillStyles\FillStyleType.cs" />
     <Compile Include="Tags\ShapeTags\DefineShapeTag.cs" />

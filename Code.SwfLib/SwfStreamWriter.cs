@@ -126,10 +126,45 @@ namespace Code.SwfLib {
             _writer.Write(terminator);
         }
 
+        public void WriteRawString(string val) {
+            var bytes = Encoding.UTF8.GetBytes(val);
+            //TODO: Should I put terminating zero here?
+            _writer.Write(bytes);
+        }
+
         public void WriteSingle(float value) {
             _writer.Write(value);
         }
 
-
+        public void WriteShortFloat(float value) {
+            ushort res = 0;
+            if (value != 0.0) {
+                if (value < 0) {
+                    res |= 0x8000;
+                    value = -value;
+                }
+                int e = 0;
+                while (value >= 1.0) {
+                    e++;
+                    value /= 2;
+                }
+                int m = 0;
+                while ((m & 0x400) == 0) {
+                    value *= 2;
+                    m <<= 1;
+                    if (value >= 1.0) {
+                        m |= 1;
+                        value -= 1.0f;
+                    }
+                    e--;
+                }
+                e += 25;
+                if (e > 31 || e < 0) throw new InvalidDataException("Exponent is out of range");
+                m = m & 0x3ff;
+                res |= (ushort)(e << 10);
+                res |= (ushort)m;
+            }
+            _writer.Write(res);
+        }
     }
 }

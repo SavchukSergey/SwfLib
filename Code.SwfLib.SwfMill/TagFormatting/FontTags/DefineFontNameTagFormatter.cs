@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.FontTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting
+namespace Code.SwfLib.SwfMill.TagFormatting.FontTags
 {
     public class DefineFontNameTagFormatter : TagFormatterBase<DefineFontNameTag>
     {

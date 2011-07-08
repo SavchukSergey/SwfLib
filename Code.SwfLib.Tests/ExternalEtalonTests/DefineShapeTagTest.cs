@@ -10,11 +10,9 @@ using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ShapeTags;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests.ExternalEtalonTests
-{
+namespace Code.SwfLib.Tests.ExternalEtalonTests {
     [TestFixture]
-    public class DefineShapeTagTest : ExternalEtalonTestFixtureBase
-    {
+    public class DefineShapeTagTest : ExternalEtalonTestFixtureBase {
 
         #region DefineShape - 1
 
@@ -50,49 +48,41 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests
       </DefineShape>
 
          */
-        private static DefineShapeTag GetDefineShapeTag1()
-        {
+        private static DefineShapeTag GetDefineShapeTag1() {
             var tag = new DefineShapeTag();
             tag.ShapeID = 2;
             tag.ShapeBounds.XMin = 0;
             tag.ShapeBounds.XMax = 5354;
             tag.ShapeBounds.YMin = 0;
             tag.ShapeBounds.YMax = 1800;
-            tag.Shapes.FillStyles.Add(new FillStyle
-            {
+            tag.Shapes.FillStyles.Add(new FillStyle {
                 FillStyleType = FillStyleType.NonSmoothedRepeatingBitmap,
                 BitmapID = 1,
-                BitmapMatrix = new SwfMatrix
-                {
+                BitmapMatrix = new SwfMatrix {
                     ScaleX = 20.0,
                     ScaleY = 20.0,
                     TranslateX = -9206,
                     TranslateY = 0
                 }
             });
-            tag.Shapes.ShapeRecords.Add(new StyleChangeShapeRecord
-            {
+            tag.Shapes.ShapeRecords.Add(new StyleChangeShapeRecord {
                 MoveDeltaX = 5354,
                 MoveDeltaY = 1800,
                 FillStyle1 = 1
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord
-            {
+            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = -5354,
                 DeltaY = 0
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord
-            {
+            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 267,
                 DeltaY = -1800
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord
-            {
+            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 5087,
                 DeltaY = 0
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord
-            {
+            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 0,
                 DeltaY = 1800
             });
@@ -101,10 +91,12 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests
         }
 
         [Test]
-        public void WriteTest()
-        {
+        public void WriteTest() {
+            var file = new SwfFile();
+            file.FileInfo.Version = 10;
+
             var tag = GetDefineShapeTag1();
-            var serializer = new TagSerializer(10);
+            var serializer = new TagSerializer(file);
             var tagData = serializer.GetTagData(tag);
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
@@ -113,8 +105,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests
             var etalon = GetEmbeddedResourceData("DefineShape.bin");
             var payload = GetTagPayload(mem.ToArray());
 
-
-            var tagReader = new SwfTagReader(10);
+            var tagReader = new SwfTagReader(file);
             var tagData2 = new SwfTagData { Type = SwfTagType.DefineShape, Data = payload };
             var shape = tagReader.ReadDefineShapeTag(tagData2);
             AssertExt.AreEqual(tag, shape);
@@ -123,9 +114,11 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests
         }
 
         [Test]
-        public void ReadTest()
-        {
-            var tagReader = new SwfTagReader(10);
+        public void ReadTest() {
+            var file = new SwfFile();
+            file.FileInfo.Version = 10;
+
+            var tagReader = new SwfTagReader(file);
             var tagData = new SwfTagData { Type = SwfTagType.DefineShape, Data = GetEmbeddedResourceData("DefineShape.bin") };
             var shape = tagReader.ReadDefineShapeTag(tagData);
             AssertExt.AreEqual(GetDefineShapeTag1(), shape);
@@ -168,42 +161,35 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests
       </DefineShape>
          */
 
-        private static DefineShapeTag GetDefineShapeTag2()
-        {
+        private static DefineShapeTag GetDefineShapeTag2() {
             var tag = new DefineShapeTag();
             tag.ShapeID = 7;
             tag.ShapeBounds.XMin = 0;
             tag.ShapeBounds.XMax = 14560;
             tag.ShapeBounds.YMin = 0;
             tag.ShapeBounds.YMax = 1800;
-            tag.Shapes.FillStyles.Add(new FillStyle
-            {
+            tag.Shapes.FillStyles.Add(new FillStyle {
                 FillStyleType = FillStyleType.SolidColor,
                 ColorRGB = new SwfRGB(255, 255, 255)
             });
-            tag.Shapes.ShapeRecords.Add(new StyleChangeShapeRecord
-            {
+            tag.Shapes.ShapeRecords.Add(new StyleChangeShapeRecord {
                 MoveDeltaX = 14560,
                 MoveDeltaY = 1800,
                 FillStyle1 = 1
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord
-            {
+            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = -14560,
                 DeltaY = 0
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord
-            {
+            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 0,
                 DeltaY = -1800
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord
-            {
+            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 14560,
                 DeltaY = 0
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord
-            {
+            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 0,
                 DeltaY = 1800
             });
@@ -212,19 +198,23 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests
         }
 
         [Test]
-        public void Read2Test()
-        {
-            var tagReader = new SwfTagReader(10);
+        public void Read2Test() {
+            var file = new SwfFile();
+            file.FileInfo.Version = 10;
+
+            var tagReader = new SwfTagReader(file);
             var tagData = new SwfTagData { Type = SwfTagType.DefineShape, Data = GetEmbeddedResourceData("DefineShape2.bin") };
             var shape = tagReader.ReadDefineShapeTag(tagData);
             AssertExt.AreEqual(GetDefineShapeTag2(), shape);
         }
 
         [Test]
-        public void Write2Test()
-        {
+        public void Write2Test() {
+            var file = new SwfFile();
+            file.FileInfo.Version = 10;
+
             var tag = GetDefineShapeTag2();
-            var serializer = new TagSerializer(10);
+            var serializer = new TagSerializer(file);
             var tagData = serializer.GetTagData(tag);
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
@@ -233,8 +223,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests
             var etalon = GetEmbeddedResourceData("DefineShape2.bin");
             var payload = GetTagPayload(mem.ToArray());
 
-
-            var tagReader = new SwfTagReader(10);
+            var tagReader = new SwfTagReader(file);
             var tagData2 = new SwfTagData { Type = SwfTagType.DefineShape, Data = payload };
             var shape = tagReader.ReadDefineShapeTag(tagData2);
             AssertExt.AreEqual(tag, shape);
@@ -244,10 +233,8 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests
 
         #endregion
 
-        protected override string EmbeddedResourceFolder
-        {
-            get
-            {
+        protected override string EmbeddedResourceFolder {
+            get {
                 return "DefineShape";
             }
         }
