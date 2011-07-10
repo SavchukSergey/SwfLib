@@ -128,8 +128,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
         protected virtual XElement FormatZoneData(SwfZoneData data) {
             return new XElement(ZONE_DATA_ELEM,
-                new XAttribute(POSITION_ATTRIB, data.Position),
-                new XAttribute(SIZE_ATTRIB, data.Size)
+                new XAttribute(POSITION_ATTRIB, FormatFloat(data.Position)),
+                new XAttribute(SIZE_ATTRIB, FormatFloat(data.Size))
                 );
         }
 
@@ -139,11 +139,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                 switch (attrib.Name.LocalName) {
                     case POSITION_ATTRIB:
                         //TODO: parse float to base class
-                        res.Position = float.Parse(attrib.Value);
+                        res.Position = double.Parse(attrib.Value);
                         break;
                     case SIZE_ATTRIB:
                         //TODO: parse float to base class
-                        res.Size = float.Parse(attrib.Value);
+                        res.Size = double.Parse(attrib.Value);
                         break;
                     default:
                         throw new FormatException("Invalid attribute " + attrib.Name.LocalName);

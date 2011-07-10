@@ -39,6 +39,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         #endregion
 
+        protected string FormatFloat(double value) {
+            string res = value.ToString();
+            return res;
+        }
         protected byte[] FromBase64(XElement dataElement) {
             //TODO: why different depth??
             var data1 = dataElement.Element("data");

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.TagFormatting;
 using Code.SwfLib.Tags;
@@ -16,7 +12,7 @@ namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
         private readonly F _formatter = new F();
 
         protected void ConvertToXmlAndCompare(T tag, string resourceXml) {
-            var doc =_formatter.FormatTag(tag);
+            var doc = _formatter.FormatTag(tag);
             new XmlComparision(XmlDifferenceHandler).Compare(doc, XDocument.Load(new StreamReader(OpenEmbeddedResource(resourceXml))).Root);
         }
 
@@ -28,12 +24,24 @@ namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
             Assert.Fail(message);
         }
 
-        protected T ParseTag(string resourceXml) {
+        protected T ParseTagFromResource(string resourceXml) {
             var resource = OpenEmbeddedResource(resourceXml);
-            XDocument doc = XDocument.Load(new StreamReader(resource));
+            return ParseTag(new StreamReader(resource));
+        }
+
+        protected T ParseTag(string tagXml) {
+            return ParseTag(new StringReader(tagXml));
+        }
+
+        protected T ParseTag(TextReader reader) {
+            XDocument doc = XDocument.Load(reader);
+            var tagElem = doc.Root;
+            return ParseTag(tagElem);
+        }
+
+        protected T ParseTag(XElement tagElem) {
             var formatter = new F();
             var tag = new T();
-            var tagElem = doc.Root;
             formatter.InitTag(tag, tagElem);
             foreach (var attrib in tagElem.Attributes()) {
                 formatter.AcceptAttribute(tag, attrib);
@@ -43,5 +51,18 @@ namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
             }
             return tag;
         }
+
+        protected void DoubleConversionFromResourceTest(string resourceXml) {
+            var resource = OpenEmbeddedResource(resourceXml);
+            var reader = new StreamReader(resource);
+            XDocument originalDoc = XDocument.Load(reader);
+            var xOriginalTag = originalDoc.Root;
+
+            var tag = ParseTag(xOriginalTag);
+            var formatter = new F();
+            var xResultTag = formatter.FormatTag(tag);
+            new XmlComparision(Assert.Fail).Compare(xOriginalTag, xResultTag);
+        }
+
     }
 }

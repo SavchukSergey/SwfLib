@@ -1,0 +1,12 @@
+syntax: glob
+Code.SwfLib.SwfMill.Tests/bin/
+Code.SwfLib.SwfMill.Tests/obj/
+Code.SwfLib.SwfMill/bin/
+Code.SwfLib.SwfMill/obj/
+Code.SwfLib.Tests/bin/
+Code.SwfLib.Tests/obj/
+Code.SwfLib/bin/
+Code.SwfLib/obj/
+_ReSharper.Code.SwfLib/
+Code.SwfLib.4.5.resharper.user
+Code.SwfLib.suo

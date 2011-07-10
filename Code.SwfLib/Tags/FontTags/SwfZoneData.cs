@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Code.SwfLib.Tags.FontTags {
+﻿namespace Code.SwfLib.Tags.FontTags {
     public class SwfZoneData {
 
-        public float Position;
+        public double Position;
 
-        public float Size;
+        public double Size;
 
     }
 }

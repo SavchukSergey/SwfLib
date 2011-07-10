@@ -136,7 +136,7 @@ namespace Code.SwfLib {
             _writer.Write(value);
         }
 
-        public void WriteShortFloat(float value) {
+        public void WriteShortFloat(double value) {
             ushort res = 0;
             if (value != 0.0) {
                 if (value < 0) {

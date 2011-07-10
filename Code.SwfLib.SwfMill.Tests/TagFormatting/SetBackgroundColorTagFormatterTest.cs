@@ -9,8 +9,13 @@ namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
 
         [Test]
         public void FormatTest() {
-            var tag = new SetBackgroundColorTag {Color = new SwfRGB(10, 224, 224)};
+            var tag = new SetBackgroundColorTag { Color = new SwfRGB(10, 224, 224) };
             ConvertToXmlAndCompare(tag, "SetBackgroundColor.xml");
+        }
+
+        [Test]
+        public void DoubleConversionTest() {
+            DoubleConversionFromResourceTest("SetBackgroundColor.xml");
         }
     }
 }

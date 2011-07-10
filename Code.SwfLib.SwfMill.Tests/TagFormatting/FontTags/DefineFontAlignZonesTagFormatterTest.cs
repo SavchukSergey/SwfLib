@@ -1,5 +1,4 @@
-﻿using Code.SwfLib.Data;
-using Code.SwfLib.SwfMill.TagFormatting.FontTags;
+﻿using Code.SwfLib.SwfMill.TagFormatting.FontTags;
 using Code.SwfLib.Tags.FontTags;
 using NUnit.Framework;
 
@@ -9,10 +8,14 @@ namespace Code.SwfLib.SwfMill.Tests.TagFormatting.FontTags {
 
         [Test]
         public void ParseTest() {
-            var tag = ParseTag("FontTags.DefineFontAlignZones.xml");
+            var tag = ParseTagFromResource("FontTags.DefineFontAlignZones.xml");
             Assert.IsNotNull(tag);
             //TODO: checked data
         }
 
+        [Test]
+        public void DoubleConversionTest() {
+            DoubleConversionFromResourceTest("FontTags.DefineFontAlignZones.xml");
+        }
     }
 }
