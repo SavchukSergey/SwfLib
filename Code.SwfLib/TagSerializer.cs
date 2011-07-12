@@ -125,11 +125,11 @@ namespace Code.SwfLib {
             writer.WriteByte(tag.Language);
             writer.WriteByte((byte)tag.FontName.Length);
             writer.WriteRawString(tag.FontName);
-            //TODO: Write other fields
+            writer.WriteUInt16((ushort) tag.Glyphs.Length);
+            writer.WriteBytes(tag.RestData);
             writer.FlushBits();
             return new SwfTagData { Type = SwfTagType.DefineFont3, Data = mem.ToArray() };
         }
-
 
         object ISwfTagVisitor.Visit(DefineFontAlignZonesTag tag) {
             var mem = new MemoryStream();

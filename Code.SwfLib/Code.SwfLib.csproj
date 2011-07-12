@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -166,6 +166,7 @@
     <Compile Include="Tags\DefineButton2Tag.cs" />
     <Compile Include="Tags\DynamicTextTags\DefineEditTextTag.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Attributes.cs" />
+    <Compile Include="Tags\FontTags\DefineFont3Glyph.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontAlignZonesTag.cs" />
     <Compile Include="Tags\FontTags\DefineFontNameTag.cs" />

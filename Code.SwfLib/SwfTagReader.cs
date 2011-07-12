@@ -33,7 +33,7 @@ namespace Code.SwfLib {
             if (fontInfo == null) {
                 throw new InvalidDataException("Couldn't find corresponding DefineFont3Tag");
             }
-            tag.Zones = new SwfZoneArray[fontInfo.GlyphsCount];
+            tag.Zones = new SwfZoneArray[fontInfo.Glyphs.Length];
             for (var i = 0; i < tag.Zones.Length; i++) {
                 var zone = new SwfZoneArray();
                 int count = reader.ReadByte();
@@ -316,9 +316,12 @@ namespace Code.SwfLib {
             tag.Language = reader.ReadByte();
             int nameLength = reader.ReadByte();
             tag.FontName = reader.ReadRawString(nameLength);
-            tag.GlyphsCount = reader.ReadUInt16();
-            //TODO: read other fields
-            //TODO: serialize other fields
+            int glyphsCount = reader.ReadUInt16();
+            tag.Glyphs = new DefineFont3Glyph[glyphsCount];
+            for (var i = 0; i < glyphsCount; i++) {
+                tag.Glyphs[i] = new DefineFont3Glyph();
+            }
+            tag.RestData = reader.ReadBytes((int) (stream.Length - stream.Position));
             return tag;
         }
 
