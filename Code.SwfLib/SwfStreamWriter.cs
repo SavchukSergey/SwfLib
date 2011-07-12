@@ -128,8 +128,8 @@ namespace Code.SwfLib {
 
         public void WriteRawString(string val) {
             var bytes = Encoding.UTF8.GetBytes(val);
-            //TODO: Should I put terminating zero here?
             _writer.Write(bytes);
+            _writer.Write((byte)0);
         }
 
         public void WriteSingle(float value) {

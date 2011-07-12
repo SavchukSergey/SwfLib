@@ -10,11 +10,11 @@ using Code.SwfLib.Tags.FontTags;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib {
-    public class TagSerializer : ISwfTagVisitor {
+    public class SwfTagSerializer : ISwfTagVisitor {
 
         private readonly SwfFile _file;
 
-        public TagSerializer(SwfFile file) {
+        public SwfTagSerializer(SwfFile file) {
             _file = file;
         }
 
@@ -123,7 +123,7 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.ObjectID);
             writer.WriteByte((byte)tag.Attributes);
             writer.WriteByte(tag.Language);
-            writer.WriteByte((byte)tag.FontName.Length);
+            writer.WriteByte((byte)(tag.FontName.Length + 1));
             writer.WriteRawString(tag.FontName);
             writer.WriteUInt16((ushort) tag.Glyphs.Length);
             writer.WriteBytes(tag.RestData);

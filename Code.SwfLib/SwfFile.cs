@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Code.SwfLib.Data;
@@ -29,7 +29,7 @@ namespace Code.SwfLib {
             var writer = new SwfStreamWriter(mem);
             writer.WriteSwfFileInfo(FileInfo);
             writer.WriteSwfHeader(Header);
-            var bin = new TagSerializer(this);
+            var bin = new SwfTagSerializer(this);
             foreach (var tag in Tags) {
                 var tagData = (SwfTagData)tag.AcceptVistor(bin);
                 writer.WriteTagData(tagData);

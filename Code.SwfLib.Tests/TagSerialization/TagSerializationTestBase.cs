@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,7 +41,7 @@ namespace Code.SwfLib.Tests.TagSerialization {
             file.FileInfo.Version = 10;
 
             var mem = new MemoryStream();
-            var serializer = new TagSerializer(file);
+            var serializer = new SwfTagSerializer(file);
             var tagData = serializer.GetTagData(tag);
             var writer = new SwfStreamWriter(mem);
             writer.WriteTagData(tagData);

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F7862DFF-3B7F-4E5C-B448-9E6E4C04FBF7}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertExt.cs" />
+    <Compile Include="Bin2BinTests.cs" />
     <Compile Include="BitsCountTest.cs" />
     <Compile Include="ColorTransformStreamExtTest.cs" />
     <Compile Include="ExternalEtalonTests\DefineShapeTagTest.cs" />
@@ -106,6 +107,30 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\DefineShape\DefineShape2.bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFont3Tag\1.75.tag" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFont3Tag\2.75.tag" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFont3Tag\3.75.tag" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFont3Tag\4.75.tag" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFont3Tag\5.75.tag" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFont3Tag\6.75.tag" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFont3Tag\7.75.tag" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFont3Tag\8.75.tag" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

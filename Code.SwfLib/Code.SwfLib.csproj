@@ -154,8 +154,9 @@
     <Compile Include="SwfStreamReaderExt.cs" />
     <Compile Include="SwfStreamWriter.cs" />
     <Compile Include="SwfStreamWriterExt.cs" />
+    <Compile Include="SwfTagSerializer.cs" />
     <Compile Include="SwfZip.cs" />
-    <Compile Include="TagSerializer.cs" />
+    <Compile Include="SwfTagDeserializer.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsBaseTag.cs" />
     <Compile Include="Tags\ControlTags\ControlBaseTag.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObjectTag.cs" />

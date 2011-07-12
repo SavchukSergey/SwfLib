@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -96,7 +96,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             file.FileInfo.Version = 10;
 
             var tag = GetDefineShapeTag1();
-            var serializer = new TagSerializer(file);
+            var serializer = new SwfTagSerializer(file);
             var tagData = serializer.GetTagData(tag);
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
@@ -214,7 +214,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             file.FileInfo.Version = 10;
 
             var tag = GetDefineShapeTag2();
-            var serializer = new TagSerializer(file);
+            var serializer = new SwfTagSerializer(file);
             var tagData = serializer.GetTagData(tag);
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
