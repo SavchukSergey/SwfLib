@@ -132,6 +132,16 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Bin2Bin\DefineFont3Tag\8.75.tag" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\1.73.tag" />
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\2.73.tag" />
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\3.73.tag" />
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\4.73.tag" />
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\5.73.tag" />
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\6.73.tag" />
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\7.73.tag" />
+    <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\8.73.tag" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

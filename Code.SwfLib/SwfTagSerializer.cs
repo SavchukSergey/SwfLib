@@ -143,13 +143,9 @@ namespace Code.SwfLib {
                     writer.WriteShortFloat(zoneData.Position);
                     writer.WriteShortFloat(zoneData.Size);
                 }
-                var flags = 0;
-                flags |= zoneArray.ZoneX ? 0x80 : 0x00;
-                flags |= zoneArray.ZoneY ? 0x40 : 0x00;
-                writer.WriteByte((byte)flags);
+                writer.WriteByte((byte)zoneArray.Flags);
             }
 
-            //TODO: serialize
             return new SwfTagData { Type = SwfTagType.DefineFontAlignZones, Data = mem.ToArray() };
         }
 

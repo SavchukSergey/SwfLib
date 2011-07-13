@@ -13,148 +13,122 @@ namespace Code.SwfLib {
 
         public SwfTagData TagData { get; set; }
 
-        public object Visit(CSMTextSettingsTag tag)
-        {
+        public SwfFile SwfFile { get; set; }
+
+        public object Visit(CSMTextSettingsTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineBitsJPEG2Tag tag)
-        {
+        public object Visit(DefineBitsJPEG2Tag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineBitsLosslessTag tag)
-        {
+        public object Visit(DefineBitsLosslessTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineButton2Tag tag)
-        {
+        public object Visit(DefineButton2Tag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineEditTextTag tag)
-        {
+        public object Visit(DefineEditTextTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineFont3Tag tag)
-        {
+        public object Visit(DefineFont3Tag tag) {
             return SwfTagReader.ReadDefineFont3Tag(TagData);
         }
 
-        public object Visit(DefineFontAlignZonesTag tag)
-        {
+        public object Visit(DefineFontAlignZonesTag tag) {
+            var reader = new SwfTagReader(SwfFile);
+            return reader.ReadDefineFontAlignZonesTag(TagData);
+        }
+
+        public object Visit(DefineFontNameTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineFontNameTag tag)
-        {
+        public object Visit(DefineShapeTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineShapeTag tag)
-        {
+        public object Visit(DefineShape3Tag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineShape3Tag tag)
-        {
+        public object Visit(DefineSpriteTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineSpriteTag tag)
-        {
+        public object Visit(DefineTextTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineTextTag tag)
-        {
+        public object Visit(DoActionTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DoActionTag tag)
-        {
+        public object Visit(DoInitActionTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(DoInitActionTag tag)
-        {
+        public object Visit(EndTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(EndTag tag)
-        {
+        public object Visit(ExportTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(ExportTag tag)
-        {
+        public object Visit(FileAttributesTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(FileAttributesTag tag)
-        {
+        public object Visit(FrameLabelTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(FrameLabelTag tag)
-        {
+        public object Visit(MetadataTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(MetadataTag tag)
-        {
+        public object Visit(PlaceObjectTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(PlaceObjectTag tag)
-        {
+        public object Visit(PlaceObject2Tag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(PlaceObject2Tag tag)
-        {
+        public object Visit(PlaceObject3Tag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(PlaceObject3Tag tag)
-        {
+        public object Visit(RemoveObjectTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(RemoveObjectTag tag)
-        {
+        public object Visit(RemoveObject2Tag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(RemoveObject2Tag tag)
-        {
+        public object Visit(SetBackgroundColorTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(SetBackgroundColorTag tag)
-        {
+        public object Visit(ScriptLimitsTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(ScriptLimitsTag tag)
-        {
+        public object Visit(ShowFrameTag tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(ShowFrameTag tag)
-        {
+        public object Visit(SwfTagBase tag) {
             throw new NotImplementedException();
         }
 
-        public object Visit(SwfTagBase tag)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Visit(UnknownTag tag)
-        {
+        public object Visit(UnknownTag tag) {
             throw new NotImplementedException();
         }
     }

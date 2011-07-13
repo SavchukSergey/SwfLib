@@ -44,10 +44,8 @@ namespace Code.SwfLib {
                     zoneData.Size = reader.ReadShortFloat();
                     zone.Data[j] = zoneData;
                 }
-                var flags = reader.ReadByte();
-                zone.ZoneX = (flags & 0x80) != 0;
-                zone.ZoneY = (flags & 0x40) != 0;
-                //TODO: reserved flags
+                zone.Flags = (SwfZoneArrayFlags) reader.ReadByte(); 
+                //TODO: store to xml reserverd flags
                 tag.Zones[i] = zone;
 
             }
