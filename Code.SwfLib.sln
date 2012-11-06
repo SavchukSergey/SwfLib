@@ -1,14 +1,10 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib", "Code.SwfLib\Code.SwfLib.csproj", "{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{AFFA8CD0-B0EC-44C2-AB6D-64943CF12F3B}"
 	ProjectSection(SolutionItems) = preProject
 		References\zlib.net.dll = References\zlib.net.dll
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.Tests", "Code.SwfLib.Tests\Code.SwfLib.Tests.csproj", "{F7862DFF-3B7F-4E5C-B448-9E6E4C04FBF7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{8CD70156-C735-47BC-AA5E-DF4AE0EE4E57}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,10 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{8CD70156-C
 		docs\swf_file_format_spec_v9.pdf = docs\swf_file_format_spec_v9.pdf
 		docs\swfmill-schema.xml = docs\swfmill-schema.xml
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill", "Code.SwfLib.SwfMill\Code.SwfLib.SwfMill.csproj", "{4CE22FF7-ABF5-4894-BCDE-402DBDD42B80}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill.Tests", "Code.SwfLib.SwfMill.Tests\Code.SwfLib.SwfMill.Tests.csproj", "{4EAE1D32-3036-493F-8699-1A9A7D65B277}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nUnit", "nUnit", "{242E2CE4-A110-4F8C-AECF-FDF29547B943}"
 	ProjectSection(SolutionItems) = preProject
@@ -30,6 +22,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "swfmill", "swfmill", "{3850
 	ProjectSection(SolutionItems) = preProject
 		References\swfmill\swfmill.exe = References\swfmill\swfmill.exe
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib", "Code.SwfLib\Code.SwfLib.csproj", "{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.Tests", "Code.SwfLib.Tests\Code.SwfLib.Tests.csproj", "{F7862DFF-3B7F-4E5C-B448-9E6E4C04FBF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill", "Code.SwfLib.SwfMill\Code.SwfLib.SwfMill.csproj", "{4CE22FF7-ABF5-4894-BCDE-402DBDD42B80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill.Tests", "Code.SwfLib.SwfMill.Tests\Code.SwfLib.SwfMill.Tests.csproj", "{4EAE1D32-3036-493F-8699-1A9A7D65B277}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
