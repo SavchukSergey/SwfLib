@@ -26,7 +26,7 @@ namespace Code.SwfLib {
 
         public SwfTagData ReadTagData() {
             ushort typeAndSize = ReadUInt16();
-            SwfTagType type = (SwfTagType)(typeAndSize >> 6);
+            var type = (SwfTagType)(typeAndSize >> 6);
             int shortSize = typeAndSize & 0x3f;
             int size = shortSize < 0x3f ? shortSize : ReadInt32();
             byte[] tagData = ReadBytes(size);
@@ -71,12 +71,16 @@ namespace Code.SwfLib {
             return _reader.ReadBytes(count);
         }
 
+        public byte[] ReadRest() {
+            return ReadBytes((int)BytesLeft);
+        }
+
         public long BytesLeft {
             get { return _reader.BaseStream.Length - _reader.BaseStream.Position; }
         }
 
         public string ReadString() {
-            MemoryStream dataStream = new MemoryStream();
+            var dataStream = new MemoryStream();
             byte bt = 1;
             while (bt > 0) {
                 bt = _reader.ReadByte();
@@ -86,7 +90,7 @@ namespace Code.SwfLib {
         }
 
         public string ReadRawString(int count) {
-            MemoryStream dataStream = new MemoryStream();
+            var dataStream = new MemoryStream();
             for (var i = 0; i < count; i++) {
                 var bt = _reader.ReadByte();
                 if (bt != 0) dataStream.WriteByte(bt);
@@ -164,5 +168,6 @@ namespace Code.SwfLib {
         public void GoBack(int distance) {
             _reader.BaseStream.Seek(-distance, SeekOrigin.Current);
         }
+
     }
 }

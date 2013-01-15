@@ -2,9 +2,11 @@
 {
     public struct ClipActions
     {
-        public ushort ActionsReserved;
+        //public ushort Reserved;
 
-        public uint ActionsFlags;
+        //public uint AllEventFlags;
+
+        public byte[] RawData;
 
     }
 }

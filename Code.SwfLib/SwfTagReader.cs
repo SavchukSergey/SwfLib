@@ -344,6 +344,7 @@ namespace Code.SwfLib {
             }
             return tag;
         }
+
         public PlaceObjectTag ReadPlaceObjectTag(SwfTagData tagData) {
             var tag = new PlaceObjectTag();
             var stream = new MemoryStream(tagData.Data);
@@ -420,50 +421,50 @@ namespace Code.SwfLib {
         public SwfTagBase ReadTag(SwfStreamReader reader) {
             var tagData = reader.ReadTagData();
             switch (tagData.Type) {
-                case SwfTagType.CSMTextSettings:
-                    return ReadCSMTextSettingsTag(tagData);
-                case SwfTagType.DefineBitsJPEG2:
-                    return ReadDefineBitsJPEG2Tag(tagData);
-                case SwfTagType.DefineBitsLossless:
-                    return ReadDefineBitsLosslessTag(tagData);
-                case SwfTagType.DefineEditText:
-                    return ReadDefineEditTextTag(tagData);
-                case SwfTagType.DefineFontAlignZones:
-                    return ReadDefineFontAlignZonesTag(tagData);
-                case SwfTagType.DefineFontName:
-                    return ReadDefineFontNameTag(tagData);
-                case SwfTagType.DefineFont3:
-                    return ReadDefineFont3Tag(tagData);
-                case SwfTagType.DefineShape:
-                    return ReadDefineShapeTag(tagData);
+                //case SwfTagType.CSMTextSettings:
+                //    return ReadCSMTextSettingsTag(tagData);
+                //case SwfTagType.DefineBitsJPEG2:
+                //    return ReadDefineBitsJPEG2Tag(tagData);
+                //case SwfTagType.DefineBitsLossless:
+                //    return ReadDefineBitsLosslessTag(tagData);
+                //case SwfTagType.DefineEditText:
+                //    return ReadDefineEditTextTag(tagData);
+                //case SwfTagType.DefineFontAlignZones:
+                //    return ReadDefineFontAlignZonesTag(tagData);
+                //case SwfTagType.DefineFontName:
+                //    return ReadDefineFontNameTag(tagData);
+                //case SwfTagType.DefineFont3:
+                //    return ReadDefineFont3Tag(tagData);
+                //case SwfTagType.DefineShape:
+                //    return ReadDefineShapeTag(tagData);
                 case SwfTagType.DefineSprite:
                     return ReadDefineSpriteTag(tagData);
-                case SwfTagType.DefineText:
-                    return ReadDefineTextTag(tagData);
-                case SwfTagType.DoAction:
-                    return ReadDoActionTag(tagData);
+                //case SwfTagType.DefineText:
+                //    return ReadDefineTextTag(tagData);
+                //case SwfTagType.DoAction:
+                //    return ReadDoActionTag(tagData);
                 case SwfTagType.End:
                     return ReadEndTag(tagData);
                 case SwfTagType.Export:
                     return ReadExportTag(tagData);
-                case SwfTagType.FrameLabel:
-                    return ReadFrameLabelTag(tagData);
+                //case SwfTagType.FrameLabel:
+                //    return ReadFrameLabelTag(tagData);
                 case SwfTagType.PlaceObject:
                     return ReadPlaceObjectTag(tagData);
-                //case SwfTagType.PlaceObject2:
-                //    return ReadPlaceObject2Tag(tagData);
+                case SwfTagType.PlaceObject2:
+                    return ReadPlaceObject2Tag(tagData);
                 case SwfTagType.ShowFrame:
                     return ReadShowFrameTag(tagData);
                 case SwfTagType.FileAttributes:
                     return ReadFileAttributesTag(tagData);
                 case SwfTagType.MetaData:
                     return ReadMetadataTag(tagData);
-                case SwfTagType.RemoveObject:
-                    return ReadRemoveObjectTag(tagData);
+                //case SwfTagType.RemoveObject:
+                //    return ReadRemoveObjectTag(tagData);
                 case SwfTagType.SetBackgroundColor:
                     return ReadSetBackgroundColorTag(tagData);
-                case SwfTagType.ScriptLimits:
-                    return ReadScriptLimitsTag(tagData);
+                //case SwfTagType.ScriptLimits:
+                //    return ReadScriptLimitsTag(tagData);
                 default:
                     return ReadUnknownTag(tagData);
             }
