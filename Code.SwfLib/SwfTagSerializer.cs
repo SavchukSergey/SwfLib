@@ -121,11 +121,11 @@ namespace Code.SwfLib {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16(tag.ObjectID);
-            writer.WriteByte((byte)tag.Attributes);
-            writer.WriteByte(tag.Language);
-            writer.WriteByte((byte)(tag.FontName.Length + 1));
-            writer.WriteRawString(tag.FontName);
-            writer.WriteUInt16((ushort)tag.Glyphs.Length);
+            //writer.WriteByte((byte)tag.Attributes);
+            //writer.WriteByte(tag.Language);
+            //writer.WriteByte((byte)(tag.FontName.Length + 1));
+            //writer.WriteRawString(tag.FontName);
+            //writer.WriteUInt16((ushort)tag.Glyphs.Length);
             writer.WriteBytes(tag.RestData);
             writer.FlushBits();
             return new SwfTagData { Type = SwfTagType.DefineFont3, Data = mem.ToArray() };

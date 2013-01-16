@@ -22,7 +22,7 @@ namespace Code.SwfLib.SwfMill {
         public const string DEFINE_FONT_3_TAG = "DefineFont3";
         public const string DEFINE_FONT_ALIGN_ZONES_TAG = "DefineFontAlignZones";
         public const string DEFINE_FONT_INFO_TAG = "DefineFontInfo";
-        public const string DEFINE_FONT_NAME_TAG = "DefineFontName";
+        public const string DEFINE_FONT_NAME_TAG = "DefineFontInfo3";
         public const string DEFINE_SHAPE_TAG = "DefineShape";
         public const string DEFINE_SHAPE3_TAG = "DefineShape3";
         public const string DEFINE_SPRITE_TAG = "DefineSprite";

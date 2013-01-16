@@ -24,39 +24,39 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                 case OBJECT_ID_ATTRIB:
                     tag.ObjectID = ushort.Parse(attrib.Value);
                     break;
-                case NAME_ATTRIB:
-                    tag.FontName = attrib.Value;
-                    break;
-                case LANGUAGE_ATTRIB:
-                    tag.Language = byte.Parse(attrib.Value);
-                    break;
-                case GLYPHS_COUNT_ATTRIB:
-                    tag.Glyphs = new DefineFont3Glyph[int.Parse(attrib.Value)];
-                    break;
-                case HAS_LAYOUT_ATTRIB:
-                    tag.HasLayout = ParseBoolFromDigit(attrib);
-                    break;
-                case SHIFT_JIS_ATTRIB:
-                    tag.ShiftJIS = ParseBoolFromDigit(attrib);
-                    break;
-                case UNICODE_ATTRIB:
-                    tag.Unicode = ParseBoolFromDigit(attrib);
-                    break;
-                case ANSI_ATTRIB:
-                    tag.ANSI = ParseBoolFromDigit(attrib);
-                    break;
-                case WIDE_GLYPH_OFFSETS_ATTRIB:
-                    tag.WideOffsets = ParseBoolFromDigit(attrib);
-                    break;
-                case WIDE_CODES_ATTRIB:
-                    tag.WideCodes = ParseBoolFromDigit(attrib);
-                    break;
-                case ITALIC_ATTRIB:
-                    tag.Italics = ParseBoolFromDigit(attrib);
-                    break;
-                case BOLD_ATTRIB:
-                    tag.Bold = ParseBoolFromDigit(attrib);
-                    break;
+                //case NAME_ATTRIB:
+                //    tag.FontName = attrib.Value;
+                //    break;
+                //case LANGUAGE_ATTRIB:
+                //    tag.Language = byte.Parse(attrib.Value);
+                //    break;
+                //case GLYPHS_COUNT_ATTRIB:
+                //    tag.Glyphs = new DefineFont3Glyph[int.Parse(attrib.Value)];
+                //    break;
+                //case HAS_LAYOUT_ATTRIB:
+                //    tag.HasLayout = ParseBoolFromDigit(attrib);
+                //    break;
+                //case SHIFT_JIS_ATTRIB:
+                //    tag.ShiftJIS = ParseBoolFromDigit(attrib);
+                //    break;
+                //case UNICODE_ATTRIB:
+                //    tag.Unicode = ParseBoolFromDigit(attrib);
+                //    break;
+                //case ANSI_ATTRIB:
+                //    tag.ANSI = ParseBoolFromDigit(attrib);
+                //    break;
+                //case WIDE_GLYPH_OFFSETS_ATTRIB:
+                //    tag.WideOffsets = ParseBoolFromDigit(attrib);
+                //    break;
+                //case WIDE_CODES_ATTRIB:
+                //    tag.WideCodes = ParseBoolFromDigit(attrib);
+                //    break;
+                //case ITALIC_ATTRIB:
+                //    tag.Italics = ParseBoolFromDigit(attrib);
+                //    break;
+                //case BOLD_ATTRIB:
+                //    tag.Bold = ParseBoolFromDigit(attrib);
+                //    break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
             }
@@ -75,17 +75,17 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         public override XElement FormatTag(DefineFont3Tag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_3_TAG),
                                 new XAttribute(OBJECT_ID_ATTRIB, tag.ObjectID),
-                                new XAttribute(LANGUAGE_ATTRIB, tag.Language),
-                                new XAttribute(GLYPHS_COUNT_ATTRIB, tag.Glyphs.Length),
-                                new XAttribute(HAS_LAYOUT_ATTRIB, FormatBoolToDigit(tag.HasLayout)),
-                                new XAttribute(SHIFT_JIS_ATTRIB, FormatBoolToDigit(tag.ShiftJIS)),
-                                new XAttribute(UNICODE_ATTRIB, FormatBoolToDigit(tag.Unicode)),
-                                new XAttribute(ANSI_ATTRIB, FormatBoolToDigit(tag.ANSI)),
-                                new XAttribute(WIDE_GLYPH_OFFSETS_ATTRIB, FormatBoolToDigit(tag.WideOffsets)),
-                                new XAttribute(WIDE_CODES_ATTRIB, FormatBoolToDigit(tag.WideCodes)),
-                                new XAttribute(ITALIC_ATTRIB, FormatBoolToDigit(tag.Italics)),
-                                new XAttribute(BOLD_ATTRIB, FormatBoolToDigit(tag.Bold)),
-                                new XAttribute(NAME_ATTRIB, tag.FontName),
+                                //new XAttribute(LANGUAGE_ATTRIB, tag.Language),
+                                //new XAttribute(GLYPHS_COUNT_ATTRIB, tag.Glyphs.Length),
+                                //new XAttribute(HAS_LAYOUT_ATTRIB, FormatBoolToDigit(tag.HasLayout)),
+                                //new XAttribute(SHIFT_JIS_ATTRIB, FormatBoolToDigit(tag.ShiftJIS)),
+                                //new XAttribute(UNICODE_ATTRIB, FormatBoolToDigit(tag.Unicode)),
+                                //new XAttribute(ANSI_ATTRIB, FormatBoolToDigit(tag.ANSI)),
+                                //new XAttribute(WIDE_GLYPH_OFFSETS_ATTRIB, FormatBoolToDigit(tag.WideOffsets)),
+                                //new XAttribute(WIDE_CODES_ATTRIB, FormatBoolToDigit(tag.WideCodes)),
+                                //new XAttribute(ITALIC_ATTRIB, FormatBoolToDigit(tag.Italics)),
+                                //new XAttribute(BOLD_ATTRIB, FormatBoolToDigit(tag.Bold)),
+                                //new XAttribute(NAME_ATTRIB, tag.FontName),
                                 GetBinary(tag.RestData)
                                 );
         }

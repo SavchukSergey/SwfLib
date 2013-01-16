@@ -3,12 +3,12 @@
 
         public ushort ObjectID;
 
-        public DefineFont3Attributes Attributes;
+        //public DefineFont3Attributes Attributes;
 
-        public byte Language;
+        //public byte Language;
 
-        public string FontName;
-
+        //public string FontName;
+        /*
         #region Attributes flags
 
         public bool HasLayout {
@@ -92,7 +92,7 @@
         }
 
         #endregion
-
+        */
         public DefineFont3Glyph[] Glyphs;
 
         //TODO: serialize other fields

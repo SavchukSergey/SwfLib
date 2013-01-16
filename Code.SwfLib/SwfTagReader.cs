@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Code.SwfLib.Data;
@@ -328,16 +329,16 @@ namespace Code.SwfLib {
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.ObjectID = reader.ReadUInt16();
-            tag.Attributes = (DefineFont3Attributes)reader.ReadByte();
-            tag.Language = reader.ReadByte();
-            int nameLength = reader.ReadByte();
-            tag.FontName = reader.ReadRawString(nameLength);
-            int glyphsCount = reader.ReadUInt16();
-            tag.Glyphs = new DefineFont3Glyph[glyphsCount];
-            for (var i = 0; i < glyphsCount; i++) {
-                tag.Glyphs[i] = new DefineFont3Glyph();
-            }
-            tag.RestData = reader.ReadBytes((int) (stream.Length - stream.Position));
+            //tag.Attributes = (DefineFont3Attributes)reader.ReadByte();
+            //tag.Language = reader.ReadByte();
+            //int nameLength = reader.ReadByte();
+            //tag.FontName = reader.ReadRawString(nameLength);
+            //int glyphsCount = reader.ReadUInt16();
+            //tag.Glyphs = new DefineFont3Glyph[glyphsCount];
+            //for (var i = 0; i < glyphsCount; i++) {
+            //    tag.Glyphs[i] = new DefineFont3Glyph();
+            //}
+            tag.RestData = reader.ReadRest();
             return tag;
         }
 
@@ -449,10 +450,10 @@ namespace Code.SwfLib {
                     return ReadDefineEditTextTag(tagData);
                 //case SwfTagType.DefineFontAlignZones:
                 //    return ReadDefineFontAlignZonesTag(tagData);
-                //case SwfTagType.DefineFontName:
-                //    return ReadDefineFontNameTag(tagData);
-                //case SwfTagType.DefineFont3:
-                //    return ReadDefineFont3Tag(tagData);
+                case SwfTagType.DefineFontName:
+                    return ReadDefineFontNameTag(tagData);
+                case SwfTagType.DefineFont3:
+                    return ReadDefineFont3Tag(tagData);
                 case SwfTagType.DefineFontInfo:
                     return ReadDefineFontInfoTag(tagData);
                 //case SwfTagType.DefineShape:
