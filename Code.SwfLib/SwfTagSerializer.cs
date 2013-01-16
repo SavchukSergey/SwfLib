@@ -226,7 +226,8 @@ namespace Code.SwfLib {
         public object Visit(DoInitActionTag tag) {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            //TODO: Write other fields
+            writer.WriteUInt16(tag.SpriteId);
+            writer.WriteBytes(tag.RestData);
             return new SwfTagData { Type = SwfTagType.DoInitAction, Data = mem.ToArray() };
         }
 

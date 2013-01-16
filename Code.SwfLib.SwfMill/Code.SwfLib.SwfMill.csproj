@@ -80,8 +80,8 @@
     <Compile Include="TagFormatting\ShapeTags\DefineShapeTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineSpriteTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineTextTagFormatter.cs" />
-    <Compile Include="TagFormatting\DoActionTagFormatter.cs" />
-    <Compile Include="TagFormatting\DoInitActionTagFormatter.cs" />
+    <Compile Include="TagFormatting\ActionTags\DoActionTagFormatter.cs" />
+    <Compile Include="TagFormatting\ActionTags\DoInitActionTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\ExportTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\FrameLabelTagFormater.cs" />
     <Compile Include="TagFormatting\ITagFormatter.cs" />

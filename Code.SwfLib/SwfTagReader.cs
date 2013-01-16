@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.Actions;
@@ -103,14 +102,23 @@ namespace Code.SwfLib {
             return tag;
         }
 
+        public DoInitActionTag ReadDoInitActionTag(SwfTagData tagData) {
+            var tag = new DoInitActionTag();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.SpriteId = reader.ReadUInt16();
+            tag.RestData = reader.ReadRest();
+            return tag;
+        }
+
         public static SymbolClassTag ReadSymbolClassTag(byte[] tagData) {
-            SymbolClassTag tag = new SymbolClassTag();
-            MemoryStream stream = new MemoryStream(tagData);
-            SwfStreamReader reader = new SwfStreamReader(stream);
+            var tag = new SymbolClassTag();
+            var stream = new MemoryStream(tagData);
+            var reader = new SwfStreamReader(stream);
             ushort count = reader.ReadUInt16();
             tag.References = new SwfSymbolReference[count];
             for (int i = 0; i < count; i++) {
-                SwfSymbolReference reference = new SwfSymbolReference();
+                var reference = new SwfSymbolReference();
                 reference.SymbolID = reader.ReadUInt16();
                 reference.SymbolName = reader.ReadString();
                 tag.References[i] = reference;
@@ -119,17 +127,17 @@ namespace Code.SwfLib {
         }
 
         public static DoABCTag ReadDoAbcTag(byte[] tagData) {
-            DoABCTag tag = new DoABCTag();
-            MemoryStream stream = new MemoryStream(tagData);
-            SwfStreamReader reader = new SwfStreamReader(stream);
+            var tag = new DoABCTag();
+            var stream = new MemoryStream(tagData);
+            var reader = new SwfStreamReader(stream);
             tag.ABCData = reader.ReadBytes((int)(stream.Length - stream.Position));
             return tag;
         }
 
         public static DoABCDefineTag ReadDoAbcDefineTag(byte[] tagData) {
-            DoABCDefineTag tag = new DoABCDefineTag();
-            MemoryStream stream = new MemoryStream(tagData);
-            SwfStreamReader reader = new SwfStreamReader(stream);
+            var tag = new DoABCDefineTag();
+            var stream = new MemoryStream(tagData);
+            var reader = new SwfStreamReader(stream);
             tag.Flags = reader.ReadUInt32();
             tag.Name = reader.ReadString();
             tag.ABCData = reader.ReadBytes((int)(stream.Length - stream.Position));
@@ -145,9 +153,9 @@ namespace Code.SwfLib {
         }
 
         public static ScriptLimitsTag ReadScriptLimitsTag(SwfTagData tagData) {
-            ScriptLimitsTag tag = new ScriptLimitsTag();
-            MemoryStream stream = new MemoryStream(tagData.Data);
-            SwfStreamReader reader = new SwfStreamReader(stream);
+            var tag = new ScriptLimitsTag();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
             tag.MaxRecursionDepth = reader.ReadUInt16();
             tag.ScriptTimeoutSeconds = reader.ReadUInt16();
             return tag;
@@ -427,8 +435,8 @@ namespace Code.SwfLib {
                 //    return ReadDefineBitsJPEG2Tag(tagData);
                 //case SwfTagType.DefineBitsLossless:
                 //    return ReadDefineBitsLosslessTag(tagData);
-                //case SwfTagType.DefineEditText:
-                //    return ReadDefineEditTextTag(tagData);
+                case SwfTagType.DefineEditText:
+                    return ReadDefineEditTextTag(tagData);
                 //case SwfTagType.DefineFontAlignZones:
                 //    return ReadDefineFontAlignZonesTag(tagData);
                 //case SwfTagType.DefineFontName:
@@ -441,6 +449,8 @@ namespace Code.SwfLib {
                     return ReadDefineSpriteTag(tagData);
                 //case SwfTagType.DefineText:
                 //    return ReadDefineTextTag(tagData);
+                case SwfTagType.DoInitAction:
+                    return ReadDoInitActionTag(tagData);
                 //case SwfTagType.DoAction:
                 //    return ReadDoActionTag(tagData);
                 case SwfTagType.End:

@@ -1,5 +1,6 @@
 ﻿using System;
 using Code.SwfLib.SwfMill.TagFormatting;
+using Code.SwfLib.SwfMill.TagFormatting.ActionTags;
 using Code.SwfLib.SwfMill.TagFormatting.BitmapTags;
 using Code.SwfLib.SwfMill.TagFormatting.ControlTags;
 using Code.SwfLib.SwfMill.TagFormatting.DisplayListTags;

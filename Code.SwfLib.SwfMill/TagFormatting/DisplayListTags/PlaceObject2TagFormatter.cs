@@ -69,6 +69,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     tag.HasColorTransform = true;
                     break;
                 case CLIP_ACTIONS_ELEM:
+                    tag.HasClipActions = true;
                     tag.ClipActions.RawData = Convert.FromBase64String(element.Value);
                     break;
                 default:

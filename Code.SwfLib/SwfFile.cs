@@ -16,7 +16,7 @@ namespace Code.SwfLib {
 
         public static SwfFile ReadFrom(Stream stream) {
             var file = new SwfFile();
-            SwfStreamReader reader = new SwfStreamReader(stream);
+            var reader = new SwfStreamReader(stream);
             file.FileInfo = reader.ReadSwfFileInfo();
             reader = GetSWFStreamReader(file.FileInfo, stream);
             file.Header = reader.ReadSwfHeader();

@@ -13,12 +13,17 @@ namespace Code.SwfLib.SwfMill {
 
         public XDocument ConvertToXml(SwfFile file) {
             _formatterFactory = new TagFormatterFactory(file.FileInfo.Version);
-            XDocument doc = new XDocument(GetRoot(file));
+            var doc = new XDocument(GetRoot(file));
             doc.Declaration = new XDeclaration("1.0", "utf-8", "yes");
             return doc;
         }
 
-        public Stream Decompress(Stream source, Stream target) {
+        public void Decompress(Stream source, Stream target) {
+            var file = SwfFile.ReadFrom(source);
+            file.WriteTo(target);
+        }
+
+        public Stream Compress(Stream source, Stream target) {
             throw new NotImplementedException();
         }
 

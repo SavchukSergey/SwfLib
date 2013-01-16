@@ -162,6 +162,7 @@
     <Compile Include="SwfTagSerializer.cs" />
     <Compile Include="SwfZip.cs" />
     <Compile Include="SwfTagDeserializer.cs" />
+    <Compile Include="Tags\Actions\DoInitActionTag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsBaseTag.cs" />
     <Compile Include="Tags\ControlTags\ControlBaseTag.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObjectTag.cs" />
@@ -186,7 +187,6 @@
     <Compile Include="Tags\DefineTextTag.cs" />
     <Compile Include="Tags\DisplayListTags\DisplayListBaseTag.cs" />
     <Compile Include="Tags\Actions\DoActionTag.cs" />
-    <Compile Include="Tags\DoInitActionTag.cs" />
     <Compile Include="Tags\ControlTags\EndTag.cs" />
     <Compile Include="Tags\ExportTag.cs" />
     <Compile Include="Tags\ISwfTagVisitor.cs" />
