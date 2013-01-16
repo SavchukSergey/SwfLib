@@ -26,6 +26,7 @@ namespace Code.SwfLib.SwfMill {
         private DefineButton2TagFormatter _defineButton2TagFormatter;
         private DefineEditTextTagFormatter _defineEditTextFormatter;
         private DefineFontAlignZonesTagFormatter _defineFontAlignZonesFormatter;
+        private DefineFontInfoTagFormatter _defineFontInfoFormatter;
         private DefineFontNameTagFormatter _defineFontNameFormater;
         private DefineFont3TagFormatter _defineFont3Formater;
         private DefineShapeTagFormatter _defineShapeFormater;
@@ -98,6 +99,13 @@ namespace Code.SwfLib.SwfMill {
                 _defineFontAlignZonesFormatter = new DefineFontAlignZonesTagFormatter();
             }
             return _defineFontAlignZonesFormatter;
+        }
+
+        public object Visit(DefineFontInfoTag tag) {
+            if (_defineFontInfoFormatter == null) {
+                _defineFontInfoFormatter = new DefineFontInfoTagFormatter();
+            }
+            return _defineFontInfoFormatter;
         }
 
         object ISwfTagVisitor.Visit(DefineFontNameTag tag) {

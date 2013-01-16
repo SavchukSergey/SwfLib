@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Text;
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.Actions;
 using Code.SwfLib.Tags;
@@ -107,6 +108,15 @@ namespace Code.SwfLib {
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.SpriteId = reader.ReadUInt16();
+            tag.RestData = reader.ReadRest();
+            return tag;
+        }
+
+        public DefineFontInfoTag ReadDefineFontInfoTag(SwfTagData tagData) {
+            var tag = new DefineFontInfoTag();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.FontId = reader.ReadUInt16();
             tag.RestData = reader.ReadRest();
             return tag;
         }
@@ -443,6 +453,8 @@ namespace Code.SwfLib {
                 //    return ReadDefineFontNameTag(tagData);
                 //case SwfTagType.DefineFont3:
                 //    return ReadDefineFont3Tag(tagData);
+                case SwfTagType.DefineFontInfo:
+                    return ReadDefineFontInfoTag(tagData);
                 //case SwfTagType.DefineShape:
                 //    return ReadDefineShapeTag(tagData);
                 case SwfTagType.DefineSprite:

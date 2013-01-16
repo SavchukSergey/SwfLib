@@ -44,6 +44,10 @@ namespace Code.SwfLib {
             return reader.ReadDefineFontAlignZonesTag(TagData);
         }
 
+        public object Visit(DefineFontInfoTag tag) {
+            throw new NotImplementedException();
+        }
+
         public object Visit(DefineFontNameTag tag) {
             throw new NotImplementedException();
         }

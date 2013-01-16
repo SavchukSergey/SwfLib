@@ -176,6 +176,7 @@
     <Compile Include="Tags\FontTags\DefineFont3Glyph.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontAlignZonesTag.cs" />
+    <Compile Include="Tags\FontTags\DefineFontInfoTag.cs" />
     <Compile Include="Tags\FontTags\DefineFontNameTag.cs" />
     <Compile Include="Tags\FontTags\SwfZoneArray.cs" />
     <Compile Include="Tags\FontTags\SwfZoneArrayFlags.cs" />

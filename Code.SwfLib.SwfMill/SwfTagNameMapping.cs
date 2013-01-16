@@ -21,6 +21,7 @@ namespace Code.SwfLib.SwfMill {
         public const string DEFINE_EDIT_TEXT_TAG = "DefineEditText";
         public const string DEFINE_FONT_3_TAG = "DefineFont3";
         public const string DEFINE_FONT_ALIGN_ZONES_TAG = "DefineFontAlignZones";
+        public const string DEFINE_FONT_INFO_TAG = "DefineFontInfo";
         public const string DEFINE_FONT_NAME_TAG = "DefineFontName";
         public const string DEFINE_SHAPE_TAG = "DefineShape";
         public const string DEFINE_SHAPE3_TAG = "DefineShape3";
@@ -49,6 +50,7 @@ namespace Code.SwfLib.SwfMill {
             _tagMap[DEFINE_EDIT_TEXT_TAG] = () => new DefineEditTextTag();
             _tagMap[DEFINE_FONT_3_TAG] = () => new DefineFont3Tag();
             _tagMap[DEFINE_FONT_ALIGN_ZONES_TAG] = () => new DefineFontAlignZonesTag();
+            _tagMap[DEFINE_FONT_INFO_TAG] = () => new DefineFontInfoTag();
             _tagMap[DEFINE_FONT_NAME_TAG] = () => new DefineFontNameTag();
             _tagMap[DEFINE_SHAPE_TAG] = () => new DefineShapeTag();
             _tagMap[DEFINE_SHAPE3_TAG] = () => new DefineShape3Tag();

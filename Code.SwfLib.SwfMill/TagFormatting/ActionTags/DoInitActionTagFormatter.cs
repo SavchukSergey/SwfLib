@@ -32,6 +32,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
 
         public override XElement FormatTag(DoInitActionTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.DO_INIT_ACTION_TAG),
+                new XAttribute(SPRITE_ATTRIB, tag.SpriteId),
                 new XElement(REST_ELEM, Convert.ToBase64String(tag.RestData)));
         }
     }

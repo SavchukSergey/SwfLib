@@ -73,6 +73,7 @@
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG2TagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsLosslessTagFormatter.cs" />
     <Compile Include="TagFormatting\DynamicTextTags\DefineEditTextTagFormatter.cs" />
+    <Compile Include="TagFormatting\FontTags\DefineFontInfoTagFormatter.cs" />
     <Compile Include="TagFormatting\FontTags\DefineFont3TagFormatter.cs" />
     <Compile Include="TagFormatting\FontTags\DefineFontAlignZonesTagFormatter.cs" />
     <Compile Include="TagFormatting\FontTags\DefineFontNameTagFormatter.cs" />

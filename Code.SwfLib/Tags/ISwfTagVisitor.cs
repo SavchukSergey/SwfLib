@@ -25,6 +25,8 @@ namespace Code.SwfLib.Tags
 
         object Visit(DefineFontAlignZonesTag tag);
 
+        object Visit(DefineFontInfoTag tag);
+
         object Visit(DefineFontNameTag tag);
 
         object Visit(DefineShapeTag tag);

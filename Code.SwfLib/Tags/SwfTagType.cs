@@ -27,6 +27,7 @@
         /// </summary>
         DefineText = 11,
         DoAction = 12,
+        DefineFontInfo = 13,
         DefineBitsLossless = 20,
         DefineBitsJPEG2 = 21,
         /// <summary>
