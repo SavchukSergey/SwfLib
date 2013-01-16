@@ -22,6 +22,7 @@ namespace Code.SwfLib.Tests {
             file.Tags.Add(new SetBackgroundColorTag {Color = new SwfRGB(10, 224, 224)});
             file.Tags.Add(new ShowFrameTag());
             file.Tags.Add(new EndTag());
+            var swf = SwfFile.ReadFrom(null);
             using (var stream = File.Open(@"D:\temp\bgTest.swf", FileMode.Create, FileAccess.ReadWrite))
             {
                 file.WriteTo(stream);

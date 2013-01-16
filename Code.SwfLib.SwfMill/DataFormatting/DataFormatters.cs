@@ -15,6 +15,8 @@
 
         public readonly ColorRGBAFormatter ColorRGBA;
 
+        public readonly ColorTransformRGBAFormatter ColorTransformRGBA;
+
         public readonly MatrixFormatter Matrix;
 
         public readonly FillStyle1Formatter FillStyle1;

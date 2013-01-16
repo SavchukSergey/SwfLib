@@ -55,6 +55,7 @@
     <Compile Include="DataFormatting\ActionSerializer.cs" />
     <Compile Include="DataFormatting\ColorRGBFormatter.cs" />
     <Compile Include="DataFormatting\ColorRGBAFormatter.cs" />
+    <Compile Include="DataFormatting\ColorTransformRGBAFormatter.cs" />
     <Compile Include="DataFormatting\DataFormatterBase.cs" />
     <Compile Include="DataFormatting\DataFormatters.cs" />
     <Compile Include="DataFormatting\FillStyle1Formatter.cs" />
