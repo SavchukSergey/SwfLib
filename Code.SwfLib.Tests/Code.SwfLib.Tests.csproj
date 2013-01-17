@@ -72,6 +72,7 @@
     <Compile Include="TagSerialization\FileAttributesTagTest.cs" />
     <Compile Include="TagSerialization\TagSerializationTestBase.cs" />
     <Compile Include="TagSerialization\EndTagTest.cs" />
+    <Compile Include="Tags\SwfTagsFactoryTest.cs" />
     <Compile Include="TestFixtureBase.cs" />
   </ItemGroup>
   <ItemGroup>

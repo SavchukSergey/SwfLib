@@ -43,8 +43,31 @@ namespace Code.SwfLib.Tags {
                     return new DefineSoundTag();
                 case SwfTagType.StartSound:
                     return new StartSoundTag();
+                case SwfTagType.DefineButtonSound:
+                    return new DefineButtonSoundTag();
+                case SwfTagType.SoundStreamHead:
+                    return new SoundStreamHeadTag();
+                case SwfTagType.SoundStreamHead2:
+                    return new SoundStreamHead2Tag();
+                case SwfTagType.SoundStreamBlock:
+                    return new SoundStreamBlockTag();
+                case SwfTagType.DefineBitsLossless:
+                    return new DefineBitsLosslessTag();
+                case SwfTagType.DefineBitsJPEG2:
+                    return new DefineBitsJPEG2Tag();
+                case SwfTagType.DefineShape2:
+                    return new DefineShape2Tag();
+                case SwfTagType.DefineButtonCxform:
+                    return new DefineButtonCxformTag();
+                case SwfTagType.Protect:
+                    return new ProtectTag();
+                case SwfTagType.PlaceObject2:
+                    return new PlaceObject2Tag();
+                case SwfTagType.RemoveObject2:
+                    return new RemoveObject2Tag();
+
                 default:
-                    return new UnknownTag();
+                    return new UnknownTag(tagType);
             }
         }
     }
