@@ -94,11 +94,16 @@
         /// Change limits used to ensure scripts don't use more resources than you choose. In version 7, it supports a maximum recursive depth and a maximum amount of time scripts can be run for in seconds. 
         /// </summary>
         ScriptLimits = 65,
+        SetTabIndex = 66,
         /// <summary>
         /// Since version 8, this tag is required and needs to be the very first tag in the movie. It is used as a way to better handle security with the Flash Player.
         /// </summary>
         FileAttributes = 69,
         PlaceObject3 = 70,
+        /// <summary>
+        /// The ImportAssets2 tag imports characters from another SWF file
+        /// </summary>
+        ImportAssets2 = 71,
         DoAbc = 72,
         /// <summary>
         /// Since SWF8, this tag was added to allow a clear definition of where a glyph starts. This is a hint to ensure that glyphs are properly drawn on pixel boundaries. Note that it is only partially useful for italic fonts since only vertical hints really make a difference.
@@ -116,15 +121,19 @@
         /// <summary>
         /// This tag includes XML code which describes the movie. The format is RDF compliant to the XMP as defined on W3C.
         /// </summary>
-        MetaData = 77,
+        Metadata = 77,
         /// <summary>
-        /// Define scale factors for a window, a button, or other similar objects. 
+        /// The DefineScalingGrid tag introduces the concept of 9-slice scaling, which allows component-style scaling to be applied to a sprite or button character.
         /// </summary>
         DefineScalingGrid = 78,
         /// <summary>
         /// New container tag for ActionScripts under SWF 9. Includes an identifier, a name and actions. 
         /// </summary>
         DoAbcDefine = 82,
+        /// <summary>
+        /// The DefineSceneAndFrameLabelData tag contains scene and frame label data for a MovieClip.
+        /// </summary>
+        DefineSceneAndFrameLabelData = 86,
         /// <summary>
         /// Define the legal font name and copyright.
         /// </summary>

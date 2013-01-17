@@ -165,10 +165,14 @@
     <Compile Include="Tags\Actions\DoInitActionTag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsBaseTag.cs" />
     <Compile Include="Tags\ControlTags\ControlBaseTag.cs" />
+    <Compile Include="Tags\ControlTags\DefineScalingGridTag.cs" />
+    <Compile Include="Tags\ControlTags\DefineSceneAndFrameLabelDataTag.cs" />
+    <Compile Include="Tags\ControlTags\ImportAssets2Tag.cs" />
     <Compile Include="Tags\ControlTags\EnableDebugger2Tag.cs" />
     <Compile Include="Tags\ControlTags\EnableDebuggerTag.cs" />
     <Compile Include="Tags\ControlTags\ImportAssetsTag.cs" />
     <Compile Include="Tags\ControlTags\ProtectTag.cs" />
+    <Compile Include="Tags\ControlTags\SetTabIndexTag.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObjectTag.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObjectTag.cs" />
     <Compile Include="Tags\DynamicTextTags\CSMTextSettingsTag.cs" />

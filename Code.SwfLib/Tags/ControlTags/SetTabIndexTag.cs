@@ -1,8 +1,8 @@
 ﻿namespace Code.SwfLib.Tags.ControlTags {
-    public class ImportAssetsTag : ControlBaseTag {
-
+    public class SetTabIndexTag : ControlBaseTag {
+        
         public override SwfTagType TagType {
-            get { return SwfTagType.ImportAssets; }
+            get { return SwfTagType.SetTabIndex; }
         }
 
         public override object AcceptVistor(ISwfTagVisitor visitor) {

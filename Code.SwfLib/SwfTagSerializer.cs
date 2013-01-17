@@ -273,7 +273,7 @@ namespace Code.SwfLib {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteString(tag.Metadata);
-            return new SwfTagData { Type = SwfTagType.MetaData, Data = mem.ToArray() };
+            return new SwfTagData { Type = SwfTagType.Metadata, Data = mem.ToArray() };
         }
 
         object ISwfTagVisitor.Visit(PlaceObjectTag tag) {

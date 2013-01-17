@@ -4,7 +4,7 @@
         public string Metadata;
 
         public override SwfTagType TagType {
-            get { return SwfTagType.MetaData; }
+            get { return SwfTagType.Metadata; }
         }
 
         public override object AcceptVistor(ISwfTagVisitor visitor) {

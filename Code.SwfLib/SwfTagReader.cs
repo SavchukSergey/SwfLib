@@ -165,6 +165,18 @@ namespace Code.SwfLib {
             return tag;
         }
 
+        public static FrameLabelTag ReadFrameLabelTag(SwfTagData tagData) {
+            var tag = new FrameLabelTag();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.Name = reader.ReadString();
+            if (!reader.IsEOF) {
+                var anchorFlag = reader.ReadByte();
+                tag.IsAnchor = anchorFlag != 0;
+            }
+            return tag;
+        }
+
         public static EnableDebugger2Tag ReadEnableDebugger2Tag(byte[] tagData) {
             return new EnableDebugger2Tag { Data = tagData };
         }
@@ -194,18 +206,6 @@ namespace Code.SwfLib {
             tag.MinorVersion = reader.ReadByte();
             tag.BuildNumber = reader.ReadUInt64();
             tag.CompilationDate = reader.ReadUInt64();
-            return tag;
-        }
-
-        public static FrameLabelTag ReadFrameLabelTag(SwfTagData tagData) {
-            FrameLabelTag tag = new FrameLabelTag();
-            MemoryStream stream = new MemoryStream(tagData.Data);
-            SwfStreamReader reader = new SwfStreamReader(stream);
-            tag.Name = reader.ReadString();
-            if (!reader.IsEOF) {
-                var anchorFlag = reader.ReadByte();
-                tag.IsAnchor = anchorFlag != 0;
-            }
             return tag;
         }
 
@@ -484,7 +484,7 @@ namespace Code.SwfLib {
                     return ReadShowFrameTag(tagData);
                 case SwfTagType.FileAttributes:
                     return ReadFileAttributesTag(tagData);
-                case SwfTagType.MetaData:
+                case SwfTagType.Metadata:
                     return ReadMetadataTag(tagData);
                 //case SwfTagType.RemoveObject:
                 //    return ReadRemoveObjectTag(tagData);
