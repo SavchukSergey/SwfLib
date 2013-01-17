@@ -40,6 +40,8 @@
         DefineSound = 14,
         StartSound = 15,
         DefineButtonSound = 17,
+        SoundStreamHead = 18,
+        SoundStreamBlock = 19,
         DefineBitsLossless = 20,
         DefineBitsJPEG2 = 21,
         /// <summary>
@@ -83,6 +85,7 @@
         /// Names a frame or anchor. This frame can later be referenced using this name. 
         /// </summary>
         FrameLabel = 43,
+        SoundStreamHead2 = 45,
         /// <summary>
         /// The DefineMorphShape tag defines the start and end states of a morph sequence.
         /// </summary>
@@ -166,6 +169,7 @@
         /// Define the legal font name and copyright.
         /// </summary>
         DefineFontName = 88,
+        StartSound2,
         /// <summary>
         /// This tag defines a bitmap character with JPEG compression. This tag extends DefineBitsJPEG3, adding a deblocking parameter.
         /// </summary>
