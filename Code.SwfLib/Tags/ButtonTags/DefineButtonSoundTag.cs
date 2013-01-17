@@ -1,13 +1,9 @@
-﻿namespace Code.SwfLib.Tags {
-    public class DefineButton2Tag : SwfTagBase {
+﻿namespace Code.SwfLib.Tags.ButtonTags {
+    public class DefineButtonSoundTag : SwfTagBase {
         public ushort ButtonID;
 
-        public byte ReservedFlags;
-
-        public bool TrackAsMenu;
-
         public override SwfTagType TagType {
-            get { return SwfTagType.DefineButton2; }
+            get { return SwfTagType.DefineButtonSound; }
         }
 
         public override object AcceptVistor(ISwfTagVisitor visitor) {

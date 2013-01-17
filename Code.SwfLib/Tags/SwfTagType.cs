@@ -21,6 +21,7 @@
         /// This tag defines a bitmap character with JPEG compression.
         /// </summary>
         DefineBits = 6,
+        DefineButton =7,
         /// <summary>
         /// This tag defines the JPEG encoding table (the Tables/Misc segment) for all JPEG images defined using the DefineBits tag.
         /// </summary>
@@ -36,12 +37,14 @@
         DefineText = 11,
         DoAction = 12,
         DefineFontInfo = 13,
+        DefineButtonSound = 17,
         DefineBitsLossless = 20,
         DefineBitsJPEG2 = 21,
         /// <summary>
         /// DefineShape2 extends the capabilities of DefineShape with the ability to support more than 255 styles in the style list and multiple style lists in a single shape.
         /// </summary>
         DefineShape2 = 22,
+        DefineButtonCxform = 23,
         /// <summary>
         /// The Protect tag marks a file as not importable for editing in an authoring environment.
         /// </summary>

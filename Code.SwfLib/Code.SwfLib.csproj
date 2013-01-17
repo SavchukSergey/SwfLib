@@ -163,6 +163,9 @@
     <Compile Include="SwfZip.cs" />
     <Compile Include="SwfTagDeserializer.cs" />
     <Compile Include="Tags\ActionsTags\ActionsBaseTag.cs" />
+    <Compile Include="Tags\ButtonTags\DefineButtonSoundTag.cs" />
+    <Compile Include="Tags\ButtonTags\DefineButtonCxformTag.cs" />
+    <Compile Include="Tags\ButtonTags\DefineButtonTag.cs" />
     <Compile Include="Tags\FontTags\DefineFont2Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontInfo2Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontTag.cs" />
@@ -191,7 +194,7 @@
     <Compile Include="Tags\TextTags\CSMTextSettingsTag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsJPEG2Tag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsLosslessTag.cs" />
-    <Compile Include="Tags\DefineButton2Tag.cs" />
+    <Compile Include="Tags\ButtonTags\DefineButton2Tag.cs" />
     <Compile Include="Tags\TextTags\DefineEditTextTag.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Attributes.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Glyph.cs" />
