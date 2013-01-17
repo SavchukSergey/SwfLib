@@ -56,12 +56,11 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             file.FileInfo.Version = 10;
 
             var visitor = new SwfTagSerializer(file);
-            var res = tag.AcceptVistor(visitor);
+            var res = visitor.GetTagData(tag);
             Assert.IsNotNull(res, "Should return a value");
-            Assert.IsTrue(res is SwfTagData, "Should return a value of SwfTagData type");
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteTagData((SwfTagData)res);
+            writer.WriteTagData(res);
             mem.Seek(0, SeekOrigin.Begin);
             var etalonStream = GetType().Assembly.GetManifestResourceStream("Code.SwfLib.Tests.Resources.Tag2Binary." + resourceName);
             if (etalonStream == null) throw new Exception("Etalong stream not found");
