@@ -164,7 +164,12 @@
     <Compile Include="SwfTagDeserializer.cs" />
     <Compile Include="Tags\ActionsTags\ActionsBaseTag.cs" />
     <Compile Include="Tags\ActionsTags\DoInitActionTag.cs" />
-    <Compile Include="Tags\BitmapTags\DefineBitsBaseTag.cs" />
+    <Compile Include="Tags\BitmapTags\BitmapBaseTag.cs" />
+    <Compile Include="Tags\BitmapTags\DefineBitsJPEG4Tag.cs" />
+    <Compile Include="Tags\BitmapTags\DefineBitsLossless2Tag.cs" />
+    <Compile Include="Tags\BitmapTags\DefineBitsJPEG3Tag.cs" />
+    <Compile Include="Tags\BitmapTags\DefineBitsTag.cs" />
+    <Compile Include="Tags\BitmapTags\JPEGTablesTag.cs" />
     <Compile Include="Tags\ControlTags\ControlBaseTag.cs" />
     <Compile Include="Tags\ControlTags\DefineScalingGridTag.cs" />
     <Compile Include="Tags\ControlTags\DefineSceneAndFrameLabelDataTag.cs" />

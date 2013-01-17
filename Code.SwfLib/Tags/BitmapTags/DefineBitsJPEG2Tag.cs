@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Code.SwfLib.Tags.BitmapTags {
-    public class DefineBitsJPEG2Tag : DefineBitsBaseTag {
+    public class DefineBitsJPEG2Tag : BitmapBaseTag {
 
         public ushort CharacterID;
 

@@ -18,6 +18,14 @@
         PlaceObject = 4,
         RemoveObject = 5,
         /// <summary>
+        /// This tag defines a bitmap character with JPEG compression.
+        /// </summary>
+        DefineBits = 6,
+        /// <summary>
+        /// This tag defines the JPEG encoding table (the Tables/Misc segment) for all JPEG images defined using the DefineBits tag.
+        /// </summary>
+        JPEGTables = 8,
+        /// <summary>
         /// Change the background color. 
         /// </summary>
         SetBackgroundColor = 9,
@@ -52,8 +60,9 @@
         /// </summary>
         DefineText2 = 33,
         DefineButton2 = 34,
+        DefineBitsJPEG3 = 35,
         /// <summary>
-        /// Defines an RGBA bitmap compressed using ZLIB (similar to the PNG format). 
+        /// DefineBitsLossless2 extends DefineBitsLossless with support for opacity (alpha values).
         /// </summary>
         DefineBitsLossless2 = 36,
         DefineEditText = 37,
@@ -142,5 +151,9 @@
         /// Define the legal font name and copyright.
         /// </summary>
         DefineFontName = 88,
+        /// <summary>
+        /// This tag defines a bitmap character with JPEG compression. This tag extends DefineBitsJPEG3, adding a deblocking parameter.
+        /// </summary>
+        DefineBitsJPEG4 = 90
     }
 }

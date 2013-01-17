@@ -1,5 +1,5 @@
 ﻿namespace Code.SwfLib.Tags.BitmapTags {
-    public class DefineBitsLosslessTag : DefineBitsBaseTag {
+    public class DefineBitsLosslessTag : BitmapBaseTag {
 
         public ushort CharacterID;
 
