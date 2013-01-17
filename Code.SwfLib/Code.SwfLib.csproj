@@ -191,6 +191,9 @@
     <Compile Include="Tags\ControlTags\SetTabIndexTag.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObjectTag.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObjectTag.cs" />
+    <Compile Include="Tags\SoundTags\StartSoundTag.cs" />
+    <Compile Include="Tags\SoundTags\DefineSoundTag.cs" />
+    <Compile Include="Tags\SwfTagsFactory.cs" />
     <Compile Include="Tags\TextTags\CSMTextSettingsTag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsJPEG2Tag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsLosslessTag.cs" />

@@ -37,6 +37,8 @@
         DefineText = 11,
         DoAction = 12,
         DefineFontInfo = 13,
+        DefineSound = 14,
+        StartSound = 15,
         DefineButtonSound = 17,
         DefineBitsLossless = 20,
         DefineBitsJPEG2 = 21,
