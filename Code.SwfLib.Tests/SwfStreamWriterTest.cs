@@ -237,7 +237,7 @@ namespace Code.SwfLib.Tests {
 
         [Test]
         public void WriteShortTagDataTest() {
-            const SwfTagType tagType = SwfTagType.Export;
+            const SwfTagType tagType = SwfTagType.ExportAssets;
             var data = new byte[10];
             for (var i = 0; i < data.Length; i++) {
                 data[i] = (byte)(i & 0xff);
@@ -258,7 +258,7 @@ namespace Code.SwfLib.Tests {
 
         [Test]
         public void WriteLongTagDataTest() {
-            const SwfTagType tagType = SwfTagType.Export;
+            const SwfTagType tagType = SwfTagType.ExportAssets;
             var data = new byte[4096];
             for (var i = 0; i < data.Length; i++) {
                 data[i] = (byte)(i & 0xff);

@@ -35,6 +35,10 @@
         /// </summary>
         DefineShape2 = 22,
         /// <summary>
+        /// The Protect tag marks a file as not importable for editing in an authoring environment.
+        /// </summary>
+        Protect = 24,
+        /// <summary>
         /// Place an object in the current display list.
         /// </summary>
         PlaceObject2 = 26,
@@ -66,18 +70,26 @@
         /// </summary>
         FrameLabel = 43,
         /// <summary>
-        /// Exports a list of definitions to other movies. You can in this way create one or more movies to hold a colection of objects to be reused by other movies without having to insert these info in each movie. A single export is enough for an entire movie (and you should have just one). 
+        /// The ExportAssets tag makes portions of a SWF file available for import by other SWF files.
         /// </summary>
-        Export = 56,
+        ExportAssets = 56,
+        /// <summary>
+        /// The ImportAssets tag imports characters from another SWF file.
+        /// </summary>
+        ImportAssets = 57,
+        /// <summary>
+        /// The EnableDebugger tag enables debugging. 
+        /// </summary>
+        EnableDebugger = 58,
         DoInitAction = 59,
         /// <summary>
         /// This tag is used when debugging an SWF movie. It gives information about what debug file to load to match the SWF movie with the source. The identifier is a UUID. 
         /// </summary>
         DebugID = 63,
         /// <summary>
-        /// The data of this tag is a 16 bits word followed by an MD5 password like the Protect tag. When it exists and you know the password, you will be given the right to debug the movie with Flash V6.x and over.
+        /// The EnableDebugger2 tag enables debugging.
         /// </summary>
-        ProtectDebug2 = 64,
+        EnableDebugger2 = 64,
         /// <summary>
         /// Change limits used to ensure scripts don't use more resources than you choose. In version 7, it supports a maximum recursive depth and a maximum amount of time scripts can be run for in seconds. 
         /// </summary>

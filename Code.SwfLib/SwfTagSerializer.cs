@@ -243,7 +243,7 @@ namespace Code.SwfLib {
             return new SwfTagData { Type = SwfTagType.End, Data = new byte[0] };
         }
 
-        public object Visit(ExportTag tag) {
+        public object Visit(ExportAssetsTag tag) {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteUInt16((ushort)tag.Symbols.Count);
@@ -251,7 +251,7 @@ namespace Code.SwfLib {
                 writer.WriteUInt16(symbolref.SymbolID);
                 writer.WriteString(symbolref.SymbolName);
             }
-            return new SwfTagData { Type = SwfTagType.Export, Data = mem.ToArray() };
+            return new SwfTagData { Type = SwfTagType.ExportAssets, Data = mem.ToArray() };
         }
 
         public object Visit(FileAttributesTag tag) {

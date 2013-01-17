@@ -1,7 +1,7 @@
 ﻿using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Tags.DisplayListTags {
-    public class PlaceObjectTag : SwfTagBase {
+    public class PlaceObjectTag : DisplayListBaseTag {
 
         public ushort CharacterID;
 

@@ -155,9 +155,21 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public static ProtectDebug2Tag ReadProtectedDebug2Tag(byte[] tagData) {
-            return new ProtectDebug2Tag { Data = tagData };
+        #region Control Tags
+
+        public SetBackgroundColorTag ReadSetBackgroundColorTag(SwfTagData tagData) {
+            var tag = new SetBackgroundColorTag();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            reader.ReadRGB(out tag.Color);
+            return tag;
         }
+
+        public static EnableDebugger2Tag ReadEnableDebugger2Tag(byte[] tagData) {
+            return new EnableDebugger2Tag { Data = tagData };
+        }
+
+        #endregion
 
         public static DebugIDTag ReadDebugIDTag(byte[] tagData) {
             return new DebugIDTag { Data = tagData };
@@ -352,8 +364,8 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public ExportTag ReadExportTag(SwfTagData tagData) {
-            var tag = new ExportTag();
+        public ExportAssetsTag ReadExportTag(SwfTagData tagData) {
+            var tag = new ExportAssetsTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             var count = reader.ReadUInt16();
@@ -425,14 +437,6 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public SetBackgroundColorTag ReadSetBackgroundColorTag(SwfTagData tagData) {
-            var tag = new SetBackgroundColorTag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            reader.ReadRGB(out tag.Color);
-            return tag;
-        }
-
         public ShowFrameTag ReadShowFrameTag(SwfTagData data) {
             return new ShowFrameTag();
         }
@@ -468,7 +472,7 @@ namespace Code.SwfLib {
                 //    return ReadDoActionTag(tagData);
                 case SwfTagType.End:
                     return ReadEndTag(tagData);
-                case SwfTagType.Export:
+                case SwfTagType.ExportAssets:
                     return ReadExportTag(tagData);
                 //case SwfTagType.FrameLabel:
                 //    return ReadFrameLabelTag(tagData);

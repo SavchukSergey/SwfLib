@@ -2,6 +2,7 @@
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ControlTags;
+using Code.SwfLib.Tags.DisplayListTags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {

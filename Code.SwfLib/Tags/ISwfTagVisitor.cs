@@ -43,7 +43,7 @@ namespace Code.SwfLib.Tags
 
         object Visit(EndTag tag);
 
-        object Visit(ExportTag tag);
+        object Visit(ExportAssetsTag tag);
 
         object Visit(FileAttributesTag tag);
 

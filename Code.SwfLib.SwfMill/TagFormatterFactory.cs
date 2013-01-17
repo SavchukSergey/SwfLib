@@ -155,7 +155,7 @@ namespace Code.SwfLib.SwfMill {
             return new EndTagFormatter();
         }
 
-        object ISwfTagVisitor.Visit(ExportTag tag) {
+        object ISwfTagVisitor.Visit(ExportAssetsTag tag) {
             return new ExportTagFormatter();
         }
 

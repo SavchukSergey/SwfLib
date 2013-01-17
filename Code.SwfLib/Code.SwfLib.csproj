@@ -165,6 +165,10 @@
     <Compile Include="Tags\Actions\DoInitActionTag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsBaseTag.cs" />
     <Compile Include="Tags\ControlTags\ControlBaseTag.cs" />
+    <Compile Include="Tags\ControlTags\EnableDebugger2Tag.cs" />
+    <Compile Include="Tags\ControlTags\EnableDebuggerTag.cs" />
+    <Compile Include="Tags\ControlTags\ImportAssetsTag.cs" />
+    <Compile Include="Tags\ControlTags\ProtectTag.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObjectTag.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObjectTag.cs" />
     <Compile Include="Tags\DynamicTextTags\CSMTextSettingsTag.cs" />
@@ -189,14 +193,14 @@
     <Compile Include="Tags\DisplayListTags\DisplayListBaseTag.cs" />
     <Compile Include="Tags\Actions\DoActionTag.cs" />
     <Compile Include="Tags\ControlTags\EndTag.cs" />
-    <Compile Include="Tags\ExportTag.cs" />
+    <Compile Include="Tags\ControlTags\ExportAssetsTag.cs" />
     <Compile Include="Tags\ISwfTagVisitor.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject3Flags.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject2Tag.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject2Flags.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject3Tag.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObject2Tag.cs" />
-    <Compile Include="Tags\ShowFrameTag.cs" />
+    <Compile Include="Tags\DisplayListTags\ShowFrameTag.cs" />
     <Compile Include="Tags\ControlTags\SwfFileAttributes.cs" />
     <Compile Include="Tags\SwfTagBase.cs" />
     <Compile Include="Tags\DebugIDTag.cs" />
@@ -206,7 +210,6 @@
     <Compile Include="Tags\ControlTags\FrameLabelTag.cs" />
     <Compile Include="Tags\ControlTags\MetadataTag.cs" />
     <Compile Include="Tags\ProductInfoTag.cs" />
-    <Compile Include="Tags\ProtectDebug2Tag.cs" />
     <Compile Include="Tags\ControlTags\ScriptLimitsTag.cs" />
     <Compile Include="Tags\ControlTags\SetBackgroundColorTag.cs" />
     <Compile Include="Data\SwfSymbolReference.cs" />

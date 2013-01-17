@@ -1,5 +1,6 @@
 ﻿using Code.SwfLib.SwfMill.TagFormatting.DisplayListTags;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.DisplayListTags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.SwfMill.Tests.TagFormatting {

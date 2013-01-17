@@ -5,15 +5,16 @@ using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags
 {
-    public class ExportTagFormatter : TagFormatterBase<ExportTag>
+    public class ExportTagFormatter : TagFormatterBase<ExportAssetsTag>
     {
 
         private const string SYMBOLS_TAGS = "symbols";
 
-        public override void AcceptAttribute(ExportTag tag, XAttribute attrib)
+        public override void AcceptAttribute(ExportAssetsTag tag, XAttribute attrib)
         {
             switch (attrib.Name.LocalName)
             {
@@ -22,7 +23,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags
             }
         }
 
-        public override void AcceptElement(ExportTag tag, XElement element)
+        public override void AcceptElement(ExportAssetsTag tag, XElement element)
         {
             switch (element.Name.LocalName)
             {
@@ -34,13 +35,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags
             }
         }
 
-        public override XElement FormatTag(ExportTag tag)
+        public override XElement FormatTag(ExportAssetsTag tag)
         {
             return new XElement(XName.Get(SwfTagNameMapping.EXPORT_TAG),
                                 new XElement(XName.Get("symbols"), tag.Symbols.Select(item => FormatSymbol(item))));
         }
 
-        private static void ReadSymbols(ExportTag tag, XElement symbolsElement)
+        private static void ReadSymbols(ExportAssetsTag tag, XElement symbolsElement)
         {
             foreach (var elem in symbolsElement.Elements())
             {

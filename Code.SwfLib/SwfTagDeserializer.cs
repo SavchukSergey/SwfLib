@@ -80,7 +80,7 @@ namespace Code.SwfLib {
             throw new NotImplementedException();
         }
 
-        public object Visit(ExportTag tag) {
+        public object Visit(ExportAssetsTag tag) {
             throw new NotImplementedException();
         }
 

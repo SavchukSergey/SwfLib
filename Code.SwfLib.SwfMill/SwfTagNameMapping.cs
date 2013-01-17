@@ -59,7 +59,7 @@ namespace Code.SwfLib.SwfMill {
             _tagMap[DO_ACTION_TAG] = () => new DoActionTag();
             _tagMap[DO_INIT_ACTION_TAG] = () => new DoInitActionTag();
             _tagMap[END_TAG] = () => new EndTag();
-            _tagMap[EXPORT_TAG] = () => new ExportTag();
+            _tagMap[EXPORT_TAG] = () => new ExportAssetsTag();
             _tagMap[FILE_ATTRIBUTES_TAG] = () => new FileAttributesTag();
             _tagMap[FRAME_LABEL_TAG] = () => new FrameLabelTag();
             _tagMap[METADATA_TAG] = () => new MetadataTag();
