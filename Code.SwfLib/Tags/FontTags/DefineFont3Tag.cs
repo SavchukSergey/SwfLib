@@ -1,14 +1,14 @@
 ﻿namespace Code.SwfLib.Tags.FontTags {
     public class DefineFont3Tag : FontBaseTag {
 
-        public ushort ObjectID;
+        public ushort FontId;
 
-        //public DefineFont3Attributes Attributes;
+        public DefineFont3Attributes Attributes;
 
-        //public byte Language;
+        public byte Language;
 
-        //public string FontName;
-        /*
+        public string FontName;
+        
         #region Attributes flags
 
         public bool HasLayout {
@@ -31,13 +31,13 @@
             }
         }
 
-        public bool Unicode {
+        public bool SmallText {
             get {
-                return (Attributes & DefineFont3Attributes.Unicode) != 0;
+                return (Attributes & DefineFont3Attributes.SmallText) != 0;
             }
             set {
-                if (value) Attributes |= DefineFont3Attributes.Unicode;
-                else Attributes &= ~DefineFont3Attributes.Unicode;
+                if (value) Attributes |= DefineFont3Attributes.SmallText;
+                else Attributes &= ~DefineFont3Attributes.SmallText;
             }
         }
 
@@ -71,13 +71,13 @@
             }
         }
 
-        public bool Italics {
+        public bool Italic {
             get {
-                return (Attributes & DefineFont3Attributes.Italics) != 0;
+                return (Attributes & DefineFont3Attributes.Italic) != 0;
             }
             set {
-                if (value) Attributes |= DefineFont3Attributes.Italics;
-                else Attributes &= ~DefineFont3Attributes.Italics;
+                if (value) Attributes |= DefineFont3Attributes.Italic;
+                else Attributes &= ~DefineFont3Attributes.Italic;
             }
         }
 
@@ -92,7 +92,7 @@
         }
 
         #endregion
-        */
+
         public DefineFont3Glyph[] Glyphs;
 
         //TODO: serialize other fields

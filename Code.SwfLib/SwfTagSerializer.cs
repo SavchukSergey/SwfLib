@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
@@ -120,14 +121,14 @@ namespace Code.SwfLib {
         public object Visit(DefineFont3Tag tag) {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteUInt16(tag.ObjectID);
-            //writer.WriteByte((byte)tag.Attributes);
-            //writer.WriteByte(tag.Language);
-            //writer.WriteByte((byte)(tag.FontName.Length + 1));
-            //writer.WriteRawString(tag.FontName);
-            //writer.WriteUInt16((ushort)tag.Glyphs.Length);
+            writer.WriteUInt16(tag.FontId);
+            writer.WriteByte((byte)tag.Attributes);
+            writer.WriteByte(tag.Language);
+            var name = Encoding.UTF8.GetBytes(tag.FontName);
+            writer.WriteByte((byte)name.Length);
+            writer.WriteBytes(name);
+            writer.WriteUInt16((ushort)tag.Glyphs.Length);
             writer.WriteBytes(tag.RestData);
-            writer.FlushBits();
             return new SwfTagData { Type = SwfTagType.DefineFont3, Data = mem.ToArray() };
         }
 

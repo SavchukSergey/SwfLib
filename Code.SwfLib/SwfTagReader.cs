@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Text;
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.Actions;
 using Code.SwfLib.Tags;
@@ -18,37 +19,6 @@ namespace Code.SwfLib {
 
         public SwfTagReader(SwfFile file) {
             _file = file;
-        }
-
-        public DefineFontAlignZonesTag ReadDefineFontAlignZonesTag(SwfTagData tagData) {
-            var tag = new DefineFontAlignZonesTag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.FontID = reader.ReadUInt16();
-            tag.CsmTableHint = reader.ReadByte();
-            var fontInfo = _file.IterateTagsRecursively()
-                .OfType<DefineFont3Tag>()
-                .FirstOrDefault(item => item.ObjectID == tag.FontID);
-            if (fontInfo == null) {
-                throw new InvalidDataException("Couldn't find corresponding DefineFont3Tag");
-            }
-            tag.Zones = new SwfZoneArray[fontInfo.Glyphs.Length];
-            for (var i = 0; i < tag.Zones.Length; i++) {
-                var zone = new SwfZoneArray();
-                int count = reader.ReadByte();
-                zone.Data = new SwfZoneData[count];
-                for (var j = 0; j < count; j++) {
-                    var zoneData = new SwfZoneData();
-                    zoneData.Position = reader.ReadShortFloat();
-                    zoneData.Size = reader.ReadShortFloat();
-                    zone.Data[j] = zoneData;
-                }
-                zone.Flags = (SwfZoneArrayFlags)reader.ReadByte();
-                //TODO: store to xml reserverd flags
-                tag.Zones[i] = zone;
-
-            }
-            return tag;
         }
 
         public DefineSpriteTag ReadDefineSpriteTag(SwfTagData tagData) {
@@ -181,6 +151,59 @@ namespace Code.SwfLib {
             var stream = new MemoryStream(tagData);
             var reader = new SwfStreamReader(stream);
             tag.ABCData = reader.ReadBytes((int)(stream.Length - stream.Position));
+            return tag;
+        }
+
+        #endregion
+
+        #region Font and Text Tags
+
+        public static DefineFont3Tag ReadDefineFont3Tag(SwfTagData tagData) {
+            var tag = new DefineFont3Tag();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.FontId = reader.ReadUInt16();
+            tag.Attributes = (DefineFont3Attributes)reader.ReadByte();
+            tag.Language = reader.ReadByte();
+            int nameLength = reader.ReadByte();
+            tag.FontName = Encoding.UTF8.GetString(reader.ReadBytes(nameLength));
+            int glyphsCount = reader.ReadUInt16();
+            tag.Glyphs = new DefineFont3Glyph[glyphsCount];
+            //for (var i = 0; i < glyphsCount; i++) {
+            //    tag.Glyphs[i] = new DefineFont3Glyph();
+            //}
+            tag.RestData = reader.ReadRest();
+            return tag;
+        }
+
+        public DefineFontAlignZonesTag ReadDefineFontAlignZonesTag(SwfTagData tagData) {
+            var tag = new DefineFontAlignZonesTag();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.FontID = reader.ReadUInt16();
+            tag.CsmTableHint = reader.ReadByte();
+            var fontInfo = _file.IterateTagsRecursively()
+                .OfType<DefineFont3Tag>()
+                .FirstOrDefault(item => item.FontId == tag.FontID);
+            if (fontInfo == null) {
+                throw new InvalidDataException("Couldn't find corresponding DefineFont3Tag");
+            }
+            tag.Zones = new SwfZoneArray[fontInfo.Glyphs.Length];
+            for (var i = 0; i < tag.Zones.Length; i++) {
+                var zone = new SwfZoneArray();
+                int count = reader.ReadByte();
+                zone.Data = new SwfZoneData[count];
+                for (var j = 0; j < count; j++) {
+                    var zoneData = new SwfZoneData();
+                    zoneData.Position = reader.ReadShortFloat();
+                    zoneData.Size = reader.ReadShortFloat();
+                    zone.Data[j] = zoneData;
+                }
+                zone.Flags = (SwfZoneArrayFlags)reader.ReadByte();
+                //TODO: store to xml reserverd flags
+                tag.Zones[i] = zone;
+
+            }
             return tag;
         }
 
@@ -336,24 +359,6 @@ namespace Code.SwfLib {
             tag.FontId = reader.ReadUInt16();
             tag.FontName = reader.ReadString();
             tag.FontCopyright = reader.ReadString();
-            return tag;
-        }
-
-        public static DefineFont3Tag ReadDefineFont3Tag(SwfTagData tagData) {
-            var tag = new DefineFont3Tag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.ObjectID = reader.ReadUInt16();
-            //tag.Attributes = (DefineFont3Attributes)reader.ReadByte();
-            //tag.Language = reader.ReadByte();
-            //int nameLength = reader.ReadByte();
-            //tag.FontName = reader.ReadRawString(nameLength);
-            //int glyphsCount = reader.ReadUInt16();
-            //tag.Glyphs = new DefineFont3Glyph[glyphsCount];
-            //for (var i = 0; i < glyphsCount; i++) {
-            //    tag.Glyphs[i] = new DefineFont3Glyph();
-            //}
-            tag.RestData = reader.ReadRest();
             return tag;
         }
 
