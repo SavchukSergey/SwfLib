@@ -1,7 +1,7 @@
 ﻿using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Tags.ShapeTags {
-    public class DefineShape3Tag : SwfTagBase {
+    public class DefineShape3Tag : ShapeBaseTag {
 
         public ushort ObjectID;
 

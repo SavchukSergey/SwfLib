@@ -31,7 +31,7 @@
         DefineBitsLossless = 20,
         DefineBitsJPEG2 = 21,
         /// <summary>
-        /// Declaration of complex 2D shapes. 
+        /// DefineShape2 extends the capabilities of DefineShape with the ability to support more than 255 styles in the style list and multiple style lists in a single shape.
         /// </summary>
         DefineShape2 = 22,
         /// <summary>
@@ -130,6 +130,10 @@
         /// New container tag for ActionScripts under SWF 9. Includes an identifier, a name and actions. 
         /// </summary>
         DoAbc = 82,
+        /// <summary>
+        /// DefineShape4 extends the capabilities of DefineShape3 by using a new line style record in the shape.
+        /// </summary>
+        DefineShape4 = 84,
         /// <summary>
         /// The DefineSceneAndFrameLabelData tag contains scene and frame label data for a MovieClip.
         /// </summary>
