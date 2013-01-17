@@ -24,88 +24,6 @@ namespace Code.SwfLib {
             return tag.AcceptVistor(this, null);
         }
 
-        //object ISwfTagVisitor.Visit(DefineFontAlignZonesTag tag) {
-        //    var mem = new MemoryStream();
-        //    var writer = new SwfStreamWriter(mem);
-        //    writer.WriteUInt16(tag.FontID);
-        //    writer.WriteByte(tag.CsmTableHint);
-
-        //    foreach (var zoneArray in tag.Zones) {
-        //        writer.WriteByte((byte)zoneArray.Data.Length);
-        //        foreach (var zoneData in zoneArray.Data) {
-        //            writer.WriteShortFloat(zoneData.Position);
-        //            writer.WriteShortFloat(zoneData.Size);
-        //        }
-        //        writer.WriteByte((byte)zoneArray.Flags);
-        //    }
-
-        //    return new SwfTagData { Type = SwfTagType.DefineFontAlignZones, Data = mem.ToArray() };
-        //}
-
-        //public object Visit(DefineFontNameTag tag) {
-        //    var mem = new MemoryStream();
-        //    var writer = new SwfStreamWriter(mem);
-        //    writer.WriteUInt16(tag.FontId);
-        //    writer.WriteString(tag.FontName);
-        //    writer.WriteString(tag.FontCopyright);
-        //    writer.FlushBits();
-        //    return new SwfTagData { Type = SwfTagType.DefineFontName, Data = mem.ToArray() };
-        //}
-
-        //object ISwfTagVisitor.Visit(DefineShapeTag tag) {
-        //    var mem = new MemoryStream();
-        //    var writer = new SwfStreamWriter(mem);
-        //    writer.WriteUInt16(tag.ShapeID);
-        //    writer.WriteRect(ref tag.ShapeBounds);
-        //    writer.WriteShapeWithStyle(tag.Shapes);
-        //    writer.FlushBits();
-        //    return new SwfTagData { Type = SwfTagType.DefineShape, Data = mem.ToArray() };
-        //}
-
-        //public object Visit(DefineShape3Tag tag) {
-        //    var mem = new MemoryStream();
-        //    var writer = new SwfStreamWriter(mem);
-        //    //TODO: Write other fields
-        //    return new SwfTagData { Type = SwfTagType.DefineShape3, Data = mem.ToArray() };
-        //}
-
-        //public object Visit(DefineSpriteTag tag) {
-        //    var mem = new MemoryStream();
-        //    var writer = new SwfStreamWriter(mem);
-        //    writer.WriteUInt16(tag.SpriteID);
-        //    writer.WriteUInt16(tag.FramesCount);
-        //    foreach (var subtag in tag.Tags) {
-        //        SwfTagData subTagData = GetTagData(subtag);
-        //        writer.WriteTagData(subTagData);
-        //    }
-        //    return new SwfTagData { Type = SwfTagType.DefineSprite, Data = mem.ToArray() };
-        //}
-
-        //public object Visit(DoActionTag tag) {
-        //    var mem = new MemoryStream();
-        //    var writer = new SwfStreamWriter(mem);
-        //    //TODO: Write other fields
-        //    return new SwfTagData { Type = SwfTagType.DoAction, Data = mem.ToArray() };
-        //}
-
-        //public object Visit(MetadataTag tag) {
-        //    var mem = new MemoryStream();
-        //    var writer = new SwfStreamWriter(mem);
-        //    writer.WriteString(tag.Metadata);
-        //    return new SwfTagData { Type = SwfTagType.Metadata, Data = mem.ToArray() };
-        //}
-
-        //public object Visit(ScriptLimitsTag tag) {
-        //}
-
-        //public object Visit(SwfTagBase tag) {
-        //    throw new NotImplementedException();
-        //}
-
-        //public object Visit(UnknownTag tag) {
-        //    return new SwfTagData { Type = tag.TagType, Data = tag.Data };
-        //}
-
         #region Display list tags
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(PlaceObjectTag tag, object arg) {
@@ -250,7 +168,10 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(MetadataTag tag, object arg) {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteString(tag.Metadata);
+            return new SwfTagData { Type = SwfTagType.Metadata, Data = mem.ToArray() };
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineScalingGridTag tag, object arg) {
@@ -266,7 +187,10 @@ namespace Code.SwfLib {
         #region Action tags
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DoActionTag tag, object arg) {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            //var writer = new SwfStreamWriter(mem);
+            //TODO: Write other fields
+            return new SwfTagData { Type = SwfTagType.DoAction, Data = mem.ToArray() };
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DoInitActionTag tag, object arg) {
@@ -290,7 +214,13 @@ namespace Code.SwfLib {
         #region Shape tags
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineShapeTag tag, object arg) {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.ShapeID);
+            writer.WriteRect(ref tag.ShapeBounds);
+            writer.WriteShapeWithStyle(tag.Shapes);
+            writer.FlushBits();
+            return new SwfTagData { Type = SwfTagType.DefineShape, Data = mem.ToArray() };
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineShape2Tag tag, object arg) {
@@ -298,7 +228,10 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineShape3Tag tag, object arg) {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            //TODO: Write other fields
+            return new SwfTagData { Type = SwfTagType.DefineShape3, Data = mem.ToArray() };
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineShape4Tag tag, object arg) {
@@ -306,6 +239,8 @@ namespace Code.SwfLib {
         }
 
         #endregion
+
+        #region Bitmap tags
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineBitsTag tag, object arg) {
             throw new NotImplementedException();
@@ -351,6 +286,8 @@ namespace Code.SwfLib {
             throw new NotImplementedException();
         }
 
+        #endregion
+
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.ShapeMorphingTags.DefineMorphShapeTag tag, object arg) {
             throw new NotImplementedException();
         }
@@ -394,11 +331,31 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineFontAlignZonesTag tag, object arg) {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.FontID);
+            writer.WriteByte(tag.CsmTableHint);
+
+            foreach (var zoneArray in tag.Zones) {
+                writer.WriteByte((byte)zoneArray.Data.Length);
+                foreach (var zoneData in zoneArray.Data) {
+                    writer.WriteShortFloat(zoneData.Position);
+                    writer.WriteShortFloat(zoneData.Size);
+                }
+                writer.WriteByte((byte)zoneArray.Flags);
+            }
+
+            return new SwfTagData { Type = SwfTagType.DefineFontAlignZones, Data = mem.ToArray() };
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineFontNameTag tag, object arg) {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.FontId);
+            writer.WriteString(tag.FontName);
+            writer.WriteString(tag.FontCopyright);
+            writer.FlushBits();
+            return new SwfTagData { Type = SwfTagType.DefineFontName, Data = mem.ToArray() };
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineTextTag tag, object arg) {
@@ -545,7 +502,15 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineSpriteTag tag, object arg) {
-            throw new NotImplementedException();
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteUInt16(tag.SpriteID);
+            writer.WriteUInt16(tag.FramesCount);
+            foreach (var subtag in tag.Tags) {
+                SwfTagData subTagData = GetTagData(subtag);
+                writer.WriteTagData(subTagData);
+            }
+            return new SwfTagData { Type = SwfTagType.DefineSprite, Data = mem.ToArray() };
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.VideoTags.DefineVideoStreamTag tag, object arg) {
@@ -569,7 +534,7 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(UnknownTag tag, object arg) {
-            throw new NotImplementedException();
+            return new SwfTagData { Type = tag.TagType, Data = tag.Data };
         }
     }
 }
