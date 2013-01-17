@@ -1,9 +1,5 @@
-﻿namespace Code.SwfLib.Tags {
-    public class DoABCDefineTag : SwfTagBase {
-
-        public uint Flags;
-
-        public string Name;
+﻿namespace Code.SwfLib.Tags.ActionsTags {
+    public class DoABCDefineTag : ActionsBaseTag {
 
         public byte[] ABCData;
 

@@ -1,11 +1,9 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.Actions;
 using Code.SwfLib.Tags;
-using Code.SwfLib.Tags.Actions;
+using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
@@ -45,7 +43,7 @@ namespace Code.SwfLib {
                     zoneData.Size = reader.ReadShortFloat();
                     zone.Data[j] = zoneData;
                 }
-                zone.Flags = (SwfZoneArrayFlags) reader.ReadByte(); 
+                zone.Flags = (SwfZoneArrayFlags)reader.ReadByte();
                 //TODO: store to xml reserverd flags
                 tag.Zones[i] = zone;
 
@@ -137,23 +135,6 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public static DoABCTag ReadDoAbcTag(byte[] tagData) {
-            var tag = new DoABCTag();
-            var stream = new MemoryStream(tagData);
-            var reader = new SwfStreamReader(stream);
-            tag.ABCData = reader.ReadBytes((int)(stream.Length - stream.Position));
-            return tag;
-        }
-
-        public static DoABCDefineTag ReadDoAbcDefineTag(byte[] tagData) {
-            var tag = new DoABCDefineTag();
-            var stream = new MemoryStream(tagData);
-            var reader = new SwfStreamReader(stream);
-            tag.Flags = reader.ReadUInt32();
-            tag.Name = reader.ReadString();
-            tag.ABCData = reader.ReadBytes((int)(stream.Length - stream.Position));
-            return tag;
-        }
 
         #region Control Tags
 
@@ -179,6 +160,28 @@ namespace Code.SwfLib {
 
         public static EnableDebugger2Tag ReadEnableDebugger2Tag(byte[] tagData) {
             return new EnableDebugger2Tag { Data = tagData };
+        }
+
+        #endregion
+
+        #region Actions Tags
+
+        public static DoABCTag ReadDoAbcTag(byte[] tagData) {
+            var tag = new DoABCTag();
+            var stream = new MemoryStream(tagData);
+            var reader = new SwfStreamReader(stream);
+            tag.Flags = reader.ReadUInt32();
+            tag.Name = reader.ReadString();
+            tag.ABCData = reader.ReadBytes((int)(stream.Length - stream.Position));
+            return tag;
+        }
+
+        public static DoABCDefineTag ReadDoAbcDefineTag(byte[] tagData) {
+            var tag = new DoABCDefineTag();
+            var stream = new MemoryStream(tagData);
+            var reader = new SwfStreamReader(stream);
+            tag.ABCData = reader.ReadBytes((int)(stream.Length - stream.Position));
+            return tag;
         }
 
         #endregion

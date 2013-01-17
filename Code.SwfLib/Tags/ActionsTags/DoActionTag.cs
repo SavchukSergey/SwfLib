@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Data.Actions;
 
-namespace Code.SwfLib.Tags.Actions {
-    public class DoActionTag : SwfTagBase {
+namespace Code.SwfLib.Tags.ActionsTags {
+    public class DoActionTag : ActionsBaseTag {
 
         public readonly IList<ActionBase> ActionRecords = new List<ActionBase>();
 

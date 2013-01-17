@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
-using Code.SwfLib.Tags.Actions;
+using Code.SwfLib.Tags.ActionsTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
     //TODO: Read actions

@@ -162,6 +162,7 @@
     <Compile Include="SwfTagSerializer.cs" />
     <Compile Include="SwfZip.cs" />
     <Compile Include="SwfTagDeserializer.cs" />
+    <Compile Include="Tags\ActionsTags\ActionsBaseTag.cs" />
     <Compile Include="Tags\ActionsTags\DoInitActionTag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsBaseTag.cs" />
     <Compile Include="Tags\ControlTags\ControlBaseTag.cs" />
@@ -208,8 +209,8 @@
     <Compile Include="Tags\ControlTags\SwfFileAttributes.cs" />
     <Compile Include="Tags\SwfTagBase.cs" />
     <Compile Include="Tags\DebugIDTag.cs" />
-    <Compile Include="Tags\DoABCDefineTag.cs" />
-    <Compile Include="Tags\DoABCTag.cs" />
+    <Compile Include="Tags\ActionsTags\DoABCDefineTag.cs" />
+    <Compile Include="Tags\ActionsTags\DoABCTag.cs" />
     <Compile Include="Tags\ControlTags\FileAttributesTag.cs" />
     <Compile Include="Tags\ControlTags\FrameLabelTag.cs" />
     <Compile Include="Tags\ControlTags\MetadataTag.cs" />

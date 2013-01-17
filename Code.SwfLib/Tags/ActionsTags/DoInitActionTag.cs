@@ -1,5 +1,5 @@
-﻿namespace Code.SwfLib.Tags.Actions {
-    public class DoInitActionTag : SwfTagBase {
+﻿namespace Code.SwfLib.Tags.ActionsTags {
+    public class DoInitActionTag : ActionsBaseTag {
 
         public ushort SpriteId;
 

@@ -104,7 +104,7 @@
         /// The ImportAssets2 tag imports characters from another SWF file
         /// </summary>
         ImportAssets2 = 71,
-        DoAbc = 72,
+        DoAbcDefine = 72,
         /// <summary>
         /// Since SWF8, this tag was added to allow a clear definition of where a glyph starts. This is a hint to ensure that glyphs are properly drawn on pixel boundaries. Note that it is only partially useful for italic fonts since only vertical hints really make a difference.
         /// </summary>
@@ -129,7 +129,7 @@
         /// <summary>
         /// New container tag for ActionScripts under SWF 9. Includes an identifier, a name and actions. 
         /// </summary>
-        DoAbcDefine = 82,
+        DoAbc = 82,
         /// <summary>
         /// The DefineSceneAndFrameLabelData tag contains scene and frame label data for a MovieClip.
         /// </summary>

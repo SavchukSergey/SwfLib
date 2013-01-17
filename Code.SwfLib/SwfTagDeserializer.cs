@@ -1,6 +1,6 @@
 ﻿using System;
 using Code.SwfLib.Tags;
-using Code.SwfLib.Tags.Actions;
+using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
