@@ -144,6 +144,10 @@
         /// </summary>
         DoAbc = 82,
         /// <summary>
+        /// DefineShape4 extends the capabilities of DefineShape3 by using a new line style record in the shape.
+        /// </summary>
+        DefineShape4 = 83,
+        /// <summary>
         /// The DefineMorphShape2 tag extends the capabilities of DefineMorphShape by using a new morph line style record in the morph shape.
         /// </summary>
         DefineMorphShape2 = 84,
