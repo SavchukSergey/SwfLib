@@ -11,9 +11,11 @@ namespace Code.SwfLib.Tags.ActionsTags {
         }
 
         public override SwfTagType TagType {
-            get {
-                return SwfTagType.DoAction;
-            }
+            get { return SwfTagType.DoAction; }
+        }
+
+        public override TResult AcceptVistor<TArg, TResult>(ISwfTagVisitor<TArg, TResult> visitor, TArg arg) {
+            return visitor.Visit(this, arg);
         }
     }
 }

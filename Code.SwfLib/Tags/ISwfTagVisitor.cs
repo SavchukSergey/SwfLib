@@ -9,6 +9,7 @@ using Code.SwfLib.Tags.ShapeMorphingTags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
+using Code.SwfLib.Tags.VideoTags;
 
 namespace Code.SwfLib.Tags {
     public interface ISwfTagVisitor {
@@ -201,6 +202,8 @@ namespace Code.SwfLib.Tags {
 
         TResult Visit(DefineTextTag tag, TArg arg);
 
+        TResult Visit(DefineText2Tag tag, TArg arg);
+
         TResult Visit(DefineEditTextTag tag, TArg arg);
 
         TResult Visit(CSMTextSettingsTag tag, TArg arg);
@@ -243,7 +246,21 @@ namespace Code.SwfLib.Tags {
         
         #endregion
 
-        TResult Visit(SwfTagBase tag, TArg arg);
+        #region Video tags
+
+        TResult Visit(DefineVideoStreamTag tag, TArg arg);
+
+        TResult Visit(VideoFrameTag tag, TArg arg);
+
+        #endregion
+
+        //TResult Visit(SwfTagBase tag, TArg arg);
+
+        TResult Visit(DefineBinaryDataTag tag, TArg arg);
+
+        TResult Visit(DebugIDTag tag, TArg arg);
+
+        TResult Visit(ProductInfoTag tag, TArg arg);
 
         TResult Visit(UnknownTag tag, TArg arg);
 

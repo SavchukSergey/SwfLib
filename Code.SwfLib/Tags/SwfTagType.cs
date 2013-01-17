@@ -129,7 +129,7 @@
         /// The ImportAssets2 tag imports characters from another SWF file
         /// </summary>
         ImportAssets2 = 71,
-        DoAbcDefine = 72,
+        DoABCDefine = 72,
         /// <summary>
         /// Since SWF8, this tag was added to allow a clear definition of where a glyph starts. This is a hint to ensure that glyphs are properly drawn on pixel boundaries. Note that it is only partially useful for italic fonts since only vertical hints really make a difference.
         /// </summary>
@@ -154,7 +154,7 @@
         /// <summary>
         /// New container tag for ActionScripts under SWF 9. Includes an identifier, a name and actions. 
         /// </summary>
-        DoAbc = 82,
+        DoABC = 82,
         /// <summary>
         /// DefineShape4 extends the capabilities of DefineShape3 by using a new line style record in the shape.
         /// </summary>

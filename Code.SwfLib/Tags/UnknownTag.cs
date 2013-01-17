@@ -11,18 +11,20 @@
             _type = type;
         }
 
-        public override object AcceptVistor(ISwfTagVisitor visitor) {
-            return visitor.Visit(this);
-        }
-
         public override SwfTagType TagType {
-            get {
-                return _type;
-            }
+            get { return _type; }
         }
 
         public void SetTagType(SwfTagType type) {
             _type = type;
+        }
+
+        public override object AcceptVistor(ISwfTagVisitor visitor) {
+            return visitor.Visit(this);
+        }
+
+        public override TResult AcceptVistor<TArg, TResult>(ISwfTagVisitor<TArg, TResult> visitor, TArg arg) {
+            return visitor.Visit(this, arg);
         }
 
     }
