@@ -166,6 +166,7 @@
     <Compile Include="Tags\ButtonTags\DefineButtonSoundTag.cs" />
     <Compile Include="Tags\ButtonTags\DefineButtonCxformTag.cs" />
     <Compile Include="Tags\ButtonTags\DefineButtonTag.cs" />
+    <Compile Include="Tags\DefineBinaryDataTag.cs" />
     <Compile Include="Tags\FontTags\DefineFont2Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontInfo2Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontTag.cs" />
@@ -250,6 +251,8 @@
     <Compile Include="Tags\ControlTags\SymbolClassTag.cs" />
     <Compile Include="Tags\TextTags\TextBaseTag.cs" />
     <Compile Include="Tags\UnknownTag.cs" />
+    <Compile Include="Tags\VideoTags\DefineVideoStreamTag.cs" />
+    <Compile Include="Tags\VideoTags\VideoFameTag.cs" />
     <Compile Include="TextRecordStreamExt.cs" />
   </ItemGroup>
   <ItemGroup>

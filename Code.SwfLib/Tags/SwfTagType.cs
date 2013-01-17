@@ -104,6 +104,8 @@
         /// </summary>
         EnableDebugger = 58,
         DoInitAction = 59,
+        DefineVideoStream = 60,
+        VideoFrame = 61,
         /// <summary>
         /// This tag is used when debugging an SWF movie. It gives information about what debug file to load to match the SWF movie with the source. The identifier is a UUID. 
         /// </summary>
@@ -165,6 +167,7 @@
         /// The DefineSceneAndFrameLabelData tag contains scene and frame label data for a MovieClip.
         /// </summary>
         DefineSceneAndFrameLabelData = 86,
+        DefineBinaryData = 87,
         /// <summary>
         /// Define the legal font name and copyright.
         /// </summary>
