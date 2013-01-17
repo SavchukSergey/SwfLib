@@ -1,8 +1,8 @@
-﻿namespace Code.SwfLib.Tags.ShapeTags {
-    public class DefineShape4Tag : ShapeBaseTag {
+﻿namespace Code.SwfLib.Tags.ShapeMorphingTags {
+    public class DefineMorphShape2Tag : ShapeMorphingBaseTag {
 
         public override SwfTagType TagType {
-            get { return SwfTagType.DefineShape4; }
+            get { return SwfTagType.DefineMorphShape2; }
         }
 
         public override object AcceptVistor(ISwfTagVisitor visitor) {

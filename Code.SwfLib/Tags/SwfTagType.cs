@@ -79,6 +79,10 @@
         /// </summary>
         FrameLabel = 43,
         /// <summary>
+        /// The DefineMorphShape tag defines the start and end states of a morph sequence.
+        /// </summary>
+        DefineMorphShape = 46,
+        /// <summary>
         /// The ExportAssets tag makes portions of a SWF file available for import by other SWF files.
         /// </summary>
         ExportAssets = 56,
@@ -140,9 +144,9 @@
         /// </summary>
         DoAbc = 82,
         /// <summary>
-        /// DefineShape4 extends the capabilities of DefineShape3 by using a new line style record in the shape.
+        /// The DefineMorphShape2 tag extends the capabilities of DefineMorphShape by using a new morph line style record in the morph shape.
         /// </summary>
-        DefineShape4 = 84,
+        DefineMorphShape2 = 84,
         /// <summary>
         /// The DefineSceneAndFrameLabelData tag contains scene and frame label data for a MovieClip.
         /// </summary>
