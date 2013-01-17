@@ -1,5 +1,5 @@
-﻿namespace Code.SwfLib.Tags.DynamicTextTags {
-    public class CSMTextSettingsTag : SwfTagBase {
+﻿namespace Code.SwfLib.Tags.TextTags {
+    public class CSMTextSettingsTag : TextBaseTag {
 
         public ushort TextID;
 

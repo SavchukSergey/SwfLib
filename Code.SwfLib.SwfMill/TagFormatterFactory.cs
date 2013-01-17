@@ -12,9 +12,9 @@ using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
-using Code.SwfLib.Tags.DynamicTextTags;
 using Code.SwfLib.Tags.FontTags;
 using Code.SwfLib.Tags.ShapeTags;
+using Code.SwfLib.Tags.TextTags;
 
 namespace Code.SwfLib.SwfMill {
     public class TagFormatterFactory : ISwfTagVisitor {

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
-using Code.SwfLib.Tags.DynamicTextTags;
+using Code.SwfLib.Tags.TextTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
 {

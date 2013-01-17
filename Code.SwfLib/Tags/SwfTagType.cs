@@ -82,6 +82,7 @@
         /// The DefineMorphShape tag defines the start and end states of a morph sequence.
         /// </summary>
         DefineMorphShape = 46,
+        DefineFont2 = 48,
         /// <summary>
         /// The ExportAssets tag makes portions of a SWF file available for import by other SWF files.
         /// </summary>
@@ -98,6 +99,7 @@
         /// <summary>
         /// This tag is used when debugging an SWF movie. It gives information about what debug file to load to match the SWF movie with the source. The identifier is a UUID. 
         /// </summary>
+        DefineFontInfo2 = 62,
         DebugID = 63,
         /// <summary>
         /// The EnableDebugger2 tag enables debugging.
@@ -162,6 +164,7 @@
         /// <summary>
         /// This tag defines a bitmap character with JPEG compression. This tag extends DefineBitsJPEG3, adding a deblocking parameter.
         /// </summary>
-        DefineBitsJPEG4 = 90
+        DefineBitsJPEG4 = 90,
+        DefineFont4 = 91
     }
 }

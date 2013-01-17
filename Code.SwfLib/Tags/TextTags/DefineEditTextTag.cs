@@ -1,7 +1,7 @@
 ﻿using Code.SwfLib.Data;
 
-namespace Code.SwfLib.Tags.DynamicTextTags {
-    public class DefineEditTextTag : SwfTagBase {
+namespace Code.SwfLib.Tags.TextTags {
+    public class DefineEditTextTag : TextBaseTag {
 
         public ushort CharacterID;
 

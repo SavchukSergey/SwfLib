@@ -1,5 +1,5 @@
 ﻿namespace Code.SwfLib.Tags.FontTags {
-    public class DefineFont3Tag : SwfTagBase {
+    public class DefineFont3Tag : FontBaseTag {
 
         public ushort ObjectID;
 

@@ -2,8 +2,8 @@
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.Text;
 
-namespace Code.SwfLib.Tags {
-    public class DefineTextTag : SwfTagBase {
+namespace Code.SwfLib.Tags.TextTags {
+    public class DefineTextTag : TextBaseTag {
 
         public ushort CharacterID;
 

@@ -163,6 +163,10 @@
     <Compile Include="SwfZip.cs" />
     <Compile Include="SwfTagDeserializer.cs" />
     <Compile Include="Tags\ActionsTags\ActionsBaseTag.cs" />
+    <Compile Include="Tags\FontTags\DefineFont2Tag.cs" />
+    <Compile Include="Tags\FontTags\DefineFontInfo2Tag.cs" />
+    <Compile Include="Tags\FontTags\DefineFontTag.cs" />
+    <Compile Include="Tags\FontTags\FontBaseTag.cs" />
     <Compile Include="Tags\ShapeMorphingTags\DefineMorphShape2Tag.cs" />
     <Compile Include="Tags\ShapeMorphingTags\DefineMorphShapeTag.cs" />
     <Compile Include="Tags\ShapeMorphingTags\ShapeMorphingBaseTag.cs" />
@@ -184,11 +188,11 @@
     <Compile Include="Tags\ControlTags\SetTabIndexTag.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObjectTag.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObjectTag.cs" />
-    <Compile Include="Tags\DynamicTextTags\CSMTextSettingsTag.cs" />
+    <Compile Include="Tags\TextTags\CSMTextSettingsTag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsJPEG2Tag.cs" />
     <Compile Include="Tags\BitmapTags\DefineBitsLosslessTag.cs" />
     <Compile Include="Tags\DefineButton2Tag.cs" />
-    <Compile Include="Tags\DynamicTextTags\DefineEditTextTag.cs" />
+    <Compile Include="Tags\TextTags\DefineEditTextTag.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Attributes.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Glyph.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Tag.cs" />
@@ -205,7 +209,8 @@
     <Compile Include="Data\FillStyles\FillStyleType.cs" />
     <Compile Include="Tags\ShapeTags\DefineShapeTag.cs" />
     <Compile Include="Tags\DefineSpriteTag.cs" />
-    <Compile Include="Tags\DefineTextTag.cs" />
+    <Compile Include="Tags\TextTags\DefineFont4Tag.cs" />
+    <Compile Include="Tags\TextTags\DefineTextTag.cs" />
     <Compile Include="Tags\DisplayListTags\DisplayListBaseTag.cs" />
     <Compile Include="Tags\ActionsTags\DoActionTag.cs" />
     <Compile Include="Tags\ControlTags\EndTag.cs" />
@@ -233,8 +238,12 @@
     <Compile Include="SwfTagReader.cs" />
     <Compile Include="Tags\SwfTagType.cs" />
     <Compile Include="Tags\ControlTags\SymbolClassTag.cs" />
+    <Compile Include="Tags\TextTags\TextBaseTag.cs" />
     <Compile Include="Tags\UnknownTag.cs" />
     <Compile Include="TextRecordStreamExt.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tags\DynamicTextTags\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
