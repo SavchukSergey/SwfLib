@@ -3,7 +3,6 @@ using Code.SwfLib.Data;
 using Code.SwfLib.Data.Actions;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
-using Code.SwfLib.Tags.BitmapTags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.FontTags;
@@ -68,18 +67,6 @@ namespace Code.SwfLib {
 
 
         #region Control Tags
-
-        public static FrameLabelTag ReadFrameLabelTag(SwfTagData tagData) {
-            var tag = new FrameLabelTag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.Name = reader.ReadString();
-            if (!reader.IsEOF) {
-                var anchorFlag = reader.ReadByte();
-                tag.IsAnchor = anchorFlag != 0;
-            }
-            return tag;
-        }
 
         public static EnableDebugger2Tag ReadEnableDebugger2Tag(byte[] tagData) {
             return new EnableDebugger2Tag { Data = tagData };
@@ -207,8 +194,6 @@ namespace Code.SwfLib {
                     return ReadDoInitActionTag(tagData);
                 case SwfTagType.DoAction:
                     return ReadDoActionTag(tagData);
-                case SwfTagType.FrameLabel:
-                    return ReadFrameLabelTag(tagData);
                 case SwfTagType.PlaceObject:
                     return ReadPlaceObjectTag(tagData);
                 case SwfTagType.RemoveObject:

@@ -71,10 +71,6 @@ namespace Code.SwfLib {
             throw new NotImplementedException();
         }
 
-        public object Visit(FrameLabelTag tag) {
-            throw new NotImplementedException();
-        }
-
         public object Visit(PlaceObjectTag tag) {
             throw new NotImplementedException();
         }
@@ -171,7 +167,14 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(FrameLabelTag tag, SwfTagData tagData) {
-            throw new NotImplementedException();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.Name = reader.ReadString();
+            if (!reader.IsEOF) {
+                var anchorFlag = reader.ReadByte();
+                tag.IsAnchor = anchorFlag != 0;
+            }
+            return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(ProtectTag tag, SwfTagData tagData) {
