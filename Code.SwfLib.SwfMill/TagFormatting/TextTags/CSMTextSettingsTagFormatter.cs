@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Tags.TextTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
-{
+namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
     public class CSMTextSettingsTagFormatter : TagFormatterBase<CSMTextSettingsTag> {
 
         private const string USE_FLASH_TYPE_ATTRIB = "useFlashType";
@@ -49,12 +45,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
                                 new XAttribute(XName.Get("objectID"), tag.TextID),
                                 new XAttribute(XName.Get("useFlashType"), tag.UseFlashType),
                                 new XAttribute(XName.Get("gridFit"), tag.GridFit),
-                                //TODO: reserved flagss
-                                //new XAttribute(XName.Get("reservedFlags"), tag.ReservedFlags),
+                //TODO: reserved flagss
+                //new XAttribute(XName.Get("reservedFlags"), tag.ReservedFlags),
                                 new XAttribute(XName.Get("thickness"), tag.Thickness.ToString(CultureInfo.InvariantCulture)),
                                 new XAttribute(XName.Get("sharpness"), tag.Sharpness.ToString(CultureInfo.InvariantCulture))
-                                //TODO: hide reserved attr
-                                //new XAttribute(XName.Get("reserved"), tag.Reserved)
+                //TODO: hide reserved attr
+                //new XAttribute(XName.Get("reserved"), tag.Reserved)
                                 );
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Code.SwfLib.Tags.ControlTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.VideoTags {
-    class DefineVideoStreamTagFormatter : TagFormatterBase<ScriptLimitsTag> {
+namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
+    class DefineScalingGridTagFormatter : TagFormatterBase<ScriptLimitsTag> {
     }
 }

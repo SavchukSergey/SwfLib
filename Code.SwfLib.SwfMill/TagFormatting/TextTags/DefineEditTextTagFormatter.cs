@@ -2,10 +2,8 @@
 using System.Xml.Linq;
 using Code.SwfLib.Tags.TextTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
-{
-    public class DefineEditTextTagFormatter : TagFormatterBase<DefineEditTextTag>
-    {
+namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
+    public class DefineEditTextTagFormatter : TagFormatterBase<DefineEditTextTag> {
 
         private const string WORD_WRAP_ATTRIB = "wordWrap";
         private const string MULTILINE_ATTRIB = "multiLine";
@@ -34,10 +32,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
 
         //TODO: Font class name and wasStatic which is not supported by swfmill
         //TODO: check bit flags seting+check fields list
-        public override void AcceptAttribute(DefineEditTextTag tag, XAttribute attrib)
-        {
-            switch (attrib.Name.LocalName)
-            {
+        public override void AcceptAttribute(DefineEditTextTag tag, XAttribute attrib) {
+            switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.CharacterID = ushort.Parse(attrib.Value);
                     break;
@@ -116,10 +112,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
             }
         }
 
-        public override void AcceptElement(DefineEditTextTag tag, XElement element)
-        {
-            switch (element.Name.LocalName)
-            {
+        public override void AcceptElement(DefineEditTextTag tag, XElement element) {
+            switch (element.Name.LocalName) {
                 //case DATA_TAG:
                 //    //TODO: set data
                 //    FromBase64(element);
@@ -136,8 +130,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
             }
         }
 
-        public override XElement FormatTag(DefineEditTextTag tag)
-        {
+        public override XElement FormatTag(DefineEditTextTag tag) {
             var res = new XElement(SwfTagNameMapping.DEFINE_EDIT_TEXT_TAG);
             res.Add(new XAttribute(OBJECT_ID_ATTRIB, tag.CharacterID));
             res.Add(new XElement(SIZE_ELEM, _formatters.Rectangle.Format(ref tag.Bounds)));
@@ -152,18 +145,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
             //res.Add(new XAttribute(STATIC_ATTRIB, FormatBoolToDigit(tag.WasStatic)));
             res.Add(new XAttribute(IS_HTML_ATTRIB, FormatBoolToDigit(tag.HTML)));
             res.Add(new XAttribute(USE_OUTLINES_ATTRIB, FormatBoolToDigit(tag.UseOutlines)));
-            if (tag.HasFont)
-            {
+            if (tag.HasFont) {
                 res.Add(new XAttribute(FONT_REF_ATTRIB, tag.FontID));
                 res.Add(new XAttribute(FONT_HEIGHT_ATTRIB, tag.FontHeight));
             }
-            if (tag.HasTextColor)
-            {
+            if (tag.HasTextColor) {
                 res.Add(new XElement("color", _formatters.ColorRGBA.Format(ref tag.TextColor)));
             }
             res.Add(new XAttribute(MAX_LENGTH_ATTRIB, tag.MaxLength));
-            if (tag.HasLayout)
-            {
+            if (tag.HasLayout) {
                 res.Add(new XAttribute(ALIGN_ATTRIB, tag.Align));
                 res.Add(new XAttribute(LEFT_MARGIN_ATTRIB, tag.LeftMargin));
                 res.Add(new XAttribute(RIGHT_MARGIN_ATTRIB, tag.RightMargin));
@@ -171,8 +161,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags
                 res.Add(new XAttribute(LEADING_ATTRIB, tag.Leading));
             }
             res.Add(new XAttribute(VARIABLE_NAME_ATTRIB, tag.VariableName));
-            if (tag.HasText)
-            {
+            if (tag.HasText) {
                 res.Add(new XAttribute(INITIAL_TEXT_ATTRIB, tag.InitialText));
             }
             return res;

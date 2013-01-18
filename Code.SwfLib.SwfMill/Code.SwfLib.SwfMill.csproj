@@ -66,17 +66,29 @@
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG4TagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsTagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\JPEGTablesTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\DefineScalingGridTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\DefineSceneAndFrameLabelDataTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\EnableDebugger2TagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\EnableDebuggerTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\ImportAssets2TagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\ImportAssetsTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\ProtectTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\ScriptLimitsTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\SetTabIndexTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\SymbolClassTagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\PlaceObject3TagFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SwfMillFacade.cs" />
     <Compile Include="SwfMillPrimitives.cs" />
     <Compile Include="SwfTagNameMapping.cs" />
-    <Compile Include="TagFormatting\DynamicTextTags\CSMTextSettingsTagFormatter.cs" />
+    <Compile Include="TagFormatting\SoundTags\DefineSoundTagFormatter.cs" />
+    <Compile Include="TagFormatting\SoundTags\SoundStreamHeadTagFormatter.cs" />
+    <Compile Include="TagFormatting\SoundTags\StartSound2TagFormater.cs" />
+    <Compile Include="TagFormatting\SoundTags\StartSoundTagFormatter.cs" />
+    <Compile Include="TagFormatting\TextTags\CSMTextSettingsTagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG2TagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsLosslessTagFormatter.cs" />
-    <Compile Include="TagFormatting\DynamicTextTags\DefineEditTextTagFormatter.cs" />
+    <Compile Include="TagFormatting\TextTags\DefineEditTextTagFormatter.cs" />
     <Compile Include="TagFormatting\FontTags\DefineFont2TagFormatter.cs" />
     <Compile Include="TagFormatting\FontTags\DefineFontInfo2TagFormatter.cs" />
     <Compile Include="TagFormatting\FontTags\DefineFontInfoTagFormatter.cs" />
@@ -96,6 +108,8 @@
     <Compile Include="TagFormatting\ITagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\PlaceObject2TagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\RemoveObject2TagFormatter.cs" />
+    <Compile Include="TagFormatting\TextTags\DefineFont4TagFormatter.cs" />
+    <Compile Include="TagFormatting\TextTags\DefineText2TagFormatter.cs" />
     <Compile Include="TagFormatting\UnknownTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\EndTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\FileAttributesTagFormatter.cs" />
@@ -104,6 +118,8 @@
     <Compile Include="TagFormatting\DisplayListTags\ShowFrameTagFormatter.cs" />
     <Compile Include="TagFormatting\TagFormatterBase.cs" />
     <Compile Include="TagFormatterFactory.cs" />
+    <Compile Include="TagFormatting\VideoTags\DefineVideoStreamTagFormatter.cs" />
+    <Compile Include="TagFormatting\VideoTags\VideoFrameTagFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Code.SwfLib\Code.SwfLib.csproj">
@@ -114,10 +130,8 @@
   <ItemGroup>
     <Folder Include="DataFormatting\Shapes\" />
     <Folder Include="TagFormatting\ButtonTags\" />
+    <Folder Include="TagFormatting\DynamicTextTags\" />
     <Folder Include="TagFormatting\ShapeMorphingTags\" />
-    <Folder Include="TagFormatting\SoundTags\" />
-    <Folder Include="TagFormatting\TextTags\" />
-    <Folder Include="TagFormatting\VideoTags\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

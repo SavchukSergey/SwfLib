@@ -2,11 +2,15 @@
 using Code.SwfLib.SwfMill.TagFormatting;
 using Code.SwfLib.SwfMill.TagFormatting.ActionTags;
 using Code.SwfLib.SwfMill.TagFormatting.BitmapTags;
+using Code.SwfLib.SwfMill.TagFormatting.ButtonTags;
 using Code.SwfLib.SwfMill.TagFormatting.ControlTags;
 using Code.SwfLib.SwfMill.TagFormatting.DisplayListTags;
-using Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags;
 using Code.SwfLib.SwfMill.TagFormatting.FontTags;
+using Code.SwfLib.SwfMill.TagFormatting.ShapeMorphingTags;
 using Code.SwfLib.SwfMill.TagFormatting.ShapeTags;
+using Code.SwfLib.SwfMill.TagFormatting.SoundTags;
+using Code.SwfLib.SwfMill.TagFormatting.TextTags;
+using Code.SwfLib.SwfMill.TagFormatting.VideoTags;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
@@ -196,7 +200,7 @@ namespace Code.SwfLib.SwfMill {
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBitsLossless2Tag tag, object arg) {
-            return new DefineBitsLossless2Tag();
+            return new DefineBitsLossless2TagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBitsJPEG4Tag tag, object arg) {
@@ -206,11 +210,11 @@ namespace Code.SwfLib.SwfMill {
         #endregion
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineMorphShapeTag tag, object arg) {
-            return new DefineMorphShapeTag();
+            return new DefineMorphShapeTagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineMorphShape2Tag tag, object arg) {
-            return new DefineMorphShape2Tag();
+            return new DefineMorphShape2TagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineFontTag tag, object arg) {
@@ -278,11 +282,11 @@ namespace Code.SwfLib.SwfMill {
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(SoundStreamHead2Tag tag, object arg) {
-            return new SoundStreamHead2Tag();
+            return new SoundStreamHead2TagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(SoundStreamBlockTag tag, object arg) {
-            return new SoundStreamBlockTag();
+            return new SoundStreamBlockTagFormatter();
         }
 
         #region Button tags
@@ -309,6 +313,8 @@ namespace Code.SwfLib.SwfMill {
             return new DefineSpriteTagFormatter(_version);
         }
 
+        #region Video tags
+
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineVideoStreamTag tag, object arg) {
             return new DefineVideoStreamTagFormatter();
         }
@@ -317,16 +323,18 @@ namespace Code.SwfLib.SwfMill {
             return new VideoFrameTagFormatter();
         }
 
+        #endregion
+
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBinaryDataTag tag, object arg) {
-            return new DefineBinaryDataTag();
+            return new DefineBinaryDataTagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DebugIDTag tag, object arg) {
-            return new DebugIDTag();
+            return new DebugIDTagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(ProductInfoTag tag, object arg) {
-            return new ProductInfoTag();
+            return new ProductInfoTagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(UnknownTag tag, object arg) {
