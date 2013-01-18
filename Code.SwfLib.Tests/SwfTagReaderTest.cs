@@ -12,51 +12,34 @@ namespace Code.SwfLib.Tests {
 
         [Test]
         public void ReadMetadataTagTest() {
-            var file = new SwfFile();
-            file.FileInfo.Version = 9;
-            MetadataTag tag = ReadTag("MetadataTag.bin", data => new SwfTagReader(file).ReadMetadataTag(data));
-            Assert.IsNotNull(tag);
-            Assert.IsAssignableFrom(typeof(MetadataTag), tag);
+            var tag = ReadTag<MetadataTag>("MetadataTag.bin");
             Assert.AreEqual("Test Meta Data", tag.Metadata);
         }
 
         [Test]
         public void ReadSetBackgroundColorTagTest() {
-            var file = new SwfFile();
-            file.FileInfo.Version = 9;
-            SetBackgroundColorTag tag = ReadTag("SetBackgroundColorTag.bin", data => new SwfTagReader(file).ReadSetBackgroundColorTag(data));
-            Assert.IsNotNull(tag);
-            Assert.IsAssignableFrom(typeof(SetBackgroundColorTag), tag);
+            var tag = ReadTag<SetBackgroundColorTag>("SetBackgroundColorTag.bin");
             Assert.AreEqual(new SwfRGB(0x0a, 0xc0, 0x80), tag.Color);
         }
 
         [Test]
         public void ReadShowFrameTagTest() {
-            var file = new SwfFile();
-            file.FileInfo.Version = 9;
-            ShowFrameTag tag = ReadTag("ShowFrameTag.bin", data => new SwfTagReader(file).ReadShowFrameTag(data));
+            var tag = ReadTag<ShowFrameTag>("ShowFrameTag.bin");
             Assert.IsNotNull(tag);
-            Assert.IsAssignableFrom(typeof(ShowFrameTag), tag);
         }
 
-        private T ReadTag<T>(string resourceName, Func<SwfTagData, T> readerFunction) where T : SwfTagBase {
+        private T ReadTag<T>(string resourceName) where T : SwfTagBase {
             var source = GetType().Assembly.GetManifestResourceStream("Code.SwfLib.Tests.Resources.SwfTagReader." + resourceName);
             if (source == null) throw new Exception("Source stream not found");
             var reader = new SwfStreamReader(source);
             var tagData = reader.ReadTagData();
-            return readerFunction(tagData);
+            var file = new SwfFile { FileInfo = { Version = 9 } };
+            var ser = new SwfTagDeserializer(file);
+            var tag = ser.ReadTag(tagData);
+            Assert.IsNotNull(tag);
+            Assert.IsAssignableFrom(typeof(T), tag);
+            return (T)tag;
         }
-
-        private SwfTagBase ReadTagBase(string resourceName) {
-            var source = GetType().Assembly.GetManifestResourceStream("Code.SwfLib.Tests.Resources.SwfTagReader." + resourceName);
-            if (source == null) throw new Exception("Source stream not found");
-            var file = new SwfFile();
-            file.FileInfo.Version = 10;
-            var reader = new SwfStreamReader(source);
-            var tagReader = new SwfTagReader(file);
-            return tagReader.ReadTag(reader);
-        }
-
 
     }
 }

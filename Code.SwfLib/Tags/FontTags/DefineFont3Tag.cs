@@ -95,9 +95,6 @@
 
         public DefineFont3Glyph[] Glyphs;
 
-        //TODO: serialize other fields
-        public byte[] RestData;
-
         public override SwfTagType TagType {
             get { return SwfTagType.DefineFont3; }
         }

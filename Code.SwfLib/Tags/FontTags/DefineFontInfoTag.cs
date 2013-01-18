@@ -3,8 +3,6 @@
 
         public ushort FontId;
 
-        public byte[] RestData;
-
         public override SwfTagType TagType {
             get { return SwfTagType.DefineFontInfo; }
         }

@@ -84,7 +84,7 @@ namespace Code.SwfLib.Tests {
                 Data = bytes
             };
             //TODO: There is no need in second instance of tag
-            return (T)tag.AcceptVistor(new SwfTagDeserializer { TagData = tagData, SwfFile = file });
+            return (T) new SwfTagDeserializer(file).ReadTag(tagData);
         }
 
         protected string[] GetResourcesFromFolder(string resourceFolder) {

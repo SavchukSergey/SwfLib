@@ -3,9 +3,6 @@
 
         public ushort SpriteId;
 
-        //TODO: expand into dom
-        public byte[] RestData;
-
         public override SwfTagType TagType {
             get { return SwfTagType.DoInitAction; }
         }
