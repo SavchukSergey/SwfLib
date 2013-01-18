@@ -215,7 +215,6 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DoInitActionTag tag, SwfStreamReader reader) {
             tag.SpriteId = reader.ReadUInt16();
-            tag.RestData = reader.ReadRest();
             return tag;
         }
 
@@ -312,7 +311,6 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontInfoTag tag, SwfStreamReader reader) {
             tag.FontId = reader.ReadUInt16();
-            tag.RestData = reader.ReadRest();
             return tag;
         }
 
@@ -335,7 +333,6 @@ namespace Code.SwfLib {
             //for (var i = 0; i < glyphsCount; i++) {
             //    tag.Glyphs[i] = new DefineFont3Glyph();
             //}
-            tag.RestData = reader.ReadRest();
             return tag;
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
@@ -12,7 +11,7 @@ using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.TextTags;
 
 namespace Code.SwfLib {
-    public class SwfTagSerializer : ISwfTagVisitor<object, SwfTagData> {
+    public class SwfTagSerializer : ISwfTagVisitor<SwfStreamWriter, SwfTagData> {
 
         private readonly SwfFile _file;
 
@@ -21,14 +20,18 @@ namespace Code.SwfLib {
         }
 
         public SwfTagData GetTagData(SwfTagBase tag) {
-            return tag.AcceptVistor(this, null);
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            tag.AcceptVistor(this, writer);
+            if (tag.RestData != null && tag.RestData.Length > 0) {
+                writer.WriteBytes(tag.RestData);
+            }
+            return new SwfTagData { Type = tag.TagType, Data = mem.ToArray() };
         }
 
         #region Display list tags
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(PlaceObjectTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(PlaceObjectTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteUInt16(tag.Depth);
             writer.WriteMatrix(ref tag.Matrix);
@@ -36,12 +39,10 @@ namespace Code.SwfLib {
                 var transform = tag.ColorTransform.Value;
                 writer.WriteColorTransformRGB(ref transform);
             }
-            return new SwfTagData { Type = SwfTagType.PlaceObject, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(PlaceObject2Tag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(PlaceObject2Tag tag, SwfStreamWriter writer) {
             writer.WriteBit(tag.HasClipActions);
             writer.WriteBit(tag.HasClipDepth);
             writer.WriteBit(tag.HasName);
@@ -60,211 +61,176 @@ namespace Code.SwfLib {
             if (tag.HasClipActions) {
                 writer.WriteClipActions(_file.FileInfo.Version, ref tag.ClipActions);
             }
-            return new SwfTagData { Type = SwfTagType.PlaceObject2, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(PlaceObject3Tag tag, object arg) {
-            var mem = new MemoryStream();
-            //var writer = new SwfStreamWriter(mem);
-            //TODO: put fields
-            return new SwfTagData { Type = SwfTagType.PlaceObject3, Data = mem.ToArray() };
-
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(PlaceObject3Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(RemoveObjectTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(RemoveObjectTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteUInt16(tag.Depth);
-            return new SwfTagData { Type = SwfTagType.RemoveObject, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(RemoveObject2Tag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(RemoveObject2Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.Depth);
-            return new SwfTagData { Type = SwfTagType.RemoveObject2, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(ShowFrameTag tag, object arg) {
-            return new SwfTagData { Type = SwfTagType.ShowFrame, Data = new byte[0] };
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ShowFrameTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
         #endregion
 
         #region Control tags
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(SetBackgroundColorTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(SetBackgroundColorTag tag, SwfStreamWriter writer) {
             writer.WriteRGB(ref tag.Color);
-            return new SwfTagData { Type = SwfTagType.SetBackgroundColor, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(FrameLabelTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(FrameLabelTag tag, SwfStreamWriter writer) {
             writer.WriteString(tag.Name);
             if (tag.IsAnchor) writer.WriteByte(1);
-            return new SwfTagData { Type = SwfTagType.FrameLabel, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(ProtectTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ProtectTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(EndTag tag, object arg) {
-            return new SwfTagData { Type = SwfTagType.End, Data = new byte[0] };
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(EndTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(ExportAssetsTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ExportAssetsTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16((ushort)tag.Symbols.Count);
             foreach (var symbolref in tag.Symbols) {
                 writer.WriteUInt16(symbolref.SymbolID);
                 writer.WriteString(symbolref.SymbolName);
             }
-            return new SwfTagData { Type = SwfTagType.ExportAssets, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(ImportAssetsTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ImportAssetsTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(EnableDebuggerTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(EnableDebuggerTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(EnableDebugger2Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(EnableDebugger2Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(ScriptLimitsTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ScriptLimitsTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.MaxRecursionDepth);
             writer.WriteUInt16(tag.ScriptTimeoutSeconds);
-            return new SwfTagData { Type = SwfTagType.ScriptLimits, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(SetTabIndexTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(SetTabIndexTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(FileAttributesTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(FileAttributesTag tag, SwfStreamWriter writer) {
             writer.WriteUInt32((uint)tag.Attributes);
-            return new SwfTagData { Type = SwfTagType.FileAttributes, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(ImportAssets2Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ImportAssets2Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(SymbolClassTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(SymbolClassTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(MetadataTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(MetadataTag tag, SwfStreamWriter writer) {
             writer.WriteString(tag.Metadata);
-            return new SwfTagData { Type = SwfTagType.Metadata, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineScalingGridTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineScalingGridTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineSceneAndFrameLabelDataTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineSceneAndFrameLabelDataTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
         #endregion
 
         #region Action tags
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DoActionTag tag, object arg) {
-            var mem = new MemoryStream();
-            //var writer = new SwfStreamWriter(mem);
-            //TODO: Write other fields
-            return new SwfTagData { Type = SwfTagType.DoAction, Data = mem.ToArray() };
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DoActionTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DoInitActionTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DoInitActionTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.SpriteId);
-            writer.WriteBytes(tag.RestData);
-            return new SwfTagData { Type = SwfTagType.DoInitAction, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DoABCTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DoABCTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DoABCDefineTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DoABCDefineTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
         #endregion
 
         #region Shape tags
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineShapeTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShapeTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
             writer.WriteShapeWithStyle(tag.Shapes);
             writer.FlushBits();
-            return new SwfTagData { Type = SwfTagType.DefineShape, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineShape2Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape2Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineShape3Tag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-            //TODO: Write other fields
-            return new SwfTagData { Type = SwfTagType.DefineShape3, Data = mem.ToArray() };
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape3Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineShape4Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape4Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
         #endregion
 
         #region Bitmap tags
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineBitsTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(JPEGTablesTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(JPEGTablesTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineBitsJPEG2Tag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG2Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             if (tag.ImageData != null) writer.WriteBytes(tag.ImageData);
-            return new SwfTagData { Type = SwfTagType.DefineBitsJPEG2, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineBitsJPEG3Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG3Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineBitsLosslessTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsLosslessTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteByte(tag.BitmapFormat);
             writer.WriteUInt16(tag.BitmapWidth);
@@ -275,50 +241,45 @@ namespace Code.SwfLib {
             if (tag.ZlibBitmapData != null) {
                 writer.WriteBytes(tag.ZlibBitmapData);
             }
-            return new SwfTagData { Type = SwfTagType.DefineBitsLossless, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineBitsLossless2Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsLossless2Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineBitsJPEG4Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG4Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
         #endregion
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.ShapeMorphingTags.DefineMorphShapeTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.ShapeMorphingTags.DefineMorphShapeTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.ShapeMorphingTags.DefineMorphShape2Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.ShapeMorphingTags.DefineMorphShape2Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineFontTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineFontInfoTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontInfoTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontId);
-            writer.WriteBytes(tag.RestData);
-            return new SwfTagData { Type = SwfTagType.DefineFontInfo, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineFontInfo2Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontInfo2Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineFont2Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont2Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineFont3Tag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont3Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontId);
             writer.WriteByte((byte)tag.Attributes);
             writer.WriteByte(tag.Language);
@@ -326,13 +287,10 @@ namespace Code.SwfLib {
             writer.WriteByte((byte)name.Length);
             writer.WriteBytes(name);
             writer.WriteUInt16((ushort)tag.Glyphs.Length);
-            writer.WriteBytes(tag.RestData);
-            return new SwfTagData { Type = SwfTagType.DefineFont3, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineFontAlignZonesTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontAlignZonesTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
             writer.WriteByte(tag.CsmTableHint);
 
@@ -345,22 +303,18 @@ namespace Code.SwfLib {
                 writer.WriteByte((byte)zoneArray.Flags);
             }
 
-            return new SwfTagData { Type = SwfTagType.DefineFontAlignZones, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineFontNameTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontNameTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontId);
             writer.WriteString(tag.FontName);
             writer.WriteString(tag.FontCopyright);
             writer.FlushBits();
-            return new SwfTagData { Type = SwfTagType.DefineFontName, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineTextTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineTextTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteRect(ref tag.TextBounds);
             writer.WriteMatrix(ref tag.TextMatrix);
@@ -383,16 +337,14 @@ namespace Code.SwfLib {
             }
             writer.FlushBits();
             //TODO: What if end record is missed?
-            return new SwfTagData { Type = SwfTagType.DefineText, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineText2Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineText2Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineEditTextTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineEditTextTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteRect(ref tag.Bounds);
             writer.FlushBits();
@@ -438,12 +390,10 @@ namespace Code.SwfLib {
             if (tag.HasText) {
                 writer.WriteString(tag.InitialText);
             }
-            return new SwfTagData { Type = SwfTagType.DefineEditText, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(CSMTextSettingsTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(CSMTextSettingsTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.TextID);
             writer.WriteUnsignedBits(tag.UseFlashType, 2);
             writer.WriteUnsignedBits(tag.GridFit, 3);
@@ -451,90 +401,85 @@ namespace Code.SwfLib {
             writer.WriteSingle(tag.Thickness);
             writer.WriteSingle(tag.Sharpness);
             writer.WriteByte(tag.Reserved);
-            return new SwfTagData { Type = SwfTagType.CSMTextSettings, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineFont4Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont4Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.SoundTags.DefineSoundTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.DefineSoundTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.SoundTags.StartSoundTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.StartSoundTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.SoundTags.StartSound2Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.StartSound2Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.SoundTags.SoundStreamHeadTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.SoundStreamHeadTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.SoundTags.SoundStreamHead2Tag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.SoundStreamHead2Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.SoundTags.SoundStreamBlockTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.SoundStreamBlockTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineButtonTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineButtonTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineButton2Tag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-            //TODO: put fields
-            return new SwfTagData { Type = SwfTagType.DefineButton2, Data = mem.ToArray() };
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineButton2Tag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineButtonCxformTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineButtonCxformTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineButtonSoundTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineButtonSoundTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineSpriteTag tag, object arg) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineSpriteTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.SpriteID);
             writer.WriteUInt16(tag.FramesCount);
             foreach (var subtag in tag.Tags) {
                 SwfTagData subTagData = GetTagData(subtag);
                 writer.WriteTagData(subTagData);
             }
-            return new SwfTagData { Type = SwfTagType.DefineSprite, Data = mem.ToArray() };
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.VideoTags.DefineVideoStreamTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.VideoTags.DefineVideoStreamTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(Tags.VideoTags.VideoFrameTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.VideoTags.VideoFrameTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DefineBinaryDataTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBinaryDataTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(DebugIDTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DebugIDTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(ProductInfoTag tag, object arg) {
-            throw new NotImplementedException();
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ProductInfoTag tag, SwfStreamWriter writer) {
+            return null;
         }
 
-        SwfTagData ISwfTagVisitor<object, SwfTagData>.Visit(UnknownTag tag, object arg) {
-            return new SwfTagData { Type = tag.TagType, Data = tag.Data };
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(UnknownTag tag, SwfStreamWriter writer) {
+            return null;
         }
     }
 }
