@@ -113,19 +113,10 @@ namespace Code.SwfLib {
             return new DebugIDTag { Data = tagData };
         }
 
-        public static ScriptLimitsTag ReadScriptLimitsTag(SwfTagData tagData) {
-            var tag = new ScriptLimitsTag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.MaxRecursionDepth = reader.ReadUInt16();
-            tag.ScriptTimeoutSeconds = reader.ReadUInt16();
-            return tag;
-        }
-
         public static ProductInfoTag ReadProductInfoTag(byte[] tagData) {
-            ProductInfoTag tag = new ProductInfoTag();
-            MemoryStream stream = new MemoryStream(tagData);
-            SwfStreamReader reader = new SwfStreamReader(stream);
+            var tag = new ProductInfoTag();
+            var stream = new MemoryStream(tagData);
+            var reader = new SwfStreamReader(stream);
             tag.ProductId = reader.ReadUInt32();
             tag.Edition = reader.ReadUInt32();
             tag.MajorVersion = reader.ReadByte();
@@ -155,83 +146,6 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public static DefineBitsJPEG2Tag ReadDefineBitsJPEG2Tag(SwfTagData tagData) {
-            var tag = new DefineBitsJPEG2Tag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.CharacterID = reader.ReadUInt16();
-            var imageLength = stream.Length - stream.Position;
-            tag.ImageData = reader.ReadBytes((int)imageLength);
-            return tag;
-        }
-
-        public static DefineBitsLosslessTag ReadDefineBitsLosslessTag(SwfTagData tagData) {
-            var tag = new DefineBitsLosslessTag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.CharacterID = reader.ReadUInt16();
-            tag.BitmapFormat = reader.ReadByte();
-            tag.BitmapWidth = reader.ReadUInt16();
-            tag.BitmapHeight = reader.ReadUInt16();
-            if (tag.BitmapFormat == 3) {
-                tag.BitmapColorTableSize = reader.ReadByte();
-            }
-            tag.ZlibBitmapData = reader.ReadBytes((int)reader.BytesLeft);
-            return tag;
-        }
-
-        public DefineEditTextTag ReadDefineEditTextTag(SwfTagData tagData) {
-            var tag = new DefineEditTextTag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.CharacterID = reader.ReadUInt16();
-            reader.ReadRect(out tag.Bounds);
-            reader.AlignToByte();
-            tag.HasText = reader.ReadBit();
-            tag.WordWrap = reader.ReadBit();
-            tag.Multiline = reader.ReadBit();
-            tag.Password = reader.ReadBit();
-            tag.ReadOnly = reader.ReadBit();
-            tag.HasTextColor = reader.ReadBit();
-            tag.HasMaxLength = reader.ReadBit();
-            tag.HasFont = reader.ReadBit();
-            tag.HasFontClass = reader.ReadBit();
-            tag.AutoSize = reader.ReadBit();
-            tag.HasLayout = reader.ReadBit();
-            tag.NoSelect = reader.ReadBit();
-            tag.Border = reader.ReadBit();
-            tag.WasStatic = reader.ReadBit();
-            tag.HTML = reader.ReadBit();
-            tag.UseOutlines = reader.ReadBit();
-            if (tag.HasFont) {
-                tag.FontID = reader.ReadUInt16();
-            }
-            if (tag.HasFontClass) {
-                tag.FontClass = reader.ReadString();
-            }
-            if (tag.HasFont) {
-                tag.FontHeight = reader.ReadUInt16();
-            }
-            if (tag.HasTextColor) {
-                reader.ReadRGBA(out tag.TextColor);
-            }
-            if (tag.HasMaxLength) {
-                tag.MaxLength = reader.ReadUInt16();
-            }
-            if (tag.HasLayout) {
-                tag.Align = reader.ReadByte();
-                tag.LeftMargin = reader.ReadUInt16();
-                tag.RightMargin = reader.ReadUInt16();
-                tag.Indent = reader.ReadUInt16();
-                tag.Leading = reader.ReadSInt16();
-            }
-            tag.VariableName = reader.ReadString();
-            if (tag.HasText) {
-                tag.InitialText = reader.ReadString();
-            }
-            return tag;
-        }
-
         public static DefineFontNameTag ReadDefineFontNameTag(SwfTagData tagData) {
             var tag = new DefineFontNameTag();
             var stream = new MemoryStream(tagData.Data);
@@ -249,18 +163,6 @@ namespace Code.SwfLib {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
             reader.ReadToShapeWithStyle(tag.Shapes);
-            return tag;
-        }
-
-        public ExportAssetsTag ReadExportTag(SwfTagData tagData) {
-            var tag = new ExportAssetsTag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            var count = reader.ReadUInt16();
-            for (var i = 0; i < count; i++) {
-                var symbolRef = reader.ReadSymbolReference();
-                tag.Symbols.Add(symbolRef);
-            }
             return tag;
         }
 
@@ -293,38 +195,24 @@ namespace Code.SwfLib {
             var ser = new SwfTagDeserializer(_file);
             return ser.ReadTag(tagData);
             switch (tagData.Type) {
-                //case SwfTagType.CSMTextSettings:
-                //    return ReadCSMTextSettingsTag(tagData);
-                //case SwfTagType.DefineBitsJPEG2:
-                //    return ReadDefineBitsJPEG2Tag(tagData);
-                //case SwfTagType.DefineBitsLossless:
-                //    return ReadDefineBitsLosslessTag(tagData);
-                case SwfTagType.DefineEditText:
-                    return ReadDefineEditTextTag(tagData);
-                //case SwfTagType.DefineFontAlignZones:
-                //    return ReadDefineFontAlignZonesTag(tagData);
+                case SwfTagType.CSMTextSettings:
+                    return ReadCSMTextSettingsTag(tagData);
                 case SwfTagType.DefineFontName:
                     return ReadDefineFontNameTag(tagData);
                 case SwfTagType.DefineFontInfo:
                     return ReadDefineFontInfoTag(tagData);
-                //case SwfTagType.DefineShape:
-                //    return ReadDefineShapeTag(tagData);
-                //case SwfTagType.DefineText:
-                //    return ReadDefineTextTag(tagData);
+                case SwfTagType.DefineShape:
+                    return ReadDefineShapeTag(tagData);
                 case SwfTagType.DoInitAction:
                     return ReadDoInitActionTag(tagData);
-                //case SwfTagType.DoAction:
-                //    return ReadDoActionTag(tagData);
-                case SwfTagType.ExportAssets:
-                    return ReadExportTag(tagData);
-                //case SwfTagType.FrameLabel:
-                //    return ReadFrameLabelTag(tagData);
+                case SwfTagType.DoAction:
+                    return ReadDoActionTag(tagData);
+                case SwfTagType.FrameLabel:
+                    return ReadFrameLabelTag(tagData);
                 case SwfTagType.PlaceObject:
                     return ReadPlaceObjectTag(tagData);
-                //case SwfTagType.RemoveObject:
-                //    return ReadRemoveObjectTag(tagData);
-                //case SwfTagType.ScriptLimits:
-                //    return ReadScriptLimitsTag(tagData);
+                case SwfTagType.RemoveObject:
+                    return ReadRemoveObjectTag(tagData);
                 default:
                     return ReadUnknownTag(tagData);
             }

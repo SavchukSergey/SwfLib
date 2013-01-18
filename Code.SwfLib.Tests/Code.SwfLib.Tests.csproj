@@ -61,6 +61,7 @@
     <Compile Include="ExternalEtalonTests\DefineShapeTagTest.cs" />
     <Compile Include="ExternalEtalonTests\ExternalEtalonTestFixtureBase.cs" />
     <Compile Include="ExternalEtalonTests\SwfStreamReaderExtTest.cs" />
+    <Compile Include="SamplesTest.cs" />
     <Compile Include="SwfFileTest.cs" />
     <Compile Include="SwfStreamReaderExtTest.cs" />
     <Compile Include="SwfStreamReaderTest.cs" />

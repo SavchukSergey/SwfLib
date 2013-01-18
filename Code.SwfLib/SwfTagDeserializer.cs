@@ -39,19 +39,7 @@ namespace Code.SwfLib {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineBitsJPEG2Tag tag) {
-            throw new NotImplementedException();
-        }
-
-        public object Visit(DefineBitsLosslessTag tag) {
-            throw new NotImplementedException();
-        }
-
         public object Visit(DefineButton2Tag tag) {
-            throw new NotImplementedException();
-        }
-
-        public object Visit(DefineEditTextTag tag) {
             throw new NotImplementedException();
         }
 
@@ -83,10 +71,6 @@ namespace Code.SwfLib {
             throw new NotImplementedException();
         }
 
-        public object Visit(ExportAssetsTag tag) {
-            throw new NotImplementedException();
-        }
-
         public object Visit(FrameLabelTag tag) {
             throw new NotImplementedException();
         }
@@ -104,10 +88,6 @@ namespace Code.SwfLib {
         }
 
         public object Visit(RemoveObject2Tag tag) {
-            throw new NotImplementedException();
-        }
-
-        public object Visit(ScriptLimitsTag tag) {
             throw new NotImplementedException();
         }
 
@@ -203,7 +183,14 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(ExportAssetsTag tag, SwfTagData tagData) {
-            throw new NotImplementedException();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            var count = reader.ReadUInt16();
+            for (var i = 0; i < count; i++) {
+                var symbolRef = reader.ReadSymbolReference();
+                tag.Symbols.Add(symbolRef);
+            }
+            return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(ImportAssetsTag tag, SwfTagData tagData) {
@@ -219,7 +206,11 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(ScriptLimitsTag tag, SwfTagData tagData) {
-            throw new NotImplementedException();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.MaxRecursionDepth = reader.ReadUInt16();
+            tag.ScriptTimeoutSeconds = reader.ReadUInt16();
+            return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(SetTabIndexTag tag, SwfTagData tagData) {
@@ -299,7 +290,12 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(DefineBitsJPEG2Tag tag, SwfTagData tagData) {
-            throw new NotImplementedException();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.CharacterID = reader.ReadUInt16();
+            var imageLength = stream.Length - stream.Position;
+            tag.ImageData = reader.ReadBytes((int)imageLength);
+            return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(DefineBitsJPEG3Tag tag, SwfTagData tagData) {
@@ -307,7 +303,17 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(DefineBitsLosslessTag tag, SwfTagData tagData) {
-            throw new NotImplementedException();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.CharacterID = reader.ReadUInt16();
+            tag.BitmapFormat = reader.ReadByte();
+            tag.BitmapWidth = reader.ReadUInt16();
+            tag.BitmapHeight = reader.ReadUInt16();
+            if (tag.BitmapFormat == 3) {
+                tag.BitmapColorTableSize = reader.ReadByte();
+            }
+            tag.ZlibBitmapData = reader.ReadBytes((int)reader.BytesLeft);
+            return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(DefineBitsLossless2Tag tag, SwfTagData tagData) {
@@ -413,7 +419,54 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(DefineEditTextTag tag, SwfTagData tagData) {
-            throw new NotImplementedException();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.CharacterID = reader.ReadUInt16();
+            reader.ReadRect(out tag.Bounds);
+            reader.AlignToByte();
+            tag.HasText = reader.ReadBit();
+            tag.WordWrap = reader.ReadBit();
+            tag.Multiline = reader.ReadBit();
+            tag.Password = reader.ReadBit();
+            tag.ReadOnly = reader.ReadBit();
+            tag.HasTextColor = reader.ReadBit();
+            tag.HasMaxLength = reader.ReadBit();
+            tag.HasFont = reader.ReadBit();
+            tag.HasFontClass = reader.ReadBit();
+            tag.AutoSize = reader.ReadBit();
+            tag.HasLayout = reader.ReadBit();
+            tag.NoSelect = reader.ReadBit();
+            tag.Border = reader.ReadBit();
+            tag.WasStatic = reader.ReadBit();
+            tag.HTML = reader.ReadBit();
+            tag.UseOutlines = reader.ReadBit();
+            if (tag.HasFont) {
+                tag.FontID = reader.ReadUInt16();
+            }
+            if (tag.HasFontClass) {
+                tag.FontClass = reader.ReadString();
+            }
+            if (tag.HasFont) {
+                tag.FontHeight = reader.ReadUInt16();
+            }
+            if (tag.HasTextColor) {
+                reader.ReadRGBA(out tag.TextColor);
+            }
+            if (tag.HasMaxLength) {
+                tag.MaxLength = reader.ReadUInt16();
+            }
+            if (tag.HasLayout) {
+                tag.Align = reader.ReadByte();
+                tag.LeftMargin = reader.ReadUInt16();
+                tag.RightMargin = reader.ReadUInt16();
+                tag.Indent = reader.ReadUInt16();
+                tag.Leading = reader.ReadSInt16();
+            }
+            tag.VariableName = reader.ReadString();
+            if (tag.HasText) {
+                tag.InitialText = reader.ReadString();
+            }
+            return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(CSMTextSettingsTag tag, SwfTagData tagData) {
