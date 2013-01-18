@@ -2,13 +2,11 @@
 using Code.SwfLib.SwfMill.TagFormatting;
 using Code.SwfLib.SwfMill.TagFormatting.ActionTags;
 using Code.SwfLib.SwfMill.TagFormatting.BitmapTags;
-using Code.SwfLib.SwfMill.TagFormatting.ButtonTags;
 using Code.SwfLib.SwfMill.TagFormatting.ControlTags;
 using Code.SwfLib.SwfMill.TagFormatting.DisplayListTags;
 using Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags;
 using Code.SwfLib.SwfMill.TagFormatting.FontTags;
 using Code.SwfLib.SwfMill.TagFormatting.ShapeTags;
-using Code.SwfLib.SwfMill.TagFormatting.VideoTags;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
@@ -175,6 +173,8 @@ namespace Code.SwfLib.SwfMill {
             return new DefineShape4TagFormatter();
         }
 
+        #region Bitmap tags
+
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBitsTag tag, object arg) {
             return new DefineBitsTagFormatter();
         }
@@ -202,6 +202,8 @@ namespace Code.SwfLib.SwfMill {
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBitsJPEG4Tag tag, object arg) {
             return new DefineBitsJPEG4TagFormatter();
         }
+
+        #endregion
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineMorphShapeTag tag, object arg) {
             return new DefineMorphShapeTag();
