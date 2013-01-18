@@ -19,27 +19,6 @@ namespace Code.SwfLib {
             _file = file;
         }
 
-        public DefineSpriteTag ReadDefineSpriteTag(SwfTagData tagData) {
-            var tag = new DefineSpriteTag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.SpriteID = reader.ReadUInt16();
-            tag.FramesCount = reader.ReadUInt16();
-            SwfTagBase subTag;
-            do {
-                subTag = ReadDefineSpriteSubTag(reader);
-                if (subTag != null) tag.Tags.Add(subTag);
-            } while (subTag != null && subTag.TagType != SwfTagType.End);
-            return tag;
-        }
-
-        public SwfTagBase ReadDefineSpriteSubTag(SwfStreamReader reader) {
-            var tag = ReadTag(reader);
-
-            //TODO: Check allowed for define sprite types
-            return tag;
-        }
-
         public DoActionTag ReadDoActionTag(SwfTagData tagData) {
             var tag = new DoActionTag();
             var stream = new MemoryStream(tagData.Data);
@@ -300,43 +279,6 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public PlaceObject2Tag ReadPlaceObject2Tag(SwfTagData tagData) {
-            var tag = new PlaceObject2Tag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.HasClipActions = reader.ReadBit(); //TODO: Check swf version
-            tag.HasClipDepth = reader.ReadBit();
-            tag.HasName = reader.ReadBit();
-            tag.HasRatio = reader.ReadBit();
-            tag.HasColorTransform = reader.ReadBit();
-            tag.HasMatrix = reader.ReadBit();
-            tag.HasCharacter = reader.ReadBit();
-            tag.Move = reader.ReadBit();
-            tag.Depth = reader.ReadUInt16();
-            if (tag.HasCharacter) {
-                tag.CharacterID = reader.ReadUInt16();
-            }
-            if (tag.HasMatrix) {
-                reader.ReadMatrix(out tag.Matrix);
-            }
-            if (tag.HasColorTransform) {
-                reader.ReadColorTransformRGBA(out tag.ColorTransform);
-            }
-            if (tag.HasRatio) {
-                tag.Ratio = reader.ReadUInt16();
-            }
-            if (tag.HasName) {
-                tag.Name = reader.ReadString();
-            }
-            if (tag.HasClipDepth) {
-                tag.ClipDepth = reader.ReadUInt16();
-            }
-            if (tag.HasClipActions) {
-                reader.ReadClipActions(_file.FileInfo.Version, out tag.ClipActions);
-            }
-            return tag;
-        }
-
         public static RemoveObjectTag ReadRemoveObjectTag(SwfTagData tagData) {
             RemoveObjectTag tag = new RemoveObjectTag();
             var stream = new MemoryStream(tagData.Data);
@@ -367,8 +309,6 @@ namespace Code.SwfLib {
                     return ReadDefineFontInfoTag(tagData);
                 //case SwfTagType.DefineShape:
                 //    return ReadDefineShapeTag(tagData);
-                case SwfTagType.DefineSprite:
-                    return ReadDefineSpriteTag(tagData);
                 //case SwfTagType.DefineText:
                 //    return ReadDefineTextTag(tagData);
                 case SwfTagType.DoInitAction:
@@ -381,8 +321,6 @@ namespace Code.SwfLib {
                 //    return ReadFrameLabelTag(tagData);
                 case SwfTagType.PlaceObject:
                     return ReadPlaceObjectTag(tagData);
-                case SwfTagType.PlaceObject2:
-                    return ReadPlaceObject2Tag(tagData);
                 //case SwfTagType.RemoveObject:
                 //    return ReadRemoveObjectTag(tagData);
                 //case SwfTagType.ScriptLimits:

@@ -27,6 +27,10 @@ namespace Code.SwfLib {
             return tag.AcceptVistor(this, data);
         }
 
+        public T ReadTag<T>(SwfTagData data) where T : SwfTagBase {
+            return (T)ReadTag(data);
+        }
+
         public SwfFile SwfFile { get { return _file; } }
 
         #region Old
@@ -67,10 +71,6 @@ namespace Code.SwfLib {
             throw new NotImplementedException();
         }
 
-        public object Visit(DefineSpriteTag tag) {
-            throw new NotImplementedException();
-        }
-
         public object Visit(DefineTextTag tag) {
             throw new NotImplementedException();
         }
@@ -92,10 +92,6 @@ namespace Code.SwfLib {
         }
 
         public object Visit(PlaceObjectTag tag) {
-            throw new NotImplementedException();
-        }
-
-        public object Visit(PlaceObject2Tag tag) {
             throw new NotImplementedException();
         }
 
@@ -132,7 +128,39 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(PlaceObject2Tag tag, SwfTagData tagData) {
-            throw new NotImplementedException();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.HasClipActions = reader.ReadBit(); //TODO: Check swf version
+            tag.HasClipDepth = reader.ReadBit();
+            tag.HasName = reader.ReadBit();
+            tag.HasRatio = reader.ReadBit();
+            tag.HasColorTransform = reader.ReadBit();
+            tag.HasMatrix = reader.ReadBit();
+            tag.HasCharacter = reader.ReadBit();
+            tag.Move = reader.ReadBit();
+            tag.Depth = reader.ReadUInt16();
+            if (tag.HasCharacter) {
+                tag.CharacterID = reader.ReadUInt16();
+            }
+            if (tag.HasMatrix) {
+                reader.ReadMatrix(out tag.Matrix);
+            }
+            if (tag.HasColorTransform) {
+                reader.ReadColorTransformRGBA(out tag.ColorTransform);
+            }
+            if (tag.HasRatio) {
+                tag.Ratio = reader.ReadUInt16();
+            }
+            if (tag.HasName) {
+                tag.Name = reader.ReadString();
+            }
+            if (tag.HasClipDepth) {
+                tag.ClipDepth = reader.ReadUInt16();
+            }
+            if (tag.HasClipActions) {
+                reader.ReadClipActions(_file.FileInfo.Version, out tag.ClipActions);
+            }
+            return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(PlaceObject3Tag tag, SwfTagData tagData) {
@@ -437,7 +465,23 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(DefineSpriteTag tag, SwfTagData tagData) {
-            throw new NotImplementedException();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.SpriteID = reader.ReadUInt16();
+            tag.FramesCount = reader.ReadUInt16();
+            SwfTagBase subTag;
+            do {
+                subTag = ReadDefineSpriteSubTag(reader);
+                if (subTag != null) tag.Tags.Add(subTag);
+            } while (subTag != null && subTag.TagType != SwfTagType.End);
+            return tag;
+        }
+
+        private SwfTagBase ReadDefineSpriteSubTag(SwfStreamReader reader) {
+            var tagData = reader.ReadTagData();
+            var tag = ReadTag(tagData);
+            //TODO: Check allowed for define sprite types
+            return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(Tags.VideoTags.DefineVideoStreamTag tag, SwfTagData tagData) {
