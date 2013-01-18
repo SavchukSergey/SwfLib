@@ -83,7 +83,7 @@
     <Compile Include="TagFormatting\DefineTextTagFormatter.cs" />
     <Compile Include="TagFormatting\ActionTags\DoActionTagFormatter.cs" />
     <Compile Include="TagFormatting\ActionTags\DoInitActionTagFormatter.cs" />
-    <Compile Include="TagFormatting\ControlTags\ExportTagFormatter.cs" />
+    <Compile Include="TagFormatting\ControlTags\ExportAssetsTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\FrameLabelTagFormater.cs" />
     <Compile Include="TagFormatting\ITagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\PlaceObject2TagFormatter.cs" />
@@ -105,6 +105,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataFormatting\Shapes\" />
+    <Folder Include="TagFormatting\ButtonTags\" />
+    <Folder Include="TagFormatting\ShapeMorphingTags\" />
+    <Folder Include="TagFormatting\SoundTags\" />
+    <Folder Include="TagFormatting\TextTags\" />
+    <Folder Include="TagFormatting\VideoTags\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

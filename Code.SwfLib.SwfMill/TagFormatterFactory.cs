@@ -1,12 +1,14 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Code.SwfLib.SwfMill.TagFormatting;
 using Code.SwfLib.SwfMill.TagFormatting.ActionTags;
 using Code.SwfLib.SwfMill.TagFormatting.BitmapTags;
+using Code.SwfLib.SwfMill.TagFormatting.ButtonTags;
 using Code.SwfLib.SwfMill.TagFormatting.ControlTags;
 using Code.SwfLib.SwfMill.TagFormatting.DisplayListTags;
 using Code.SwfLib.SwfMill.TagFormatting.DynamicTextTags;
 using Code.SwfLib.SwfMill.TagFormatting.FontTags;
 using Code.SwfLib.SwfMill.TagFormatting.ShapeTags;
+using Code.SwfLib.SwfMill.TagFormatting.VideoTags;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
@@ -14,228 +16,319 @@ using Code.SwfLib.Tags.ButtonTags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.FontTags;
+using Code.SwfLib.Tags.ShapeMorphingTags;
 using Code.SwfLib.Tags.ShapeTags;
+using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
+using Code.SwfLib.Tags.VideoTags;
 
 namespace Code.SwfLib.SwfMill {
-    public class TagFormatterFactory : ISwfTagVisitor {
+    public class TagFormatterFactory : ISwfTagVisitor<object, ITagFormatter> {
+        
         private readonly ushort _version;
 
-        private CSMTextSettingsTagFormatter _csmTextSettingsFormatter;
-        private DefineBitsJPEG2TagFormatter _defineBitsJpeg2Formatter;
-        private DefineBitsLosslessTagFormatter _defineBitsLosslessFormatter;
-        private DefineButton2TagFormatter _defineButton2TagFormatter;
-        private DefineEditTextTagFormatter _defineEditTextFormatter;
-        private DefineFontAlignZonesTagFormatter _defineFontAlignZonesFormatter;
-        private DefineFontInfoTagFormatter _defineFontInfoFormatter;
-        private DefineFontNameTagFormatter _defineFontNameFormater;
-        private DefineFont3TagFormatter _defineFont3Formater;
-        private DefineShapeTagFormatter _defineShapeFormater;
-        private DefineShape3TagFormatter _defineShape3Formater;
-        private DoActionTagFormatter _doActionTagFormatter;
-        private DoInitActionTagFormatter _doInitActionTagFormatter;
-        private FileAttributesTagFormatter _fileAttributesFormatter;
-        private FrameLabelTagFormater _frameLabelFormatter;
-        private PlaceObject2TagFormatter _placeObject2Formatter;
-        private PlaceObject3TagFormatter _placeObject3Formatter;
-        private RemoveObject2TagFormatter _removeObject2Formatter;
-        private ScriptLimitsTagFormatter _scriptLimitsFormatter;
-        private ShowFrameTagFormatter _showFrameFormatter;
-        private UnknownTagFormatter _unknownTagFormatter;
+        private readonly Dictionary<SwfTagType, ITagFormatter> _cache = new Dictionary<SwfTagType, ITagFormatter>();
 
         public TagFormatterFactory(ushort version) {
             _version = version;
         }
 
         public ITagFormatter GetFormatter(SwfTagBase tag) {
-            return (ITagFormatter)tag.AcceptVistor(this);
-        }
-
-        #region ISwfTagVisitor Members
-
-        object ISwfTagVisitor.Visit(CSMTextSettingsTag tag) {
-            if (_csmTextSettingsFormatter == null) {
-                _csmTextSettingsFormatter = new CSMTextSettingsTagFormatter();
+            var type = tag.TagType;
+            ITagFormatter formatter;
+            if (!_cache.TryGetValue(type, out formatter)) {
+                formatter = tag.AcceptVistor(this, null);
+                _cache[type] = formatter;
             }
-            return _csmTextSettingsFormatter;
+            return formatter;
         }
 
-        object ISwfTagVisitor.Visit(DefineBitsJPEG2Tag tag) {
-            if (_defineBitsJpeg2Formatter == null) {
-                _defineBitsJpeg2Formatter = new DefineBitsJPEG2TagFormatter();
-            }
-            return _defineBitsJpeg2Formatter;
+        #region Display list tags
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(PlaceObjectTag tag, object arg) {
+            return new PlaceObject2TagFormatter();
         }
 
-        object ISwfTagVisitor.Visit(DefineBitsLosslessTag tag) {
-            if (_defineBitsLosslessFormatter == null) {
-                _defineBitsLosslessFormatter = new DefineBitsLosslessTagFormatter();
-            }
-            return _defineBitsLosslessFormatter;
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(PlaceObject2Tag tag, object arg) {
+            return new PlaceObject2TagFormatter();
         }
 
-        object ISwfTagVisitor.Visit(DefineButton2Tag tag) {
-            if (_defineButton2TagFormatter == null) {
-                _defineButton2TagFormatter = new DefineButton2TagFormatter();
-            }
-            return _defineButton2TagFormatter;
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(PlaceObject3Tag tag, object arg) {
+            return new PlaceObject3TagFormatter();
         }
 
-        object ISwfTagVisitor.Visit(DefineEditTextTag tag) {
-            if (_defineEditTextFormatter == null) {
-                _defineEditTextFormatter = new DefineEditTextTagFormatter();
-            }
-            return _defineEditTextFormatter;
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(RemoveObjectTag tag, object arg) {
+            return new RemoveObject2TagFormatter();
         }
 
-        object ISwfTagVisitor.Visit(DefineFont3Tag tag) {
-            if (_defineFont3Formater == null) {
-                _defineFont3Formater = new DefineFont3TagFormatter();
-            }
-            return _defineFont3Formater;
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(RemoveObject2Tag tag, object arg) {
+            return new RemoveObject2TagFormatter();
         }
 
-        object ISwfTagVisitor.Visit(DefineFontAlignZonesTag tag) {
-            if (_defineFontAlignZonesFormatter == null) {
-                _defineFontAlignZonesFormatter = new DefineFontAlignZonesTagFormatter();
-            }
-            return _defineFontAlignZonesFormatter;
-        }
-
-        public object Visit(DefineFontInfoTag tag) {
-            if (_defineFontInfoFormatter == null) {
-                _defineFontInfoFormatter = new DefineFontInfoTagFormatter();
-            }
-            return _defineFontInfoFormatter;
-        }
-
-        object ISwfTagVisitor.Visit(DefineFontNameTag tag) {
-            if (_defineFontNameFormater == null) {
-                _defineFontNameFormater = new DefineFontNameTagFormatter();
-            }
-            return _defineFontNameFormater;
-        }
-
-        object ISwfTagVisitor.Visit(DefineShapeTag tag) {
-            if (_defineShapeFormater == null) {
-                _defineShapeFormater = new DefineShapeTagFormatter();
-            }
-            return _defineShapeFormater;
-        }
-
-        object ISwfTagVisitor.Visit(DefineShape3Tag tag) {
-            if (_defineShape3Formater == null) {
-                _defineShape3Formater = new DefineShape3TagFormatter();
-            }
-            return _defineShape3Formater;
-        }
-
-        object ISwfTagVisitor.Visit(DefineSpriteTag tag) {
-            return new DefineSpriteTagFormatter(_version);
-        }
-
-        object ISwfTagVisitor.Visit(DefineTextTag tag) {
-            return new DefineTextTagFormatter();
-        }
-
-        object ISwfTagVisitor.Visit(DoActionTag tag) {
-            if (_doActionTagFormatter == null) {
-                _doActionTagFormatter = new DoActionTagFormatter();
-            }
-            return _doActionTagFormatter;
-        }
-
-        object ISwfTagVisitor.Visit(DoInitActionTag tag) {
-            if (_doInitActionTagFormatter == null) {
-                _doInitActionTagFormatter = new DoInitActionTagFormatter();
-            }
-            return _doInitActionTagFormatter;
-        }
-
-        object ISwfTagVisitor.Visit(EndTag tag) {
-            return new EndTagFormatter();
-        }
-
-        object ISwfTagVisitor.Visit(ExportAssetsTag tag) {
-            return new ExportTagFormatter();
-        }
-
-        object ISwfTagVisitor.Visit(FileAttributesTag tag) {
-            if (_fileAttributesFormatter == null) {
-                _fileAttributesFormatter = new FileAttributesTagFormatter(_version);
-            }
-            return _fileAttributesFormatter;
-        }
-
-        object ISwfTagVisitor.Visit(FrameLabelTag tag) {
-            if (_frameLabelFormatter == null) {
-                _frameLabelFormatter = new FrameLabelTagFormater();
-            }
-            return _frameLabelFormatter;
-        }
-
-        object ISwfTagVisitor.Visit(MetadataTag tag) {
-            return new MetadataTagFormatter();
-        }
-
-        object ISwfTagVisitor.Visit(PlaceObjectTag tag) {
-            throw new NotImplementedException();
-        }
-
-        object ISwfTagVisitor.Visit(PlaceObject2Tag tag) {
-            if (_placeObject2Formatter == null) {
-                _placeObject2Formatter = new PlaceObject2TagFormatter();
-            }
-            return _placeObject2Formatter;
-        }
-
-        object ISwfTagVisitor.Visit(PlaceObject3Tag tag) {
-            if (_placeObject3Formatter == null) {
-                _placeObject3Formatter = new PlaceObject3TagFormatter();
-            }
-            return _placeObject3Formatter;
-        }
-
-        object ISwfTagVisitor.Visit(RemoveObjectTag tag) {
-            throw new NotImplementedException();
-        }
-
-        object ISwfTagVisitor.Visit(RemoveObject2Tag tag) {
-            if (_removeObject2Formatter == null) {
-                _removeObject2Formatter = new RemoveObject2TagFormatter();
-            }
-            return _removeObject2Formatter;
-        }
-
-        object ISwfTagVisitor.Visit(SetBackgroundColorTag tag) {
-            return new SetBackgroundColorTagFormatter();
-        }
-
-        object ISwfTagVisitor.Visit(ShowFrameTag tag) {
-            if (_showFrameFormatter == null) {
-                _showFrameFormatter = new ShowFrameTagFormatter();
-            }
-            return _showFrameFormatter;
-        }
-
-        object ISwfTagVisitor.Visit(ScriptLimitsTag tag) {
-            if (_scriptLimitsFormatter == null) {
-                _scriptLimitsFormatter = new ScriptLimitsTagFormatter();
-            }
-            return _scriptLimitsFormatter;
-        }
-
-        object ISwfTagVisitor.Visit(SwfTagBase tag) {
-            throw new InvalidOperationException("Couldn't create formatter for unregistered tag");
-        }
-
-        object ISwfTagVisitor.Visit(UnknownTag tag) {
-            if (_unknownTagFormatter == null) {
-                _unknownTagFormatter = new UnknownTagFormatter();
-            }
-            return _unknownTagFormatter;
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(ShowFrameTag tag, object arg) {
+            return new ShowFrameTagFormatter();
         }
 
         #endregion
+
+        #region Control tags
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(SetBackgroundColorTag tag, object arg) {
+            return new SetBackgroundColorTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(FrameLabelTag tag, object arg) {
+            return new FrameLabelTagFormater();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(ProtectTag tag, object arg) {
+            return new ProtectTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(EndTag tag, object arg) {
+            return new EndTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(ExportAssetsTag tag, object arg) {
+            return new ExportAssetsTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(ImportAssetsTag tag, object arg) {
+            return new ImportAssetsTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(EnableDebuggerTag tag, object arg) {
+            return new EnableDebuggerTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(EnableDebugger2Tag tag, object arg) {
+            return new EnableDebugger2TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(ScriptLimitsTag tag, object arg) {
+            return new ScriptLimitsTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(SetTabIndexTag tag, object arg) {
+            return new SetTabIndexTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(FileAttributesTag tag, object arg) {
+            return new FileAttributesTagFormatter(_version);
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(ImportAssets2Tag tag, object arg) {
+            return new ImportAssets2TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(SymbolClassTag tag, object arg) {
+            return new SymbolClassTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(MetadataTag tag, object arg) {
+            return new MetadataTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineScalingGridTag tag, object arg) {
+            return new DefineScalingGridTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineSceneAndFrameLabelDataTag tag, object arg) {
+            return new DefineSceneAndFrameLabelDataTagFormatter();
+        }
+
+        #endregion
+
+        #region Action tags
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DoActionTag tag, object arg) {
+            return new DoActionTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DoInitActionTag tag, object arg) {
+            return new DoInitActionTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DoABCTag tag, object arg) {
+            return new DoABCTagFormattter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DoABCDefineTag tag, object arg) {
+            return new DoABCDefineTagFormatter();
+        }
+
+        #endregion
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineShapeTag tag, object arg) {
+            return new DefineShapeTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineShape2Tag tag, object arg) {
+            return new DefineShape2TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineShape3Tag tag, object arg) {
+            return new DefineShape3TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineShape4Tag tag, object arg) {
+            return new DefineShape4TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBitsTag tag, object arg) {
+            return new DefineBitsTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(JPEGTablesTag tag, object arg) {
+            return new JPEGTablesTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBitsJPEG2Tag tag, object arg) {
+            return new DefineBitsJPEG2TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBitsJPEG3Tag tag, object arg) {
+            return new DefineBitsJPEG3TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBitsLosslessTag tag, object arg) {
+            return new DefineBitsLosslessTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBitsLossless2Tag tag, object arg) {
+            return new DefineBitsLossless2Tag();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBitsJPEG4Tag tag, object arg) {
+            return new DefineBitsJPEG4TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineMorphShapeTag tag, object arg) {
+            return new DefineMorphShapeTag();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineMorphShape2Tag tag, object arg) {
+            return new DefineMorphShape2Tag();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineFontTag tag, object arg) {
+            return new DefineFont3TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineFontInfoTag tag, object arg) {
+            return new DefineFontInfoTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineFontInfo2Tag tag, object arg) {
+            return new DefineFontInfo2TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineFont2Tag tag, object arg) {
+            return new DefineFont2TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineFont3Tag tag, object arg) {
+            return new DefineFont3TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineFontAlignZonesTag tag, object arg) {
+            return new DefineFontAlignZonesTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineFontNameTag tag, object arg) {
+            return new DefineFontNameTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineTextTag tag, object arg) {
+            return new DefineTextTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineText2Tag tag, object arg) {
+            return new DefineText2TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineEditTextTag tag, object arg) {
+            return new ExportAssetsTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(CSMTextSettingsTag tag, object arg) {
+            return new CSMTextSettingsTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineFont4Tag tag, object arg) {
+            return new DefineFont4TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineSoundTag tag, object arg) {
+            return new DefineSoundTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(StartSoundTag tag, object arg) {
+            return new StartSoundTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(StartSound2Tag tag, object arg) {
+            return new StartSound2TagFormater();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(SoundStreamHeadTag tag, object arg) {
+            return new SoundStreamHeadTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(SoundStreamHead2Tag tag, object arg) {
+            return new SoundStreamHead2Tag();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(SoundStreamBlockTag tag, object arg) {
+            return new SoundStreamBlockTag();
+        }
+
+        #region Button tags
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineButtonTag tag, object arg) {
+            return new DefineButtonTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineButton2Tag tag, object arg) {
+            return new DefineButton2TagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineButtonCxformTag tag, object arg) {
+            return new DefineButtonCxformTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineButtonSoundTag tag, object arg) {
+            return new DefineButtonSoundTagFormatter();
+        }
+
+        #endregion
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineSpriteTag tag, object arg) {
+            return new DefineSpriteTagFormatter(_version);
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineVideoStreamTag tag, object arg) {
+            return new DefineVideoStreamTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(VideoFrameTag tag, object arg) {
+            return new VideoFrameTagFormatter();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineBinaryDataTag tag, object arg) {
+            return new DefineBinaryDataTag();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DebugIDTag tag, object arg) {
+            return new DebugIDTag();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(ProductInfoTag tag, object arg) {
+            return new ProductInfoTag();
+        }
+
+        ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(UnknownTag tag, object arg) {
+            return new UnknownTagFormatter();
+        }
     }
 }
