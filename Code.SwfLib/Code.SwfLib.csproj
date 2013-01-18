@@ -247,7 +247,6 @@
     <Compile Include="Tags\ControlTags\SetBackgroundColorTag.cs" />
     <Compile Include="Data\SwfSymbolReference.cs" />
     <Compile Include="Tags\SwfTagData.cs" />
-    <Compile Include="SwfTagReader.cs" />
     <Compile Include="Tags\SwfTagType.cs" />
     <Compile Include="Tags\ControlTags\SymbolClassTag.cs" />
     <Compile Include="Tags\TextTags\TextBaseTag.cs" />

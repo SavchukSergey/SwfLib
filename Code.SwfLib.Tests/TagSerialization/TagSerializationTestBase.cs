@@ -26,8 +26,9 @@ namespace Code.SwfLib.Tests.TagSerialization {
             var streamReader = new SwfStreamReader(mem);
             var file = new SwfFile();
             file.FileInfo.Version = VERSION;
-            var tagReader = new SwfTagReader(file);
-            var tag = tagReader.ReadTag(streamReader);
+            var tagReader = new SwfTagDeserializer(file);
+            var tagData = streamReader.ReadTagData();
+            var tag = tagReader.ReadTag(tagData);
             Assert.IsNotNull(tag);
             return tag;
         }

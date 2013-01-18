@@ -43,8 +43,9 @@ namespace Code.SwfLib {
 
         private static void ReadTags(SwfFile file, SwfStreamReader reader) {
             while (!reader.IsEOF) {
-                var tagReader = new SwfTagReader(file);
-                SwfTagBase tag = tagReader.ReadTag(reader);
+                var ser = new SwfTagDeserializer(file);
+                var tagData = reader.ReadTagData();
+                SwfTagBase tag = ser.ReadTag(tagData);
                 if (tag != null) file.Tags.Add(tag);
                 else throw new InvalidOperationException("Tag can't be null. Loss of data possible");
             }
