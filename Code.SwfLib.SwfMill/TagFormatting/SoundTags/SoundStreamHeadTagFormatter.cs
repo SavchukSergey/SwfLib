@@ -1,10 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Code.SwfLib.Tags.ControlTags;
+﻿using System.Xml.Linq;
+using Code.SwfLib.Tags.SoundTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
-    class SoundStreamHeadTagFormatter : TagFormatterBase<ScriptLimitsTag> {
+    public class SoundStreamHeadTagFormatter : TagFormatterBase<SoundStreamHeadTag> {
+        public override XElement FormatTag(SoundStreamHeadTag tag) {
+            throw new System.NotImplementedException();
+        }
+
+        public override void AcceptAttribute(SoundStreamHeadTag tag, XAttribute attrib) {
+            throw new System.NotImplementedException();
+        }
+
+        public override void AcceptElement(SoundStreamHeadTag tag, XElement element) {
+            throw new System.NotImplementedException();
+        }
     }
 }

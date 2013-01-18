@@ -62,10 +62,17 @@
     <Compile Include="DataFormatting\MatrixFormatter.cs" />
     <Compile Include="DataFormatting\RectangleDataFormatter.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="TagFormatting\ActionTags\DoABCDefineTagFormatter.cs" />
+    <Compile Include="TagFormatting\ActionTags\DoABCTagFormattter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG3TagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG4TagFormatter.cs" />
+    <Compile Include="TagFormatting\BitmapTags\DefineBitsLossless2TagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsTagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\JPEGTablesTagFormatter.cs" />
+    <Compile Include="TagFormatting\ButtonTags\DefineButton2TagFormatter.cs" />
+    <Compile Include="TagFormatting\ButtonTags\DefineButtonCxformTagFormatter.cs" />
+    <Compile Include="TagFormatting\ButtonTags\DefineButtonSoundTagFormatter.cs" />
+    <Compile Include="TagFormatting\ButtonTags\DefineButtonTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\DefineScalingGridTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\DefineSceneAndFrameLabelDataTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\EnableDebugger2TagFormatter.cs" />
@@ -76,12 +83,19 @@
     <Compile Include="TagFormatting\ControlTags\ScriptLimitsTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\SetTabIndexTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\SymbolClassTagFormatter.cs" />
+    <Compile Include="TagFormatting\DebugIDTagFormatter.cs" />
+    <Compile Include="TagFormatting\DefineBinaryDataTagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\PlaceObject3TagFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SwfMillFacade.cs" />
     <Compile Include="SwfMillPrimitives.cs" />
     <Compile Include="SwfTagNameMapping.cs" />
+    <Compile Include="TagFormatting\ProductInfoTagFormatter.cs" />
+    <Compile Include="TagFormatting\ShapeMorphingTags\DefineMorphShape2TagFormatter.cs" />
+    <Compile Include="TagFormatting\ShapeMorphingTags\DefineMorphShapeTagFormatter.cs" />
     <Compile Include="TagFormatting\SoundTags\DefineSoundTagFormatter.cs" />
+    <Compile Include="TagFormatting\SoundTags\SoundStreamBlockTagFormatter.cs" />
+    <Compile Include="TagFormatting\SoundTags\SoundStreamHead2TagFormatter.cs" />
     <Compile Include="TagFormatting\SoundTags\SoundStreamHeadTagFormatter.cs" />
     <Compile Include="TagFormatting\SoundTags\StartSound2TagFormater.cs" />
     <Compile Include="TagFormatting\SoundTags\StartSoundTagFormatter.cs" />
@@ -129,9 +143,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataFormatting\Shapes\" />
-    <Folder Include="TagFormatting\ButtonTags\" />
-    <Folder Include="TagFormatting\DynamicTextTags\" />
-    <Folder Include="TagFormatting\ShapeMorphingTags\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
