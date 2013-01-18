@@ -6,8 +6,6 @@ using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.FontTags;
-using Code.SwfLib.Tags.ShapeTags;
-using Code.SwfLib.Tags.TextTags;
 
 namespace Code.SwfLib {
     public class SwfTagReader {
@@ -119,20 +117,6 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public static CSMTextSettingsTag ReadCSMTextSettingsTag(SwfTagData tagData) {
-            var tag = new CSMTextSettingsTag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.TextID = reader.ReadUInt16();
-            tag.UseFlashType = (byte)reader.ReadUnsignedBits(2);
-            tag.GridFit = (byte)reader.ReadUnsignedBits(3);
-            tag.ReservedFlags = (byte)reader.ReadUnsignedBits(3);
-            tag.Thickness = reader.ReadSingle();
-            tag.Sharpness = reader.ReadSingle();
-            tag.Reserved = reader.ReadByte();
-            return tag;
-        }
-
         public static DefineFontNameTag ReadDefineFontNameTag(SwfTagData tagData) {
             var tag = new DefineFontNameTag();
             var stream = new MemoryStream(tagData.Data);
@@ -143,33 +127,8 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        public DefineShapeTag ReadDefineShapeTag(SwfTagData tagData) {
-            var tag = new DefineShapeTag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.ShapeID = reader.ReadUInt16();
-            reader.ReadRect(out tag.ShapeBounds);
-            reader.ReadToShapeWithStyle(tag.Shapes);
-            return tag;
-        }
-
-        public PlaceObjectTag ReadPlaceObjectTag(SwfTagData tagData) {
-            var tag = new PlaceObjectTag();
-            var stream = new MemoryStream(tagData.Data);
-            var reader = new SwfStreamReader(stream);
-            tag.CharacterID = reader.ReadUInt16();
-            tag.Depth = reader.ReadUInt16();
-            reader.ReadMatrix(out tag.Matrix);
-            if (!reader.IsEOF) {
-                tag.ColorTransform = reader.ReadColorTransformRGB();
-            } else {
-                tag.ColorTransform = null;
-            }
-            return tag;
-        }
-
         public static RemoveObjectTag ReadRemoveObjectTag(SwfTagData tagData) {
-            RemoveObjectTag tag = new RemoveObjectTag();
+            var tag = new RemoveObjectTag();
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
             tag.CharacterID = reader.ReadUInt16();
@@ -182,20 +141,14 @@ namespace Code.SwfLib {
             var ser = new SwfTagDeserializer(_file);
             return ser.ReadTag(tagData);
             switch (tagData.Type) {
-                case SwfTagType.CSMTextSettings:
-                    return ReadCSMTextSettingsTag(tagData);
                 case SwfTagType.DefineFontName:
                     return ReadDefineFontNameTag(tagData);
                 case SwfTagType.DefineFontInfo:
                     return ReadDefineFontInfoTag(tagData);
-                case SwfTagType.DefineShape:
-                    return ReadDefineShapeTag(tagData);
                 case SwfTagType.DoInitAction:
                     return ReadDoInitActionTag(tagData);
                 case SwfTagType.DoAction:
                     return ReadDoActionTag(tagData);
-                case SwfTagType.PlaceObject:
-                    return ReadPlaceObjectTag(tagData);
                 case SwfTagType.RemoveObject:
                     return ReadRemoveObjectTag(tagData);
                 default:

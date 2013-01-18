@@ -35,10 +35,6 @@ namespace Code.SwfLib {
 
         #region Old
 
-        public object Visit(CSMTextSettingsTag tag) {
-            throw new NotImplementedException();
-        }
-
         public object Visit(DefineButton2Tag tag) {
             throw new NotImplementedException();
         }
@@ -48,10 +44,6 @@ namespace Code.SwfLib {
         }
 
         public object Visit(DefineFontNameTag tag) {
-            throw new NotImplementedException();
-        }
-
-        public object Visit(DefineShapeTag tag) {
             throw new NotImplementedException();
         }
 
@@ -71,9 +63,6 @@ namespace Code.SwfLib {
             throw new NotImplementedException();
         }
 
-        public object Visit(PlaceObjectTag tag) {
-            throw new NotImplementedException();
-        }
 
         public object Visit(PlaceObject3Tag tag) {
             throw new NotImplementedException();
@@ -100,7 +89,17 @@ namespace Code.SwfLib {
         #region Display list tags
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(PlaceObjectTag tag, SwfTagData tagData) {
-            throw new NotImplementedException();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.CharacterID = reader.ReadUInt16();
+            tag.Depth = reader.ReadUInt16();
+            reader.ReadMatrix(out tag.Matrix);
+            if (!reader.IsEOF) {
+                tag.ColorTransform = reader.ReadColorTransformRGB();
+            } else {
+                tag.ColorTransform = null;
+            }
+            return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(PlaceObject2Tag tag, SwfTagData tagData) {
@@ -269,7 +268,12 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(DefineShapeTag tag, SwfTagData tagData) {
-            throw new NotImplementedException();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.ShapeID = reader.ReadUInt16();
+            reader.ReadRect(out tag.ShapeBounds);
+            reader.ReadToShapeWithStyle(tag.Shapes);
+            return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(DefineShape2Tag tag, SwfTagData tagData) {
@@ -473,7 +477,16 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(CSMTextSettingsTag tag, SwfTagData tagData) {
-            throw new NotImplementedException();
+            var stream = new MemoryStream(tagData.Data);
+            var reader = new SwfStreamReader(stream);
+            tag.TextID = reader.ReadUInt16();
+            tag.UseFlashType = (byte)reader.ReadUnsignedBits(2);
+            tag.GridFit = (byte)reader.ReadUnsignedBits(3);
+            tag.ReservedFlags = (byte)reader.ReadUnsignedBits(3);
+            tag.Thickness = reader.ReadSingle();
+            tag.Sharpness = reader.ReadSingle();
+            tag.Reserved = reader.ReadByte();
+            return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfTagData, SwfTagBase>.Visit(DefineFont4Tag tag, SwfTagData tagData) {

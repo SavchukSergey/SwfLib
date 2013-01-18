@@ -105,9 +105,9 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             var etalon = GetEmbeddedResourceData("DefineShape.bin");
             var payload = GetTagPayload(mem.ToArray());
 
-            var tagReader = new SwfTagReader(file);
+            var tagReader = new SwfTagDeserializer(file);
             var tagData2 = new SwfTagData { Type = SwfTagType.DefineShape, Data = payload };
-            var shape = tagReader.ReadDefineShapeTag(tagData2);
+            var shape = tagReader.ReadTag<DefineShapeTag>(tagData2);
             AssertExt.AreEqual(tag, shape);
 
             AssertExt.AreEqual(etalon, payload, "Checking DefineShape");
@@ -118,9 +118,9 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             var file = new SwfFile();
             file.FileInfo.Version = 10;
 
-            var tagReader = new SwfTagReader(file);
+            var tagReader = new SwfTagDeserializer(file);
             var tagData = new SwfTagData { Type = SwfTagType.DefineShape, Data = GetEmbeddedResourceData("DefineShape.bin") };
-            var shape = tagReader.ReadDefineShapeTag(tagData);
+            var shape = tagReader.ReadTag<DefineShapeTag>(tagData);
             AssertExt.AreEqual(GetDefineShapeTag1(), shape);
         }
 
@@ -202,9 +202,9 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             var file = new SwfFile();
             file.FileInfo.Version = 10;
 
-            var tagReader = new SwfTagReader(file);
+            var tagReader = new SwfTagDeserializer(file);
             var tagData = new SwfTagData { Type = SwfTagType.DefineShape, Data = GetEmbeddedResourceData("DefineShape2.bin") };
-            var shape = tagReader.ReadDefineShapeTag(tagData);
+            var shape = tagReader.ReadTag<DefineShapeTag>(tagData);
             AssertExt.AreEqual(GetDefineShapeTag2(), shape);
         }
 
@@ -223,9 +223,9 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             var etalon = GetEmbeddedResourceData("DefineShape2.bin");
             var payload = GetTagPayload(mem.ToArray());
 
-            var tagReader = new SwfTagReader(file);
+            var tagReader = new SwfTagDeserializer(file);
             var tagData2 = new SwfTagData { Type = SwfTagType.DefineShape, Data = payload };
-            var shape = tagReader.ReadDefineShapeTag(tagData2);
+            var shape = tagReader.ReadTag<DefineShapeTag>(tagData2);
             AssertExt.AreEqual(tag, shape);
 
             AssertExt.AreEqual(etalon, payload, "Checking DefineShape");
