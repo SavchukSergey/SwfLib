@@ -9,7 +9,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
         private const string HEIGHT_ATTRIB = "height";
         private const string N_COLOR_MAP_ATTRIB = "n_colormap";
 
-        public override void AcceptAttribute(DefineBitsLosslessTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineBitsLosslessTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.CharacterID = SwfMillPrimitives.ParseObjectID(attrib);
@@ -31,7 +31,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             }
         }
 
-        public override void AcceptElement(DefineBitsLosslessTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineBitsLosslessTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case DATA_TAG:
                     var dataElem = element.Element(XName.Get("data"));
@@ -42,7 +42,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             }
         }
 
-        public override XElement FormatTag(DefineBitsLosslessTag tag) {
+        protected override XElement FormatTagElement(DefineBitsLosslessTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_BITS_LOSSLESS_TAG),
                 new XAttribute(OBJECT_ID_ATTRIB, tag.CharacterID),
                 new XAttribute(FORMAT_ATTRIB, tag.BitmapFormat),

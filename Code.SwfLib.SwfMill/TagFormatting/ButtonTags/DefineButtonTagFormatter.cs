@@ -3,15 +3,15 @@ using Code.SwfLib.Tags.ButtonTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
     public class DefineButtonTagFormatter : TagFormatterBase<DefineButtonTag> {
-        public override XElement FormatTag(DefineButtonTag tag) {
+        protected override XElement FormatTagElement(DefineButtonTag tag) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptAttribute(DefineButtonTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineButtonTag tag, XAttribute attrib) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptElement(DefineButtonTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineButtonTag tag, XElement element) {
             throw new System.NotImplementedException();
         }
     }

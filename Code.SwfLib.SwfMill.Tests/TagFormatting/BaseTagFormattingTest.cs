@@ -12,7 +12,7 @@ namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
         private readonly F _formatter = new F();
 
         protected void ConvertToXmlAndCompare(T tag, string resourceXml) {
-            var doc = _formatter.FormatTag(tag);
+            var doc = _formatter.FormatElement(tag);
             new XmlComparision(XmlDifferenceHandler).Compare(doc, XDocument.Load(new StreamReader(OpenEmbeddedResource(resourceXml))).Root);
         }
 
@@ -60,7 +60,7 @@ namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
 
             var tag = ParseTag(xOriginalTag);
             var formatter = new F();
-            var xResultTag = formatter.FormatTag(tag);
+            var xResultTag = formatter.FormatElement(tag);
             new XmlComparision(Assert.Fail).Compare(xOriginalTag, xResultTag);
         }
 

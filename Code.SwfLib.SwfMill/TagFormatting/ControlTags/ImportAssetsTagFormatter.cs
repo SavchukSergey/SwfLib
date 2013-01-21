@@ -3,15 +3,15 @@ using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class ImportAssetsTagFormatter : TagFormatterBase<ImportAssetsTag> {
-        public override XElement FormatTag(ImportAssetsTag tag) {
+        protected override XElement FormatTagElement(ImportAssetsTag tag) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptAttribute(ImportAssetsTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(ImportAssetsTag tag, XAttribute attrib) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptElement(ImportAssetsTag tag, XElement element) {
+        protected override void AcceptTagElement(ImportAssetsTag tag, XElement element) {
             throw new System.NotImplementedException();
         }
     }

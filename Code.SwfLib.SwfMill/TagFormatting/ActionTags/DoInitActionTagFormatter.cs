@@ -10,7 +10,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
         private const string ACTIONS_ELEM = "actions";
         private const string REST_ELEM = "rest";
 
-        public override void AcceptAttribute(DoInitActionTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DoInitActionTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case SPRITE_ATTRIB:
                     tag.SpriteId = ushort.Parse(attrib.Value);
@@ -20,7 +20,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             }
         }
 
-        public override void AcceptElement(DoInitActionTag tag, XElement element) {
+        protected override void AcceptTagElement(DoInitActionTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case REST_ELEM:
                     tag.RestData = Convert.FromBase64String(element.Value);
@@ -30,7 +30,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             }
         }
 
-        public override XElement FormatTag(DoInitActionTag tag) {
+        protected override XElement FormatTagElement(DoInitActionTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.DO_INIT_ACTION_TAG),
                 new XAttribute(SPRITE_ATTRIB, tag.SpriteId),
                 new XElement(REST_ELEM, Convert.ToBase64String(tag.RestData)));

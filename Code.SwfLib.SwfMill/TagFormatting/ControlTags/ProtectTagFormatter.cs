@@ -3,15 +3,15 @@ using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class ProtectTagFormatter : TagFormatterBase<ProtectTag> {
-        public override XElement FormatTag(ProtectTag tag) {
+        protected override XElement FormatTagElement(ProtectTag tag) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptAttribute(ProtectTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(ProtectTag tag, XAttribute attrib) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptElement(ProtectTag tag, XElement element) {
+        protected override void AcceptTagElement(ProtectTag tag, XElement element) {
             throw new System.NotImplementedException();
         }
     }

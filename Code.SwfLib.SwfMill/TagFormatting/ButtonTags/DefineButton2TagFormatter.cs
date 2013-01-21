@@ -10,7 +10,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
         private const string BUTTONS_ELEM = "buttons";
         private const string CONDITIONS_ELEM = "conditions";
 
-        public override void AcceptAttribute(DefineButton2Tag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineButton2Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.ButtonID = SwfMillPrimitives.ParseObjectID(attrib);
@@ -26,7 +26,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
             }
         }
 
-        public override void AcceptElement(DefineButton2Tag tag, XElement element) {
+        protected override void AcceptTagElement(DefineButton2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BUTTONS_ELEM:
                     //TODO: read buttons
@@ -39,7 +39,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
             }
         }
 
-        public override XElement FormatTag(DefineButton2Tag tag) {
+        protected override XElement FormatTagElement(DefineButton2Tag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_BUTTON2_TAG));
         }
 

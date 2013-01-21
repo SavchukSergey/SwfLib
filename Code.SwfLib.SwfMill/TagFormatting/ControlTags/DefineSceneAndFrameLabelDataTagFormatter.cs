@@ -4,15 +4,15 @@ using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class DefineSceneAndFrameLabelDataTagFormatter : TagFormatterBase<DefineSceneAndFrameLabelDataTag> {
-        public override XElement FormatTag(DefineSceneAndFrameLabelDataTag tag) {
+        protected override XElement FormatTagElement(DefineSceneAndFrameLabelDataTag tag) {
             throw new NotImplementedException();
         }
 
-        public override void AcceptAttribute(DefineSceneAndFrameLabelDataTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineSceneAndFrameLabelDataTag tag, XAttribute attrib) {
             throw new NotImplementedException();
         }
 
-        public override void AcceptElement(DefineSceneAndFrameLabelDataTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineSceneAndFrameLabelDataTag tag, XElement element) {
             throw new NotImplementedException();
         }
     }

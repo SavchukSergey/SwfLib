@@ -3,15 +3,15 @@ using Code.SwfLib.Tags.VideoTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.VideoTags {
     public class DefineVideoStreamTagFormatter : TagFormatterBase<DefineVideoStreamTag> {
-        public override XElement FormatTag(DefineVideoStreamTag tag) {
+        protected override XElement FormatTagElement(DefineVideoStreamTag tag) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptAttribute(DefineVideoStreamTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineVideoStreamTag tag, XAttribute attrib) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptElement(DefineVideoStreamTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineVideoStreamTag tag, XElement element) {
             throw new System.NotImplementedException();
         }
     }

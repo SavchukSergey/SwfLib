@@ -17,7 +17,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
         private const string FILTERS_ELEM = "filters";
         private const string EVENTS_ELEM = "events";
 
-        public override void AcceptAttribute(PlaceObject3Tag tag, XAttribute attrib)
+        protected override void AcceptTagAttribute(PlaceObject3Tag tag, XAttribute attrib)
         {
             switch (attrib.Name.LocalName)
             {
@@ -51,7 +51,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
             }
         }
 
-        public override void AcceptElement(PlaceObject3Tag tag, XElement element)
+        protected override void AcceptTagElement(PlaceObject3Tag tag, XElement element)
         {
             switch (element.Name.LocalName)
             {
@@ -69,7 +69,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags
             }
         }
 
-        public override XElement FormatTag(PlaceObject3Tag tag)
+        protected override XElement FormatTagElement(PlaceObject3Tag tag)
         {
             return new XElement(SwfTagNameMapping.PLACE_OBJECT3_TAG,
                 //TODO: Other fields

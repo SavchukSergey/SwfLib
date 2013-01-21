@@ -19,7 +19,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         private const string LANGUAGE_ATTRIB = "language";
         private const string GLYPHS_COUNT_ATTRIB = "glyphsCount";
 
-        public override void AcceptAttribute(DefineFont3Tag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineFont3Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.FontId = ushort.Parse(attrib.Value);
@@ -62,7 +62,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        public override void AcceptElement(DefineFont3Tag tag, XElement element) {
+        protected override void AcceptTagElement(DefineFont3Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case DATA_TAG:
                     tag.RestData = ReadBase64(element);
@@ -72,7 +72,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        public override XElement FormatTag(DefineFont3Tag tag) {
+        protected override XElement FormatTagElement(DefineFont3Tag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_3_TAG),
                                 new XAttribute(OBJECT_ID_ATTRIB, tag.FontId),
                                 new XAttribute(LANGUAGE_ATTRIB, tag.Language),

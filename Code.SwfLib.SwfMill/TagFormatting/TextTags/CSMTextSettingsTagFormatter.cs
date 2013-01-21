@@ -11,7 +11,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
         private const string THICKNESS = "thickness";
         private const string SHARPNESS = "sharpness";
 
-        public override void AcceptAttribute(CSMTextSettingsTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(CSMTextSettingsTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.TextID = SwfMillPrimitives.ParseObjectID(attrib);
@@ -33,14 +33,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             }
         }
 
-        public override void AcceptElement(CSMTextSettingsTag tag, XElement element) {
+        protected override void AcceptTagElement(CSMTextSettingsTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
         }
 
-        public override XElement FormatTag(CSMTextSettingsTag tag) {
+        protected override XElement FormatTagElement(CSMTextSettingsTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.CSM_TEXT_SETTINGS_TAG),
                                 new XAttribute(XName.Get("objectID"), tag.TextID),
                                 new XAttribute(XName.Get("useFlashType"), tag.UseFlashType),

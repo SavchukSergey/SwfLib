@@ -19,7 +19,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         private const string POSITION_ATTRIB = "position";
         private const string SIZE_ATTRIB = "size";
 
-        public override void AcceptAttribute(DefineFontAlignZonesTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineFontAlignZonesTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.FontID = ushort.Parse(attrib.Value);
@@ -32,7 +32,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        public override void AcceptElement(DefineFontAlignZonesTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineFontAlignZonesTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case ZONE_ARRAYS_ELEM:
                     tag.Zones = ParseZoneArrays(element);
@@ -42,7 +42,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        public override XElement FormatTag(DefineFontAlignZonesTag tag) {
+        protected override XElement FormatTagElement(DefineFontAlignZonesTag tag) {
             return new XElement(
                 XName.Get(SwfTagNameMapping.DEFINE_FONT_ALIGN_ZONES_TAG),
                 new XAttribute(OBJECT_ID_ATTRIB, tag.FontID),

@@ -13,7 +13,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         private const string STYLES_ELEM = "styles";
         private const string SHAPES_ELEM = "shapes";
 
-        public override void AcceptAttribute(DefineShapeTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineShapeTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.ShapeID = ushort.Parse(attrib.Value);
@@ -23,7 +23,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        public override void AcceptElement(DefineShapeTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineShapeTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BOUNDS_ELEM:
                     _formatters.Rectangle.Parse(element.Element(XName.Get("Rectangle")), out tag.ShapeBounds);
@@ -77,7 +77,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        public override XElement FormatTag(DefineShapeTag tag) {
+        protected override XElement FormatTagElement(DefineShapeTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_SHAPE_TAG),
                 new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ShapeID),
                 new XElement(XName.Get(BOUNDS_ELEM), _formatters.Rectangle.Format(ref tag.ShapeBounds))

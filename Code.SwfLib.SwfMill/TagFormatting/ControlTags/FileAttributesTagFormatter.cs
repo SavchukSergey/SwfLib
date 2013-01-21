@@ -18,7 +18,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             _version = version;
         }
 
-        public override void AcceptAttribute(FileAttributesTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(FileAttributesTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case HAS_METADATA_ATTRIB:
                     tag.HasMetadata = ParseBoolFromDigit(attrib);
@@ -46,14 +46,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        public override void AcceptElement(FileAttributesTag tag, XElement element) {
+        protected override void AcceptTagElement(FileAttributesTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
         }
 
-        public override XElement FormatTag(FileAttributesTag tag) {
+        protected override XElement FormatTagElement(FileAttributesTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.FILE_ATTRIBUTES_TAG),
                                    new XAttribute(XName.Get(HAS_METADATA_ATTRIB), FormatBoolToDigit(tag.HasMetadata)),
                                    new XAttribute(XName.Get(USE_NETWORK_ATTRIB), FormatBoolToDigit(tag.UseNetwork)),

@@ -4,15 +4,15 @@ using Code.SwfLib.Tags.ButtonTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
     public class DefineButtonCxformTagFormatter : TagFormatterBase<DefineButtonCxformTag> {
-        public override XElement FormatTag(DefineButtonCxformTag tag) {
+        protected override XElement FormatTagElement(DefineButtonCxformTag tag) {
             throw new NotImplementedException();
         }
 
-        public override void AcceptAttribute(DefineButtonCxformTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineButtonCxformTag tag, XAttribute attrib) {
             throw new NotImplementedException();
         }
 
-        public override void AcceptElement(DefineButtonCxformTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineButtonCxformTag tag, XElement element) {
             throw new NotImplementedException();
         }
     }

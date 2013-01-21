@@ -9,14 +9,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
 
         private ActionSerializer serializer = new ActionSerializer();
 
-        public override void AcceptAttribute(DoActionTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DoActionTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
             }
         }
 
-        public override void AcceptElement(DoActionTag tag, XElement element) {
+        protected override void AcceptTagElement(DoActionTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case ACTIONS_ELEM:
                     //TODO: Read actions
@@ -26,7 +26,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             }
         }
 
-        public override XElement FormatTag(DoActionTag tag) {
+        protected override XElement FormatTagElement(DoActionTag tag) {
             var res = new XElement(SwfTagNameMapping.DO_ACTION_TAG);
             var actions = new XElement(ACTIONS_ELEM);
             //TODO: process functions bodies.

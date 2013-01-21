@@ -3,15 +3,15 @@ using Code.SwfLib.Tags.DisplayListTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class PlaceObjectTagFormatter : TagFormatterBase<PlaceObjectTag> {
-        public override XElement FormatTag(PlaceObjectTag tag) {
+        protected override XElement FormatTagElement(PlaceObjectTag tag) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptAttribute(PlaceObjectTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(PlaceObjectTag tag, XAttribute attrib) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptElement(PlaceObjectTag tag, XElement element) {
+        protected override void AcceptTagElement(PlaceObjectTag tag, XElement element) {
             throw new System.NotImplementedException();
         }
     }

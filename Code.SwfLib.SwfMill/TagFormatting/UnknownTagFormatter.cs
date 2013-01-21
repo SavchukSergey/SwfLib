@@ -8,7 +8,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         private const string ID_ATTRIB = "id";
 
-        public override void AcceptAttribute(UnknownTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(UnknownTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case ID_ATTRIB:
                     tag.SetTagType((SwfTagType) ParseHex(attrib.Value));
@@ -18,7 +18,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        public override void AcceptElement(UnknownTag tag, XElement element) {
+        protected override void AcceptTagElement(UnknownTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case DATA_TAG:
                     tag.Data = FromBase64(element);
@@ -28,7 +28,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        public override XElement FormatTag(UnknownTag tag) {
+        protected override XElement FormatTagElement(UnknownTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.UNKNOWN_TAG),
                                  new XAttribute(XName.Get("id"), string.Format("0x{0:x}", (int)tag.TagType)),
                                  new XElement(XName.Get("data"), Convert.ToBase64String(tag.Data)));

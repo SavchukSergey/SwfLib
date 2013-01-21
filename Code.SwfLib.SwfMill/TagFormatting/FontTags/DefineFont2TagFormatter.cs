@@ -3,15 +3,15 @@ using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
     public class DefineFont2TagFormatter : TagFormatterBase<DefineFont2Tag> {
-        public override XElement FormatTag(DefineFont2Tag tag) {
+        protected override XElement FormatTagElement(DefineFont2Tag tag) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptAttribute(DefineFont2Tag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineFont2Tag tag, XAttribute attrib) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptElement(DefineFont2Tag tag, XElement element) {
+        protected override void AcceptTagElement(DefineFont2Tag tag, XElement element) {
             throw new System.NotImplementedException();
         }
     }

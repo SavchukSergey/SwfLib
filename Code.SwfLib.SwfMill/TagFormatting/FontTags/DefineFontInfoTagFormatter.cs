@@ -7,7 +7,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
         private const string REST_ELEM = "rest";
 
-        public override void AcceptAttribute(DefineFontInfoTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineFontInfoTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.FontId = SwfMillPrimitives.ParseObjectID(attrib);
@@ -17,7 +17,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        public override void AcceptElement(DefineFontInfoTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineFontInfoTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case REST_ELEM:
                     tag.RestData = Convert.FromBase64String(element.Value);
@@ -27,7 +27,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        public override XElement FormatTag(DefineFontInfoTag tag) {
+        protected override XElement FormatTagElement(DefineFontInfoTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_INFO_TAG),
                               new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.FontId),
                               new XElement(REST_ELEM, Convert.ToBase64String(tag.RestData)));

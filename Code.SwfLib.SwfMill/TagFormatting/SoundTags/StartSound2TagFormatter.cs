@@ -3,15 +3,15 @@ using Code.SwfLib.Tags.SoundTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
     public class StartSound2TagFormatter : TagFormatterBase<StartSound2Tag> {
-        public override XElement FormatTag(StartSound2Tag tag) {
+        protected override XElement FormatTagElement(StartSound2Tag tag) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptAttribute(StartSound2Tag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(StartSound2Tag tag, XAttribute attrib) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptElement(StartSound2Tag tag, XElement element) {
+        protected override void AcceptTagElement(StartSound2Tag tag, XElement element) {
             throw new System.NotImplementedException();
         }
     }

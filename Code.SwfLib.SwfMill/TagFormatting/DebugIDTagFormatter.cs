@@ -4,15 +4,15 @@ using Code.SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting {
     public class DebugIDTagFormatter : TagFormatterBase<DebugIDTag> {
-        public override XElement FormatTag(DebugIDTag tag) {
+        protected override XElement FormatTagElement(DebugIDTag tag) {
             throw new NotImplementedException();
         }
 
-        public override void AcceptAttribute(DebugIDTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DebugIDTag tag, XAttribute attrib) {
             throw new NotImplementedException();
         }
 
-        public override void AcceptElement(DebugIDTag tag, XElement element) {
+        protected override void AcceptTagElement(DebugIDTag tag, XElement element) {
             throw new NotImplementedException();
         }
     }

@@ -3,15 +3,15 @@ using Code.SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting {
     public class DefineBinaryDataTagFormatter : TagFormatterBase<DefineBinaryDataTag> {
-        public override XElement FormatTag(DefineBinaryDataTag tag) {
+        protected override XElement FormatTagElement(DefineBinaryDataTag tag) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptAttribute(DefineBinaryDataTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineBinaryDataTag tag, XAttribute attrib) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptElement(DefineBinaryDataTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineBinaryDataTag tag, XElement element) {
             throw new System.NotImplementedException();
         }
     }

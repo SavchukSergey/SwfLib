@@ -8,14 +8,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         private const string COLOR_ELEM = "color";
 
-        public override void AcceptAttribute(SetBackgroundColorTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(SetBackgroundColorTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
             }
         }
 
-        public override void AcceptElement(SetBackgroundColorTag tag, XElement element) {
+        protected override void AcceptTagElement(SetBackgroundColorTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case COLOR_ELEM:
                     tag.Color = ParseRGBFromFirstChild(element);
@@ -25,7 +25,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        public override XElement FormatTag(SetBackgroundColorTag tag) {
+        protected override XElement FormatTagElement(SetBackgroundColorTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.SET_BACKGROUND_COLOR_TAG),
                                 new XElement(XName.Get("color"), _formatters.ColorRGB.Format(ref tag.Color)));
         }

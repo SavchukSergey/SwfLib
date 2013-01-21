@@ -32,7 +32,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
 
         //TODO: Font class name and wasStatic which is not supported by swfmill
         //TODO: check bit flags seting+check fields list
-        public override void AcceptAttribute(DefineEditTextTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineEditTextTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.CharacterID = ushort.Parse(attrib.Value);
@@ -112,7 +112,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             }
         }
 
-        public override void AcceptElement(DefineEditTextTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineEditTextTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 //case DATA_TAG:
                 //    //TODO: set data
@@ -130,7 +130,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             }
         }
 
-        public override XElement FormatTag(DefineEditTextTag tag) {
+        protected override XElement FormatTagElement(DefineEditTextTag tag) {
             var res = new XElement(SwfTagNameMapping.DEFINE_EDIT_TEXT_TAG);
             res.Add(new XAttribute(OBJECT_ID_ATTRIB, tag.CharacterID));
             res.Add(new XElement(SIZE_ELEM, _formatters.Rectangle.Format(ref tag.Bounds)));

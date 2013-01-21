@@ -11,7 +11,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         private const string TRANSFORM_ELEM = "transform";
         private const string RECORDS_ELEM = "records";
 
-        public override void AcceptAttribute(DefineTextTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineTextTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.CharacterID = SwfMillPrimitives.ParseObjectID(attrib);
@@ -21,7 +21,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        public override void AcceptElement(DefineTextTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineTextTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BOUNDS_ELEM:
                     _formatters.Rectangle.Parse(element.Element(XName.Get("Rectangle")), out tag.TextBounds);
@@ -46,7 +46,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         //TODO: simulate swfmill incorrect structure of TextRecord (parsing, formating)
 
-        public override XElement FormatTag(DefineTextTag tag) {
+        protected override XElement FormatTagElement(DefineTextTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_TEXT_TAG),
                                    new XAttribute(XName.Get("objectID"), tag.CharacterID));
             res.Add(new XElement("bounds", _formatters.Rectangle.Format(ref tag.TextBounds)));

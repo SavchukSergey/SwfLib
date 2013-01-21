@@ -21,23 +21,35 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         XElement ITagFormatter.FormatTag(SwfTagBase tag) {
-            return FormatTag((T)tag);
+            return FormatTagElement((T)tag);
         }
 
         void ITagFormatter.AcceptAttribute(SwfTagBase tag, XAttribute attrib) {
-            AcceptAttribute((T)tag, attrib);
+            AcceptTagAttribute((T)tag, attrib);
         }
 
         void ITagFormatter.AcceptElement(SwfTagBase tag, XElement element) {
-            AcceptElement((T)tag, element);
+            AcceptTagElement((T)tag, element);
         }
 
         public virtual void InitTag(T tag, XElement element) {
         }
 
-        public abstract XElement FormatTag(T tag);
-        public abstract void AcceptAttribute(T tag, XAttribute attrib);
-        public abstract void AcceptElement(T tag, XElement element);
+        public XElement FormatElement(T tag) {
+            return FormatTagElement(tag);
+        }
+
+        public void AcceptAttribute(T tag, XAttribute attrib) {
+            AcceptTagAttribute(tag, attrib);
+        }
+
+        public void AcceptElement(T tag, XElement element) {
+            AcceptTagElement(tag, element);
+        }
+
+        protected abstract XElement FormatTagElement(T tag);
+        protected abstract void AcceptTagAttribute(T tag, XAttribute attrib);
+        protected abstract void AcceptTagElement(T tag, XElement element);
 
         #endregion
 

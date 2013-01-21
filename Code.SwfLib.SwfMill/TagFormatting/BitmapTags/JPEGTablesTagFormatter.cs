@@ -3,15 +3,15 @@ using Code.SwfLib.Tags.BitmapTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class JPEGTablesTagFormatter : TagFormatterBase<JPEGTablesTag> {
-        public override XElement FormatTag(JPEGTablesTag tag) {
+        protected override XElement FormatTagElement(JPEGTablesTag tag) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptAttribute(JPEGTablesTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(JPEGTablesTag tag, XAttribute attrib) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptElement(JPEGTablesTag tag, XElement element) {
+        protected override void AcceptTagElement(JPEGTablesTag tag, XElement element) {
             throw new System.NotImplementedException();
         }
     }

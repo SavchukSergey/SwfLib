@@ -3,15 +3,15 @@ using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
     public class DefineShape2TagFormatter : TagFormatterBase<DefineShape2Tag> {
-        public override XElement FormatTag(DefineShape2Tag tag) {
+        protected override XElement FormatTagElement(DefineShape2Tag tag) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptAttribute(DefineShape2Tag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineShape2Tag tag, XAttribute attrib) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptElement(DefineShape2Tag tag, XElement element) {
+        protected override void AcceptTagElement(DefineShape2Tag tag, XElement element) {
             throw new System.NotImplementedException();
         }
     }

@@ -9,14 +9,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         private const string SYMBOLS_TAGS = "symbols";
 
-        public override void AcceptAttribute(ExportAssetsTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(ExportAssetsTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
             }
         }
 
-        public override void AcceptElement(ExportAssetsTag tag, XElement element) {
+        protected override void AcceptTagElement(ExportAssetsTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case SYMBOLS_TAGS:
                     ReadSymbols(tag, element);
@@ -26,7 +26,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        public override XElement FormatTag(ExportAssetsTag tag) {
+        protected override XElement FormatTagElement(ExportAssetsTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.EXPORT_TAG),
                                 new XElement(XName.Get("symbols"), tag.Symbols.Select(item => FormatSymbol(item))));
         }

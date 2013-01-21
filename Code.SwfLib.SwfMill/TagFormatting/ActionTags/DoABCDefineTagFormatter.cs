@@ -3,15 +3,15 @@ using Code.SwfLib.Tags.ActionsTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoABCDefineTagFormatter : TagFormatterBase<DoABCDefineTag> {
-        public override XElement FormatTag(DoABCDefineTag tag) {
+        protected override XElement FormatTagElement(DoABCDefineTag tag) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptAttribute(DoABCDefineTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DoABCDefineTag tag, XAttribute attrib) {
             throw new System.NotImplementedException();
         }
 
-        public override void AcceptElement(DoABCDefineTag tag, XElement element) {
+        protected override void AcceptTagElement(DoABCDefineTag tag, XElement element) {
             throw new System.NotImplementedException();
         }
     }

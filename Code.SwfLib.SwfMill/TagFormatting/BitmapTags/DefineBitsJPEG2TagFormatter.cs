@@ -6,7 +6,7 @@ using Code.SwfLib.Tags.BitmapTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class DefineBitsJPEG2TagFormatter : TagFormatterBase<DefineBitsJPEG2Tag> {
 
-        public override void AcceptAttribute(DefineBitsJPEG2Tag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineBitsJPEG2Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.CharacterID = ushort.Parse(attrib.Value);
@@ -16,7 +16,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             }
         }
 
-        public override void AcceptElement(DefineBitsJPEG2Tag tag, XElement element) {
+        protected override void AcceptTagElement(DefineBitsJPEG2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case DATA_TAG:
                     //TODO: navigate to tag correctly
@@ -27,7 +27,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             }
         }
 
-        public override XElement FormatTag(DefineBitsJPEG2Tag tag) {
+        protected override XElement FormatTagElement(DefineBitsJPEG2Tag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_BITS_JPEG2_TAG),
                                 new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.CharacterID),
                                 new XElement(XName.Get("data"), SwfMillPrimitives.FormatBinaryData(tag.ImageData))

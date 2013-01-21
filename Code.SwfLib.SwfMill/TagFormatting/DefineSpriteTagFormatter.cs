@@ -18,7 +18,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             _subFormatterFactory = new TagFormatterFactory(version);
         }
 
-        public override void AcceptAttribute(DefineSpriteTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(DefineSpriteTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     tag.SpriteID = ushort.Parse(attrib.Value);
@@ -31,7 +31,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        public override void AcceptElement(DefineSpriteTag tag, XElement element) {
+        protected override void AcceptTagElement(DefineSpriteTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case TAGS_ELEMENTS:
                     ReadTags(tag, element);
@@ -41,7 +41,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        public override XElement FormatTag(DefineSpriteTag tag) {
+        protected override XElement FormatTagElement(DefineSpriteTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_SPRITE_TAG),
                                new XAttribute(XName.Get("objectID"), tag.SpriteID),
                                new XAttribute(XName.Get("frames"), tag.FramesCount),

@@ -18,7 +18,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string COLOR_TRANSFORM_ELEM = "color"; //TODO: Does name match swfmill
         private const string CLIP_ACTIONS_ELEM = "events";
 
-        public override void AcceptAttribute(PlaceObject2Tag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(PlaceObject2Tag tag, XAttribute attrib) {
             tag.Move = true;
 
             switch (attrib.Name.LocalName) {
@@ -56,7 +56,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             }
         }
 
-        public override void AcceptElement(PlaceObject2Tag tag, XElement element) {
+        protected override void AcceptTagElement(PlaceObject2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case TRANSFORM_ELEM:
                     SwfMatrix matrix;
@@ -77,7 +77,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             }
         }
 
-        public override XElement FormatTag(PlaceObject2Tag tag) {
+        protected override XElement FormatTagElement(PlaceObject2Tag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.PLACE_OBJECT2_TAG));
             if (tag.HasCharacter) {
                 res.Add(new XAttribute(OBJECT_ID_ATTRIB, tag.CharacterID));

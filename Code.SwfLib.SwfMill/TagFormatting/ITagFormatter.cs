@@ -7,7 +7,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         void InitTag(T tag, XElement element);
 
-        XElement FormatTag(T tag);
+        XElement FormatElement(T tag);
 
         void AcceptAttribute(T tag, XAttribute attrib);
 

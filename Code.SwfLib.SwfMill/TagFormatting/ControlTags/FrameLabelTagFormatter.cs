@@ -8,7 +8,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         private const string LABEL_ATTRIB = "label";
         private const string FLAGS_ELEM = "flags";
 
-        public override void AcceptAttribute(FrameLabelTag tag, XAttribute attrib) {
+        protected override void AcceptTagAttribute(FrameLabelTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case LABEL_ATTRIB:
                     tag.Name = attrib.Value;
@@ -18,7 +18,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        public override void AcceptElement(FrameLabelTag tag, XElement element) {
+        protected override void AcceptTagElement(FrameLabelTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case FLAGS_ELEM:
                     //TODO: read flags
@@ -28,7 +28,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        public override XElement FormatTag(FrameLabelTag tag) {
+        protected override XElement FormatTagElement(FrameLabelTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.FRAME_LABEL_TAG),
                 new XAttribute(XName.Get(LABEL_ATTRIB), tag.Name)
                 //TODO: Flags
