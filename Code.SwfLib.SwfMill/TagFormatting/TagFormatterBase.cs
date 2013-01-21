@@ -7,6 +7,7 @@ using Code.SwfLib.Tags;
 namespace Code.SwfLib.SwfMill.TagFormatting {
     public abstract class TagFormatterBase<T> : ITagFormatter<T> where T : SwfTagBase {
 
+        private const string REST_ELEM = "rest";
         protected const string DATA_TAG = "data";
         protected const string OBJECT_ID_ATTRIB = "objectID";
         protected const string TRANSFORM_TYPE_ELEM = "Transform";
@@ -36,7 +37,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         public XElement FormatElement(T tag) {
-            return FormatTagElement(tag);
+            var res = FormatTagElement(tag);
+            if (tag.RestData != null && tag.RestData.Length > 0) {
+                res.Add(new XElement(REST_ELEM, Convert.ToBase64String(tag.RestData)));
+            }
+            return res;
         }
 
         public void AcceptAttribute(T tag, XAttribute attrib) {
@@ -44,7 +49,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         public void AcceptElement(T tag, XElement element) {
-            AcceptTagElement(tag, element);
+            switch (element.Name.LocalName) {
+                case REST_ELEM:
+                    tag.RestData = Convert.FromBase64String(element.Value);
+                    break;
+                default:
+                    AcceptTagElement(tag, element);
+                    break;
+            }
         }
 
         protected abstract XElement FormatTagElement(T tag);
@@ -89,7 +101,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             rgb.Blue = byte.Parse(colorElem.Attribute(XName.Get("blue")).Value);
             return rgb;
         }
-
 
         protected static byte[] ReadBase64(XElement data) {
             string val = data.Value
