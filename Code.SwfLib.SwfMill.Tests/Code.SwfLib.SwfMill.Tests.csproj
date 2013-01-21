@@ -59,6 +59,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Resources\TagFormatting\FontTags\DefineFontAlignZones.xml" />
     <Compile Include="SwfMillFacadeTest.cs" />
+    <Compile Include="TagFormatterFactoryTest.cs" />
     <Compile Include="TagFormatting\BaseTagFormattingTest.cs" />
     <Compile Include="TagFormatting\EndTagFormatterTest.cs" />
     <Compile Include="TagFormatting\FontTags\DefineFontAlignZonesTagFormatterTest.cs" />

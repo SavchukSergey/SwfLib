@@ -48,7 +48,7 @@ namespace Code.SwfLib.SwfMill {
         #region Display list tags
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(PlaceObjectTag tag, object arg) {
-            return new PlaceObject2TagFormatter();
+            return new PlaceObjectTagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(PlaceObject2Tag tag, object arg) {
@@ -60,7 +60,7 @@ namespace Code.SwfLib.SwfMill {
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(RemoveObjectTag tag, object arg) {
-            return new RemoveObject2TagFormatter();
+            return new RemoveObjectTagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(RemoveObject2Tag tag, object arg) {
@@ -80,7 +80,7 @@ namespace Code.SwfLib.SwfMill {
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(FrameLabelTag tag, object arg) {
-            return new FrameLabelTagFormater();
+            return new FrameLabelTagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(ProtectTag tag, object arg) {
@@ -152,7 +152,7 @@ namespace Code.SwfLib.SwfMill {
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DoABCTag tag, object arg) {
-            return new DoABCTagFormattter();
+            return new DoABCTagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DoABCDefineTag tag, object arg) {
@@ -160,6 +160,8 @@ namespace Code.SwfLib.SwfMill {
         }
 
         #endregion
+
+        #region Shape tags
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineShapeTag tag, object arg) {
             return new DefineShapeTagFormatter();
@@ -176,6 +178,8 @@ namespace Code.SwfLib.SwfMill {
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineShape4Tag tag, object arg) {
             return new DefineShape4TagFormatter();
         }
+
+        #endregion
 
         #region Bitmap tags
 
@@ -218,7 +222,7 @@ namespace Code.SwfLib.SwfMill {
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineFontTag tag, object arg) {
-            return new DefineFont3TagFormatter();
+            return new DefineFontTagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineFontInfoTag tag, object arg) {
@@ -254,7 +258,7 @@ namespace Code.SwfLib.SwfMill {
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(DefineEditTextTag tag, object arg) {
-            return new ExportAssetsTagFormatter();
+            return new DefineEditTextTagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(CSMTextSettingsTag tag, object arg) {
@@ -274,7 +278,7 @@ namespace Code.SwfLib.SwfMill {
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(StartSound2Tag tag, object arg) {
-            return new StartSound2TagFormater();
+            return new StartSound2TagFormatter();
         }
 
         ITagFormatter ISwfTagVisitor<object, ITagFormatter>.Visit(SoundStreamHeadTag tag, object arg) {

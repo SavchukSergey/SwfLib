@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
-    public class FrameLabelTagFormater : TagFormatterBase<FrameLabelTag> {
+    public class FrameLabelTagFormatter : TagFormatterBase<FrameLabelTag> {
 
         private const string LABEL_ATTRIB = "label";
         private const string FLAGS_ELEM = "flags";

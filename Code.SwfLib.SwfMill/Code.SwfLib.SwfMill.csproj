@@ -63,7 +63,7 @@
     <Compile Include="DataFormatting\RectangleDataFormatter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="TagFormatting\ActionTags\DoABCDefineTagFormatter.cs" />
-    <Compile Include="TagFormatting\ActionTags\DoABCTagFormattter.cs" />
+    <Compile Include="TagFormatting\ActionTags\DoABCTagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG3TagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG4TagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsLossless2TagFormatter.cs" />
@@ -90,6 +90,9 @@
     <Compile Include="SwfMillFacade.cs" />
     <Compile Include="SwfMillPrimitives.cs" />
     <Compile Include="SwfTagNameMapping.cs" />
+    <Compile Include="TagFormatting\DisplayListTags\PlaceObjectTagFormatter.cs" />
+    <Compile Include="TagFormatting\DisplayListTags\RemoveObjectTagFormatter.cs" />
+    <Compile Include="TagFormatting\FontTags\DefineFontTagFormatter.cs" />
     <Compile Include="TagFormatting\ProductInfoTagFormatter.cs" />
     <Compile Include="TagFormatting\ShapeMorphingTags\DefineMorphShape2TagFormatter.cs" />
     <Compile Include="TagFormatting\ShapeMorphingTags\DefineMorphShapeTagFormatter.cs" />
@@ -97,7 +100,7 @@
     <Compile Include="TagFormatting\SoundTags\SoundStreamBlockTagFormatter.cs" />
     <Compile Include="TagFormatting\SoundTags\SoundStreamHead2TagFormatter.cs" />
     <Compile Include="TagFormatting\SoundTags\SoundStreamHeadTagFormatter.cs" />
-    <Compile Include="TagFormatting\SoundTags\StartSound2TagFormater.cs" />
+    <Compile Include="TagFormatting\SoundTags\StartSound2TagFormatter.cs" />
     <Compile Include="TagFormatting\SoundTags\StartSoundTagFormatter.cs" />
     <Compile Include="TagFormatting\TextTags\CSMTextSettingsTagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG2TagFormatter.cs" />
@@ -118,7 +121,7 @@
     <Compile Include="TagFormatting\ActionTags\DoActionTagFormatter.cs" />
     <Compile Include="TagFormatting\ActionTags\DoInitActionTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\ExportAssetsTagFormatter.cs" />
-    <Compile Include="TagFormatting\ControlTags\FrameLabelTagFormater.cs" />
+    <Compile Include="TagFormatting\ControlTags\FrameLabelTagFormatter.cs" />
     <Compile Include="TagFormatting\ITagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\PlaceObject2TagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\RemoveObject2TagFormatter.cs" />

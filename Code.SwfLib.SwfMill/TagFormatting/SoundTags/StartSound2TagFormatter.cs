@@ -2,7 +2,7 @@
 using Code.SwfLib.Tags.SoundTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
-    public class StartSound2TagFormater : TagFormatterBase<StartSound2Tag> {
+    public class StartSound2TagFormatter : TagFormatterBase<StartSound2Tag> {
         public override XElement FormatTag(StartSound2Tag tag) {
             throw new System.NotImplementedException();
         }

@@ -1,10 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Code.SwfLib.Tags.BitmapTags;
+using System.Xml.Linq;
+using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
-    class ImportAssets2TagFormatter : TagFormatterBase<DefineBitsJPEG4Tag> {
+    public class ImportAssets2TagFormatter : TagFormatterBase<ImportAssets2Tag> {
+        public override XElement FormatTag(ImportAssets2Tag tag) {
+            throw new NotImplementedException();
+        }
+
+        public override void AcceptAttribute(ImportAssets2Tag tag, XAttribute attrib) {
+            throw new NotImplementedException();
+        }
+
+        public override void AcceptElement(ImportAssets2Tag tag, XElement element) {
+            throw new NotImplementedException();
+        }
     }
 }

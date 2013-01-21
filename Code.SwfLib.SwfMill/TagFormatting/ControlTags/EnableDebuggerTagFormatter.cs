@@ -1,10 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
-    class EnableDebuggerTagFormatter : TagFormatterBase<ProtectTag> {
+    public class EnableDebuggerTagFormatter : TagFormatterBase<EnableDebuggerTag> {
+        public override XElement FormatTag(EnableDebuggerTag tag) {
+            throw new System.NotImplementedException();
+        }
+
+        public override void AcceptAttribute(EnableDebuggerTag tag, XAttribute attrib) {
+            throw new System.NotImplementedException();
+        }
+
+        public override void AcceptElement(EnableDebuggerTag tag, XElement element) {
+            throw new System.NotImplementedException();
+        }
     }
 }
