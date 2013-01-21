@@ -118,8 +118,7 @@ namespace Code.SwfLib {
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(FrameLabelTag tag, SwfStreamReader reader) {
             tag.Name = reader.ReadString();
             if (!reader.IsEOF) {
-                var anchorFlag = reader.ReadByte();
-                tag.IsAnchor = anchorFlag != 0;
+                tag.AnchorFlag = reader.ReadByte(); 
             }
             return tag;
         }
