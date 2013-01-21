@@ -61,18 +61,18 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         public override XElement Format(ref ColorTransformRGBA data) {
-            var res = new XElement(XName.Get("ColorTransform"));
+            var res = new XElement(XName.Get("ColorTransform2"));
             if (data.RedMultTerm.HasValue) {
-                res.Add(new XAttribute(XName.Get("redmult"), data.RedMultTerm.Value));
+                res.Add(new XAttribute(XName.Get("factorRed"), data.RedMultTerm.Value));
             }
             if (data.GreenMultTerm.HasValue) {
-                res.Add(new XAttribute(XName.Get("greenmult"), data.GreenMultTerm.Value));
+                res.Add(new XAttribute(XName.Get("factorGreen"), data.GreenMultTerm.Value));
             }
             if (data.BlueMultTerm.HasValue) {
-                res.Add(new XAttribute(XName.Get("bluemult"), data.BlueMultTerm.Value));
+                res.Add(new XAttribute(XName.Get("factorBlue"), data.BlueMultTerm.Value));
             }
             if (data.AlphaMultTerm.HasValue) {
-                res.Add(new XAttribute(XName.Get("alphamult"), data.AlphaMultTerm.Value));
+                res.Add(new XAttribute(XName.Get("factorAlpha"), data.AlphaMultTerm.Value));
             }
 
             if (data.RedAddTerm.HasValue) {

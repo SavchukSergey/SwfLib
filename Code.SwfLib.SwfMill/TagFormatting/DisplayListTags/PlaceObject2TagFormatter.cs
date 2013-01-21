@@ -14,7 +14,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string ALL_FLAGS2_ATTRIB = "allflags2";
         private const string CLIP_DEPTH = "clipDepth";
         private const string TRANSFORM_ELEM = "transform";
-        private const string COLOR_TRANSFORM_ELEM = "color"; //TODO: Does name match swfmill
+        private const string COLOR_TRANSFORM_ELEM = "colorTransform";
         private const string CLIP_ACTIONS_ELEM = "events";
 
         protected override void AcceptTagAttribute(PlaceObject2Tag tag, XAttribute attrib) {
