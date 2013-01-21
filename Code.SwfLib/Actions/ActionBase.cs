@@ -5,7 +5,7 @@ namespace Code.SwfLib.Actions {
 
         public abstract ActionCode ActionCode { get; }
 
-        public abstract object AcceptVisitor(IActionVisitor visitor);
+        public abstract TResult AcceptVisitor<TArg, TResult>(IActionVisitor<TArg, TResult> visitor, TArg arg);
 
     }
 }

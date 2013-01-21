@@ -1,124 +1,123 @@
 ﻿using Code.SwfLib.Data.Actions;
 
 namespace Code.SwfLib.Actions {
-    public interface IActionVisitor {
+    public interface IActionVisitor<TArg, TResult> {
 
         #region SWF 4
 
-        object Visit(ActionAdd action);
+        TResult Visit(ActionAdd action, TArg arg);
 
-        object Visit(ActionDivide action);
+        TResult Visit(ActionDivide action, TArg arg);
 
-        object Visit(ActionMultiply action);
+        TResult Visit(ActionMultiply action, TArg arg);
 
-        object Visit(ActionSubtract action);
-
+        TResult Visit(ActionSubtract action, TArg arg);
 
         #endregion
 
-        object Visit(ActionAnd action);
+        TResult Visit(ActionAnd action, TArg arg);
 
-        object Visit(ActionAsciiToChar action);
+        TResult Visit(ActionAsciiToChar action, TArg arg);
 
-        object Visit(ActionCall action);
+        TResult Visit(ActionCall action, TArg arg);
 
-        object Visit(ActionCharToAscii action);
+        TResult Visit(ActionCharToAscii action, TArg arg);
 
-        object Visit(ActionCloneSprite action);
+        TResult Visit(ActionCloneSprite action, TArg arg);
 
-        object Visit(ActionConstantPool action);
+        TResult Visit(ActionConstantPool action, TArg arg);
 
-        object Visit(ActionDefineFunction action);
+        TResult Visit(ActionDefineFunction action, TArg arg);
 
-        object Visit(ActionEndDrag action);
+        TResult Visit(ActionEndDrag action, TArg arg);
 
-        object Visit(ActionEquals action);
+        TResult Visit(ActionEquals action, TArg arg);
 
-        object Visit(ActionGetProperty action);
+        TResult Visit(ActionGetProperty action, TArg arg);
 
-        object Visit(ActionGetTime action);
+        TResult Visit(ActionGetTime action, TArg arg);
 
-        object Visit(ActionGetURL action);
+        TResult Visit(ActionGetURL action, TArg arg);
 
-        object Visit(ActionGetURL2 action);
+        TResult Visit(ActionGetURL2 action, TArg arg);
 
-        object Visit(ActionGetVariable action);
+        TResult Visit(ActionGetVariable action, TArg arg);
 
-        object Visit(ActionGotoFrame action);
+        TResult Visit(ActionGotoFrame action, TArg arg);
 
-        object Visit(ActionGotoFrame2 action);
+        TResult Visit(ActionGotoFrame2 action, TArg arg);
 
-        object Visit(ActionGoToLabel action);
+        TResult Visit(ActionGoToLabel action, TArg arg);
 
-        object Visit(ActionIf action);
+        TResult Visit(ActionIf action, TArg arg);
 
-        object Visit(ActionJump action);
+        TResult Visit(ActionJump action, TArg arg);
 
-        object Visit(ActionLess action);
+        TResult Visit(ActionLess action, TArg arg);
 
-        object Visit(ActionMBAsciiToChar action);
+        TResult Visit(ActionMBAsciiToChar action, TArg arg);
 
-        object Visit(ActionMBCharToAscii action);
+        TResult Visit(ActionMBCharToAscii action, TArg arg);
 
-        object Visit(ActionMBStringExtract action);
+        TResult Visit(ActionMBStringExtract action, TArg arg);
 
-        object Visit(ActionMBStringLength action);
+        TResult Visit(ActionMBStringLength action, TArg arg);
 
-        object Visit(ActionNextFrame action);
+        TResult Visit(ActionNextFrame action, TArg arg);
 
-        object Visit(ActionNot action);
+        TResult Visit(ActionNot action, TArg arg);
 
-        object Visit(ActionOr action);
+        TResult Visit(ActionOr action, TArg arg);
 
-        object Visit(ActionPlay action);
+        TResult Visit(ActionPlay action, TArg arg);
 
-        object Visit(ActionPop action);
+        TResult Visit(ActionPop action, TArg arg);
 
-        object Visit(ActionPreviousFrame action);
+        TResult Visit(ActionPreviousFrame action, TArg arg);
 
-        object Visit(ActionPush action);
+        TResult Visit(ActionPush action, TArg arg);
 
-        object Visit(ActionRandomNumber action);
+        TResult Visit(ActionRandomNumber action, TArg arg);
 
-        object Visit(ActionRemoveSprite action);
+        TResult Visit(ActionRemoveSprite action, TArg arg);
 
-        object Visit(ActionReturn action);
+        TResult Visit(ActionReturn action, TArg arg);
 
-        object Visit(ActionSetMember action);
+        TResult Visit(ActionSetMember action, TArg arg);
 
-        object Visit(ActionSetProperty action);
+        TResult Visit(ActionSetProperty action, TArg arg);
 
-        object Visit(ActionSetTarget action);
+        TResult Visit(ActionSetTarget action, TArg arg);
 
-        object Visit(ActionSetTarget2 action);
+        TResult Visit(ActionSetTarget2 action, TArg arg);
 
-        object Visit(ActionSetVariable action);
+        TResult Visit(ActionSetVariable action, TArg arg);
 
-        object Visit(ActionStartDrag action);
+        TResult Visit(ActionStartDrag action, TArg arg);
 
-        object Visit(ActionStop action);
+        TResult Visit(ActionStop action, TArg arg);
 
-        object Visit(ActionStopSounds action);
+        TResult Visit(ActionStopSounds action, TArg arg);
 
-        object Visit(ActionStringAdd action);
+        TResult Visit(ActionStringAdd action, TArg arg);
 
-        object Visit(ActionStringEquals action);
+        TResult Visit(ActionStringEquals action, TArg arg);
 
-        object Visit(ActionStringExtract action);
+        TResult Visit(ActionStringExtract action, TArg arg);
 
-        object Visit(ActionStringLength action);
+        TResult Visit(ActionStringLength action, TArg arg);
 
-        object Visit(ActionStringLess action);
+        TResult Visit(ActionStringLess action, TArg arg);
 
-        object Visit(ActionToggleQuality action);
+        TResult Visit(ActionToggleQuality action, TArg arg);
 
-        object Visit(ActionToInteger action);
+        TResult Visit(ActionToInteger action, TArg arg);
 
-        object Visit(ActionTrace action);
+        TResult Visit(ActionTrace action, TArg arg);
 
-        object Visit(ActionWaitForFrame action);
+        TResult Visit(ActionWaitForFrame action, TArg arg);
 
-        object Visit(ActionWaitForFrame2 action);
+        TResult Visit(ActionWaitForFrame2 action, TArg arg);
 
     }
 }

@@ -7,8 +7,8 @@ namespace Code.SwfLib.Actions {
             get { return ActionCode.GetURL2; }
         }
 
-        public override object AcceptVisitor(IActionVisitor visitor) {
-            return visitor.Visit(this);
+        public override TResult AcceptVisitor<TArg, TResult>(IActionVisitor<TArg, TResult> visitor, TArg arg) {
+            return visitor.Visit(this, arg);
         }
 
     }

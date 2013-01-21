@@ -22,8 +22,8 @@ namespace Code.SwfLib.Actions {
 
         public ushort SceneBias { get; set; }
 
-        public override object AcceptVisitor(IActionVisitor visitor) {
-            return visitor.Visit(this);
+        public override TResult AcceptVisitor<TArg, TResult>(IActionVisitor<TArg, TResult> visitor, TArg arg) {
+            return visitor.Visit(this, arg);
         }
 
     }

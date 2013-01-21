@@ -1,45 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Actions;
 using Code.SwfLib.Data.Actions;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
-    public class ActionSerializer : IActionVisitor {
+    public class ActionSerializer : IActionVisitor<object, XElement> {
 
         public XElement Serialize(ActionBase action) {
-            return (XElement)action.AcceptVisitor(this);
+            return action.AcceptVisitor(this, null);
         }
 
         #region IActionVisitor Members
 
-        object IActionVisitor.Visit(ActionAdd action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionAdd action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionAnd action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionAnd action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionAsciiToChar action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionAsciiToChar action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionCall action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionCall action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionCharToAscii action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionCharToAscii action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionCloneSprite action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionCloneSprite action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionConstantPool action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionConstantPool action, object writer) {
             var res = new XElement("Dictionary");
             var strings = new XElement("strings");
             foreach (var item in action.ConstantPool) {
@@ -49,7 +46,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
             return res;
         }
 
-        object IActionVisitor.Visit(ActionDefineFunction action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction action, object writer) {
             var res = new XElement("DeclareFunction");
             res.Add(new XAttribute("name", action.FunctionName),
                 new XAttribute("argc", action.Params.Length),
@@ -64,195 +61,195 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
             return res;
         }
 
-        object IActionVisitor.Visit(ActionDivide action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionDivide action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionEndDrag action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionEndDrag action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionEquals action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionEquals action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionGetProperty action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionGetProperty action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionGetTime action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionGetTime action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionGetURL action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionGetURL action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionGetURL2 action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionGetURL2 action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionGetVariable action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionGetVariable action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionGotoFrame action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionGotoFrame action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionGotoFrame2 action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionGotoFrame2 action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionGoToLabel action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionGoToLabel action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionIf action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionIf action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionJump action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionJump action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionLess action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionLess action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionMBAsciiToChar action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionMBAsciiToChar action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionMBCharToAscii action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionMBCharToAscii action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionMBStringExtract action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionMBStringExtract action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionMBStringLength action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionMBStringLength action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionMultiply action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionMultiply action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionNextFrame action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionNextFrame action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionNot action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionNot action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionOr action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionOr action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionPlay action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionPlay action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionPop action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionPop action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionPreviousFrame action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionPreviousFrame action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionPush action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionPush action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionRandomNumber action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionRandomNumber action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionRemoveSprite action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionRemoveSprite action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionReturn action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionReturn action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionSetMember action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionSetMember action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionSetProperty action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionSetProperty action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionSetTarget action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionSetTarget action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionSetTarget2 action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionSetTarget2 action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionSetVariable action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionSetVariable action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionStartDrag action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionStartDrag action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionStop action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionStop action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionStopSounds action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionStopSounds action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionStringAdd action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionStringAdd action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionStringEquals action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionStringEquals action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionStringExtract action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionStringExtract action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionStringLength action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionStringLength action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionStringLess action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionStringLess action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionSubtract action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionSubtract action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionToggleQuality action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionToggleQuality action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionToInteger action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionToInteger action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionTrace action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionTrace action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionWaitForFrame action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionWaitForFrame action, object writer) {
             throw new NotImplementedException();
         }
 
-        object IActionVisitor.Visit(ActionWaitForFrame2 action) {
+        XElement IActionVisitor<object, XElement>.Visit(ActionWaitForFrame2 action, object writer) {
             throw new NotImplementedException();
         }
 
