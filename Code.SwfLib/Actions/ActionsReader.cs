@@ -61,47 +61,47 @@ namespace Code.SwfLib.Actions {
                 case ActionCode.Or:
                     return ReadOr();
                 case ActionCode.StringAdd:
-                    return ReadStringAdd(length);
+                    return ReadStringAdd();
                 case ActionCode.StringEquals:
-                    return ReadStringEquals(length);
+                    return ReadStringEquals();
                 case ActionCode.StringExtract:
-                    return ReadStringExtract(length);
+                    return ReadStringExtract();
                 case ActionCode.StringLength:
-                    return ReadStringLength(length);
+                    return ReadStringLength();
                 case ActionCode.MBStringExtract:
-                    return ReadMBStringExtract(length);
+                    return ReadMBStringExtract();
                 case ActionCode.MBStringLength:
-                    return ReadMBStringLength(length);
+                    return ReadMBStringLength();
                 case ActionCode.StringLess:
-                    return ReadStringLess(length);
+                    return ReadStringLess();
 
                 case ActionCode.Pop:
-                    return ReadPop(length);
+                    return ReadPop();
                 case ActionCode.Push:
                     return ReadPush(length);
 
                 case ActionCode.AsciiToChar:
-                    return ReadAsciiToChar(length);
+                    return ReadAsciiToChar();
                 case ActionCode.CharToAscii:
-                    return ReadCharToAscii(length);
+                    return ReadCharToAscii();
                 case ActionCode.ToInteger:
-                    return ReadToInteger(length);
+                    return ReadToInteger();
                 case ActionCode.MBAsciiToChar:
-                    return ReadMBAsciiToChar(length);
+                    return ReadMBAsciiToChar();
                 case ActionCode.MBCharToAscii:
-                    return ReadMBCharToAscii(length);
+                    return ReadMBCharToAscii();
 
                 case ActionCode.Call:
-                    return ReadCall(length);
+                    return ReadCall();
                 case ActionCode.If:
-                    return ReadIf(length);
+                    return ReadIf();
                 case ActionCode.Jump:
                     return ReadJump();
 
                 case ActionCode.GetVariable:
-                    return ReadGetVariable(length);
+                    return ReadGetVariable();
                 case ActionCode.SetVariable:
-                    return ReadSetVariable(length);
+                    return ReadSetVariable();
 
                 case ActionCode.GetURL2:
                     return ReadGetURL2();
@@ -118,18 +118,18 @@ namespace Code.SwfLib.Actions {
                 case ActionCode.StartDrag:
                     return ReadStartDrag();
                 case ActionCode.WaitForFrame2:
-                    return ReadWaitForFrame2(length);
+                    return ReadWaitForFrame2();
                 case ActionCode.CloneSprite:
                     return ReadCloneSprite();
                 case ActionCode.EndDrag:
-                    return ReadEndDrag(length);
+                    return ReadEndDrag();
 
                 case ActionCode.GetTime:
-                    throw new NotImplementedException(code.ToString());
+                    return ReadGetTime();
                 case ActionCode.RandomNumber:
-                    return ReadRandomNumber(length);
+                    return ReadRandomNumber();
                 case ActionCode.Trace:
-                    return ReadTrace(length);
+                    return ReadTrace();
 
 
                 //Other
@@ -247,31 +247,31 @@ namespace Code.SwfLib.Actions {
 
         #region String manipulation
 
-        private ActionStringAdd ReadStringAdd(ushort length) {
+        private ActionStringAdd ReadStringAdd() {
             return new ActionStringAdd();
         }
 
-        private ActionStringEquals ReadStringEquals(ushort length) {
+        private ActionStringEquals ReadStringEquals() {
             return new ActionStringEquals();
         }
 
-        private ActionStringExtract ReadStringExtract(ushort length) {
+        private ActionStringExtract ReadStringExtract() {
             return new ActionStringExtract();
         }
 
-        private ActionStringLength ReadStringLength(ushort length) {
+        private ActionStringLength ReadStringLength() {
             return new ActionStringLength();
         }
 
-        private ActionMBStringExtract ReadMBStringExtract(ushort length) {
+        private ActionMBStringExtract ReadMBStringExtract() {
             return new ActionMBStringExtract();
         }
 
-        private ActionMBStringLength ReadMBStringLength(ushort length) {
+        private ActionMBStringLength ReadMBStringLength() {
             return new ActionMBStringLength();
         }
 
-        private ActionStringEquals ReadStringLess(ushort length) {
+        private ActionStringEquals ReadStringLess() {
             return new ActionStringEquals();
         }
 
@@ -279,7 +279,7 @@ namespace Code.SwfLib.Actions {
 
         #region Stack operations
 
-        private ActionPop ReadPop(ushort length) {
+        private ActionPop ReadPop() {
             return new ActionPop();
         }
 
@@ -329,23 +329,23 @@ namespace Code.SwfLib.Actions {
 
         #region Type Conversion
 
-        private ActionAsciiToChar ReadAsciiToChar(ushort length) {
+        private ActionAsciiToChar ReadAsciiToChar() {
             return new ActionAsciiToChar();
         }
 
-        private ActionCharToAscii ReadCharToAscii(ushort length) {
+        private ActionCharToAscii ReadCharToAscii() {
             return new ActionCharToAscii();
         }
 
-        private ActionToInteger ReadToInteger(ushort length) {
+        private ActionToInteger ReadToInteger() {
             return new ActionToInteger();
         }
 
-        private ActionMBAsciiToChar ReadMBAsciiToChar(ushort length) {
+        private ActionMBAsciiToChar ReadMBAsciiToChar() {
             return new ActionMBAsciiToChar();
         }
 
-        private ActionMBCharToAscii ReadMBCharToAscii(ushort length) {
+        private ActionMBCharToAscii ReadMBCharToAscii() {
             return new ActionMBCharToAscii();
         }
 
@@ -353,12 +353,12 @@ namespace Code.SwfLib.Actions {
 
         #region Control flow
 
-        private ActionCall ReadCall(ushort length) {
+        private ActionCall ReadCall() {
             return new ActionCall();
         }
 
-        private ActionIf ReadIf(ushort length) {
-            return new ActionIf();
+        private ActionIf ReadIf() {
+            return new ActionIf { BranchOffset = _reader.ReadSInt16() };
         }
 
         private ActionJump ReadJump() {
@@ -369,11 +369,11 @@ namespace Code.SwfLib.Actions {
 
         #region Variables
 
-        private ActionGetVariable ReadGetVariable(ushort length) {
+        private ActionGetVariable ReadGetVariable() {
             return new ActionGetVariable();
         }
 
-        private ActionSetVariable ReadSetVariable(ushort length) {
+        private ActionSetVariable ReadSetVariable() {
             return new ActionSetVariable();
         }
 
@@ -390,7 +390,12 @@ namespace Code.SwfLib.Actions {
         }
 
         private ActionGotoFrame2 ReadGoToFrame2() {
-            return new ActionGotoFrame2();
+            var res = new ActionGotoFrame2 { Flags = _reader.ReadByte() };
+            if (res.SceneBiasFlag) {
+                res.SceneBias = _reader.ReadUInt16();
+            }
+            return res;
+
         }
 
         private ActionRemoveSprite ReadRemoveSprite() {
@@ -409,7 +414,7 @@ namespace Code.SwfLib.Actions {
             return new ActionStartDrag();
         }
 
-        private ActionWaitForFrame2 ReadWaitForFrame2(ushort length) {
+        private ActionWaitForFrame2 ReadWaitForFrame2() {
             return new ActionWaitForFrame2 { SkipCount = _reader.ReadByte() };
         }
 
@@ -417,7 +422,7 @@ namespace Code.SwfLib.Actions {
             return new ActionCloneSprite();
         }
 
-        public ActionEndDrag ReadEndDrag(ushort length) {
+        private ActionEndDrag ReadEndDrag() {
             return new ActionEndDrag();
         }
 
@@ -425,15 +430,15 @@ namespace Code.SwfLib.Actions {
 
         #region Utilities
 
-        public ActionGetTime ReadGetTime(ushort length) {
+        private ActionGetTime ReadGetTime() {
             return new ActionGetTime();
         }
 
-        public ActionRandomNumber ReadRandomNumber(ushort length) {
+        private ActionRandomNumber ReadRandomNumber() {
             return new ActionRandomNumber();
         }
 
-        public ActionTrace ReadTrace(ushort length) {
+        private ActionTrace ReadTrace() {
             return new ActionTrace();
         }
 

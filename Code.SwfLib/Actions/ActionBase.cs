@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Code.SwfLib.Actions;
+﻿using Code.SwfLib.Data.Actions;
 
-namespace Code.SwfLib.Data.Actions {
+namespace Code.SwfLib.Actions {
     public abstract class ActionBase {
 
         public abstract ActionCode ActionCode { get; }

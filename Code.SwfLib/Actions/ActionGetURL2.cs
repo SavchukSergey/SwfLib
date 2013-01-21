@@ -1,6 +1,6 @@
-﻿using Code.SwfLib.Actions;
+﻿using Code.SwfLib.Data.Actions;
 
-namespace Code.SwfLib.Data.Actions {
+namespace Code.SwfLib.Actions {
     public class ActionGetURL2 : ActionBase {
 
         public override ActionCode ActionCode {
