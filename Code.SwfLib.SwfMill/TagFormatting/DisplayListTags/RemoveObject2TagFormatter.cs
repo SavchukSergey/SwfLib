@@ -10,7 +10,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         protected override void AcceptTagAttribute(RemoveObject2Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case DEPTH_ATTRIB:
-                    //TODO: read depth
+                    tag.Depth = ushort.Parse(attrib.Value);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -25,7 +25,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         }
 
         protected override XElement FormatTagElement(RemoveObject2Tag tag) {
-            return new XElement(XName.Get(SwfTagNameMapping.REMOVE_OBJECT2_TAG));
+            return new XElement(SwfTagNameMapping.REMOVE_OBJECT2_TAG,
+                new XAttribute(DEPTH_ATTRIB, tag.Depth));
         }
     }
 }

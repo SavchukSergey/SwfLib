@@ -454,6 +454,7 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineButton2Tag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.ButtonID);
             return null;
         }
 

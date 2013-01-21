@@ -40,7 +40,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
         }
 
         protected override XElement FormatTagElement(DefineButton2Tag tag) {
-            return new XElement(XName.Get(SwfTagNameMapping.DEFINE_BUTTON2_TAG));
+            return new XElement(SwfTagNameMapping.DEFINE_BUTTON2_TAG,
+                new XAttribute(OBJECT_ID_ATTRIB, tag.ButtonID));
         }
 
     }

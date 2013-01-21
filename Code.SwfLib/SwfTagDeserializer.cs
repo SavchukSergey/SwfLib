@@ -99,6 +99,7 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(RemoveObject2Tag tag, SwfStreamReader reader) {
+            tag.Depth = reader.ReadUInt16();
             return tag;
         }
 
@@ -118,7 +119,7 @@ namespace Code.SwfLib {
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(FrameLabelTag tag, SwfStreamReader reader) {
             tag.Name = reader.ReadString();
             if (!reader.IsEOF) {
-                tag.AnchorFlag = reader.ReadByte(); 
+                tag.AnchorFlag = reader.ReadByte();
             }
             return tag;
         }
@@ -496,6 +497,7 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineButton2Tag tag, SwfStreamReader reader) {
+            tag.ButtonID = reader.ReadUInt16();
             return tag;
         }
 
