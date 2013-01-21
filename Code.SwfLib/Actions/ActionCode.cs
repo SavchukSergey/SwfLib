@@ -33,7 +33,7 @@
         /// <summary>
         /// ActionSubtract subtracts two numbers and pushes the result back to the stack.
         /// </summary>
-        Substract = 0x0b,
+        Subtract = 0x0b,
         /// <summary>
         /// ActionMultiply multiplies two numbers and pushes the result back to the stack.
         /// </summary>

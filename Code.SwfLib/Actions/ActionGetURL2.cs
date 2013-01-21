@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Data.Actions {
+﻿using Code.SwfLib.Actions;
+
+namespace Code.SwfLib.Data.Actions {
     public class ActionGetURL2 : ActionBase {
 
         public override ActionCode ActionCode {

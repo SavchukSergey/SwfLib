@@ -79,6 +79,10 @@ namespace Code.SwfLib {
             get { return _reader.BaseStream.Length - _reader.BaseStream.Position; }
         }
 
+        /// <summary>
+        /// Reads Null-terminated string
+        /// </summary>
+        /// <returns></returns>
         public string ReadString() {
             var dataStream = new MemoryStream();
             byte bt = 1;
@@ -100,6 +104,10 @@ namespace Code.SwfLib {
 
         public float ReadSingle() {
             return _reader.ReadSingle();
+        }
+
+        public double ReadDouble() {
+            return _reader.ReadDouble();
         }
 
         public float ReadShortFloat() {
@@ -163,11 +171,6 @@ namespace Code.SwfLib {
         }
 
         #endregion
-
-
-        public void GoBack(int distance) {
-            _reader.BaseStream.Seek(-distance, SeekOrigin.Current);
-        }
 
     }
 }

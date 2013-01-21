@@ -1,7 +1,20 @@
-﻿namespace Code.SwfLib.Data.Actions {
+﻿using Code.SwfLib.Data.Actions;
+
+namespace Code.SwfLib.Actions {
     public interface IActionVisitor {
 
+        #region SWF 4
+
         object Visit(ActionAdd action);
+
+        object Visit(ActionDivide action);
+
+        object Visit(ActionMultiply action);
+
+        object Visit(ActionSubtract action);
+
+
+        #endregion
 
         object Visit(ActionAnd action);
 
@@ -16,8 +29,6 @@
         object Visit(ActionConstantPool action);
 
         object Visit(ActionDefineFunction action);
-
-        object Visit(ActionDivide action);
 
         object Visit(ActionEndDrag action);
 
@@ -52,8 +63,6 @@
         object Visit(ActionMBStringExtract action);
 
         object Visit(ActionMBStringLength action);
-
-        object Visit(ActionMultiply action);
 
         object Visit(ActionNextFrame action);
 
@@ -100,8 +109,6 @@
         object Visit(ActionStringLength action);
 
         object Visit(ActionStringLess action);
-
-        object Visit(ActionSubtract action);
 
         object Visit(ActionToggleQuality action);
 
