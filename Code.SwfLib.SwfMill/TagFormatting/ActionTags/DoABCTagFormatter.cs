@@ -5,7 +5,7 @@ using Code.SwfLib.Tags.ActionsTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoABCTagFormatter : TagFormatterBase<DoABCTag> {
         protected override XElement FormatTagElement(DoABCTag tag) {
-            throw new NotImplementedException();
+            return new XElement(SwfTagNameMapping.DO_ABC_TAG);
         }
 
         protected override void AcceptTagAttribute(DoABCTag tag, XAttribute attrib) {

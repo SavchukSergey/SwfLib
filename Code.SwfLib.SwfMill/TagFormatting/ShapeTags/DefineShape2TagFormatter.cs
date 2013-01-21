@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.ShapeTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
     public class DefineShape2TagFormatter : TagFormatterBase<DefineShape2Tag> {
         protected override XElement FormatTagElement(DefineShape2Tag tag) {
-            throw new System.NotImplementedException();
+            return new XElement(SwfTagNameMapping.DEFINE_SHAPE2_TAG);
         }
 
         protected override void AcceptTagAttribute(DefineShape2Tag tag, XAttribute attrib) {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
@@ -14,6 +15,10 @@ namespace Code.SwfLib.SwfMill {
     public static class SwfTagNameMapping {
 
         private static readonly Dictionary<string, Func<SwfTagBase>> _tagMap = new Dictionary<string, Func<SwfTagBase>>();
+        public static XName SYMBOL_CLASS_TAG = "SymbolClassTag";
+        public static XName DEFINE_SHAPE2_TAG = "DefineShape2";
+        public static XName DEFINE_BITS_LOSSLESS2_TAG = "DefineBitsLossless2";
+        public static XName DEFINE_SCALING_GRID_TAG = "DefineScalingGrid";
 
         public const string CSM_TEXT_SETTINGS_TAG = "CSMTextSettings";
         public const string DEFINE_BITS_JPEG2_TAG = "DefineBitsJPEG2";
@@ -42,6 +47,7 @@ namespace Code.SwfLib.SwfMill {
         public const string SCRIPT_LIMITES_TAG = "ScriptLimits";
         public const string SHOW_FRAME_TAG = "ShowFrame";
         public const string UNKNOWN_TAG = "UnknownTag";
+        public const string DO_ABC_TAG = "DoAbc";
 
         static SwfTagNameMapping() {
             _tagMap[CSM_TEXT_SETTINGS_TAG] = () => new CSMTextSettingsTag();
@@ -71,6 +77,7 @@ namespace Code.SwfLib.SwfMill {
             _tagMap[SCRIPT_LIMITES_TAG] = () => new ScriptLimitsTag();
             _tagMap[SHOW_FRAME_TAG] = () => new ShowFrameTag();
             _tagMap[UNKNOWN_TAG] = () => new UnknownTag();
+            _tagMap[DO_ABC_TAG] = () => new DoABCTag();
         }
 
         public static SwfTagBase CreateTagByXmlName(string name) {

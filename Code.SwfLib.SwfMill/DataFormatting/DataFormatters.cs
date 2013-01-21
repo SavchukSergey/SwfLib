@@ -7,6 +7,7 @@
             ColorRGBA = new ColorRGBAFormatter(this);
             Matrix = new MatrixFormatter(this);
             FillStyle1 = new FillStyle1Formatter(this);
+            ColorTransformRGBA = new ColorTransformRGBAFormatter(this);
         }
 
         public readonly RectangleDataFormatter Rectangle;
