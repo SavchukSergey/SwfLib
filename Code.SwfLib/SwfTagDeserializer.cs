@@ -202,8 +202,7 @@ namespace Code.SwfLib {
 
         #region Actions tags
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DoActionTag tag, SwfStreamReader reader)
-        {
+        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DoActionTag tag, SwfStreamReader reader) {
             var actionReader = new ActionsReader(reader);
             ActionBase action;
             do {

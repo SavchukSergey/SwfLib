@@ -1,6 +1,7 @@
 ﻿namespace Code.SwfLib.Tags.ControlTags {
     public class FrameLabelTag : ControlBaseTag {
-        public bool IsAnchor;
+        
+        public byte AnchorFlag;
 
         public string Name { get; set; }
 

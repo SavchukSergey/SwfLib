@@ -71,6 +71,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             string res = value.ToString();
             return res;
         }
+
         protected byte[] FromBase64(XElement dataElement) {
             //TODO: why different depth??
             var data1 = dataElement.Element("data");

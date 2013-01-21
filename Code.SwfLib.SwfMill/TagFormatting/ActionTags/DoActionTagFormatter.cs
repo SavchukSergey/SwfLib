@@ -7,7 +7,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoActionTagFormatter : TagFormatterBase<DoActionTag> {
         private const string ACTIONS_ELEM = "actions";
 
-        private ActionSerializer serializer = new ActionSerializer();
+        private readonly ActionSerializer _serializer = new ActionSerializer();
 
         protected override void AcceptTagAttribute(DoActionTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
@@ -31,7 +31,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             var actions = new XElement(ACTIONS_ELEM);
             //TODO: process functions bodies.
             foreach (var action in tag.ActionRecords) {
-                actions.Add(serializer.Serialize(action));
+                actions.Add(_serializer.Serialize(action));
             }
             res.Add(actions);
             return res;
