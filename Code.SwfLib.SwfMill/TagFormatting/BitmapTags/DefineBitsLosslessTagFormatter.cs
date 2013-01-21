@@ -5,8 +5,6 @@ using Code.SwfLib.Tags.BitmapTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class DefineBitsLosslessTagFormatter : TagFormatterBase<DefineBitsLosslessTag> {
         private const string FORMAT_ATTRIB = "format";
-        private const string WIDTH_ATTRIB = "width";
-        private const string HEIGHT_ATTRIB = "height";
         private const string N_COLOR_MAP_ATTRIB = "n_colormap";
 
         protected override void AcceptTagAttribute(DefineBitsLosslessTag tag, XAttribute attrib) {

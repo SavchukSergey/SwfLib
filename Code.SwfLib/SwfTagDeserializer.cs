@@ -288,6 +288,14 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBitsLossless2Tag tag, SwfStreamReader reader) {
+            tag.CharacterID = reader.ReadUInt16();
+            tag.BitmapFormat = reader.ReadByte();
+            tag.BitmapWidth = reader.ReadUInt16();
+            tag.BitmapHeight = reader.ReadUInt16();
+            if (tag.BitmapFormat == 3) {
+                tag.BitmapColorTableSize = reader.ReadByte();
+            }
+            tag.ZlibBitmapData = reader.ReadBytes((int)reader.BytesLeft);
             return tag;
         }
 
@@ -327,7 +335,7 @@ namespace Code.SwfLib {
             tag.Attributes = (DefineFont3Attributes)reader.ReadByte();
             tag.Language = reader.ReadByte();
             int nameLength = reader.ReadByte();
-            tag.FontName = Encoding.UTF8.GetString(reader.ReadBytes(nameLength));
+            tag.FontName = Encoding.UTF8.GetString(reader.ReadBytes(nameLength)).TrimEnd('\0');
             int glyphsCount = reader.ReadUInt16();
             tag.Glyphs = new DefineFont3Glyph[glyphsCount];
             //for (var i = 0; i < glyphsCount; i++) {

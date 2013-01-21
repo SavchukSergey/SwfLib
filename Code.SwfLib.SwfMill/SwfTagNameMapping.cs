@@ -17,7 +17,7 @@ namespace Code.SwfLib.SwfMill {
         private static readonly Dictionary<string, Func<SwfTagBase>> _tagMap = new Dictionary<string, Func<SwfTagBase>>();
         public static XName SYMBOL_CLASS_TAG = "SymbolClass";
         public static XName DEFINE_SHAPE2_TAG = "DefineShape2";
-        public static XName DEFINE_BITS_LOSSLESS2_TAG = "DefineBitsLossless2";
+        public static string DEFINE_BITS_LOSSLESS2_TAG = "DefineBitsLossless2";
         public static XName DEFINE_SCALING_GRID_TAG = "DefineScalingGrid";
         public static XName DEFINE_SHAPE_4_TAG = "DefineShape4";
 

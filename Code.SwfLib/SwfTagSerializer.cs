@@ -250,6 +250,16 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsLossless2Tag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.CharacterID);
+            writer.WriteByte(tag.BitmapFormat);
+            writer.WriteUInt16(tag.BitmapWidth);
+            writer.WriteUInt16(tag.BitmapHeight);
+            if (tag.BitmapFormat == 3) {
+                writer.WriteByte(tag.BitmapColorTableSize);
+            }
+            if (tag.ZlibBitmapData != null) {
+                writer.WriteBytes(tag.ZlibBitmapData);
+            }
             return null;
         }
 

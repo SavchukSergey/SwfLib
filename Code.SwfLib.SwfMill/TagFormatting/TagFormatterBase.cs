@@ -11,6 +11,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected const string DATA_TAG = "data";
         protected const string OBJECT_ID_ATTRIB = "objectID";
         protected const string NAME_ATTRIB = "name";
+        protected const string WIDTH_ATTRIB = "width";
+        protected const string HEIGHT_ATTRIB = "height";
+
 
         protected const string TRANSFORM_TYPE_ELEM = "Transform";
         protected const string COLOR_TRANSFORM_TYPE_ELEM = "ColorTransform";
