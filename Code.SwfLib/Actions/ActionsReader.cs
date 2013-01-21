@@ -15,6 +15,30 @@ namespace Code.SwfLib.Actions {
             ushort length = (byte)code >= 0x80 ? _reader.ReadUInt16() : (ushort)0;
 
             switch (code) {
+                //SWF 3
+                case ActionCode.GotoFrame:
+                    return ReadGotoFrame(length);
+                case ActionCode.GetURL:
+                    return ReadGetURL(length);
+                case ActionCode.NextFrame:
+                    return ReadNextFrame();
+                case ActionCode.PreviousFrame:
+                    return ReadPreviousFrame();
+                case ActionCode.Play:
+                    return ReadPlay();
+                case ActionCode.Stop:
+                    return ReadStop(length);
+                case ActionCode.ToggleQuality:
+                    return ReadToggleQuality(length);
+                case ActionCode.StopSounds:
+                    return ReadStopSounds(length);
+                case ActionCode.WaitForFrame:
+                    return ReadWaitForFrame(length);
+                case ActionCode.SetTarget:
+                    return ReadSetTarget(length);
+                case ActionCode.GoToLabel:
+                    return ReadGoToLabel(length);
+
                 case ActionCode.Pop:
                 case ActionCode.Equals:
                 case ActionCode.Less:
@@ -58,50 +82,28 @@ namespace Code.SwfLib.Actions {
                     return ReadActionDivide(length);
                 case ActionCode.EndDrag:
                     return ReadActionEndDrag(length);
-                case ActionCode.GetURL:
-                    return ReadActionGetURL(length);
                 case ActionCode.GetVariable:
                     return ReadActionGetVariable(length);
-                case ActionCode.GotoFrame:
-                    return ReadActionGotoFrame(length);
-                case ActionCode.GoToLabel:
-                    return ReadActionGoToLabel(length);
                 case ActionCode.Jump:
                     return ReadActionJump();
                 case ActionCode.Multiply:
                     return ReadActionMultiply();
-                case ActionCode.NextFrame:
-                    return ReadActionNextFrame();
                 case ActionCode.Or:
                     return ReadActionOr();
-                case ActionCode.Play:
-                    return ReadActionPlay();
-                case ActionCode.PreviousFrame:
-                    return ReadActionPreviousFrame();
                 case ActionCode.Push:
                     return ReadActionPush(length);
                 case ActionCode.RandomNumber:
                     return ReadActionRandomNumber(length);
                 case ActionCode.SetMember:
                     return ReadActionSetMember(length);
-                case ActionCode.SetTarget:
-                    return ReadActionSetTarget(length);
                 case ActionCode.StartDrag:
                     return ReadActionStartDrag();
-                case ActionCode.Stop:
-                    return ReadActionStop(length);
-                case ActionCode.StopSounds:
-                    return ReadActionStopSounds(length);
                 case ActionCode.StringEquals:
                     return ReadActionStringEquals(length);
                 case ActionCode.Substract:
                     return ReadActionSubtract();
-                case ActionCode.ToggleQuality:
-                    return ReadActionToggleQuality(length);
                 case ActionCode.Trace:
                     return ReadActionTrace(length);
-                case ActionCode.WaitForFrame:
-                    return ReadActionWaitForFrame(length);
                 case ActionCode.WaitForFrame2:
                     return ReadActionWaitForFrame2(length);
                 default:
@@ -109,6 +111,54 @@ namespace Code.SwfLib.Actions {
             }
             //TODO: other actions (SWF 5-10)
         }
+
+        #region SWF 3 actions
+
+        public ActionGotoFrame ReadGotoFrame(ushort length) {
+            return new ActionGotoFrame { Frame = _reader.ReadUInt16() };
+        }
+
+        public ActionGetURL ReadGetURL(ushort length) {
+            return new ActionGetURL { UrlString = _reader.ReadString(), TargetString = _reader.ReadString() };
+        }
+
+        public ActionNextFrame ReadNextFrame() {
+            return new ActionNextFrame();
+        }
+
+        public ActionPreviousFrame ReadPreviousFrame() {
+            return new ActionPreviousFrame();
+        }
+
+        public ActionPlay ReadPlay() {
+            return new ActionPlay();
+        }
+
+        public ActionStop ReadStop(ushort length) {
+            return new ActionStop();
+        }
+
+        public ActionToggleQuality ReadToggleQuality(ushort length) {
+            return new ActionToggleQuality();
+        }
+
+        public ActionStopSounds ReadStopSounds(ushort length) {
+            return new ActionStopSounds();
+        }
+
+        public ActionWaitForFrame ReadWaitForFrame(ushort length) {
+            return new ActionWaitForFrame { Frame = _reader.ReadUInt16(), SkipCount = _reader.ReadByte() };
+        }
+
+        public ActionSetTarget ReadSetTarget(ushort length) {
+            return new ActionSetTarget { TargetName = _reader.ReadString() };
+        }
+
+        public ActionGoToLabel ReadGoToLabel(ushort length) {
+            return new ActionGoToLabel { Label = _reader.ReadString() };
+        }
+
+        #endregion
 
         public ActionAdd ReadActionAdd(ushort length) {
             return new ActionAdd();
@@ -150,20 +200,8 @@ namespace Code.SwfLib.Actions {
             return new ActionDefineFunction { FunctionName = name, Params = parameters, Body = _reader.ReadBytes(bodySize) };
         }
 
-        public ActionGetURL ReadActionGetURL(ushort length) {
-            return new ActionGetURL { UrlString = _reader.ReadString(), TargetString = _reader.ReadString() };
-        }
-
         public ActionGetVariable ReadActionGetVariable(ushort length) {
             return new ActionGetVariable();
-        }
-
-        public ActionGotoFrame ReadActionGotoFrame(ushort length) {
-            return new ActionGotoFrame { Frame = _reader.ReadUInt16() };
-        }
-
-        public ActionGoToLabel ReadActionGoToLabel(ushort length) {
-            return new ActionGoToLabel { Label = _reader.ReadString() };
         }
 
         public ActionJump ReadActionJump() {
@@ -174,20 +212,8 @@ namespace Code.SwfLib.Actions {
             return new ActionMultiply();
         }
 
-        public ActionNextFrame ReadActionNextFrame() {
-            return new ActionNextFrame();
-        }
-
         public ActionOr ReadActionOr() {
             return new ActionOr();
-        }
-
-        public ActionPlay ReadActionPlay() {
-            return new ActionPlay();
-        }
-
-        public ActionPreviousFrame ReadActionPreviousFrame() {
-            return new ActionPreviousFrame();
         }
 
         public ActionPush ReadActionPush(ushort length) {
@@ -224,20 +250,8 @@ namespace Code.SwfLib.Actions {
             return new ActionSetMember();
         }
 
-        public ActionSetTarget ReadActionSetTarget(ushort length) {
-            return new ActionSetTarget { TargetName = _reader.ReadString() };
-        }
-
         public ActionStartDrag ReadActionStartDrag() {
             return new ActionStartDrag();
-        }
-
-        public ActionStop ReadActionStop(ushort length) {
-            return new ActionStop();
-        }
-
-        public ActionStopSounds ReadActionStopSounds(ushort length) {
-            return new ActionStopSounds();
         }
 
         public ActionStringEquals ReadActionStringEquals(ushort length) {
@@ -248,16 +262,8 @@ namespace Code.SwfLib.Actions {
             return new ActionSubtract();
         }
 
-        public ActionToggleQuality ReadActionToggleQuality(ushort length) {
-            return new ActionToggleQuality();
-        }
-
         public ActionTrace ReadActionTrace(ushort length) {
             return new ActionTrace();
-        }
-
-        public ActionWaitForFrame ReadActionWaitForFrame(ushort length) {
-            return new ActionWaitForFrame { Frame = _reader.ReadUInt16(), SkipCount = _reader.ReadByte() };
         }
 
         public ActionWaitForFrame2 ReadActionWaitForFrame2(ushort length) {
