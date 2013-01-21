@@ -242,6 +242,8 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShape2Tag tag, SwfStreamReader reader) {
+            tag.ShapeID = reader.ReadUInt16();
+            reader.ReadRect(out tag.ShapeBounds);
             return tag;
         }
 

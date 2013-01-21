@@ -202,6 +202,8 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape2Tag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.ShapeID);
+            writer.WriteRect(ref tag.ShapeBounds);
             return null;
         }
 
