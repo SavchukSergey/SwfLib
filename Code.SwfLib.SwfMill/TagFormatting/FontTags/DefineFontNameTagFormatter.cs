@@ -5,7 +5,6 @@ using Code.SwfLib.Tags.FontTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
     public class DefineFontNameTagFormatter : TagFormatterBase<DefineFontNameTag> {
 
-        protected const string NAME_ATTRIB = "name";
         protected const string COPYRIGHT_ATTRIB = "copyright";
 
         protected override void AcceptTagAttribute(DefineFontNameTag tag, XAttribute attrib) {

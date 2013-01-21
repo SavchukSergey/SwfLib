@@ -10,7 +10,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string REPLACE_ATTRIB = "replace";
         private const string DEPTH_ATTRIB = "depth";
         private const string MORPH_ATTRIB = "morph";
-        private const string NAME_ATTRIB = "name";
         private const string ALL_FLAGS1_ATTRIB = "allflags1";
         private const string ALL_FLAGS2_ATTRIB = "allflags2";
         private const string CLIP_DEPTH = "clipDepth";

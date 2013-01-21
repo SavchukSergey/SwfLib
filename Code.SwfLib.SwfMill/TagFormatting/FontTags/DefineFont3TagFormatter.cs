@@ -5,8 +5,6 @@ using Code.SwfLib.Tags.FontTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
     public class DefineFont3TagFormatter : TagFormatterBase<DefineFont3Tag> {
 
-        private const string NAME_ATTRIB = "name";
-        
         private const string HAS_LAYOUT_ATTRIB = "hasLayout";
         private const string SHIFT_JIS_ATTRIB = "isShiftJIS";
         private const string UNICODE_ATTRIB = "isUnicode";

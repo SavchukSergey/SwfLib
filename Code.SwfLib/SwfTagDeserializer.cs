@@ -173,13 +173,12 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(SymbolClassTag tag, SwfStreamReader reader) {
             ushort count = reader.ReadUInt16();
-            tag.References = new SwfSymbolReference[count];
             for (int i = 0; i < count; i++) {
                 var reference = new SwfSymbolReference {
                     SymbolID = reader.ReadUInt16(),
                     SymbolName = reader.ReadString()
                 };
-                tag.References[i] = reference;
+                tag.References.Add(reference);
             }
             return tag;
 

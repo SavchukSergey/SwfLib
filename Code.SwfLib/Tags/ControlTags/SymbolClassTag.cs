@@ -1,9 +1,10 @@
-﻿using Code.SwfLib.Data;
+﻿using System.Collections.Generic;
+using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Tags.ControlTags {
     public class SymbolClassTag : ControlBaseTag {
 
-        public SwfSymbolReference[] References;
+        public readonly IList<SwfSymbolReference> References = new List<SwfSymbolReference>();
 
         public override SwfTagType TagType {
             get { return SwfTagType.SymbolClass; }
