@@ -94,7 +94,7 @@ namespace Code.SwfLib {
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(FrameLabelTag tag, SwfStreamWriter writer) {
             writer.WriteString(tag.Name);
-            if (tag.IsAnchor) writer.WriteByte(1);
+            if (tag.AnchorFlag != 0) writer.WriteByte(tag.AnchorFlag);
             return null;
         }
 
