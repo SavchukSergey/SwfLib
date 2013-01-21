@@ -144,7 +144,7 @@ namespace Code.SwfLib.Actions {
                 default:
                     throw new NotSupportedException("ActionCode is " + code);
             }
-            //TODO: other actions (SWF 5-10)
+            //TODO: other actions (SWF 5, 6, 7)
         }
 
         #region SWF 3 actions

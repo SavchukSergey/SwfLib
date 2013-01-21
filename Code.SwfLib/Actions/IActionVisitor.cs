@@ -13,13 +13,39 @@ namespace Code.SwfLib.Actions {
 
         TResult Visit(ActionSubtract action, TArg arg);
 
-        #endregion
+        #region Logical operands
 
         TResult Visit(ActionAnd action, TArg arg);
 
-        TResult Visit(ActionAsciiToChar action, TArg arg);
+        #endregion
+
+        #region Control flow
 
         TResult Visit(ActionCall action, TArg arg);
+
+        #endregion
+
+        #endregion
+
+        #region SWF 7
+
+        TResult Visit(ActionDefineFunction2 action, TArg arg);
+
+        TResult Visit(ActionExtends action, TArg arg);
+
+        TResult Visit(ActionCastOp action, TArg arg);
+
+        TResult Visit(ActionImplementsOp action, TArg arg);
+
+        TResult Visit(ActionTry action, TArg arg);
+
+        TResult Visit(ActionThrow action, TArg arg);
+
+        #endregion
+
+
+        TResult Visit(ActionAsciiToChar action, TArg arg);
+
 
         TResult Visit(ActionCharToAscii action, TArg arg);
 

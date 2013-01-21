@@ -1,5 +1,5 @@
 ﻿namespace Code.SwfLib.Data.Actions {
-    public  enum ActionCode : byte {
+    public enum ActionCode : byte {
 
         Empty = 0x00,
         /// <summary>
@@ -126,6 +126,9 @@
         /// ActionEndDrag ends the drag operation in progress, if any.
         /// </summary>
         EndDrag = 0x28,
+        Throw = 0x2a,
+        CastOp = 0x2b,
+        ImplementsOp = 0x2c,
         /// <summary>
         /// ActionStringLess tests to see if a string is less than another string 
         /// </summary>
@@ -172,6 +175,7 @@
         /// created. Any existing value in the property is overwritten.
         /// </summary>
         SetMember = 0x4f,
+        Extends = 0x69,
         /// <summary>
         /// ActionGotoFrame instructs Flash Player to go to the specified frame in the current file. 
         /// </summary>
@@ -208,6 +212,8 @@
         /// ActionWaitForFrame2 waits for a frame to be loaded and is stack based.
         /// </summary>
         WaitForFrame2 = 0x8d,
+        DefineFunction2 = 0x8e,
+        Try = 0x8f,
         /// <summary>
         /// ActionPush pushes one or more values to the stack. 
         /// </summary>

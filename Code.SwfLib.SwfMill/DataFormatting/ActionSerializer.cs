@@ -12,11 +12,21 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         #region IActionVisitor Members
 
+        #region SWF 3
+
+        #endregion
+
+        #region SWF 4
+
         XElement IActionVisitor<object, XElement>.Visit(ActionAdd action, object writer) {
             throw new NotImplementedException();
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionAnd action, object writer) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionDivide action, object writer) {
             throw new NotImplementedException();
         }
 
@@ -35,6 +45,36 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         XElement IActionVisitor<object, XElement>.Visit(ActionCloneSprite action, object writer) {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        #region SWF 7
+
+        public XElement Visit(ActionDefineFunction2 action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        public XElement Visit(ActionExtends action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        public XElement Visit(ActionCastOp action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        public XElement Visit(ActionImplementsOp action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        public XElement Visit(ActionTry action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        public XElement Visit(ActionThrow action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
         XElement IActionVisitor<object, XElement>.Visit(ActionConstantPool action, object writer) {
             var res = new XElement("Dictionary");
@@ -59,10 +99,6 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
             }
             res.Add(args);
             return res;
-        }
-
-        XElement IActionVisitor<object, XElement>.Visit(ActionDivide action, object writer) {
-            throw new NotImplementedException();
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionEndDrag action, object writer) {
@@ -105,11 +141,11 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
             throw new NotImplementedException();
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionIf action, object writer) {
+        public XElement Visit(ActionIf action, object arg) {
             throw new NotImplementedException();
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionJump action, object writer) {
+        public XElement Visit(ActionJump action, object arg) {
             throw new NotImplementedException();
         }
 

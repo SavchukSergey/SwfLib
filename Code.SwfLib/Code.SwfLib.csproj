@@ -54,7 +54,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\ActionCastOp.cs" />
+    <Compile Include="Actions\ActionDefineFunction2.cs" />
+    <Compile Include="Actions\ActionExtends.cs" />
+    <Compile Include="Actions\ActionImplementsOp.cs" />
     <Compile Include="Actions\ActionsReader.cs" />
+    <Compile Include="Actions\ActionThrow.cs" />
+    <Compile Include="Actions\ActionTry.cs" />
     <Compile Include="BitsCount.cs" />
     <Compile Include="ClipActionsStreamExt.cs" />
     <Compile Include="ColorTransformStreamExt.cs" />
