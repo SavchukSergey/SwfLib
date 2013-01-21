@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace Code.SwfLib.SwfMill {
@@ -28,19 +24,19 @@ namespace Code.SwfLib.SwfMill {
                     Decompress(args);
                     break;
                 default:
-                    System.Console.WriteLine("Unknown command {0}", command);
+                    Console.WriteLine("Unknown command {0}", command);
                     break;
             }
         }
 
         static void SwfToXml(string[] args) {
             if (args.Length < 2) {
-                System.Console.WriteLine("Source file wasn't specified");
+                Console.WriteLine("Source file wasn't specified");
                 ShowUsage();
                 return;
             }
             if (args.Length < 3) {
-                System.Console.WriteLine("target file wasn't specified");
+                Console.WriteLine("target file wasn't specified");
                 ShowUsage();
                 return;
             }
@@ -54,12 +50,12 @@ namespace Code.SwfLib.SwfMill {
 
         static void XmlToSwf(string[] args) {
             if (args.Length < 2) {
-                System.Console.WriteLine("Source file wasn't specified");
+                Console.WriteLine("Source file wasn't specified");
                 ShowUsage();
                 return;
             }
             if (args.Length < 3) {
-                System.Console.WriteLine("target file wasn't specified");
+                Console.WriteLine("target file wasn't specified");
                 ShowUsage();
                 return;
             }
@@ -74,19 +70,14 @@ namespace Code.SwfLib.SwfMill {
         }
 
         static void Decompress(string[] args) {
-            string source, target;
             if (args.Length < 2) {
-                System.Console.WriteLine("Source file wasn't specified");
+                Console.WriteLine("Source file wasn't specified");
                 ShowUsage();
                 return;
             }
-            source = args[1];
-            if (args.Length < 3) {
-                target = source;
-            } else {
-                target = args[2];
-            }
-            MemoryStream mem = new MemoryStream();
+            var source = args[1];
+            var target = args.Length < 3 ? source : args[2];
+            var mem = new MemoryStream();
             using (var file = File.Open(source, FileMode.Open, FileAccess.Read)) {
                 var facade = new SwfMillFacade();
                 facade.Decompress(file, mem);
