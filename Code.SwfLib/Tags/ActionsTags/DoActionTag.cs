@@ -6,10 +6,6 @@ namespace Code.SwfLib.Tags.ActionsTags {
 
         public readonly IList<ActionBase> ActionRecords = new List<ActionBase>();
 
-        public override object AcceptVistor(ISwfTagVisitor visitor) {
-            return visitor.Visit(this);
-        }
-
         public override SwfTagType TagType {
             get { return SwfTagType.DoAction; }
         }

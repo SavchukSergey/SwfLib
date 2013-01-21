@@ -8,8 +8,6 @@
         /// </summary>
         public byte[] RestData;
 
-        public abstract object AcceptVistor(ISwfTagVisitor visitor);
-
         public abstract TResult AcceptVistor<TArg, TResult>(ISwfTagVisitor<TArg, TResult> visitor, TArg arg);
 
     }

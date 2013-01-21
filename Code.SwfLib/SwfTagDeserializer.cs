@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Text;
+using Code.SwfLib.Actions;
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.Actions;
 using Code.SwfLib.Tags;
@@ -201,10 +202,12 @@ namespace Code.SwfLib {
 
         #region Actions tags
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DoActionTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DoActionTag tag, SwfStreamReader reader)
+        {
+            var actionReader = new ActionsReader(reader);
             ActionBase action;
             do {
-                action = reader.ReadAction();
+                action = actionReader.ReadAction();
                 if (action != null) {
                     tag.ActionRecords.Add(action);
                 }

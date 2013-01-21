@@ -147,6 +147,11 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(SymbolClassTag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16((ushort)tag.References.Count);
+            foreach (var symbolRef in tag.References) {
+                writer.WriteUInt16(symbolRef.SymbolID);
+                writer.WriteString(symbolRef.SymbolName);
+            }
             return null;
         }
 
