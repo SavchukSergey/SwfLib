@@ -131,6 +131,19 @@ namespace Code.SwfLib.Actions {
                 case ActionCode.Trace:
                     return ReadTrace();
 
+                //SWF 7
+                case ActionCode.DefineFunction2:
+                    return ReadDefineFunction2();
+                case ActionCode.Extends:
+                    return ReadExtends();
+                case ActionCode.CastOp:
+                    return ReadCastOp();
+                case ActionCode.ImplementsOp:
+                    return ReadImplemntsOp();
+                case ActionCode.Try:
+                    return ReadTry();
+                case ActionCode.Throw:
+                    return ReadThrow();
 
                 //Other
                 case ActionCode.Empty:
@@ -144,7 +157,7 @@ namespace Code.SwfLib.Actions {
                 default:
                     throw new NotSupportedException("ActionCode is " + code);
             }
-            //TODO: other actions (SWF 5, 6, 7)
+            //TODO: other actions (SWF 5, 6)
         }
 
         #region SWF 3 actions
@@ -446,6 +459,33 @@ namespace Code.SwfLib.Actions {
 
         #endregion
 
+        #region SWF 7
+
+        private ActionBase ReadDefineFunction2() {
+            throw new NotImplementedException();
+        }
+
+        private ActionExtends ReadExtends() {
+            return new ActionExtends();
+        }
+
+        private ActionCastOp ReadCastOp() {
+            return new ActionCastOp();
+        }
+
+        private ActionImplementsOp ReadImplemntsOp() {
+            return new ActionImplementsOp();
+        }
+
+        private ActionBase ReadTry() {
+            throw new NotImplementedException();
+        }
+
+        private ActionThrow ReadThrow() {
+            return new ActionThrow();
+        }
+
+        #endregion
 
         public ActionConstantPool ReadActionConstantPool(ushort length) {
             ushort count = _reader.ReadUInt16();
