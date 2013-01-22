@@ -1,7 +1,6 @@
 ﻿namespace Code.SwfLib.Actions {
     public class ActionConstantPool : ActionBase {
 
-
         public string[] ConstantPool;
 
         public override ActionCode ActionCode {

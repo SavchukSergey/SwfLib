@@ -166,6 +166,79 @@
 
                 #region SWF 5
 
+                case ActionCode.CallFunction:
+                    return new ActionCallFunction();
+                case ActionCode.CallMethod:
+                    return new ActionCallMethod();
+                case ActionCode.ConstantPool:
+                    return new ActionConstantPool();
+                case ActionCode.DefineFunction:
+                    return new ActionDefineFunction();
+                case ActionCode.DefineLocal:
+                    return new ActionDefineLocal();
+                case ActionCode.DefineLocal2:
+                    return new ActionDefineLocal2();
+                case ActionCode.Delete:
+                    return new ActionDelete();
+                case ActionCode.Delete2:
+                    return new ActionDelete2();
+                case ActionCode.Enumerate:
+                    return new ActionEnumerate();
+                case ActionCode.Equals2:
+                    return new ActionEquals2();
+                case ActionCode.GetMember:
+                    return new ActionGetMember();
+                case ActionCode.InitArray:
+                    return new ActionInitArray();
+                case ActionCode.InitObject:
+                    return new ActionInitObject();
+                case ActionCode.NewMethod:
+                    return new ActionNewMethod();
+                case ActionCode.NewObject:
+                    return new ActionNewObject();
+                case ActionCode.SetMember:
+                    return new ActionSetMember();
+                case ActionCode.TargetPath:
+                    return new ActionTargetPath();
+                case ActionCode.With:
+                    return new ActionWith();
+                case ActionCode.ToNumber:
+                    return new ActionToNumber();
+                case ActionCode.ToString:
+                    return new ActionToString();
+                case ActionCode.TypeOf:
+                    return new ActionTypeOf();
+                case ActionCode.Add2:
+                    return new ActionAdd2();
+                case ActionCode.Less2:
+                    return new ActionLess2();
+                case ActionCode.Modulo:
+                    return new ActionModulo();
+                case ActionCode.BitAnd:
+                    return new ActionBitAnd();
+                case ActionCode.BitLShift:
+                    return new ActionBitLShift();
+                case ActionCode.BitOr:
+                    return new ActionBitOr();
+                case ActionCode.BitRShift:
+                    return new ActionBitRShift();
+                case ActionCode.BitURShift:
+                    return new ActionBitURShift();
+                case ActionCode.BitXor:
+                    return new ActionBitXor();
+                case ActionCode.Decrement:
+                    return new ActionDecrement();
+                case ActionCode.Increment:
+                    return new ActionIncrement();
+                case ActionCode.PushDuplicate:
+                    return new ActionPushDuplicate();
+                case ActionCode.Return:
+                    return new ActionReturn();
+                case ActionCode.StackSwap:
+                    return new ActionStackSwap();
+                case ActionCode.StoreRegister:
+                    return new ActionStoreRegister();
+                
                 #endregion
 
                 #region SWF 6
@@ -200,15 +273,6 @@
                     return new ActionThrow();
 
                 #endregion
-
-                case ActionCode.ConstantPool:
-                    return new ActionConstantPool();
-                case ActionCode.DefineFunction:
-                    return new ActionDefineFunction();
-                case ActionCode.Return:
-                    return new ActionReturn();
-                case ActionCode.SetMember:
-                    return new ActionSetMember();
 
                 default:
                     return new ActionUnknown(code);

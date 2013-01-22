@@ -165,18 +165,48 @@
         /// ActionMBAsciiToChar converts ASCII to character code and is multi-byte aware.
         /// </summary>
         MBAsciiToChar = 0x37,
+        Delete = 0x3a,
+        Delete2 = 0x3b,
+        DefineLocal = 0x3c,
+        CallFunction = 0x3d,
         /// <summary>
         /// ActionReturn forces the return item to be pushed off the stack and returned. If a return is not 
         /// appropriate, the return item is discarded.
         /// </summary>
         Return = 0x3e,
+        Modulo = 0x3f,
+        NewObject = 0x40,
+        DefineLocal2 = 0x41,
+        InitArray = 0x42,
+        InitObject = 0x43,
+        TypeOf = 0x44,
+        TargetPath = 0x45,
+        Enumerate = 0x46,
+        Add2 = 0x47,
+        Less2 = 0x48,
+        Equals2 = 0x49,
+        ToNumber = 0x4a,
+        ToString = 0x4b,
+        PushDuplicate = 0x4c,
+        StackSwap = 0x4d,
+        GetMember = 0x4e,
         /// <summary>
         /// ActionSetMember sets a property of an object. If the property does not already exist, it is 
         /// created. Any existing value in the property is overwritten.
         /// </summary>
         SetMember = 0x4f,
+        Increment = 0x50,
+        Decrement = 0x51,
+        CallMethod = 0x52,
+        NewMethod = 0x53,
         InstanceOf = 0x54,
         Enumerate2 = 0x55,
+        BitAnd = 0x60,
+        BitOr = 0x61,
+        BitXor = 0x62,
+        BitLShift = 0x63,
+        BitRShift = 0x64,
+        BitURShift = 0x65,
         StrictEquals = 0x66,
         Greater = 0x67,
         StringGreater = 0x68,
@@ -193,6 +223,7 @@
         /// respectively. 
         /// </summary>
         GetURL = 0x83,
+        StoreRegister = 0x87,
         /// <summary>
         /// ActionConstantPool creates a new constant pool, and replaces the old constant pool if one 
         /// already exists.
@@ -219,6 +250,7 @@
         WaitForFrame2 = 0x8d,
         DefineFunction2 = 0x8e,
         Try = 0x8f,
+        With = 0x94,
         /// <summary>
         /// ActionPush pushes one or more values to the stack. 
         /// </summary>

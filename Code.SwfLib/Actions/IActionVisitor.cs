@@ -193,6 +193,8 @@
 
         TResult Visit(ActionWith action, TArg arg);
 
+        #endregion
+
         TResult Visit(ActionToNumber action, TArg arg);
 
         TResult Visit(ActionToString action, TArg arg);
@@ -229,7 +231,6 @@
 
         TResult Visit(ActionStoreRegister action, TArg arg);
 
-        #endregion
 
         #endregion
 
