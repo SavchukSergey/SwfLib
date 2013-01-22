@@ -13,7 +13,8 @@ namespace Code.SwfLib.Actions {
             var code = (ActionCode)_reader.ReadByte();
             ushort length = (byte)code >= 0x80 ? _reader.ReadUInt16() : (ushort)0;
             var action = _factory.Create(code);
-            return action.AcceptVisitor(this, length);
+            action.AcceptVisitor(this, length);
+            return action;
         }
 
         #region SWF 3
