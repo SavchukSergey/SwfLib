@@ -1,6 +1,4 @@
-﻿using Code.SwfLib.Data.Actions;
-
-namespace Code.SwfLib.Actions {
+﻿namespace Code.SwfLib.Actions {
     public class ActionThrow : ActionBase {
         public override ActionCode ActionCode {
             get { return ActionCode.Throw; }

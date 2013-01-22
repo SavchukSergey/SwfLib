@@ -1,7 +1,5 @@
-﻿namespace Code.SwfLib.Data.Actions
-{
-    public struct ClipActions
-    {
+﻿namespace Code.SwfLib.Actions {
+    public struct ClipActions {
         //public ushort Reserved;
 
         //public uint AllEventFlags;

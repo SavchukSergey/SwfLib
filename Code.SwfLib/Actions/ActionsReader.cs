@@ -1,5 +1,4 @@
 ﻿using System;
-using Code.SwfLib.Data.Actions;
 
 namespace Code.SwfLib.Actions {
     public class ActionsReader : IActionVisitor<ushort, ActionBase> {
@@ -20,14 +19,13 @@ namespace Code.SwfLib.Actions {
         #region SWF 3
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGotoFrame action, ushort length) {
-            action.Frame = _reader.ReadUInt16(); 
+            action.Frame = _reader.ReadUInt16();
             return action;
         }
 
-        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGetURL action, ushort length)
-        {
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGetURL action, ushort length) {
             action.UrlString = _reader.ReadString();
-            action.TargetString = _reader.ReadString() ; 
+            action.TargetString = _reader.ReadString();
             return action;
         }
 
@@ -57,17 +55,17 @@ namespace Code.SwfLib.Actions {
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionWaitForFrame action, ushort length) {
             action.Frame = _reader.ReadUInt16();
-            action.SkipCount = _reader.ReadByte(); 
+            action.SkipCount = _reader.ReadByte();
             return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionSetTarget action, ushort length) {
-            action.TargetName = _reader.ReadString(); 
+            action.TargetName = _reader.ReadString();
             return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGoToLabel action, ushort length) {
-            action.Label = _reader.ReadString(); 
+            action.Label = _reader.ReadString();
             return action;
         }
 
@@ -209,7 +207,7 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionIf action, ushort length) {
-            action.BranchOffset = _reader.ReadSInt16(); 
+            action.BranchOffset = _reader.ReadSInt16();
             return action;
         }
 

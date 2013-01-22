@@ -1,6 +1,6 @@
 ﻿using Code.SwfLib.Actions;
 
-namespace Code.SwfLib.Data.Actions {
+namespace Code.SwfLib.Actions {
     public class ActionSetVariable : ActionBase {
 
         public override ActionCode ActionCode {

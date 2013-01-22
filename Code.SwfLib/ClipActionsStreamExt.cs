@@ -1,4 +1,4 @@
-﻿using Code.SwfLib.Data.Actions;
+﻿using Code.SwfLib.Actions;
 
 namespace Code.SwfLib {
     public static class ClipActionsStreamExt {

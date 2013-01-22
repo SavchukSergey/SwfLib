@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.Actions;
-using Code.SwfLib.Data.Actions;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
     public class ActionXmlSerializer : IActionVisitor<object, XElement> {

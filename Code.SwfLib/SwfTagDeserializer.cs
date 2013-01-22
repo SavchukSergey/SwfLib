@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text;
 using Code.SwfLib.Actions;
 using Code.SwfLib.Data;
-using Code.SwfLib.Data.Actions;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;

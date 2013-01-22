@@ -1,6 +1,6 @@
 ﻿using Code.SwfLib.Actions;
 
-namespace Code.SwfLib.Data.Actions {
+namespace Code.SwfLib.Actions {
     public class ActionDivide : ActionBase {
 
         public override ActionCode ActionCode {

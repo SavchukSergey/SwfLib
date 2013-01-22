@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Actions;
 
-namespace Code.SwfLib.Data.Actions {
+namespace Code.SwfLib.Actions {
     public class ActionPush : ActionBase {
 
         public readonly IList<ActionPushItem> Items = new List<ActionPushItem>();
