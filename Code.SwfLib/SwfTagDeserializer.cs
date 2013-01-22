@@ -259,6 +259,7 @@ namespace Code.SwfLib {
             reader.ReadRect(out tag.ShapeBounds);
             reader.AlignToByte();
             reader.ReadRect(out tag.EdgeBounds);
+            reader.AlignToByte();
             tag.Flags = reader.ReadByte();
             return tag;
         }

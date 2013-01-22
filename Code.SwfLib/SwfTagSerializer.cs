@@ -216,6 +216,10 @@ namespace Code.SwfLib {
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape4Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
+            writer.FlushBits();
+            writer.WriteRect(ref tag.EdgeBounds);
+            writer.FlushBits();
+            writer.WriteByte(tag.Flags);
             return null;
         }
 
