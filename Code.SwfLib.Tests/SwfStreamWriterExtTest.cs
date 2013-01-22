@@ -143,8 +143,10 @@ namespace Code.SwfLib.Tests {
         public void WriteMatrixFromBitsTest() {
             var mem = new MemoryStream();
             var matrix = new SwfMatrix {
+                HasScale = true,
                 ScaleX = 2.5,
                 ScaleY = 1.75,
+                HasRotate = true,
                 RotateSkew0 = 3.25,
                 RotateSkew1 = 0.5,
                 TranslateX = 16,
