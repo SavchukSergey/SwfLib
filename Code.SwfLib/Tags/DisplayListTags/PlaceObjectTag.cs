@@ -1,13 +1,7 @@
 ﻿using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Tags.DisplayListTags {
-    public class PlaceObjectTag : DisplayListBaseTag {
-
-        public ushort CharacterID;
-
-        public ushort Depth;
-
-        public SwfMatrix Matrix;
+    public class PlaceObjectTag : PlaceObjectBaseTag {
 
         public ColorTransformRGB? ColorTransform;
 

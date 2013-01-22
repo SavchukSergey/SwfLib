@@ -173,6 +173,7 @@
     <Compile Include="Tags\ButtonTags\DefineButtonCxformTag.cs" />
     <Compile Include="Tags\ButtonTags\DefineButtonTag.cs" />
     <Compile Include="Tags\DefineBinaryDataTag.cs" />
+    <Compile Include="Tags\DisplayListTags\PlaceObjectBaseTag.cs" />
     <Compile Include="Tags\FontTags\DefineFont2Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontInfo2Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontTag.cs" />

@@ -25,6 +25,10 @@ namespace Code.SwfLib.SwfMill {
         public static string DEFINE_BITS_LOSSLESS2_TAG = "DefineBitsLossless2";
         public static XName DEFINE_SCALING_GRID_TAG = "DefineScalingGrid";
 
+        public const string PLACE_OBJECT_TAG = "PlaceObject";
+        public const string PLACE_OBJECT2_TAG = "PlaceObject2";
+        public const string PLACE_OBJECT3_TAG = "PlaceObject3";
+
         public const string CSM_TEXT_SETTINGS_TAG = "CSMTextSettings";
         public const string DEFINE_BITS_JPEG2_TAG = "DefineBitsJPEG2";
         public const string DEFINE_BITS_LOSSLESS_TAG = "DefineBitsLossless";
@@ -43,8 +47,6 @@ namespace Code.SwfLib.SwfMill {
         public const string FILE_ATTRIBUTES_TAG = "FileAttributes";
         public const string FRAME_LABEL_TAG = "FrameLabel";
         public const string METADATA_TAG = "Metadata";
-        public const string PLACE_OBJECT2_TAG = "PlaceObject2";
-        public const string PLACE_OBJECT3_TAG = "PlaceObject3";
         public const string REMOVE_OBJECT2_TAG = "RemoveObject2";
         public const string SET_BACKGROUND_COLOR_TAG = "SetBackgroundColor";
         public const string SCRIPT_LIMITES_TAG = "ScriptLimits";

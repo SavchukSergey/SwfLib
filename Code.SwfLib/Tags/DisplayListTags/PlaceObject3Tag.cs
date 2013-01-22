@@ -1,11 +1,13 @@
 ﻿namespace Code.SwfLib.Tags.DisplayListTags {
-    public class PlaceObject3Tag : DisplayListBaseTag {
-
-        public ushort ObjectID;
+    public class PlaceObject3Tag : PlaceObjectBaseTag {
 
         public string Name;
 
         public byte BitmapCache;
+
+        public bool HasCharacter;
+
+        public bool HasMatrix;
 
         public override SwfTagType TagType {
             get { return SwfTagType.PlaceObject3; }

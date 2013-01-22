@@ -90,6 +90,7 @@
     <Compile Include="SwfMillFacade.cs" />
     <Compile Include="SwfMillPrimitives.cs" />
     <Compile Include="SwfTagNameMapping.cs" />
+    <Compile Include="TagFormatting\DisplayListTags\PlaceObjectBaseFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\PlaceObjectTagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\RemoveObjectTagFormatter.cs" />
     <Compile Include="TagFormatting\FontTags\DefineFontTagFormatter.cs" />
