@@ -2,303 +2,149 @@
 using Code.SwfLib.Data.Actions;
 
 namespace Code.SwfLib.Actions {
-    public class ActionsReader {
+    public class ActionsReader : IActionVisitor<ushort, ActionBase> {
         private readonly SwfStreamReader _reader;
-
+        private readonly ActionsFactory _factory;
         public ActionsReader(SwfStreamReader reader) {
             _reader = reader;
+            _factory = new ActionsFactory();
         }
 
         public ActionBase ReadAction() {
             var code = (ActionCode)_reader.ReadByte();
-
             ushort length = (byte)code >= 0x80 ? _reader.ReadUInt16() : (ushort)0;
-
-            switch (code) {
-                //SWF 3
-                case ActionCode.GotoFrame:
-                    return ReadGotoFrame(length);
-                case ActionCode.GetURL:
-                    return ReadGetURL(length);
-                case ActionCode.NextFrame:
-                    return ReadNextFrame();
-                case ActionCode.PreviousFrame:
-                    return ReadPreviousFrame();
-                case ActionCode.Play:
-                    return ReadPlay();
-                case ActionCode.Stop:
-                    return ReadStop(length);
-                case ActionCode.ToggleQuality:
-                    return ReadToggleQuality(length);
-                case ActionCode.StopSounds:
-                    return ReadStopSounds(length);
-                case ActionCode.WaitForFrame:
-                    return ReadWaitForFrame(length);
-                case ActionCode.SetTarget:
-                    return ReadSetTarget(length);
-                case ActionCode.GoToLabel:
-                    return ReadGoToLabel(length);
-
-                //SWF 4
-                case ActionCode.Add:
-                    return ReadAdd();
-                case ActionCode.Divide:
-                    return ReadDivide();
-                case ActionCode.Multiply:
-                    return ReadMultiply();
-                case ActionCode.Subtract:
-                    return ReadSubtract();
-
-                case ActionCode.Equals:
-                    return ReadEquals();
-                case ActionCode.Less:
-                    return ReadLess();
-
-                case ActionCode.And:
-                    return ReadAnd();
-                case ActionCode.Not:
-                    return ReadNot();
-                case ActionCode.Or:
-                    return ReadOr();
-                case ActionCode.StringAdd:
-                    return ReadStringAdd();
-                case ActionCode.StringEquals:
-                    return ReadStringEquals();
-                case ActionCode.StringExtract:
-                    return ReadStringExtract();
-                case ActionCode.StringLength:
-                    return ReadStringLength();
-                case ActionCode.MBStringExtract:
-                    return ReadMBStringExtract();
-                case ActionCode.MBStringLength:
-                    return ReadMBStringLength();
-                case ActionCode.StringLess:
-                    return ReadStringLess();
-
-                case ActionCode.Pop:
-                    return ReadPop();
-                case ActionCode.Push:
-                    return ReadPush(length);
-
-                case ActionCode.AsciiToChar:
-                    return ReadAsciiToChar();
-                case ActionCode.CharToAscii:
-                    return ReadCharToAscii();
-                case ActionCode.ToInteger:
-                    return ReadToInteger();
-                case ActionCode.MBAsciiToChar:
-                    return ReadMBAsciiToChar();
-                case ActionCode.MBCharToAscii:
-                    return ReadMBCharToAscii();
-
-                case ActionCode.Call:
-                    return ReadCall();
-                case ActionCode.If:
-                    return ReadIf();
-                case ActionCode.Jump:
-                    return ReadJump();
-
-                case ActionCode.GetVariable:
-                    return ReadGetVariable();
-                case ActionCode.SetVariable:
-                    return ReadSetVariable();
-
-                case ActionCode.GetURL2:
-                    return ReadGetURL2();
-                case ActionCode.GetProperty:
-                    return ReadGetProperty();
-                case ActionCode.GotoFrame2:
-                    return ReadGoToFrame2();
-                case ActionCode.RemoveSprite:
-                    return ReadRemoveSprite();
-                case ActionCode.SetProperty:
-                    return ReadSetProperty();
-                case ActionCode.SetTarget2:
-                    return ReadSetTarget2();
-                case ActionCode.StartDrag:
-                    return ReadStartDrag();
-                case ActionCode.WaitForFrame2:
-                    return ReadWaitForFrame2();
-                case ActionCode.CloneSprite:
-                    return ReadCloneSprite();
-                case ActionCode.EndDrag:
-                    return ReadEndDrag();
-
-                case ActionCode.GetTime:
-                    return ReadGetTime();
-                case ActionCode.RandomNumber:
-                    return ReadRandomNumber();
-                case ActionCode.Trace:
-                    return ReadTrace();
-
-                //SWF 7
-                case ActionCode.DefineFunction2:
-                    return ReadDefineFunction2();
-                case ActionCode.Extends:
-                    return ReadExtends();
-                case ActionCode.CastOp:
-                    return ReadCastOp();
-                case ActionCode.ImplementsOp:
-                    return ReadImplemntsOp();
-                case ActionCode.Try:
-                    return ReadTry();
-                case ActionCode.Throw:
-                    return ReadThrow();
-
-                //Other
-                case ActionCode.Empty:
-                    return null;
-                case ActionCode.ConstantPool:
-                    return ReadActionConstantPool(length);
-                case ActionCode.DefineFunction:
-                    return ReadActionDefineFunction(length);
-                case ActionCode.SetMember:
-                    return ReadActionSetMember(length);
-                default:
-                    throw new NotSupportedException("ActionCode is " + code);
-            }
-            //TODO: other actions (SWF 5, 6)
+            var action = _factory.Create(code);
+            return action.AcceptVisitor(this, length);
         }
 
-        #region SWF 3 actions
+        #region SWF 3
 
-        public ActionGotoFrame ReadGotoFrame(ushort length) {
-            return new ActionGotoFrame { Frame = _reader.ReadUInt16() };
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGotoFrame action, ushort length) {
+            action.Frame = _reader.ReadUInt16(); 
+            return action;
         }
 
-        public ActionGetURL ReadGetURL(ushort length) {
-            return new ActionGetURL { UrlString = _reader.ReadString(), TargetString = _reader.ReadString() };
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGetURL action, ushort length)
+        {
+            action.UrlString = _reader.ReadString();
+            action.TargetString = _reader.ReadString() ; 
+            return action;
         }
 
-        public ActionNextFrame ReadNextFrame() {
-            return new ActionNextFrame();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionNextFrame action, ushort length) {
+            return action;
         }
 
-        public ActionPreviousFrame ReadPreviousFrame() {
-            return new ActionPreviousFrame();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionPreviousFrame action, ushort length) {
+            return action;
         }
 
-        public ActionPlay ReadPlay() {
-            return new ActionPlay();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionPlay action, ushort length) {
+            return action;
         }
 
-        public ActionStop ReadStop(ushort length) {
-            return new ActionStop();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStop action, ushort length) {
+            return action;
         }
 
-        public ActionToggleQuality ReadToggleQuality(ushort length) {
-            return new ActionToggleQuality();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionToggleQuality action, ushort length) {
+            return action;
         }
 
-        public ActionStopSounds ReadStopSounds(ushort length) {
-            return new ActionStopSounds();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStopSounds action, ushort length) {
+            return action;
         }
 
-        public ActionWaitForFrame ReadWaitForFrame(ushort length) {
-            return new ActionWaitForFrame { Frame = _reader.ReadUInt16(), SkipCount = _reader.ReadByte() };
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionWaitForFrame action, ushort length) {
+            action.Frame = _reader.ReadUInt16();
+            action.SkipCount = _reader.ReadByte(); 
+            return action;
         }
 
-        public ActionSetTarget ReadSetTarget(ushort length) {
-            return new ActionSetTarget { TargetName = _reader.ReadString() };
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionSetTarget action, ushort length) {
+            action.TargetName = _reader.ReadString(); 
+            return action;
         }
 
-        public ActionGoToLabel ReadGoToLabel(ushort length) {
-            return new ActionGoToLabel { Label = _reader.ReadString() };
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGoToLabel action, ushort length) {
+            action.Label = _reader.ReadString(); 
+            return action;
         }
 
         #endregion
 
-        #region SWF 4 actions
+        #region SWF 4
 
-        #region Arithmetic operators
-
-        private ActionAdd ReadAdd() {
-            return new ActionAdd();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionAdd action, ushort length) {
+            return action;
         }
 
-        private ActionDivide ReadDivide() {
-            return new ActionDivide();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionDivide action, ushort length) {
+            return action;
         }
 
-        private ActionMultiply ReadMultiply() {
-            return new ActionMultiply();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionMultiply action, ushort length) {
+            return action;
         }
 
-        private ActionSubtract ReadSubtract() {
-            return new ActionSubtract();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionSubtract action, ushort length) {
+            return action;
         }
 
-        #endregion
-
-        #region Numerical comparision
-
-        private ActionEquals ReadEquals() {
-            return new ActionEquals();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionEquals action, ushort length) {
+            return action;
         }
 
-        private ActionLess ReadLess() {
-            return new ActionLess();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionLess action, ushort length) {
+            return action;
         }
 
-        #endregion
-
-        #region Logical operators
-
-        private ActionAnd ReadAnd() {
-            return new ActionAnd();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionAnd action, ushort length) {
+            return action;
         }
 
-        private ActionNot ReadNot() {
-            return new ActionNot();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionNot action, ushort length) {
+            return action;
         }
 
-        private ActionOr ReadOr() {
-            return new ActionOr();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionOr action, ushort length) {
+            return action;
         }
 
-        #endregion
-
-        #region String manipulation
-
-        private ActionStringAdd ReadStringAdd() {
-            return new ActionStringAdd();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStringAdd action, ushort length) {
+            return action;
         }
 
-        private ActionStringEquals ReadStringEquals() {
-            return new ActionStringEquals();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStringEquals action, ushort length) {
+            return action;
         }
 
-        private ActionStringExtract ReadStringExtract() {
-            return new ActionStringExtract();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStringExtract action, ushort length) {
+            return action;
         }
 
-        private ActionStringLength ReadStringLength() {
-            return new ActionStringLength();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStringLength action, ushort length) {
+            return action;
         }
 
-        private ActionMBStringExtract ReadMBStringExtract() {
-            return new ActionMBStringExtract();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionMBStringExtract action, ushort length) {
+            return action;
         }
 
-        private ActionMBStringLength ReadMBStringLength() {
-            return new ActionMBStringLength();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionMBStringLength action, ushort length) {
+            return action;
         }
 
-        private ActionStringEquals ReadStringLess() {
-            return new ActionStringEquals();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStringLess action, ushort length) {
+            return action;
         }
 
-        #endregion
-
-        #region Stack operations
-
-        private ActionPop ReadPop() {
-            return new ActionPop();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionPop action, ushort length) {
+            return action;
         }
 
-        private ActionPush ReadPush(ushort length) {
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionPush action, ushort length) {
             var position = _reader.BaseStream.Position;
-            var action = new ActionPush();
             while (_reader.BaseStream.Position - position < length) {
                 var item = new ActionPushItem();
                 var type = (ActionPushItemType)_reader.ReadByte();
@@ -338,166 +184,162 @@ namespace Code.SwfLib.Actions {
             return action;
         }
 
-        #endregion
-
-        #region Type Conversion
-
-        private ActionAsciiToChar ReadAsciiToChar() {
-            return new ActionAsciiToChar();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionAsciiToChar action, ushort length) {
+            return action;
         }
 
-        private ActionCharToAscii ReadCharToAscii() {
-            return new ActionCharToAscii();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionCharToAscii action, ushort length) {
+            return action;
         }
 
-        private ActionToInteger ReadToInteger() {
-            return new ActionToInteger();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionToInteger action, ushort length) {
+            return action;
         }
 
-        private ActionMBAsciiToChar ReadMBAsciiToChar() {
-            return new ActionMBAsciiToChar();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionMBAsciiToChar action, ushort length) {
+            return action;
         }
 
-        private ActionMBCharToAscii ReadMBCharToAscii() {
-            return new ActionMBCharToAscii();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionMBCharToAscii action, ushort length) {
+            return action;
         }
 
-        #endregion
-
-        #region Control flow
-
-        private ActionCall ReadCall() {
-            return new ActionCall();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionCall action, ushort length) {
+            return action;
         }
 
-        private ActionIf ReadIf() {
-            return new ActionIf { BranchOffset = _reader.ReadSInt16() };
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionIf action, ushort length) {
+            action.BranchOffset = _reader.ReadSInt16(); 
+            return action;
         }
 
-        private ActionJump ReadJump() {
-            return new ActionJump { BranchOffset = _reader.ReadSInt16() };
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionJump action, ushort length) {
+            action.BranchOffset = _reader.ReadSInt16();
+            return action;
         }
 
-        #endregion
-
-        #region Variables
-
-        private ActionGetVariable ReadGetVariable() {
-            return new ActionGetVariable();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGetVariable action, ushort length) {
+            return action;
         }
 
-        private ActionSetVariable ReadSetVariable() {
-            return new ActionSetVariable();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionSetVariable action, ushort length) {
+            return action;
         }
 
-        #endregion
-
-        #region Movie control
-
-        private ActionGetURL2 ReadGetURL2() {
-            return new ActionGetURL2();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGetURL2 action, ushort length) {
+            return action;
         }
 
-        private ActionGetProperty ReadGetProperty() {
-            return new ActionGetProperty();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGetProperty action, ushort length) {
+            return action;
         }
 
-        private ActionGotoFrame2 ReadGoToFrame2() {
-            var res = new ActionGotoFrame2 { Flags = _reader.ReadByte() };
-            if (res.SceneBiasFlag) {
-                res.SceneBias = _reader.ReadUInt16();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGotoFrame2 action, ushort length) {
+            action.Flags = _reader.ReadByte();
+            if (action.SceneBiasFlag) {
+                action.SceneBias = _reader.ReadUInt16();
             }
-            return res;
-
+            return action;
         }
 
-        private ActionRemoveSprite ReadRemoveSprite() {
-            return new ActionRemoveSprite();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionRemoveSprite action, ushort length) {
+            return action;
         }
 
-        private ActionSetProperty ReadSetProperty() {
-            return new ActionSetProperty();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionSetProperty action, ushort length) {
+            return action;
         }
 
-        private ActionSetTarget2 ReadSetTarget2() {
-            return new ActionSetTarget2();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionSetTarget2 action, ushort length) {
+            return action;
         }
 
-        private ActionStartDrag ReadStartDrag() {
-            return new ActionStartDrag();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStartDrag action, ushort length) {
+            return action;
         }
 
-        private ActionWaitForFrame2 ReadWaitForFrame2() {
-            return new ActionWaitForFrame2 { SkipCount = _reader.ReadByte() };
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionWaitForFrame2 action, ushort length) {
+            action.SkipCount = _reader.ReadByte();
+            return action;
         }
 
-        private ActionCloneSprite ReadCloneSprite() {
-            return new ActionCloneSprite();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionCloneSprite action, ushort length) {
+            return action;
         }
 
-        private ActionEndDrag ReadEndDrag() {
-            return new ActionEndDrag();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionEndDrag action, ushort length) {
+            return action;
         }
 
-        #endregion
-
-        #region Utilities
-
-        private ActionGetTime ReadGetTime() {
-            return new ActionGetTime();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGetTime action, ushort length) {
+            return action;
         }
 
-        private ActionRandomNumber ReadRandomNumber() {
-            return new ActionRandomNumber();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionRandomNumber action, ushort length) {
+            return action;
         }
 
-        private ActionTrace ReadTrace() {
-            return new ActionTrace();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionTrace action, ushort length) {
+            return action;
         }
 
         #endregion
 
-        #endregion
-
-        #region SWF 7
-
-        private ActionBase ReadDefineFunction2() {
-            throw new NotImplementedException();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionInstanceOf action, ushort length) {
+            return action;
         }
 
-        private ActionExtends ReadExtends() {
-            return new ActionExtends();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionEnumerate2 action, ushort length) {
+            return action;
         }
 
-        private ActionCastOp ReadCastOp() {
-            return new ActionCastOp();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStrictEquals action, ushort length) {
+            return action;
         }
 
-        private ActionImplementsOp ReadImplemntsOp() {
-            return new ActionImplementsOp();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGreater action, ushort length) {
+            return action;
         }
 
-        private ActionBase ReadTry() {
-            throw new NotImplementedException();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStringGreater action, ushort length) {
+            return action;
         }
 
-        private ActionThrow ReadThrow() {
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionDefineFunction2 action, ushort length) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionExtends action, ushort length) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionCastOp action, ushort length) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionImplementsOp action, ushort length) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionTry action, ushort length) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionThrow action, ushort length) {
             return new ActionThrow();
         }
 
-        #endregion
-
-        public ActionConstantPool ReadActionConstantPool(ushort length) {
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionConstantPool action, ushort length) {
             ushort count = _reader.ReadUInt16();
             var pool = new string[count];
             for (var i = 0; i < count; i++) {
                 pool[i] = _reader.ReadString();
             }
-            return new ActionConstantPool { ConstantPool = pool };
+            action.ConstantPool = pool;
+            return action;
         }
 
-
-        public ActionDefineFunction ReadActionDefineFunction(ushort length) {
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionDefineFunction action, ushort length) {
             string name = _reader.ReadString();
             ushort count = _reader.ReadUInt16();
             var parameters = new string[count];
@@ -505,19 +347,22 @@ namespace Code.SwfLib.Actions {
                 parameters[i] = _reader.ReadString();
             }
             ushort bodySize = _reader.ReadUInt16();
-            return new ActionDefineFunction { FunctionName = name, Params = parameters, Body = _reader.ReadBytes(bodySize) };
+            action.FunctionName = name;
+            action.Params = parameters;
+            action.Body = _reader.ReadBytes(bodySize);
+            return action;
         }
 
-
-
-
-
-        public ActionSetMember ReadActionSetMember(ushort length) {
-            return new ActionSetMember();
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionReturn action, ushort length) {
+            return action;
         }
 
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionSetMember action, ushort length) {
+            return action;
+        }
 
-
-
+        ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionUnknown action, ushort length) {
+            return action;
+        }
     }
 }
