@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Code.SwfLib.Data;
 
-namespace Code.SwfLib.SwfMill.DataFormatting
-{
-    public class MatrixFormatter : DataFormatterBase<SwfMatrix>
-    {
+namespace Code.SwfLib.SwfMill.DataFormatting {
+    public class MatrixFormatter : DataFormatterBase<SwfMatrix> {
 
         public MatrixFormatter(DataFormatters formatters)
-            : base(formatters)
-        {
+            : base(formatters) {
         }
 
-        protected override void InitData(XElement element, out SwfMatrix data)
-        {
+        protected override void InitData(XElement element, out SwfMatrix data) {
+            data.HasScale = false;
+            data.HasRotate = false;
             data.ScaleX = 1.0;
             data.ScaleY = 1.0;
             data.RotateSkew0 = 0.0;
@@ -25,26 +19,23 @@ namespace Code.SwfLib.SwfMill.DataFormatting
             data.TranslateY = 0;
         }
 
-        protected override void AcceptElement(XElement element, ref SwfMatrix data)
-        {
-            switch (element.Name.LocalName)
-            {
+        protected override void AcceptElement(XElement element, ref SwfMatrix data) {
+            switch (element.Name.LocalName) {
                 default:
                     OnUnknownElementFound(element);
                     break;
             }
         }
 
-        protected override void AcceptAttribute(XAttribute attrib, ref SwfMatrix data)
-        {
-            //TODO: skew
-            switch (attrib.Name.LocalName)
-            {
+        protected override void AcceptAttribute(XAttribute attrib, ref SwfMatrix data) {
+            switch (attrib.Name.LocalName) {
                 case "scaleX":
                     data.ScaleX = double.Parse(attrib.Value);
+                    data.HasScale = true;
                     break;
                 case "scaleY":
                     data.ScaleY = double.Parse(attrib.Value);
+                    data.HasScale = true;
                     break;
                 case "transX":
                     data.TranslateX = int.Parse(attrib.Value);
@@ -52,12 +43,13 @@ namespace Code.SwfLib.SwfMill.DataFormatting
                 case "transY":
                     data.TranslateY = int.Parse(attrib.Value);
                     break;
-                //TODO: check order of skews
                 case "skewX":
                     data.RotateSkew0 = double.Parse(attrib.Value);
+                    data.HasRotate = true;
                     break;
                 case "skewY":
                     data.RotateSkew1 = double.Parse(attrib.Value);
+                    data.HasRotate = true;
                     break;
                 default:
                     OnUnknownAttributeFound(attrib);
@@ -65,18 +57,19 @@ namespace Code.SwfLib.SwfMill.DataFormatting
             }
         }
 
-        public override XElement Format(ref SwfMatrix data)
-        {
-            //TODO: skew
-            return new XElement(XName.Get("Transform"),
-                new XAttribute(XName.Get("scaleX"), data.ScaleX),
-                new XAttribute(XName.Get("scaleY"), data.ScaleY),
+        public override XElement Format(ref SwfMatrix data) {
+            var res = new XElement(XName.Get("Transform"),
                 new XAttribute(XName.Get("transX"), data.TranslateX),
-                new XAttribute(XName.Get("transY"), data.TranslateY),
-                //TODO: Check skew fields order
-                new XAttribute(XName.Get("skewX"), data.RotateSkew0),
-                new XAttribute(XName.Get("skewY"), data.RotateSkew1)
-                );
+                new XAttribute(XName.Get("transY"), data.TranslateY));
+            if (data.HasScale) {
+                res.Add(new XAttribute(XName.Get("scaleX"), data.ScaleX));
+                res.Add(new XAttribute(XName.Get("scaleY"), data.ScaleY));
+            }
+            if (data.HasRotate) {
+                res.Add(new XAttribute(XName.Get("skewX"), data.RotateSkew0));
+                res.Add(new XAttribute(XName.Get("skewY"), data.RotateSkew1));
+            }
+            return res;
         }
     }
 }

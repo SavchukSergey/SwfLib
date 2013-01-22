@@ -17,13 +17,9 @@ namespace Code.SwfLib.Data {
 
         public int TranslateY;
 
-        public bool HasScale {
-            get { return ScaleX != 1.0 || ScaleY != 1.0; }
-        }
+        public bool HasScale;
 
-        public bool HasRotate {
-            get { return RotateSkew0 != 0.0 || RotateSkew1 != 0.0; }
-        }
+        public bool HasRotate;
 
     }
 }

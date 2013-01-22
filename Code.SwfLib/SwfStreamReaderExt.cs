@@ -60,8 +60,8 @@ namespace Code.SwfLib {
 
         public static void ReadMatrix(this SwfStreamReader reader, out SwfMatrix matrix) {
             reader.AlignToByte();
-            var hasScale = reader.ReadBit();
-            if (hasScale) {
+            matrix.HasScale = reader.ReadBit();
+            if (matrix.HasScale) {
                 var bits = (byte)reader.ReadUnsignedBits(5);
                 matrix.ScaleX = reader.ReadFixedPoint16(bits);
                 matrix.ScaleY = reader.ReadFixedPoint16(bits);
@@ -69,8 +69,8 @@ namespace Code.SwfLib {
                 matrix.ScaleX = 1;
                 matrix.ScaleY = 1;
             }
-            var hasRotate = reader.ReadBit();
-            if (hasRotate) {
+            matrix.HasRotate = reader.ReadBit();
+            if (matrix.HasRotate) {
                 var bits = (byte)reader.ReadUnsignedBits(5);
                 matrix.RotateSkew0 = reader.ReadFixedPoint16(bits);
                 matrix.RotateSkew1 = reader.ReadFixedPoint16(bits);
