@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\SwfActionFactoryTest.cs" />
     <Compile Include="AssertExt.cs" />
     <Compile Include="Bin2BinTests.cs" />
     <Compile Include="BitsCountTest.cs" />
@@ -149,6 +150,7 @@
     <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\7.73.tag" />
     <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\8.73.tag" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

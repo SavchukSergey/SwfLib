@@ -197,6 +197,7 @@ namespace Code.SwfLib.Actions {
 
         TResult Visit(ActionSetMember action, TArg arg);
 
+        TResult Visit(ActionUnknown action, TArg arg);
 
 
     }

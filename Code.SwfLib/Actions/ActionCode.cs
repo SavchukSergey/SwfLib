@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Data.Actions {
+﻿namespace Code.SwfLib.Actions {
     public enum ActionCode : byte {
 
         Empty = 0x00,

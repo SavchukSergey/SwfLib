@@ -310,5 +310,9 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         XElement IActionVisitor<object, XElement>.Visit(ActionSetMember action, object param) {
             throw new NotImplementedException();
         }
+
+        public XElement Visit(ActionUnknown action, object arg) {
+            throw new NotImplementedException();
+        }
     }
 }
