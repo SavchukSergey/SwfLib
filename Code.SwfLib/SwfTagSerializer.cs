@@ -208,10 +208,14 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape3Tag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.ShapeID);
+            writer.WriteRect(ref tag.ShapeBounds);
             return null;
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape4Tag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.ShapeID);
+            writer.WriteRect(ref tag.ShapeBounds);
             return null;
         }
 

@@ -249,10 +249,17 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShape3Tag tag, SwfStreamReader reader) {
+            tag.ShapeID = reader.ReadUInt16();
+            reader.ReadRect(out tag.ShapeBounds);
             return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShape4Tag tag, SwfStreamReader reader) {
+            tag.ShapeID = reader.ReadUInt16();
+            reader.ReadRect(out tag.ShapeBounds);
+            reader.AlignToByte();
+            reader.ReadRect(out tag.EdgeBounds);
+            tag.Flags = reader.ReadByte();
             return tag;
         }
 
