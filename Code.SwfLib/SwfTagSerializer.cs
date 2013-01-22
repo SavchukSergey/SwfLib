@@ -196,20 +196,25 @@ namespace Code.SwfLib {
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShapeTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
-            writer.WriteShapeWithStyle(tag.Shapes);
             writer.FlushBits();
+            
+            writer.WriteFillStyles1(tag.FillStyles);
+
+            writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits());
             return null;
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape2Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
+            writer.FlushBits();
             return null;
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape3Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
+            writer.FlushBits();
             return null;
         }
 

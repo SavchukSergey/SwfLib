@@ -6,7 +6,10 @@ namespace Code.SwfLib {
     public static class FillStyleStreamExt {
 
         public static void ReadToFillStyles1(this SwfStreamReader reader, IList<FillStyle> fillStyles) {
-            byte count = reader.ReadByte();
+            ushort count = reader.ReadByte();
+            if (count == 255) {
+                count = reader.ReadUInt16();
+            }
             for (var i = 0; i < count; i++) {
                 FillStyle style;
                 reader.ReadFillStyle1(out style);
@@ -15,11 +18,14 @@ namespace Code.SwfLib {
         }
 
         public static void WriteFillStyles1(this SwfStreamWriter writer, IList<FillStyle> styles) {
-            byte cnt = (byte)styles.Count;
-            //TODO: Check boundaries
-            writer.WriteByte(cnt);
-            for (var i = 0; i < cnt; i++) {
-                var style = styles[i];
+            if (styles.Count < 255) {
+                writer.WriteByte((byte)styles.Count);
+            } else {
+                writer.WriteByte(255);
+                writer.WriteUInt16((ushort)styles.Count);
+            }
+            foreach (FillStyle fillStyle in styles) {
+                var style = fillStyle;
                 writer.WriteFillStyle1(ref style);
             }
         }

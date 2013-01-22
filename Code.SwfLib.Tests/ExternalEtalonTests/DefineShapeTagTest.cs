@@ -55,7 +55,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             tag.ShapeBounds.XMax = 5354;
             tag.ShapeBounds.YMin = 0;
             tag.ShapeBounds.YMax = 1800;
-            tag.Shapes.FillStyles.Add(new FillStyle {
+            tag.FillStyles.Add(new FillStyle {
                 FillStyleType = FillStyleType.NonSmoothedRepeatingBitmap,
                 BitmapID = 1,
                 BitmapMatrix = new SwfMatrix {
@@ -168,7 +168,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             tag.ShapeBounds.XMax = 14560;
             tag.ShapeBounds.YMin = 0;
             tag.ShapeBounds.YMax = 1800;
-            tag.Shapes.FillStyles.Add(new FillStyle {
+            tag.FillStyles.Add(new FillStyle {
                 FillStyleType = FillStyleType.SolidColor,
                 ColorRGB = new SwfRGB(255, 255, 255)
             });

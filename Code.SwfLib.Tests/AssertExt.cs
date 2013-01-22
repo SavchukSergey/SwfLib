@@ -28,10 +28,10 @@ namespace Code.SwfLib.Tests {
         public static void AreEqual(DefineShapeTag expected, DefineShapeTag actual) {
             Assert.AreEqual(expected.ShapeID, actual.ShapeID);
             AreEqual(expected.ShapeBounds, actual.ShapeBounds, "ShapeBounds");
-            Assert.AreEqual(expected.Shapes.FillStyles.Count, actual.Shapes.FillStyles.Count, "FillStyles.Count");
-            for (var i = 0; i < expected.Shapes.FillStyles.Count; i++) {
-                var exp = expected.Shapes.FillStyles[i];
-                var act = actual.Shapes.FillStyles[i];
+            Assert.AreEqual(expected.FillStyles.Count, actual.FillStyles.Count, "FillStyles.Count");
+            for (var i = 0; i < expected.FillStyles.Count; i++) {
+                var exp = expected.FillStyles[i];
+                var act = actual.FillStyles[i];
                 AreEqual(exp, act, "FillStyles[" + i + "]");
             }
             Assert.AreEqual(expected.Shapes.LineStyles.Count, actual.Shapes.LineStyles.Count, "LineStyles.Count");

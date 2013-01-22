@@ -5,10 +5,9 @@ using Code.SwfLib.Data.Shapes;
 namespace Code.SwfLib {
     public static class ShapeRecordStreamExt {
 
-        public static void WriteShapeWithStyle(this SwfStreamWriter writer, ShapeWithStyle1 shapeWithStyle) {
-            writer.WriteFillStyles1(shapeWithStyle.FillStyles);
+        public static void WriteShapeWithStyle(this SwfStreamWriter writer, ShapeWithStyle1 shapeWithStyle, uint fillStyleBits) {
+           
             writer.WriteLineStyles1(shapeWithStyle.LineStyles);
-            var fillStyleBits = new BitsCount(shapeWithStyle.FillStyles.Count).GetUnsignedBits();
             var lineStyleBits = new BitsCount(shapeWithStyle.LineStyles.Count).GetUnsignedBits();
             writer.WriteUnsignedBits(fillStyleBits, 4);
             writer.WriteUnsignedBits(lineStyleBits, 4);
@@ -16,9 +15,6 @@ namespace Code.SwfLib {
         }
 
         public static void ReadToShapeWithStyle(this SwfStreamReader reader, ShapeWithStyle1 style) {
-            style.FillStyles.Clear();
-            reader.ReadToFillStyles1(style.FillStyles);
-
             style.LineStyles.Clear();
             reader.ReadToLineStyles1(style.LineStyles);
 
