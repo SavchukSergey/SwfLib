@@ -287,11 +287,11 @@ namespace Code.SwfLib.Actions {
         #region SWF 5
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionCallFunction action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionCallMethod action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionConstantPool action, ushort length) {
@@ -319,47 +319,47 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionDefineLocal action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionDefineLocal2 action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionDelete action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionDelete2 action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionEnumerate action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionEquals2 action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGetMember action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionInitArray action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionInitObject action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionNewMethod action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionNewObject action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionSetMember action, ushort length) {
@@ -367,71 +367,71 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionTargetPath action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionWith action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionToNumber action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionToString action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionTypeOf action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionAdd2 action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionLess2 action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionModulo action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionBitAnd action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionBitLShift action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionBitOr action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionBitRShift action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionBitURShift action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionBitXor action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionDecrement action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionIncrement action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionPushDuplicate action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionReturn action, ushort length) {
@@ -439,11 +439,11 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStackSwap action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStoreRegister action, ushort arg) {
-            throw new NotImplementedException();
+            return action;
         }
 
         #endregion
