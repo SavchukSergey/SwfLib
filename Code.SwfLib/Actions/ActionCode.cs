@@ -175,6 +175,11 @@
         /// created. Any existing value in the property is overwritten.
         /// </summary>
         SetMember = 0x4f,
+        InstanceOf = 0x54,
+        Enumerate2 = 0x55,
+        StrictEquals = 0x66,
+        Greater = 0x67,
+        StringGreater = 0x68,
         Extends = 0x69,
         /// <summary>
         /// ActionGotoFrame instructs Flash Player to go to the specified frame in the current file. 

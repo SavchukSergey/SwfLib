@@ -3,7 +3,35 @@
 namespace Code.SwfLib.Actions {
     public interface IActionVisitor<TArg, TResult> {
 
+        #region SWF 3
+
+        TResult Visit(ActionGotoFrame action, TArg arg);
+
+        TResult Visit(ActionGetURL action, TArg arg);
+
+        TResult Visit(ActionNextFrame action, TArg arg);
+
+        TResult Visit(ActionPreviousFrame action, TArg arg);
+
+        TResult Visit(ActionPlay action, TArg arg);
+
+        TResult Visit(ActionStop action, TArg arg);
+
+        TResult Visit(ActionToggleQuality action, TArg arg);
+
+        TResult Visit(ActionStopSounds action, TArg arg);
+
+        TResult Visit(ActionWaitForFrame action, TArg arg);
+
+        TResult Visit(ActionSetTarget action, TArg arg);
+
+        TResult Visit(ActionGoToLabel action, TArg arg);
+
+        #endregion
+
         #region SWF 4
+
+        #region Arithmetic operators
 
         TResult Visit(ActionAdd action, TArg arg);
 
@@ -13,9 +41,63 @@ namespace Code.SwfLib.Actions {
 
         TResult Visit(ActionSubtract action, TArg arg);
 
+        #endregion
+
+        #region Numerical comparision
+
+        TResult Visit(ActionEquals action, TArg arg);
+
+        TResult Visit(ActionLess action, TArg arg);
+
+        #endregion
+
         #region Logical operands
 
         TResult Visit(ActionAnd action, TArg arg);
+
+        TResult Visit(ActionNot action, TArg arg);
+
+        TResult Visit(ActionOr action, TArg arg);
+
+        #endregion
+
+        #region String manipulation
+
+        TResult Visit(ActionStringAdd action, TArg arg);
+
+        TResult Visit(ActionStringEquals action, TArg arg);
+
+        TResult Visit(ActionStringExtract action, TArg arg);
+
+        TResult Visit(ActionStringLength action, TArg arg);
+
+        TResult Visit(ActionMBStringExtract action, TArg arg);
+
+        TResult Visit(ActionMBStringLength action, TArg arg);
+
+        TResult Visit(ActionStringLess action, TArg arg);
+
+        #endregion
+
+        #region Stack operations
+
+        TResult Visit(ActionPop action, TArg arg);
+
+        TResult Visit(ActionPush action, TArg arg);
+
+        #endregion
+
+        #region Type covnersion
+
+        TResult Visit(ActionAsciiToChar action, TArg arg);
+
+        TResult Visit(ActionCharToAscii action, TArg arg);
+
+        TResult Visit(ActionToInteger action, TArg arg);
+
+        TResult Visit(ActionMBAsciiToChar action, TArg arg);
+
+        TResult Visit(ActionMBCharToAscii action, TArg arg);
 
         #endregion
 
@@ -23,7 +105,71 @@ namespace Code.SwfLib.Actions {
 
         TResult Visit(ActionCall action, TArg arg);
 
+        TResult Visit(ActionIf action, TArg arg);
+
+        TResult Visit(ActionJump action, TArg arg);
+
         #endregion
+
+        #region Variables
+
+        TResult Visit(ActionGetVariable action, TArg arg);
+
+        TResult Visit(ActionSetVariable action, TArg arg);
+
+        #endregion
+
+        #region Movie control
+
+        TResult Visit(ActionGetURL2 action, TArg arg);
+
+        TResult Visit(ActionGetProperty action, TArg arg);
+
+        TResult Visit(ActionGotoFrame2 action, TArg arg);
+
+        TResult Visit(ActionRemoveSprite action, TArg arg);
+
+        TResult Visit(ActionSetProperty action, TArg arg);
+
+        TResult Visit(ActionSetTarget2 action, TArg arg);
+
+        TResult Visit(ActionStartDrag action, TArg arg);
+
+        TResult Visit(ActionWaitForFrame2 action, TArg arg);
+
+        TResult Visit(ActionCloneSprite action, TArg arg);
+
+        TResult Visit(ActionEndDrag action, TArg arg);
+
+        #endregion
+
+        #region Utilities
+
+        TResult Visit(ActionGetTime action, TArg arg);
+
+        TResult Visit(ActionRandomNumber action, TArg arg);
+
+        TResult Visit(ActionTrace action, TArg arg);
+
+        #endregion
+
+        #endregion
+
+        #region SWF 5
+
+        #endregion
+
+        #region SWF 6
+
+        TResult Visit(ActionInstanceOf action, TArg arg);
+
+        TResult Visit(ActionEnumerate2 action, TArg arg);
+
+        TResult Visit(ActionStrictEquals action, TArg arg);
+
+        TResult Visit(ActionGreater action, TArg arg);
+
+        TResult Visit(ActionStringGreater action, TArg arg);
 
         #endregion
 
@@ -43,107 +189,15 @@ namespace Code.SwfLib.Actions {
 
         #endregion
 
-
-        TResult Visit(ActionAsciiToChar action, TArg arg);
-
-
-        TResult Visit(ActionCharToAscii action, TArg arg);
-
-        TResult Visit(ActionCloneSprite action, TArg arg);
-
         TResult Visit(ActionConstantPool action, TArg arg);
 
         TResult Visit(ActionDefineFunction action, TArg arg);
-
-        TResult Visit(ActionEndDrag action, TArg arg);
-
-        TResult Visit(ActionEquals action, TArg arg);
-
-        TResult Visit(ActionGetProperty action, TArg arg);
-
-        TResult Visit(ActionGetTime action, TArg arg);
-
-        TResult Visit(ActionGetURL action, TArg arg);
-
-        TResult Visit(ActionGetURL2 action, TArg arg);
-
-        TResult Visit(ActionGetVariable action, TArg arg);
-
-        TResult Visit(ActionGotoFrame action, TArg arg);
-
-        TResult Visit(ActionGotoFrame2 action, TArg arg);
-
-        TResult Visit(ActionGoToLabel action, TArg arg);
-
-        TResult Visit(ActionIf action, TArg arg);
-
-        TResult Visit(ActionJump action, TArg arg);
-
-        TResult Visit(ActionLess action, TArg arg);
-
-        TResult Visit(ActionMBAsciiToChar action, TArg arg);
-
-        TResult Visit(ActionMBCharToAscii action, TArg arg);
-
-        TResult Visit(ActionMBStringExtract action, TArg arg);
-
-        TResult Visit(ActionMBStringLength action, TArg arg);
-
-        TResult Visit(ActionNextFrame action, TArg arg);
-
-        TResult Visit(ActionNot action, TArg arg);
-
-        TResult Visit(ActionOr action, TArg arg);
-
-        TResult Visit(ActionPlay action, TArg arg);
-
-        TResult Visit(ActionPop action, TArg arg);
-
-        TResult Visit(ActionPreviousFrame action, TArg arg);
-
-        TResult Visit(ActionPush action, TArg arg);
-
-        TResult Visit(ActionRandomNumber action, TArg arg);
-
-        TResult Visit(ActionRemoveSprite action, TArg arg);
 
         TResult Visit(ActionReturn action, TArg arg);
 
         TResult Visit(ActionSetMember action, TArg arg);
 
-        TResult Visit(ActionSetProperty action, TArg arg);
 
-        TResult Visit(ActionSetTarget action, TArg arg);
-
-        TResult Visit(ActionSetTarget2 action, TArg arg);
-
-        TResult Visit(ActionSetVariable action, TArg arg);
-
-        TResult Visit(ActionStartDrag action, TArg arg);
-
-        TResult Visit(ActionStop action, TArg arg);
-
-        TResult Visit(ActionStopSounds action, TArg arg);
-
-        TResult Visit(ActionStringAdd action, TArg arg);
-
-        TResult Visit(ActionStringEquals action, TArg arg);
-
-        TResult Visit(ActionStringExtract action, TArg arg);
-
-        TResult Visit(ActionStringLength action, TArg arg);
-
-        TResult Visit(ActionStringLess action, TArg arg);
-
-        TResult Visit(ActionToggleQuality action, TArg arg);
-
-        TResult Visit(ActionToInteger action, TArg arg);
-
-        TResult Visit(ActionTrace action, TArg arg);
-
-        TResult Visit(ActionWaitForFrame action, TArg arg);
-
-        TResult Visit(ActionWaitForFrame2 action, TArg arg);
 
     }
 }

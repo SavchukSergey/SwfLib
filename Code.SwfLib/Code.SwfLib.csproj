@@ -56,9 +56,14 @@
   <ItemGroup>
     <Compile Include="Actions\ActionCastOp.cs" />
     <Compile Include="Actions\ActionDefineFunction2.cs" />
+    <Compile Include="Actions\ActionEnumerate2.cs" />
     <Compile Include="Actions\ActionExtends.cs" />
+    <Compile Include="Actions\ActionGreater.cs" />
     <Compile Include="Actions\ActionImplementsOp.cs" />
+    <Compile Include="Actions\ActionInstanceOf.cs" />
     <Compile Include="Actions\ActionsReader.cs" />
+    <Compile Include="Actions\ActionStrictEquals.cs" />
+    <Compile Include="Actions\ActionStringGreater.cs" />
     <Compile Include="Actions\ActionThrow.cs" />
     <Compile Include="Actions\ActionTry.cs" />
     <Compile Include="BitsCount.cs" />

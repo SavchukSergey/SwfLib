@@ -7,7 +7,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoActionTagFormatter : TagFormatterBase<DoActionTag> {
         private const string ACTIONS_ELEM = "actions";
 
-        private readonly ActionSerializer _serializer = new ActionSerializer();
+        private readonly ActionXmlSerializer _serializer = new ActionXmlSerializer();
 
         protected override void AcceptTagAttribute(DoActionTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
