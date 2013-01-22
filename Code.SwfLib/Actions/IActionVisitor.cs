@@ -155,6 +155,82 @@
 
         #region SWF 5
 
+        #region ScriptObject actions
+
+        TResult Visit(ActionCallFunction action, TArg arg);
+
+        TResult Visit(ActionCallMethod action, TArg arg);
+
+        TResult Visit(ActionConstantPool action, TArg arg);
+
+        TResult Visit(ActionDefineFunction action, TArg arg);
+
+        TResult Visit(ActionDefineLocal action, TArg arg);
+
+        TResult Visit(ActionDefineLocal2 action, TArg arg);
+
+        TResult Visit(ActionDelete action, TArg arg);
+
+        TResult Visit(ActionDelete2 action, TArg arg);
+
+        TResult Visit(ActionEnumerate action, TArg arg);
+
+        TResult Visit(ActionEquals2 action, TArg arg);
+
+        TResult Visit(ActionGetMember action, TArg arg);
+
+        TResult Visit(ActionInitArray action, TArg arg);
+
+        TResult Visit(ActionInitObject action, TArg arg);
+
+        TResult Visit(ActionNewMethod action, TArg arg);
+
+        TResult Visit(ActionNewObject action, TArg arg);
+
+        TResult Visit(ActionSetMember action, TArg arg);
+
+        TResult Visit(ActionTargetPath action, TArg arg);
+
+        TResult Visit(ActionWith action, TArg arg);
+
+        TResult Visit(ActionToNumber action, TArg arg);
+
+        TResult Visit(ActionToString action, TArg arg);
+
+        TResult Visit(ActionTypeOf action, TArg arg);
+
+        TResult Visit(ActionAdd2 action, TArg arg);
+
+        TResult Visit(ActionLess2 action, TArg arg);
+
+        TResult Visit(ActionModulo action, TArg arg);
+
+        TResult Visit(ActionBitAnd action, TArg arg);
+
+        TResult Visit(ActionBitLShift action, TArg arg);
+
+        TResult Visit(ActionBitOr action, TArg arg);
+
+        TResult Visit(ActionBitRShift action, TArg arg);
+
+        TResult Visit(ActionBitURShift action, TArg arg);
+
+        TResult Visit(ActionBitXor action, TArg arg);
+
+        TResult Visit(ActionDecrement action, TArg arg);
+
+        TResult Visit(ActionIncrement action, TArg arg);
+
+        TResult Visit(ActionPushDuplicate action, TArg arg);
+
+        TResult Visit(ActionReturn action, TArg arg);
+
+        TResult Visit(ActionStackSwap action, TArg arg);
+
+        TResult Visit(ActionStoreRegister action, TArg arg);
+
+        #endregion
+
         #endregion
 
         #region SWF 6
@@ -186,14 +262,6 @@
         TResult Visit(ActionThrow action, TArg arg);
 
         #endregion
-
-        TResult Visit(ActionConstantPool action, TArg arg);
-
-        TResult Visit(ActionDefineFunction action, TArg arg);
-
-        TResult Visit(ActionReturn action, TArg arg);
-
-        TResult Visit(ActionSetMember action, TArg arg);
 
         TResult Visit(ActionUnknown action, TArg arg);
 
