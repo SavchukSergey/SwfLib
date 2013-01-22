@@ -225,6 +225,176 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         #endregion
 
+        #region SWF 5
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionCallFunction action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionCallMethod action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionConstantPool action, object param) {
+            var res = new XElement("Dictionary");
+            var strings = new XElement("strings");
+            foreach (var item in action.ConstantPool) {
+                strings.Add(new XElement("String", new XAttribute("value", item)));
+            }
+            res.Add(strings);
+            return res;
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction action, object param) {
+            var res = new XElement("DeclareFunction");
+            res.Add(new XAttribute("name", action.FunctionName),
+                new XAttribute("argc", action.Params.Length),
+                new XAttribute("length", action.Body.Length)
+            );
+            //TODO: method body
+            var args = new XElement("args");
+            foreach (var arg in action.Params) {
+                throw new NotImplementedException();
+            }
+            res.Add(args);
+            return res;
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionDefineLocal action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionDefineLocal2 action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionDelete action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionDelete2 action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionEnumerate action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionEquals2 action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionGetMember action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionInitArray action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionInitObject action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionNewMethod action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionNewObject action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionSetMember action, object param) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionTargetPath action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionWith action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionToNumber action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionToString action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionTypeOf action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionAdd2 action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionLess2 action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionModulo action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionBitAnd action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionBitLShift action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionBitOr action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionBitRShift action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionBitURShift action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionBitXor action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionDecrement action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionIncrement action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionPushDuplicate action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionReturn action, object param) {
+            throw new NotImplementedException();
+        }
+
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionStackSwap action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionStoreRegister action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        XElement IActionVisitor<object, XElement>.Visit(ActionUnknown action, object arg) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
         #region SWF 6
 
         XElement IActionVisitor<object, XElement>.Visit(ActionInstanceOf action, object param) {
@@ -277,41 +447,9 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         #endregion
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionConstantPool action, object param) {
-            var res = new XElement("Dictionary");
-            var strings = new XElement("strings");
-            foreach (var item in action.ConstantPool) {
-                strings.Add(new XElement("String", new XAttribute("value", item)));
-            }
-            res.Add(strings);
-            return res;
-        }
-
-        XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction action, object param) {
-            var res = new XElement("DeclareFunction");
-            res.Add(new XAttribute("name", action.FunctionName),
-                new XAttribute("argc", action.Params.Length),
-                new XAttribute("length", action.Body.Length)
-            );
-            //TODO: method body
-            var args = new XElement("args");
-            foreach (var arg in action.Params) {
-                throw new NotImplementedException();
-            }
-            res.Add(args);
-            return res;
-        }
-
-        XElement IActionVisitor<object, XElement>.Visit(ActionReturn action, object param) {
-            throw new NotImplementedException();
-        }
-
-        XElement IActionVisitor<object, XElement>.Visit(ActionSetMember action, object param) {
-            throw new NotImplementedException();
-        }
-
         public XElement Visit(ActionUnknown action, object arg) {
             throw new NotImplementedException();
         }
+
     }
 }
