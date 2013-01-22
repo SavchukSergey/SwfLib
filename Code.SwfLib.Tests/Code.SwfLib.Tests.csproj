@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\ActionReaderTest.cs" />
+    <Compile Include="Actions\ActionWriterTest.cs" />
     <Compile Include="Actions\SwfActionFactoryTest.cs" />
     <Compile Include="AssertExt.cs" />
     <Compile Include="Bin2BinTests.cs" />

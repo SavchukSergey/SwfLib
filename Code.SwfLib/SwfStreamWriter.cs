@@ -7,9 +7,17 @@ namespace Code.SwfLib {
     public class SwfStreamWriter {
 
         private readonly BinaryWriter _writer;
+        private readonly Stream _baseStream;
+
+        public Stream BaseStream {
+            get {
+                return _baseStream;
+            }
+        }
 
         public SwfStreamWriter(Stream stream) {
             _writer = new BinaryWriter(stream);
+            _baseStream = stream;
         }
 
         public void WriteTagData(SwfTagData data) {

@@ -100,6 +100,7 @@
     <Compile Include="Actions\ActionTypeOf.cs" />
     <Compile Include="Actions\ActionUnknown.cs" />
     <Compile Include="Actions\ActionWith.cs" />
+    <Compile Include="Actions\ActionWriter.cs" />
     <Compile Include="BitsCount.cs" />
     <Compile Include="ClipActionsStreamExt.cs" />
     <Compile Include="ColorTransformStreamExt.cs" />
