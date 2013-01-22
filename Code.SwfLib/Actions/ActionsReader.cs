@@ -284,6 +284,8 @@ namespace Code.SwfLib.Actions {
 
         #endregion
 
+        #region SWF 6
+
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionInstanceOf action, ushort length) {
             return action;
         }
@@ -303,6 +305,10 @@ namespace Code.SwfLib.Actions {
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStringGreater action, ushort length) {
             return action;
         }
+
+        #endregion
+
+        #region SWF 7
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionDefineFunction2 action, ushort length) {
             return action;
@@ -327,6 +333,8 @@ namespace Code.SwfLib.Actions {
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionThrow action, ushort length) {
             return new ActionThrow();
         }
+
+        #endregion
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionConstantPool action, ushort length) {
             ushort count = _reader.ReadUInt16();
