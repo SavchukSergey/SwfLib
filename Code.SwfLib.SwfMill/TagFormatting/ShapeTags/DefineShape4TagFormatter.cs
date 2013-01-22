@@ -2,17 +2,17 @@
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
-    public class DefineShape4TagFormatter : TagFormatterBase<DefineShape4Tag> {
-        protected override XElement FormatTagElement(DefineShape4Tag tag) {
-            return new XElement(SwfTagNameMapping.DEFINE_SHAPE_4_TAG);
+    public class DefineShape4TagFormatter : DefineShapeBaseFormatter<DefineShape4Tag> {
+
+        protected override void FormatShapeElement(DefineShape4Tag tag, XElement elem) {
         }
 
-        protected override void AcceptTagAttribute(DefineShape4Tag tag, XAttribute attrib) {
-            throw new System.NotImplementedException();
+        protected override void AcceptShapeTagElement(DefineShape4Tag tag, XElement element)
+        {
         }
 
-        protected override void AcceptTagElement(DefineShape4Tag tag, XElement element) {
-            throw new System.NotImplementedException();
+        protected override string TagName {
+            get { return SwfTagNameMapping.DEFINE_SHAPE_4_TAG; }
         }
     }
 }

@@ -16,10 +16,14 @@ namespace Code.SwfLib.SwfMill {
 
         private static readonly Dictionary<string, Func<SwfTagBase>> _tagMap = new Dictionary<string, Func<SwfTagBase>>();
         public static XName SYMBOL_CLASS_TAG = "SymbolClass";
-        public static XName DEFINE_SHAPE2_TAG = "DefineShape2";
+
+        public const string DEFINE_SHAPE_TAG = "DefineShape";
+        public static string DEFINE_SHAPE2_TAG = "DefineShape2";
+        public const string DEFINE_SHAPE3_TAG = "DefineShape3";
+        public static string DEFINE_SHAPE_4_TAG = "DefineShape5";
+        
         public static string DEFINE_BITS_LOSSLESS2_TAG = "DefineBitsLossless2";
         public static XName DEFINE_SCALING_GRID_TAG = "DefineScalingGrid";
-        public static XName DEFINE_SHAPE_4_TAG = "DefineShape4";
 
         public const string CSM_TEXT_SETTINGS_TAG = "CSMTextSettings";
         public const string DEFINE_BITS_JPEG2_TAG = "DefineBitsJPEG2";
@@ -30,8 +34,6 @@ namespace Code.SwfLib.SwfMill {
         public const string DEFINE_FONT_ALIGN_ZONES_TAG = "DefineFontAlignZones";
         public const string DEFINE_FONT_INFO_TAG = "DefineFontInfo";
         public const string DEFINE_FONT_NAME_TAG = "DefineFontInfo3";
-        public const string DEFINE_SHAPE_TAG = "DefineShape";
-        public const string DEFINE_SHAPE3_TAG = "DefineShape3";
         public const string DEFINE_SPRITE_TAG = "DefineSprite";
         public const string DEFINE_TEXT_TAG = "DefineText";
         public const string DO_ACTION_TAG = "DoAction";

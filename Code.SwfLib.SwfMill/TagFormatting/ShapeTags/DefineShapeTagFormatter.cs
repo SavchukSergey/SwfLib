@@ -7,27 +7,28 @@ using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
-    public class DefineShapeTagFormatter : TagFormatterBase<DefineShapeTag> {
+    public class DefineShapeTagFormatter : DefineShapeBaseFormatter<DefineShapeTag> {
 
-        private const string BOUNDS_ELEM = "bounds";
         private const string STYLES_ELEM = "styles";
         private const string SHAPES_ELEM = "shapes";
 
-        protected override void AcceptTagAttribute(DefineShapeTag tag, XAttribute attrib) {
-            switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.ShapeID = ushort.Parse(attrib.Value);
-                    break;
-                default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
-            }
+        protected override void FormatShapeElement(DefineShapeTag tag, XElement element) {
+            var stylesElem = new XElement(XName.Get("styles"));
+            var styleListElem = new XElement(XName.Get("StyleList"));
+            styleListElem.Add(FormatFillStyles(tag.Shapes.FillStyles));
+            stylesElem.Add(styleListElem);
+            element.Add(stylesElem);
+
+            var shapesElem = new XElement(XName.Get(SHAPES_ELEM));
+            var shapeElem = new XElement(XName.Get("Shape"));
+            var edgesElem = FormatEdges(tag.Shapes.ShapeRecords);
+            shapeElem.Add(edgesElem);
+            shapesElem.Add(shapeElem);
+            element.Add(shapesElem);
         }
 
-        protected override void AcceptTagElement(DefineShapeTag tag, XElement element) {
+        protected override void AcceptShapeTagElement(DefineShapeTag tag, XElement element) {
             switch (element.Name.LocalName) {
-                case BOUNDS_ELEM:
-                    _formatters.Rectangle.Parse(element.Element(XName.Get("Rectangle")), out tag.ShapeBounds);
-                    break;
                 case STYLES_ELEM:
                     ReadStyles(tag, element);
                     break;
@@ -37,6 +38,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
+        }
+
+        protected override string TagName {
+            get { return SwfTagNameMapping.DEFINE_SHAPE_TAG; }
         }
 
         private static void ReadStyles(DefineShapeTag tag, XElement styleElements) {
@@ -75,27 +80,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                     }
                 }
             }
-        }
-
-        protected override XElement FormatTagElement(DefineShapeTag tag) {
-            var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_SHAPE_TAG),
-                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.ShapeID),
-                new XElement(XName.Get(BOUNDS_ELEM), _formatters.Rectangle.Format(ref tag.ShapeBounds))
-                );
-            var stylesElem = new XElement(XName.Get("styles"));
-            var styleListElem = new XElement(XName.Get("StyleList"));
-            styleListElem.Add(FormatFillStyles(tag.Shapes.FillStyles));
-            stylesElem.Add(styleListElem);
-            res.Add(stylesElem);
-
-            var shapesElem = new XElement(XName.Get(SHAPES_ELEM));
-            var shapeElem = new XElement(XName.Get("Shape"));
-            var edgesElem = FormatEdges(tag.Shapes.ShapeRecords);
-            shapeElem.Add(edgesElem);
-            shapesElem.Add(shapeElem);
-            res.Add(shapesElem);
-
-            return res;
         }
 
         private static XElement FormatFillStyles(IEnumerable<FillStyle> styles) {

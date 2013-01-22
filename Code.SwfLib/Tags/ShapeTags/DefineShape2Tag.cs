@@ -3,10 +3,6 @@
 namespace Code.SwfLib.Tags.ShapeTags {
     public class DefineShape2Tag : ShapeBaseTag {
 
-        public ushort ShapeID { get; set; }
-
-        public SwfRect ShapeBounds;
-
         public readonly ShapeWithStyle1 Shapes = new ShapeWithStyle1();
 
         public override SwfTagType TagType {

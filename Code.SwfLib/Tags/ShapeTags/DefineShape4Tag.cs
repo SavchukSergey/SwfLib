@@ -1,11 +1,5 @@
-﻿using Code.SwfLib.Data;
-
-namespace Code.SwfLib.Tags.ShapeTags {
+﻿namespace Code.SwfLib.Tags.ShapeTags {
     public class DefineShape4Tag : ShapeBaseTag {
-
-        public ushort ObjectID;
-
-        public SwfRect Bounds;
 
         public override SwfTagType TagType {
             get { return SwfTagType.DefineShape4; }

@@ -96,6 +96,7 @@
     <Compile Include="TagFormatting\ProductInfoTagFormatter.cs" />
     <Compile Include="TagFormatting\ShapeMorphingTags\DefineMorphShape2TagFormatter.cs" />
     <Compile Include="TagFormatting\ShapeMorphingTags\DefineMorphShapeTagFormatter.cs" />
+    <Compile Include="TagFormatting\ShapeTags\DefineShapeBaseFormatter.cs" />
     <Compile Include="TagFormatting\SoundTags\DefineSoundTagFormatter.cs" />
     <Compile Include="TagFormatting\SoundTags\SoundStreamBlockTagFormatter.cs" />
     <Compile Include="TagFormatting\SoundTags\SoundStreamHead2TagFormatter.cs" />
