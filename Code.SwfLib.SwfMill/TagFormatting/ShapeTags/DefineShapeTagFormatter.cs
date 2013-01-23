@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -7,7 +6,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
     public class DefineShapeTagFormatter : DefineShapeBaseFormatter<DefineShapeTag> {
 
         private const string STYLES_ELEM = "styles";
-        private const string SHAPES_ELEM = "shapes";
 
         protected override void FormatFillStyles(DefineShapeTag tag, XElement xFillStyles) {
             foreach (var style in tag.FillStyles) {
@@ -22,25 +20,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         }
 
 
-        protected override void FormatShapeElement(DefineShapeTag tag, XElement element) {
-            var shapesElem = new XElement(XName.Get(SHAPES_ELEM));
-            var shapeElem = new XElement(XName.Get("Shape"));
-            var edgesElem = FormatEdges(tag.ShapeRecords);
-            shapeElem.Add(edgesElem);
-            shapesElem.Add(shapeElem);
-            element.Add(shapesElem);
-        }
-
         protected override void AcceptShapeTagElement(DefineShapeTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case STYLES_ELEM:
                     ReadStyles(tag, element);
                     break;
-                case SHAPES_ELEM:
-                    ReadShapes(tag, element);
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    throw new FormatException("Invalid xRecords " + element.Name.LocalName);
             }
         }
 
@@ -60,38 +47,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        private static void ReadShapes(DefineShapeTag tag, XElement shapes) {
-            var array = shapes.Element(XName.Get("Shape"));
-            var edges = array.Element("edges");
-            if (edges != null) {
-                foreach (var shapeElement in edges.Elements()) {
-                    switch (shapeElement.Name.LocalName) {
-                        case "ShapeSetup":
-                            if (shapeElement.Attributes().Count() > 0) {
-                                tag.ShapeRecords.Add(SwfMillPrimitives.ReadStyleChangeShapeRecord(shapeElement));
-                            } else {
-                                tag.ShapeRecords.Add(SwfMillPrimitives.ReadEndShapeRecord(shapeElement));
-                            }
-                            break;
-                        case "LineTo":
-                            tag.ShapeRecords.Add(SwfMillPrimitives.ReadStraightEdgeShapeRecord(shapeElement));
-                            break;
-                        case "CurveTo":
-                            tag.ShapeRecords.Add(SwfMillPrimitives.ReadCurvedEdgeShapeRecord(shapeElement));
-                            break;
-                        default:
-                            throw new FormatException("Unknown shape type " + shapeElement.Name.LocalName);
-                    }
-                }
-            }
-        }
-
-
-
-
         //TODO: Simulate swfmill ShapeSetup struct bug
-
-
 
     }
 }

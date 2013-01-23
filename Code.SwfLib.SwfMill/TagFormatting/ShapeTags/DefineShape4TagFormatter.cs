@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
@@ -14,13 +15,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         protected override void FormatLineStyles(DefineShape4Tag tag, XElement xLineStyles) {
             foreach (var style in tag.LineStyles) {
-                xLineStyles.Add(FormatLineStyle(style));
+                xLineStyles.Add(XLineStyleEx.ToXml(style));
             }
         }
-
-        protected override void FormatShapeElement(DefineShape4Tag tag, XElement elem) {
-        }
-
 
         protected override void FormatAdditionalBounds(DefineShape4Tag tag, XElement elem) {
             elem.Add(new XElement(EDGE_BOUNDS_ELEM, _formatters.Rectangle.Format(ref tag.EdgeBounds)));

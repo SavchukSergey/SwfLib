@@ -238,7 +238,7 @@
                     return new ActionStackSwap();
                 case ActionCode.StoreRegister:
                     return new ActionStoreRegister();
-                
+
                 #endregion
 
                 #region SWF 6
@@ -274,6 +274,8 @@
 
                 #endregion
 
+                case ActionCode.End:
+                    return new ActionEnd();
                 default:
                     return new ActionUnknown(code);
             }

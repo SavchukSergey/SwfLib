@@ -401,6 +401,10 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
             throw new NotImplementedException();
         }
 
+        public XElement Visit(ActionEnd action, object arg) {
+            return new XElement("EndAction");
+        }
+
         XElement IActionVisitor<object, XElement>.Visit(ActionUnknown action, object arg) {
             throw new NotImplementedException();
         }

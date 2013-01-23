@@ -264,6 +264,8 @@
 
         #endregion
 
+        TResult Visit(ActionEnd action, TArg arg);
+
         TResult Visit(ActionUnknown action, TArg arg);
 
 

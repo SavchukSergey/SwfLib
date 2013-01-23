@@ -207,10 +207,8 @@ namespace Code.SwfLib {
             ActionBase action;
             do {
                 action = actionReader.ReadAction();
-                if (action != null) {
-                    tag.ActionRecords.Add(action);
-                }
-            } while (action != null);
+                tag.ActionRecords.Add(action);
+            } while (!(action is ActionEnd));
             return tag;
         }
 

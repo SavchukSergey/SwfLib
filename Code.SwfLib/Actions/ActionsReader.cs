@@ -2,10 +2,10 @@
 
 namespace Code.SwfLib.Actions {
     public class ActionsReader : IActionVisitor<ushort, ActionBase> {
-        
+
         private readonly SwfStreamReader _reader;
         private readonly ActionsFactory _factory;
-        
+
         public ActionsReader(SwfStreamReader reader) {
             _reader = reader;
             _factory = new ActionsFactory();
@@ -13,7 +13,6 @@ namespace Code.SwfLib.Actions {
 
         public ActionBase ReadAction() {
             var code = (ActionCode)_reader.ReadByte();
-            if (code == ActionCode.End) return null;
             ushort length = (byte)code >= 0x80 ? _reader.ReadUInt16() : (ushort)0;
             var action = _factory.Create(code);
             action.AcceptVisitor(this, length);
@@ -499,6 +498,10 @@ namespace Code.SwfLib.Actions {
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionThrow action, ushort length) {
             return new ActionThrow();
+        }
+
+        public ActionBase Visit(ActionEnd action, ushort arg) {
+            return action;
         }
 
         #endregion

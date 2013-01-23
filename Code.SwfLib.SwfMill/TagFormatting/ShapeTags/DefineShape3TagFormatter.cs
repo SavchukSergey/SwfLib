@@ -20,9 +20,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        protected override void FormatShapeElement(DefineShape3Tag tag, XElement elem) {
-        }
-
         protected override void AcceptShapeTagElement(DefineShape3Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case STYLES_ELEM:
@@ -32,7 +29,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                     ReadShapes(tag, element);
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    throw new FormatException("Invalid xRecords " + element.Name.LocalName);
             }
         }
 

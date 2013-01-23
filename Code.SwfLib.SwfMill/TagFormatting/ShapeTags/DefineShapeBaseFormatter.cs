@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using Code.SwfLib.Data.Shapes;
+using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
     public abstract class DefineShapeBaseFormatter<T> : TagFormatterBase<T> where T : ShapeBaseTag {
 
         private const string BOUNDS_ELEM = "bounds";
+        private const string SHAPES_ELEM = "shapes";
 
         protected sealed override XElement FormatTagElement(T tag) {
             var res = new XElement(TagName);
@@ -39,6 +41,30 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         protected abstract void FormatLineStyles(T tag, XElement xLineStyles);
 
+        protected void FormatShapeElement(T tag, XElement xml) {
+            var xShapes = new XElement(SHAPES_ELEM);
+            var xShape = new XElement("Shape");
+            
+            var xEdges = new XElement("edges");
+
+            foreach (var shapeRecord in tag.ShapeRecords) {
+                xEdges.Add(XShapeRecord.ToXml(shapeRecord));
+            }
+
+            xShape.Add(xEdges);
+            xShapes.Add(xShape);
+            xml.Add(xShapes);
+        }
+
+        private static void ReadShapes(T tag, XElement shapes) {
+            var array = shapes.Element(XName.Get("Shape"));
+            var edges = array.Element("edges");
+            if (edges != null) {
+                foreach (var xShapeRecord in edges.Elements()) {
+                    tag.ShapeRecords.Add(XShapeRecord.FromXml(xShapeRecord));
+                }
+            }
+        }
 
         protected sealed override void AcceptTagAttribute(T tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
@@ -55,68 +81,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                 case BOUNDS_ELEM:
                     _formatters.Rectangle.Parse(element.Element("Rectangle"), out tag.ShapeBounds);
                     break;
+                case SHAPES_ELEM:
+                    ReadShapes(tag, element);
+                    break;
                 default:
                     AcceptShapeTagElement(tag, element);
                     break;
             }
         }
-        #region Edges
-
-        protected static XElement FormatEdges(IEnumerable<ShapeRecord> edges) {
-            var edgesElem = new XElement("edges");
-
-            foreach (var shape in edges) {
-                var styleChange = shape as StyleChangeShapeRecord;
-                if (styleChange != null) edgesElem.Add(FormatShapeSetup(styleChange));
-                var endRecord = shape as EndShapeRecord;
-                if (endRecord != null) edgesElem.Add(FormatEndRecord(endRecord));
-                var lineRecord = shape as StraightEdgeShapeRecord;
-                if (lineRecord != null) edgesElem.Add(FormatStraightEdgeShapeRecord(lineRecord));
-                var curvedRecord = shape as CurvedEdgeShapeRecord;
-                if (curvedRecord != null) edgesElem.Add(FormatCurvedEdgeShapeRecord(curvedRecord));
-                //TODO: default behavior? throw new exception
-            }
-            return edgesElem;
-        }
-
-        private static XElement FormatShapeSetup(StyleChangeShapeRecord styleChange) {
-            var setup = new XElement("ShapeSetup");
-            if (styleChange.FillStyle0.HasValue) {
-                setup.Add(new XAttribute(XName.Get("fillStyle0"), styleChange.FillStyle0.Value));
-            }
-            if (styleChange.FillStyle1.HasValue) {
-                setup.Add(new XAttribute(XName.Get("fillStyle1"), styleChange.FillStyle1.Value));
-            }
-            //TODO: line style
-            setup.Add(new XAttribute(XName.Get("x"), styleChange.MoveDeltaX));
-            setup.Add(new XAttribute(XName.Get("y"), styleChange.MoveDeltaY));
-
-            //TODO: Glyphs  
-            return setup;
-        }
-
-        private static XElement FormatEndRecord(EndShapeRecord endRecord) {
-            var setup = new XElement("ShapeSetup");
-            return setup;
-        }
-
-        private static XElement FormatStraightEdgeShapeRecord(StraightEdgeShapeRecord record) {
-            return new XElement("LineTo",
-                new XAttribute("x", record.DeltaX),
-                new XAttribute("y", record.DeltaY)
-            );
-        }
-
-        private static XElement FormatCurvedEdgeShapeRecord(CurvedEdgeShapeRecord record) {
-            return new XElement("CurveTo",
-                new XAttribute("x1", record.ControlDeltaX),
-                new XAttribute("y1", record.ControlDeltaY),
-                new XAttribute("x2", record.AnchorDeltaX),
-                new XAttribute("y2", record.AnchorDeltaY)
-            );
-        }
-
-        #endregion
 
         protected static XElement FormatFillStyle(FillStyleRGB style) {
             var fillStyle = style;
@@ -136,13 +108,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             throw new NotImplementedException();
         }
 
-        protected static XElement FormatLineStyle(LineStyleEx style) {
-            throw new NotImplementedException();
-        }
-
-
         protected virtual void FormatAdditionalBounds(T tag, XElement elem) { }
-        protected abstract void FormatShapeElement(T tag, XElement elem);
         protected abstract void AcceptShapeTagElement(T tag, XElement element);
         protected abstract string TagName { get; }
     }

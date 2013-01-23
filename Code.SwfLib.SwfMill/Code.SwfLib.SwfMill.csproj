@@ -71,6 +71,7 @@
     <Compile Include="Shapes\XFillStyleRGBA.cs" />
     <Compile Include="Shapes\XFillStyleRGB.cs" />
     <Compile Include="Shapes\XLineStyleEx.cs" />
+    <Compile Include="Shapes\XShapeRecord.cs" />
     <Compile Include="TagFormatting\ActionTags\DoABCDefineTagFormatter.cs" />
     <Compile Include="TagFormatting\ActionTags\DoABCTagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG3TagFormatter.cs" />

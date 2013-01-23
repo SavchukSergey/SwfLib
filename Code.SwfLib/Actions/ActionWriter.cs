@@ -421,6 +421,10 @@ namespace Code.SwfLib.Actions {
             return null;
         }
 
+        public object Visit(ActionEnd action, SwfStreamWriter arg) {
+            return null;
+        }
+
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionUnknown action, SwfStreamWriter writer) {
             return null;
         }

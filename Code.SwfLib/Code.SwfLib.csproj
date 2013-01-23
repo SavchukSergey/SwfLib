@@ -70,6 +70,7 @@
     <Compile Include="Actions\ActionDefineLocal2.cs" />
     <Compile Include="Actions\ActionDelete.cs" />
     <Compile Include="Actions\ActionDelete2.cs" />
+    <Compile Include="Actions\ActionEnd.cs" />
     <Compile Include="Actions\ActionEnumerate.cs" />
     <Compile Include="Actions\ActionEnumerate2.cs" />
     <Compile Include="Actions\ActionEquals2.cs" />

@@ -16,9 +16,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        protected override void FormatShapeElement(DefineShape2Tag tag, XElement elem) {
-        }
-
         protected override void AcceptShapeTagElement(DefineShape2Tag tag, XElement element) {
         }
 
