@@ -38,6 +38,19 @@ namespace Code.SwfLib.Tests.Samples {
             Assert.IsNull(firstShape.FillStyle0);
             Assert.IsNotNull(firstShape.FillStyle1);
             Assert.AreEqual(1, firstShape.FillStyle1.Value);
+
+            var lineShape = tag.Shapes.ShapeRecords[6] as StraightEdgeShapeRecord;
+            var curveShape = tag.Shapes.ShapeRecords[7] as CurvedEdgeShapeRecord;
+            Assert.IsNotNull(lineShape);
+            Assert.IsNotNull(curveShape);
+
+            Assert.AreEqual(-2, lineShape.DeltaX);
+            Assert.AreEqual(10, lineShape.DeltaY);
+
+            Assert.AreEqual(0, curveShape.ControlDeltaX);
+            Assert.AreEqual(12, curveShape.ControlDeltaY);
+            Assert.AreEqual(9, curveShape.AnchorDeltaX);
+            Assert.AreEqual(8, curveShape.AnchorDeltaY);
         }
     }
 }
