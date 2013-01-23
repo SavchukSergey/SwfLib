@@ -65,6 +65,8 @@
     <Compile Include="ExternalEtalonTests\ExternalEtalonTestFixtureBase.cs" />
     <Compile Include="ExternalEtalonTests\SwfStreamReaderExtTest.cs" />
     <Compile Include="SamplesTest.cs" />
+    <Compile Include="Samples\BaseSampleTest.cs" />
+    <Compile Include="Samples\DefineShapeTagTest.cs" />
     <Compile Include="SwfFileTest.cs" />
     <Compile Include="SwfStreamReaderExtTest.cs" />
     <Compile Include="SwfStreamReaderTest.cs" />
@@ -152,7 +154,9 @@
     <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\7.73.tag" />
     <EmbeddedResource Include="Resources\Bin2Bin\DefineFontAlignZonesTag\8.73.tag" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Samples\Sample - 1.swf" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

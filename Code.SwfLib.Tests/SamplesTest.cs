@@ -3,18 +3,17 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tests.Samples;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
     [TestFixture]
-    public class SamplesTest {
-
-        private MD5 _md5 = MD5.Create();
+    public class SamplesTest : BaseSampleTest{
 
         [Test]
         [Ignore]
         public void GrabAllSwfsFromMachine() {
-            var source = @"D:\dev\Code.SwfLib\Code.SwfLib.SwfMill\bin\Debug\";
+            var source = @"D:\Sergey\Samples\";
             var target = Path.Combine(source, "tags");
             if (!Directory.Exists(target)) {
                 Directory.CreateDirectory(target);
@@ -33,7 +32,7 @@ namespace Code.SwfLib.Tests {
                         var file = new SwfFile();
                         var reader = new SwfStreamReader(stream);
                         file.FileInfo = reader.ReadSwfFileInfo();
-                        reader = GetSWFStreamReader(file.FileInfo, stream);
+                        reader = GetSwfStreamReader(file.FileInfo, stream);
                         file.Header = reader.ReadSwfHeader();
 
                         while (!reader.IsEOF) {
@@ -58,27 +57,8 @@ namespace Code.SwfLib.Tests {
         }
 
         protected string GetFileName(SwfTagData tagData) {
-            var hash = _md5.ComputeHash(tagData.Data);
-            return string.Format("{0}.bin", ToHex(hash));
+            return string.Format("{0}.bin", GetTagHash(tagData));
         }
 
-        protected string ToHex(byte[] data) {
-            const string hex = "0123456789abcdef";
-            return data.Aggregate("", (seed, bt) => seed + hex[bt >> 4] + hex[bt & 0x0f]);
-        }
-
-        protected static SwfStreamReader GetSWFStreamReader(SwfFileInfo info, Stream stream) {
-            switch (info.Format) {
-                case "CWS":
-                    MemoryStream mem = new MemoryStream();
-                    SwfZip.Decompress(stream, mem);
-                    mem.Seek(8, SeekOrigin.Begin);
-                    return new SwfStreamReader(mem);
-                case "FWS":
-                    return new SwfStreamReader(stream);
-                default:
-                    throw new NotSupportedException("Illegal file format");
-            }
-        }
     }
 }

@@ -140,6 +140,23 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
+        public void WriteRectMustBeByteAlignedTest() {
+            var rect = new SwfRect {
+                XMin = 0x004,
+                XMax = 0x48f,
+                YMin = 0x008,
+                YMax = 0x0ee
+            };
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteSignedBits(0xa8 >> 3, 5);
+            writer.WriteRect(ref rect);
+            writer.FlushBits();
+            CheckBits(mem, "10101000", "01100", "0000.00000100", "0100.10001111", "0000.00001000", "0000.11101110");
+            mem.Seek(0, SeekOrigin.Begin);
+        }
+
+        [Test]
         public void WriteMatrixFromBitsTest() {
             var mem = new MemoryStream();
             var matrix = new SwfMatrix {

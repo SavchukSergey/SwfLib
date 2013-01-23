@@ -197,9 +197,8 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
             writer.FlushBits();
-            
-            writer.WriteFillStyles1(tag.FillStyles);
 
+            writer.WriteFillStyles1(tag.FillStyles);
             writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits());
             return null;
         }
@@ -221,7 +220,6 @@ namespace Code.SwfLib {
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape4Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
-            writer.FlushBits();
             writer.WriteRect(ref tag.EdgeBounds);
             writer.FlushBits();
             writer.WriteByte(tag.Flags);
