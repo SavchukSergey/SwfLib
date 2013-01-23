@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Tags.ShapeTags {
     public class DefineShapeTag : ShapeBaseTag {
-
-        public readonly ShapeWithStyle1 Shapes = new ShapeWithStyle1();
 
         public readonly IList<FillStyleRGB> FillStyles = new List<FillStyleRGB>();
 

@@ -25,9 +25,9 @@ namespace Code.SwfLib.Tests.Samples {
 
             Assert.AreEqual(0, tag.LineStyles.Count);
 
-            Assert.AreEqual(33, tag.Shapes.ShapeRecords.Count);
-            var firstShape = tag.Shapes.ShapeRecords.First() as StyleChangeShapeRecord;
-            var lastShape = tag.Shapes.ShapeRecords.Last() as EndShapeRecord;
+            Assert.AreEqual(33, tag.ShapeRecords.Count);
+            var firstShape = tag.ShapeRecords.First() as StyleChangeShapeRecord;
+            var lastShape = tag.ShapeRecords.Last() as EndShapeRecord;
             Assert.IsNotNull(firstShape);
             Assert.IsNotNull(lastShape);
 
@@ -37,8 +37,8 @@ namespace Code.SwfLib.Tests.Samples {
             Assert.IsNotNull(firstShape.FillStyle1);
             Assert.AreEqual(1, firstShape.FillStyle1.Value);
 
-            var lineShape = tag.Shapes.ShapeRecords[6] as StraightEdgeShapeRecord;
-            var curveShape = tag.Shapes.ShapeRecords[7] as CurvedEdgeShapeRecord;
+            var lineShape = tag.ShapeRecords[6] as StraightEdgeShapeRecord;
+            var curveShape = tag.ShapeRecords[7] as CurvedEdgeShapeRecord;
             Assert.IsNotNull(lineShape);
             Assert.IsNotNull(curveShape);
 
@@ -69,9 +69,9 @@ namespace Code.SwfLib.Tests.Samples {
 
             Assert.AreEqual(0, tag.LineStyles.Count);
 
-            Assert.AreEqual(15, tag.Shapes.ShapeRecords.Count);
-            var firstShape = tag.Shapes.ShapeRecords.First() as StyleChangeShapeRecord;
-            var lastShape = tag.Shapes.ShapeRecords.Last() as EndShapeRecord;
+            Assert.AreEqual(15, tag.ShapeRecords.Count);
+            var firstShape = tag.ShapeRecords.First() as StyleChangeShapeRecord;
+            var lastShape = tag.ShapeRecords.Last() as EndShapeRecord;
             Assert.IsNotNull(firstShape);
             Assert.IsNotNull(lastShape);
 
@@ -81,7 +81,7 @@ namespace Code.SwfLib.Tests.Samples {
             Assert.IsNotNull(firstShape.FillStyle1);
             Assert.AreEqual(1, firstShape.FillStyle1.Value);
 
-            var styleChange = tag.Shapes.ShapeRecords[9] as StyleChangeShapeRecord;
+            var styleChange = tag.ShapeRecords[9] as StyleChangeShapeRecord;
             Assert.IsNotNull(styleChange);
 
             Assert.AreEqual(31, styleChange.MoveDeltaX);

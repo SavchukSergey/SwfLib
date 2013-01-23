@@ -240,8 +240,7 @@ namespace Code.SwfLib {
             reader.ReadRect(out tag.ShapeBounds);
             reader.ReadToFillStylesRGB(tag.FillStyles, false);
             reader.ReadToLineStylesRGB(tag.LineStyles, false);
-
-            reader.ReadToShapeWithStyle(tag.Shapes);
+            reader.ReadToShapeRecords(tag.ShapeRecords);
             return tag;
         }
 
@@ -250,6 +249,7 @@ namespace Code.SwfLib {
             reader.ReadRect(out tag.ShapeBounds);
             reader.ReadToFillStylesRGB(tag.FillStyles, true);
             reader.ReadToLineStylesRGB(tag.LineStyles, true);
+            reader.ReadToShapeRecords(tag.ShapeRecords);
             return tag;
         }
 
@@ -258,6 +258,7 @@ namespace Code.SwfLib {
             reader.ReadRect(out tag.ShapeBounds);
             reader.ReadToFillStylesRGBA(tag.FillStyles, true);
             reader.ReadToLineStylesRGBA(tag.LineStyles, true);
+            reader.ReadToShapeRecords(tag.ShapeRecords);
             return tag;
         }
 
@@ -271,6 +272,7 @@ namespace Code.SwfLib {
             //TODO: other flags
             reader.ReadToFillStylesRGBA(tag.FillStyles, true);
             reader.ReadToLineStylesEx(tag.LineStyles, true);
+            reader.ReadToShapeRecords(tag.ShapeRecords);
             return tag;
         }
 

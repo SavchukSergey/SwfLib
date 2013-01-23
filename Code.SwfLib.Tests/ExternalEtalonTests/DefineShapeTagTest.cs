@@ -64,28 +64,28 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
                     TranslateY = 0
                 }
             });
-            tag.Shapes.ShapeRecords.Add(new StyleChangeShapeRecord {
+            tag.ShapeRecords.Add(new StyleChangeShapeRecord {
                 MoveDeltaX = 5354,
                 MoveDeltaY = 1800,
                 FillStyle1 = 1
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
+            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = -5354,
                 DeltaY = 0
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
+            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 267,
                 DeltaY = -1800
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
+            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 5087,
                 DeltaY = 0
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
+            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 0,
                 DeltaY = 1800
             });
-            tag.Shapes.ShapeRecords.Add(new EndShapeRecord());
+            tag.ShapeRecords.Add(new EndShapeRecord());
             return tag;
         }
 
@@ -171,28 +171,28 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
                 FillStyleType = FillStyleType.SolidColor,
                 ColorRGB = new SwfRGB(255, 255, 255)
             });
-            tag.Shapes.ShapeRecords.Add(new StyleChangeShapeRecord {
+            tag.ShapeRecords.Add(new StyleChangeShapeRecord {
                 MoveDeltaX = 14560,
                 MoveDeltaY = 1800,
                 FillStyle1 = 1
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
+            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = -14560,
                 DeltaY = 0
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
+            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 0,
                 DeltaY = -1800
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
+            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 14560,
                 DeltaY = 0
             });
-            tag.Shapes.ShapeRecords.Add(new StraightEdgeShapeRecord {
+            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
                 DeltaX = 0,
                 DeltaY = 1800
             });
-            tag.Shapes.ShapeRecords.Add(new EndShapeRecord());
+            tag.ShapeRecords.Add(new EndShapeRecord());
             return tag;
         }
 

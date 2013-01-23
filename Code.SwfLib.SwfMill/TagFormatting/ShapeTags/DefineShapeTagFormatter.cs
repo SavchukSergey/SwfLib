@@ -25,7 +25,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         protected override void FormatShapeElement(DefineShapeTag tag, XElement element) {
             var shapesElem = new XElement(XName.Get(SHAPES_ELEM));
             var shapeElem = new XElement(XName.Get("Shape"));
-            var edgesElem = FormatEdges(tag.Shapes.ShapeRecords);
+            var edgesElem = FormatEdges(tag.ShapeRecords);
             shapeElem.Add(edgesElem);
             shapesElem.Add(shapeElem);
             element.Add(shapesElem);
@@ -68,16 +68,16 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                     switch (shapeElement.Name.LocalName) {
                         case "ShapeSetup":
                             if (shapeElement.Attributes().Count() > 0) {
-                                tag.Shapes.ShapeRecords.Add(SwfMillPrimitives.ReadStyleChangeShapeRecord(shapeElement));
+                                tag.ShapeRecords.Add(SwfMillPrimitives.ReadStyleChangeShapeRecord(shapeElement));
                             } else {
-                                tag.Shapes.ShapeRecords.Add(SwfMillPrimitives.ReadEndShapeRecord(shapeElement));
+                                tag.ShapeRecords.Add(SwfMillPrimitives.ReadEndShapeRecord(shapeElement));
                             }
                             break;
                         case "LineTo":
-                            tag.Shapes.ShapeRecords.Add(SwfMillPrimitives.ReadStraightEdgeShapeRecord(shapeElement));
+                            tag.ShapeRecords.Add(SwfMillPrimitives.ReadStraightEdgeShapeRecord(shapeElement));
                             break;
                         case "CurveTo":
-                            tag.Shapes.ShapeRecords.Add(SwfMillPrimitives.ReadCurvedEdgeShapeRecord(shapeElement));
+                            tag.ShapeRecords.Add(SwfMillPrimitives.ReadCurvedEdgeShapeRecord(shapeElement));
                             break;
                         default:
                             throw new FormatException("Unknown shape type " + shapeElement.Name.LocalName);

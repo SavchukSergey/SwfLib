@@ -38,10 +38,10 @@ namespace Code.SwfLib.Tests {
                 var act = actual.LineStyles[i];
                 AreEqual(exp, act, "LineStyles[" + i + "]");
             }
-            Assert.AreEqual(expected.Shapes.ShapeRecords.Count, actual.Shapes.ShapeRecords.Count, "ShapeRecords.Count");
-            for (var i = 0; i < expected.Shapes.ShapeRecords.Count; i++) {
-                var exp = expected.Shapes.ShapeRecords[i];
-                var act = actual.Shapes.ShapeRecords[i];
+            Assert.AreEqual(expected.ShapeRecords.Count, actual.ShapeRecords.Count, "ShapeRecords.Count");
+            for (var i = 0; i < expected.ShapeRecords.Count; i++) {
+                var exp = expected.ShapeRecords[i];
+                var act = actual.ShapeRecords[i];
                 AreEqual(exp, act, "ShapeRecords[" + i + "]");
             }
         }

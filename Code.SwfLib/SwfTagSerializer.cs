@@ -200,7 +200,7 @@ namespace Code.SwfLib {
             
             writer.WriteFillStylesRGB(tag.FillStyles);
             writer.WriteLineStylesRGB(tag.LineStyles);
-            writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+            writer.WriteShapeRecords(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
             return null;
         }
 
@@ -210,7 +210,7 @@ namespace Code.SwfLib {
 
             writer.WriteFillStylesRGB(tag.FillStyles);
             writer.WriteLineStylesRGB(tag.LineStyles);
-            writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+            writer.WriteShapeRecords(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
             
             writer.FlushBits();
             return null;
@@ -222,7 +222,7 @@ namespace Code.SwfLib {
 
             writer.WriteFillStylesRGBA(tag.FillStyles);
             writer.WriteLineStylesRGBA(tag.LineStyles);
-            writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+            writer.WriteShapeRecords(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
             
             writer.FlushBits();
             return null;
@@ -235,6 +235,7 @@ namespace Code.SwfLib {
             writer.FlushBits();
             writer.WriteByte(tag.Flags);
             throw new NotImplementedException();
+            writer.WriteShapeRecords(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
             return null;
         }
 
