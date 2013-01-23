@@ -97,6 +97,7 @@ namespace Code.SwfLib {
             lineStyle.NoHScale = reader.ReadBit();
             lineStyle.NoVScale = reader.ReadBit();
             lineStyle.PixelHinting = reader.ReadBit();
+            lineStyle.Reserved = (byte)reader.ReadUnsignedBits(5);
             lineStyle.NoClose = reader.ReadBit();
             lineStyle.EndCapStyle = reader.ReadCapStyle();
             if (lineStyle.JoinStyle == JoinStyle.Miter) {

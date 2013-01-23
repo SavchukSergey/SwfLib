@@ -54,6 +54,8 @@ namespace Code.SwfLib.SwfMill {
         public const string UNKNOWN_TAG = "UnknownTag";
         public const string DO_ABC_TAG = "DoAbc";
 
+        public const string DEFINE_SCENE_AND_FRAME_LABEL_DATA_TAG = "DefineSceneAndFrameLabelData";
+
         static SwfTagNameMapping() {
             _tagMap[CSM_TEXT_SETTINGS_TAG] = () => new CSMTextSettingsTag();
             _tagMap[DEFINE_BITS_JPEG2_TAG] = () => new DefineBitsJPEG2Tag();

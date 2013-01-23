@@ -128,7 +128,19 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionPush action, object param) {
-            throw new NotImplementedException();
+            var xAction = new XElement("PushData");
+            var xItems = new XElement("items");
+            foreach (var item in action.Items) {
+                switch (item.Type) {
+                    case ActionPushItemType.String:
+                        xItems.Add(new XElement("StackString", new XAttribute("value", item.String)));
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+            xAction.Add(xItems);
+            return xAction;
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionAsciiToChar action, object param) {
@@ -168,7 +180,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSetVariable action, object param) {
-            throw new NotImplementedException();
+            return new XElement("SetVariable");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetURL2 action, object param) {

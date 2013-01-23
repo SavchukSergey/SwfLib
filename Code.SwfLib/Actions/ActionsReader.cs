@@ -13,6 +13,7 @@ namespace Code.SwfLib.Actions {
 
         public ActionBase ReadAction() {
             var code = (ActionCode)_reader.ReadByte();
+            if (code == ActionCode.End) return null;
             ushort length = (byte)code >= 0x80 ? _reader.ReadUInt16() : (ushort)0;
             var action = _factory.Create(code);
             action.AcceptVisitor(this, length);

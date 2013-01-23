@@ -65,9 +65,12 @@
     <Compile Include="Data\XColorRGBA.cs" />
     <Compile Include="Data\XColorRGB.cs" />
     <Compile Include="Data\XMatrix.cs" />
+    <Compile Include="Gradients\XGradientRecordRGBA.cs" />
     <Compile Include="Gradients\XGradientRecordRGB.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Shapes\XFillStyleRGBA.cs" />
     <Compile Include="Shapes\XFillStyleRGB.cs" />
+    <Compile Include="Shapes\XLineStyleEx.cs" />
     <Compile Include="TagFormatting\ActionTags\DoABCDefineTagFormatter.cs" />
     <Compile Include="TagFormatting\ActionTags\DoABCTagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG3TagFormatter.cs" />
@@ -154,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataFormatting\Shapes\" />
+    <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,7 @@
 ﻿namespace Code.SwfLib.Actions {
     public enum ActionCode : byte {
 
-        Empty = 0x00,
+        End = 0x00,
         /// <summary>
         /// ActionNextFrame instructs Flash Player to go to the next frame in the current file.
         /// </summary>
