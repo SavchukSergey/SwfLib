@@ -173,8 +173,6 @@
     <Compile Include="Data\Gradients\GradientRecordRGB.cs" />
     <Compile Include="Data\Gradients\InterpolationMode.cs" />
     <Compile Include="Data\Gradients\SpreadMode.cs" />
-    <Compile Include="Data\LineStyles\LineStyleRGB.cs" />
-    <Compile Include="Data\LineStyles\LineStylesRGBList.cs" />
     <Compile Include="Data\Shapes\CurvedEdgeShapeRecord.cs" />
     <Compile Include="Data\Shapes\EndShapeRecord.cs" />
     <Compile Include="Data\Shapes\ShapeRecord.cs" />
@@ -239,6 +237,11 @@
     <Compile Include="Tags\ControlTags\SetTabIndexTag.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObjectTag.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObjectTag.cs" />
+    <Compile Include="Tags\ShapeTags\JoinStyle.cs" />
+    <Compile Include="Tags\ShapeTags\LineStyleRGB.cs" />
+    <Compile Include="Tags\ShapeTags\LineStyleRGBA.cs" />
+    <Compile Include="Tags\ShapeTags\LineStyleEx.cs" />
+    <Compile Include="Tags\ShapeTags\CapStyle.cs" />
     <Compile Include="Tags\SoundTags\SoundStreamBlockTag.cs" />
     <Compile Include="Tags\SoundTags\SoundStreamHead2Tag.cs" />
     <Compile Include="Tags\SoundTags\SoundStreamHeadTag.cs" />

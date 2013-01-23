@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Code.SwfLib.Actions;
@@ -238,6 +239,7 @@ namespace Code.SwfLib {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
             reader.ReadToFillStyles1(tag.FillStyles);
+            reader.ReadToLineStylesRGB(tag.LineStyles, false);
 
             reader.ReadToShapeWithStyle(tag.Shapes);
             return tag;
@@ -246,6 +248,8 @@ namespace Code.SwfLib {
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShape2Tag tag, SwfStreamReader reader) {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
+            reader.ReadToFillStyles1(tag.FillStyles);
+            reader.ReadToLineStylesRGB(tag.LineStyles, true);
             return tag;
         }
 
@@ -253,6 +257,7 @@ namespace Code.SwfLib {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
             reader.ReadToFillStyles1(tag.FillStyles);
+            reader.ReadToLineStylesRGBA(tag.LineStyles, true);
             return tag;
         }
 
@@ -262,9 +267,10 @@ namespace Code.SwfLib {
             reader.ReadRect(out tag.EdgeBounds);
             reader.AlignToByte();
             tag.Flags = reader.ReadByte();
-
+            throw new NotImplementedException();
+            //TODO: other flags
             reader.ReadToFillStyles1(tag.FillStyles);
-
+            reader.ReadToLineStylesEx(tag.LineStyles, true);
             return tag;
         }
 

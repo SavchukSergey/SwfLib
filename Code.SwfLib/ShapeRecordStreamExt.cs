@@ -5,19 +5,13 @@ using Code.SwfLib.Data.Shapes;
 namespace Code.SwfLib {
     public static class ShapeRecordStreamExt {
 
-        public static void WriteShapeWithStyle(this SwfStreamWriter writer, ShapeWithStyle1 shapeWithStyle, uint fillStyleBits) {
-           
-            writer.WriteLineStyles1(shapeWithStyle.LineStyles);
-            var lineStyleBits = new BitsCount(shapeWithStyle.LineStyles.Count).GetUnsignedBits();
+        public static void WriteShapeWithStyle(this SwfStreamWriter writer, ShapeWithStyle1 shapeWithStyle, uint fillStyleBits, uint lineStyleBits) {
             writer.WriteUnsignedBits(fillStyleBits, 4);
             writer.WriteUnsignedBits(lineStyleBits, 4);
             writer.WriteShapeRecords1(shapeWithStyle.ShapeRecords, ref fillStyleBits, ref lineStyleBits);
         }
 
         public static void ReadToShapeWithStyle(this SwfStreamReader reader, ShapeWithStyle1 style) {
-            style.LineStyles.Clear();
-            reader.ReadToLineStyles1(style.LineStyles);
-
             var fillStyleBits = reader.ReadUnsignedBits(4);
             var lineStyleBits = reader.ReadUnsignedBits(4);
             reader.ReadToShapeRecords1(style.ShapeRecords, ref fillStyleBits, ref lineStyleBits);

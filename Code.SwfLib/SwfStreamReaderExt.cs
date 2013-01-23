@@ -51,6 +51,7 @@ namespace Code.SwfLib {
         }
 
         public static void ReadRect(this SwfStreamReader reader, out SwfRect rect) {
+            reader.AlignToByte();
             var bits = reader.ReadUnsignedBits(5);
             rect.XMin = reader.ReadSignedBits(bits);
             rect.XMax = reader.ReadSignedBits(bits);

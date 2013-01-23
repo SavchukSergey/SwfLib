@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
@@ -196,16 +197,21 @@ namespace Code.SwfLib {
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShapeTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
-            writer.FlushBits();
-
+            
             writer.WriteFillStyles1(tag.FillStyles);
-            writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits());
+            writer.WriteLineStylesRGB(tag.LineStyles);
+            writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
             return null;
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape2Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
+
+            writer.WriteFillStyles1(tag.FillStyles);
+            writer.WriteLineStylesRGB(tag.LineStyles);
+            writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+            
             writer.FlushBits();
             return null;
         }
@@ -213,6 +219,11 @@ namespace Code.SwfLib {
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape3Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
+
+            writer.WriteFillStyles1(tag.FillStyles);
+            writer.WriteLineStylesRGBA(tag.LineStyles);
+            writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+            
             writer.FlushBits();
             return null;
         }
@@ -223,6 +234,7 @@ namespace Code.SwfLib {
             writer.WriteRect(ref tag.EdgeBounds);
             writer.FlushBits();
             writer.WriteByte(tag.Flags);
+            throw new NotImplementedException();
             return null;
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
 using NUnit.Framework;
 
@@ -257,6 +258,43 @@ namespace Code.SwfLib.Tests {
             Assert.AreEqual(3.43359375f, reader.ReadShortFloat(), "Value");
 
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+        }
+
+        [Test]
+        public void ReadRectTest() {
+            var etalon = new SwfRect {
+                XMin = 0x004,
+                XMax = 0x48f,
+                YMin = 0x008,
+                YMax = 0x0ee
+            };
+            var mem = new MemoryStream();
+            WriteBits(mem, "01100", "0000.00000100", "0100.10001111", "0000.00001000", "0000.11101110");
+            var reader = new SwfStreamReader(mem);
+            SwfRect rect;
+            reader.ReadRect(out rect);
+            Assert.AreEqual(etalon, rect);
+        }
+
+        [Test]
+        public void ReadRectMustBeByteAlignedTest() {
+            var etalon = new SwfRect {
+                XMin = 0x004,
+                XMax = 0x48f,
+                YMin = 0x008,
+                YMax = 0x0ee
+            };
+            var mem = new MemoryStream();
+            WriteBits(mem, "10101000", "01100", "0000.00000100", "0100.10001111", "0000.00001000", "0000.11101110");
+            var reader = new SwfStreamReader(mem);
+            reader.ReadBit();
+            reader.ReadBit();
+            reader.ReadBit();
+            reader.ReadBit();
+            reader.ReadBit();
+            SwfRect rect;
+            reader.ReadRect(out rect);
+            Assert.AreEqual(etalon, rect);
         }
     }
 }

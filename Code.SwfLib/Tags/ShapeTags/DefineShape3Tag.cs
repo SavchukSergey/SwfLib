@@ -1,5 +1,12 @@
-﻿namespace Code.SwfLib.Tags.ShapeTags {
+﻿using System.Collections.Generic;
+using Code.SwfLib.Data;
+
+namespace Code.SwfLib.Tags.ShapeTags {
     public class DefineShape3Tag : ShapeBaseTag {
+
+        public readonly ShapeWithStyle1 Shapes = new ShapeWithStyle1();
+
+        public readonly IList<LineStyleRGBA> LineStyles = new List<LineStyleRGBA>();
 
         public override SwfTagType TagType {
             get { return SwfTagType.DefineShape3; }

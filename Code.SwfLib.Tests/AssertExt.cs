@@ -2,7 +2,6 @@
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Data.Gradients;
-using Code.SwfLib.Data.LineStyles;
 using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 using NUnit.Framework;
@@ -34,10 +33,10 @@ namespace Code.SwfLib.Tests {
                 var act = actual.FillStyles[i];
                 AreEqual(exp, act, "FillStyles[" + i + "]");
             }
-            Assert.AreEqual(expected.Shapes.LineStyles.Count, actual.Shapes.LineStyles.Count, "LineStyles.Count");
-            for (var i = 0; i < expected.Shapes.LineStyles.Count; i++) {
-                var exp = expected.Shapes.LineStyles[i];
-                var act = actual.Shapes.LineStyles[i];
+            Assert.AreEqual(expected.LineStyles.Count, actual.LineStyles.Count, "LineStyles.Count");
+            for (var i = 0; i < expected.LineStyles.Count; i++) {
+                var exp = expected.LineStyles[i];
+                var act = actual.LineStyles[i];
                 AreEqual(exp, act, "LineStyles[" + i + "]");
             }
             Assert.AreEqual(expected.Shapes.ShapeRecords.Count, actual.Shapes.ShapeRecords.Count, "ShapeRecords.Count");

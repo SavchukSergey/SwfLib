@@ -24,7 +24,7 @@ namespace Code.SwfLib.Tests.Samples {
             Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Green);
             Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Blue);
 
-            Assert.AreEqual(0, tag.Shapes.LineStyles.Count);
+            Assert.AreEqual(0, tag.LineStyles.Count);
 
             Assert.AreEqual(33, tag.Shapes.ShapeRecords.Count);
             var firstShape = tag.Shapes.ShapeRecords.First() as StyleChangeShapeRecord;
@@ -68,7 +68,7 @@ namespace Code.SwfLib.Tests.Samples {
             Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Green);
             Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Blue);
 
-            Assert.AreEqual(0, tag.Shapes.LineStyles.Count);
+            Assert.AreEqual(0, tag.LineStyles.Count);
 
             Assert.AreEqual(15, tag.Shapes.ShapeRecords.Count);
             var firstShape = tag.Shapes.ShapeRecords.First() as StyleChangeShapeRecord;
