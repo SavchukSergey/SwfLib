@@ -6,6 +6,8 @@ namespace Code.SwfLib.Tags.ShapeTags {
 
         public readonly ShapeWithStyle1 Shapes = new ShapeWithStyle1();
 
+        public readonly IList<FillStyleRGB> FillStyles = new List<FillStyleRGB>();
+
         public readonly IList<LineStyleRGB> LineStyles = new List<LineStyleRGB>();
 
         public override SwfTagType TagType {

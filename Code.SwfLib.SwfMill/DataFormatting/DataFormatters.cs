@@ -6,7 +6,8 @@
             ColorRGB = new ColorRGBFormatter(this);
             ColorRGBA = new ColorRGBAFormatter(this);
             Matrix = new MatrixFormatter(this);
-            FillStyle1 = new FillStyle1Formatter(this);
+            FillStyleRGB = new FillStyleRGBFormatter(this);
+            FillStyleRGBA = new FillStyleRGBAFormatter(this);
             ColorTransformRGBA = new ColorTransformRGBAFormatter(this);
         }
 
@@ -20,7 +21,9 @@
 
         public readonly MatrixFormatter Matrix;
 
-        public readonly FillStyle1Formatter FillStyle1;
+        public readonly FillStyleRGBFormatter FillStyleRGB;
+
+        public readonly FillStyleRGBAFormatter FillStyleRGBA;
 
     }
 }

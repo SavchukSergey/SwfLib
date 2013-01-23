@@ -8,6 +8,18 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         private const string STYLES_ELEM = "styles";
         private const string SHAPES_ELEM = "shapes";
 
+        protected override void FormatFillStyles(DefineShape3Tag tag, XElement xFillStyles) {
+            foreach (var style in tag.FillStyles) {
+                xFillStyles.Add(FormatFillStyle(style));
+            }
+        }
+
+        protected override void FormatLineStyles(DefineShape3Tag tag, XElement xLineStyles) {
+            foreach (var style in tag.LineStyles) {
+                xLineStyles.Add(FormatLineStyle(style));
+            }
+        }
+
         protected override void FormatShapeElement(DefineShape3Tag tag, XElement elem) {
         }
 

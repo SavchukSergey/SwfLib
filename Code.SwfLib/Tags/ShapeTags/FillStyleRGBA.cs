@@ -1,11 +1,10 @@
-﻿using Code.SwfLib.Data.Gradients;
+﻿using Code.SwfLib.Data;
+using Code.SwfLib.Data.Gradients;
 
-namespace Code.SwfLib.Data.FillStyles {
-    public struct FillStyle {
+namespace Code.SwfLib.Tags.ShapeTags {
+    public struct FillStyleRGBA {
 
         public FillStyleType FillStyleType;
-
-        public SwfRGB ColorRGB;
 
         public SwfRGBA ColorRGBA;
 

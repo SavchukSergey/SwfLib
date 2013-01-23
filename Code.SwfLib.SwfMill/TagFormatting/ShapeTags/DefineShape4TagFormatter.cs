@@ -6,8 +6,21 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         private const string EDGE_BOUNDS_ELEM = "strokeBounds";
 
+        protected override void FormatFillStyles(DefineShape4Tag tag, XElement xFillStyles) {
+            foreach (var style in tag.FillStyles) {
+                xFillStyles.Add(FormatFillStyle(style));
+            }
+        }
+
+        protected override void FormatLineStyles(DefineShape4Tag tag, XElement xLineStyles) {
+            foreach (var style in tag.LineStyles) {
+                xLineStyles.Add(FormatLineStyle(style));
+            }
+        }
+
         protected override void FormatShapeElement(DefineShape4Tag tag, XElement elem) {
         }
+
 
         protected override void FormatAdditionalBounds(DefineShape4Tag tag, XElement elem) {
             elem.Add(new XElement(EDGE_BOUNDS_ELEM, _formatters.Rectangle.Format(ref tag.EdgeBounds)));

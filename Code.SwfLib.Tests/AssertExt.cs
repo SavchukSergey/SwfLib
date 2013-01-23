@@ -1,6 +1,5 @@
 ﻿using System;
 using Code.SwfLib.Data;
-using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Data.Gradients;
 using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
@@ -80,10 +79,19 @@ namespace Code.SwfLib.Tests {
             throw new NotImplementedException();
         }
 
-        public static void AreEqual(FillStyle expected, FillStyle actual, string message) {
+        public static void AreEqual(FillStyleRGB expected, FillStyleRGB actual, string message) {
             Assert.AreEqual(expected.BitmapID, actual.BitmapID, "BitmapID");
             AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
             AreEqual(expected.ColorRGB, actual.ColorRGB, "ColorRGB");
+            Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
+            AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
+            AreEqual(expected.Gradient, actual.Gradient, "Gradient");
+            AreEqual(expected.GradientMatrix, actual.GradientMatrix, "GradientMatrix");
+        }
+
+        public static void AreEqual(FillStyleRGBA expected, FillStyleRGBA actual, string message) {
+            Assert.AreEqual(expected.BitmapID, actual.BitmapID, "BitmapID");
+            AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
             AreEqual(expected.ColorRGBA, actual.ColorRGBA, "ColorRGBA");
             Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
             AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");

@@ -167,7 +167,8 @@
     <Compile Include="Actions\ClipActions.cs" />
     <Compile Include="Actions\IActionVisitor.cs" />
     <Compile Include="Data\ColorTransformRGBA.cs" />
-    <Compile Include="Data\FillStyles\FillStyle.cs" />
+    <Compile Include="Tags\ShapeTags\FillStyleRGBA.cs" />
+    <Compile Include="Tags\ShapeTags\FillStyleRGB.cs" />
     <Compile Include="Data\Gradients\FocalGradient.cs" />
     <Compile Include="Data\Gradients\GradientRGB.cs" />
     <Compile Include="Data\Gradients\GradientRecordRGB.cs" />
@@ -268,7 +269,7 @@
     <Compile Include="Tags\ShapeTags\DefineShape2Tag.cs" />
     <Compile Include="Tags\ShapeTags\ShapeBaseTag.cs" />
     <Compile Include="Tags\ShapeTags\DefineShape3Tag.cs" />
-    <Compile Include="Data\FillStyles\FillStyleType.cs" />
+    <Compile Include="Tags\ShapeTags\FillStyleType.cs" />
     <Compile Include="Tags\ShapeTags\DefineShapeTag.cs" />
     <Compile Include="Tags\DefineSpriteTag.cs" />
     <Compile Include="Tags\TextTags\DefineFont4Tag.cs" />
@@ -305,7 +306,9 @@
     <Compile Include="Tags\VideoTags\VideoFrameTag.cs" />
     <Compile Include="TextRecordStreamExt.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Data\FillStyles\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -6,6 +6,8 @@ namespace Code.SwfLib.Tags.ShapeTags {
 
         public SwfRect EdgeBounds;
 
+        public readonly IList<FillStyleRGBA> FillStyles = new List<FillStyleRGBA>();
+
         public readonly IList<LineStyleEx> LineStyles = new List<LineStyleEx>();
 
         public byte Flags;

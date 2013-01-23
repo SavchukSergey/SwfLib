@@ -1,5 +1,4 @@
 ﻿using Code.SwfLib.Data;
-using Code.SwfLib.Data.FillStyles;
 
 namespace Code.SwfLib.Tags.ShapeTags {
     public struct LineStyleEx {
@@ -28,6 +27,6 @@ namespace Code.SwfLib.Tags.ShapeTags {
 
         public SwfRGBA? Color;
 
-        public FillStyle? FillStyle;
+        public FillStyleRGB? FillStyle;
     }
 }

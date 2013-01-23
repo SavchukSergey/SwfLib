@@ -198,7 +198,7 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
             
-            writer.WriteFillStyles1(tag.FillStyles);
+            writer.WriteFillStylesRGB(tag.FillStyles);
             writer.WriteLineStylesRGB(tag.LineStyles);
             writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
             return null;
@@ -208,7 +208,7 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
 
-            writer.WriteFillStyles1(tag.FillStyles);
+            writer.WriteFillStylesRGB(tag.FillStyles);
             writer.WriteLineStylesRGB(tag.LineStyles);
             writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
             
@@ -220,7 +220,7 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
 
-            writer.WriteFillStyles1(tag.FillStyles);
+            writer.WriteFillStylesRGBA(tag.FillStyles);
             writer.WriteLineStylesRGBA(tag.LineStyles);
             writer.WriteShapeWithStyle(tag.Shapes, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
             

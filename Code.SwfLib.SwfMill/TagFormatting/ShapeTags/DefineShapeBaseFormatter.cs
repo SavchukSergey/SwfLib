@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -21,12 +20,25 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             res.Add(xStyles);
 
             var xStyleList = new XElement("StyleList");
-            xStyleList.Add(FormatFillStyles(tag.FillStyles));
+
+            var xFillStyles = new XElement("fillStyles");
+            FormatFillStyles(tag, xFillStyles);
+            xStyleList.Add(xFillStyles);
+
+            var xLineStyles = new XElement("lineStyles");
+            FormatLineStyles(tag, xLineStyles);
+            xStyleList.Add(xLineStyles);
+
             xStyles.Add(xStyleList);
 
             FormatShapeElement(tag, res);
             return res;
         }
+
+        protected abstract void FormatFillStyles(T tag, XElement xFillStyles);
+
+        protected abstract void FormatLineStyles(T tag, XElement xLineStyles);
+
 
         protected sealed override void AcceptTagAttribute(T tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
@@ -48,6 +60,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                     break;
             }
         }
+        #region Edges
 
         protected static XElement FormatEdges(IEnumerable<ShapeRecord> edges) {
             var edgesElem = new XElement("edges");
@@ -103,14 +116,30 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             );
         }
 
-        protected static XElement FormatFillStyles(IEnumerable<FillStyle> styles) {
-            var fillStylesElem = new XElement("fillStyles");
-            foreach (var style in styles) {
-                var fillStyle = style;
-                fillStylesElem.Add(_formatters.FillStyle1.Format(ref fillStyle));
-            }
-            return fillStylesElem;
+        #endregion
+
+        protected static XElement FormatFillStyle(FillStyleRGB style) {
+            var fillStyle = style;
+            return _formatters.FillStyleRGB.Format(ref fillStyle);
         }
+
+        protected static XElement FormatFillStyle(FillStyleRGBA style) {
+            var fillStyle = style;
+            return _formatters.FillStyleRGBA.Format(ref fillStyle);
+        }
+
+        protected static XElement FormatLineStyle(LineStyleRGB style) {
+            throw new NotImplementedException();
+        }
+
+        protected static XElement FormatLineStyle(LineStyleRGBA style) {
+            throw new NotImplementedException();
+        }
+
+        protected static XElement FormatLineStyle(LineStyleEx style) {
+            throw new NotImplementedException();
+        }
+
 
         protected virtual void FormatAdditionalBounds(T tag, XElement elem) { }
         protected abstract void FormatShapeElement(T tag, XElement elem);

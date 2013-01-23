@@ -8,6 +8,8 @@ namespace Code.SwfLib.Tags.ShapeTags {
 
         public readonly IList<LineStyleRGB> LineStyles = new List<LineStyleRGB>();
 
+        public readonly IList<FillStyleRGB> FillStyles = new List<FillStyleRGB>();
+
         public override SwfTagType TagType {
             get { return SwfTagType.DefineShape2; }
         }

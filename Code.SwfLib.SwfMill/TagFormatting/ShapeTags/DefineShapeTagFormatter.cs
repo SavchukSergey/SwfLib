@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Linq;
-using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
@@ -9,6 +8,19 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         private const string STYLES_ELEM = "styles";
         private const string SHAPES_ELEM = "shapes";
+
+        protected override void FormatFillStyles(DefineShapeTag tag, XElement xFillStyles) {
+            foreach (var style in tag.FillStyles) {
+                xFillStyles.Add(FormatFillStyle(style));
+            }
+        }
+
+        protected override void FormatLineStyles(DefineShapeTag tag, XElement xLineStyles) {
+            foreach (var style in tag.LineStyles) {
+                xLineStyles.Add(FormatLineStyle(style));
+            }
+        }
+
 
         protected override void FormatShapeElement(DefineShapeTag tag, XElement element) {
             var shapesElem = new XElement(XName.Get(SHAPES_ELEM));
@@ -42,8 +54,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             //TODO: line styles
 
             foreach (var styleElem in fillStyles.Elements()) {
-                FillStyle fillStyle;
-                _formatters.FillStyle1.Parse(styleElem, out fillStyle);
+                FillStyleRGB fillStyle;
+                _formatters.FillStyleRGB.Parse(styleElem, out fillStyle);
                 tag.FillStyles.Add(fillStyle);
             }
         }

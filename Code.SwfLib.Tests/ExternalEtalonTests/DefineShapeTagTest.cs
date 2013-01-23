@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Code.SwfLib.Data;
-using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ShapeTags;
@@ -55,7 +54,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             tag.ShapeBounds.XMax = 5354;
             tag.ShapeBounds.YMin = 0;
             tag.ShapeBounds.YMax = 1800;
-            tag.FillStyles.Add(new FillStyle {
+            tag.FillStyles.Add(new FillStyleRGB {
                 FillStyleType = FillStyleType.NonSmoothedRepeatingBitmap,
                 BitmapID = 1,
                 BitmapMatrix = new SwfMatrix {
@@ -168,7 +167,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             tag.ShapeBounds.XMax = 14560;
             tag.ShapeBounds.YMin = 0;
             tag.ShapeBounds.YMax = 1800;
-            tag.FillStyles.Add(new FillStyle {
+            tag.FillStyles.Add(new FillStyleRGB {
                 FillStyleType = FillStyleType.SolidColor,
                 ColorRGB = new SwfRGB(255, 255, 255)
             });

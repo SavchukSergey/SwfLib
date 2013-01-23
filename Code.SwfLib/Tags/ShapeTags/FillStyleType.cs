@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Data.FillStyles {
+﻿namespace Code.SwfLib.Tags.ShapeTags {
     public enum FillStyleType : byte {
         SolidColor = 0x00,
         LinearGradient = 0x10,

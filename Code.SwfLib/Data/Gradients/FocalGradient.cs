@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Code.SwfLib.Data.Gradients {
+﻿namespace Code.SwfLib.Data.Gradients {
     public struct FocalGradient {
     }
 }

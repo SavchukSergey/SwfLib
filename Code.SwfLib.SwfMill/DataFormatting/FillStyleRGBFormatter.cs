@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
-using Code.SwfLib.Data.FillStyles;
 using Code.SwfLib.Data.Gradients;
+using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
-    public class FillStyle1Formatter : DataFormatterBase<FillStyle> {
-        public FillStyle1Formatter(DataFormatters formatters)
+    public class FillStyleRGBFormatter : DataFormatterBase<FillStyleRGB> {
+        public FillStyleRGBFormatter(DataFormatters formatters)
             : base(formatters) {
         }
 
-        protected override void InitData(XElement element, out FillStyle data) {
-            data = new FillStyle();
+        protected override void InitData(XElement element, out FillStyleRGB data) {
+            data = new FillStyleRGB();
             switch (element.Name.LocalName) {
                 case "LinearGradient":
                     data.FillStyleType = FillStyleType.LinearGradient;
@@ -35,7 +33,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
             }
         }
 
-        protected override void AcceptElement(XElement element, ref FillStyle data) {
+        protected override void AcceptElement(XElement element, ref FillStyleRGB data) {
             switch (data.FillStyleType) {
                 case FillStyleType.SolidColor:
                     switch (element.Name.LocalName) {
@@ -84,7 +82,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
 
-        protected override void AcceptAttribute(XAttribute attrib, ref FillStyle data) {
+        protected override void AcceptAttribute(XAttribute attrib, ref FillStyleRGB data) {
             switch (data.FillStyleType) {
                 case FillStyleType.SolidColor:
                     switch (attrib.Name.LocalName) {
@@ -123,7 +121,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         }
 
-        public override XElement Format(ref FillStyle data) {
+        public override XElement Format(ref FillStyleRGB data) {
             switch (data.FillStyleType) {
                 case FillStyleType.SolidColor:
                     return FormatSolidColorRGBFillStyle(ref data);
@@ -145,50 +143,50 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
                     throw new NotSupportedException("Fill style " + data.FillStyleType + " is not supported");
             }
         }
-        private XElement FormatNonSmoothedClippedFillStyle(ref FillStyle style) {
+        private XElement FormatNonSmoothedClippedFillStyle(ref FillStyleRGB style) {
             var elem = new XElement(XName.Get("ClippedBitmap2"));
             elem.Add(new XAttribute(XName.Get("objectID"), style.BitmapID));
             elem.Add(new XElement(XName.Get("matrix"), _formatters.Matrix.Format(ref style.BitmapMatrix)));
             return elem;
         }
 
-        private XElement FormatNonSmoothedRepeatingBitmapFillStyle(ref FillStyle style) {
+        private XElement FormatNonSmoothedRepeatingBitmapFillStyle(ref FillStyleRGB style) {
             var elem = new XElement(XName.Get("TiledBitmap2"));
             elem.Add(new XAttribute(XName.Get("objectID"), style.BitmapID));
             elem.Add(new XElement(XName.Get("matrix"), _formatters.Matrix.Format(ref style.BitmapMatrix)));
             return elem;
         }
 
-        private XElement FormatClippedBitmapFillStyle(ref FillStyle style) {
+        private XElement FormatClippedBitmapFillStyle(ref FillStyleRGB style) {
             var elem = new XElement(XName.Get("ClippedBitmap"));
             elem.Add(new XAttribute(XName.Get("objectID"), style.BitmapID));
             elem.Add(new XElement(XName.Get("matrix"), _formatters.Matrix.Format(ref style.BitmapMatrix)));
             return elem;
         }
 
-        private XElement FormatRepeatingBitmapFillStyle(ref FillStyle style) {
+        private XElement FormatRepeatingBitmapFillStyle(ref FillStyleRGB style) {
             var elem = new XElement(XName.Get("TiledBitmap"));
             elem.Add(new XAttribute(XName.Get("objectID"), style.BitmapID));
             elem.Add(new XElement(XName.Get("matrix"), _formatters.Matrix.Format(ref style.BitmapMatrix)));
             return elem;
         }
 
-        private static XElement FormatFocalGradientRGBFillStyle(ref FillStyle style) {
+        private static XElement FormatFocalGradientRGBFillStyle(ref FillStyleRGB style) {
             throw new NotImplementedException();
         }
 
-        private static XElement FormatRadialGradientRGBFillStyle(ref FillStyle style) {
+        private static XElement FormatRadialGradientRGBFillStyle(ref FillStyleRGB style) {
             throw new NotImplementedException();
         }
 
-        private XElement FormatLinearGradientRGBFillStyle(ref FillStyle style) {
+        private XElement FormatLinearGradientRGBFillStyle(ref FillStyleRGB style) {
             return new XElement(XName.Get("LinearGradient"),
                 new XElement(XName.Get("matrix"), _formatters.Matrix.Format(ref style.GradientMatrix)),
                 FormatGradientRecord(style.Gradient.GradientRecords)
                 );
         }
 
-        private XElement FormatSolidColorRGBFillStyle(ref FillStyle style) {
+        private XElement FormatSolidColorRGBFillStyle(ref FillStyleRGB style) {
             return new XElement(XName.Get("Solid"),
                 new XElement(XName.Get("color"), _formatters.ColorRGB.Format(ref style.ColorRGB)));
         }

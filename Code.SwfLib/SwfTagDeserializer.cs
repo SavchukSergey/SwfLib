@@ -238,7 +238,7 @@ namespace Code.SwfLib {
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShapeTag tag, SwfStreamReader reader) {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
-            reader.ReadToFillStyles1(tag.FillStyles);
+            reader.ReadToFillStylesRGB(tag.FillStyles, false);
             reader.ReadToLineStylesRGB(tag.LineStyles, false);
 
             reader.ReadToShapeWithStyle(tag.Shapes);
@@ -248,7 +248,7 @@ namespace Code.SwfLib {
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShape2Tag tag, SwfStreamReader reader) {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
-            reader.ReadToFillStyles1(tag.FillStyles);
+            reader.ReadToFillStylesRGB(tag.FillStyles, true);
             reader.ReadToLineStylesRGB(tag.LineStyles, true);
             return tag;
         }
@@ -256,7 +256,7 @@ namespace Code.SwfLib {
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShape3Tag tag, SwfStreamReader reader) {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
-            reader.ReadToFillStyles1(tag.FillStyles);
+            reader.ReadToFillStylesRGBA(tag.FillStyles, true);
             reader.ReadToLineStylesRGBA(tag.LineStyles, true);
             return tag;
         }
@@ -269,7 +269,7 @@ namespace Code.SwfLib {
             tag.Flags = reader.ReadByte();
             throw new NotImplementedException();
             //TODO: other flags
-            reader.ReadToFillStyles1(tag.FillStyles);
+            reader.ReadToFillStylesRGBA(tag.FillStyles, true);
             reader.ReadToLineStylesEx(tag.LineStyles, true);
             return tag;
         }
