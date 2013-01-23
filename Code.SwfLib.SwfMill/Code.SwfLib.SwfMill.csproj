@@ -53,7 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataFormatting\ActionXmlSerializer.cs" />
-    <Compile Include="DataFormatting\ColorRGBAFormatter.cs" />
     <Compile Include="DataFormatting\ColorTransformRGBAFormatter.cs" />
     <Compile Include="DataFormatting\FillStyleRGBAFormatter.cs" />
     <Compile Include="DataFormatting\DataFormatterBase.cs" />
@@ -156,7 +155,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataFormatting\Shapes\" />
     <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

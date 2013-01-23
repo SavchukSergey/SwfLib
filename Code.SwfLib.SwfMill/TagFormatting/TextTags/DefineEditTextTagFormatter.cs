@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.TextTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
@@ -122,7 +123,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                     _formatters.Rectangle.Parse(element.Element("Rectangle"), out tag.Bounds);
                     break;
                 case COLOR_ELEM:
-                    _formatters.ColorRGBA.Parse(element.Element("Color"), out tag.TextColor);
+                    tag.TextColor = XColorRGBA.FromXml(element.Element("Color"));
                     tag.HasTextColor = true;
                     break;
                 default:
@@ -150,7 +151,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                 res.Add(new XAttribute(FONT_HEIGHT_ATTRIB, tag.FontHeight));
             }
             if (tag.HasTextColor) {
-                res.Add(new XElement("color", _formatters.ColorRGBA.Format(ref tag.TextColor)));
+                res.Add(new XElement("color", XColorRGBA.ToXml(tag.TextColor)));
             }
             res.Add(new XAttribute(MAX_LENGTH_ATTRIB, tag.MaxLength));
             if (tag.HasLayout) {
