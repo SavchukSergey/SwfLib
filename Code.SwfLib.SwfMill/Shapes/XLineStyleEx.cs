@@ -22,7 +22,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
                 res.Add(new XAttribute("miterFactor", lineStyle.MilterLimitFactor));
             }
             if (lineStyle.HasFill) {
-                res.Add(new XElement("filLStyle", XFillStyleRGBA.ToXml(lineStyle.FillStyle)));
+                res.Add(new XElement("fillStyle", XFillStyleRGBA.ToXml(lineStyle.FillStyle)));
             } else {
                 res.Add(new XElement("fillColor", XColorRGBA.ToXml(lineStyle.Color)));
             }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Linq;
-using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -98,14 +96,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         protected static XElement FormatFillStyle(FillStyleRGBA style) {
             var fillStyle = style;
             return _formatters.FillStyleRGBA.Format(ref fillStyle);
-        }
-
-        protected static XElement FormatLineStyle(LineStyleRGB style) {
-            throw new NotImplementedException();
-        }
-
-        protected static XElement FormatLineStyle(LineStyleRGBA style) {
-            throw new NotImplementedException();
         }
 
         protected virtual void FormatAdditionalBounds(T tag, XElement elem) { }

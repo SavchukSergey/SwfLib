@@ -27,7 +27,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         XElement ITagFormatter.FormatTag(SwfTagBase tag) {
-            return FormatTagElement((T)tag);
+            return FormatElement((T)tag);
         }
 
         void ITagFormatter.AcceptAttribute(SwfTagBase tag, XAttribute attrib) {

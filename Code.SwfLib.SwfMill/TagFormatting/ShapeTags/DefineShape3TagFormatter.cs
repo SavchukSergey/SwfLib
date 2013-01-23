@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
@@ -16,7 +17,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         protected override void FormatLineStyles(DefineShape3Tag tag, XElement xLineStyles) {
             foreach (var style in tag.LineStyles) {
-                xLineStyles.Add(FormatLineStyle(style));
+                xLineStyles.Add(XLineStyleRGBA.ToXml(style));
             }
         }
 

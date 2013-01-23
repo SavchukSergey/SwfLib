@@ -66,6 +66,8 @@
     <Compile Include="Gradients\XGradientRecordRGBA.cs" />
     <Compile Include="Gradients\XGradientRecordRGB.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Shapes\XLineStyleRGBA.cs" />
+    <Compile Include="Shapes\XLineStyleRGB.cs" />
     <Compile Include="Shapes\XFillStyleRGBA.cs" />
     <Compile Include="Shapes\XFillStyleRGB.cs" />
     <Compile Include="Shapes\XLineStyleEx.cs" />
