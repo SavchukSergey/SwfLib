@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.SwfMill.Data;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
     public class ColorRGBAFormatter : DataFormatterBase<SwfRGBA> {
@@ -43,13 +44,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         public override XElement Format(ref SwfRGBA data) {
-            return new XElement(XName.Get("Color"),
-                    new XAttribute(XName.Get("red"), data.Red),
-                    new XAttribute(XName.Get("green"), data.Green),
-                    new XAttribute(XName.Get("blue"), data.Blue),
-                    new XAttribute(XName.Get("alpha"), data.Alpha)
-            );
-
+            return XColorRGBA.ToXml(data);
         }
     }
 }

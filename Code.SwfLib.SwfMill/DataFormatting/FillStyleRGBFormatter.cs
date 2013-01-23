@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using Code.SwfLib.Gradients;
+using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
@@ -180,28 +181,12 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         private XElement FormatLinearGradientRGBFillStyle(ref FillStyleRGB style) {
-            return new XElement(XName.Get("LinearGradient"),
-                new XElement(XName.Get("matrix"), _formatters.Matrix.Format(ref style.GradientMatrix)),
-                FormatGradientRecord(style.Gradient.GradientRecords)
-                );
+            return XFillStyleRGB.ToXml(style);
         }
 
         private XElement FormatSolidColorRGBFillStyle(ref FillStyleRGB style) {
             return new XElement(XName.Get("Solid"),
                 new XElement(XName.Get("color"), _formatters.ColorRGB.Format(ref style.Color)));
-        }
-
-        //TODO: Interpolation and spread mode!!
-        private XElement FormatGradientRecord(IEnumerable<GradientRecordRGB> gradients) {
-            var list = new XElement(XName.Get("gradientColors"));
-            foreach (var gradient in gradients) {
-                var color = gradient.Color;
-                list.Add(new XElement(XName.Get("GradientItem"),
-                    new XAttribute(XName.Get("position"), gradient.Ratio),
-                    new XElement(XName.Get("color"), _formatters.ColorRGB.Format(ref color))
-                ));
-            }
-            return list;
         }
 
         //TODO: Interpolation and spread mode!!

@@ -68,6 +68,12 @@ namespace Code.SwfLib {
             rect.YMax = reader.ReadSignedBits(bits);
         }
 
+        public static SwfMatrix ReadMatrix(this SwfStreamReader reader) {
+            SwfMatrix matrix;
+            reader.ReadMatrix(out matrix);
+            return matrix;
+        }
+
         public static void ReadMatrix(this SwfStreamReader reader, out SwfMatrix matrix) {
             reader.AlignToByte();
             matrix.HasScale = reader.ReadBit();

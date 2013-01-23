@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.SwfMill.Data;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
     public class ColorRGBFormatter : DataFormatterBase<SwfRGB> {
@@ -39,10 +40,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         public override XElement Format(ref SwfRGB data) {
-            return new XElement(XName.Get("Color"),
-                    new XAttribute(XName.Get("red"), data.Red),
-                    new XAttribute(XName.Get("green"), data.Green),
-                    new XAttribute(XName.Get("blue"), data.Blue));
+            return XColorRGB.ToXml(data);
 
         }
     }

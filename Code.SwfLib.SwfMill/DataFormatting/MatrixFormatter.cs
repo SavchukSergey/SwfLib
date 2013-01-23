@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.SwfMill.Data;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
     public class MatrixFormatter : DataFormatterBase<SwfMatrix> {
@@ -58,18 +59,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         public override XElement Format(ref SwfMatrix data) {
-            var res = new XElement(XName.Get("Transform"),
-                new XAttribute(XName.Get("transX"), data.TranslateX),
-                new XAttribute(XName.Get("transY"), data.TranslateY));
-            if (data.HasScale) {
-                res.Add(new XAttribute(XName.Get("scaleX"), data.ScaleX));
-                res.Add(new XAttribute(XName.Get("scaleY"), data.ScaleY));
-            }
-            if (data.HasRotate) {
-                res.Add(new XAttribute(XName.Get("skewX"), data.RotateSkew0));
-                res.Add(new XAttribute(XName.Get("skewY"), data.RotateSkew1));
-            }
-            return res;
+            return XMatrix.ToXml(data);
         }
     }
 }

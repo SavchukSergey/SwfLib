@@ -308,7 +308,6 @@
     <Compile Include="TextRecordStreamExt.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Gradients\" />
     <Folder Include="FillStyles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
