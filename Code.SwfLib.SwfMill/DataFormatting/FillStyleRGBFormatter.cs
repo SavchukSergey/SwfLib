@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using Code.SwfLib.Data.Gradients;
+using Code.SwfLib.Gradients;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
@@ -38,7 +38,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
                 case FillStyleType.SolidColor:
                     switch (element.Name.LocalName) {
                         case "color":
-                            _formatters.ColorRGB.Parse(element.Element(XName.Get("Color")), out data.ColorRGB);
+                            _formatters.ColorRGB.Parse(element.Element(XName.Get("Color")), out data.Color);
                             break;
                         default:
                             OnUnknownElementFound(element);
@@ -188,7 +188,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         private XElement FormatSolidColorRGBFillStyle(ref FillStyleRGB style) {
             return new XElement(XName.Get("Solid"),
-                new XElement(XName.Get("color"), _formatters.ColorRGB.Format(ref style.ColorRGB)));
+                new XElement(XName.Get("color"), _formatters.ColorRGB.Format(ref style.Color)));
         }
 
         //TODO: Interpolation and spread mode!!

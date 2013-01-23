@@ -19,9 +19,9 @@ namespace Code.SwfLib.Tests.Samples {
 
             Assert.AreEqual(1, tag.FillStyles.Count);
             Assert.AreEqual(FillStyleType.SolidColor, tag.FillStyles[0].FillStyleType);
-            Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Red);
-            Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Green);
-            Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Blue);
+            Assert.AreEqual(255, tag.FillStyles[0].Color.Red);
+            Assert.AreEqual(255, tag.FillStyles[0].Color.Green);
+            Assert.AreEqual(255, tag.FillStyles[0].Color.Blue);
 
             Assert.AreEqual(0, tag.LineStyles.Count);
 
@@ -63,9 +63,9 @@ namespace Code.SwfLib.Tests.Samples {
 
             Assert.AreEqual(1, tag.FillStyles.Count);
             Assert.AreEqual(FillStyleType.SolidColor, tag.FillStyles[0].FillStyleType);
-            Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Red);
-            Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Green);
-            Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Blue);
+            Assert.AreEqual(255, tag.FillStyles[0].Color.Red);
+            Assert.AreEqual(255, tag.FillStyles[0].Color.Green);
+            Assert.AreEqual(255, tag.FillStyles[0].Color.Blue);
 
             Assert.AreEqual(0, tag.LineStyles.Count);
 

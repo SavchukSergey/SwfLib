@@ -2,6 +2,7 @@
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.Gradients;
 using Code.SwfLib.Data.Shapes;
+using Code.SwfLib.Gradients;
 using Code.SwfLib.Tags.ShapeTags;
 using NUnit.Framework;
 
@@ -82,7 +83,7 @@ namespace Code.SwfLib.Tests {
         public static void AreEqual(FillStyleRGB expected, FillStyleRGB actual, string message) {
             Assert.AreEqual(expected.BitmapID, actual.BitmapID, "BitmapID");
             AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
-            AreEqual(expected.ColorRGB, actual.ColorRGB, "ColorRGB");
+            AreEqual(expected.Color, actual.Color, "Color");
             Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
             AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
             AreEqual(expected.Gradient, actual.Gradient, "Gradient");
@@ -92,7 +93,7 @@ namespace Code.SwfLib.Tests {
         public static void AreEqual(FillStyleRGBA expected, FillStyleRGBA actual, string message) {
             Assert.AreEqual(expected.BitmapID, actual.BitmapID, "BitmapID");
             AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
-            AreEqual(expected.ColorRGBA, actual.ColorRGBA, "ColorRGBA");
+            AreEqual(expected.Color, actual.Color, "Color");
             Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
             AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
             AreEqual(expected.Gradient, actual.Gradient, "Gradient");
@@ -110,7 +111,23 @@ namespace Code.SwfLib.Tests {
             }
         }
 
+        public static void AreEqual(GradientRGBA expected, GradientRGBA actual, string message) {
+            Assert.AreEqual(expected.SpreadMode, actual.SpreadMode, message + ": SpreadMode");
+            Assert.AreEqual(expected.InterpolationMode, actual.InterpolationMode, message + ": InterpolationMode");
+            Assert.AreEqual(expected.GradientRecords.Count, actual.GradientRecords.Count, message + ": GradientRecords.Count");
+            for (var i = 0; i < expected.GradientRecords.Count; i++) {
+                var exp = expected.GradientRecords[i];
+                var act = actual.GradientRecords[i];
+                AreEqual(exp, act, message + ": GradientRecords[" + i + "]");
+            }
+        }
+
         public static void AreEqual(GradientRecordRGB expected, GradientRecordRGB actual, string message) {
+            Assert.AreEqual(expected.Ratio, actual.Ratio, message + ": Ratio");
+            AreEqual(expected.Color, actual.Color, message + ": Color");
+        }
+
+        public static void AreEqual(GradientRecordRGBA expected, GradientRecordRGBA actual, string message) {
             Assert.AreEqual(expected.Ratio, actual.Ratio, message + ": Ratio");
             AreEqual(expected.Color, actual.Color, message + ": Color");
         }

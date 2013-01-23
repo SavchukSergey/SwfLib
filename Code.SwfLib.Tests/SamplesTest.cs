@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tests.Samples;
 using NUnit.Framework;

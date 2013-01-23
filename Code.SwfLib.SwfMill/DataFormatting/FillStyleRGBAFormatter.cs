@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using Code.SwfLib.Data.Gradients;
+using Code.SwfLib.Gradients;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
@@ -39,7 +40,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
                 case FillStyleType.SolidColor:
                     switch (element.Name.LocalName) {
                         case "color":
-                            _formatters.ColorRGBA.Parse(element.Element(XName.Get("Color")), out data.ColorRGBA);
+                            _formatters.ColorRGBA.Parse(element.Element(XName.Get("Color")), out data.Color);
                             break;
                         default:
                             OnUnknownElementFound(element);
@@ -189,7 +190,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         private XElement FormatSolidColorRGBFillStyle(ref FillStyleRGBA style) {
             return new XElement(XName.Get("Solid"),
-                new XElement(XName.Get("color"), _formatters.ColorRGBA.Format(ref style.ColorRGBA)));
+                new XElement(XName.Get("color"), _formatters.ColorRGBA.Format(ref style.Color)));
         }
 
         //TODO: Interpolation and spread mode!!
@@ -205,12 +206,25 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
             return list;
         }
 
+        private XElement FormatGradientRecord(IEnumerable<GradientRecordRGBA> gradients) {
+            var list = new XElement(XName.Get("gradientColors"));
+            foreach (var gradient in gradients) {
+                var color = gradient.Color;
+                list.Add(new XElement(XName.Get("GradientItem"),
+                    new XAttribute(XName.Get("position"), gradient.Ratio),
+                    new XElement(XName.Get("color"), _formatters.ColorRGBA.Format(ref color))
+                ));
+            }
+            return list;
+        }
+
+
         //TODO: Interpolation and spread mode!!
-        private void ParseGradientColorsTo(XElement element, IList<GradientRecordRGB> records) {
+        private void ParseGradientColorsTo(XElement element, IList<GradientRecordRGBA> records) {
             foreach (var item in element.Elements(XName.Get("GradientItem"))) {
-                GradientRecordRGB record;
+                GradientRecordRGBA record;
                 record.Ratio = byte.Parse(item.Attribute(XName.Get("position")).Value);
-                _formatters.ColorRGB.Parse(item.Element("color").Element("Color"), out record.Color);
+                _formatters.ColorRGBA.Parse(item.Element("color").Element("Color"), out record.Color);
                 records.Add(record);
             }
         }

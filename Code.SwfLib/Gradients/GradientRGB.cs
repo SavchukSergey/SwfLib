@@ -1,21 +1,17 @@
 ﻿using System.Collections.Generic;
+using Code.SwfLib.Data.Gradients;
 
-namespace Code.SwfLib.Data.Gradients
-{
-    public struct GradientRGB
-    {
+namespace Code.SwfLib.Gradients {
+    public struct GradientRGB {
 
         public SpreadMode SpreadMode;
 
         public InterpolationMode InterpolationMode;
 
         private IList<GradientRecordRGB> _gradientRecords;
-        public IList<GradientRecordRGB> GradientRecords
-        {
-            get
-            {
-                if (_gradientRecords == null)
-                {
+        public IList<GradientRecordRGB> GradientRecords {
+            get {
+                if (_gradientRecords == null) {
                     _gradientRecords = new List<GradientRecordRGB>();
                 }
                 return _gradientRecords;

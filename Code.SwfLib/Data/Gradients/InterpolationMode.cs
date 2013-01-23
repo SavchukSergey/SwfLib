@@ -2,7 +2,7 @@
 {
     public enum InterpolationMode : byte
     {
-        NormalRGB = 0x00,
+        Normal = 0x00,
         Linear = 0x01,
         Reserved2 = 0x02,
         Reserved3 = 0x03

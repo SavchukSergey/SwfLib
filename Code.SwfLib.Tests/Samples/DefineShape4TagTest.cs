@@ -8,11 +8,12 @@ namespace Code.SwfLib.Tests.Samples {
     public class DefineShape4TagTest : BaseSampleTest {
 
         [Test]
-        public void Test1() {
+        public void Test1()
+        {
             var tag = ReadTag<DefineShape4Tag>("Sample - 1.swf", "6de111f18ae52ef83b08ff85603ce4e3");
             Assert.IsNotNull(tag);
             Assert.AreEqual(14, tag.ShapeID);
-            
+
             Assert.AreEqual(-10, tag.ShapeBounds.XMin);
             Assert.AreEqual(14550, tag.ShapeBounds.XMax);
             Assert.AreEqual(0, tag.ShapeBounds.YMin);
@@ -30,40 +31,21 @@ namespace Code.SwfLib.Tests.Samples {
             Assert.AreEqual(0, tag.FillStyles.Count);
 
             Assert.AreEqual(1, tag.LineStyles.Count);
-            //Assert.AreEqual(1, tag.FillStyles.Count);
-            //Assert.AreEqual(FillStyleType.SolidColor, tag.FillStyles[0].FillStyleType);
-            //Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Red);
-            //Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Green);
-            //Assert.AreEqual(255, tag.FillStyles[0].ColorRGB.Blue);
 
-            //Assert.AreEqual(0, tag.Shapes.LineStyles.Count);
 
-            //Assert.AreEqual(33, tag.Shapes.ShapeRecords.Count);
-            //var firstShape = tag.Shapes.ShapeRecords.First() as StyleChangeShapeRecord;
-            //var lastShape = tag.Shapes.ShapeRecords.Last() as EndShapeRecord;
-            //Assert.IsNotNull(firstShape);
-            //Assert.IsNotNull(lastShape);
+            var lineStyle = tag.LineStyles[0];
 
-            //Assert.AreEqual(60, firstShape.MoveDeltaX);
-            //Assert.AreEqual(17, firstShape.MoveDeltaY);
-            //Assert.IsNull(firstShape.FillStyle0);
-            //Assert.IsNotNull(firstShape.FillStyle1);
-            //Assert.AreEqual(1, firstShape.FillStyle1.Value);
+            Assert.AreEqual(0, lineStyle.Color.Red);
+            Assert.AreEqual(0, lineStyle.Color.Green);
+            Assert.AreEqual(0, lineStyle.Color.Blue);
+            Assert.AreEqual(255, lineStyle.Color.Alpha);
 
-            //var lineShape = tag.Shapes.ShapeRecords[6] as StraightEdgeShapeRecord;
-            //var curveShape = tag.Shapes.ShapeRecords[7] as CurvedEdgeShapeRecord;
-            //Assert.IsNotNull(lineShape);
-            //Assert.IsNotNull(curveShape);
-
-            //Assert.AreEqual(-2, lineShape.DeltaX);
-            //Assert.AreEqual(10, lineShape.DeltaY);
-
-            //Assert.AreEqual(0, curveShape.ControlDeltaX);
-            //Assert.AreEqual(12, curveShape.ControlDeltaY);
-            //Assert.AreEqual(9, curveShape.AnchorDeltaX);
-            //Assert.AreEqual(8, curveShape.AnchorDeltaY);
+            Assert.AreEqual(6, tag.ShapeRecords.Count);
+            var firstShape = tag.ShapeRecords.First() as StyleChangeShapeRecord;
+            var lastShape = tag.ShapeRecords.Last() as EndShapeRecord;
+            Assert.IsNotNull(firstShape);
+            Assert.IsNotNull(lastShape);
         }
 
-      
     }
 }

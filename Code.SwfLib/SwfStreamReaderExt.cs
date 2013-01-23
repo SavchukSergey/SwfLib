@@ -40,6 +40,15 @@ namespace Code.SwfLib {
             color.Alpha = reader.ReadByte();
         }
 
+        public static SwfRGBA ReadRGBA(this SwfStreamReader reader) {
+            return new SwfRGBA {
+                Red = reader.ReadByte(),
+                Green = reader.ReadByte(),
+                Blue = reader.ReadByte(),
+                Alpha = reader.ReadByte()
+            };
+        }
+
         public static SwfRGBA ReadARGB(this SwfStreamReader reader) {
             var rgb = new SwfRGBA {
                 Alpha = reader.ReadByte(),

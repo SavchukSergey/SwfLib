@@ -167,11 +167,14 @@
     <Compile Include="Actions\ClipActions.cs" />
     <Compile Include="Actions\IActionVisitor.cs" />
     <Compile Include="Data\ColorTransformRGBA.cs" />
+    <Compile Include="Gradients\GradientRecordRGBA.cs" />
+    <Compile Include="Gradients\GradientRGBA.cs" />
+    <Compile Include="Gradients\GradientStreamExt.cs" />
     <Compile Include="Tags\ShapeTags\FillStyleRGBA.cs" />
     <Compile Include="Tags\ShapeTags\FillStyleRGB.cs" />
     <Compile Include="Data\Gradients\FocalGradient.cs" />
-    <Compile Include="Data\Gradients\GradientRGB.cs" />
-    <Compile Include="Data\Gradients\GradientRecordRGB.cs" />
+    <Compile Include="Gradients\GradientRGB.cs" />
+    <Compile Include="Gradients\GradientRecordRGB.cs" />
     <Compile Include="Data\Gradients\InterpolationMode.cs" />
     <Compile Include="Data\Gradients\SpreadMode.cs" />
     <Compile Include="Data\Shapes\CurvedEdgeShapeRecord.cs" />
@@ -189,7 +192,6 @@
     <Compile Include="Data\Text\TextRecord.cs" />
     <Compile Include="Data\Text\TextRecordFlags.cs" />
     <Compile Include="FillStyleStreamExt.cs" />
-    <Compile Include="GradientStreamExt.cs" />
     <Compile Include="LineStyleStreamExt.cs" />
     <Compile Include="ShapeRecordStreamExt.cs" />
     <Compile Include="SwfFile.cs" />
@@ -305,7 +307,9 @@
     <Compile Include="Tags\VideoTags\VideoFrameTag.cs" />
     <Compile Include="TextRecordStreamExt.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="FillStyles\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

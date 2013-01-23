@@ -23,10 +23,10 @@ namespace Code.SwfLib.Tags.ShapeTags {
 
         public CapStyle EndCapStyle;
 
-        public float MilterLimitFactor;
+        public double MilterLimitFactor;
 
-        public SwfRGBA? Color;
+        public SwfRGBA Color;
 
-        public FillStyleRGB? FillStyle;
+        public FillStyleRGBA FillStyle;
     }
 }

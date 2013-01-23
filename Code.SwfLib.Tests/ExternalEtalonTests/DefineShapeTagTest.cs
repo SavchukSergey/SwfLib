@@ -169,7 +169,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             tag.ShapeBounds.YMax = 1800;
             tag.FillStyles.Add(new FillStyleRGB {
                 FillStyleType = FillStyleType.SolidColor,
-                ColorRGB = new SwfRGB(255, 255, 255)
+                Color = new SwfRGB(255, 255, 255)
             });
             tag.ShapeRecords.Add(new StyleChangeShapeRecord {
                 MoveDeltaX = 14560,

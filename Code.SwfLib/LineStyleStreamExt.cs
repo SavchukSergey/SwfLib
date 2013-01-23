@@ -7,7 +7,7 @@ namespace Code.SwfLib {
 
         public static void ReadToLineStylesRGB(this SwfStreamReader reader, IList<LineStyleRGB> lineStyles, bool allowBigArray) {
             ushort cnt = reader.ReadByte();
-            if (allowBigArray && cnt == 0) {
+            if (allowBigArray && cnt == 255) {
                 cnt = reader.ReadUInt16();
             }
             for (var i = 0; i < cnt; i++) {
@@ -17,7 +17,7 @@ namespace Code.SwfLib {
 
         public static void ReadToLineStylesRGBA(this SwfStreamReader reader, IList<LineStyleRGBA> lineStyles, bool allowBigArray) {
             ushort cnt = reader.ReadByte();
-            if (allowBigArray && cnt == 0) {
+            if (allowBigArray && cnt == 255) {
                 cnt = reader.ReadUInt16();
             }
             for (var i = 0; i < cnt; i++) {
@@ -27,7 +27,7 @@ namespace Code.SwfLib {
 
         public static void ReadToLineStylesEx(this SwfStreamReader reader, IList<LineStyleEx> lineStyles, bool allowBigArray) {
             ushort cnt = reader.ReadByte();
-            if (allowBigArray && cnt == 0) {
+            if (allowBigArray && cnt == 255) {
                 cnt = reader.ReadUInt16();
             }
             for (var i = 0; i < cnt; i++) {
@@ -91,7 +91,23 @@ namespace Code.SwfLib {
         public static LineStyleEx ReadLineStyleEx(this SwfStreamReader reader) {
             var lineStyle = new LineStyleEx();
             lineStyle.Width = reader.ReadUInt16();
-            throw new NotImplementedException();
+            lineStyle.StartCapStyle = reader.ReadCapStyle();
+            lineStyle.JoinStyle = reader.ReadJoinStyle();
+            lineStyle.HasFill = reader.ReadBit();
+            lineStyle.NoHScale = reader.ReadBit();
+            lineStyle.NoVScale = reader.ReadBit();
+            lineStyle.PixelHinting = reader.ReadBit();
+            lineStyle.NoClose = reader.ReadBit();
+            lineStyle.EndCapStyle = reader.ReadCapStyle();
+            if (lineStyle.JoinStyle == JoinStyle.Miter) {
+                lineStyle.MilterLimitFactor = reader.ReadFixedPoint8();
+            }
+            if (lineStyle.HasFill) {
+                lineStyle.FillStyle = reader.ReadFillStyleRGBA();
+            } else {
+                lineStyle.Color = reader.ReadRGBA();
+            }
+            return lineStyle;
         }
 
         public static void WriteLineStyleRGB(this SwfStreamWriter writer, LineStyleRGB lineStyle) {
@@ -107,6 +123,18 @@ namespace Code.SwfLib {
         public static void WriteLineStyleEx(this SwfStreamWriter writer, LineStyleEx lineStyle) {
             writer.WriteUInt16(lineStyle.Width);
             throw new NotImplementedException();
+        }
+
+        private static CapStyle ReadCapStyle(this SwfStreamReader reader) {
+            var bit0 = reader.ReadBit();
+            var bit1 = reader.ReadBit();
+            return (CapStyle)((bit1 ? 2 : 0) + (bit0 ? 1 : 0));
+        }
+
+        private static JoinStyle ReadJoinStyle(this SwfStreamReader reader) {
+            var bit0 = reader.ReadBit();
+            var bit1 = reader.ReadBit();
+            return (JoinStyle)((bit1 ? 2 : 0) + (bit0 ? 1 : 0));
         }
     }
 }

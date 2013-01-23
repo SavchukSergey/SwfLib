@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Code.SwfLib.Gradients;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib {
@@ -61,7 +62,7 @@ namespace Code.SwfLib {
             fillStyle.FillStyleType = type;
             switch (type) {
                 case FillStyleType.SolidColor:
-                    reader.ReadRGB(out fillStyle.ColorRGB);
+                    reader.ReadRGB(out fillStyle.Color);
                     break;
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
@@ -84,19 +85,24 @@ namespace Code.SwfLib {
             }
         }
 
+        public static FillStyleRGBA ReadFillStyleRGBA(this SwfStreamReader reader) {
+            FillStyleRGBA fillStyle;
+            reader.ReadFillStyleRGBA(out fillStyle);
+            return fillStyle;
+        }
+
         public static void ReadFillStyleRGBA(this SwfStreamReader reader, out FillStyleRGBA fillStyle) {
             var type = (FillStyleType)reader.ReadByte();
             fillStyle = new FillStyleRGBA();
             fillStyle.FillStyleType = type;
             switch (type) {
                 case FillStyleType.SolidColor:
-                    reader.ReadRGBA(out fillStyle.ColorRGBA);
+                    reader.ReadRGBA(out fillStyle.Color);
                     break;
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
                     reader.ReadMatrix(out fillStyle.GradientMatrix);
-                    //TODO: gradient rgba
-                    reader.ReadGradientRGB(out fillStyle.Gradient);
+                    reader.ReadGradientRGBA(out fillStyle.Gradient);
                     break;
                 case FillStyleType.FocalGradient:
                     reader.ReadMatrix(out fillStyle.GradientMatrix);
@@ -118,7 +124,7 @@ namespace Code.SwfLib {
             writer.WriteByte((byte)fillStyle.FillStyleType);
             switch (fillStyle.FillStyleType) {
                 case FillStyleType.SolidColor:
-                    writer.WriteRGB(ref fillStyle.ColorRGB);
+                    writer.WriteRGB(ref fillStyle.Color);
                     break;
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
@@ -145,13 +151,12 @@ namespace Code.SwfLib {
             writer.WriteByte((byte)fillStyle.FillStyleType);
             switch (fillStyle.FillStyleType) {
                 case FillStyleType.SolidColor:
-                    writer.WriteRGBA(ref fillStyle.ColorRGBA);
+                    writer.WriteRGBA(ref fillStyle.Color);
                     break;
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
                     writer.WriteMatrix(ref fillStyle.GradientMatrix);
-                    //TODO: gradient rgba
-                    writer.WriteGradientRGB(ref fillStyle.Gradient);
+                    writer.WriteGradientRGBA(ref fillStyle.Gradient);
                     break;
                 case FillStyleType.FocalGradient:
                     writer.WriteMatrix(ref fillStyle.GradientMatrix);

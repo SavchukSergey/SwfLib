@@ -268,8 +268,6 @@ namespace Code.SwfLib {
             reader.ReadRect(out tag.EdgeBounds);
             reader.AlignToByte();
             tag.Flags = reader.ReadByte();
-            throw new NotImplementedException();
-            //TODO: other flags
             reader.ReadToFillStylesRGBA(tag.FillStyles, true);
             reader.ReadToLineStylesEx(tag.LineStyles, true);
             reader.ReadToShapeRecords(tag.ShapeRecords);
