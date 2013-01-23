@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertExt.cs" />
+    <Compile Include="ActionXmlSerializerTest.cs" />
     <Compile Include="EnumerableExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Resources\TagFormatting\FontTags\DefineFontAlignZones.xml" />

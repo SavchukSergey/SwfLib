@@ -20,27 +20,27 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionNextFrame action, object param) {
-            throw new NotImplementedException();
+            return new XElement("NextFrame");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionPreviousFrame action, object param) {
-            throw new NotImplementedException();
+            return new XElement("PreviousFrame");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionPlay action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Play");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStop action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Stop");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionToggleQuality action, object param) {
-            throw new NotImplementedException();
+            return new XElement("ToggleQuality");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStopSounds action, object param) {
-            throw new NotImplementedException();
+            return new XElement("StopSounds");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionWaitForFrame action, object param) {
@@ -60,71 +60,71 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         #region SWF 4
 
         XElement IActionVisitor<object, XElement>.Visit(ActionAdd action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Add");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDivide action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Divide");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionMultiply action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Multiply");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSubtract action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Subtract");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionEquals action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Equals");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionLess action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Less");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionAnd action, object param) {
-            throw new NotImplementedException();
+            return new XElement("And");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionNot action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Not");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionOr action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Or");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStringAdd action, object param) {
-            throw new NotImplementedException();
+            return new XElement("StringAdd");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStringEquals action, object param) {
-            throw new NotImplementedException();
+            return new XElement("StringEquals");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStringExtract action, object param) {
-            throw new NotImplementedException();
+            return new XElement("StringExtract");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStringLength action, object param) {
-            throw new NotImplementedException();
+            return new XElement("StringLength");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionMBStringExtract action, object param) {
-            throw new NotImplementedException();
+            return new XElement("MBStringExtract");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionMBStringLength action, object param) {
-            throw new NotImplementedException();
+            return new XElement("MBStringLength");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStringLess action, object param) {
-            throw new NotImplementedException();
+            return new XElement("StringLess");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionPop action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Pop");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionPush action, object param) {
@@ -144,23 +144,23 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionAsciiToChar action, object param) {
-            throw new NotImplementedException();
+            return new XElement("AsciiToChar");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionCharToAscii action, object param) {
-            throw new NotImplementedException();
+            return new XElement("CharToAscii");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionToInteger action, object param) {
-            throw new NotImplementedException();
+            return new XElement("ToInteger");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionMBAsciiToChar action, object param) {
-            throw new NotImplementedException();
+            return new XElement("MBAsciiToChar");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionMBCharToAscii action, object param) {
-            throw new NotImplementedException();
+            return new XElement("MBCharToAscii");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionCall action, object param) {
@@ -176,7 +176,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetVariable action, object param) {
-            throw new NotImplementedException();
+            return new XElement("GetVariable");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSetVariable action, object param) {
@@ -188,7 +188,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetProperty action, object param) {
-            throw new NotImplementedException();
+            return new XElement("GetProperty");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGotoFrame2 action, object param) {
@@ -196,19 +196,19 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionRemoveSprite action, object param) {
-            throw new NotImplementedException();
+            return new XElement("RemoveSprite");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSetProperty action, object param) {
-            throw new NotImplementedException();
+            return new XElement("SetProperty");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSetTarget2 action, object param) {
-            throw new NotImplementedException();
+            return new XElement("SetTarget2");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStartDrag action, object param) {
-            throw new NotImplementedException();
+            return new XElement("StartDrag");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionWaitForFrame2 action, object param) {
@@ -216,23 +216,23 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionCloneSprite action, object param) {
-            throw new NotImplementedException();
+            return new XElement("CloneSprite");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionEndDrag action, object param) {
-            throw new NotImplementedException();
+            return new XElement("EndDrag");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetTime action, object param) {
-            throw new NotImplementedException();
+            return new XElement("GetTime");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionRandomNumber action, object param) {
-            throw new NotImplementedException();
+            return new XElement("RandomNumber");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionTrace action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Trace");
         }
 
         #endregion
@@ -240,11 +240,11 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         #region SWF 5
 
         XElement IActionVisitor<object, XElement>.Visit(ActionCallFunction action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("CallFunction");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionCallMethod action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("CallMethod");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionConstantPool action, object param) {
@@ -273,55 +273,55 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineLocal action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("DefineLocal");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineLocal2 action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("DefineLocal2");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDelete action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("Delete");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDelete2 action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("Delete2");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionEnumerate action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("Enumerate");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionEquals2 action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("Equals2");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetMember action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("GetMember");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionInitArray action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("InitArray");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionInitObject action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("InitObject");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionNewMethod action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("NewMethod");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionNewObject action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("NewObject");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSetMember action, object param) {
-            throw new NotImplementedException();
+            return new XElement("SetMember");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionTargetPath action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("TargetPath");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionWith action, object arg) {
@@ -329,72 +329,72 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionToNumber action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("ToNumber");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionToString action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("ToString");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionTypeOf action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("TypeOf");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionAdd2 action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("Add2");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionLess2 action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("Less2");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionModulo action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("Modulo");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionBitAnd action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("BitAnd");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionBitLShift action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("BitLShift");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionBitOr action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("BitOr");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionBitRShift action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("BitRShift");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionBitURShift action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("BitURShift");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionBitXor action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("BitXor");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDecrement action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("Decrement");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionIncrement action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("Increment");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionPushDuplicate action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("PushDuplicate");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionReturn action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Return");
         }
 
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStackSwap action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("StackSwap");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStoreRegister action, object arg) {
@@ -414,23 +414,23 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         #region SWF 6
 
         XElement IActionVisitor<object, XElement>.Visit(ActionInstanceOf action, object param) {
-            throw new NotImplementedException();
+            return new XElement("InstanceOf");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionEnumerate2 action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Enumerate2");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStrictEquals action, object param) {
-            throw new NotImplementedException();
+            return new XElement("StrictEquals");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGreater action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Greater");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStringGreater action, object param) {
-            throw new NotImplementedException();
+            return new XElement("StringGreater");
         }
 
         #endregion
@@ -442,15 +442,15 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionExtends action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Extends");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionCastOp action, object param) {
-            throw new NotImplementedException();
+            return new XElement("CastOp");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionImplementsOp action, object param) {
-            throw new NotImplementedException();
+            return new XElement("ImplementsOp");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionTry action, object param) {
@@ -458,7 +458,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionThrow action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Throw");
         }
 
         #endregion
