@@ -46,6 +46,9 @@ namespace Code.SwfLib.SwfMill.Shapes {
             setup.Add(new XAttribute(XName.Get("x"), styleChange.MoveDeltaX));
             setup.Add(new XAttribute(XName.Get("y"), styleChange.MoveDeltaY));
 
+            if (styleChange.StateNewStyles) {
+
+            }
             //TODO: Glyphs  
             return setup;
         }

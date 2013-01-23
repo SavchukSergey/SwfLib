@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
-using Code.SwfLib.Data;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
@@ -27,7 +27,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         protected override XElement FormatTagElement(SetBackgroundColorTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.SET_BACKGROUND_COLOR_TAG),
-                                new XElement(XName.Get("color"), _formatters.ColorRGB.Format(ref tag.Color)));
+                                new XElement("color", XColorRGB.ToXml(tag.Color)));
         }
     }
 }

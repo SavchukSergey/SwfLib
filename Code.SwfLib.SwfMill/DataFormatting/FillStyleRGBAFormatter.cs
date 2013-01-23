@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using Code.SwfLib.Gradients;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
@@ -199,7 +200,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
                 var color = gradient.Color;
                 list.Add(new XElement(XName.Get("GradientItem"),
                     new XAttribute(XName.Get("position"), gradient.Ratio),
-                    new XElement(XName.Get("color"), _formatters.ColorRGB.Format(ref color))
+                    new XElement(XName.Get("color"), XColorRGB.ToXml(color))
                 ));
             }
             return list;

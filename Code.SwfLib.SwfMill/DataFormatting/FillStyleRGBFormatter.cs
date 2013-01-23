@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using Code.SwfLib.Gradients;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -39,7 +40,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
                 case FillStyleType.SolidColor:
                     switch (element.Name.LocalName) {
                         case "color":
-                            _formatters.ColorRGB.Parse(element.Element(XName.Get("Color")), out data.Color);
+                            data.Color = XColorRGB.FromXml(element.Element("Color"));
                             break;
                         default:
                             OnUnknownElementFound(element);
@@ -186,7 +187,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         private XElement FormatSolidColorRGBFillStyle(ref FillStyleRGB style) {
             return new XElement(XName.Get("Solid"),
-                new XElement(XName.Get("color"), _formatters.ColorRGB.Format(ref style.Color)));
+                new XElement(XName.Get("color"), XColorRGB.ToXml(style.Color)));
         }
 
         //TODO: Interpolation and spread mode!!
@@ -194,7 +195,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
             foreach (var item in element.Elements(XName.Get("GradientItem"))) {
                 GradientRecordRGB record;
                 record.Ratio = byte.Parse(item.Attribute(XName.Get("position")).Value);
-                _formatters.ColorRGB.Parse(item.Element("color").Element("Color"), out record.Color);
+                record.Color = XColorRGB.FromXml(item.Element("color").Element("Color"));
                 records.Add(record);
             }
         }

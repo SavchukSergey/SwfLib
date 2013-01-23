@@ -32,13 +32,14 @@ namespace Code.SwfLib {
             //They are not actually byte aligned as Adobe promises..
             var isEdge = reader.ReadBit();
             if (!isEdge) {
-                bool reservedFlag = reader.ReadBit();
+                bool stateNewStyles = reader.ReadBit();
                 bool stateLineStyle = reader.ReadBit();
                 bool stateFillStyle1 = reader.ReadBit();
                 bool stateFillStyle0 = reader.ReadBit();
                 bool stateMoveTo = reader.ReadBit();
-                if (reservedFlag || stateLineStyle || stateFillStyle1 || stateFillStyle0 || stateMoveTo) {
+                if (stateNewStyles || stateLineStyle || stateFillStyle1 || stateFillStyle0 || stateMoveTo) {
                     var styleChange = new StyleChangeShapeRecord();
+                    styleChange.StateNewStyles = stateNewStyles;
                     if (stateMoveTo) {
                         var moveBits = reader.ReadUnsignedBits(5);
                         styleChange.MoveDeltaX = reader.ReadSignedBits(moveBits);
@@ -53,6 +54,7 @@ namespace Code.SwfLib {
                     if (stateLineStyle) {
                         styleChange.LineStyle = reader.ReadUnsignedBits(lineBitsCount);
                     }
+                    //TODO: read new fill styles and line styles
                     return styleChange;
                 } else {
                     return new EndShapeRecord();

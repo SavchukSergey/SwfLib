@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using Code.SwfLib.Data;
 using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Data.Text;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.DataFormatting;
 
 namespace Code.SwfLib.SwfMill
@@ -184,9 +185,9 @@ namespace Code.SwfLib.SwfMill
             if (entry.HasColor)
             {
                 var color = entry.TextColor.Value;
-                res.Add(new XElement(XName.Get("color"), _formatters.ColorRGB.Format(ref color)));
+                res.Add(new XElement(XName.Get("color"), XColorRGB.ToXml(color)));
             }
-            res.Add(new XElement(XName.Get("glyphs"), entry.Glyphs.Select(item => FormatGlyphEntry(item))));
+            res.Add(new XElement(XName.Get("glyphs"), entry.Glyphs.Select(FormatGlyphEntry)));
             return res;
         }
 
@@ -220,8 +221,7 @@ namespace Code.SwfLib.SwfMill
                 switch (elem.Name.LocalName)
                 {
                     case "color":
-                        SwfRGB color;
-                        _formatters.ColorRGB.Parse(elem.Element("Color"), out color);
+                        SwfRGB color = XColorRGB.FromXml(elem.Element("Color"));
                         result.TextColor = color;
                         break;
                     case "glyphs":

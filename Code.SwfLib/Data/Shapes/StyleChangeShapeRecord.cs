@@ -11,8 +11,11 @@
 
         public int MoveDeltaY;
 
+        public bool StateNewStyles;
+
         public override ShapeRecordType Type {
             get { return ShapeRecordType.StyleChangeRecord; }
         }
+
     }
 }
