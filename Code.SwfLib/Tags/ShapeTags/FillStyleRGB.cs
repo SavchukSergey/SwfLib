@@ -1,5 +1,4 @@
 ﻿using Code.SwfLib.Data;
-using Code.SwfLib.Data.Gradients;
 using Code.SwfLib.Gradients;
 
 namespace Code.SwfLib.Tags.ShapeTags {

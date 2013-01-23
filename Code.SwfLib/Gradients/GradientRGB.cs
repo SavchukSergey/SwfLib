@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Data.Gradients;
 
 namespace Code.SwfLib.Gradients {
     public struct GradientRGB {

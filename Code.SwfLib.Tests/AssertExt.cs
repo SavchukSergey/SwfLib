@@ -1,6 +1,5 @@
 ﻿using System;
 using Code.SwfLib.Data;
-using Code.SwfLib.Data.Gradients;
 using Code.SwfLib.Data.Shapes;
 using Code.SwfLib.Gradients;
 using Code.SwfLib.Tags.ShapeTags;

@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Data.Gradients {
+﻿namespace Code.SwfLib.Gradients {
     public struct FocalGradient {
     }
 }
