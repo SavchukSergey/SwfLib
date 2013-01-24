@@ -166,6 +166,11 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineSceneAndFrameLabelDataTag tag, SwfStreamWriter writer) {
+            writer.WriteEncodedU32((uint)tag.Scenes.Count);
+            foreach (var scene in tag.Scenes) {
+                writer.WriteEncodedU32(scene.Offset);
+                writer.WriteString(scene.Name);
+            }
             return null;
         }
 
@@ -262,7 +267,7 @@ namespace Code.SwfLib {
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG3Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
-            writer.WriteUInt32((uint) tag.ImageData.Length);
+            writer.WriteUInt32((uint)tag.ImageData.Length);
             writer.WriteBytes(tag.ImageData);
             writer.WriteBytes(tag.BitmapAlphaData);
             return null;

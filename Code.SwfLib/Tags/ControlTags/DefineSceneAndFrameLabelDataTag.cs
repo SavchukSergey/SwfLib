@@ -1,5 +1,10 @@
-﻿namespace Code.SwfLib.Tags.ControlTags {
+﻿using System.Collections.Generic;
+using Code.SwfLib.Data;
+
+namespace Code.SwfLib.Tags.ControlTags {
     public class DefineSceneAndFrameLabelDataTag : ControlBaseTag {
+
+        public readonly IList<SceneAndFrameLabel> Scenes = new List<SceneAndFrameLabel>();
 
         public override SwfTagType TagType {
             get { return SwfTagType.DefineSceneAndFrameLabelData; }
