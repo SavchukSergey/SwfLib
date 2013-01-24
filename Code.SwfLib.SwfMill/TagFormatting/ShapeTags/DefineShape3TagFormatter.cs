@@ -30,7 +30,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                     ReadShapes(tag, element);
                     break;
                 default:
-                    throw new FormatException("Invalid xRecords " + element.Name.LocalName);
+                    throw new FormatException("Invalid element " + element.Name.LocalName);
             }
         }
 

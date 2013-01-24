@@ -1,5 +1,7 @@
 ﻿namespace Code.SwfLib.Tags.BitmapTags {
-    public class JPEGTablesTag : BitmapBaseTag {
+    public class JPEGTablesTag : SwfTagBase {
+
+        public byte[] JPEGData;
 
         public override SwfTagType TagType {
             get { return SwfTagType.JPEGTables; }

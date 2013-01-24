@@ -1,8 +1,6 @@
 ﻿namespace Code.SwfLib.Tags.BitmapTags {
     public class DefineBitsLossless2Tag : BitmapBaseTag {
         
-        public ushort CharacterID;
-
         public byte BitmapFormat { get; set; }
 
         public ushort BitmapWidth { get; set; }

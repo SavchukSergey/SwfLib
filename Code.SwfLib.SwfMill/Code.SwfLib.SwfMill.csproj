@@ -58,6 +58,7 @@
     <Compile Include="DataFormatting\DataFormatters.cs" />
     <Compile Include="DataFormatting\FillStyleRGBFormatter.cs" />
     <Compile Include="DataFormatting\MatrixFormatter.cs" />
+    <Compile Include="Data\XBinary.cs" />
     <Compile Include="Data\XColorTransformRGBA.cs" />
     <Compile Include="Data\XColorRGBA.cs" />
     <Compile Include="Data\XColorRGB.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Shapes\XShapeRecord.cs" />
     <Compile Include="TagFormatting\ActionTags\DoABCDefineTagFormatter.cs" />
     <Compile Include="TagFormatting\ActionTags\DoABCTagFormatter.cs" />
+    <Compile Include="TagFormatting\BitmapTags\DefineBitmapBaseTagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG3TagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG4TagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsLossless2TagFormatter.cs" />

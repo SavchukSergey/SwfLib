@@ -277,10 +277,13 @@ namespace Code.SwfLib {
         #region Bitmap tags
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBitsTag tag, SwfStreamReader reader) {
+            tag.CharacterID = reader.ReadUInt16();
+            tag.JPEGData = reader.ReadRest();
             return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(JPEGTablesTag tag, SwfStreamReader reader) {
+            tag.JPEGData = reader.ReadRest();
             return tag;
         }
 
@@ -291,6 +294,19 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBitsJPEG3Tag tag, SwfStreamReader reader) {
+            tag.CharacterID = reader.ReadUInt16();
+            var alphaDataOffset = reader.ReadUInt32();
+            tag.ImageData = reader.ReadBytes((int)alphaDataOffset);
+            tag.BitmapAlphaData = reader.ReadRest();
+            return tag;
+        }
+
+        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBitsJPEG4Tag tag, SwfStreamReader reader) {
+            tag.CharacterID = reader.ReadUInt16();
+            var alphaDataOffset = reader.ReadUInt32();
+            tag.DeblockParam = reader.ReadUInt16();
+            tag.ImageData = reader.ReadBytes((int)alphaDataOffset);
+            tag.BitmapAlphaData = reader.ReadRest();
             return tag;
         }
 
@@ -315,10 +331,6 @@ namespace Code.SwfLib {
                 tag.BitmapColorTableSize = reader.ReadByte();
             }
             tag.ZlibBitmapData = reader.ReadBytes((int)reader.BytesLeft);
-            return tag;
-        }
-
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBitsJPEG4Tag tag, SwfStreamReader reader) {
             return tag;
         }
 

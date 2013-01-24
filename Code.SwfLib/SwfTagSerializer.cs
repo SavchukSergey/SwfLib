@@ -244,10 +244,13 @@ namespace Code.SwfLib {
         #region Bitmap tags
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsTag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.CharacterID);
+            writer.WriteBytes(tag.JPEGData);
             return null;
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(JPEGTablesTag tag, SwfStreamWriter writer) {
+            writer.WriteBytes(tag.JPEGData);
             return null;
         }
 
@@ -258,6 +261,19 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG3Tag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.CharacterID);
+            writer.WriteUInt32((uint) tag.ImageData.Length);
+            writer.WriteBytes(tag.ImageData);
+            writer.WriteBytes(tag.BitmapAlphaData);
+            return null;
+        }
+
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG4Tag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.CharacterID);
+            writer.WriteUInt32((uint)tag.ImageData.Length);
+            writer.WriteUInt16(tag.DeblockParam);
+            writer.WriteBytes(tag.ImageData);
+            writer.WriteBytes(tag.BitmapAlphaData);
             return null;
         }
 
@@ -286,10 +302,6 @@ namespace Code.SwfLib {
             if (tag.ZlibBitmapData != null) {
                 writer.WriteBytes(tag.ZlibBitmapData);
             }
-            return null;
-        }
-
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG4Tag tag, SwfStreamWriter writer) {
             return null;
         }
 
