@@ -9,6 +9,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string COLOR_TRANSFORM_ELEM = "colorTransform";
 
         protected override void FormatPlaceElement(PlaceObjectTag tag, XElement elem) {
+            if (tag.ColorTransform.HasValue) {
+                elem.Add(new XElement(COLOR_TRANSFORM_ELEM, XColorTransformRGB.ToXml(tag.ColorTransform.Value)));
+            }
         }
 
         protected override void AcceptPlaceAttribute(PlaceObjectTag tag, XAttribute attrib) {
