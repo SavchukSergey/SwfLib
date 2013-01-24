@@ -37,7 +37,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             return res;
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DoAction"; }
         }
     }

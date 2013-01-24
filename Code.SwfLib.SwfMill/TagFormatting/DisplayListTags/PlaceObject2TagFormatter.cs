@@ -96,8 +96,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         }
 
 
-        protected override string TagName {
-            get { return SwfTagNameMapping.PLACE_OBJECT2_TAG; }
+        public override string TagName {
+            get { return "PlaceObject2"; }
         }
 
     }

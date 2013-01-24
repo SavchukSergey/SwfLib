@@ -80,6 +80,7 @@
     <Compile Include="TagFormatting\BitmapTags\DefineBitsLossless2TagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsTagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\JPEGTablesTagFormatter.cs" />
+    <Compile Include="TagFormatting\ButtonTags\DefineButtonBaseTagFormatter.cs" />
     <Compile Include="TagFormatting\ButtonTags\DefineButton2TagFormatter.cs" />
     <Compile Include="TagFormatting\ButtonTags\DefineButtonCxformTagFormatter.cs" />
     <Compile Include="TagFormatting\ButtonTags\DefineButtonSoundTagFormatter.cs" />

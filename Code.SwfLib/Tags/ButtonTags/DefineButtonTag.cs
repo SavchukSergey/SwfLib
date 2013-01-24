@@ -1,8 +1,6 @@
 ﻿namespace Code.SwfLib.Tags.ButtonTags {
-    public class DefineButtonTag : SwfTagBase {
+    public class DefineButtonTag : DefineButtonBaseTag {
         
-        public ushort ButtonID;
-
         public override SwfTagType TagType {
             get { return SwfTagType.DefineButton; }
         }

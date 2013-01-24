@@ -16,7 +16,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             throw new System.NotImplementedException();
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DoABCDefine"; }
         }
 

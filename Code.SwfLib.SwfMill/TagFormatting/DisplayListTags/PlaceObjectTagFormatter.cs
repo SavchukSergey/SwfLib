@@ -41,8 +41,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         protected override void HasMatrix(PlaceObjectTag tag, bool val) {
         }
 
-        protected override string TagName {
-            get { return SwfTagNameMapping.PLACE_OBJECT_TAG; }
+        public override string TagName {
+            get { return "PlaceObject"; }
         }
 
     }

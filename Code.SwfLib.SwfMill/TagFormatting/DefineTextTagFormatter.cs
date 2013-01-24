@@ -57,7 +57,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return xTag;
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineText"; }
         }
 

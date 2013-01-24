@@ -16,7 +16,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             throw new NotImplementedException();
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineFontInfo2"; }
         }
     }

@@ -80,7 +80,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected abstract void AcceptTagAttribute(T tag, XAttribute attrib);
         protected abstract void AcceptTagElement(T tag, XElement element);
 
-        protected abstract string TagName { get; }
+        public abstract string TagName { get; }
 
         protected virtual ushort? GetObjectID(T tag) {
             return null;

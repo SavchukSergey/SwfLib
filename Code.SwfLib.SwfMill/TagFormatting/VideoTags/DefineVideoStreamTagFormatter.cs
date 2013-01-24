@@ -15,7 +15,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.VideoTags {
             throw new System.NotImplementedException();
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineVideoStream"; }
         }
     }

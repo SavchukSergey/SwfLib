@@ -171,6 +171,7 @@
     <Compile Include="Gradients\GradientRecordRGBA.cs" />
     <Compile Include="Gradients\GradientRGBA.cs" />
     <Compile Include="Gradients\GradientStreamExt.cs" />
+    <Compile Include="Tags\ButtonTags\DefineButtonBaseTag.cs" />
     <Compile Include="Tags\ShapeTags\FillStyleRGBA.cs" />
     <Compile Include="Tags\ShapeTags\FillStyleRGB.cs" />
     <Compile Include="Gradients\FocalGradient.cs" />

@@ -34,16 +34,16 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        protected override string TagName {
-            get { return SwfTagNameMapping.DEFINE_SHAPE3_TAG; }
-        }
-
         private static void ReadStyles(DefineShape3Tag tag, XElement styleElements) {
             //TODO: Implement styles reading;
         }
 
         private static void ReadShapes(DefineShape3Tag tag, XElement shapes) {
             //TODO: Implement shapes reading;
+        }
+
+        public override string TagName {
+            get { return "DefineShape3"; }
         }
 
     }

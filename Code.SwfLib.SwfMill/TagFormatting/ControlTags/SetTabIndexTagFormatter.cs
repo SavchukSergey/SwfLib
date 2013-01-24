@@ -5,7 +5,7 @@ using Code.SwfLib.Tags.ControlTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class SetTabIndexTagFormatter : TagFormatterBase<SetTabIndexTag> {
         protected override XElement FormatTagElement(SetTabIndexTag tag, XElement xTag) {
-            throw new NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(SetTabIndexTag tag, XAttribute attrib) {
@@ -14,6 +14,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         protected override void AcceptTagElement(SetTabIndexTag tag, XElement element) {
             throw new NotImplementedException();
+        }
+
+        public override string TagName {
+            get { return "SetTabIndex"; }
         }
     }
 }

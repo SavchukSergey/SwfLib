@@ -31,7 +31,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
                 new XAttribute(SPRITE_ATTRIB, tag.SpriteId));
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DoInitAction"; }
         }
     }

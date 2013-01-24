@@ -16,7 +16,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             throw new NotImplementedException();
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineText2"; }
         }
     }

@@ -35,8 +35,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        protected override string TagName {
-            get { return SwfTagNameMapping.DEFINE_SHAPE_4_TAG; }
+        public override string TagName {
+            get { return "DefineShape5"; }
         }
     }
 }

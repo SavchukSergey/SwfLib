@@ -20,8 +20,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         protected override void AcceptShapeTagElement(DefineShape2Tag tag, XElement element) {
         }
 
-        protected override string TagName {
-            get { return SwfTagNameMapping.DEFINE_SHAPE2_TAG; }
+        public override string TagName {
+            get { return "DefineShape2"; }
         }
     }
 }

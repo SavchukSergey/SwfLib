@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.SoundTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
     public class DefineSoundTagFormatter : TagFormatterBase<DefineSoundTag> {
         protected override XElement FormatTagElement(DefineSoundTag tag, XElement xTag) {
-            throw new System.NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(DefineSoundTag tag, XAttribute attrib) {
@@ -13,6 +13,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
 
         protected override void AcceptTagElement(DefineSoundTag tag, XElement element) {
             throw new System.NotImplementedException();
+        }
+
+        public override string TagName {
+            get { return "DefineSound"; }
         }
     }
 }

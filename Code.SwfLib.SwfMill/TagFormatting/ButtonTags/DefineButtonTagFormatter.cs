@@ -2,9 +2,10 @@
 using Code.SwfLib.Tags.ButtonTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
-    public class DefineButtonTagFormatter : TagFormatterBase<DefineButtonTag> {
+    public class DefineButtonTagFormatter : DefineButtonBaseTagFormatter<DefineButtonTag> {
+        
         protected override XElement FormatTagElement(DefineButtonTag tag, XElement xTag) {
-            throw new System.NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(DefineButtonTag tag, XAttribute attrib) {
@@ -13,6 +14,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
 
         protected override void AcceptTagElement(DefineButtonTag tag, XElement element) {
             throw new System.NotImplementedException();
+        }
+
+        public override string TagName {
+            get { return "DefineButton"; }
         }
     }
 }

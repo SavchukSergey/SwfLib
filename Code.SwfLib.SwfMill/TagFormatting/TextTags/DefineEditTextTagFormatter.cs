@@ -163,7 +163,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             return xTag;
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineEditText"; }
         }
 

@@ -50,7 +50,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             }
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineBitsLossless2"; }
         }
 

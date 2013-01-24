@@ -5,6 +5,10 @@ using Code.SwfLib.Tags.ControlTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class MetadataTagFormatter : TagFormatterBase<MetadataTag> {
 
+        protected override XElement FormatTagElement(MetadataTag tag, XElement xTag) {
+            xTag.Add(XElement.Parse(tag.Metadata));
+            return xTag;
+        }
 
         public override void InitTag(MetadataTag tag, XElement element) {
             base.InitTag(tag, element);
@@ -33,8 +37,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        protected override XElement FormatTagElement(MetadataTag tag, XElement xTag) {
-            return new XElement(XName.Get(SwfTagNameMapping.METADATA_TAG), XElement.Parse(tag.Metadata));
+        public override string TagName {
+            get { return "Metadata"; }
         }
     }
 }

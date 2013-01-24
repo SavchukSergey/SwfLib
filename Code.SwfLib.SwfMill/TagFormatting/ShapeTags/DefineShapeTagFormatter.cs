@@ -44,7 +44,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         //TODO: Simulate swfmill ShapeSetup struct bug
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineShape"; }
         }
 

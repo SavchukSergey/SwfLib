@@ -15,7 +15,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             throw new System.NotImplementedException();
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "EnableDebugger2"; }
         }
     }

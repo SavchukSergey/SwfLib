@@ -11,7 +11,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected override void AcceptTagAttribute(UnknownTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case ID_ATTRIB:
-                    tag.SetTagType((SwfTagType) ParseHex(attrib.Value));
+                    tag.SetTagType((SwfTagType)ParseHex(attrib.Value));
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -29,9 +29,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         protected override XElement FormatTagElement(UnknownTag tag, XElement xTag) {
-            return new XElement(XName.Get(SwfTagNameMapping.UNKNOWN_TAG),
-                                 new XAttribute(XName.Get("id"), string.Format("0x{0:x}", (int)tag.TagType)),
-                                 new XElement(XName.Get("data"), Convert.ToBase64String(tag.Data)));
+            xTag.Add(new XAttribute(XName.Get("id"), string.Format("0x{0:x}", (int)tag.TagType)));
+            xTag.Add(new XElement(XName.Get("data"), Convert.ToBase64String(tag.Data)));
+            return xTag;
         }
 
         private static uint ParseHex(string value) {
@@ -39,7 +39,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return uint.Parse(value, NumberStyles.HexNumber | NumberStyles.AllowHexSpecifier);
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "UnknownTag"; }
         }
     }

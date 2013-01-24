@@ -5,7 +5,7 @@ using Code.SwfLib.Tags.DisplayListTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class RemoveObjectTagFormatter : TagFormatterBase<RemoveObjectTag> {
         protected override XElement FormatTagElement(RemoveObjectTag tag, XElement xTag) {
-            throw new NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(RemoveObjectTag tag, XAttribute attrib) {
@@ -14,6 +14,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
 
         protected override void AcceptTagElement(RemoveObjectTag tag, XElement element) {
             throw new NotImplementedException();
+        }
+
+        public override string TagName {
+            get { return "RemoveObject"; }
         }
     }
 }

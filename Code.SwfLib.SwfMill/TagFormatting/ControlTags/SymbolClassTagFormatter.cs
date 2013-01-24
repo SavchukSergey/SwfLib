@@ -38,7 +38,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             };
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "SymbolClass"; }
         }
 

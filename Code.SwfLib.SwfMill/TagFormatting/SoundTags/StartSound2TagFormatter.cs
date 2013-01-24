@@ -16,7 +16,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
             throw new System.NotImplementedException();
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "StartSound2"; }
         }
     }

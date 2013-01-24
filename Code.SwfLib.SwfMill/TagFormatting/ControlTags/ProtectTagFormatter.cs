@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.ControlTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class ProtectTagFormatter : TagFormatterBase<ProtectTag> {
         protected override XElement FormatTagElement(ProtectTag tag, XElement xTag) {
-            throw new System.NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(ProtectTag tag, XAttribute attrib) {
@@ -13,6 +13,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         protected override void AcceptTagElement(ProtectTag tag, XElement element) {
             throw new System.NotImplementedException();
+        }
+
+        public override string TagName {
+            get { return "Protect"; }
         }
     }
 }

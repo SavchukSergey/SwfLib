@@ -2,7 +2,8 @@
 using Code.SwfLib.Tags.ButtonTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
-    public class DefineButtonSoundTagFormatter : TagFormatterBase<DefineButtonSoundTag> {
+    public class DefineButtonSoundTagFormatter : DefineButtonBaseTagFormatter<DefineButtonSoundTag> {
+        
         protected override XElement FormatTagElement(DefineButtonSoundTag tag, XElement xTag) {
             return xTag;
         }
@@ -15,7 +16,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
             throw new System.NotImplementedException();
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineButtonSound"; }
         }
     }

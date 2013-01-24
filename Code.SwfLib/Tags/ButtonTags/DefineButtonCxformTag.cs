@@ -1,5 +1,6 @@
 ﻿namespace Code.SwfLib.Tags.ButtonTags {
-    public class DefineButtonCxformTag : SwfTagBase {
+    public class DefineButtonCxformTag : DefineButtonBaseTag {
+        
         public override SwfTagType TagType {
             get { return SwfTagType.DefineButtonCxform; }
         }

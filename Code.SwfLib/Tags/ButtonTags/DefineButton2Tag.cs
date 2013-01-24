@@ -1,6 +1,5 @@
 ﻿namespace Code.SwfLib.Tags.ButtonTags {
-    public class DefineButton2Tag : SwfTagBase {
-        public ushort ButtonID;
+    public class DefineButton2Tag : DefineButtonBaseTag {
 
         public byte ReservedFlags;
 

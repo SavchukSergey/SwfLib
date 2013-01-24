@@ -70,7 +70,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             return (all & toTest) > 0 ? "1" : "0";
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "FileAttributes"; }
         }
     }

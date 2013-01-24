@@ -23,7 +23,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             return xTag;
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineFontInfo"; }
         }
 

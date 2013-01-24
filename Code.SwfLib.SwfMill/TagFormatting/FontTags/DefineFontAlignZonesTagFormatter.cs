@@ -146,7 +146,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             return res;
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineFontAlignZones"; }
         }
 

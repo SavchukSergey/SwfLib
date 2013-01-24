@@ -65,7 +65,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return subFormatter.FormatTag(tag);
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineSprite"; }
         }
 

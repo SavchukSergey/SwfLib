@@ -4,7 +4,7 @@ using Code.SwfLib.Tags;
 namespace Code.SwfLib.SwfMill.TagFormatting {
     public class DefineBinaryDataTagFormatter : TagFormatterBase<DefineBinaryDataTag> {
         protected override XElement FormatTagElement(DefineBinaryDataTag tag, XElement xTag) {
-            throw new System.NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(DefineBinaryDataTag tag, XAttribute attrib) {
@@ -13,6 +13,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         protected override void AcceptTagElement(DefineBinaryDataTag tag, XElement element) {
             throw new System.NotImplementedException();
+        }
+
+        public override string TagName {
+            get { return "DefineBinaryData"; }
         }
     }
 }

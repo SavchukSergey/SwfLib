@@ -52,7 +52,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                                 new XAttribute(XName.Get("name"), symbol.SymbolName));
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "Export"; }
         }
 

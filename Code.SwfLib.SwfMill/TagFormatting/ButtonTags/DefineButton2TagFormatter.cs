@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using Code.SwfLib.Tags.ButtonTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
-    public class DefineButton2TagFormatter : TagFormatterBase<DefineButton2Tag> {
+    public class DefineButton2TagFormatter : DefineButtonBaseTagFormatter<DefineButton2Tag> {
 
         private const string MENU_ATTRIB = "menu";
         private const string BUTTONS_SIZE_ATTRIB = "buttonsSize";
@@ -40,7 +40,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
             return xTag;
         }
 
-        protected override string TagName {
+        public override string TagName {
             get { return "DefineButton2"; }
         }
 

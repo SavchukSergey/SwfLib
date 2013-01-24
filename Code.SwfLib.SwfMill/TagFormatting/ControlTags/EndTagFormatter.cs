@@ -5,6 +5,10 @@ using Code.SwfLib.Tags.ControlTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class EndTagFormatter : TagFormatterBase<EndTag> {
 
+        protected override XElement FormatTagElement(EndTag tag, XElement xTag) {
+            return xTag;
+        }
+
         protected override void AcceptTagAttribute(EndTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 default:
@@ -19,8 +23,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        protected override XElement FormatTagElement(EndTag tag, XElement xTag) {
-            return new XElement(XName.Get(SwfTagNameMapping.END_TAG));
+        public override string TagName {
+            get { return "End"; }
         }
     }
 }

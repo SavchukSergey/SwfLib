@@ -25,5 +25,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         void AcceptElement(SwfTagBase tag, XElement element);
 
+        string TagName { get; }
+
     }
 }

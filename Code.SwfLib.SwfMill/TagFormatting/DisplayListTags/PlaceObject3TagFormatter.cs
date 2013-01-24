@@ -72,8 +72,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             tag.HasMatrix = val;
         }
 
-        protected override string TagName {
-            get { return SwfTagNameMapping.PLACE_OBJECT3_TAG; }
+        public override string TagName {
+            get { return "PlaceObject3"; }
         }
 
     }
