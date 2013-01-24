@@ -5,7 +5,7 @@ using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class SymbolClassTagFormatter : TagFormatterBase<SymbolClassTag> {
-        protected override XElement FormatTagElement(SymbolClassTag tag) {
+        protected override XElement FormatTagElement(SymbolClassTag tag, XElement xTag) {
             var res = new XElement(SwfTagNameMapping.SYMBOL_CLASS_TAG);
             var xSymbols = new XElement("symbols");
             foreach (var symbolRef in tag.References) {

@@ -3,7 +3,7 @@ using Code.SwfLib.Tags.SoundTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
     public class SoundStreamHeadTagFormatter : TagFormatterBase<SoundStreamHeadTag> {
-        protected override XElement FormatTagElement(SoundStreamHeadTag tag) {
+        protected override XElement FormatTagElement(SoundStreamHeadTag tag, XElement xTag) {
             throw new System.NotImplementedException();
         }
 

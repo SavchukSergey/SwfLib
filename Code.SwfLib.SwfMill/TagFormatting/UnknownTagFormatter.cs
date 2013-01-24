@@ -28,7 +28,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        protected override XElement FormatTagElement(UnknownTag tag) {
+        protected override XElement FormatTagElement(UnknownTag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.UNKNOWN_TAG),
                                  new XAttribute(XName.Get("id"), string.Format("0x{0:x}", (int)tag.TagType)),
                                  new XElement(XName.Get("data"), Convert.ToBase64String(tag.Data)));

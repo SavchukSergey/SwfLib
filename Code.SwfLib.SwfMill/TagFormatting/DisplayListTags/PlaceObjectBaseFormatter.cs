@@ -8,7 +8,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string DEPTH_ATTRIB = "depth";
         private const string TRANSFORM_ELEM = "transform";
 
-        protected sealed override XElement FormatTagElement(T tag) {
+        protected sealed override XElement FormatTagElement(T tag, XElement xTag) {
             var res = new XElement(TagName);
 
             if (HasCharacter(tag)) {
@@ -54,7 +54,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             }
         }
 
-        protected abstract string TagName { get; }
         protected abstract void FormatPlaceElement(T tag, XElement elem);
 
         protected abstract bool HasCharacter(T tag);

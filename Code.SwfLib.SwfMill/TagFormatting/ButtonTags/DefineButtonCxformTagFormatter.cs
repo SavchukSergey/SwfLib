@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.ButtonTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
     public class DefineButtonCxformTagFormatter : TagFormatterBase<DefineButtonCxformTag> {
-        protected override XElement FormatTagElement(DefineButtonCxformTag tag) {
+        protected override XElement FormatTagElement(DefineButtonCxformTag tag, XElement xTag) {
             throw new NotImplementedException();
         }
 

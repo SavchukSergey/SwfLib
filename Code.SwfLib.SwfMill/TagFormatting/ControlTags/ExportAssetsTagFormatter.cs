@@ -26,7 +26,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        protected override XElement FormatTagElement(ExportAssetsTag tag) {
+        protected override XElement FormatTagElement(ExportAssetsTag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.EXPORT_TAG),
                                 new XElement(XName.Get("symbols"), tag.Symbols.Select(item => FormatSymbol(item))));
         }

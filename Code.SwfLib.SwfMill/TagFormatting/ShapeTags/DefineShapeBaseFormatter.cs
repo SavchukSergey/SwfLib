@@ -10,15 +10,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         private const string BOUNDS_ELEM = "bounds";
         private const string SHAPES_ELEM = "shapes";
 
-        protected sealed override XElement FormatTagElement(T tag) {
-            var res = new XElement(TagName);
-            res.Add(new XAttribute(OBJECT_ID_ATTRIB, tag.ShapeID));
-            res.Add(new XElement(BOUNDS_ELEM, XRect.ToXml(tag.ShapeBounds)));
+        protected sealed override XElement FormatTagElement(T tag, XElement xTag) {
+            xTag.Add(new XElement(BOUNDS_ELEM, XRect.ToXml(tag.ShapeBounds)));
 
-            FormatAdditionalBounds(tag, res);
+            FormatAdditionalBounds(tag, xTag);
 
             var xStyles = new XElement("styles");
-            res.Add(xStyles);
+            xTag.Add(xStyles);
 
             var xStyleList = new XElement("StyleList");
 
@@ -32,8 +30,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
             xStyles.Add(xStyleList);
 
-            FormatShapeElement(tag, res);
-            return res;
+            FormatShapeElement(tag, xTag);
+            return xTag;
         }
 
         protected abstract void FormatFillStyles(T tag, XElement xFillStyles);
@@ -43,7 +41,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         protected void FormatShapeElement(T tag, XElement xml) {
             var xShapes = new XElement(SHAPES_ELEM);
             var xShape = new XElement("Shape");
-            
+
             var xEdges = new XElement("edges");
 
             foreach (var shapeRecord in tag.ShapeRecords) {
@@ -101,6 +99,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         protected virtual void FormatAdditionalBounds(T tag, XElement elem) { }
         protected abstract void AcceptShapeTagElement(T tag, XElement element);
-        protected abstract string TagName { get; }
+
+        protected override ushort? GetObjectID(T tag) {
+            return tag.ShapeID;
+        }
     }
 }

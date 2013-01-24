@@ -25,7 +25,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             throw new FormatException("Invalid element " + element.Name.LocalName);
         }
 
-        protected override XElement FormatTagElement(ScriptLimitsTag tag) {
+        protected override XElement FormatTagElement(ScriptLimitsTag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.SCRIPT_LIMITES_TAG),
                 new XAttribute(XName.Get(MAX_RECURSION_ATTRIB), tag.MaxRecursionDepth),
                 new XAttribute(XName.Get(TIMEOUT_ATTRIB), tag.ScriptTimeoutSeconds)

@@ -42,7 +42,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        protected override XElement FormatTagElement(DefineFontAlignZonesTag tag) {
+        protected override XElement FormatTagElement(DefineFontAlignZonesTag tag, XElement xTag) {
             return new XElement(
                 XName.Get(SwfTagNameMapping.DEFINE_FONT_ALIGN_ZONES_TAG),
                 new XAttribute(OBJECT_ID_ATTRIB, tag.FontID),

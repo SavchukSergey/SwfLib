@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class DefineScalingGridTagFormatter : TagFormatterBase<DefineScalingGridTag> {
-        protected override XElement FormatTagElement(DefineScalingGridTag tag) {
+        protected override XElement FormatTagElement(DefineScalingGridTag tag, XElement xTag) {
             return new XElement(SwfTagNameMapping.DEFINE_SCALING_GRID_TAG);
         }
 

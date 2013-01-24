@@ -40,7 +40,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             }
         }
 
-        protected override XElement FormatTagElement(CSMTextSettingsTag tag) {
+        protected override XElement FormatTagElement(CSMTextSettingsTag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.CSM_TEXT_SETTINGS_TAG),
                                 new XAttribute(XName.Get("objectID"), tag.TextID),
                                 new XAttribute(XName.Get("useFlashType"), tag.UseFlashType),

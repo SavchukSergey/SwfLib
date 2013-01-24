@@ -18,14 +18,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         protected override void AcceptTagElement(SetBackgroundColorTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case COLOR_ELEM:
-                    tag.Color = ParseRGBFromFirstChild(element);
+                    tag.Color = XColorRGB.FromXml(element.Element("Color"));
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
         }
 
-        protected override XElement FormatTagElement(SetBackgroundColorTag tag) {
+        protected override XElement FormatTagElement(SetBackgroundColorTag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.SET_BACKGROUND_COLOR_TAG),
                                 new XElement("color", XColorRGB.ToXml(tag.Color)));
         }

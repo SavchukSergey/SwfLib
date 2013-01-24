@@ -22,7 +22,6 @@ namespace Code.SwfLib.SwfMill {
         public const string DEFINE_SHAPE3_TAG = "DefineShape3";
         public static string DEFINE_SHAPE_4_TAG = "DefineShape5";
         
-        public static string DEFINE_BITS_LOSSLESS2_TAG = "DefineBitsLossless2";
         public static XName DEFINE_SCALING_GRID_TAG = "DefineScalingGrid";
 
         public const string PLACE_OBJECT_TAG = "PlaceObject";
@@ -30,9 +29,7 @@ namespace Code.SwfLib.SwfMill {
         public const string PLACE_OBJECT3_TAG = "PlaceObject3";
 
         public const string CSM_TEXT_SETTINGS_TAG = "CSMTextSettings";
-        public const string DEFINE_BITS_JPEG2_TAG = "DefineBitsJPEG2";
         public const string DEFINE_BITS_LOSSLESS_TAG = "DefineBitsLossless";
-        public const string DEFINE_BUTTON2_TAG = "DefineButton2";
         public const string DEFINE_EDIT_TEXT_TAG = "DefineEditText";
         public const string DEFINE_FONT_TAG = "DefineFont";
         public const string DEFINE_FONT_3_TAG = "DefineFont3";
@@ -59,9 +56,7 @@ namespace Code.SwfLib.SwfMill {
 
         static SwfTagNameMapping() {
             _tagMap[CSM_TEXT_SETTINGS_TAG] = () => new CSMTextSettingsTag();
-            _tagMap[DEFINE_BITS_JPEG2_TAG] = () => new DefineBitsJPEG2Tag();
             _tagMap[DEFINE_BITS_LOSSLESS_TAG] = () => new DefineBitsLosslessTag();
-            _tagMap[DEFINE_BUTTON2_TAG] = () => new DefineButton2Tag();
             _tagMap[DEFINE_EDIT_TEXT_TAG] = () => new DefineEditTextTag();
             _tagMap[DEFINE_FONT_3_TAG] = () => new DefineFont3Tag();
             _tagMap[DEFINE_FONT_ALIGN_ZONES_TAG] = () => new DefineFontAlignZonesTag();

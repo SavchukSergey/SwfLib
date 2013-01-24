@@ -4,7 +4,7 @@ using Code.SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting {
     public class DebugIDTagFormatter : TagFormatterBase<DebugIDTag> {
-        protected override XElement FormatTagElement(DebugIDTag tag) {
+        protected override XElement FormatTagElement(DebugIDTag tag, XElement xTag) {
             throw new NotImplementedException();
         }
 

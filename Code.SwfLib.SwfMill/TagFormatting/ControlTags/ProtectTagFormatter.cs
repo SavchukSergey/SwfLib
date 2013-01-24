@@ -3,7 +3,7 @@ using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class ProtectTagFormatter : TagFormatterBase<ProtectTag> {
-        protected override XElement FormatTagElement(ProtectTag tag) {
+        protected override XElement FormatTagElement(ProtectTag tag, XElement xTag) {
             throw new System.NotImplementedException();
         }
 

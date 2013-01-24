@@ -12,8 +12,6 @@ namespace Code.SwfLib.SwfMill
     public static class SwfMillPrimitives
     {
 
- 
-
         public static ushort ParseObjectID(XAttribute attrib)
         {
             return ushort.Parse(attrib.Value);

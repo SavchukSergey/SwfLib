@@ -7,27 +7,21 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
         private const string FORMAT_ATTRIB = "format";
         private const string N_COLOR_MAP_ATTRIB = "n_colormap";
 
-        protected override XElement FormatTagElement(DefineBitsLossless2Tag tag) {
-            var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_BITS_LOSSLESS2_TAG),
-                  new XAttribute(OBJECT_ID_ATTRIB, tag.CharacterID),
-                  new XAttribute(FORMAT_ATTRIB, tag.BitmapFormat),
-                  new XAttribute(WIDTH_ATTRIB, tag.BitmapWidth),
-                  new XAttribute(HEIGHT_ATTRIB, tag.BitmapHeight)
-            );
+        protected override XElement FormatTagElement(DefineBitsLossless2Tag tag, XElement xTag) {
+            xTag.Add(new XAttribute(FORMAT_ATTRIB, tag.BitmapFormat));
+            xTag.Add( new XAttribute(WIDTH_ATTRIB, tag.BitmapWidth));
+            xTag.Add(new XAttribute(HEIGHT_ATTRIB, tag.BitmapHeight));
             if (tag.BitmapFormat == 3) {
-                res.Add(new XAttribute(N_COLOR_MAP_ATTRIB, tag.BitmapColorTableSize));
+                xTag.Add(new XAttribute(N_COLOR_MAP_ATTRIB, tag.BitmapColorTableSize));
             }
             if (tag.ZlibBitmapData != null) {
-                res.Add(new XElement(DATA_TAG, new XElement(DATA_TAG, Convert.ToBase64String(tag.ZlibBitmapData))));
+                xTag.Add(new XElement(DATA_TAG, new XElement(DATA_TAG, Convert.ToBase64String(tag.ZlibBitmapData))));
             }
-            return res;
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(DefineBitsLossless2Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.CharacterID = SwfMillPrimitives.ParseObjectID(attrib);
-                    break;
                 case FORMAT_ATTRIB:
                     tag.BitmapFormat = byte.Parse(attrib.Value);
                     break;
@@ -54,6 +48,18 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
+        }
+
+        protected override string TagName {
+            get { return "DefineBitsLossless2"; }
+        }
+
+        protected override ushort? GetObjectID(DefineBitsLossless2Tag tag) {
+            return tag.CharacterID;
+        }
+
+        protected override void SetObjectID(DefineBitsLossless2Tag tag, ushort value) {
+            tag.CharacterID = value;
         }
     }
 }

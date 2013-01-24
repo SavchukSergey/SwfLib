@@ -1,6 +1,9 @@
 ﻿namespace Code.SwfLib.Tags.BitmapTags {
     public class DefineBitsJPEG4Tag : BitmapBaseTag {
 
+        //TODO: read it
+        public ushort CharacterID;
+        
         public override SwfTagType TagType {
             get { return SwfTagType.DefineBitsJPEG4; }
         }

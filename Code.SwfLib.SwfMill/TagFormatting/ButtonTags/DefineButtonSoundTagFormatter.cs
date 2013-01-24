@@ -3,7 +3,7 @@ using Code.SwfLib.Tags.ButtonTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
     public class DefineButtonSoundTagFormatter : TagFormatterBase<DefineButtonSoundTag> {
-        protected override XElement FormatTagElement(DefineButtonSoundTag tag) {
+        protected override XElement FormatTagElement(DefineButtonSoundTag tag, XElement xTag) {
             throw new System.NotImplementedException();
         }
 

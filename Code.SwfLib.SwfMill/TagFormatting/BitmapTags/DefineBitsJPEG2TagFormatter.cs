@@ -8,9 +8,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
 
         protected override void AcceptTagAttribute(DefineBitsJPEG2Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.CharacterID = ushort.Parse(attrib.Value);
-                    break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
             }
@@ -27,12 +24,22 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             }
         }
 
-        protected override XElement FormatTagElement(DefineBitsJPEG2Tag tag) {
-            return new XElement(XName.Get(SwfTagNameMapping.DEFINE_BITS_JPEG2_TAG),
-                                new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.CharacterID),
-                                new XElement(XName.Get("data"), SwfMillPrimitives.FormatBinaryData(tag.ImageData))
-                //TODO: store image data
-                );
+        protected override XElement FormatTagElement(DefineBitsJPEG2Tag tag, XElement xTag) {
+            xTag.Add(new XElement(XName.Get("data"), SwfMillPrimitives.FormatBinaryData(tag.ImageData)));
+            //TODO: store image data
+            return xTag;
+        }
+
+        protected override string TagName {
+            get { return "DefineBitsJPEG2"; }
+        }
+
+        protected override ushort? GetObjectID(DefineBitsJPEG2Tag tag) {
+            return tag.CharacterID;
+        }
+
+        protected override void SetObjectID(DefineBitsJPEG2Tag tag, ushort value) {
+            tag.CharacterID = value;
         }
     }
 }

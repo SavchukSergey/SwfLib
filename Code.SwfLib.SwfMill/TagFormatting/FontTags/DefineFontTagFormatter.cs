@@ -5,7 +5,7 @@ using Code.SwfLib.Tags.FontTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
     public class DefineFontTagFormatter : TagFormatterBase<DefineFontTag> {
 
-        protected override XElement FormatTagElement(DefineFontTag tag) {
+        protected override XElement FormatTagElement(DefineFontTag tag, XElement xTag) {
             var res = new XElement(SwfTagNameMapping.DEFINE_FONT_TAG,
                  new XAttribute(OBJECT_ID_ATTRIB, tag.FontID));
             var xOffsets = new XElement("offsets");

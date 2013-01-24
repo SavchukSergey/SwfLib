@@ -24,7 +24,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             }
         }
 
-        protected override XElement FormatTagElement(RemoveObject2Tag tag) {
+        protected override XElement FormatTagElement(RemoveObject2Tag tag, XElement xTag) {
             return new XElement(SwfTagNameMapping.REMOVE_OBJECT2_TAG,
                 new XAttribute(DEPTH_ATTRIB, tag.Depth));
         }

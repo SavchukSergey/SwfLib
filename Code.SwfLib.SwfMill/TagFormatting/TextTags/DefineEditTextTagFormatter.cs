@@ -131,7 +131,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             }
         }
 
-        protected override XElement FormatTagElement(DefineEditTextTag tag) {
+        protected override XElement FormatTagElement(DefineEditTextTag tag, XElement xTag) {
             var res = new XElement(SwfTagNameMapping.DEFINE_EDIT_TEXT_TAG);
             res.Add(new XAttribute(OBJECT_ID_ATTRIB, tag.CharacterID));
             res.Add(new XElement(SIZE_ELEM, XRect.ToXml(tag.Bounds)));

@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class ImportAssets2TagFormatter : TagFormatterBase<ImportAssets2Tag> {
-        protected override XElement FormatTagElement(ImportAssets2Tag tag) {
+        protected override XElement FormatTagElement(ImportAssets2Tag tag, XElement xTag) {
             throw new NotImplementedException();
         }
 

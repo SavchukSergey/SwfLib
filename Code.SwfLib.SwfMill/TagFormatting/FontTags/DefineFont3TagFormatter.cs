@@ -70,7 +70,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        protected override XElement FormatTagElement(DefineFont3Tag tag) {
+        protected override XElement FormatTagElement(DefineFont3Tag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_3_TAG),
                                 new XAttribute(OBJECT_ID_ATTRIB, tag.FontID),
                                 new XAttribute(LANGUAGE_ATTRIB, tag.Language),

@@ -3,7 +3,7 @@ using Code.SwfLib.Tags.BitmapTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class DefineBitsTagFormatter : TagFormatterBase<DefineBitsTag> {
-        protected override XElement FormatTagElement(DefineBitsTag tag) {
+        protected override XElement FormatTagElement(DefineBitsTag tag, XElement xTag) {
             throw new System.NotImplementedException();
         }
 

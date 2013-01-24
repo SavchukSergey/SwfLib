@@ -27,7 +27,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        protected override XElement FormatTagElement(DefineFontInfoTag tag) {
+        protected override XElement FormatTagElement(DefineFontInfoTag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_INFO_TAG),
                               new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.FontID),
                               new XElement(REST_ELEM, Convert.ToBase64String(tag.RestData)));

@@ -33,7 +33,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        protected override XElement FormatTagElement(MetadataTag tag) {
+        protected override XElement FormatTagElement(MetadataTag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.METADATA_TAG), XElement.Parse(tag.Metadata));
         }
     }

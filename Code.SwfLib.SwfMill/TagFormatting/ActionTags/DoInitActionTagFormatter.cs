@@ -26,9 +26,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             }
         }
 
-        protected override XElement FormatTagElement(DoInitActionTag tag) {
+        protected override XElement FormatTagElement(DoInitActionTag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.DO_INIT_ACTION_TAG),
                 new XAttribute(SPRITE_ATTRIB, tag.SpriteId));
+        }
+
+        protected override string TagName {
+            get { return "DoInitAction"; }
         }
     }
 }

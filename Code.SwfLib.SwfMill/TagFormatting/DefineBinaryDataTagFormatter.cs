@@ -3,7 +3,7 @@ using Code.SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting {
     public class DefineBinaryDataTagFormatter : TagFormatterBase<DefineBinaryDataTag> {
-        protected override XElement FormatTagElement(DefineBinaryDataTag tag) {
+        protected override XElement FormatTagElement(DefineBinaryDataTag tag, XElement xTag) {
             throw new System.NotImplementedException();
         }
 

@@ -3,7 +3,7 @@ using Code.SwfLib.Tags.ShapeMorphingTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeMorphingTags {
     public class DefineMorphShape2TagFormatter : TagFormatterBase<DefineMorphShape2Tag> {
-        protected override XElement FormatTagElement(DefineMorphShape2Tag tag) {
+        protected override XElement FormatTagElement(DefineMorphShape2Tag tag, XElement xTag) {
             throw new System.NotImplementedException();
         }
 

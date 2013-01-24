@@ -53,7 +53,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        protected override XElement FormatTagElement(FileAttributesTag tag) {
+        protected override XElement FormatTagElement(FileAttributesTag tag, XElement xTag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.FILE_ATTRIBUTES_TAG),
                                    new XAttribute(XName.Get(HAS_METADATA_ATTRIB), FormatBoolToDigit(tag.HasMetadata)),
                                    new XAttribute(XName.Get(USE_NETWORK_ATTRIB), FormatBoolToDigit(tag.UseNetwork)),

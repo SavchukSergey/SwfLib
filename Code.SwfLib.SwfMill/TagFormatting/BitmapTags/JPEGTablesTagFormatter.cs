@@ -3,7 +3,7 @@ using Code.SwfLib.Tags.BitmapTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class JPEGTablesTagFormatter : TagFormatterBase<JPEGTablesTag> {
-        protected override XElement FormatTagElement(JPEGTablesTag tag) {
+        protected override XElement FormatTagElement(JPEGTablesTag tag, XElement xTag) {
             throw new System.NotImplementedException();
         }
 

@@ -28,7 +28,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        protected override XElement FormatTagElement(FrameLabelTag tag) {
+        protected override XElement FormatTagElement(FrameLabelTag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.FRAME_LABEL_TAG),
                 new XAttribute(XName.Get(LABEL_ATTRIB), tag.Name)
                 //TODO: Flags

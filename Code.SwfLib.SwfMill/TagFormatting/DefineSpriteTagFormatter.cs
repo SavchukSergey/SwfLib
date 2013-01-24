@@ -41,7 +41,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        protected override XElement FormatTagElement(DefineSpriteTag tag) {
+        protected override XElement FormatTagElement(DefineSpriteTag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_SPRITE_TAG),
                                new XAttribute(XName.Get("objectID"), tag.SpriteID),
                                new XAttribute(XName.Get("frames"), tag.FramesCount),

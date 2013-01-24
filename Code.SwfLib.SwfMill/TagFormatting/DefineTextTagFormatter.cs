@@ -46,7 +46,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         //TODO: simulate swfmill incorrect structure of TextRecord (parsing, formating)
 
-        protected override XElement FormatTagElement(DefineTextTag tag) {
+        protected override XElement FormatTagElement(DefineTextTag tag, XElement xTag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_TEXT_TAG),
                                    new XAttribute(XName.Get("objectID"), tag.CharacterID));
             res.Add(new XElement("bounds", XRect.ToXml(tag.TextBounds)));

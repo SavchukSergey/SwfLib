@@ -26,7 +26,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             }
         }
 
-        protected override XElement FormatTagElement(DoActionTag tag) {
+        protected override XElement FormatTagElement(DoActionTag tag, XElement xTag) {
             var res = new XElement(SwfTagNameMapping.DO_ACTION_TAG);
             var actions = new XElement(ACTIONS_ELEM);
             //TODO: process functions bodies.
@@ -35,6 +35,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             }
             res.Add(actions);
             return res;
+        }
+
+        protected override string TagName {
+            get { return "DoAction"; }
         }
     }
 }

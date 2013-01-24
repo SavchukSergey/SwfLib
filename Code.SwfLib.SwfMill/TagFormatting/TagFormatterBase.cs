@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Linq;
-using Code.SwfLib.Data;
 using Code.SwfLib.SwfMill.DataFormatting;
 using Code.SwfLib.Tags;
 
@@ -8,8 +7,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
     public abstract class TagFormatterBase<T> : ITagFormatter<T> where T : SwfTagBase {
 
         private const string REST_ELEM = "rest";
+        private const string OBJECT_ID_ATTRIB = "objectID";
+
         protected const string DATA_TAG = "data";
-        protected const string OBJECT_ID_ATTRIB = "objectID";
         protected const string NAME_ATTRIB = "name";
         protected const string WIDTH_ATTRIB = "width";
         protected const string HEIGHT_ATTRIB = "height";
@@ -42,7 +42,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         public XElement FormatElement(T tag) {
-            var res = FormatTagElement(tag);
+            var res = new XElement(TagName);
+            var objectID = GetObjectID(tag);
+            if (objectID.HasValue) {
+                res.Add(new XAttribute(OBJECT_ID_ATTRIB, objectID.Value));
+            }
+            res = FormatTagElement(tag, res);
             if (tag.RestData != null && tag.RestData.Length > 0) {
                 res.Add(new XElement(REST_ELEM, Convert.ToBase64String(tag.RestData)));
             }
@@ -50,7 +55,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         public void AcceptAttribute(T tag, XAttribute attrib) {
-            AcceptTagAttribute(tag, attrib);
+            switch (attrib.Name.LocalName) {
+                case OBJECT_ID_ATTRIB:
+                    SetObjectID(tag, ushort.Parse(attrib.Value));
+                    break;
+                default:
+                    AcceptTagAttribute(tag, attrib);
+                    break;
+            }
         }
 
         public void AcceptElement(T tag, XElement element) {
@@ -64,9 +76,21 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        protected abstract XElement FormatTagElement(T tag);
+        //TODO: override others
+        protected virtual string TagName {
+            get { return this.GetType().Name.Replace("Formatter", ""); }
+        }
+
+        protected abstract XElement FormatTagElement(T tag, XElement xTag);
         protected abstract void AcceptTagAttribute(T tag, XAttribute attrib);
         protected abstract void AcceptTagElement(T tag, XElement element);
+
+        protected virtual ushort? GetObjectID(T tag) {
+            return null;
+        }
+        
+        protected virtual void SetObjectID(T tag, ushort value) {
+        }
 
         #endregion
 
@@ -97,15 +121,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         protected string FormatBoolToDigit(bool val) {
             return val ? "1" : "0";
-        }
-
-        protected SwfRGB ParseRGBFromFirstChild(XElement elem) {
-            var colorElem = elem.Element(XName.Get("Color"));
-            SwfRGB rgb;
-            rgb.Red = byte.Parse(colorElem.Attribute(XName.Get("red")).Value);
-            rgb.Green = byte.Parse(colorElem.Attribute(XName.Get("green")).Value);
-            rgb.Blue = byte.Parse(colorElem.Attribute(XName.Get("blue")).Value);
-            return rgb;
         }
 
         protected static byte[] ReadBase64(XElement data) {

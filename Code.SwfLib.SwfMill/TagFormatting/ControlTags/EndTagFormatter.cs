@@ -19,7 +19,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        protected override XElement FormatTagElement(EndTag tag) {
+        protected override XElement FormatTagElement(EndTag tag, XElement xTag) {
             return new XElement(XName.Get(SwfTagNameMapping.END_TAG));
         }
     }

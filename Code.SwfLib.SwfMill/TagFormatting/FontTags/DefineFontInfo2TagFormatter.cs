@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
     public class DefineFontInfo2TagFormatter : TagFormatterBase<DefineFontInfo2Tag> {
-        protected override XElement FormatTagElement(DefineFontInfo2Tag tag) {
+        protected override XElement FormatTagElement(DefineFontInfo2Tag tag, XElement xTag) {
             throw new NotImplementedException();
         }
 

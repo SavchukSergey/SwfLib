@@ -12,9 +12,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
 
         protected override void AcceptTagAttribute(DefineButton2Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.ButtonID = SwfMillPrimitives.ParseObjectID(attrib);
-                    break;
                 case MENU_ATTRIB:
                     //TODO: read menu
                     break;
@@ -39,9 +36,20 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
             }
         }
 
-        protected override XElement FormatTagElement(DefineButton2Tag tag) {
-            return new XElement(SwfTagNameMapping.DEFINE_BUTTON2_TAG,
-                new XAttribute(OBJECT_ID_ATTRIB, tag.ButtonID));
+        protected override XElement FormatTagElement(DefineButton2Tag tag, XElement xTag) {
+            return xTag;
+        }
+
+        protected override string TagName {
+            get { return "DefineButton2"; }
+        }
+
+        protected override ushort? GetObjectID(DefineButton2Tag tag) {
+            return tag.ButtonID;
+        }
+
+        protected override void SetObjectID(DefineButton2Tag tag, ushort value) {
+            tag.ButtonID = value;
         }
 
     }

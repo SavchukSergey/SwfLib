@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.VideoTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.VideoTags {
     public class VideoFrameTagFormatter : TagFormatterBase<VideoFrameTag> {
-        protected override XElement FormatTagElement(VideoFrameTag tag) {
+        protected override XElement FormatTagElement(VideoFrameTag tag, XElement xTag) {
             throw new NotImplementedException();
         }
 
