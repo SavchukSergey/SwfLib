@@ -2,55 +2,49 @@
 using Code.SwfLib.Data;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests
-{
+namespace Code.SwfLib.Tests {
     [TestFixture]
-    public class ColorTransformStreamExtTest : TestFixtureBase
-    {
+    public class ColorTransformStreamExtTest : TestFixtureBase {
 
         [Test]
-        public void ReadColorTransformRGBFromBitsMultTest()
-        {
+        public void ReadColorTransformRGBFromBitsMultTest() {
             var mem = new MemoryStream();
             WriteBits(mem,
                 "0", "1", "1001", "0.00001010", "0.11100000", "1.11110110");
             var reader = new SwfStreamReader(mem);
             var color = reader.ReadColorTransformRGB();
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+
+            Assert.IsTrue(color.HasMultTerms);
+            Assert.IsFalse(color.HasAddTerms);
+
             Assert.AreEqual(10, color.RedMultTerm);
             Assert.AreEqual(224, color.GreenMultTerm);
             Assert.AreEqual(-10, color.BlueMultTerm);
-
-            Assert.IsFalse(color.RedAddTerm.HasValue);
-            Assert.IsFalse(color.GreenAddTerm.HasValue);
-            Assert.IsFalse(color.BlueAddTerm.HasValue);
 
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }
 
         [Test]
-        public void ReadColorTransformRGBFromBitsAddTest()
-        {
+        public void ReadColorTransformRGBFromBitsAddTest() {
             var mem = new MemoryStream();
             WriteBits(mem,
                 "1", "0", "1001", "0.00001010", "1.11110110", "0.11100000");
             var reader = new SwfStreamReader(mem);
             var color = reader.ReadColorTransformRGB();
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            Assert.IsTrue(color.HasAddTerms);
+            Assert.IsFalse(color.HasMultTerms);
+
             Assert.AreEqual(10, color.RedAddTerm);
             Assert.AreEqual(-10, color.GreenAddTerm);
             Assert.AreEqual(224, color.BlueAddTerm);
-
-            Assert.IsFalse(color.RedMultTerm.HasValue);
-            Assert.IsFalse(color.GreenMultTerm.HasValue);
-            Assert.IsFalse(color.BlueMultTerm.HasValue);
 
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }
 
         [Test]
-        public void ReadColorTransformRGBFromBitsMultAddTest()
-        {
+        public void ReadColorTransformRGBFromBitsMultAddTest() {
             var mem = new MemoryStream();
             WriteBits(mem,
                 "1", "1", "1001", "0.00001010", "1.11110110", "0.11100000", "1.11110111", "0.10000001", "0.00010000");
@@ -69,8 +63,7 @@ namespace Code.SwfLib.Tests
         }
 
         [Test]
-        public void ReadColorTransformRGBAFromBitsMultTest()
-        {
+        public void ReadColorTransformRGBAFromBitsMultTest() {
             var mem = new MemoryStream();
             WriteBits(mem,
                 "0", "1", "1001", "0.00001010", "0.11100000", "1.11110110", "0.00010001");
@@ -78,22 +71,20 @@ namespace Code.SwfLib.Tests
             ColorTransformRGBA color;
             reader.ReadColorTransformRGBA(out color);
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+
+            Assert.IsTrue(color.HasMultTerms);
+            Assert.IsFalse(color.HasAddTerms);
+
             Assert.AreEqual(10, color.RedMultTerm);
             Assert.AreEqual(224, color.GreenMultTerm);
             Assert.AreEqual(-10, color.BlueMultTerm);
             Assert.AreEqual(17, color.AlphaMultTerm);
 
-            Assert.IsFalse(color.RedAddTerm.HasValue);
-            Assert.IsFalse(color.GreenAddTerm.HasValue);
-            Assert.IsFalse(color.BlueAddTerm.HasValue);
-            Assert.IsFalse(color.AlphaAddTerm.HasValue);
-
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }
 
         [Test]
-        public void ReadColorTransformRGBAFromBitsAddTest()
-        {
+        public void ReadColorTransformRGBAFromBitsAddTest() {
             var mem = new MemoryStream();
             WriteBits(mem,
                 "1", "0", "1001", "0.00001010", "1.11110110", "0.11100000", "0.11000000");
@@ -101,22 +92,20 @@ namespace Code.SwfLib.Tests
             ColorTransformRGBA color;
             reader.ReadColorTransformRGBA(out color);
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            
+            Assert.IsTrue(color.HasAddTerms);
+            Assert.IsFalse(color.HasMultTerms);
+
             Assert.AreEqual(10, color.RedAddTerm);
             Assert.AreEqual(-10, color.GreenAddTerm);
             Assert.AreEqual(224, color.BlueAddTerm);
             Assert.AreEqual(192, color.AlphaAddTerm);
 
-            Assert.IsFalse(color.RedMultTerm.HasValue);
-            Assert.IsFalse(color.GreenMultTerm.HasValue);
-            Assert.IsFalse(color.BlueMultTerm.HasValue);
-            Assert.IsFalse(color.AlphaMultTerm.HasValue);
-
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }
 
         [Test]
-        public void ReadColorTransformRGBAFromBitsMultAddTest()
-        {
+        public void ReadColorTransformRGBAFromBitsMultAddTest() {
             var mem = new MemoryStream();
             WriteBits(mem,
                 "1", "1", "1001", "0.00001010", "1.11110110", "0.11100000", "0.10110000",
@@ -139,18 +128,18 @@ namespace Code.SwfLib.Tests
         }
 
         [Test]
-        public void WriteColorTransformRGBFromBitsMultTest()
-        {
+        public void WriteColorTransformRGBFromBitsMultTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            var tranform = new ColorTransformRGB
-            {
+            var tranform = new ColorTransformRGB {
                 RedMultTerm = 10,
                 GreenMultTerm = 224,
                 BlueMultTerm = -10,
-                RedAddTerm = null,
-                GreenAddTerm = null,
-                BlueAddTerm = null
+                HasMultTerms = true,
+                RedAddTerm = 0,
+                GreenAddTerm = 0,
+                BlueAddTerm = 0,
+                HasAddTerms = false
             };
             writer.WriteColorTransformRGB(ref tranform);
             CheckBits(mem,
@@ -158,18 +147,18 @@ namespace Code.SwfLib.Tests
         }
 
         [Test]
-        public void WriteColorTransformRGBFromBitsAddTest()
-        {
+        public void WriteColorTransformRGBFromBitsAddTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            var tranform = new ColorTransformRGB
-            {
-                RedMultTerm = null,
-                GreenMultTerm = null,
-                BlueMultTerm = null,
+            var tranform = new ColorTransformRGB {
+                RedMultTerm = 0,
+                GreenMultTerm = 0,
+                BlueMultTerm = 0,
+                HasMultTerms = false,
                 RedAddTerm = 10,
                 GreenAddTerm = -10,
-                BlueAddTerm = 224
+                BlueAddTerm = 224,
+                HasAddTerms = true
             };
             writer.WriteColorTransformRGB(ref tranform);
             CheckBits(mem,
@@ -177,18 +166,18 @@ namespace Code.SwfLib.Tests
         }
 
         [Test]
-        public void WriteColorTransformRGBFromBitsMultAddTest()
-        {
+        public void WriteColorTransformRGBFromBitsMultAddTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            var tranform = new ColorTransformRGB
-            {
+            var tranform = new ColorTransformRGB {
                 RedMultTerm = 10,
                 GreenMultTerm = -10,
                 BlueMultTerm = 224,
+                HasMultTerms = true,
                 RedAddTerm = -9,
                 GreenAddTerm = 129,
-                BlueAddTerm = 16
+                BlueAddTerm = 16,
+                HasAddTerms = true
             };
             writer.WriteColorTransformRGB(ref tranform);
             CheckBits(mem,
@@ -196,20 +185,20 @@ namespace Code.SwfLib.Tests
         }
 
         [Test]
-        public void WriteColorTransformRGBAFromBitsMultTest()
-        {
+        public void WriteColorTransformRGBAFromBitsMultTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            var tranform = new ColorTransformRGBA
-            {
+            var tranform = new ColorTransformRGBA {
                 RedMultTerm = 10,
                 GreenMultTerm = 224,
                 BlueMultTerm = -10,
                 AlphaMultTerm = 17,
-                RedAddTerm = null,
-                GreenAddTerm = null,
-                BlueAddTerm = null,
-                AlphaAddTerm = null
+                HasMultTerms = true,
+                RedAddTerm = 0,
+                GreenAddTerm = 0,
+                BlueAddTerm = 0,
+                AlphaAddTerm = 0,
+                HasAddTerms = false
             };
             writer.WriteColorTransformRGBA(ref tranform);
             CheckBits(mem,
@@ -217,20 +206,20 @@ namespace Code.SwfLib.Tests
         }
 
         [Test]
-        public void WriteColorTransformRGBAFromBitsAddTest()
-        {
+        public void WriteColorTransformRGBAFromBitsAddTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            var tranform = new ColorTransformRGBA
-            {
-                RedMultTerm = null,
-                GreenMultTerm = null,
-                BlueMultTerm = null,
-                AlphaMultTerm = null,
+            var tranform = new ColorTransformRGBA {
+                RedMultTerm = 0,
+                GreenMultTerm = 0,
+                BlueMultTerm = 0,
+                AlphaMultTerm = 0,
+                HasMultTerms = false,
                 RedAddTerm = 10,
                 GreenAddTerm = -10,
                 BlueAddTerm = 224,
-                AlphaAddTerm = 192
+                AlphaAddTerm = 192,
+                HasAddTerms = true
             };
             writer.WriteColorTransformRGBA(ref tranform);
             CheckBits(mem,
@@ -238,20 +227,20 @@ namespace Code.SwfLib.Tests
         }
 
         [Test]
-        public void WriteColorTransformRGBAFromBitsMultAddTest()
-        {
+        public void WriteColorTransformRGBAFromBitsMultAddTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            var tranform = new ColorTransformRGBA
-            {
+            var tranform = new ColorTransformRGBA {
                 RedMultTerm = 10,
                 GreenMultTerm = -10,
                 BlueMultTerm = 224,
                 AlphaMultTerm = 176,
+                HasMultTerms = true,
                 RedAddTerm = -9,
                 GreenAddTerm = 129,
                 BlueAddTerm = 16,
-                AlphaAddTerm = 15
+                AlphaAddTerm = 15,
+                HasAddTerms = true
             };
             writer.WriteColorTransformRGBA(ref tranform);
             CheckBits(mem,

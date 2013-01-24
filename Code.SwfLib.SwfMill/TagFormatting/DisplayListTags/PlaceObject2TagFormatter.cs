@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
-using Code.SwfLib.Data;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.DisplayListTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
@@ -48,7 +48,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         protected override void AcceptPlaceTagElement(PlaceObject2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case COLOR_TRANSFORM_ELEM:
-                    _formatters.ColorTransformRGBA.Parse(element.Element(COLOR_TRANSFORM_TYPE_ELEM), out tag.ColorTransform);
+                    tag.ColorTransform = XColorTransformRGBA.FromXml(element.Element(COLOR_TRANSFORM_TYPE_ELEM));
                     tag.HasColorTransform = true;
                     break;
                 case CLIP_ACTIONS_ELEM:
@@ -65,7 +65,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                 elem.Add(new XAttribute(NAME_ATTRIB, tag.Name));
             }
             if (tag.HasColorTransform) {
-                elem.Add(new XElement(COLOR_TRANSFORM_ELEM, _formatters.ColorTransformRGBA.Format(ref tag.ColorTransform)));
+                elem.Add(new XElement(COLOR_TRANSFORM_ELEM, XColorTransformRGBA.ToXml(tag.ColorTransform)));
             }
             if (tag.HasClipDepth) {
                 elem.Add(new XAttribute(CLIP_DEPTH, tag.ClipDepth));
