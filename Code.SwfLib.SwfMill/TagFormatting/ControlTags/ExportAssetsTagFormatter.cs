@@ -27,8 +27,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         }
 
         protected override XElement FormatTagElement(ExportAssetsTag tag, XElement xTag) {
-            return new XElement(XName.Get(SwfTagNameMapping.EXPORT_TAG),
-                                new XElement(XName.Get("symbols"), tag.Symbols.Select(item => FormatSymbol(item))));
+            xTag.Add(new XElement(XName.Get("symbols"), tag.Symbols.Select(FormatSymbol)));
+            return xTag;
         }
 
         private static void ReadSymbols(ExportAssetsTag tag, XElement symbolsElement) {
@@ -39,7 +39,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         protected static SwfSymbolReference ParseSymbol(XElement element) {
             var symbol = new SwfSymbolReference {
-                SymbolID = ushort.Parse(element.Attribute(OBJECT_ID_ATTRIB).Value),
+                SymbolID = ushort.Parse(element.Attribute("objectID").Value),
                 SymbolName = element.Attribute("name").Value
 
             };
@@ -52,6 +52,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                                 new XAttribute(XName.Get("name"), symbol.SymbolName));
         }
 
+        protected override string TagName {
+            get { return "Export"; }
+        }
 
 
     }

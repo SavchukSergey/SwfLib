@@ -9,9 +9,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
         protected override void AcceptTagAttribute(DefineFontNameTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.FontId = SwfMillPrimitives.ParseObjectID(attrib);
-                    break;
                 case NAME_ATTRIB:
                     tag.FontName = attrib.Value;
                     break;
@@ -31,10 +28,21 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         }
 
         protected override XElement FormatTagElement(DefineFontNameTag tag, XElement xTag) {
-            return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_NAME_TAG),
-                               new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.FontId),
-                               new XAttribute(XName.Get(NAME_ATTRIB), tag.FontName),
-                               new XAttribute(XName.Get(COPYRIGHT_ATTRIB), tag.FontCopyright));
+            xTag.Add(new XAttribute(XName.Get(NAME_ATTRIB), tag.FontName));
+            xTag.Add(new XAttribute(XName.Get(COPYRIGHT_ATTRIB), tag.FontCopyright));
+            return xTag;
+        }
+
+        protected override string TagName {
+            get { return "DefineFontInfo3"; }
+        }
+
+        protected override ushort? GetObjectID(DefineFontNameTag tag) {
+            return tag.FontID;
+        }
+
+        protected override void SetObjectID(DefineFontNameTag tag, ushort value) {
+            tag.FontID = value;
         }
     }
 }

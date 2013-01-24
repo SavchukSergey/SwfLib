@@ -6,22 +6,17 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
     public class DefineFontTagFormatter : TagFormatterBase<DefineFontTag> {
 
         protected override XElement FormatTagElement(DefineFontTag tag, XElement xTag) {
-            var res = new XElement(SwfTagNameMapping.DEFINE_FONT_TAG,
-                 new XAttribute(OBJECT_ID_ATTRIB, tag.FontID));
             var xOffsets = new XElement("offsets");
             foreach (var offset in tag.OffsetTable) {
                 var xOffset = new XElement("offset", new XAttribute("value", offset));
                 xOffsets.Add(xOffset);
             }
-            res.Add(xOffsets);
-            return res;
+            xTag.Add(xOffsets);
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(DefineFontTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.FontID = ushort.Parse(attrib.Value);
-                    break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
             }
@@ -38,6 +33,18 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
+        }
+
+        protected override string TagName {
+            get { return "DefineFont"; }
+        }
+
+        protected override ushort? GetObjectID(DefineFontTag tag) {
+            return tag.FontID;
+        }
+
+        protected override void SetObjectID(DefineFontTag tag, ushort value) {
+            tag.FontID = value;
         }
     }
 }

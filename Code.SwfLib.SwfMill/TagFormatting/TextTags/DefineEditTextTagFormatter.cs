@@ -35,9 +35,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
         //TODO: check bit flags seting+check fields list
         protected override void AcceptTagAttribute(DefineEditTextTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.CharacterID = ushort.Parse(attrib.Value);
-                    break;
                 case WORD_WRAP_ATTRIB:
                     tag.WordWrap = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
@@ -132,40 +129,50 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
         }
 
         protected override XElement FormatTagElement(DefineEditTextTag tag, XElement xTag) {
-            var res = new XElement(SwfTagNameMapping.DEFINE_EDIT_TEXT_TAG);
-            res.Add(new XAttribute(OBJECT_ID_ATTRIB, tag.CharacterID));
-            res.Add(new XElement(SIZE_ELEM, XRect.ToXml(tag.Bounds)));
-            res.Add(new XAttribute(WORD_WRAP_ATTRIB, SwfMillPrimitives.GetStringValue(tag.WordWrap)));
-            res.Add(new XAttribute(MULTILINE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Multiline)));
-            res.Add(new XAttribute(PASSWORD_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Password)));
-            res.Add(new XAttribute(READONLY_ATTRIB, SwfMillPrimitives.GetStringValue(tag.ReadOnly)));
-            res.Add(new XAttribute(AUTOSIZE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.AutoSize)));
-            res.Add(new XAttribute(HAS_LAYOUT_ATTRIB, FormatBoolToDigit(tag.HasLayout)));
-            res.Add(new XAttribute(NOT_SELECTABLE_ATTRIB, FormatBoolToDigit(tag.NoSelect)));
-            res.Add(new XAttribute(BORDER_ATTRIB, FormatBoolToDigit(tag.Border)));
+            xTag.Add(new XElement(SIZE_ELEM, XRect.ToXml(tag.Bounds)));
+            xTag.Add(new XAttribute(WORD_WRAP_ATTRIB, SwfMillPrimitives.GetStringValue(tag.WordWrap)));
+            xTag.Add(new XAttribute(MULTILINE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Multiline)));
+            xTag.Add(new XAttribute(PASSWORD_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Password)));
+            xTag.Add(new XAttribute(READONLY_ATTRIB, SwfMillPrimitives.GetStringValue(tag.ReadOnly)));
+            xTag.Add(new XAttribute(AUTOSIZE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.AutoSize)));
+            xTag.Add(new XAttribute(HAS_LAYOUT_ATTRIB, FormatBoolToDigit(tag.HasLayout)));
+            xTag.Add(new XAttribute(NOT_SELECTABLE_ATTRIB, FormatBoolToDigit(tag.NoSelect)));
+            xTag.Add(new XAttribute(BORDER_ATTRIB, FormatBoolToDigit(tag.Border)));
             //res.Add(new XAttribute(STATIC_ATTRIB, FormatBoolToDigit(tag.WasStatic)));
-            res.Add(new XAttribute(IS_HTML_ATTRIB, FormatBoolToDigit(tag.HTML)));
-            res.Add(new XAttribute(USE_OUTLINES_ATTRIB, FormatBoolToDigit(tag.UseOutlines)));
+            xTag.Add(new XAttribute(IS_HTML_ATTRIB, FormatBoolToDigit(tag.HTML)));
+            xTag.Add(new XAttribute(USE_OUTLINES_ATTRIB, FormatBoolToDigit(tag.UseOutlines)));
             if (tag.HasFont) {
-                res.Add(new XAttribute(FONT_REF_ATTRIB, tag.FontID));
-                res.Add(new XAttribute(FONT_HEIGHT_ATTRIB, tag.FontHeight));
+                xTag.Add(new XAttribute(FONT_REF_ATTRIB, tag.FontID));
+                xTag.Add(new XAttribute(FONT_HEIGHT_ATTRIB, tag.FontHeight));
             }
             if (tag.HasTextColor) {
-                res.Add(new XElement("color", XColorRGBA.ToXml(tag.TextColor)));
+                xTag.Add(new XElement("color", XColorRGBA.ToXml(tag.TextColor)));
             }
-            res.Add(new XAttribute(MAX_LENGTH_ATTRIB, tag.MaxLength));
+            xTag.Add(new XAttribute(MAX_LENGTH_ATTRIB, tag.MaxLength));
             if (tag.HasLayout) {
-                res.Add(new XAttribute(ALIGN_ATTRIB, tag.Align));
-                res.Add(new XAttribute(LEFT_MARGIN_ATTRIB, tag.LeftMargin));
-                res.Add(new XAttribute(RIGHT_MARGIN_ATTRIB, tag.RightMargin));
-                res.Add(new XAttribute(INDENT_ATTRIB, tag.Indent));
-                res.Add(new XAttribute(LEADING_ATTRIB, tag.Leading));
+                xTag.Add(new XAttribute(ALIGN_ATTRIB, tag.Align));
+                xTag.Add(new XAttribute(LEFT_MARGIN_ATTRIB, tag.LeftMargin));
+                xTag.Add(new XAttribute(RIGHT_MARGIN_ATTRIB, tag.RightMargin));
+                xTag.Add(new XAttribute(INDENT_ATTRIB, tag.Indent));
+                xTag.Add(new XAttribute(LEADING_ATTRIB, tag.Leading));
             }
-            res.Add(new XAttribute(VARIABLE_NAME_ATTRIB, tag.VariableName));
+            xTag.Add(new XAttribute(VARIABLE_NAME_ATTRIB, tag.VariableName));
             if (tag.HasText) {
-                res.Add(new XAttribute(INITIAL_TEXT_ATTRIB, tag.InitialText));
+                xTag.Add(new XAttribute(INITIAL_TEXT_ATTRIB, tag.InitialText));
             }
-            return res;
+            return xTag;
+        }
+
+        protected override string TagName {
+            get { return "DefineEditText"; }
+        }
+
+        protected override ushort? GetObjectID(DefineEditTextTag tag) {
+            return tag.CharacterID;
+        }
+
+        protected override void SetObjectID(DefineEditTextTag tag, ushort value) {
+            tag.CharacterID = value;
         }
     }
 }

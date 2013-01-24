@@ -21,9 +21,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
         protected override void AcceptTagAttribute(DefineFontAlignZonesTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.FontID = ushort.Parse(attrib.Value);
-                    break;
                 case CSM_HINT_ATTRIB:
                     tag.CsmTableHint = (byte)(byte.Parse(attrib.Value) << 6);
                     break;
@@ -43,18 +40,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         }
 
         protected override XElement FormatTagElement(DefineFontAlignZonesTag tag, XElement xTag) {
-            return new XElement(
-                XName.Get(SwfTagNameMapping.DEFINE_FONT_ALIGN_ZONES_TAG),
-                new XAttribute(OBJECT_ID_ATTRIB, tag.FontID),
-                new XAttribute(CSM_HINT_ATTRIB, tag.CsmTableHint >> 6),
-                FormatZoneArrays(tag.Zones)
-                //TODO: reserved flags
-                );
+            xTag.Add(new XAttribute(CSM_HINT_ATTRIB, tag.CsmTableHint >> 6));
+            xTag.Add(FormatZoneArrays(tag.Zones));
+            //TODO: reserved flags
+            return xTag;
         }
 
 
         protected virtual XElement FormatZoneArrays(SwfZoneArray[] array) {
-            return new XElement(ZONE_ARRAYS_ELEM, array.Select(item => FormatZoneArray(item)));
+            return new XElement(ZONE_ARRAYS_ELEM, array.Select(FormatZoneArray));
         }
 
         protected virtual SwfZoneArray[] ParseZoneArrays(XElement xZoneArrays) {
@@ -108,7 +102,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
 
         protected virtual XElement FormatZoneDataArray(SwfZoneData[] zoneDataArray) {
-            return new XElement(ZONES_ELEM, zoneDataArray.Select(item => FormatZoneData(item)));
+            return new XElement(ZONES_ELEM, zoneDataArray.Select(FormatZoneData));
         }
 
         protected virtual SwfZoneData[] ParseZoneDataArray(XElement xZoneDataArray) {
@@ -151,6 +145,17 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
             return res;
         }
-    
+
+        protected override string TagName {
+            get { return "DefineFontAlignZones"; }
+        }
+
+        protected override ushort? GetObjectID(DefineFontAlignZonesTag tag) {
+            return tag.FontID;
+        }
+
+        protected override void SetObjectID(DefineFontAlignZonesTag tag, ushort value) {
+            tag.FontID = value;
+        }
     }
 }

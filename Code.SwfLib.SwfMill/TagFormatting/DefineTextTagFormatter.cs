@@ -13,9 +13,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         protected override void AcceptTagAttribute(DefineTextTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.CharacterID = SwfMillPrimitives.ParseObjectID(attrib);
-                    break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
             }
@@ -47,19 +44,29 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         //TODO: simulate swfmill incorrect structure of TextRecord (parsing, formating)
 
         protected override XElement FormatTagElement(DefineTextTag tag, XElement xTag) {
-            var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_TEXT_TAG),
-                                   new XAttribute(XName.Get("objectID"), tag.CharacterID));
-            res.Add(new XElement("bounds", XRect.ToXml(tag.TextBounds)));
-            res.Add(new XElement("transform", _formatters.Matrix.Format(ref tag.TextMatrix)));
+            xTag.Add(new XElement("bounds", XRect.ToXml(tag.TextBounds)));
+            xTag.Add(new XElement("transform", _formatters.Matrix.Format(ref tag.TextMatrix)));
             //TODO: remove unnessary nested nodes. Swfmill requires them
-            res.Add(new XElement(XName.Get("records"),
+            xTag.Add(new XElement(XName.Get("records"),
                                  new XElement(XName.Get("TextRecord"),
                                               new XElement(XName.Get("records"),
                                                            tag.TextRecords.Select(item => SwfMillPrimitives.FormatTextRecord(item))
                                                   )
                                      )));
             //TODO: Other fields
-            return res;
+            return xTag;
+        }
+
+        protected override string TagName {
+            get { return "DefineText"; }
+        }
+
+        protected override ushort? GetObjectID(DefineTextTag tag) {
+            return tag.CharacterID;
+        }
+
+        protected override void SetObjectID(DefineTextTag tag, ushort value) {
+            tag.CharacterID = value;
         }
     }
 }

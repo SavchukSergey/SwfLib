@@ -1,8 +1,6 @@
 ﻿namespace Code.SwfLib.Tags.FontTags {
     public class DefineFontAlignZonesTag : FontBaseTag {
 
-        public ushort FontID;
-
         public byte CsmTableHint;
 
         public SwfZoneArray[] Zones;

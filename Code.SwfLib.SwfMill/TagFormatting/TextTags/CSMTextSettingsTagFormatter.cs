@@ -13,9 +13,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
 
         protected override void AcceptTagAttribute(CSMTextSettingsTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.TextID = SwfMillPrimitives.ParseObjectID(attrib);
-                    break;
                 case USE_FLASH_TYPE_ATTRIB:
                     tag.UseFlashType = byte.Parse(attrib.Value);
                     break;
@@ -41,17 +38,24 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
         }
 
         protected override XElement FormatTagElement(CSMTextSettingsTag tag, XElement xTag) {
-            return new XElement(XName.Get(SwfTagNameMapping.CSM_TEXT_SETTINGS_TAG),
-                                new XAttribute(XName.Get("objectID"), tag.TextID),
-                                new XAttribute(XName.Get("useFlashType"), tag.UseFlashType),
-                                new XAttribute(XName.Get("gridFit"), tag.GridFit),
-                //TODO: reserved flagss
-                //new XAttribute(XName.Get("reservedFlags"), tag.ReservedFlags),
-                                new XAttribute(XName.Get("thickness"), tag.Thickness.ToString(CultureInfo.InvariantCulture)),
-                                new XAttribute(XName.Get("sharpness"), tag.Sharpness.ToString(CultureInfo.InvariantCulture))
-                //TODO: hide reserved attr
-                //new XAttribute(XName.Get("reserved"), tag.Reserved)
-                                );
+            xTag.Add(new XAttribute(XName.Get("useFlashType"), tag.UseFlashType));
+            xTag.Add(new XAttribute(XName.Get("gridFit"), tag.GridFit));
+
+            //TODO: reserved flagss
+            //new XAttribute(XName.Get("reservedFlags"), tag.ReservedFlags),
+            xTag.Add(new XAttribute(XName.Get("thickness"), tag.Thickness.ToString(CultureInfo.InvariantCulture)));
+            xTag.Add(new XAttribute(XName.Get("sharpness"), tag.Sharpness.ToString(CultureInfo.InvariantCulture)));
+            //TODO: hide reserved attr
+            //new XAttribute(XName.Get("reserved"), tag.Reserved)
+            return xTag;
+        }
+
+        protected override ushort? GetObjectID(CSMTextSettingsTag tag) {
+            return tag.TextID;
+        }
+
+        protected override void SetObjectID(CSMTextSettingsTag tag, ushort value) {
+            tag.TextID = value;
         }
     }
 }

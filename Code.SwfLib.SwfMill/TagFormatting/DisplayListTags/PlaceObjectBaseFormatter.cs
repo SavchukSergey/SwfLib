@@ -9,28 +9,18 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string TRANSFORM_ELEM = "transform";
 
         protected sealed override XElement FormatTagElement(T tag, XElement xTag) {
-            var res = new XElement(TagName);
-
-            if (HasCharacter(tag)) {
-                res.Add(new XAttribute(OBJECT_ID_ATTRIB, tag.CharacterID));
-            }
-
-            res.Add(new XAttribute(DEPTH_ATTRIB, tag.Depth));
+            xTag.Add(new XAttribute(DEPTH_ATTRIB, tag.Depth));
 
             if (HasMatrix(tag)) {
-                res.Add(new XElement(TRANSFORM_ELEM, _formatters.Matrix.Format(ref tag.Matrix)));
+                xTag.Add(new XElement(TRANSFORM_ELEM, _formatters.Matrix.Format(ref tag.Matrix)));
             }
 
-            FormatPlaceElement(tag, res);
-            return res;
+            FormatPlaceElement(tag, xTag);
+            return xTag;
         }
 
         protected sealed override void AcceptTagAttribute(T tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.CharacterID = SwfMillPrimitives.ParseObjectID(attrib);
-                    HasCharacter(tag, true);
-                    break;
                 case DEPTH_ATTRIB:
                     tag.Depth = ushort.Parse(attrib.Value);
                     break;
@@ -64,5 +54,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
 
         protected abstract void AcceptPlaceAttribute(T tag, XAttribute attrib);
         protected abstract void AcceptPlaceTagElement(T tag, XElement element);
+
+        protected override ushort? GetObjectID(T tag) {
+            if (!HasCharacter(tag)) return null;
+            return tag.CharacterID;
+        }
+
+        protected override void SetObjectID(T tag, ushort value) {
+            HasCharacter(tag, true);
+            tag.CharacterID = value;
+        }
     }
 }

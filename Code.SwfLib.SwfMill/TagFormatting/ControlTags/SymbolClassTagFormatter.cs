@@ -6,16 +6,15 @@ using Code.SwfLib.Tags.ControlTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class SymbolClassTagFormatter : TagFormatterBase<SymbolClassTag> {
         protected override XElement FormatTagElement(SymbolClassTag tag, XElement xTag) {
-            var res = new XElement(SwfTagNameMapping.SYMBOL_CLASS_TAG);
             var xSymbols = new XElement("symbols");
             foreach (var symbolRef in tag.References) {
                 var xSymbol = new XElement("Symbol");
-                xSymbol.Add(new XAttribute(OBJECT_ID_ATTRIB, symbolRef.SymbolID));
+                xSymbol.Add(new XAttribute("objectID", symbolRef.SymbolID));
                 xSymbol.Add(new XAttribute(NAME_ATTRIB, symbolRef.SymbolName));
                 xSymbols.Add(xSymbol);
             }
-            res.Add(xSymbols);
-            return res;
+            xTag.Add(xSymbols);
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(SymbolClassTag tag, XAttribute attrib) {
@@ -34,9 +33,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         protected SwfSymbolReference ParseReference(XElement xSymbol) {
             return new SwfSymbolReference {
-                SymbolID = ushort.Parse(xSymbol.Attribute(OBJECT_ID_ATTRIB).Value),
+                SymbolID = ushort.Parse(xSymbol.Attribute("objectID").Value),
                 SymbolName = xSymbol.Attribute(NAME_ATTRIB).Value
             };
         }
+
+        protected override string TagName {
+            get { return "SymbolClass"; }
+        }
+
     }
 }

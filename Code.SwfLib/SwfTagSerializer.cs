@@ -359,7 +359,7 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontNameTag tag, SwfStreamWriter writer) {
-            writer.WriteUInt16(tag.FontId);
+            writer.WriteUInt16(tag.FontID);
             writer.WriteString(tag.FontName);
             writer.WriteString(tag.FontCopyright);
             writer.FlushBits();

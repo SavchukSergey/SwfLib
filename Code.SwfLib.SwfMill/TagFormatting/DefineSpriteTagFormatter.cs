@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Tags;
 
@@ -20,9 +18,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         protected override void AcceptTagAttribute(DefineSpriteTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
-                case OBJECT_ID_ATTRIB:
-                    tag.SpriteID = ushort.Parse(attrib.Value);
-                    break;
                 case FRAMES_ATTRIB:
                     tag.FramesCount = ushort.Parse(attrib.Value);
                     break;
@@ -42,10 +37,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         protected override XElement FormatTagElement(DefineSpriteTag tag, XElement xTag) {
-            return new XElement(XName.Get(SwfTagNameMapping.DEFINE_SPRITE_TAG),
-                               new XAttribute(XName.Get("objectID"), tag.SpriteID),
-                               new XAttribute(XName.Get("frames"), tag.FramesCount),
-                               new XElement(XName.Get("tags"), tag.Tags.Select(item => BuildTagXml(item))));
+            xTag.Add(new XAttribute(XName.Get("frames"), tag.FramesCount));
+            xTag.Add(new XElement(XName.Get("tags"), tag.Tags.Select(BuildTagXml)));
+            return xTag;
         }
 
         private static void ReadTags(DefineSpriteTag tag, XElement tagsElement) {
@@ -69,6 +63,18 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected XElement BuildTagXml(SwfTagBase tag) {
             var subFormatter = _subFormatterFactory.GetFormatter(tag);
             return subFormatter.FormatTag(tag);
+        }
+
+        protected override string TagName {
+            get { return "DefineSprite"; }
+        }
+
+        protected override ushort? GetObjectID(DefineSpriteTag tag) {
+            return tag.SpriteID;
+        }
+
+        protected override void SetObjectID(DefineSpriteTag tag, ushort value) {
+            tag.SpriteID = value;
         }
     }
 }

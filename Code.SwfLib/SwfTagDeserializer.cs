@@ -409,7 +409,7 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontNameTag tag, SwfStreamReader reader) {
-            tag.FontId = reader.ReadUInt16();
+            tag.FontID = reader.ReadUInt16();
             tag.FontName = reader.ReadString();
             tag.FontCopyright = reader.ReadString();
             return tag;
