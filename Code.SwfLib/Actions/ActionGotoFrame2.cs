@@ -18,6 +18,24 @@
             }
         }
 
+        public bool Play {
+            get { return (Flags & 0x80) > 0; }
+            set {
+                if (value) {
+                    Flags = (byte)(Flags | 0x80);
+                } else {
+                    Flags = (byte)(Flags & 0x7f);
+                }
+            }
+        }
+
+        public byte Reserved {
+            get { return (byte)(Flags & 0x3f); }
+            set {
+                Flags = (byte)((Flags & 0xc0) | (value & 0x3f));
+            }
+        }
+
         public ushort SceneBias { get; set; }
 
         public override TResult AcceptVisitor<TArg, TResult>(IActionVisitor<TArg, TResult> visitor, TArg arg) {

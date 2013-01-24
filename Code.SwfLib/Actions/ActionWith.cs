@@ -1,5 +1,7 @@
 ﻿namespace Code.SwfLib.Actions {
     public class ActionWith : ActionBase {
+        public ushort Size;
+
         public override ActionCode ActionCode {
             get { return ActionCode.With; }
         }

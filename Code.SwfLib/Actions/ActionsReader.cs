@@ -228,6 +228,7 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGetURL2 action, ushort length) {
+            action.Flags = _reader.ReadByte();
             return action;
         }
 
@@ -373,6 +374,7 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionWith action, ushort arg) {
+            action.Size = _reader.ReadUInt16();
             return action;
         }
 
@@ -445,6 +447,7 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionStoreRegister action, ushort arg) {
+            action.RegisterNumber = _reader.ReadByte();
             return action;
         }
 

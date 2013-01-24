@@ -2,6 +2,7 @@
     public enum ActionPushItemType : byte {
         String = 0,
         Float = 1,
+        Null = 2,
         Undefined = 3,
         Register = 4,
         Boolean = 5,

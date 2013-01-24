@@ -1,6 +1,8 @@
 ﻿namespace Code.SwfLib.Actions {
     public class ActionStoreRegister : ActionBase {
         
+        public byte RegisterNumber;
+
         public override ActionCode ActionCode {
             get { return ActionCode.StoreRegister; }
         }

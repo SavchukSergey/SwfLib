@@ -189,6 +189,7 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGetURL2 action, SwfStreamWriter writer) {
+            writer.WriteByte(action.Flags);
             return null;
         }
 
@@ -309,6 +310,7 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionWith action, SwfStreamWriter writer) {
+            writer.WriteUInt16(action.Size);
             return null;
         }
 
@@ -381,6 +383,7 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStoreRegister action, SwfStreamWriter writer) {
+            writer.WriteByte(action.RegisterNumber);
             return null;
         }
 

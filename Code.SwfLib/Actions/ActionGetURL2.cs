@@ -1,6 +1,8 @@
 ﻿namespace Code.SwfLib.Actions {
     public class ActionGetURL2 : ActionBase {
 
+        public byte Flags;
+
         public override ActionCode ActionCode {
             get { return ActionCode.GetURL2; }
         }

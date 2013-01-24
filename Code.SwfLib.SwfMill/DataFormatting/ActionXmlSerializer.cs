@@ -141,8 +141,35 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
                     case ActionPushItemType.String:
                         xItems.Add(new XElement("StackString", new XAttribute("value", item.String)));
                         break;
+                    case ActionPushItemType.Float:
+                        xItems.Add(new XElement("StackFloat", new XAttribute("value", item.Float)));
+                        break;
+                    case ActionPushItemType.Null:
+                        xItems.Add(new XElement("StackNull"));
+                        break;
+                    case ActionPushItemType.Undefined:
+                        xItems.Add(new XElement("StackUndefined"));
+                        break;
+                    case ActionPushItemType.Register:
+                        xItems.Add(new XElement("StackRegister", new XAttribute("value", item.Register)));
+                        break;
+                    case ActionPushItemType.Boolean:
+                        xItems.Add(new XElement("StackBoolean", new XAttribute("value", item.Boolean)));
+                        break;
+                    case ActionPushItemType.Double:
+                        xItems.Add(new XElement("StackDouble", new XAttribute("value", item.Double)));
+                        break;
+                    case ActionPushItemType.Integer:
+                        xItems.Add(new XElement("StackInteger", new XAttribute("value", item.Integer)));
+                        break;
+                    case ActionPushItemType.Constant8:
+                        xItems.Add(new XElement("StackConstant8", new XAttribute("value", item.Constant8)));
+                        break;
+                    case ActionPushItemType.Constant16:
+                        xItems.Add(new XElement("StackConstant16", new XAttribute("value", item.Constant16)));
+                        break;
                     default:
-                        throw new NotImplementedException();
+                        throw new NotSupportedException();
                 }
             }
             xAction.Add(xItems);
@@ -170,15 +197,18 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionCall action, object param) {
-            throw new NotImplementedException();
+            //TODO; why it doesn't have args
+            return new XElement("Call");
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionIf action, object param) {
-            throw new NotImplementedException();
+            return new XElement("If",
+                new XAttribute("offset", action.BranchOffset));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionJump action, object param) {
-            throw new NotImplementedException();
+            return new XElement("Jump",
+              new XAttribute("offset", action.BranchOffset));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetVariable action, object param) {
@@ -190,7 +220,8 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetURL2 action, object param) {
-            throw new NotImplementedException();
+            return new XElement("GetURL2",
+               new XAttribute("flags", action.Flags));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetProperty action, object param) {
@@ -198,7 +229,13 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGotoFrame2 action, object param) {
-            throw new NotImplementedException();
+            var res = new XElement("GoToFrame2",
+                new XAttribute("play", action.Play));
+            if (action.SceneBiasFlag) {
+                res.Add(new XAttribute("bias", action.SceneBias));
+            }
+            res.Add(new XAttribute("reserved", action.Reserved));
+            return res;
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionRemoveSprite action, object param) {
@@ -218,7 +255,8 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionWaitForFrame2 action, object param) {
-            throw new NotImplementedException();
+            return new XElement("WaitForFrame2",
+             new XAttribute("skipCount", action.SkipCount));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionCloneSprite action, object param) {
@@ -331,7 +369,8 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionWith action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("With",
+              new XAttribute("size", action.Size));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionToNumber action, object arg) {
@@ -404,15 +443,12 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStoreRegister action, object arg) {
-            throw new NotImplementedException();
+            return new XElement("StoreRegister",
+                new XAttribute("register", action.RegisterNumber));
         }
 
         public XElement Visit(ActionEnd action, object arg) {
             return new XElement("EndAction");
-        }
-
-        XElement IActionVisitor<object, XElement>.Visit(ActionUnknown action, object arg) {
-            throw new NotImplementedException();
         }
 
         #endregion
@@ -469,9 +505,9 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         #endregion
 
-        public XElement Visit(ActionUnknown action, object arg) {
-            throw new NotImplementedException();
+        XElement IActionVisitor<object, XElement>.Visit(ActionUnknown action, object arg) {
+            return new XElement("Unknown",
+                new XAttribute("type", action.ActionCode));
         }
-
     }
 }
