@@ -12,11 +12,13 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         #region SWF 3
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGotoFrame action, object param) {
-            throw new NotImplementedException();
+            return new XElement("GoToFrame", new XAttribute("frame", action.Frame));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetURL action, object param) {
-            throw new NotImplementedException();
+            return new XElement("GoToFrame",
+                new XAttribute("url", action.UrlString),
+                new XAttribute("target", action.TargetString));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionNextFrame action, object param) {
@@ -44,15 +46,19 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionWaitForFrame action, object param) {
-            throw new NotImplementedException();
+            return new XElement("WaitForFrame",
+               new XAttribute("frame", action.Frame),
+               new XAttribute("skipCount", action.SkipCount));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSetTarget action, object param) {
-            throw new NotImplementedException();
+            return new XElement("SetTarget",
+                 new XAttribute("target", action.TargetName));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGoToLabel action, object param) {
-            throw new NotImplementedException();
+            return new XElement("GoToLabel",
+                  new XAttribute("label", action.Label));
         }
 
         #endregion

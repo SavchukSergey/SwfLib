@@ -24,10 +24,13 @@ namespace Code.SwfLib.Actions {
         #region SWF 3
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGotoFrame action, SwfStreamWriter writer) {
+            writer.WriteUInt16(action.Frame);
             return null;
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGetURL action, SwfStreamWriter writer) {
+            writer.WriteString(action.UrlString);
+            writer.WriteString(action.TargetString);
             return null;
         }
 
@@ -56,14 +59,18 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionWaitForFrame action, SwfStreamWriter writer) {
+            writer.WriteUInt16(action.Frame);
+            writer.WriteByte(action.SkipCount);
             return null;
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionSetTarget action, SwfStreamWriter writer) {
+            writer.WriteString(action.TargetName);
             return null;
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGoToLabel action, SwfStreamWriter writer) {
+            writer.WriteString(action.Label);
             return null;
         }
 
