@@ -1,8 +1,12 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.DisplayListTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class PlaceObjectTagFormatter : PlaceObjectBaseFormatter<PlaceObjectTag> {
+
+        private const string COLOR_TRANSFORM_ELEM = "colorTransform";
 
         protected override void FormatPlaceElement(PlaceObjectTag tag, XElement elem) {
         }
@@ -11,6 +15,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         }
 
         protected override void AcceptPlaceTagElement(PlaceObjectTag tag, XElement element) {
+            switch (element.Name.LocalName) {
+                case COLOR_TRANSFORM_ELEM:
+                    tag.ColorTransform = XColorTransformRGB.FromXml(element.Element(COLOR_TRANSFORM_TYPE_ELEM));
+                    break;
+                default:
+                    throw new FormatException("Invalid element " + element.Name.LocalName);
+            }
         }
 
         protected override bool HasCharacter(PlaceObjectTag tag) {
