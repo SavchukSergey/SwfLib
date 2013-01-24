@@ -333,24 +333,34 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontTag tag, SwfStreamReader reader) {
+            tag.FontID = reader.ReadUInt16();
+            var firstOffset = reader.ReadUInt16();
+            var glyphsCount = firstOffset / 2;
+            tag.OffsetTable.Add(firstOffset);
+            for (var i = 1; i < glyphsCount; i++) {
+                tag.OffsetTable.Add(reader.ReadUInt16());
+            }
+
             return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontInfoTag tag, SwfStreamReader reader) {
-            tag.FontId = reader.ReadUInt16();
+            tag.FontID = reader.ReadUInt16();
             return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontInfo2Tag tag, SwfStreamReader reader) {
+            tag.FontID = reader.ReadUInt16();
             return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFont2Tag tag, SwfStreamReader reader) {
+            tag.FontID = reader.ReadUInt16();
             return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFont3Tag tag, SwfStreamReader reader) {
-            tag.FontId = reader.ReadUInt16();
+            tag.FontID = reader.ReadUInt16();
             tag.Attributes = (DefineFont3Attributes)reader.ReadByte();
             tag.Language = reader.ReadByte();
             int nameLength = reader.ReadByte();
@@ -363,12 +373,18 @@ namespace Code.SwfLib {
             return tag;
         }
 
+
+        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFont4Tag tag, SwfStreamReader reader) {
+            tag.FontID = reader.ReadUInt16();
+            return tag;
+        }
+
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontAlignZonesTag tag, SwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
             tag.CsmTableHint = reader.ReadByte();
             var fontInfo = _file.IterateTagsRecursively()
                 .OfType<DefineFont3Tag>()
-                .FirstOrDefault(item => item.FontId == tag.FontID);
+                .FirstOrDefault(item => item.FontID == tag.FontID);
             if (fontInfo == null) {
                 throw new InvalidDataException("Couldn't find corresponding DefineFont3Tag");
             }
@@ -473,10 +489,6 @@ namespace Code.SwfLib {
             tag.Thickness = reader.ReadSingle();
             tag.Sharpness = reader.ReadSingle();
             tag.Reserved = reader.ReadByte();
-            return tag;
-        }
-
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFont4Tag tag, SwfStreamReader reader) {
             return tag;
         }
 

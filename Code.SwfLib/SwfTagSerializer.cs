@@ -197,7 +197,7 @@ namespace Code.SwfLib {
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShapeTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
-            
+
             writer.WriteFillStylesRGB(tag.FillStyles);
             writer.WriteLineStylesRGB(tag.LineStyles);
             writer.WriteShapeRecords(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
@@ -211,7 +211,7 @@ namespace Code.SwfLib {
             writer.WriteFillStylesRGB(tag.FillStyles);
             writer.WriteLineStylesRGB(tag.LineStyles);
             writer.WriteShapeRecords(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
-            
+
             writer.FlushBits();
             return null;
         }
@@ -223,7 +223,7 @@ namespace Code.SwfLib {
             writer.WriteFillStylesRGBA(tag.FillStyles);
             writer.WriteLineStylesRGBA(tag.LineStyles);
             writer.WriteShapeRecords(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
-            
+
             writer.FlushBits();
             return null;
         }
@@ -304,30 +304,41 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontTag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.FontID);
+            foreach (var offset in tag.OffsetTable) {
+                writer.WriteUInt16(offset);
+            }
             return null;
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontInfoTag tag, SwfStreamWriter writer) {
-            writer.WriteUInt16(tag.FontId);
+            writer.WriteUInt16(tag.FontID);
             return null;
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontInfo2Tag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.FontID);
             return null;
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont2Tag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.FontID);
             return null;
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont3Tag tag, SwfStreamWriter writer) {
-            writer.WriteUInt16(tag.FontId);
+            writer.WriteUInt16(tag.FontID);
             writer.WriteByte((byte)tag.Attributes);
             writer.WriteByte(tag.Language);
             var name = Encoding.UTF8.GetBytes(tag.FontName);
             writer.WriteByte((byte)name.Length);
             writer.WriteBytes(name);
             writer.WriteUInt16((ushort)tag.Glyphs.Length);
+            return null;
+        }
+
+        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont4Tag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.FontID);
             return null;
         }
 
@@ -442,10 +453,6 @@ namespace Code.SwfLib {
             writer.WriteSingle(tag.Thickness);
             writer.WriteSingle(tag.Sharpness);
             writer.WriteByte(tag.Reserved);
-            return null;
-        }
-
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont4Tag tag, SwfStreamWriter writer) {
             return null;
         }
 

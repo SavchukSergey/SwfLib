@@ -34,6 +34,7 @@ namespace Code.SwfLib.SwfMill {
         public const string DEFINE_BITS_LOSSLESS_TAG = "DefineBitsLossless";
         public const string DEFINE_BUTTON2_TAG = "DefineButton2";
         public const string DEFINE_EDIT_TEXT_TAG = "DefineEditText";
+        public const string DEFINE_FONT_TAG = "DefineFont";
         public const string DEFINE_FONT_3_TAG = "DefineFont3";
         public const string DEFINE_FONT_ALIGN_ZONES_TAG = "DefineFontAlignZones";
         public const string DEFINE_FONT_INFO_TAG = "DefineFontInfo";

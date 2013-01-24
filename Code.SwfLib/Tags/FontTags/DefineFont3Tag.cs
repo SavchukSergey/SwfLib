@@ -1,8 +1,6 @@
 ﻿namespace Code.SwfLib.Tags.FontTags {
     public class DefineFont3Tag : FontBaseTag {
 
-        public ushort FontId;
-
         public DefineFont3Attributes Attributes;
 
         public byte Language;

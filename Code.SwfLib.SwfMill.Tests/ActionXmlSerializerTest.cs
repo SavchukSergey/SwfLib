@@ -24,7 +24,7 @@ namespace Code.SwfLib.SwfMill.Tests {
                             Console.WriteLine("Warning: Incosistent naming, Action type: {0}, Class: {1}", type,
                                               actualName);
                         }
-                    } catch (Exception exc) {
+                    } catch (Exception) {
                         Assert.Fail("Couldnt serialize: {0}", type);
                     }
                 }

@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.TextTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting {

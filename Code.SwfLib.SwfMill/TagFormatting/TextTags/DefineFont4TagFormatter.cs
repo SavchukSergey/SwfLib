@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using Code.SwfLib.Tags.FontTags;
 using Code.SwfLib.Tags.TextTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {

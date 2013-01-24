@@ -10,7 +10,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         protected override void AcceptTagAttribute(DefineFontInfoTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
-                    tag.FontId = SwfMillPrimitives.ParseObjectID(attrib);
+                    tag.FontID = SwfMillPrimitives.ParseObjectID(attrib);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -29,7 +29,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
         protected override XElement FormatTagElement(DefineFontInfoTag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_INFO_TAG),
-                              new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.FontId),
+                              new XAttribute(XName.Get(OBJECT_ID_ATTRIB), tag.FontID),
                               new XElement(REST_ELEM, Convert.ToBase64String(tag.RestData)));
         }
     }

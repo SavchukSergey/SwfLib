@@ -20,7 +20,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         protected override void AcceptTagAttribute(DefineFont3Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
-                    tag.FontId = ushort.Parse(attrib.Value);
+                    tag.FontID = ushort.Parse(attrib.Value);
                     break;
                 case NAME_ATTRIB:
                     tag.FontName = attrib.Value;
@@ -72,7 +72,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
         protected override XElement FormatTagElement(DefineFont3Tag tag) {
             return new XElement(XName.Get(SwfTagNameMapping.DEFINE_FONT_3_TAG),
-                                new XAttribute(OBJECT_ID_ATTRIB, tag.FontId),
+                                new XAttribute(OBJECT_ID_ATTRIB, tag.FontID),
                                 new XAttribute(LANGUAGE_ATTRIB, tag.Language),
                                 new XAttribute(GLYPHS_COUNT_ATTRIB, tag.Glyphs.Length),
                                 new XAttribute(HAS_LAYOUT_ATTRIB, FormatBoolToDigit(tag.HasLayout)),
