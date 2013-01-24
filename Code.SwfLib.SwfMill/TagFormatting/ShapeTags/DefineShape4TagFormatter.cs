@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -20,13 +21,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         }
 
         protected override void FormatAdditionalBounds(DefineShape4Tag tag, XElement elem) {
-            elem.Add(new XElement(EDGE_BOUNDS_ELEM, _formatters.Rectangle.Format(ref tag.EdgeBounds)));
+            elem.Add(new XElement(EDGE_BOUNDS_ELEM, XRect.ToXml(tag.EdgeBounds)));
         }
 
         protected override void AcceptShapeTagElement(DefineShape4Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case EDGE_BOUNDS_ELEM:
-                    _formatters.Rectangle.Parse(element.Element("Rectangle"), out tag.EdgeBounds);
+                    tag.EdgeBounds = XRect.FromXml(element.Element("Rectangle"));
                     break;
                 default:
                     AcceptShapeTagElement(tag, element);

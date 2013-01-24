@@ -58,12 +58,12 @@
     <Compile Include="DataFormatting\DataFormatters.cs" />
     <Compile Include="DataFormatting\FillStyleRGBFormatter.cs" />
     <Compile Include="DataFormatting\MatrixFormatter.cs" />
-    <Compile Include="DataFormatting\RectangleDataFormatter.cs" />
     <Compile Include="Data\XColorTransformRGBA.cs" />
     <Compile Include="Data\XColorRGBA.cs" />
     <Compile Include="Data\XColorRGB.cs" />
     <Compile Include="Data\XColorTransformRGB.cs" />
     <Compile Include="Data\XMatrix.cs" />
+    <Compile Include="Data\XRect.cs" />
     <Compile Include="Gradients\XGradientRecordRGBA.cs" />
     <Compile Include="Gradients\XGradientRecordRGB.cs" />
     <Compile Include="Program.cs" />

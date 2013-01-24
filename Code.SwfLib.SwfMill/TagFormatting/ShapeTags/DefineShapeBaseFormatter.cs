@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -12,7 +13,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         protected sealed override XElement FormatTagElement(T tag) {
             var res = new XElement(TagName);
             res.Add(new XAttribute(OBJECT_ID_ATTRIB, tag.ShapeID));
-            res.Add(new XElement(BOUNDS_ELEM, _formatters.Rectangle.Format(ref tag.ShapeBounds)));
+            res.Add(new XElement(BOUNDS_ELEM, XRect.ToXml(tag.ShapeBounds)));
 
             FormatAdditionalBounds(tag, res);
 
@@ -77,7 +78,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         protected sealed override void AcceptTagElement(T tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BOUNDS_ELEM:
-                    _formatters.Rectangle.Parse(element.Element("Rectangle"), out tag.ShapeBounds);
+                    tag.ShapeBounds = XRect.FromXml(element.Element("Rectangle"));
                     break;
                 case SHAPES_ELEM:
                     ReadShapes(tag, element);

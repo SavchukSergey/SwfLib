@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.TextTags;
 
@@ -24,7 +25,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected override void AcceptTagElement(DefineTextTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BOUNDS_ELEM:
-                    _formatters.Rectangle.Parse(element.Element(XName.Get("Rectangle")), out tag.TextBounds);
+                    tag.TextBounds = XRect.FromXml(element.Element(XName.Get("Rectangle")));
                     break;
                 case TRANSFORM_ELEM:
                     _formatters.Matrix.Parse(element.Element(XName.Get("Transform")), out tag.TextMatrix);
@@ -49,7 +50,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected override XElement FormatTagElement(DefineTextTag tag) {
             var res = new XElement(XName.Get(SwfTagNameMapping.DEFINE_TEXT_TAG),
                                    new XAttribute(XName.Get("objectID"), tag.CharacterID));
-            res.Add(new XElement("bounds", _formatters.Rectangle.Format(ref tag.TextBounds)));
+            res.Add(new XElement("bounds", XRect.ToXml(tag.TextBounds)));
             res.Add(new XElement("transform", _formatters.Matrix.Format(ref tag.TextMatrix)));
             //TODO: remove unnessary nested nodes. Swfmill requires them
             res.Add(new XElement(XName.Get("records"),

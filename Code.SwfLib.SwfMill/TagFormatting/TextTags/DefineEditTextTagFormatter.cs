@@ -120,7 +120,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                 //    FromBase64(element);
                 //    break;
                 case SIZE_ELEM:
-                    _formatters.Rectangle.Parse(element.Element("Rectangle"), out tag.Bounds);
+                    tag.Bounds = XRect.FromXml(element.Element("Rectangle"));
                     break;
                 case COLOR_ELEM:
                     tag.TextColor = XColorRGBA.FromXml(element.Element("Color"));
@@ -134,7 +134,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
         protected override XElement FormatTagElement(DefineEditTextTag tag) {
             var res = new XElement(SwfTagNameMapping.DEFINE_EDIT_TEXT_TAG);
             res.Add(new XAttribute(OBJECT_ID_ATTRIB, tag.CharacterID));
-            res.Add(new XElement(SIZE_ELEM, _formatters.Rectangle.Format(ref tag.Bounds)));
+            res.Add(new XElement(SIZE_ELEM, XRect.ToXml(tag.Bounds)));
             res.Add(new XAttribute(WORD_WRAP_ATTRIB, SwfMillPrimitives.GetStringValue(tag.WordWrap)));
             res.Add(new XAttribute(MULTILINE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Multiline)));
             res.Add(new XAttribute(PASSWORD_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Password)));
