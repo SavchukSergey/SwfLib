@@ -3,8 +3,9 @@ using Code.SwfLib.Tags.SoundTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
     public class StartSound2TagFormatter : TagFormatterBase<StartSound2Tag> {
+        
         protected override XElement FormatTagElement(StartSound2Tag tag, XElement xTag) {
-            throw new System.NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(StartSound2Tag tag, XAttribute attrib) {
@@ -13,6 +14,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
 
         protected override void AcceptTagElement(StartSound2Tag tag, XElement element) {
             throw new System.NotImplementedException();
+        }
+
+        protected override string TagName {
+            get { return "StartSound2"; }
         }
     }
 }

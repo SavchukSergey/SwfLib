@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Linq;
-using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.DisplayListTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
@@ -21,8 +20,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         }
 
         protected override XElement FormatTagElement(ShowFrameTag tag, XElement xTag) {
-            return new XElement(XName.Get(SwfTagNameMapping.SHOW_FRAME_TAG));
+            return xTag;
+        }
 
+        protected override string TagName {
+            get { return "ShowFrame"; }
         }
     }
 }

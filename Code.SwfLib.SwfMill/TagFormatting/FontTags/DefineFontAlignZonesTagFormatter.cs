@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
-    public class DefineFontAlignZonesTagFormatter : TagFormatterBase<DefineFontAlignZonesTag> {
+    public class DefineFontAlignZonesTagFormatter : DefineFontBaseFormatter<DefineFontAlignZonesTag> {
 
         private const string CSM_HINT_ATTRIB = "csmTableHint";
 
@@ -150,12 +150,5 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             get { return "DefineFontAlignZones"; }
         }
 
-        protected override ushort? GetObjectID(DefineFontAlignZonesTag tag) {
-            return tag.FontID;
-        }
-
-        protected override void SetObjectID(DefineFontAlignZonesTag tag, ushort value) {
-            tag.FontID = value;
-        }
     }
 }

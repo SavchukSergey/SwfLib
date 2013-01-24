@@ -1,11 +1,10 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.FontTags;
-using Code.SwfLib.Tags.TextTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
-    public class DefineFont4TagFormatter : TagFormatterBase<DefineFont4Tag> {
+namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
+    public class DefineFont4TagFormatter : DefineFontBaseFormatter<DefineFont4Tag> {
         protected override XElement FormatTagElement(DefineFont4Tag tag, XElement xTag) {
-            throw new System.NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(DefineFont4Tag tag, XAttribute attrib) {
@@ -14,6 +13,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
 
         protected override void AcceptTagElement(DefineFont4Tag tag, XElement element) {
             throw new System.NotImplementedException();
+        }
+
+        protected override string TagName {
+            get { return "DefineFont4"; }
         }
     }
 }

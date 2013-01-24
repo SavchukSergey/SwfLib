@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.SoundTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
     public class SoundStreamBlockTagFormatter : TagFormatterBase<SoundStreamBlockTag> {
         protected override XElement FormatTagElement(SoundStreamBlockTag tag, XElement xTag) {
-            throw new System.NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(SoundStreamBlockTag tag, XAttribute attrib) {
@@ -13,6 +13,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
 
         protected override void AcceptTagElement(SoundStreamBlockTag tag, XElement element) {
             throw new System.NotImplementedException();
+        }
+
+        protected override string TagName {
+            get { return "SoundStreamBlock"; }
         }
     }
 }

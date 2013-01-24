@@ -14,5 +14,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.VideoTags {
         protected override void AcceptTagElement(DefineVideoStreamTag tag, XElement element) {
             throw new System.NotImplementedException();
         }
+
+        protected override string TagName {
+            get { return "DefineVideoStream"; }
+        }
     }
 }

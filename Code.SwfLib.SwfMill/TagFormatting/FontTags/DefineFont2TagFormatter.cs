@@ -2,9 +2,9 @@
 using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
-    public class DefineFont2TagFormatter : TagFormatterBase<DefineFont2Tag> {
+    public class DefineFont2TagFormatter : DefineFontBaseFormatter<DefineFont2Tag> {
         protected override XElement FormatTagElement(DefineFont2Tag tag, XElement xTag) {
-            throw new System.NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(DefineFont2Tag tag, XAttribute attrib) {
@@ -14,5 +14,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         protected override void AcceptTagElement(DefineFont2Tag tag, XElement element) {
             throw new System.NotImplementedException();
         }
+
+        protected override string TagName {
+            get { return "DefineFont2"; }
+        }
+
     }
 }

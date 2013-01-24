@@ -39,12 +39,5 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             get { return "DefineFont"; }
         }
 
-        protected override ushort? GetObjectID(DefineFontTag tag) {
-            return tag.FontID;
-        }
-
-        protected override void SetObjectID(DefineFontTag tag, ushort value) {
-            tag.FontID = value;
-        }
     }
 }

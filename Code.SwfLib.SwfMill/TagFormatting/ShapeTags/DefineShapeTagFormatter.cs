@@ -30,10 +30,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        protected override string TagName {
-            get { return SwfTagNameMapping.DEFINE_SHAPE_TAG; }
-        }
-
         private static void ReadStyles(DefineShapeTag tag, XElement styleElements) {
             var array = styleElements.Element(XName.Get("StyleList"));
             var fillStyles = array.Element("fillStyles");
@@ -47,6 +43,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         }
 
         //TODO: Simulate swfmill ShapeSetup struct bug
+
+        protected override string TagName {
+            get { return "DefineShape"; }
+        }
+
 
     }
 }

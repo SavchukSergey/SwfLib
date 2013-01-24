@@ -3,9 +3,7 @@ using System.Xml.Linq;
 using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
-    public class DefineFontInfoTagFormatter : TagFormatterBase<DefineFontInfoTag> {
-
-        private const string REST_ELEM = "rest";
+    public class DefineFontInfoTagFormatter : DefineFontBaseFormatter<DefineFontInfoTag> {
 
         protected override void AcceptTagAttribute(DefineFontInfoTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
@@ -29,12 +27,5 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             get { return "DefineFontInfo"; }
         }
 
-        protected override ushort? GetObjectID(DefineFontInfoTag tag) {
-            return tag.FontID;
-        }
-
-        protected override void SetObjectID(DefineFontInfoTag tag, ushort value) {
-            tag.FontID = value;
-        }
     }
 }

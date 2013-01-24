@@ -50,6 +50,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             return xTag;
         }
 
+        protected override string TagName {
+            get { return "CSMTextSettings"; }
+        }
+
         protected override ushort? GetObjectID(CSMTextSettingsTag tag) {
             return tag.TextID;
         }

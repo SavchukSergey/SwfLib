@@ -15,5 +15,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.VideoTags {
         protected override void AcceptTagElement(VideoFrameTag tag, XElement element) {
             throw new NotImplementedException();
         }
+
+        protected override string TagName {
+            get { return "VideoFrame"; }
+        }
     }
 }

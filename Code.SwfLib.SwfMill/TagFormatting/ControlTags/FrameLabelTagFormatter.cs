@@ -34,5 +34,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 //TODO: Flags
                 );
         }
+
+        protected override string TagName {
+            get { return "FrameLabel"; }
+        }
     }
 }

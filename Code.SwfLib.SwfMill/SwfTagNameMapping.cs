@@ -15,7 +15,6 @@ namespace Code.SwfLib.SwfMill {
 
         private static readonly Dictionary<string, Func<SwfTagBase>> _tagMap = new Dictionary<string, Func<SwfTagBase>>();
 
-        public const string DEFINE_SHAPE_TAG = "DefineShape";
         public static string DEFINE_SHAPE2_TAG = "DefineShape2";
         public const string DEFINE_SHAPE3_TAG = "DefineShape3";
         public static string DEFINE_SHAPE_4_TAG = "DefineShape5";
@@ -26,7 +25,6 @@ namespace Code.SwfLib.SwfMill {
         public const string PLACE_OBJECT2_TAG = "PlaceObject2";
         public const string PLACE_OBJECT3_TAG = "PlaceObject3";
 
-        public const string CSM_TEXT_SETTINGS_TAG = "CSMTextSettings";
         public const string DEFINE_BITS_LOSSLESS_TAG = "DefineBitsLossless";
         public const string DEFINE_FONT_TAG = "DefineFont";
         public const string DEFINE_FONT_ALIGN_ZONES_TAG = "DefineFontAlignZones";
@@ -34,20 +32,15 @@ namespace Code.SwfLib.SwfMill {
         public const string DO_ACTION_TAG = "DoAction";
         public const string DO_INIT_ACTION_TAG = "DoInitAction";
         public const string END_TAG = "End";
-        public const string FILE_ATTRIBUTES_TAG = "FileAttributes";
-        public const string FRAME_LABEL_TAG = "FrameLabel";
         public const string METADATA_TAG = "Metadata";
         public const string REMOVE_OBJECT2_TAG = "RemoveObject2";
         public const string SET_BACKGROUND_COLOR_TAG = "SetBackgroundColor";
         public const string SCRIPT_LIMITES_TAG = "ScriptLimits";
-        public const string SHOW_FRAME_TAG = "ShowFrame";
-        public const string UNKNOWN_TAG = "UnknownTag";
         public const string DO_ABC_TAG = "DoAbc";
 
         public const string DEFINE_SCENE_AND_FRAME_LABEL_DATA_TAG = "DefineSceneAndFrameLabelData";
 
         static SwfTagNameMapping() {
-            _tagMap[CSM_TEXT_SETTINGS_TAG] = () => new CSMTextSettingsTag();
             _tagMap[DEFINE_BITS_LOSSLESS_TAG] = () => new DefineBitsLosslessTag();
             _tagMap[DEFINE_FONT_ALIGN_ZONES_TAG] = () => new DefineFontAlignZonesTag();
             _tagMap[DEFINE_FONT_INFO_TAG] = () => new DefineFontInfoTag();
@@ -56,16 +49,12 @@ namespace Code.SwfLib.SwfMill {
             _tagMap[DO_ACTION_TAG] = () => new DoActionTag();
             _tagMap[DO_INIT_ACTION_TAG] = () => new DoInitActionTag();
             _tagMap[END_TAG] = () => new EndTag();
-            _tagMap[FILE_ATTRIBUTES_TAG] = () => new FileAttributesTag();
-            _tagMap[FRAME_LABEL_TAG] = () => new FrameLabelTag();
             _tagMap[METADATA_TAG] = () => new MetadataTag();
             _tagMap[PLACE_OBJECT2_TAG] = () => new PlaceObject2Tag();
             _tagMap[PLACE_OBJECT3_TAG] = () => new PlaceObject3Tag();
             _tagMap[REMOVE_OBJECT2_TAG] = () => new RemoveObject2Tag();
             _tagMap[SET_BACKGROUND_COLOR_TAG] = () => new SetBackgroundColorTag();
             _tagMap[SCRIPT_LIMITES_TAG] = () => new ScriptLimitsTag();
-            _tagMap[SHOW_FRAME_TAG] = () => new ShowFrameTag();
-            _tagMap[UNKNOWN_TAG] = () => new UnknownTag();
             _tagMap[DO_ABC_TAG] = () => new DoABCTag();
         }
 

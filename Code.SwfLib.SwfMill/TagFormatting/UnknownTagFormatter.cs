@@ -38,5 +38,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             value = value.Replace("0x", "");
             return uint.Parse(value, NumberStyles.HexNumber | NumberStyles.AllowHexSpecifier);
         }
+
+        protected override string TagName {
+            get { return "UnknownTag"; }
+        }
     }
 }

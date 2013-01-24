@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.ControlTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class EnableDebugger2TagFormatter : TagFormatterBase<EnableDebugger2Tag> {
         protected override XElement FormatTagElement(EnableDebugger2Tag tag, XElement xTag) {
-            throw new System.NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(EnableDebugger2Tag tag, XAttribute attrib) {
@@ -13,6 +13,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         protected override void AcceptTagElement(EnableDebugger2Tag tag, XElement element) {
             throw new System.NotImplementedException();
+        }
+
+        protected override string TagName {
+            get { return "EnableDebugger2"; }
         }
     }
 }

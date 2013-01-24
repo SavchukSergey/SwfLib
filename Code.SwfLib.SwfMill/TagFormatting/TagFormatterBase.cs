@@ -76,19 +76,16 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        //TODO: override others
-        protected virtual string TagName {
-            get { return this.GetType().Name.Replace("Formatter", ""); }
-        }
-
         protected abstract XElement FormatTagElement(T tag, XElement xTag);
         protected abstract void AcceptTagAttribute(T tag, XAttribute attrib);
         protected abstract void AcceptTagElement(T tag, XElement element);
 
+        protected abstract string TagName { get; }
+
         protected virtual ushort? GetObjectID(T tag) {
             return null;
         }
-        
+
         protected virtual void SetObjectID(T tag, ushort value) {
         }
 

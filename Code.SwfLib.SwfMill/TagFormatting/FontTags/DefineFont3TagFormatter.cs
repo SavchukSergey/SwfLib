@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
-    public class DefineFont3TagFormatter : TagFormatterBase<DefineFont3Tag> {
+    public class DefineFont3TagFormatter : DefineFontBaseFormatter<DefineFont3Tag> {
 
         private const string HAS_LAYOUT_ATTRIB = "hasLayout";
         private const string SHIFT_JIS_ATTRIB = "isShiftJIS";
@@ -86,12 +86,5 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             get { return "DefineFont3"; }
         }
 
-        protected override ushort? GetObjectID(DefineFont3Tag tag) {
-            return tag.FontID;
-        }
-
-        protected override void SetObjectID(DefineFont3Tag tag, ushort value) {
-            tag.FontID = value;
-        }
     }
 }

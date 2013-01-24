@@ -4,7 +4,7 @@ using Code.SwfLib.Tags.BitmapTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class DefineBitsTagFormatter : TagFormatterBase<DefineBitsTag> {
         protected override XElement FormatTagElement(DefineBitsTag tag, XElement xTag) {
-            throw new System.NotImplementedException();
+            return xTag;
         }
 
         protected override void AcceptTagAttribute(DefineBitsTag tag, XAttribute attrib) {
@@ -13,6 +13,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
 
         protected override void AcceptTagElement(DefineBitsTag tag, XElement element) {
             throw new System.NotImplementedException();
+        }
+
+        protected override string TagName {
+            get { return "DefineBits"; }
         }
     }
 }

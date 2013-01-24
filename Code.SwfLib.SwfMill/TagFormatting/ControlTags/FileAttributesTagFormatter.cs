@@ -54,25 +54,24 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         }
 
         protected override XElement FormatTagElement(FileAttributesTag tag, XElement xTag) {
-            var res = new XElement(XName.Get(SwfTagNameMapping.FILE_ATTRIBUTES_TAG),
-                                   new XAttribute(XName.Get(HAS_METADATA_ATTRIB), FormatBoolToDigit(tag.HasMetadata)),
-                                   new XAttribute(XName.Get(USE_NETWORK_ATTRIB), FormatBoolToDigit(tag.UseNetwork)),
-                                   new XAttribute(XName.Get(ALLOW_ABC_ATTRIB), FormatBoolToDigit(tag.AllowAbc)),
-                                   new XAttribute(XName.Get(SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB), FormatBoolToDigit(tag.SupressCrossDomainCaching)),
-                                   new XAttribute(XName.Get(SWF_RELATIVE_URLS_ATTRIB), FormatBoolToDigit(tag.SwfRelativeUrls))
-
-                );
+            xTag.Add(new XAttribute(XName.Get(HAS_METADATA_ATTRIB), FormatBoolToDigit(tag.HasMetadata)));
+            xTag.Add(new XAttribute(XName.Get(USE_NETWORK_ATTRIB), FormatBoolToDigit(tag.UseNetwork)));
+            xTag.Add(new XAttribute(XName.Get(ALLOW_ABC_ATTRIB), FormatBoolToDigit(tag.AllowAbc)));
+            xTag.Add(new XAttribute(XName.Get(SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB), FormatBoolToDigit(tag.SupressCrossDomainCaching)));
+            xTag.Add(new XAttribute(XName.Get(SWF_RELATIVE_URLS_ATTRIB), FormatBoolToDigit(tag.SwfRelativeUrls)));
             if (_version >= 10) {
-                res.Add(new XAttribute(XName.Get(USE_GPU), FormatBoolToDigit(tag.UseGPU)));
-                res.Add(new XAttribute(XName.Get(USE_DIRECT_BLIT), FormatBoolToDigit(tag.UseDirectBlit)));
+                xTag.Add(new XAttribute(XName.Get(USE_GPU), FormatBoolToDigit(tag.UseGPU)));
+                xTag.Add(new XAttribute(XName.Get(USE_DIRECT_BLIT), FormatBoolToDigit(tag.UseDirectBlit)));
             }
-            return res;
+            return xTag;
         }
 
         private static string CheckFileAttribute(SwfFileAttributes all, SwfFileAttributes toTest) {
             return (all & toTest) > 0 ? "1" : "0";
         }
 
-
+        protected override string TagName {
+            get { return "FileAttributes"; }
+        }
     }
 }

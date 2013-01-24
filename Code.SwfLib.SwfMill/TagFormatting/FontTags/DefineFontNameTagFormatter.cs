@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
-    public class DefineFontNameTagFormatter : TagFormatterBase<DefineFontNameTag> {
+    public class DefineFontNameTagFormatter : DefineFontBaseFormatter<DefineFontNameTag> {
 
         protected const string COPYRIGHT_ATTRIB = "copyright";
 
@@ -37,12 +37,5 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             get { return "DefineFontInfo3"; }
         }
 
-        protected override ushort? GetObjectID(DefineFontNameTag tag) {
-            return tag.FontID;
-        }
-
-        protected override void SetObjectID(DefineFontNameTag tag, ushort value) {
-            tag.FontID = value;
-        }
     }
 }

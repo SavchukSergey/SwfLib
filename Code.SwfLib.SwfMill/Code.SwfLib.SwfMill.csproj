@@ -104,6 +104,7 @@
     <Compile Include="TagFormatting\DisplayListTags\PlaceObjectBaseFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\PlaceObjectTagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\RemoveObjectTagFormatter.cs" />
+    <Compile Include="TagFormatting\FontTags\DefineFontBaseFormatter.cs" />
     <Compile Include="TagFormatting\FontTags\DefineFontTagFormatter.cs" />
     <Compile Include="TagFormatting\ProductInfoTagFormatter.cs" />
     <Compile Include="TagFormatting\ShapeMorphingTags\DefineMorphShape2TagFormatter.cs" />
@@ -138,7 +139,7 @@
     <Compile Include="TagFormatting\ITagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\PlaceObject2TagFormatter.cs" />
     <Compile Include="TagFormatting\DisplayListTags\RemoveObject2TagFormatter.cs" />
-    <Compile Include="TagFormatting\TextTags\DefineFont4TagFormatter.cs" />
+    <Compile Include="TagFormatting\FontTags\DefineFont4TagFormatter.cs" />
     <Compile Include="TagFormatting\TextTags\DefineText2TagFormatter.cs" />
     <Compile Include="TagFormatting\UnknownTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\EndTagFormatter.cs" />
