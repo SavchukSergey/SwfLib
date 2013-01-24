@@ -1,12 +1,27 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.BitmapTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
-    public class DefineBitsLosslessTagFormatter : TagFormatterBase<DefineBitsLosslessTag> {
+    public class DefineBitsLosslessTagFormatter : DefineBitmapBaseTagFormatter<DefineBitsLosslessTag> {
+       
         private const string FORMAT_ATTRIB = "format";
         private const string N_COLOR_MAP_ATTRIB = "n_colormap";
 
+        protected override XElement FormatTagElement(DefineBitsLosslessTag tag, XElement xTag) {
+            xTag.Add(new XAttribute(FORMAT_ATTRIB, tag.BitmapFormat));
+            xTag.Add(new XAttribute(WIDTH_ATTRIB, tag.BitmapWidth));
+            xTag.Add(new XAttribute(HEIGHT_ATTRIB, tag.BitmapHeight));
+            if (tag.BitmapFormat == 3) {
+                xTag.Add(new XAttribute(N_COLOR_MAP_ATTRIB, tag.BitmapColorTableSize));
+            }
+            if (tag.ZlibBitmapData != null) {
+                xTag.Add(new XElement("data", XBinary.ToXml(tag.ZlibBitmapData)));
+            }
+            return xTag;
+        }
+        
         protected override void AcceptTagAttribute(DefineBitsLosslessTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case FORMAT_ATTRIB:
@@ -29,37 +44,16 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
         protected override void AcceptTagElement(DefineBitsLosslessTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case DATA_TAG:
-                    var dataElem = element.Element(XName.Get("data"));
-                    tag.ZlibBitmapData = Convert.FromBase64String(dataElem.Value);
+                    tag.ZlibBitmapData = XBinary.FromXml(element.Element("data"));
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
         }
 
-        protected override XElement FormatTagElement(DefineBitsLosslessTag tag, XElement xTag) {
-            xTag.Add(new XAttribute(FORMAT_ATTRIB, tag.BitmapFormat));
-            xTag.Add(new XAttribute(WIDTH_ATTRIB, tag.BitmapWidth));
-            xTag.Add(new XAttribute(HEIGHT_ATTRIB, tag.BitmapHeight));
-            if (tag.BitmapFormat == 3) {
-                xTag.Add(new XAttribute(N_COLOR_MAP_ATTRIB, tag.BitmapColorTableSize));
-            }
-            if (tag.ZlibBitmapData != null) {
-                xTag.Add(new XElement(DATA_TAG, new XElement(DATA_TAG, Convert.ToBase64String(tag.ZlibBitmapData))));
-            }
-            return xTag;
-        }
-
         public override string TagName {
             get { return "DefineBitsLossless"; }
         }
 
-        protected override ushort? GetObjectID(DefineBitsLosslessTag tag) {
-            return tag.CharacterID;
-        }
-
-        protected override void SetObjectID(DefineBitsLosslessTag tag, ushort value) {
-            tag.CharacterID = value;
-        }
     }
 }

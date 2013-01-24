@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.BitmapTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
-    public class DefineBitsLossless2TagFormatter : TagFormatterBase<DefineBitsLossless2Tag> {
+    public class DefineBitsLossless2TagFormatter : DefineBitmapBaseTagFormatter<DefineBitsLossless2Tag> {
+        
         private const string FORMAT_ATTRIB = "format";
         private const string N_COLOR_MAP_ATTRIB = "n_colormap";
 
@@ -15,7 +17,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
                 xTag.Add(new XAttribute(N_COLOR_MAP_ATTRIB, tag.BitmapColorTableSize));
             }
             if (tag.ZlibBitmapData != null) {
-                xTag.Add(new XElement(DATA_TAG, new XElement(DATA_TAG, Convert.ToBase64String(tag.ZlibBitmapData))));
+                xTag.Add(new XElement("data", XBinary.ToXml(tag.ZlibBitmapData)));
             }
             return xTag;
         }
@@ -42,8 +44,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
         protected override void AcceptTagElement(DefineBitsLossless2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case DATA_TAG:
-                    var dataElem = element.Element(XName.Get("data"));
-                    tag.ZlibBitmapData = Convert.FromBase64String(dataElem.Value);
+                    tag.ZlibBitmapData = XBinary.FromXml(element.Element("data"));
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
@@ -54,12 +55,5 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             get { return "DefineBitsLossless2"; }
         }
 
-        protected override ushort? GetObjectID(DefineBitsLossless2Tag tag) {
-            return tag.CharacterID;
-        }
-
-        protected override void SetObjectID(DefineBitsLossless2Tag tag, ushort value) {
-            tag.CharacterID = value;
-        }
     }
 }
