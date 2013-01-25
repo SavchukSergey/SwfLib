@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Data;
+using Code.SwfLib.Shapes.Records;
 
 namespace Code.SwfLib.Tags.ShapeTags {
     public class DefineShape4Tag : ShapeBaseTag {
@@ -9,6 +10,8 @@ namespace Code.SwfLib.Tags.ShapeTags {
         public readonly IList<FillStyleRGBA> FillStyles = new List<FillStyleRGBA>();
 
         public readonly IList<LineStyleEx> LineStyles = new List<LineStyleEx>();
+
+        public readonly IList<IShapeRecordEx> ShapeRecords = new List<IShapeRecordEx>();
 
         public byte Flags;
 

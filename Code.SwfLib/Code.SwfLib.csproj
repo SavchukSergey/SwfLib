@@ -173,6 +173,17 @@
     <Compile Include="Gradients\GradientRecordRGBA.cs" />
     <Compile Include="Gradients\GradientRGBA.cs" />
     <Compile Include="Gradients\GradientStreamExt.cs" />
+    <Compile Include="Shapes\Records\StyleChangeShapeRecordEx.cs" />
+    <Compile Include="Shapes\Records\StyleChangeShapeRecordRGBA.cs" />
+    <Compile Include="Shapes\ShapeRecordExReader.cs" />
+    <Compile Include="Shapes\ShapeRecordRGBAReader.cs" />
+    <Compile Include="Shapes\Records\IShapeRecord.cs" />
+    <Compile Include="Shapes\Records\IShapeRecordEx.cs" />
+    <Compile Include="Shapes\Records\IShapeRecordRGB.cs" />
+    <Compile Include="Shapes\Records\IShapeRecordRGBA.cs" />
+    <Compile Include="Shapes\Records\StyleChangeShapeRecordRGB.cs" />
+    <Compile Include="Shapes\ShapeRecordReader.cs" />
+    <Compile Include="Shapes\ShapeRecordRGBReader.cs" />
     <Compile Include="Tags\ButtonTags\DefineButtonBaseTag.cs" />
     <Compile Include="Tags\ShapeTags\FillStyleRGBA.cs" />
     <Compile Include="Tags\ShapeTags\FillStyleRGB.cs" />
@@ -181,14 +192,11 @@
     <Compile Include="Gradients\GradientRecordRGB.cs" />
     <Compile Include="Gradients\InterpolationMode.cs" />
     <Compile Include="Gradients\SpreadMode.cs" />
-    <Compile Include="Data\Shapes\CurvedEdgeShapeRecord.cs" />
-    <Compile Include="Data\Shapes\EndShapeRecord.cs" />
-    <Compile Include="Data\Shapes\ShapeRecord.cs" />
-    <Compile Include="Data\Shapes\ShapeRecords1List.cs" />
-    <Compile Include="Data\Shapes\ShapeRecordsListBase.cs" />
-    <Compile Include="Data\Shapes\ShapeRecordType.cs" />
-    <Compile Include="Data\Shapes\StraightEdgeShapeRecord.cs" />
-    <Compile Include="Data\Shapes\StyleChangeShapeRecord.cs" />
+    <Compile Include="Shapes\Records\CurvedEdgeShapeRecord.cs" />
+    <Compile Include="Shapes\Records\EndShapeRecord.cs" />
+    <Compile Include="Shapes\Records\ShapeRecordType.cs" />
+    <Compile Include="Shapes\Records\StraightEdgeShapeRecord.cs" />
+    <Compile Include="Shapes\Records\StyleChangeShapeRecord.cs" />
     <Compile Include="Data\ColorTransformRGB.cs" />
     <Compile Include="Data\SwfMorphShapeWithStyle.cs" />
     <Compile Include="Data\SwfRGBA.cs" />
@@ -311,9 +319,7 @@
     <Compile Include="Tags\VideoTags\VideoFrameTag.cs" />
     <Compile Include="TextRecordStreamExt.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FillStyles\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

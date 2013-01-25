@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.SwfLib.Data.Shapes;
+using Code.SwfLib.Shapes;
+using Code.SwfLib.Shapes.Records;
 
 namespace Code.SwfLib {
     public static class ShapeRecordStreamExt {
 
-        public static void WriteShapeRecords(this SwfStreamWriter writer, IList<ShapeRecord> shapeRecords, uint fillStyleBits, uint lineStyleBits) {
+        public static void WriteShapeRecordsRGB(this SwfStreamWriter writer, IList<IShapeRecordRGB> shapeRecords, uint fillStyleBits, uint lineStyleBits) {
             writer.WriteUnsignedBits(fillStyleBits, 4);
             writer.WriteUnsignedBits(lineStyleBits, 4);
             writer.FlushBits();
@@ -16,82 +17,69 @@ namespace Code.SwfLib {
 
         }
 
-        public static void ReadToShapeRecords(this SwfStreamReader reader, IList<ShapeRecord> shapeRecords) {
+        public static void WriteShapeRecordsRGBA(this SwfStreamWriter writer, IList<IShapeRecordRGBA> shapeRecords, uint fillStyleBits, uint lineStyleBits) {
+            writer.WriteUnsignedBits(fillStyleBits, 4);
+            writer.WriteUnsignedBits(lineStyleBits, 4);
+            writer.FlushBits();
+            for (var i = 0; i < shapeRecords.Count; i++) {
+                var shapeRecord = shapeRecords[i];
+                writer.WriteShapeRecord(shapeRecord, ref fillStyleBits, ref lineStyleBits);
+            }
+
+        }
+
+        public static void WriteShapeRecordsEx(this SwfStreamWriter writer, IList<IShapeRecordEx> shapeRecords, uint fillStyleBits, uint lineStyleBits) {
+            writer.WriteUnsignedBits(fillStyleBits, 4);
+            writer.WriteUnsignedBits(lineStyleBits, 4);
+            writer.FlushBits();
+            for (var i = 0; i < shapeRecords.Count; i++) {
+                var shapeRecord = shapeRecords[i];
+                writer.WriteShapeRecord(shapeRecord, ref fillStyleBits, ref lineStyleBits);
+            }
+
+        }
+
+        private static ShapeRecordRGBReader _shapeRecordRGBReader = new ShapeRecordRGBReader();
+        private static ShapeRecordRGBAReader _shapeRecordRGBAReader = new ShapeRecordRGBAReader();
+        private static ShapeRecordExReader _shapeRecorExReader = new ShapeRecordExReader();
+
+        public static void ReadToShapeRecordsRGB(this SwfStreamReader reader, IList<IShapeRecordRGB> shapeRecords) {
             var fillStyleBits = reader.ReadUnsignedBits(4);
             var lineStyleBits = reader.ReadUnsignedBits(4);
             reader.AlignToByte();
-            ShapeRecord record;
+            IShapeRecordRGB record;
             do {
-                record = reader.ReadShapeRecord(ref fillStyleBits, ref lineStyleBits);
+                record = _shapeRecordRGBReader.Read(reader, true, ref fillStyleBits, ref lineStyleBits);
+                shapeRecords.Add(record);
+            } while (!(record is EndShapeRecord));
+        }
+
+        public static void ReadToShapeRecordsRGBA(this SwfStreamReader reader, IList<IShapeRecordRGBA> shapeRecords) {
+            var fillStyleBits = reader.ReadUnsignedBits(4);
+            var lineStyleBits = reader.ReadUnsignedBits(4);
+            reader.AlignToByte();
+            IShapeRecordRGBA record;
+            do {
+                record = _shapeRecordRGBAReader.Read(reader, true, ref fillStyleBits, ref lineStyleBits);
+                shapeRecords.Add(record);
+            } while (!(record is EndShapeRecord));
+        }
+
+        public static void ReadToShapeRecordsEx(this SwfStreamReader reader, IList<IShapeRecordEx> shapeRecords) {
+            var fillStyleBits = reader.ReadUnsignedBits(4);
+            var lineStyleBits = reader.ReadUnsignedBits(4);
+            reader.AlignToByte();
+            IShapeRecordEx record;
+            do {
+                record = _shapeRecorExReader.Read(reader , true, ref fillStyleBits, ref lineStyleBits);
                 shapeRecords.Add(record);
             } while (!(record is EndShapeRecord));
         }
 
 
-        public static ShapeRecord ReadShapeRecord(this SwfStreamReader reader, ref uint fillBitsCount, ref uint lineBitsCount) {
+        public static void WriteShapeRecord(this SwfStreamWriter writer, IShapeRecord shapeRecord, ref uint fillStyleBits, ref uint lineStyleBits) {
             //They are not actually byte aligned as Adobe promises..
-            var isEdge = reader.ReadBit();
-            if (!isEdge) {
-                bool stateNewStyles = reader.ReadBit();
-                bool stateLineStyle = reader.ReadBit();
-                bool stateFillStyle1 = reader.ReadBit();
-                bool stateFillStyle0 = reader.ReadBit();
-                bool stateMoveTo = reader.ReadBit();
-                if (stateNewStyles || stateLineStyle || stateFillStyle1 || stateFillStyle0 || stateMoveTo) {
-                    var styleChange = new StyleChangeShapeRecord();
-                    styleChange.StateNewStyles = stateNewStyles;
-                    if (stateMoveTo) {
-                        var moveBits = reader.ReadUnsignedBits(5);
-                        styleChange.MoveDeltaX = reader.ReadSignedBits(moveBits);
-                        styleChange.MoveDeltaY = reader.ReadSignedBits(moveBits);
-                    }
-                    if (stateFillStyle0) {
-                        styleChange.FillStyle0 = reader.ReadUnsignedBits(fillBitsCount);
-                    }
-                    if (stateFillStyle1) {
-                        styleChange.FillStyle1 = reader.ReadUnsignedBits(fillBitsCount);
-                    }
-                    if (stateLineStyle) {
-                        styleChange.LineStyle = reader.ReadUnsignedBits(lineBitsCount);
-                    }
-                    //TODO: read new fill styles and line styles
-                    return styleChange;
-                } else {
-                    return new EndShapeRecord();
-                }
-            }
-            bool straight = reader.ReadBit();
-            if (straight) {
-                var record = new StraightEdgeShapeRecord();
-                var numBits = reader.ReadUnsignedBits(4) + 2;
-                var generalLineFlag = reader.ReadBit();
-                bool vertLineFlag = false;
-                if (!generalLineFlag) {
-                    vertLineFlag = reader.ReadBit();
-                }
-                if (generalLineFlag || !vertLineFlag) {
-                    record.DeltaX = reader.ReadSignedBits(numBits);
-                }
-                if (generalLineFlag || vertLineFlag) {
-                    record.DeltaY = reader.ReadSignedBits(numBits);
-                }
-                return record;
-            } else {
-                var record = new CurvedEdgeShapeRecord();
-                var numBits = reader.ReadUnsignedBits(4) + 2;
-                record.ControlDeltaX = reader.ReadSignedBits(numBits);
-                record.ControlDeltaY = reader.ReadSignedBits(numBits);
-                record.AnchorDeltaX = reader.ReadSignedBits(numBits);
-                record.AnchorDeltaY = reader.ReadSignedBits(numBits);
-                return record;
-            }
-        }
-
-
-        public static void WriteShapeRecord(this SwfStreamWriter writer, ShapeRecord shapeRecord, ref uint fillStyleBits, ref uint lineStyleBits) {
-            //They are not actually byte aligned as Adobe promises..
-            switch (shapeRecord.Type)
-            {
+            switch (shapeRecord.Type) {
                 case ShapeRecordType.CurvedEdgeRecord:
                     writer.WriteCurvedEdge((CurvedEdgeShapeRecord)shapeRecord);
                     break;

@@ -1,5 +1,5 @@
-﻿namespace Code.SwfLib.Data.Shapes {
-    public class StyleChangeShapeRecord : ShapeRecord {
+﻿namespace Code.SwfLib.Shapes.Records {
+    public abstract class StyleChangeShapeRecord : IShapeRecord {
 
         public uint? FillStyle0;
 
@@ -13,7 +13,7 @@
 
         public bool StateNewStyles;
 
-        public override ShapeRecordType Type {
+        public ShapeRecordType Type {
             get { return ShapeRecordType.StyleChangeRecord; }
         }
 

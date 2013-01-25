@@ -1,7 +1,5 @@
-﻿using System;
-
-namespace Code.SwfLib.Data.Shapes {
-    public class CurvedEdgeShapeRecord : ShapeRecord {
+﻿namespace Code.SwfLib.Shapes.Records {
+    public class CurvedEdgeShapeRecord : IShapeRecordRGB, IShapeRecordRGBA, IShapeRecordEx {
 
         public int ControlDeltaX;
 
@@ -11,7 +9,7 @@ namespace Code.SwfLib.Data.Shapes {
 
         public int AnchorDeltaY;
 
-        public override ShapeRecordType Type {
+        public ShapeRecordType Type {
             get { return ShapeRecordType.CurvedEdgeRecord; }
         }
     }

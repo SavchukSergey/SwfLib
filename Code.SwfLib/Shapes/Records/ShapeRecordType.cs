@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Data.Shapes {
+﻿namespace Code.SwfLib.Shapes.Records {
     public enum ShapeRecordType : byte {
 
         EndRecord,

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Linq;
-using Code.SwfLib.Data.Shapes;
+using Code.SwfLib.Shapes;
+using Code.SwfLib.Shapes.Records;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public static class XShapeRecord {
