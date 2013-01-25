@@ -17,5 +17,7 @@
             get { return ShapeRecordType.StyleChangeRecord; }
         }
 
+        public abstract TResult AcceptVisitor<TArg, TResult>(IShapeRecordVisitor<TArg, TResult> visitor, TArg arg);
+
     }
 }

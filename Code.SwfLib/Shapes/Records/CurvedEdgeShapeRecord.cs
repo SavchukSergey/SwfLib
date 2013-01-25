@@ -12,5 +12,9 @@
         public ShapeRecordType Type {
             get { return ShapeRecordType.CurvedEdgeRecord; }
         }
+
+        public TResult AcceptVisitor<TArg, TResult>(IShapeRecordVisitor<TArg, TResult> visitor, TArg arg) {
+            return visitor.Visit(this, arg);
+        }
     }
 }

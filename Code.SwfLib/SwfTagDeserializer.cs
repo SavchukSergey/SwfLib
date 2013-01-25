@@ -280,7 +280,6 @@ namespace Code.SwfLib {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
             reader.ReadRect(out tag.EdgeBounds);
-            reader.AlignToByte();
             tag.Flags = reader.ReadByte();
             reader.ReadToFillStylesRGBA(tag.FillStyles, true);
             reader.ReadToLineStylesEx(tag.LineStyles, true);

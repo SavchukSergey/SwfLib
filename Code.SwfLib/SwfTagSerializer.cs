@@ -232,7 +232,7 @@ namespace Code.SwfLib {
 
             writer.WriteFillStylesRGBA(tag.FillStyles);
             writer.WriteLineStylesRGBA(tag.LineStyles);
-            writer.WriteShapeRecordsEx(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+            writer.WriteShapeRecordsRGBA(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
 
             writer.FlushBits();
             return null;
@@ -244,8 +244,10 @@ namespace Code.SwfLib {
             writer.WriteRect(ref tag.EdgeBounds);
             writer.FlushBits();
             writer.WriteByte(tag.Flags);
-            throw new NotImplementedException();
-            writer.WriteShapeRecords(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+
+            writer.WriteFillStylesRGBA(tag.FillStyles);
+            writer.WriteLineStylesEx(tag.LineStyles);
+            writer.WriteShapeRecordsEx(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
             return null;
         }
 

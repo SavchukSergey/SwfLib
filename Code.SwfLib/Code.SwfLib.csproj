@@ -173,6 +173,7 @@
     <Compile Include="Gradients\GradientRecordRGBA.cs" />
     <Compile Include="Gradients\GradientRGBA.cs" />
     <Compile Include="Gradients\GradientStreamExt.cs" />
+    <Compile Include="Shapes\Records\IShapeRecordVisitor.cs" />
     <Compile Include="Shapes\Records\StyleChangeShapeRecordEx.cs" />
     <Compile Include="Shapes\Records\StyleChangeShapeRecordRGBA.cs" />
     <Compile Include="Shapes\ShapeRecordExReader.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Shapes\Records\StyleChangeShapeRecordRGB.cs" />
     <Compile Include="Shapes\ShapeRecordReader.cs" />
     <Compile Include="Shapes\ShapeRecordRGBReader.cs" />
+    <Compile Include="Shapes\ShapeRecordWriter.cs" />
     <Compile Include="Tags\ButtonTags\DefineButtonBaseTag.cs" />
     <Compile Include="Tags\ShapeTags\FillStyleRGBA.cs" />
     <Compile Include="Tags\ShapeTags\FillStyleRGB.cs" />

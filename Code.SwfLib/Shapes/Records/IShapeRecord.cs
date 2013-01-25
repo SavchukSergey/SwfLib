@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Code.SwfLib.Shapes.Records {
+﻿namespace Code.SwfLib.Shapes.Records {
     public interface IShapeRecord {
 
         ShapeRecordType Type { get; }
 
+        TResult AcceptVisitor<TArg, TResult>(IShapeRecordVisitor<TArg, TResult> visitor, TArg arg);
     }
 }

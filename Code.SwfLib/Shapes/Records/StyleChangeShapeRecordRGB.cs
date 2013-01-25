@@ -8,5 +8,8 @@ namespace Code.SwfLib.Shapes.Records {
 
         public readonly IList<LineStyleRGB> LineStyles = new List<LineStyleRGB>();
 
+        public override TResult AcceptVisitor<TArg, TResult>(IShapeRecordVisitor<TArg, TResult> visitor, TArg arg) {
+            return visitor.Visit(this, arg);
+        }
     }
 }
