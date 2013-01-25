@@ -81,22 +81,33 @@ namespace Code.SwfLib.SwfMill.Shapes {
                 return record;
             }
 
-            public IShapeRecord Visit(StyleChangeShapeRecordRGB record, XElement arg) {
-                //TODO: read nested
-                ReadStyleChange(record, arg);
+            public IShapeRecord Visit(StyleChangeShapeRecordRGB record, XElement xShapeRecord) {
+                ReadStyleChange(record, xShapeRecord);
+                var xStyles = xShapeRecord.Element("styles");
+                if (xStyles != null) {
+                    record.StateNewStyles = true;
+                    XStyleList.FromXml(xStyles.Element("StyleList"), record.FillStyles, record.LineStyles);
+                }
                 return record;
             }
 
-            public IShapeRecord Visit(StyleChangeShapeRecordRGBA record, XElement arg) {
-                //TODO: read nested
-                ReadStyleChange(record, arg);
+            public IShapeRecord Visit(StyleChangeShapeRecordRGBA record, XElement xShapeRecord) {
+                ReadStyleChange(record, xShapeRecord);
+                var xStyles = xShapeRecord.Element("styles");
+                if (xStyles != null) {
+                    record.StateNewStyles = true;
+                    XStyleList.FromXml(xStyles.Element("StyleList"), record.FillStyles, record.LineStyles);
+                }
                 return record;
             }
 
-            public IShapeRecord Visit(StyleChangeShapeRecordEx record, XElement arg) {
-                //TODO: read nested
-                ReadStyleChange(record, arg);
-                return record;
+            public IShapeRecord Visit(StyleChangeShapeRecordEx record, XElement xShapeRecord) {
+                ReadStyleChange(record, xShapeRecord);
+                var xStyles = xShapeRecord.Element("styles");
+                if (xStyles != null) {
+                    record.StateNewStyles = true;
+                    XStyleList.FromXml(xStyles.Element("StyleList"), record.FillStyles, record.LineStyles);
+                } return record;
             }
 
             public IShapeRecord Visit(StraightEdgeShapeRecord record, XElement xShape) {

@@ -46,7 +46,9 @@ namespace Code.SwfLib.SwfMill.Shapes {
             switch (xFillStyle.Name.LocalName) {
                 case "Solid":
                     return ParseSolidRGB(xFillStyle);
-                    //TODO: other fill styles
+                case "LinearGradient":
+                    return ParseLinearRGB(xFillStyle);
+                //TODO: other fill styles
                 default:
                     throw new NotSupportedException();
             }
@@ -56,11 +58,15 @@ namespace Code.SwfLib.SwfMill.Shapes {
             switch (xFillStyle.Name.LocalName) {
                 case "Solid":
                     return ParseSolidRGBA(xFillStyle);
+                case "LinearGradient":
+                    return ParseLinearRGBA(xFillStyle);
                 //TODO: other fill styles
                 default:
                     throw new NotSupportedException();
             }
         }
+
+        #region Solid
 
         private static FillStyleRGB ParseSolidRGB(XElement xFillStyle) {
             var xColor = xFillStyle.Element("color");
@@ -77,6 +83,37 @@ namespace Code.SwfLib.SwfMill.Shapes {
                 Color = XColorRGBA.FromXml(xColor)
             };
         }
+
+        #endregion
+
+        #region Linear Gradient
+
+        private static FillStyleRGB ParseLinearRGB(XElement xFillStyle) {
+            return new FillStyleRGB {
+                FillStyleType = FillStyleType.LinearGradient,
+                Gradient = {
+                    SpreadMode = GetSpreadMode(xFillStyle)
+                },
+                //TODO: other fields
+            };
+        }
+
+        private static FillStyleRGBA ParseLinearRGBA(XElement xFillStyle) {
+            return new FillStyleRGBA {
+                FillStyleType = FillStyleType.LinearGradient,
+                Gradient = {
+                    SpreadMode = GetSpreadMode(xFillStyle)
+                },
+                //TODO: other fields
+            };
+        }
+
+        //AddSpreadMode(res, fillStyle.Gradient.SpreadMode);
+        //           AddInterpolationMode(res, fillStyle.Gradient.InterpolationMode);
+        //           AddMatrix(res, fillStyle.GradientMatrix);
+        //           AddGradientColors(res, fillStyle.Gradient.GradientRecords);
+
+        #endregion
 
         private static void AddGradientColors(XElement xml, IEnumerable<GradientRecordRGB> records) {
             var xColors = new XElement("gradientColors");
@@ -102,6 +139,13 @@ namespace Code.SwfLib.SwfMill.Shapes {
 
         private static void AddSpreadMode(XElement xml, SpreadMode mode) {
             xml.Add(new XAttribute("spreadMode", mode.ToString()));
+        }
+
+        private static SpreadMode GetSpreadMode(XElement xFillStyle) {
+            var xMode = xFillStyle.Attribute("spreadMode");
+            var res = SpreadMode.Pad;
+            if (xMode == null) return res;
+            return (SpreadMode)Enum.Parse(typeof(SpreadMode), xMode.Value);
         }
 
         private static void AddInterpolationMode(XElement xml, InterpolationMode mode) {

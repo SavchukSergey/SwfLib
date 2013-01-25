@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using Code.SwfLib.Gradients;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Gradients;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
@@ -199,12 +200,9 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
 
-        //TODO: Interpolation and spread mode!!
         private void ParseGradientColorsTo(XElement element, IList<GradientRecordRGBA> records) {
             foreach (var item in element.Elements(XName.Get("GradientItem"))) {
-                GradientRecordRGBA record;
-                record.Ratio = byte.Parse(item.Attribute(XName.Get("position")).Value);
-                record.Color = XColorRGBA.FromXml(item.Element("color").Element("Color"));
+                var record = XGradientRecordRGBA.FromXml(item);
                 records.Add(record);
             }
         }

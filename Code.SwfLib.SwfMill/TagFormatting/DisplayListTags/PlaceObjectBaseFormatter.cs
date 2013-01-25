@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.DisplayListTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
@@ -12,7 +13,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             xTag.Add(new XAttribute(DEPTH_ATTRIB, tag.Depth));
 
             if (HasMatrix(tag)) {
-                xTag.Add(new XElement(TRANSFORM_ELEM, _formatters.Matrix.Format(ref tag.Matrix)));
+                xTag.Add(new XElement(TRANSFORM_ELEM, XMatrix.ToXml(tag.Matrix)));
             }
 
             FormatPlaceElement(tag, xTag);
