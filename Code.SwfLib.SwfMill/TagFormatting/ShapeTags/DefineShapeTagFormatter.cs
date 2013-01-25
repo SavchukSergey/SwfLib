@@ -6,18 +6,8 @@ using Code.SwfLib.Tags.ShapeTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
     public class DefineShapeTagFormatter : DefineShapeBaseFormatter<DefineShapeTag> {
 
-        private const string STYLES_ELEM = "styles";
-
-        protected override void FormatFillStyles(DefineShapeTag tag, XElement xFillStyles) {
-            foreach (var style in tag.FillStyles) {
-                xFillStyles.Add(FormatFillStyle(style));
-            }
-        }
-
-        protected override void FormatLineStyles(DefineShapeTag tag, XElement xLineStyles) {
-            foreach (var style in tag.LineStyles) {
-                xLineStyles.Add(XLineStyleRGB.ToXml(style));
-            }
+        protected override void WriteStyles(DefineShapeTag tag, XElement xStyles) {
+            xStyles.Add(XStyleList.ToXml(tag.FillStyles, tag.LineStyles));
         }
 
         protected override void ReadShapes(DefineShapeTag tag, XElement xEdges) {

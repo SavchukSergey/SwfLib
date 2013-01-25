@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
@@ -9,6 +8,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         private const string BOUNDS_ELEM = "bounds";
         private const string SHAPES_ELEM = "shapes";
+        protected const string STYLES_ELEM = "styles";
+
 
         protected sealed override XElement FormatTagElement(T tag, XElement xTag) {
             xTag.Add(new XElement(BOUNDS_ELEM, XRect.ToXml(tag.ShapeBounds)));
@@ -16,27 +17,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             FormatAdditionalBounds(tag, xTag);
 
             var xStyles = new XElement("styles");
+            WriteStyles(tag, xStyles);
             xTag.Add(xStyles);
-
-            var xStyleList = new XElement("StyleList");
-
-            var xFillStyles = new XElement("fillStyles");
-            FormatFillStyles(tag, xFillStyles);
-            xStyleList.Add(xFillStyles);
-
-            var xLineStyles = new XElement("lineStyles");
-            FormatLineStyles(tag, xLineStyles);
-            xStyleList.Add(xLineStyles);
-
-            xStyles.Add(xStyleList);
 
             FormatShapeElement(tag, xTag);
             return xTag;
         }
-
-        protected abstract void FormatFillStyles(T tag, XElement xFillStyles);
-
-        protected abstract void FormatLineStyles(T tag, XElement xLineStyles);
 
         protected void FormatShapeElement(T tag, XElement xml) {
             var xShapes = new XElement(SHAPES_ELEM);
@@ -50,6 +36,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             xShapes.Add(xShape);
             xml.Add(xShapes);
         }
+
+        protected abstract void WriteStyles(T tag, XElement xStyles);
 
         protected abstract void ReadShapes(T tag, XElement xEdges);
 

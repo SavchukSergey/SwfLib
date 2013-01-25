@@ -6,19 +6,10 @@ using Code.SwfLib.Tags.ShapeTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
     public class DefineShape3TagFormatter : DefineShapeBaseFormatter<DefineShape3Tag> {
 
-        private const string STYLES_ELEM = "styles";
         private const string SHAPES_ELEM = "shapes";
 
-        protected override void FormatFillStyles(DefineShape3Tag tag, XElement xFillStyles) {
-            foreach (var style in tag.FillStyles) {
-                xFillStyles.Add(FormatFillStyle(style));
-            }
-        }
-
-        protected override void FormatLineStyles(DefineShape3Tag tag, XElement xLineStyles) {
-            foreach (var style in tag.LineStyles) {
-                xLineStyles.Add(XLineStyleRGBA.ToXml(style));
-            }
+        protected override void WriteStyles(DefineShape3Tag tag, XElement xStyles) {
+            xStyles.Add(XStyleList.ToXml(tag.FillStyles, tag.LineStyles));
         }
 
         protected override void ReadShapes(DefineShape3Tag tag, XElement xEdges) {

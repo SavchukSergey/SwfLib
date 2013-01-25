@@ -19,6 +19,9 @@ namespace Code.SwfLib.SwfMill.Shapes {
                     AddMatrix(res, fillStyle.GradientMatrix);
                     AddGradientColors(res, fillStyle.Gradient.GradientRecords);
                     break;
+                case FillStyleType.SolidColor:
+                    res.Add(new XElement("color", XColorRGBA.ToXml(fillStyle.Color)));
+                    break;
             }
             return res;
         }
@@ -48,6 +51,8 @@ namespace Code.SwfLib.SwfMill.Shapes {
             switch (type) {
                 case FillStyleType.LinearGradient:
                     return "LinearGradient";
+                case FillStyleType.SolidColor:
+                    return "Solid";
                 default:
                     throw new NotSupportedException();
             }

@@ -15,14 +15,9 @@ namespace Code.SwfLib.SwfMill.Shapes {
             public XElement Visit(StyleChangeShapeRecordRGB record, object arg) {
                 var res = FormatShapeSetup(record);
                 if (record.StateNewStyles) {
-                    var xFillStyles = res.Element("fillStyles");
-                    var xLineStyles = res.Element("lineStyles");
-                    foreach (var fillStyle in record.FillStyles) {
-                        xFillStyles.Add(XFillStyleRGB.ToXml(fillStyle));
-                    }
-                    foreach (var lineStyle in record.LineStyles) {
-                        xLineStyles.Add(XLineStyleRGB.ToXml(lineStyle));
-                    }
+                    var xStyles = new XElement("styles");
+                    xStyles.Add(XStyleList.ToXml(record.FillStyles, record.LineStyles));
+                    res.Add(xStyles);
                 }
                 return res;
             }
@@ -30,14 +25,9 @@ namespace Code.SwfLib.SwfMill.Shapes {
             public XElement Visit(StyleChangeShapeRecordRGBA record, object arg) {
                 var res = FormatShapeSetup(record);
                 if (record.StateNewStyles) {
-                    var xFillStyles = res.Element("fillStyles");
-                    var xLineStyles = res.Element("lineStyles");
-                    foreach (var fillStyle in record.FillStyles) {
-                        xFillStyles.Add(XFillStyleRGBA.ToXml(fillStyle));
-                    }
-                    foreach (var lineStyle in record.LineStyles) {
-                        xLineStyles.Add(XLineStyleRGBA.ToXml(lineStyle));
-                    }
+                    var xStyles = new XElement("styles");
+                    xStyles.Add(XStyleList.ToXml(record.FillStyles, record.LineStyles));
+                    res.Add(xStyles);
                 }
                 return res;
             }
@@ -45,14 +35,9 @@ namespace Code.SwfLib.SwfMill.Shapes {
             public XElement Visit(StyleChangeShapeRecordEx record, object arg) {
                 var res = FormatShapeSetup(record);
                 if (record.StateNewStyles) {
-                    var xFillStyles = res.Element("fillStyles");
-                    var xLineStyles = res.Element("lineStyles");
-                    foreach (var fillStyle in record.FillStyles) {
-                        xFillStyles.Add(XFillStyleRGBA.ToXml(fillStyle));
-                    }
-                    foreach (var lineStyle in record.LineStyles) {
-                        xLineStyles.Add(XLineStyleEx.ToXml(lineStyle));
-                    }
+                    var xStyles = new XElement("styles");
+                    xStyles.Add(XStyleList.ToXml(record.FillStyles, record.LineStyles));
+                    res.Add(xStyles);
                 }
                 return res;
             }
@@ -75,6 +60,8 @@ namespace Code.SwfLib.SwfMill.Shapes {
 
             private static XElement FormatShapeSetup(StyleChangeShapeRecord styleChange) {
                 var setup = new XElement("ShapeSetup");
+                setup.Add(new XAttribute("x", styleChange.MoveDeltaX));
+                setup.Add(new XAttribute("y", styleChange.MoveDeltaY));
                 if (styleChange.FillStyle0.HasValue) {
                     setup.Add(new XAttribute("fillStyle0", styleChange.FillStyle0.Value));
                 }
@@ -84,15 +71,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
                 if (styleChange.LineStyle.HasValue) {
                     setup.Add(new XAttribute("lineStyle", styleChange.LineStyle.Value));
                 }
-                setup.Add(new XAttribute("x", styleChange.MoveDeltaX));
-                setup.Add(new XAttribute("y", styleChange.MoveDeltaY));
 
-                if (styleChange.StateNewStyles) {
-                    var xFillStyles = new XElement("fillStyles");
-                    setup.Add(xFillStyles);
-                    var xLineStyles = new XElement("lineStyles");
-                    setup.Add(xLineStyles);
-                }
                 return setup;
             }
         }
