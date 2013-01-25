@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
@@ -16,32 +17,23 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
             FormatAdditionalBounds(tag, xTag);
 
-            var xStyles = new XElement("styles");
+            var xStyles = new XElement(STYLES_ELEM);
             WriteStyles(tag, xStyles);
             xTag.Add(xStyles);
 
-            FormatShapeElement(tag, xTag);
-            return xTag;
-        }
-
-        protected void FormatShapeElement(T tag, XElement xml) {
             var xShapes = new XElement(SHAPES_ELEM);
-            var xShape = new XElement("Shape");
-
-            var xEdges = new XElement("edges");
-
-            WriteShapes(tag, xEdges);
-
-            xShape.Add(xEdges);
+            var xShape = FormatShape(tag);
             xShapes.Add(xShape);
-            xml.Add(xShapes);
+            xTag.Add(xShapes);
+
+            return xTag;
         }
 
         protected abstract void WriteStyles(T tag, XElement xStyles);
 
         protected abstract void ReadShapes(T tag, XElement xEdges);
 
-        protected abstract void WriteShapes(T tag, XElement xEdges);
+        protected abstract XElement FormatShape(T tag);
 
         protected sealed override void AcceptTagAttribute(T tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {

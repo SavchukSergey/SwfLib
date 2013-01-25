@@ -73,6 +73,7 @@
     <Compile Include="Shapes\XFillStyleRGBA.cs" />
     <Compile Include="Shapes\XFillStyleRGB.cs" />
     <Compile Include="Shapes\XLineStyleEx.cs" />
+    <Compile Include="Shapes\XShape.cs" />
     <Compile Include="Shapes\XShapeRecord.cs" />
     <Compile Include="Shapes\XStyleList.cs" />
     <Compile Include="TagFormatting\ActionTags\DoABCDefineTagFormatter.cs" />

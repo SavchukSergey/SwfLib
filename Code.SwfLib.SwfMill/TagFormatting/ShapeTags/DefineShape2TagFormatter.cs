@@ -15,11 +15,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        protected override void WriteShapes(DefineShape2Tag tag, XElement xEdges) {
-            foreach (var shapeRecord in tag.ShapeRecords) {
-                xEdges.Add(XShapeRecord.ToXml(shapeRecord));
-            }
+        protected override XElement FormatShape(DefineShape2Tag tag) {
+            return XShape.ToXml(tag.ShapeRecords);
         }
+
 
         protected override void AcceptShapeTagElement(DefineShape2Tag tag, XElement element) {
         }

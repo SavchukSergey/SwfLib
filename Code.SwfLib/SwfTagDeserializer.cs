@@ -89,6 +89,7 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(PlaceObject3Tag tag, SwfStreamReader reader) {
+            //TODO: deserialize
             return tag;
         }
 
