@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
     [TestFixture]
-    public class SwfStreamWriterTest {
+    public class SwfStreamWriterTest : TestFixtureBase {
 
         [Test]
         public void WriteFixedPoint16FromBitsTest() {
@@ -307,5 +307,49 @@ namespace Code.SwfLib.Tests {
         //    Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         //}
 
+        [Test]
+        public void WriteEncodedU32Byte1Test() {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteEncodedU32(0x28);
+            Assert.AreEqual(1, mem.Length);
+            CheckBits(mem, "00101000");
+        }
+
+        [Test]
+        public void WriteEncodedU32Bytes2Test() {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteEncodedU32(0x3aa8);
+            Assert.AreEqual(2, mem.Length);
+            CheckBits(mem, "10101000", "01110101");
+        }
+
+        [Test]
+        public void WriteEncodedU32Bytes3Test() {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteEncodedU32(0x013aa8);
+            Assert.AreEqual(3, mem.Length);
+            CheckBits(mem, "10101000", "11110101", "00000100");
+        }
+
+        [Test]
+        public void WriteEncodedU32Bytes4Test() {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteEncodedU32(0x08013aa8);
+            Assert.AreEqual(4, mem.Length);
+            CheckBits(mem, "10101000", "11110101", "10000100", "01000000");
+        }
+
+        [Test]
+        public void WriteEncodedU32Bytes5Test() {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteEncodedU32(0xa8013aa8);
+            Assert.AreEqual(5, mem.Length);
+            CheckBits(mem, "10101000", "11110101", "10000100", "11000000", "00001010");
+        }
     }
 }

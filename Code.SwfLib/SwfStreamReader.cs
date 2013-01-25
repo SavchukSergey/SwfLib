@@ -79,6 +79,30 @@ namespace Code.SwfLib {
             get { return _reader.BaseStream.Length - _reader.BaseStream.Position; }
         }
 
+        public uint ReadEncodedU32() {
+            AlignToByte();
+            uint val = 0;
+            var bt = _reader.ReadByte();
+            val |= bt & 0x7fu;
+            if ((bt & 0x80) == 0) return val;
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 7;
+            if ((bt & 0x80) == 0) return val;
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 14;
+            if ((bt & 0x80) == 0) return val;
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 21;
+            if ((bt & 0x80) == 0) return val;
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 28;
+            return val;
+        }
+
         /// <summary>
         /// Reads Null-terminated string
         /// </summary>

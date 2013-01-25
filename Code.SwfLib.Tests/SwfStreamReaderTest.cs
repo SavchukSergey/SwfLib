@@ -296,5 +296,55 @@ namespace Code.SwfLib.Tests {
             reader.ReadRect(out rect);
             Assert.AreEqual(etalon, rect);
         }
+
+        [Test]
+        public void ReadEncodedU32Byte1Test() {
+            var mem = new MemoryStream();
+            WriteBits(mem, "00101000");
+            var reader = new SwfStreamReader(mem);
+            var actual = reader.ReadEncodedU32();
+            Assert.AreEqual(1, mem.Position);
+            Assert.AreEqual(0x28, actual);
+        }
+
+        [Test]
+        public void ReadEncodedU32Bytes2Test() {
+            var mem = new MemoryStream();
+            WriteBits(mem, "10101000", "01110101");
+            var reader = new SwfStreamReader(mem);
+            var actual = reader.ReadEncodedU32();
+            Assert.AreEqual(2, mem.Position);
+            Assert.AreEqual(0x3aa8, actual);
+        }
+
+        [Test]
+        public void ReadEncodedU32Bytes3Test() {
+            var mem = new MemoryStream();
+            WriteBits(mem, "10101000", "11110101", "00000100");
+            var reader = new SwfStreamReader(mem);
+            var actual = reader.ReadEncodedU32();
+            Assert.AreEqual(3, mem.Position);
+            Assert.AreEqual(0x013aa8, actual);
+        }
+
+        [Test]
+        public void ReadEncodedU32Bytes4Test() {
+            var mem = new MemoryStream();
+            WriteBits(mem, "10101000", "11110101", "10000100", "01000000");
+            var reader = new SwfStreamReader(mem);
+            var actual = reader.ReadEncodedU32();
+            Assert.AreEqual(4, mem.Position);
+            Assert.AreEqual(0x08013aa8, actual);
+        }
+
+        [Test]
+        public void ReadEncodedU32Bytes5Test() {
+            var mem = new MemoryStream();
+            WriteBits(mem, "10101000", "11110101", "10000100", "11000000", "00001010");
+            var reader = new SwfStreamReader(mem);
+            var actual = reader.ReadEncodedU32();
+            Assert.AreEqual(5, mem.Position);
+            Assert.AreEqual(0xa8013aa8, actual);
+        }
     }
 }

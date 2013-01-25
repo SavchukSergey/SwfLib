@@ -127,6 +127,40 @@ namespace Code.SwfLib {
             _writer.Write(val);
         }
 
+        public void WriteEncodedU32(uint val) {
+            FlushBits();
+
+            if (val < 0x80) {
+                _writer.Write((byte)val);
+            } else {
+                _writer.Write((byte)((val & 0x7f) | 0x80));
+                val = val >> 7;
+
+                if (val < 0x80) {
+                    _writer.Write((byte)val);
+                } else {
+                    _writer.Write((byte)((val & 0x7f) | 0x80));
+                    val = val >> 7;
+
+                    if (val < 0x80) {
+                        _writer.Write((byte)val);
+                    } else {
+                        _writer.Write((byte)((val & 0x7f) | 0x80));
+                        val = val >> 7;
+
+                        if (val < 0x80) {
+                            _writer.Write((byte)val);
+                        } else {
+                            _writer.Write((byte)((val & 0x7f) | 0x80));
+                            val = val >> 7;
+
+                            _writer.Write((byte)(val & 0x7f));
+                        }
+                    }
+                }
+            }
+        }
+
         public void WriteString(string val) {
             var bytes = Encoding.UTF8.GetBytes(val);
             _writer.Write(bytes);
