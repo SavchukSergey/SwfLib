@@ -26,7 +26,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
 
         }
 
-        public static object ToXml(IList<FillStyleRGBA> fillStyles, IList<LineStyleRGBA> lineStyles) {
+        public static XElement ToXml(IList<FillStyleRGBA> fillStyles, IList<LineStyleRGBA> lineStyles) {
             var xStyleList = new XElement("StyleList");
 
             var xFillStyles = new XElement("fillStyles");

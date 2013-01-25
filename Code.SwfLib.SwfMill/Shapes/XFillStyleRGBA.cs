@@ -36,7 +36,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         private static void AddMatrix(XElement xml, SwfMatrix matrix) {
-            xml.Add(new XElement("Matrix", XMatrix.ToXml(matrix)));
+            xml.Add(new XElement("matrix", XMatrix.ToXml(matrix)));
         }
 
         private static void AddSpreadMode(XElement xml, SpreadMode mode) {

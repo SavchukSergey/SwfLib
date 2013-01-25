@@ -8,18 +8,20 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         private const string EDGE_BOUNDS_ELEM = "strokeBounds";
 
-        protected override void WriteStyles(DefineShape4Tag tag, XElement xStyles) {
-            xStyles.Add(XStyleList.ToXml(tag.FillStyles, tag.LineStyles));
-        }
-
-        protected override void ReadShapes(DefineShape4Tag tag, XElement xEdges) {
-            foreach (var xShape in xEdges.Elements()) {
-                tag.ShapeRecords.Add(XShapeRecord.ExFromXml(xShape));
-            }
+        protected override XElement FormatStyles(DefineShape4Tag tag) {
+            return XStyleList.ToXml(tag.FillStyles, tag.LineStyles);
         }
 
         protected override XElement FormatShape(DefineShape4Tag tag) {
             return XShape.ToXml(tag.ShapeRecords);
+        }
+
+        protected override void ReadShapes(DefineShape4Tag tag, XElement xShape) {
+            XShape.FromXml(xShape, tag.ShapeRecords);
+        }
+
+        protected override void ReadStyles(DefineShape4Tag tag, XElement xStyleList) {
+            XStyleList.FromXml(xStyleList, tag.FillStyles, tag.LineStyles);
         }
 
         protected override void FormatAdditionalBounds(DefineShape4Tag tag, XElement elem) {

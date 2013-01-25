@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
@@ -9,31 +8,27 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         private const string BOUNDS_ELEM = "bounds";
         private const string SHAPES_ELEM = "shapes";
-        protected const string STYLES_ELEM = "styles";
-
+        private const string STYLES_ELEM = "styles";
 
         protected sealed override XElement FormatTagElement(T tag, XElement xTag) {
             xTag.Add(new XElement(BOUNDS_ELEM, XRect.ToXml(tag.ShapeBounds)));
 
             FormatAdditionalBounds(tag, xTag);
 
-            var xStyles = new XElement(STYLES_ELEM);
-            WriteStyles(tag, xStyles);
+            var xStyles = new XElement(STYLES_ELEM, FormatStyles(tag));
             xTag.Add(xStyles);
 
-            var xShapes = new XElement(SHAPES_ELEM);
-            var xShape = FormatShape(tag);
-            xShapes.Add(xShape);
+            var xShapes = new XElement(SHAPES_ELEM, FormatShape(tag));
             xTag.Add(xShapes);
 
             return xTag;
         }
 
-        protected abstract void WriteStyles(T tag, XElement xStyles);
-
-        protected abstract void ReadShapes(T tag, XElement xEdges);
-
+        protected abstract XElement FormatStyles(T tag);
         protected abstract XElement FormatShape(T tag);
+
+        protected abstract void ReadShapes(T tag, XElement xShape);
+        protected abstract void ReadStyles(T tag, XElement xStyleList);
 
         protected sealed override void AcceptTagAttribute(T tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
@@ -47,12 +42,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                 case BOUNDS_ELEM:
                     tag.ShapeBounds = XRect.FromXml(element.Element("Rectangle"));
                     break;
+                case STYLES_ELEM:
+                    var xStyleList = element.Element("StyleList");
+                    ReadStyles(tag, xStyleList);
+                    break;
                 case SHAPES_ELEM:
-                    var array = element.Element(XName.Get("Shape"));
-                    var xEdges = array.Element("edges");
-                    if (xEdges != null) {
-                        ReadShapes(tag, xEdges);
-                    }
+                    var xShape = element.Element("Shape");
+                    ReadShapes(tag, xShape);
                     break;
                 default:
                     AcceptShapeTagElement(tag, element);
@@ -60,18 +56,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        protected static XElement FormatFillStyle(FillStyleRGB style) {
-            var fillStyle = style;
-            return _formatters.FillStyleRGB.Format(ref fillStyle);
-        }
-
-        protected static XElement FormatFillStyle(FillStyleRGBA style) {
-            var fillStyle = style;
-            return _formatters.FillStyleRGBA.Format(ref fillStyle);
-        }
-
         protected virtual void FormatAdditionalBounds(T tag, XElement elem) { }
-        protected abstract void AcceptShapeTagElement(T tag, XElement element);
+
+        protected virtual void AcceptShapeTagElement(T tag, XElement element) { }
 
         protected override ushort? GetObjectID(T tag) {
             return tag.ShapeID;
