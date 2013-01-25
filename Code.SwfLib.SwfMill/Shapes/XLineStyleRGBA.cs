@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -9,6 +10,10 @@ namespace Code.SwfLib.SwfMill.Shapes {
             return new XElement("LineStyle",
                 new XAttribute("width", lineStyle.Width),
                 new XElement("color", XColorRGBA.ToXml(lineStyle.Color)));
+        }
+
+        public static LineStyleRGBA FromXml(XElement xLineStyle) {
+            throw new NotImplementedException();
         }
     }
 }

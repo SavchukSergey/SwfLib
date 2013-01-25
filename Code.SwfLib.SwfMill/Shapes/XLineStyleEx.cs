@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -22,11 +23,15 @@ namespace Code.SwfLib.SwfMill.Shapes {
                 res.Add(new XAttribute("miterFactor", lineStyle.MilterLimitFactor));
             }
             if (lineStyle.HasFill) {
-                res.Add(new XElement("fillStyle", XFillStyleRGBA.ToXml(lineStyle.FillStyle)));
+                res.Add(new XElement("fillStyle", XFillStyle.ToXml(lineStyle.FillStyle)));
             } else {
                 res.Add(new XElement("fillColor", XColorRGBA.ToXml(lineStyle.Color)));
             }
             return res;
+        }
+
+        public static LineStyleEx FromXml(XElement xLineStyle) {
+            throw new NotImplementedException();
         }
     }
 }

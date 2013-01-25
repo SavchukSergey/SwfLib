@@ -157,9 +157,5 @@ namespace Code.SwfLib.SwfMill
             return val ? "1" : "0";
         }
 
-        public static XElement FormatBinaryData(byte[] bytes)
-        {
-            return new XElement(XName.Get("data"), Convert.ToBase64String(bytes));
-        }
     }
 }

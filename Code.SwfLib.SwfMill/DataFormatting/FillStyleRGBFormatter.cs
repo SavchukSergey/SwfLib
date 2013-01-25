@@ -182,7 +182,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         private XElement FormatLinearGradientRGBFillStyle(ref FillStyleRGB style) {
-            return XFillStyleRGB.ToXml(style);
+            return XFillStyle.ToXml(style);
         }
 
         private XElement FormatSolidColorRGBFillStyle(ref FillStyleRGB style) {
