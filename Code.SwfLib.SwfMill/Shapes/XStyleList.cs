@@ -22,8 +22,6 @@ namespace Code.SwfLib.SwfMill.Shapes {
             }
 
             return xStyleList;
-
-
         }
 
         public static XElement ToXml(IList<FillStyleRGBA> fillStyles, IList<LineStyleRGBA> lineStyles) {
@@ -64,5 +62,46 @@ namespace Code.SwfLib.SwfMill.Shapes {
             return xStyleList;
         }
 
+        public static void FromXml(XElement xStyleList, IList<FillStyleRGB> fillStyles, IList<LineStyleRGB> lineStyles) {
+            var xFillStyles = xStyleList.Element("fillStyles");
+            foreach (var xFillStyle in xFillStyles.Elements()) {
+                var fillStyle = XFillStyleRGB.FromXml(xFillStyle);
+                fillStyles.Add(fillStyle);
+            }
+
+            var xLineStyles = xStyleList.Element("lineStyles");
+            foreach (var xLineStyle in xLineStyles.Elements()) {
+                var fillStyle = XLineStyleRGB.FromXml(xLineStyle);
+                fillStyles.Add(fillStyle);
+            }
+        }
+
+        public static void FromXml(XElement xStyleList, IList<FillStyleRGBA> fillStyles, IList<LineStyleRGBA> lineStyles) {
+            var xFillStyles = xStyleList.Element("fillStyles");
+            foreach (var xFillStyle in xFillStyles.Elements()) {
+                var fillStyle = XFillStyleRGBA.FromXml(xFillStyle);
+                fillStyles.Add(fillStyle);
+            }
+
+            var xLineStyles = xStyleList.Element("lineStyles");
+            foreach (var xLineStyle in xLineStyles.Elements()) {
+                var fillStyle = XLineStyleRGBA.FromXml(xLineStyle);
+                fillStyles.Add(fillStyle);
+            }
+        }
+
+        public static void FromXml(XElement xStyleList, IList<FillStyleRGBA> fillStyles, IList<LineStyleEx> lineStyles) {
+            var xFillStyles = xStyleList.Element("fillStyles");
+            foreach (var xFillStyle in xFillStyles.Elements()) {
+                var fillStyle = XFillStyleRGBA.FromXml(xFillStyle);
+                fillStyles.Add(fillStyle);
+            }
+
+            var xLineStyles = xStyleList.Element("lineStyles");
+            foreach (var xLineStyle in xLineStyles.Elements()) {
+                var fillStyle = XLineStyleEx.FromXml(xLineStyle);
+                fillStyles.Add(fillStyle);
+            }
+        }
     }
 }
