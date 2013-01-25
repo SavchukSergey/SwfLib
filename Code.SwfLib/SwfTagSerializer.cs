@@ -171,6 +171,11 @@ namespace Code.SwfLib {
                 writer.WriteEncodedU32(scene.Offset);
                 writer.WriteString(scene.Name);
             }
+            writer.WriteEncodedU32((uint)tag.Frames.Count);
+            foreach (var frame in tag.Frames) {
+                writer.WriteEncodedU32(frame.FrameNumber);
+                writer.WriteString(frame.Label);
+            }
             return null;
         }
 

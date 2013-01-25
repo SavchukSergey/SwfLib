@@ -1,5 +1,5 @@
 ﻿namespace Code.SwfLib.Data {
-    public class SceneAndFrameLabel {
+    public class SceneOffsetData {
         public uint Offset;
 
         public string Name;

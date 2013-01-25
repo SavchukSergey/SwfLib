@@ -195,13 +195,21 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineSceneAndFrameLabelDataTag tag, SwfStreamReader reader) {
-            var count = reader.ReadEncodedU32();
-            for (var i = 0; i < count; i++) {
-                var item = new SceneAndFrameLabel {
+            var scenesCount = reader.ReadEncodedU32();
+            for (var i = 0; i < scenesCount; i++) {
+                var item = new SceneOffsetData {
                     Offset = reader.ReadEncodedU32(),
                     Name = reader.ReadString()
                 };
                 tag.Scenes.Add(item);
+            }
+            var framesCount = reader.ReadEncodedU32();
+            for (var i = 0; i < framesCount; i++) {
+                var item = new FrameLabelData {
+                    FrameNumber = reader.ReadEncodedU32(),
+                    Label = reader.ReadString()
+                };
+                tag.Frames.Add(item);
             }
             return tag;
         }

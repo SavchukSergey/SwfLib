@@ -168,7 +168,8 @@
     <Compile Include="Actions\ClipActions.cs" />
     <Compile Include="Actions\IActionVisitor.cs" />
     <Compile Include="Data\ColorTransformRGBA.cs" />
-    <Compile Include="Data\SceneAndFrameLabel.cs" />
+    <Compile Include="Data\FrameLabelData.cs" />
+    <Compile Include="Data\SceneOffsetData.cs" />
     <Compile Include="Gradients\GradientRecordRGBA.cs" />
     <Compile Include="Gradients\GradientRGBA.cs" />
     <Compile Include="Gradients\GradientStreamExt.cs" />

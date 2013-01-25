@@ -14,6 +14,16 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 xScenes.Add(xScene);
             }
             xTag.Add(xScenes);
+
+            var xFrames = new XElement("frames");
+            foreach (var frame in tag.Frames) {
+                var xFrame = new XElement("Frame",
+                    new XAttribute("number", frame.FrameNumber),
+                    new XAttribute("label", frame.Label));
+                xFrames.Add(xFrame);
+            }
+            xTag.Add(xFrames);
+
             return xTag;
         }
 
@@ -26,11 +36,22 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             foreach (var xScene in xScenes.Elements()) {
                 var xOffset = xScene.Attribute("offset");
                 var xName = xScene.Attribute("name");
-                var scene = new SceneAndFrameLabel {
+                var scene = new SceneOffsetData {
                     Offset = uint.Parse(xOffset.Value),
                     Name = xName.Value
                 };
                 tag.Scenes.Add(scene);
+            }
+
+            var xFrames = element.Element("frames");
+            foreach (var xFrame in xFrames.Elements()) {
+                var xNumber = xFrame.Attribute("number");
+                var xLabel = xFrame.Attribute("label");
+                var frame = new FrameLabelData() {
+                    FrameNumber = uint.Parse(xNumber.Value),
+                    Label = xLabel.Value
+                };
+                tag.Frames.Add(frame);
             }
         }
 

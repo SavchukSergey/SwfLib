@@ -4,7 +4,9 @@ using Code.SwfLib.Data;
 namespace Code.SwfLib.Tags.ControlTags {
     public class DefineSceneAndFrameLabelDataTag : ControlBaseTag {
 
-        public readonly IList<SceneAndFrameLabel> Scenes = new List<SceneAndFrameLabel>();
+        public readonly IList<SceneOffsetData> Scenes = new List<SceneOffsetData>();
+
+        public readonly IList<FrameLabelData> Frames = new List<FrameLabelData>();
 
         public override SwfTagType TagType {
             get { return SwfTagType.DefineSceneAndFrameLabelData; }
