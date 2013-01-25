@@ -47,7 +47,7 @@ namespace Code.SwfLib.Tests {
             }
         }
 
-        public static void AreEqual(ShapeRecord expected, ShapeRecord actual, string message) {
+        public static void AreEqual(IShapeRecord expected, IShapeRecord actual, string message) {
             if (expected is StyleChangeShapeRecord && actual is StyleChangeShapeRecord) {
                 AreEqual((StyleChangeShapeRecord)expected, (StyleChangeShapeRecord)actual, message);
             } else if (expected is StraightEdgeShapeRecord && actual is StraightEdgeShapeRecord) {

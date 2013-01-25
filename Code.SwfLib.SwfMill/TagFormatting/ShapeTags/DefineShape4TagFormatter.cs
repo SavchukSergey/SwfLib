@@ -20,6 +20,18 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
+        protected override void ReadShapes(DefineShape4Tag tag, XElement xEdges) {
+            foreach (var xShape in xEdges.Elements()) {
+                tag.ShapeRecords.Add(XShapeRecord.ExFromXml(xShape));
+            }
+        }
+
+        protected override void WriteShapes(DefineShape4Tag tag, XElement xEdges) {
+            foreach (var shapeRecord in tag.ShapeRecords) {
+                xEdges.Add(XShapeRecord.ToXml(shapeRecord));
+            }
+        }
+
         protected override void FormatAdditionalBounds(DefineShape4Tag tag, XElement elem) {
             elem.Add(new XElement(EDGE_BOUNDS_ELEM, XRect.ToXml(tag.EdgeBounds)));
         }

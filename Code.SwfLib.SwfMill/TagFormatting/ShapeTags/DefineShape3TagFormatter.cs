@@ -21,6 +21,19 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
+        protected override void ReadShapes(DefineShape3Tag tag, XElement xEdges) {
+            foreach (var xShape in xEdges.Elements()) {
+                tag.ShapeRecords.Add(XShapeRecord.RGBAFromXml(xShape));
+            }
+        }
+
+
+        protected override void WriteShapes(DefineShape3Tag tag, XElement xEdges) {
+            foreach (var shapeRecord in tag.ShapeRecords) {
+                xEdges.Add(XShapeRecord.ToXml(shapeRecord));
+            }
+        }
+
         protected override void AcceptShapeTagElement(DefineShape3Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case STYLES_ELEM:
@@ -36,10 +49,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         private static void ReadStyles(DefineShape3Tag tag, XElement styleElements) {
             //TODO: Implement styles reading;
-        }
-
-        private static void ReadShapes(DefineShape3Tag tag, XElement shapes) {
-            //TODO: Implement shapes reading;
         }
 
         public override string TagName {

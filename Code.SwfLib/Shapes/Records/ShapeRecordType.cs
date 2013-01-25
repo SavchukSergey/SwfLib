@@ -3,7 +3,6 @@
 
         EndRecord,
         StyleChangeRecord,
-        StyleChange2Record,
         StraightEdge,
         CurvedEdgeRecord
 

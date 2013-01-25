@@ -9,19 +9,19 @@ namespace Code.SwfLib.Shapes {
             public SwfStreamWriter Writer;
         }
 
-        public void Write(SwfStreamWriter writer, IShapeRecordRGB record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
-            WriteCore(writer, record, allowBigArray, ref fillBitsCount, ref lineBitsCount);
+        public void WriteRGB(SwfStreamWriter writer, IShapeRecordRGB record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
+            Write(writer, record, allowBigArray, ref fillBitsCount, ref lineBitsCount);
         }
 
-        public void Write(SwfStreamWriter writer, IShapeRecordRGBA record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
-            WriteCore(writer, record, allowBigArray, ref fillBitsCount, ref lineBitsCount);
+        public void WriteRGBA(SwfStreamWriter writer, IShapeRecordRGBA record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
+            Write(writer, record, allowBigArray, ref fillBitsCount, ref lineBitsCount);
         }
 
-        public void Write(SwfStreamWriter writer, IShapeRecordEx record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
-            WriteCore(writer, record, allowBigArray, ref fillBitsCount, ref lineBitsCount);
+        public void WriteEx(SwfStreamWriter writer, IShapeRecordEx record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
+            Write(writer, record, allowBigArray, ref fillBitsCount, ref lineBitsCount);
         }
 
-        private void WriteCore(SwfStreamWriter writer, IShapeRecord record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
+        private void Write(SwfStreamWriter writer, IShapeRecord record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
             var ctx = new ShapeRecordWriteContext {
                 FillStyleBits = fillBitsCount,
                 LineStyleBits = lineBitsCount,

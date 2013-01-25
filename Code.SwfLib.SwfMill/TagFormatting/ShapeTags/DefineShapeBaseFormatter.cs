@@ -44,24 +44,16 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
             var xEdges = new XElement("edges");
 
-            foreach (var shapeRecord in tag.ShapeRecords) {
-                xEdges.Add(XShapeRecord.ToXml(shapeRecord));
-            }
+            WriteShapes(tag, xEdges);
 
             xShape.Add(xEdges);
             xShapes.Add(xShape);
             xml.Add(xShapes);
         }
 
-        private static void ReadShapes(T tag, XElement shapes) {
-            var array = shapes.Element(XName.Get("Shape"));
-            var edges = array.Element("edges");
-            if (edges != null) {
-                foreach (var xShapeRecord in edges.Elements()) {
-                    tag.ShapeRecords.Add(XShapeRecord.FromXml(xShapeRecord));
-                }
-            }
-        }
+        protected abstract void ReadShapes(T tag, XElement xEdges);
+
+        protected abstract void WriteShapes(T tag, XElement xEdges);
 
         protected sealed override void AcceptTagAttribute(T tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
@@ -76,7 +68,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                     tag.ShapeBounds = XRect.FromXml(element.Element("Rectangle"));
                     break;
                 case SHAPES_ELEM:
-                    ReadShapes(tag, element);
+                    var array = element.Element(XName.Get("Shape"));
+                    var xEdges = array.Element("edges");
+                    if (xEdges != null) {
+                        ReadShapes(tag, xEdges);
+                    }
                     break;
                 default:
                     AcceptShapeTagElement(tag, element);

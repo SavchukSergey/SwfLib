@@ -14,7 +14,7 @@ namespace Code.SwfLib {
             writer.FlushBits();
             for (var i = 0; i < shapeRecords.Count; i++) {
                 var shapeRecord = shapeRecords[i];
-                _shapeRecordWriter.Write(writer, shapeRecord, false, ref fillStyleBits, ref lineStyleBits);
+                _shapeRecordWriter.WriteRGB(writer, shapeRecord, false, ref fillStyleBits, ref lineStyleBits);
             }
 
         }
@@ -25,7 +25,7 @@ namespace Code.SwfLib {
             writer.FlushBits();
             for (var i = 0; i < shapeRecords.Count; i++) {
                 var shapeRecord = shapeRecords[i];
-                _shapeRecordWriter.Write(writer, shapeRecord, true, ref fillStyleBits, ref lineStyleBits);
+                _shapeRecordWriter.WriteRGBA(writer, shapeRecord, true, ref fillStyleBits, ref lineStyleBits);
             }
 
         }
@@ -36,7 +36,7 @@ namespace Code.SwfLib {
             writer.FlushBits();
             for (var i = 0; i < shapeRecords.Count; i++) {
                 var shapeRecord = shapeRecords[i];
-                _shapeRecordWriter.Write(writer, shapeRecord, true, ref fillStyleBits, ref lineStyleBits);
+                _shapeRecordWriter.WriteEx(writer, shapeRecord, true, ref fillStyleBits, ref lineStyleBits);
             }
 
         }

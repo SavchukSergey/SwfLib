@@ -1,7 +1,9 @@
 ﻿using Code.SwfLib.Shapes.Records;
 
 namespace Code.SwfLib.Shapes {
-    public abstract class ShapeRecordReader<T, TStyleChange> where T : IShapeRecord where TStyleChange : StyleChangeShapeRecord {
+    public abstract class ShapeRecordReader<T, TStyleChange>
+        where T : IShapeRecord
+        where TStyleChange : StyleChangeShapeRecord {
 
         public T Read(SwfStreamReader reader, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
             var isEdge = reader.ReadBit();
@@ -78,7 +80,7 @@ namespace Code.SwfLib.Shapes {
         protected abstract TStyleChange CreateStyleChangeRecord();
         protected abstract void ReadFillStyles(SwfStreamReader reader, TStyleChange record, bool allowBigArray);
         protected abstract void ReadLineStyles(SwfStreamReader reader, TStyleChange record, bool allowBigArray);
-        
+
         protected abstract T Adapt(EndShapeRecord record);
         protected abstract T Adapt(StraightEdgeShapeRecord record);
         protected abstract T Adapt(CurvedEdgeShapeRecord record);
