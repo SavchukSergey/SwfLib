@@ -34,9 +34,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         protected sealed override void AcceptTagElement(T tag, XElement element) {
             switch (element.Name.LocalName) {
                 case TRANSFORM_ELEM:
-                    SwfMatrix matrix;
-                    _formatters.Matrix.Parse(element.Element(TRANSFORM_TYPE_ELEM), out matrix);
-                    tag.Matrix = matrix;
+                    tag.Matrix = XMatrix.FromXml(element.Element(TRANSFORM_TYPE_ELEM));
                     HasMatrix(tag, true);
                     break;
                 default:

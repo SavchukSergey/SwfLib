@@ -92,8 +92,10 @@ namespace Code.SwfLib.SwfMill.Shapes {
             return new FillStyleRGB {
                 FillStyleType = FillStyleType.LinearGradient,
                 Gradient = {
-                    SpreadMode = GetSpreadMode(xFillStyle)
+                    SpreadMode = GetSpreadMode(xFillStyle),
+                    InterpolationMode = GetInterpolationMode(xFillStyle),
                 },
+                GradientMatrix = GetMatrix(xFillStyle)
                 //TODO: other fields
             };
         }
@@ -102,14 +104,14 @@ namespace Code.SwfLib.SwfMill.Shapes {
             return new FillStyleRGBA {
                 FillStyleType = FillStyleType.LinearGradient,
                 Gradient = {
-                    SpreadMode = GetSpreadMode(xFillStyle)
+                    SpreadMode = GetSpreadMode(xFillStyle),
+                    InterpolationMode = GetInterpolationMode(xFillStyle),
                 },
+                GradientMatrix = GetMatrix(xFillStyle)
                 //TODO: other fields
             };
         }
 
-        //AddSpreadMode(res, fillStyle.Gradient.SpreadMode);
-        //           AddInterpolationMode(res, fillStyle.Gradient.InterpolationMode);
         //           AddMatrix(res, fillStyle.GradientMatrix);
         //           AddGradientColors(res, fillStyle.Gradient.GradientRecords);
 
@@ -137,6 +139,11 @@ namespace Code.SwfLib.SwfMill.Shapes {
             xml.Add(new XElement("matrix", XMatrix.ToXml(matrix)));
         }
 
+        private static SwfMatrix GetMatrix(XElement xFillStyle) {
+            var xMatrix = xFillStyle.Element("matrix");
+            return XMatrix.FromXml(xMatrix.Element("Transform"));
+        }
+
         private static void AddSpreadMode(XElement xml, SpreadMode mode) {
             xml.Add(new XAttribute("spreadMode", mode.ToString()));
         }
@@ -150,6 +157,13 @@ namespace Code.SwfLib.SwfMill.Shapes {
 
         private static void AddInterpolationMode(XElement xml, InterpolationMode mode) {
             xml.Add(new XAttribute("interpolationMode", mode.ToString()));
+        }
+
+        private static InterpolationMode GetInterpolationMode(XElement xFillStyle) {
+            var xMode = xFillStyle.Attribute("spreadMode");
+            var res = InterpolationMode.Normal;
+            if (xMode == null) return res;
+            return (InterpolationMode)Enum.Parse(typeof(InterpolationMode), xMode.Value);
         }
 
         private static string GetNodeName(FillStyleType type) {
