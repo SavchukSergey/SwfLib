@@ -59,6 +59,12 @@ namespace Code.SwfLib {
             return rgb;
         }
 
+        public static SwfRect ReadRect(this SwfStreamReader reader) {
+            SwfRect rect;
+            ReadRect(reader, out rect);
+            return rect;
+        }
+
         public static void ReadRect(this SwfStreamReader reader, out SwfRect rect) {
             reader.AlignToByte();
             var bits = reader.ReadUnsignedBits(5);

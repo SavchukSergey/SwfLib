@@ -1,4 +1,8 @@
-﻿namespace Code.SwfLib.Tags.FontTags {
+﻿using System.Collections.Generic;
+using Code.SwfLib.Data;
+using Code.SwfLib.Fonts;
+
+namespace Code.SwfLib.Tags.FontTags {
     public class DefineFont3Tag : FontBaseTag {
 
         public DefineFont3Attributes Attributes;
@@ -6,7 +10,7 @@
         public byte Language;
 
         public string FontName;
-        
+
         #region Attributes flags
 
         public bool HasLayout {
@@ -91,7 +95,15 @@
 
         #endregion
 
-        public DefineFont3Glyph[] Glyphs;
+        public short Ascent { get; set; }
+
+        public short Descent { get; set; }
+
+        public short Leading { get; set; }
+
+        public readonly IList<Glyph> Glyphs = new List<Glyph>();
+
+        public readonly IList<KerningRecord> KerningRecords = new List<KerningRecord>();
 
         public override SwfTagType TagType {
             get { return SwfTagType.DefineFont3; }

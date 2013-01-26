@@ -169,6 +169,9 @@
     <Compile Include="Actions\IActionVisitor.cs" />
     <Compile Include="Data\ColorTransformRGBA.cs" />
     <Compile Include="Data\FrameLabelData.cs" />
+    <Compile Include="Fonts\FontStreamExt.cs" />
+    <Compile Include="Fonts\Glyph.cs" />
+    <Compile Include="Fonts\KerningRecord.cs" />
     <Compile Include="Data\SceneOffsetData.cs" />
     <Compile Include="Gradients\GradientRecordRGBA.cs" />
     <Compile Include="Gradients\GradientRGBA.cs" />
@@ -273,7 +276,6 @@
     <Compile Include="Tags\ButtonTags\DefineButton2Tag.cs" />
     <Compile Include="Tags\TextTags\DefineEditTextTag.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Attributes.cs" />
-    <Compile Include="Tags\FontTags\DefineFont3Glyph.cs" />
     <Compile Include="Tags\FontTags\DefineFont3Tag.cs" />
     <Compile Include="Tags\FontTags\DefineFontAlignZonesTag.cs" />
     <Compile Include="Tags\FontTags\DefineFontInfoTag.cs" />

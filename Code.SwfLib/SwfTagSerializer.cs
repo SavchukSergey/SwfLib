@@ -398,7 +398,7 @@ namespace Code.SwfLib {
             var name = Encoding.UTF8.GetBytes(tag.FontName);
             writer.WriteByte((byte)name.Length);
             writer.WriteBytes(name);
-            writer.WriteUInt16((ushort)tag.Glyphs.Length);
+            writer.WriteUInt16((ushort)tag.Glyphs.Count);
             return null;
         }
 

@@ -64,9 +64,11 @@
     <Compile Include="Data\XColorTransformRGB.cs" />
     <Compile Include="Data\XMatrix.cs" />
     <Compile Include="Data\XRect.cs" />
+    <Compile Include="Fonts\XKerningRecord.cs" />
     <Compile Include="Gradients\XGradientRecordRGBA.cs" />
     <Compile Include="Gradients\XGradientRecordRGB.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Shapes\XGlyphShape.cs" />
     <Compile Include="Shapes\XLineStyleRGBA.cs" />
     <Compile Include="Shapes\XLineStyleRGB.cs" />
     <Compile Include="Shapes\XFillStyle.cs" />

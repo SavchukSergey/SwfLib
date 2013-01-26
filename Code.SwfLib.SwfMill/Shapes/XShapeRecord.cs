@@ -60,8 +60,10 @@ namespace Code.SwfLib.SwfMill.Shapes {
 
             private static XElement FormatShapeSetup(StyleChangeShapeRecord styleChange) {
                 var setup = new XElement("ShapeSetup");
-                setup.Add(new XAttribute("x", styleChange.MoveDeltaX));
-                setup.Add(new XAttribute("y", styleChange.MoveDeltaY));
+                //if (styleChange.MoveDeltaX != 0 || styleChange.MoveDeltaY != 0) {
+                    setup.Add(new XAttribute("x", styleChange.MoveDeltaX));
+                    setup.Add(new XAttribute("y", styleChange.MoveDeltaY));
+                //}
                 if (styleChange.FillStyle0.HasValue) {
                     setup.Add(new XAttribute("fillStyle0", styleChange.FillStyle0.Value));
                 }

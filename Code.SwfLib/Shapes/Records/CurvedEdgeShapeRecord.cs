@@ -16,5 +16,9 @@
         public TResult AcceptVisitor<TArg, TResult>(IShapeRecordVisitor<TArg, TResult> visitor, TArg arg) {
             return visitor.Visit(this, arg);
         }
+
+        public override string ToString() {
+            return string.Format("CurveTo: anchor ({0}, {1}), control: ({2}, {3})", AnchorDeltaX, AnchorDeltaY, ControlDeltaX, ControlDeltaY);
+        }
     }
 }

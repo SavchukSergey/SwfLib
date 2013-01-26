@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using Code.SwfLib.Actions;
 using Code.SwfLib.Data;
+using Code.SwfLib.Fonts;
+using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
@@ -105,7 +108,7 @@ namespace Code.SwfLib {
             var hasCacheAsBitmap = reader.ReadBit();
             var hasBlendMode = reader.ReadBit();
             tag.HasFilterList = reader.ReadBit();
-            
+
             tag.Depth = reader.ReadUInt16();
 
             if (tag.HasCharacter) {
@@ -462,10 +465,44 @@ namespace Code.SwfLib {
             int nameLength = reader.ReadByte();
             tag.FontName = Encoding.UTF8.GetString(reader.ReadBytes(nameLength)).TrimEnd('\0');
             int glyphsCount = reader.ReadUInt16();
-            tag.Glyphs = new DefineFont3Glyph[glyphsCount];
-            //for (var i = 0; i < glyphsCount; i++) {
-            //    tag.Glyphs[i] = new DefineFont3Glyph();
-            //}
+            var offsetTable = new uint[glyphsCount];
+            for (var i = 0; i < glyphsCount; i++) {
+                offsetTable[i] = tag.WideOffsets ? reader.ReadUInt32() : reader.ReadUInt16();
+            }
+            uint codeTableOffset = tag.WideOffsets ? reader.ReadUInt32() : reader.ReadUInt16();
+
+            for (var i = 0; i < glyphsCount; i++) {
+                reader.AlignToByte();
+                var glyph = new Glyph();
+                reader.ReadToShapeRecordsRGB(glyph.Records);
+                tag.Glyphs.Add(glyph);
+            }
+
+            for (var i = 0; i < glyphsCount; i++) {
+                var glyph = tag.Glyphs[i];
+                glyph.Code = tag.WideCodes ? reader.ReadUInt16() : reader.ReadByte();
+            }
+
+            if (tag.HasLayout) {
+                tag.Ascent = reader.ReadSInt16();
+                tag.Descent = reader.ReadSInt16();
+                tag.Leading = reader.ReadSInt16();
+
+                for (var i = 0; i < glyphsCount; i++) {
+                    var glyph = tag.Glyphs[i];
+                    glyph.Advance = reader.ReadSInt16();
+                }
+
+                for (var i = 0; i < glyphsCount; i++) {
+                    var glyph = tag.Glyphs[i];
+                    glyph.Bounds = reader.ReadRect();
+                }
+
+                var kerningCounts = reader.ReadUInt16();
+                for (var i = 0; i < kerningCounts; i++) {
+                    tag.KerningRecords.Add(reader.ReadKerningRecord(tag.WideCodes));
+                }
+            }
             return tag;
         }
 
@@ -484,7 +521,7 @@ namespace Code.SwfLib {
             if (fontInfo == null) {
                 throw new InvalidDataException("Couldn't find corresponding DefineFont3Tag");
             }
-            tag.Zones = new SwfZoneArray[fontInfo.Glyphs.Length];
+            tag.Zones = new SwfZoneArray[fontInfo.Glyphs.Count];
             for (var i = 0; i < tag.Zones.Length; i++) {
                 var zone = new SwfZoneArray();
                 int count = reader.ReadByte();

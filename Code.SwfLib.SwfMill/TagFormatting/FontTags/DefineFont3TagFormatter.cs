@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Fonts;
+using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
@@ -15,7 +18,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         private const string BOLD_ATTRIB = "bold";
 
         private const string LANGUAGE_ATTRIB = "language";
-        private const string GLYPHS_COUNT_ATTRIB = "glyphsCount";
 
         protected override void AcceptTagAttribute(DefineFont3Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
@@ -24,9 +26,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                     break;
                 case LANGUAGE_ATTRIB:
                     tag.Language = byte.Parse(attrib.Value);
-                    break;
-                case GLYPHS_COUNT_ATTRIB:
-                    tag.Glyphs = new DefineFont3Glyph[int.Parse(attrib.Value)];
                     break;
                 case HAS_LAYOUT_ATTRIB:
                     tag.HasLayout = ParseBoolFromDigit(attrib);
@@ -69,7 +68,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
         protected override XElement FormatTagElement(DefineFont3Tag tag, XElement xTag) {
             xTag.Add(new XAttribute(LANGUAGE_ATTRIB, tag.Language));
-            xTag.Add(new XAttribute(GLYPHS_COUNT_ATTRIB, tag.Glyphs.Length));
             xTag.Add(new XAttribute(HAS_LAYOUT_ATTRIB, FormatBoolToDigit(tag.HasLayout)));
             xTag.Add(new XAttribute(SHIFT_JIS_ATTRIB, FormatBoolToDigit(tag.ShiftJIS)));
             xTag.Add(new XAttribute(UNICODE_ATTRIB, FormatBoolToDigit(tag.SmallText)));
@@ -79,6 +77,42 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             xTag.Add(new XAttribute(ITALIC_ATTRIB, FormatBoolToDigit(tag.Italic)));
             xTag.Add(new XAttribute(BOLD_ATTRIB, FormatBoolToDigit(tag.Bold)));
             xTag.Add(new XAttribute(NAME_ATTRIB, tag.FontName));
+
+            var xGlyphs = new XElement("glyphs");
+            foreach (var glyph in tag.Glyphs) {
+                var xGlyph = new XElement("Glyph");
+                xGlyph.Add(new XAttribute("map", glyph.Code));
+                xGlyph.Add(XGlyphShape.ToXml(glyph));
+                xGlyphs.Add(xGlyph);
+            }
+            xTag.Add(xGlyphs);
+
+            if (tag.HasLayout) {
+                xTag.Add(new XAttribute("ascent", tag.Ascent));
+                xTag.Add(new XAttribute("descent", tag.Descent));
+                xTag.Add(new XAttribute("leading", tag.Leading));
+                
+                var xAdvance = new XElement("advance");
+                foreach (var glyph in tag.Glyphs) {
+                    var xGlyph = new XElement("Short");
+                    xGlyph.Add(new XAttribute("value", glyph.Advance));
+                    xAdvance.Add(xGlyph);
+                }
+                xTag.Add(xAdvance);
+
+                var xBounds = new XElement("bounds");
+                foreach (var glyph in tag.Glyphs) {
+                    xBounds.Add(XRect.ToXml(glyph.Bounds));
+                }
+                xTag.Add(xBounds);
+
+                var xKerningRecords = new XElement("wideKerning");
+                foreach (var kerningRecord in tag.KerningRecords) {
+                    xKerningRecords.Add(XKerningRecord.ToXml(kerningRecord));
+                }
+                xTag.Add(xKerningRecords);
+            }
+
             return xTag;
         }
 

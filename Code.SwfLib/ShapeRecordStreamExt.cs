@@ -44,7 +44,7 @@ namespace Code.SwfLib {
         private static ShapeRecordRGBReader _shapeRecordRGBReader = new ShapeRecordRGBReader();
         private static ShapeRecordRGBAReader _shapeRecordRGBAReader = new ShapeRecordRGBAReader();
         private static ShapeRecordExReader _shapeRecorExReader = new ShapeRecordExReader();
-        
+
         public static void ReadToShapeRecordsRGB(this SwfStreamReader reader, IList<IShapeRecordRGB> shapeRecords) {
             var fillStyleBits = reader.ReadUnsignedBits(4);
             var lineStyleBits = reader.ReadUnsignedBits(4);
@@ -73,12 +73,12 @@ namespace Code.SwfLib {
             reader.AlignToByte();
             IShapeRecordEx record;
             do {
-                record = _shapeRecorExReader.Read(reader , true, ref fillStyleBits, ref lineStyleBits);
+                record = _shapeRecorExReader.Read(reader, true, ref fillStyleBits, ref lineStyleBits);
                 shapeRecords.Add(record);
             } while (!(record is EndShapeRecord));
         }
 
 
-        
+
     }
 }
