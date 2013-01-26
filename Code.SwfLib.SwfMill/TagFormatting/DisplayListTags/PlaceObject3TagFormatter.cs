@@ -19,6 +19,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                 case NAME_ATTRIB:
                     tag.Name = attrib.Value;
                     break;
+                case "className":
+                    tag.ClassName = attrib.Value;
+                    break;
                 case REPLACE_ATTRIB:
                     //TODO: read replace
                     break;
