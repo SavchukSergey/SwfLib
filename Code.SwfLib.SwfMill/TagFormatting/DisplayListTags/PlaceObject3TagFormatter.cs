@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.DisplayListTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class PlaceObject3TagFormatter : PlaceObjectBaseFormatter<PlaceObject3Tag> {
+
         private const string REPLACE_ATTRIB = "replace";
-        private const string DEPTH_ATTRIB = "depth";
         private const string MORPH_ATTRIB = "morph";
         private const string ALL_FLAGS1_ATTRIB = "allflags1";
         private const string ALL_FLAGS2_ATTRIB = "allflags2";
@@ -31,7 +32,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     //TODO: read flags2
                     break;
                 case BITMAP_CACHING_ATTRIB:
-                    //TODO: check swfmill schema. Probably it's bollean
                     tag.BitmapCache = byte.Parse(attrib.Value);
                     break;
                 default:
@@ -47,13 +47,21 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                 case EVENTS_ELEM:
                     //TODO: Read transform
                     break;
+                case "colorTransform":
+                    tag.ColorTransform = XColorTransformRGBA.FromXml(element.Element("ColorTransform2"));
+                    break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
         }
 
         protected override void FormatPlaceElement(PlaceObject3Tag tag, XElement elem) {
-            elem.Add(new XAttribute(BITMAP_CACHING_ATTRIB, tag.BitmapCache));
+            if (tag.BitmapCache.HasValue) {
+                elem.Add(new XAttribute(BITMAP_CACHING_ATTRIB, tag.BitmapCache.Value));
+            }
+            if (tag.ColorTransform.HasValue) {
+                elem.Add(new XElement("colorTransform", XColorTransformRGBA.ToXml(tag.ColorTransform.Value)));
+            }
         }
 
         protected override bool HasCharacter(PlaceObject3Tag tag) {

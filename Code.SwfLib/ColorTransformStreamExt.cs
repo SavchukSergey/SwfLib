@@ -10,9 +10,9 @@ namespace Code.SwfLib {
             bool hasMultTerms = reader.ReadBit();
             var bits = reader.ReadUnsignedBits(4);
             if (hasMultTerms) {
-                transform.RedMultTerm = (short) reader.ReadSignedBits(bits);
-                transform.GreenMultTerm = (short) reader.ReadSignedBits(bits);
-                transform.BlueMultTerm = (short) reader.ReadSignedBits(bits);
+                transform.RedMultTerm = (short)reader.ReadSignedBits(bits);
+                transform.GreenMultTerm = (short)reader.ReadSignedBits(bits);
+                transform.BlueMultTerm = (short)reader.ReadSignedBits(bits);
                 transform.HasMultTerms = true;
             } else {
                 transform.RedMultTerm = 0;
@@ -64,6 +64,12 @@ namespace Code.SwfLib {
             writer.FlushBits();
         }
 
+        public static ColorTransformRGBA ReadColorTransformRGBA(this SwfStreamReader reader) {
+            ColorTransformRGBA transform;
+            reader.ReadColorTransformRGBA(out transform);
+            return transform;
+        }
+
         public static void ReadColorTransformRGBA(this SwfStreamReader reader, out ColorTransformRGBA transform) {
             reader.AlignToByte();
             bool hasAddTerms = reader.ReadBit();
@@ -95,6 +101,10 @@ namespace Code.SwfLib {
                 transform.AlphaAddTerm = 0;
                 transform.HasAddTerms = false;
             }
+        }
+
+        public static void WriteColorTransformRGBA(this SwfStreamWriter writer, ColorTransformRGBA transform) {
+            WriteColorTransformRGBA(writer, ref transform);
         }
 
         public static void WriteColorTransformRGBA(this SwfStreamWriter writer, ref ColorTransformRGBA tranform) {

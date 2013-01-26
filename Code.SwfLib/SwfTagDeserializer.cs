@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -89,7 +90,74 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(PlaceObject3Tag tag, SwfStreamReader reader) {
-            //TODO: deserialize
+            tag.HasClipActions = reader.ReadBit();
+            var hasClipDepth = reader.ReadBit();
+            var hasName = reader.ReadBit();
+            var hasRatio = reader.ReadBit();
+            var hasColorMartix = reader.ReadBit();
+            tag.HasMatrix = reader.ReadBit();
+            tag.HasCharacter = reader.ReadBit();
+            tag.Move = reader.ReadBit();
+
+            tag.Reserved = (byte)reader.ReadUnsignedBits(3);
+            tag.HasImage = reader.ReadBit();
+            var hasClassName = reader.ReadBit();
+            var hasCacheAsBitmap = reader.ReadBit();
+            var hasBlendMode = reader.ReadBit();
+            tag.HasFilterList = reader.ReadBit();
+            
+            tag.Depth = reader.ReadUInt16();
+
+            if (tag.HasCharacter) {
+                tag.CharacterID = reader.ReadUInt16();
+            }
+
+            //if (hasClassName || (tag.HasImage && tag.HasCharacter)) {
+            //    tag.ClassName = reader.ReadString();
+            //}
+
+            if (hasClassName) {
+                tag.ClassName = reader.ReadString();
+            }
+
+
+            if (tag.HasMatrix) {
+                tag.Matrix = reader.ReadMatrix();
+            }
+
+            if (hasColorMartix) {
+                tag.ColorTransform = reader.ReadColorTransformRGBA();
+            }
+
+            if (hasRatio) {
+                tag.Ratio = reader.ReadUInt16();
+            }
+
+            if (hasName) {
+                tag.Name = reader.ReadString();
+            }
+
+            if (hasClipDepth) {
+                tag.ClipDepth = reader.ReadUInt16();
+            }
+
+            //TODO: uncomment
+            //if (tag.HasFilterList) {
+            //    throw new NotImplementedException();
+            //    //tag.FilterList = reader.ReadFilterList();
+            //}
+
+            //if (hasBlendMode) {
+            //    tag.BlendMode = reader.ReadByte();
+            //}
+
+            //if (hasCacheAsBitmap) {
+            //    tag.BitmapCache = reader.ReadByte();
+            //}
+
+            //if (tag.HasClipActions) {
+            //    reader.ReadClipActions(_file.FileInfo.Version, out tag.ClipActions);
+            //}
             return tag;
         }
 

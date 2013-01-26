@@ -66,6 +66,47 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(PlaceObject3Tag tag, SwfStreamWriter writer) {
+            writer.WriteBit(tag.HasClipActions);
+            writer.WriteBit(tag.ClipDepth.HasValue);
+            writer.WriteBit(tag.Name != null);
+            writer.WriteBit(tag.Ratio.HasValue);
+            writer.WriteBit(tag.ColorTransform.HasValue);
+            writer.WriteBit(tag.HasMatrix);
+            writer.WriteBit(tag.HasCharacter);
+            writer.WriteBit(tag.Move);
+
+            writer.WriteUnsignedBits(tag.Reserved, 3);
+            writer.WriteBit(tag.HasImage);
+            writer.WriteBit(tag.ClassName != null);
+            writer.WriteBit(tag.BitmapCache.HasValue);
+            writer.WriteBit(tag.BlendMode.HasValue);
+            writer.WriteBit(tag.HasFilterList);
+
+            writer.WriteUInt16(tag.Depth);
+            if (tag.ClassName != null) {
+                writer.WriteString(tag.ClassName);
+            }
+
+            if (tag.HasCharacter) {
+                writer.WriteUInt16(tag.CharacterID);
+            }
+
+            if (tag.HasMatrix) {
+                writer.WriteMatrix(ref tag.Matrix);
+            }
+
+            if (tag.ColorTransform.HasValue) {
+                writer.WriteColorTransformRGBA(tag.ColorTransform.Value);
+            }
+            if (tag.Ratio.HasValue) {
+                writer.WriteUInt16(tag.Ratio.Value);
+            }
+            if (tag.Name != null) {
+                writer.WriteString(tag.Name);
+            }
+            if (tag.ClipDepth.HasValue) {
+                writer.WriteUInt16(tag.ClipDepth.Value);
+            }
             return null;
         }
 
