@@ -16,7 +16,7 @@ namespace Code.SwfLib.Tags.FontTags {
 
         public byte Reserved;
 
-        public readonly IList<SwfZoneArray> ZoneTable = new List<SwfZoneArray>();
+        public readonly IList<ZoneRecord> ZoneTable = new List<ZoneRecord>();
 
         public override SwfTagType TagType {
             get { return SwfTagType.DefineFontAlignZones; }

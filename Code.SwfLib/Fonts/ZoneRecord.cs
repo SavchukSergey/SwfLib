@@ -1,7 +1,7 @@
-﻿using Code.SwfLib.Fonts;
+﻿using Code.SwfLib.Tags.FontTags;
 
-namespace Code.SwfLib.Tags.FontTags {
-    public class SwfZoneArray {
+namespace Code.SwfLib.Fonts {
+    public class ZoneRecord {
 
         public ZoneData[] Data;
 

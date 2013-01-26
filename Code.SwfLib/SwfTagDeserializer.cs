@@ -524,7 +524,7 @@ namespace Code.SwfLib {
                 throw new InvalidDataException("Couldn't find corresponding DefineFont3Tag");
             }
             while (!reader.IsEOF) {
-                var zone = new SwfZoneArray();
+                var zone = new ZoneRecord();
                 int count = reader.ReadByte();
                 zone.Data = new ZoneData[count];
                 for (var j = 0; j < count; j++) {

@@ -60,8 +60,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         }
 
 
-        private SwfZoneArray[] ParseZoneArrays(XElement xZoneArrays) {
-            var res = new List<SwfZoneArray>();
+        private ZoneRecord[] ParseZoneArrays(XElement xZoneArrays) {
+            var res = new List<ZoneRecord>();
             foreach (var element in xZoneArrays.Elements()) {
                 switch (element.Name.LocalName) {
                     case ZONE_ARRAY_ELEM:
@@ -75,8 +75,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         }
 
 
-        private SwfZoneArray ParseZoneArray(XElement xZoneArray) {
-            var zoneArray = new SwfZoneArray();
+        private ZoneRecord ParseZoneArray(XElement xZoneArray) {
+            var zoneArray = new ZoneRecord();
             foreach (var attrib in xZoneArray.Attributes()) {
                 switch (attrib.Name.LocalName) {
                     case ZONE_X_ATTRIB:
