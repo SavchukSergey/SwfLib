@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.Fonts;
 using Code.SwfLib.SwfMill.Fonts;
@@ -18,8 +17,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
         private const string ZONES_ELEM = "zones";
         private const string ZONE_DATA_ELEM = "ZoneData";
-        private const string POSITION_ATTRIB = "position";
-        private const string SIZE_ATTRIB = "size";
 
         protected override void AcceptTagAttribute(DefineFontAlignZonesTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
@@ -107,7 +104,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             foreach (var element in xZoneDataArray.Elements()) {
                 switch (element.Name.LocalName) {
                     case ZONE_DATA_ELEM:
-                        res.Add(ParseZoneData(element));
+                        res.Add(XZoneData.FromXml(element));
                         break;
                     default:
                         throw new FormatException("Invalid element " + element.Name.LocalName);
@@ -116,24 +113,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             return res.ToArray(); ;
         }
 
-        private ZoneData ParseZoneData(XElement xZoneData) {
-            var res = new ZoneData();
-            foreach (var attrib in xZoneData.Attributes()) {
-                switch (attrib.Name.LocalName) {
-                    case POSITION_ATTRIB:
-                        //TODO: parse float to base class
-                        res.Position = double.Parse(attrib.Value);
-                        break;
-                    case SIZE_ATTRIB:
-                        //TODO: parse float to base class
-                        res.Size = double.Parse(attrib.Value);
-                        break;
-                    default:
-                        throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
-                }
-            }
-            return res;
-        }
+
 
         public override string TagName {
             get { return "DefineFontAlignZones"; }

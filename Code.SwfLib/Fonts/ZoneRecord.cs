@@ -5,27 +5,27 @@ namespace Code.SwfLib.Fonts {
 
         public ZoneData[] Data;
 
-        public SwfZoneArrayFlags Flags;
+        public ZoneRecordFlags Flags;
 
         public byte Reserved;
 
         public bool ZoneX {
             get {
-                return (Flags & SwfZoneArrayFlags.ZoneX) != 0;
+                return (Flags & ZoneRecordFlags.ZoneX) != 0;
             }
             set {
-                if (value) Flags |= SwfZoneArrayFlags.ZoneX;
-                else Flags &= ~SwfZoneArrayFlags.ZoneX;
+                if (value) Flags |= ZoneRecordFlags.ZoneX;
+                else Flags &= ~ZoneRecordFlags.ZoneX;
             }
         }
 
         public bool ZoneY {
             get {
-                return (Flags & SwfZoneArrayFlags.ZoneY) != 0;
+                return (Flags & ZoneRecordFlags.ZoneY) != 0;
             }
             set {
-                if (value) Flags |= SwfZoneArrayFlags.ZoneY;
-                else Flags &= ~SwfZoneArrayFlags.ZoneY;
+                if (value) Flags |= ZoneRecordFlags.ZoneY;
+                else Flags &= ~ZoneRecordFlags.ZoneY;
             }
         }
 
