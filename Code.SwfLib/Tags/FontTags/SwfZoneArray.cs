@@ -1,9 +1,13 @@
-﻿namespace Code.SwfLib.Tags.FontTags {
+﻿using Code.SwfLib.Fonts;
+
+namespace Code.SwfLib.Tags.FontTags {
     public class SwfZoneArray {
 
-        public SwfZoneData[] Data;
+        public ZoneData[] Data;
 
         public SwfZoneArrayFlags Flags;
+
+        public byte Reserved;
 
         public bool ZoneX {
             get {

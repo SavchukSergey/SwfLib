@@ -409,9 +409,10 @@ namespace Code.SwfLib {
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontAlignZonesTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
-            writer.WriteByte(tag.CsmTableHint);
+            writer.WriteUnsignedBits((byte)tag.CsmTableHint, 2);
+            writer.WriteUnsignedBits(tag.Reserved, 6);
 
-            foreach (var zoneArray in tag.Zones) {
+            foreach (var zoneArray in tag.ZoneTable) {
                 writer.WriteByte((byte)zoneArray.Data.Length);
                 foreach (var zoneData in zoneArray.Data) {
                     writer.WriteShortFloat(zoneData.Position);

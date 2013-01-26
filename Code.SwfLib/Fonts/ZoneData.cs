@@ -1,5 +1,5 @@
-﻿namespace Code.SwfLib.Tags.FontTags {
-    public class SwfZoneData {
+﻿namespace Code.SwfLib.Fonts {
+    public class ZoneData {
 
         public double Position;
 

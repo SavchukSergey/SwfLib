@@ -61,6 +61,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                 case DATA_TAG:
                     tag.RestData = ReadBase64(element);
                     break;
+                case "wideKerning":
+                    foreach (var xRecord in element.Elements()) {
+                        tag.KerningRecords.Add(XKerningRecord.FromXml(xRecord));
+                    }
+                    break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
@@ -91,7 +96,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                 xTag.Add(new XAttribute("ascent", tag.Ascent));
                 xTag.Add(new XAttribute("descent", tag.Descent));
                 xTag.Add(new XAttribute("leading", tag.Leading));
-                
+
                 var xAdvance = new XElement("advance");
                 foreach (var glyph in tag.Glyphs) {
                     var xGlyph = new XElement("Short");

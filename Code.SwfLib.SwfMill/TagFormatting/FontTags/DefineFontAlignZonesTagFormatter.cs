@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using Code.SwfLib.Fonts;
+using Code.SwfLib.SwfMill.Fonts;
 using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
@@ -22,7 +24,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         protected override void AcceptTagAttribute(DefineFontAlignZonesTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case CSM_HINT_ATTRIB:
-                    tag.CsmTableHint = (byte)(byte.Parse(attrib.Value) << 6);
+                    tag.CsmTableHint = (CSMTableHint)(byte.Parse(attrib.Value) << 6);
+                    break;
+                case "reserved":
+                    tag.Reserved = byte.Parse(attrib.Value);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -32,7 +37,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         protected override void AcceptTagElement(DefineFontAlignZonesTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case ZONE_ARRAYS_ELEM:
-                    tag.Zones = ParseZoneArrays(element);
+                    foreach (var record in ParseZoneArrays(element)) {
+                        tag.ZoneTable.Add(record);
+                    }
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
@@ -40,18 +47,20 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         }
 
         protected override XElement FormatTagElement(DefineFontAlignZonesTag tag, XElement xTag) {
-            xTag.Add(new XAttribute(CSM_HINT_ATTRIB, tag.CsmTableHint >> 6));
-            xTag.Add(FormatZoneArrays(tag.Zones));
-            //TODO: reserved flags
+            xTag.Add(new XAttribute(CSM_HINT_ATTRIB, (byte)tag.CsmTableHint));
+            if (tag.Reserved > 0) {
+                xTag.Add(new XAttribute("reserved", tag.Reserved));
+            }
+            var xZoneArrays = new XElement("zoneArrays");
+            foreach (var record in tag.ZoneTable) {
+                xZoneArrays.Add(XZoneRecord.ToXml(record));
+            }
+            xTag.Add(xZoneArrays);
             return xTag;
         }
 
 
-        protected virtual XElement FormatZoneArrays(SwfZoneArray[] array) {
-            return new XElement(ZONE_ARRAYS_ELEM, array.Select(FormatZoneArray));
-        }
-
-        protected virtual SwfZoneArray[] ParseZoneArrays(XElement xZoneArrays) {
+        private SwfZoneArray[] ParseZoneArrays(XElement xZoneArrays) {
             var res = new List<SwfZoneArray>();
             foreach (var element in xZoneArrays.Elements()) {
                 switch (element.Name.LocalName) {
@@ -66,15 +75,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         }
 
 
-        protected virtual XElement FormatZoneArray(SwfZoneArray array) {
-            return new XElement(ZONE_ARRAY_ELEM,
-                new XAttribute(ZONE_X_ATTRIB, FormatBoolToDigit(array.ZoneX)),
-                new XAttribute(ZONE_Y_ATTRIB, FormatBoolToDigit(array.ZoneY)),
-                FormatZoneDataArray(array.Data)
-                );
-        }
-
-        protected virtual SwfZoneArray ParseZoneArray(XElement xZoneArray) {
+        private SwfZoneArray ParseZoneArray(XElement xZoneArray) {
             var zoneArray = new SwfZoneArray();
             foreach (var attrib in xZoneArray.Attributes()) {
                 switch (attrib.Name.LocalName) {
@@ -101,12 +102,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         }
 
 
-        protected virtual XElement FormatZoneDataArray(SwfZoneData[] zoneDataArray) {
-            return new XElement(ZONES_ELEM, zoneDataArray.Select(FormatZoneData));
-        }
-
-        protected virtual SwfZoneData[] ParseZoneDataArray(XElement xZoneDataArray) {
-            var res = new List<SwfZoneData>();
+        private ZoneData[] ParseZoneDataArray(XElement xZoneDataArray) {
+            var res = new List<ZoneData>();
             foreach (var element in xZoneDataArray.Elements()) {
                 switch (element.Name.LocalName) {
                     case ZONE_DATA_ELEM:
@@ -119,16 +116,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             return res.ToArray(); ;
         }
 
-
-        protected virtual XElement FormatZoneData(SwfZoneData data) {
-            return new XElement(ZONE_DATA_ELEM,
-                new XAttribute(POSITION_ATTRIB, FormatFloat(data.Position)),
-                new XAttribute(SIZE_ATTRIB, FormatFloat(data.Size))
-                );
-        }
-
-        protected virtual SwfZoneData ParseZoneData(XElement xZoneData) {
-            var res = new SwfZoneData();
+        private ZoneData ParseZoneData(XElement xZoneData) {
+            var res = new ZoneData();
             foreach (var attrib in xZoneData.Attributes()) {
                 switch (attrib.Name.LocalName) {
                     case POSITION_ATTRIB:

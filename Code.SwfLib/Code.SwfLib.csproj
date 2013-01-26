@@ -169,6 +169,7 @@
     <Compile Include="Actions\IActionVisitor.cs" />
     <Compile Include="Data\ColorTransformRGBA.cs" />
     <Compile Include="Data\FrameLabelData.cs" />
+    <Compile Include="Fonts\CSMTableHint.cs" />
     <Compile Include="Fonts\FontStreamExt.cs" />
     <Compile Include="Fonts\Glyph.cs" />
     <Compile Include="Fonts\KerningRecord.cs" />
@@ -282,7 +283,7 @@
     <Compile Include="Tags\FontTags\DefineFontNameTag.cs" />
     <Compile Include="Tags\FontTags\SwfZoneArray.cs" />
     <Compile Include="Tags\FontTags\SwfZoneArrayFlags.cs" />
-    <Compile Include="Tags\FontTags\SwfZoneData.cs" />
+    <Compile Include="Fonts\ZoneData.cs" />
     <Compile Include="Tags\ShapeTags\DefineShape4Tag.cs" />
     <Compile Include="Tags\ShapeTags\DefineShape2Tag.cs" />
     <Compile Include="Tags\ShapeTags\ShapeBaseTag.cs" />

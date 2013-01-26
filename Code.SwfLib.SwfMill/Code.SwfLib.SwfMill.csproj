@@ -57,6 +57,7 @@
     <Compile Include="DataFormatting\DataFormatterBase.cs" />
     <Compile Include="DataFormatting\DataFormatters.cs" />
     <Compile Include="DataFormatting\FillStyleRGBFormatter.cs" />
+    <Compile Include="Data\CommonFormatter.cs" />
     <Compile Include="Data\XBinary.cs" />
     <Compile Include="Data\XColorTransformRGBA.cs" />
     <Compile Include="Data\XColorRGBA.cs" />
@@ -65,6 +66,8 @@
     <Compile Include="Data\XMatrix.cs" />
     <Compile Include="Data\XRect.cs" />
     <Compile Include="Fonts\XKerningRecord.cs" />
+    <Compile Include="Fonts\XZoneData.cs" />
+    <Compile Include="Fonts\XZoneRecord.cs" />
     <Compile Include="Gradients\XGradientRecordRGBA.cs" />
     <Compile Include="Gradients\XGradientRecordRGB.cs" />
     <Compile Include="Program.cs" />

@@ -514,29 +514,28 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontAlignZonesTag tag, SwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
-            tag.CsmTableHint = reader.ReadByte();
+            tag.CsmTableHint = (CSMTableHint)reader.ReadUnsignedBits(2);
+            tag.Reserved = (byte)reader.ReadUnsignedBits(6);
+
             var fontInfo = _file.IterateTagsRecursively()
                 .OfType<DefineFont3Tag>()
                 .FirstOrDefault(item => item.FontID == tag.FontID);
             if (fontInfo == null) {
                 throw new InvalidDataException("Couldn't find corresponding DefineFont3Tag");
             }
-            tag.Zones = new SwfZoneArray[fontInfo.Glyphs.Count];
-            for (var i = 0; i < tag.Zones.Length; i++) {
+            while (!reader.IsEOF) {
                 var zone = new SwfZoneArray();
                 int count = reader.ReadByte();
-                zone.Data = new SwfZoneData[count];
+                zone.Data = new ZoneData[count];
                 for (var j = 0; j < count; j++) {
-                    var zoneData = new SwfZoneData {
+                    var zoneData = new ZoneData {
                         Position = reader.ReadShortFloat(),
                         Size = reader.ReadShortFloat()
                     };
                     zone.Data[j] = zoneData;
                 }
                 zone.Flags = (SwfZoneArrayFlags)reader.ReadByte();
-                //TODO: store to xml reserverd flags
-                tag.Zones[i] = zone;
-
+                tag.ZoneTable.Add(zone);
             }
             return tag;
         }
