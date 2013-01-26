@@ -56,6 +56,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         }
 
         protected override void FormatPlaceElement(PlaceObject3Tag tag, XElement elem) {
+            if (tag.Name != null) {
+                elem.Add(new XAttribute("name", tag.Name));
+            }
+            if (tag.ClassName != null) {
+                elem.Add(new XAttribute("className", tag.ClassName));
+            }
             if (tag.BitmapCache.HasValue) {
                 elem.Add(new XAttribute(BITMAP_CACHING_ATTRIB, tag.BitmapCache.Value));
             }
