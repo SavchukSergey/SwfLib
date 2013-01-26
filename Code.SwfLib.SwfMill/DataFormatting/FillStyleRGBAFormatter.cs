@@ -7,7 +7,6 @@ using Code.SwfLib.SwfMill.Gradients;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
-    //TODO: extract base class
     public class FillStyleRGBAFormatter : DataFormatterBase<FillStyleRGBA> {
         public FillStyleRGBAFormatter(DataFormatters formatters)
             : base(formatters) {
@@ -193,7 +192,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
                 var color = gradient.Color;
                 list.Add(new XElement(XName.Get("GradientItem"),
                     new XAttribute(XName.Get("position"), gradient.Ratio),
-                    new XElement(XName.Get("color"), XColorRGBA.ToXml(color))
+                    new XElement("color", XColorRGBA.ToXml(color))
                 ));
             }
             return list;

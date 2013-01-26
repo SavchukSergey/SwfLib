@@ -30,7 +30,7 @@ namespace Code.SwfLib.SwfMill
             var res = new XElement(XName.Get("TextRecord6"));
             if (entry.HasFont)
             {
-                res.Add(new XAttribute(XName.Get("objectID"), entry.FontID.Value));
+                res.Add(new XAttribute("objectID", entry.FontID.Value));
             }
             if (entry.HasXOffset)
             {
@@ -48,7 +48,7 @@ namespace Code.SwfLib.SwfMill
             if (entry.HasColor)
             {
                 var color = entry.TextColor.Value;
-                res.Add(new XElement(XName.Get("color"), XColorRGB.ToXml(color)));
+                res.Add(new XElement("color", XColorRGB.ToXml(color)));
             }
             res.Add(new XElement(XName.Get("glyphs"), entry.Glyphs.Select(FormatGlyphEntry)));
             return res;

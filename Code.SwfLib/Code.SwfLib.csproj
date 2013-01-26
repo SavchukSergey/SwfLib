@@ -282,7 +282,7 @@
     <Compile Include="Tags\FontTags\DefineFontInfoTag.cs" />
     <Compile Include="Tags\FontTags\DefineFontNameTag.cs" />
     <Compile Include="Fonts\ZoneRecord.cs" />
-    <Compile Include="Tags\FontTags\SwfZoneArrayFlags.cs" />
+    <Compile Include="Fonts\ZoneRecordFlags.cs" />
     <Compile Include="Fonts\ZoneData.cs" />
     <Compile Include="Tags\ShapeTags\DefineShape4Tag.cs" />
     <Compile Include="Tags\ShapeTags\DefineShape2Tag.cs" />

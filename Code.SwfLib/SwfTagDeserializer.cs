@@ -534,7 +534,7 @@ namespace Code.SwfLib {
                     };
                     zone.Data[j] = zoneData;
                 }
-                zone.Flags = (SwfZoneArrayFlags)reader.ReadByte();
+                zone.Flags = (ZoneRecordFlags)reader.ReadByte();
                 tag.ZoneTable.Add(zone);
             }
             return tag;

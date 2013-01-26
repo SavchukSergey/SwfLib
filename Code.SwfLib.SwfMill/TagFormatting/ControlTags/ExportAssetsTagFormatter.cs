@@ -48,7 +48,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         protected static XElement FormatSymbol(SwfSymbolReference symbol) {
             return new XElement(XName.Get("Symbol"),
-                                new XAttribute(XName.Get("objectID"), symbol.SymbolID),
+                                new XAttribute("objectID", symbol.SymbolID),
                                 new XAttribute(XName.Get("name"), symbol.SymbolName));
         }
 

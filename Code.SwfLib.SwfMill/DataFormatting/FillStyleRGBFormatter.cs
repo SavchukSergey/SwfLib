@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using Code.SwfLib.Gradients;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Gradients;
 using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -145,29 +146,29 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
         private XElement FormatNonSmoothedClippedFillStyle(ref FillStyleRGB style) {
             var elem = new XElement(XName.Get("ClippedBitmap2"));
-            elem.Add(new XAttribute(XName.Get("objectID"), style.BitmapID));
-            elem.Add(new XElement(XName.Get("matrix"), XMatrix.ToXml(style.BitmapMatrix)));
+            elem.Add(new XAttribute("objectID", style.BitmapID));
+            elem.Add(new XElement("matrix", XMatrix.ToXml(style.BitmapMatrix)));
             return elem;
         }
 
         private XElement FormatNonSmoothedRepeatingBitmapFillStyle(ref FillStyleRGB style) {
             var elem = new XElement(XName.Get("TiledBitmap2"));
-            elem.Add(new XAttribute(XName.Get("objectID"), style.BitmapID));
-            elem.Add(new XElement(XName.Get("matrix"), XMatrix.ToXml(style.BitmapMatrix)));
+            elem.Add(new XAttribute("objectID", style.BitmapID));
+            elem.Add(new XElement("matrix", XMatrix.ToXml(style.BitmapMatrix)));
             return elem;
         }
 
         private XElement FormatClippedBitmapFillStyle(ref FillStyleRGB style) {
             var elem = new XElement(XName.Get("ClippedBitmap"));
-            elem.Add(new XAttribute(XName.Get("objectID"), style.BitmapID));
-            elem.Add(new XElement(XName.Get("matrix"), XMatrix.ToXml(style.BitmapMatrix)));
+            elem.Add(new XAttribute("objectID", style.BitmapID));
+            elem.Add(new XElement("matrix", XMatrix.ToXml(style.BitmapMatrix)));
             return elem;
         }
 
         private XElement FormatRepeatingBitmapFillStyle(ref FillStyleRGB style) {
             var elem = new XElement(XName.Get("TiledBitmap"));
-            elem.Add(new XAttribute(XName.Get("objectID"), style.BitmapID));
-            elem.Add(new XElement(XName.Get("matrix"), XMatrix.ToXml(style.BitmapMatrix)));
+            elem.Add(new XAttribute("objectID", style.BitmapID));
+            elem.Add(new XElement("matrix", XMatrix.ToXml(style.BitmapMatrix)));
             return elem;
         }
 
@@ -185,15 +186,12 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         private XElement FormatSolidColorRGBFillStyle(ref FillStyleRGB style) {
             return new XElement(XName.Get("Solid"),
-                new XElement(XName.Get("color"), XColorRGB.ToXml(style.Color)));
+                new XElement("color", XColorRGB.ToXml(style.Color)));
         }
 
-        //TODO: Interpolation and spread mode!!
         private void ParseGradientColorsTo(XElement element, IList<GradientRecordRGB> records) {
             foreach (var item in element.Elements(XName.Get("GradientItem"))) {
-                GradientRecordRGB record;
-                record.Ratio = byte.Parse(item.Attribute(XName.Get("position")).Value);
-                record.Color = XColorRGB.FromXml(item.Element("color").Element("Color"));
+                var record = XGradientRecordRGB.FromXml(item);
                 records.Add(record);
             }
         }
