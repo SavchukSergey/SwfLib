@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Tags.ShapeTags {
+﻿namespace Code.SwfLib.Shapes.LineStyles {
     public enum CapStyle {
         Round = 0,
         NoCap = 1,

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.Tags.ShapeTags;
 
-namespace Code.SwfLib {
+namespace Code.SwfLib.Shapes {
     public static class LineStyleStreamExt {
 
         public static void ReadToLineStylesRGB(this SwfStreamReader reader, IList<LineStyleRGB> lineStyles, bool allowBigArray) {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Code.SwfLib.Gradients;
 using Code.SwfLib.Tags.ShapeTags;
 
-namespace Code.SwfLib {
+namespace Code.SwfLib.Shapes {
     public static class FillStyleStreamExt {
 
         public static void ReadToFillStylesRGB(this SwfStreamReader reader, IList<FillStyleRGB> fillStyles, bool allowBigArray) {

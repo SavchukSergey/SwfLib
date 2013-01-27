@@ -206,8 +206,8 @@
     <Compile Include="Shapes\ShapeRecordRGBReader.cs" />
     <Compile Include="Shapes\ShapeRecordWriter.cs" />
     <Compile Include="Tags\ButtonTags\DefineButtonBaseTag.cs" />
-    <Compile Include="Tags\ShapeTags\FillStyleRGBA.cs" />
-    <Compile Include="Tags\ShapeTags\FillStyleRGB.cs" />
+    <Compile Include="Shapes\FillStyles\FillStyleRGBA.cs" />
+    <Compile Include="Shapes\FillStyles\FillStyleRGB.cs" />
     <Compile Include="Gradients\FocalGradient.cs" />
     <Compile Include="Gradients\GradientRGB.cs" />
     <Compile Include="Gradients\GradientRecordRGB.cs" />
@@ -224,8 +224,8 @@
     <Compile Include="Data\Text\GlyphEntry.cs" />
     <Compile Include="Data\Text\TextRecord.cs" />
     <Compile Include="Data\Text\TextRecordFlags.cs" />
-    <Compile Include="FillStyleStreamExt.cs" />
-    <Compile Include="LineStyleStreamExt.cs" />
+    <Compile Include="Shapes\FillStyleStreamExt.cs" />
+    <Compile Include="Shapes\LineStyleStreamExt.cs" />
     <Compile Include="ShapeRecordStreamExt.cs" />
     <Compile Include="SwfFile.cs" />
     <Compile Include="SwfFileInfo.cs" />
@@ -272,11 +272,11 @@
     <Compile Include="Tags\ControlTags\SetTabIndexTag.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObjectTag.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObjectTag.cs" />
-    <Compile Include="Tags\ShapeTags\JoinStyle.cs" />
-    <Compile Include="Tags\ShapeTags\LineStyleRGB.cs" />
-    <Compile Include="Tags\ShapeTags\LineStyleRGBA.cs" />
-    <Compile Include="Tags\ShapeTags\LineStyleEx.cs" />
-    <Compile Include="Tags\ShapeTags\CapStyle.cs" />
+    <Compile Include="Shapes\LineStyles\JoinStyle.cs" />
+    <Compile Include="Shapes\LineStyles\LineStyleRGB.cs" />
+    <Compile Include="Shapes\LineStyles\LineStyleRGBA.cs" />
+    <Compile Include="Shapes\LineStyles\LineStyleEx.cs" />
+    <Compile Include="Shapes\LineStyles\CapStyle.cs" />
     <Compile Include="Tags\SoundTags\SoundStreamBlockTag.cs" />
     <Compile Include="Tags\SoundTags\SoundStreamHead2Tag.cs" />
     <Compile Include="Tags\SoundTags\SoundStreamHeadTag.cs" />
@@ -301,7 +301,7 @@
     <Compile Include="Tags\ShapeTags\DefineShape2Tag.cs" />
     <Compile Include="Tags\ShapeTags\ShapeBaseTag.cs" />
     <Compile Include="Tags\ShapeTags\DefineShape3Tag.cs" />
-    <Compile Include="Tags\ShapeTags\FillStyleType.cs" />
+    <Compile Include="Shapes\FillStyles\FillStyleType.cs" />
     <Compile Include="Tags\ShapeTags\DefineShapeTag.cs" />
     <Compile Include="Tags\DefineSpriteTag.cs" />
     <Compile Include="Tags\FontTags\DefineFont4Tag.cs" />
