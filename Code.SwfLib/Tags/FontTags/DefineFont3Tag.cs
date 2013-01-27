@@ -18,8 +18,6 @@ namespace Code.SwfLib.Tags.FontTags {
 
         public bool WideOffsets;
 
-        public bool WideCodes;
-
         public bool Italic;
 
         public bool Bold;

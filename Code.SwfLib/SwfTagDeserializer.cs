@@ -471,7 +471,7 @@ namespace Code.SwfLib {
             tag.ANSI = reader.ReadBit();
 
             tag.WideOffsets = reader.ReadBit();
-            tag.WideCodes = reader.ReadBit();
+            var wideCodes = reader.ReadBit();
             tag.Italic = reader.ReadBit();
             tag.Bold = reader.ReadBit();
 
@@ -496,7 +496,7 @@ namespace Code.SwfLib {
 
             for (var i = 0; i < glyphsCount; i++) {
                 var glyph = tag.Glyphs[i];
-                glyph.Code = tag.WideCodes ? reader.ReadUInt16() : reader.ReadByte();
+                glyph.Code = wideCodes ? reader.ReadUInt16() : reader.ReadByte();
             }
 
             if (tag.HasLayout) {
@@ -516,7 +516,7 @@ namespace Code.SwfLib {
 
                 var kerningCounts = reader.ReadUInt16();
                 for (var i = 0; i < kerningCounts; i++) {
-                    tag.KerningRecords.Add(reader.ReadKerningRecord(tag.WideCodes));
+                    tag.KerningRecords.Add(reader.ReadKerningRecord(wideCodes));
                 }
             }
             return tag;

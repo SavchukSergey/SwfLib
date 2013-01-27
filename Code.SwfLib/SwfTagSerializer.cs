@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
@@ -396,13 +397,14 @@ namespace Code.SwfLib {
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont3Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
 
+            var wideCodes = tag.Glyphs.Any(item => item.Code > 255);
             writer.WriteBit(tag.HasLayout);
             writer.WriteBit(tag.ShiftJIS);
             writer.WriteBit(tag.SmallText);
             writer.WriteBit(tag.ANSI);
 
             writer.WriteBit(tag.WideOffsets);
-            writer.WriteBit(tag.WideCodes);
+            writer.WriteBit(wideCodes);
             writer.WriteBit(tag.Italic);
             writer.WriteBit(tag.Bold);
 
