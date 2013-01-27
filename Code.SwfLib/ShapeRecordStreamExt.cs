@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Code.SwfLib.Shapes;
 using Code.SwfLib.Shapes.Records;
 
@@ -12,8 +11,7 @@ namespace Code.SwfLib {
             writer.WriteUnsignedBits(fillStyleBits, 4);
             writer.WriteUnsignedBits(lineStyleBits, 4);
             writer.FlushBits();
-            for (var i = 0; i < shapeRecords.Count; i++) {
-                var shapeRecord = shapeRecords[i];
+            foreach (var shapeRecord in shapeRecords) {
                 _shapeRecordWriter.WriteRGB(writer, shapeRecord, false, ref fillStyleBits, ref lineStyleBits);
             }
 
@@ -23,8 +21,7 @@ namespace Code.SwfLib {
             writer.WriteUnsignedBits(fillStyleBits, 4);
             writer.WriteUnsignedBits(lineStyleBits, 4);
             writer.FlushBits();
-            for (var i = 0; i < shapeRecords.Count; i++) {
-                var shapeRecord = shapeRecords[i];
+            foreach (var shapeRecord in shapeRecords) {
                 _shapeRecordWriter.WriteRGBA(writer, shapeRecord, true, ref fillStyleBits, ref lineStyleBits);
             }
 
@@ -34,8 +31,7 @@ namespace Code.SwfLib {
             writer.WriteUnsignedBits(fillStyleBits, 4);
             writer.WriteUnsignedBits(lineStyleBits, 4);
             writer.FlushBits();
-            for (var i = 0; i < shapeRecords.Count; i++) {
-                var shapeRecord = shapeRecords[i];
+            foreach (var shapeRecord in shapeRecords) {
                 _shapeRecordWriter.WriteEx(writer, shapeRecord, true, ref fillStyleBits, ref lineStyleBits);
             }
 

@@ -399,18 +399,29 @@ namespace Code.SwfLib {
             writer.WriteBit(tag.HasLayout);
             writer.WriteBit(tag.ShiftJIS);
             writer.WriteBit(tag.SmallText);
-            writer.WriteBit(tag.ANSI );
+            writer.WriteBit(tag.ANSI);
 
-             writer.WriteBit(tag.WideOffsets);
-             writer.WriteBit(tag.WideCodes);
-             writer.WriteBit(tag.Italic);
-             writer.WriteBit(tag.Bold);
+            writer.WriteBit(tag.WideOffsets);
+            writer.WriteBit(tag.WideCodes);
+            writer.WriteBit(tag.Italic);
+            writer.WriteBit(tag.Bold);
 
             writer.WriteByte(tag.Language);
             var name = Encoding.UTF8.GetBytes(tag.FontName);
             writer.WriteByte((byte)name.Length);
             writer.WriteBytes(name);
             writer.WriteUInt16((ushort)tag.Glyphs.Count);
+
+            var offsetTable = new uint[tag.Glyphs.Count];
+            
+            var shapesStream = new MemoryStream();
+            var shapesSwfWriter = new SwfStreamWriter(shapesStream);
+            for (int i = 0; i < tag.Glyphs.Count; i++) {
+                offsetTable[i] = (uint) shapesStream.Position;
+                var glyph = tag.Glyphs[i];
+                writer.FlushBits();
+                shapesSwfWriter.WriteShapeRecordsRGB(glyph.Records, 1, 0);
+            }
             return null;
         }
 

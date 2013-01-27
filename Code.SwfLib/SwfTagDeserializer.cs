@@ -464,17 +464,17 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFont3Tag tag, SwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
-            
+
             tag.HasLayout = reader.ReadBit();
             tag.ShiftJIS = reader.ReadBit();
             tag.SmallText = reader.ReadBit();
             tag.ANSI = reader.ReadBit();
-            
+
             tag.WideOffsets = reader.ReadBit();
             tag.WideCodes = reader.ReadBit();
             tag.Italic = reader.ReadBit();
             tag.Bold = reader.ReadBit();
-                
+
             tag.Language = reader.ReadByte();
             int nameLength = reader.ReadByte();
             tag.FontName = Encoding.UTF8.GetString(reader.ReadBytes(nameLength)).TrimEnd('\0');
