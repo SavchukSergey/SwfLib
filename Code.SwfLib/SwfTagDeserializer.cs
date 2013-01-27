@@ -491,6 +491,7 @@ namespace Code.SwfLib {
                 reader.ReadToShapeRecordsRGB(glyph.Records);
                 tag.Glyphs.Add(glyph);
             }
+            reader.AlignToByte();
 
             for (var i = 0; i < glyphsCount; i++) {
                 var glyph = tag.Glyphs[i];

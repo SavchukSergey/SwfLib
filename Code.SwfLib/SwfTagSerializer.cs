@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Code.SwfLib.Actions;
+using Code.SwfLib.Fonts;
 using Code.SwfLib.Shapes;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
@@ -433,6 +434,52 @@ namespace Code.SwfLib {
                 var glyph = tag.Glyphs[i];
                 writer.FlushBits();
                 shapesSwfWriter.WriteShapeRecordsRGB(glyph.Records, 1, 0);
+            }
+            shapesSwfWriter.FlushBits();
+
+            foreach (var offset in offsetTable) {
+                if (tag.WideOffsets) {
+                    writer.WriteUInt32(offset);
+                } else {
+                    writer.WriteUInt16((ushort)offset);
+                }
+            }
+
+            var offsetTableSize = (uint)(tag.WideOffsets ? 4 * tag.Glyphs.Count : 2 * tag.Glyphs.Count);
+
+            var codeTableOffset = offsetTableSize + (uint)shapesStream.Length;
+            if (tag.WideOffsets) {
+                writer.WriteUInt32(codeTableOffset);
+            } else {
+                writer.WriteUInt16((ushort)codeTableOffset);
+            }
+
+            writer.WriteBytes(shapesStream.ToArray());
+            foreach (var glyph in tag.Glyphs) {
+                if (wideCodes) {
+                    writer.WriteUInt16(glyph.Code);
+                } else {
+                    writer.WriteByte((byte)glyph.Code);
+                }
+            }
+
+            if (tag.HasLayout) {
+                writer.WriteSInt16(tag.Ascent);
+                writer.WriteSInt16(tag.Descent);
+                writer.WriteSInt16(tag.Leading);
+
+                foreach (var glyph in tag.Glyphs) {
+                    writer.WriteSInt16(glyph.Advance);
+                }
+
+                foreach (var glyph in tag.Glyphs) {
+                    writer.WriteRect(ref glyph.Bounds);
+                }
+
+                writer.WriteUInt16((ushort)tag.KerningRecords.Count);
+                foreach (var kerningRecord in tag.KerningRecords) {
+                    writer.WriteKerningRecord(kerningRecord, wideCodes);
+                }
             }
             return null;
         }

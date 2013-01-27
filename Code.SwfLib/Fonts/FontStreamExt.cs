@@ -9,5 +9,16 @@
             };
             return res;
         }
+
+        public static void WriteKerningRecord(this SwfStreamWriter writer, KerningRecord record, bool wideCodes) {
+            if (wideCodes) {
+                writer.WriteUInt16(record.LeftCode);
+                writer.WriteUInt16(record.RightCode);
+            } else {
+                writer.WriteByte((byte)record.LeftCode);
+                writer.WriteByte((byte)record.RightCode);
+            }
+            writer.WriteSInt16(record.Adjustment);
+        }
     }
 }
