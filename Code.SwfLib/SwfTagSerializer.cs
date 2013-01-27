@@ -244,6 +244,9 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DoABCTag tag, SwfStreamWriter writer) {
+            writer.WriteUInt32(tag.Flags);
+            writer.WriteString(tag.Name);
+            writer.WriteBytes(tag.ABCData);
             return null;
         }
 
