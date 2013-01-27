@@ -90,31 +90,36 @@ namespace Code.SwfLib.SwfMill.Shapes {
         #region Linear Gradient
 
         private static FillStyleRGB ParseLinearRGB(XElement xFillStyle) {
-            return new FillStyleRGB {
+            var res = new FillStyleRGB {
                 FillStyleType = FillStyleType.LinearGradient,
                 Gradient = {
                     SpreadMode = GetSpreadMode(xFillStyle),
                     InterpolationMode = GetInterpolationMode(xFillStyle),
                 },
                 GradientMatrix = GetMatrix(xFillStyle)
-                //TODO: other fields
             };
+            var xGradientColors = xFillStyle.Element("gradientColors");
+            foreach (var xRecord in xGradientColors.Elements("GradientItem")) {
+                res.Gradient.GradientRecords.Add(XGradientRecordRGB.FromXml(xRecord));
+            }
+            return res;
         }
 
         private static FillStyleRGBA ParseLinearRGBA(XElement xFillStyle) {
-            return new FillStyleRGBA {
+            var res = new FillStyleRGBA {
                 FillStyleType = FillStyleType.LinearGradient,
                 Gradient = {
                     SpreadMode = GetSpreadMode(xFillStyle),
                     InterpolationMode = GetInterpolationMode(xFillStyle),
                 },
                 GradientMatrix = GetMatrix(xFillStyle)
-                //TODO: other fields
             };
+            var xGradientColors = xFillStyle.Element("gradientColors");
+            foreach (var xRecord in xGradientColors.Elements("GradientItem")) {
+                res.Gradient.GradientRecords.Add(XGradientRecordRGBA.FromXml(xRecord));
+            }
+            return res;
         }
-
-        //           AddMatrix(res, fillStyle.GradientMatrix);
-        //           AddGradientColors(res, fillStyle.Gradient.GradientRecords);
 
         #endregion
 
