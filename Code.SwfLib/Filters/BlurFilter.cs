@@ -1,6 +1,14 @@
 ﻿namespace Code.SwfLib.Filters {
     public class BlurFilter : BaseFilter {
 
+        public double BlurX;
+
+        public double BlurY;
+
+        public uint Passes;
+
+        public uint Reserved;
+
         public override FilterType Type {
             get { return FilterType.Blur; }
         }

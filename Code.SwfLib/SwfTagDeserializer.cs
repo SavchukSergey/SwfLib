@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Code.SwfLib.Actions;
 using Code.SwfLib.Data;
+using Code.SwfLib.Filters;
 using Code.SwfLib.Fonts;
 using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags;
@@ -107,7 +108,7 @@ namespace Code.SwfLib {
             var hasClassName = reader.ReadBit();
             var hasCacheAsBitmap = reader.ReadBit();
             var hasBlendMode = reader.ReadBit();
-            tag.HasFilterList = reader.ReadBit();
+            var hasFilterList = reader.ReadBit();
 
             tag.Depth = reader.ReadUInt16();
 
@@ -145,10 +146,13 @@ namespace Code.SwfLib {
             }
 
             //TODO: uncomment
-            //if (tag.HasFilterList) {
-            //    throw new NotImplementedException();
-            //    //tag.FilterList = reader.ReadFilterList();
-            //}
+            if (hasFilterList) {
+                var count = reader.ReadByte();
+                for (var i = 0; i < count; i++) {
+                    var filter = reader.ReadFilter();
+                    tag.Filters.Add(filter);
+                }
+            }
 
             //if (hasBlendMode) {
             //    tag.BlendMode = reader.ReadByte();
@@ -460,11 +464,23 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFont3Tag tag, SwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
-            tag.Attributes = (DefineFont3Attributes)reader.ReadByte();
+            
+            tag.HasLayout = reader.ReadBit();
+            tag.ShiftJIS = reader.ReadBit();
+            tag.SmallText = reader.ReadBit();
+            tag.ANSI = reader.ReadBit();
+            
+            tag.WideOffsets = reader.ReadBit();
+            tag.WideCodes = reader.ReadBit();
+            tag.Italic = reader.ReadBit();
+            tag.Bold = reader.ReadBit();
+                
             tag.Language = reader.ReadByte();
             int nameLength = reader.ReadByte();
             tag.FontName = Encoding.UTF8.GetString(reader.ReadBytes(nameLength)).TrimEnd('\0');
+
             int glyphsCount = reader.ReadUInt16();
+
             var offsetTable = new uint[glyphsCount];
             for (var i = 0; i < glyphsCount; i++) {
                 offsetTable[i] = tag.WideOffsets ? reader.ReadUInt32() : reader.ReadUInt16();

@@ -1,5 +1,7 @@
-﻿using Code.SwfLib.Actions;
+﻿using System.Collections.Generic;
+using Code.SwfLib.Actions;
 using Code.SwfLib.Data;
+using Code.SwfLib.Filters;
 
 namespace Code.SwfLib.Tags.DisplayListTags {
     public class PlaceObject3Tag : PlaceObjectBaseTag {
@@ -14,11 +16,9 @@ namespace Code.SwfLib.Tags.DisplayListTags {
 
         public bool HasImage;
 
-        public bool HasFilterList;
-
 
         public string Name;
-        
+
         public string ClassName;
 
         public byte Reserved;
@@ -34,6 +34,8 @@ namespace Code.SwfLib.Tags.DisplayListTags {
         public ClipActions ClipActions;
 
         public byte? BlendMode;
+
+        public readonly IList<BaseFilter> Filters = new List<BaseFilter>();
 
         public override SwfTagType TagType {
             get { return SwfTagType.PlaceObject3; }

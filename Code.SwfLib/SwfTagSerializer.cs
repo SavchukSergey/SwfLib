@@ -80,7 +80,7 @@ namespace Code.SwfLib {
             writer.WriteBit(tag.ClassName != null);
             writer.WriteBit(tag.BitmapCache.HasValue);
             writer.WriteBit(tag.BlendMode.HasValue);
-            writer.WriteBit(tag.HasFilterList);
+            writer.WriteBit(tag.Filters.Count > 0);
 
             writer.WriteUInt16(tag.Depth);
             if (tag.ClassName != null) {
@@ -107,6 +107,8 @@ namespace Code.SwfLib {
             if (tag.ClipDepth.HasValue) {
                 writer.WriteUInt16(tag.ClipDepth.Value);
             }
+
+            //TODO: writer filters
             return null;
         }
 
@@ -393,7 +395,17 @@ namespace Code.SwfLib {
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont3Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
-            writer.WriteByte((byte)tag.Attributes);
+
+            writer.WriteBit(tag.HasLayout);
+            writer.WriteBit(tag.ShiftJIS);
+            writer.WriteBit(tag.SmallText);
+            writer.WriteBit(tag.ANSI );
+
+             writer.WriteBit(tag.WideOffsets);
+             writer.WriteBit(tag.WideCodes);
+             writer.WriteBit(tag.Italic);
+             writer.WriteBit(tag.Bold);
+
             writer.WriteByte(tag.Language);
             var name = Encoding.UTF8.GetBytes(tag.FontName);
             writer.WriteByte((byte)name.Length);

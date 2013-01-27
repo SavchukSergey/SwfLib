@@ -33,8 +33,13 @@ namespace Code.SwfLib {
             return new SwfTagData { Type = type, Data = tagData };
         }
 
+        //TODO: Why unsigned
         public double ReadFixedPoint8() {
             return ReadUInt16() / 256.0;
+        }
+
+        public double ReadFixed() {
+            return ReadInt32() / 65536.0;
         }
 
         public double ReadFixedPoint16(uint bits) {

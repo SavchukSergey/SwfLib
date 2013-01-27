@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Filters;
 using Code.SwfLib.Tags.DisplayListTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
@@ -23,7 +24,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     tag.ClassName = attrib.Value;
                     break;
                 case REPLACE_ATTRIB:
-                    //TODO: read replace
+                    tag.Move = ParseBoolFromDigit(attrib);
                     break;
                 case MORPH_ATTRIB:
                     //TODO: read morph
@@ -65,11 +66,22 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             if (tag.ClassName != null) {
                 elem.Add(new XAttribute("className", tag.ClassName));
             }
+            if (tag.Ratio.HasValue) {
+                elem.Add(new XAttribute("morph", tag.Ratio.Value));
+            }
+            elem.Add(new XAttribute("replace", CommonFormatter.Format(tag.Move)));
             if (tag.BitmapCache.HasValue) {
                 elem.Add(new XAttribute(BITMAP_CACHING_ATTRIB, tag.BitmapCache.Value));
             }
             if (tag.ColorTransform.HasValue) {
                 elem.Add(new XElement("colorTransform", XColorTransformRGBA.ToXml(tag.ColorTransform.Value)));
+            }
+            if (tag.Filters.Count > 0) {
+                var xFilters = new XElement("filters");
+                foreach (var filter in tag.Filters) {
+                    xFilters.Add(XFilter.ToXml(filter));
+                }
+                elem.Add(xFilters);
             }
         }
 

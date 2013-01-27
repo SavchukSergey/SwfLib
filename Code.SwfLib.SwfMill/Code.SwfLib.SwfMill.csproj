@@ -65,6 +65,10 @@
     <Compile Include="Data\XColorTransformRGB.cs" />
     <Compile Include="Data\XMatrix.cs" />
     <Compile Include="Data\XRect.cs" />
+    <Compile Include="Filters\XBlurFilter.cs" />
+    <Compile Include="Filters\XDropShadowFilter.cs" />
+    <Compile Include="Filters\XFilter.cs" />
+    <Compile Include="Filters\XGlowFilter.cs" />
     <Compile Include="Fonts\XKerningRecord.cs" />
     <Compile Include="Fonts\XZoneData.cs" />
     <Compile Include="Fonts\XZoneRecord.cs" />
