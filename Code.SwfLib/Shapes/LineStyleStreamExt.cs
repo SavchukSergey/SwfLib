@@ -92,15 +92,15 @@ namespace Code.SwfLib.Shapes {
         public static LineStyleEx ReadLineStyleEx(this SwfStreamReader reader) {
             var lineStyle = new LineStyleEx();
             lineStyle.Width = reader.ReadUInt16();
-            lineStyle.StartCapStyle = reader.ReadCapStyle();
-            lineStyle.JoinStyle = reader.ReadJoinStyle();
+            lineStyle.StartCapStyle = (CapStyle)reader.ReadUnsignedBits(2);
+            lineStyle.JoinStyle = (JoinStyle)reader.ReadUnsignedBits(2);
             lineStyle.HasFill = reader.ReadBit();
             lineStyle.NoHScale = reader.ReadBit();
             lineStyle.NoVScale = reader.ReadBit();
             lineStyle.PixelHinting = reader.ReadBit();
             lineStyle.Reserved = (byte)reader.ReadUnsignedBits(5);
             lineStyle.NoClose = reader.ReadBit();
-            lineStyle.EndCapStyle = reader.ReadCapStyle();
+            lineStyle.EndCapStyle = (CapStyle)reader.ReadUnsignedBits(2);
             if (lineStyle.JoinStyle == JoinStyle.Miter) {
                 lineStyle.MilterLimitFactor = reader.ReadFixedPoint8();
             }
@@ -124,19 +124,25 @@ namespace Code.SwfLib.Shapes {
 
         public static void WriteLineStyleEx(this SwfStreamWriter writer, LineStyleEx lineStyle) {
             writer.WriteUInt16(lineStyle.Width);
-            throw new NotImplementedException();
+            writer.WriteUnsignedBits((uint)lineStyle.StartCapStyle, 2);
+            writer.WriteUnsignedBits((uint)lineStyle.JoinStyle, 2);
+            writer.WriteBit(lineStyle.HasFill);
+            writer.WriteBit(lineStyle.NoHScale);
+            writer.WriteBit(lineStyle.NoVScale);
+            writer.WriteBit(lineStyle.PixelHinting);
+            writer.WriteUnsignedBits(lineStyle.Reserved, 5);
+            writer.WriteBit(lineStyle.NoClose);
+            writer.WriteUnsignedBits((uint)lineStyle.EndCapStyle, 2);
+            if (lineStyle.JoinStyle == JoinStyle.Miter) {
+                writer.WriteFixedPoint8(lineStyle.MilterLimitFactor);
+            }
+            if (lineStyle.HasFill) {
+                writer.WriteFillStyleRGBA(ref lineStyle.FillStyle);
+            } else {
+                writer.WriteRGBA(ref lineStyle.Color);
+            }
         }
 
-        private static CapStyle ReadCapStyle(this SwfStreamReader reader) {
-            var bit0 = reader.ReadBit();
-            var bit1 = reader.ReadBit();
-            return (CapStyle)((bit1 ? 2 : 0) + (bit0 ? 1 : 0));
-        }
 
-        private static JoinStyle ReadJoinStyle(this SwfStreamReader reader) {
-            var bit0 = reader.ReadBit();
-            var bit1 = reader.ReadBit();
-            return (JoinStyle)((bit1 ? 2 : 0) + (bit0 ? 1 : 0));
-        }
     }
 }
