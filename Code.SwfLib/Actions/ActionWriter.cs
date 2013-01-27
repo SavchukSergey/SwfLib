@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Code.SwfLib.Actions {
     public class ActionWriter : IActionVisitor<SwfStreamWriter, object> {
@@ -145,6 +146,41 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionPush action, SwfStreamWriter writer) {
+            foreach (var item in action.Items) {
+                writer.WriteByte((byte)item.Type);
+                switch (item.Type) {
+                    case ActionPushItemType.String:
+                        writer.WriteString(item.String);
+                        break;
+                    case ActionPushItemType.Float:
+                        writer.WriteSingle(item.Float);
+                        break;
+                    case ActionPushItemType.Null:
+                        break;
+                    case ActionPushItemType.Undefined:
+                        break;
+                    case ActionPushItemType.Register:
+                        writer.WriteByte(item.Register);
+                        break;
+                    case ActionPushItemType.Boolean:
+                        writer.WriteByte(item.Boolean);
+                        break;
+                    case ActionPushItemType.Double:
+                        writer.WriteDouble(item.Double);
+                        break;
+                    case ActionPushItemType.Integer:
+                        writer.WriteUInt32(item.Integer);
+                        break;
+                    case ActionPushItemType.Constant8:
+                        writer.WriteByte(item.Constant8);
+                        break;
+                    case ActionPushItemType.Constant16:
+                        writer.WriteUInt16(item.Constant16);
+                        break;
+                    default:
+                        throw new NotSupportedException("Unknown PushData type " + item.Type);
+                }
+            }
             return null;
         }
 

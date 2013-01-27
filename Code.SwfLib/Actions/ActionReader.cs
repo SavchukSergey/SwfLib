@@ -157,6 +157,8 @@ namespace Code.SwfLib.Actions {
                     case ActionPushItemType.Float:
                         item.Float = _reader.ReadSingle();
                         break;
+                    case ActionPushItemType.Null:
+                        break;
                     case ActionPushItemType.Undefined:
                         break;
                     case ActionPushItemType.Register:
@@ -169,7 +171,7 @@ namespace Code.SwfLib.Actions {
                         item.Double = _reader.ReadDouble();
                         break;
                     case ActionPushItemType.Integer:
-                        item.Integer = _reader.ReadInt32();
+                        item.Integer = _reader.ReadUInt32();
                         break;
                     case ActionPushItemType.Constant8:
                         item.Constant8 = _reader.ReadByte();

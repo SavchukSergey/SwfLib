@@ -13,7 +13,7 @@
 
         public double Double;
 
-        public int Integer;
+        public uint Integer;
 
         public byte Constant8;
 

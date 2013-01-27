@@ -178,6 +178,10 @@ namespace Code.SwfLib {
             _writer.Write(value);
         }
 
+        public void WriteDouble(double value) {
+            _writer.Write(value);
+        }
+
         public void WriteShortFloat(double value) {
             ushort res = 0;
             if (value != 0.0) {
