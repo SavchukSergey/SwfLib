@@ -24,6 +24,17 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             XStyleList.FromXml(xStyleList, tag.FillStyles, tag.LineStyles);
         }
 
+        protected override void FormatAdditionalAttributes(DefineShape4Tag tag, XElement xTag) {
+            xTag.Add(new XAttribute("nonScalingStrokes", CommonFormatter.Format(tag.UsesNonScalingStrokes)));
+            xTag.Add(new XAttribute("scalingStrokes", CommonFormatter.Format(tag.UsesScalingStrokes)));
+            if (tag.UsesFillWindingRule) {
+                xTag.Add(new XAttribute("fillWindingRule", CommonFormatter.Format(tag.UsesFillWindingRule)));
+            }
+            if (tag.ReservedFlags != 0) {
+                xTag.Add(new XAttribute("reserved", tag.ReservedFlags));
+            }
+        }
+
         protected override void FormatAdditionalBounds(DefineShape4Tag tag, XElement elem) {
             elem.Add(new XElement(EDGE_BOUNDS_ELEM, XRect.ToXml(tag.EdgeBounds)));
         }

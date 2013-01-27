@@ -10,7 +10,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
             var res = new XElement("LineStyle",
                 new XAttribute("width", lineStyle.Width),
                 new XAttribute("startCapStyle", (byte)lineStyle.StartCapStyle),
-                new XAttribute("jointStyle", lineStyle.JoinStyle),
+                new XAttribute("jointStyle", (byte)lineStyle.JoinStyle),
                 new XAttribute("hasFill", lineStyle.HasFill ? "1" : "0"),
                 new XAttribute("noHScale", lineStyle.NoHScale ? "1" : "0"),
                 new XAttribute("noVScale", lineStyle.NoVScale ? "1" : "0"),

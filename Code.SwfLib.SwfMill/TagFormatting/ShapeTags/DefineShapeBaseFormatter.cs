@@ -11,6 +11,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         private const string STYLES_ELEM = "styles";
 
         protected sealed override XElement FormatTagElement(T tag, XElement xTag) {
+            FormatAdditionalAttributes(tag, xTag);
+
             xTag.Add(new XElement(BOUNDS_ELEM, XRect.ToXml(tag.ShapeBounds)));
 
             FormatAdditionalBounds(tag, xTag);
@@ -55,6 +57,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                     break;
             }
         }
+
+        protected virtual void FormatAdditionalAttributes(T tag, XElement xTag) { }
 
         protected virtual void FormatAdditionalBounds(T tag, XElement elem) { }
 
