@@ -219,21 +219,21 @@ namespace Code.SwfLib.SwfMill.Shapes {
         public static IShapeRecordRGB RGBFromXml(XElement xShape) {
             var type = GetShapeRecordType(xShape);
             var record = _factory.CreateRGB(type);
-            record.AcceptVisitor(_reader, null);
+            record.AcceptVisitor(_reader, xShape);
             return record;
         }
 
         public static IShapeRecordRGBA RGBAFromXml(XElement xShape) {
             var type = GetShapeRecordType(xShape);
             var record = _factory.CreateRGBA(type);
-            record.AcceptVisitor(_reader, null);
+            record.AcceptVisitor(_reader, xShape);
             return record;
         }
 
         public static IShapeRecordEx ExFromXml(XElement xShape) {
             var type = GetShapeRecordType(xShape);
             var record = _factory.CreateEx(type);
-            record.AcceptVisitor(_reader, null);
+            record.AcceptVisitor(_reader, xShape);
             return record;
         }
 

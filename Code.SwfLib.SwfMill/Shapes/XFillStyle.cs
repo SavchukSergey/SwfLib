@@ -160,7 +160,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         private static InterpolationMode GetInterpolationMode(XElement xFillStyle) {
-            var xMode = xFillStyle.Attribute("spreadMode");
+            var xMode = xFillStyle.Attribute("interpolationMode");
             var res = InterpolationMode.Normal;
             if (xMode == null) return res;
             return (InterpolationMode)Enum.Parse(typeof(InterpolationMode), xMode.Value);

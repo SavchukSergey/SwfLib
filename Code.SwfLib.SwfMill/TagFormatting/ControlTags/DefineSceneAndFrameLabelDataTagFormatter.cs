@@ -32,26 +32,31 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         }
 
         protected override void AcceptTagElement(DefineSceneAndFrameLabelDataTag tag, XElement element) {
-            var xScenes = element.Element("scenes");
-            foreach (var xScene in xScenes.Elements()) {
-                var xOffset = xScene.Attribute("offset");
-                var xName = xScene.Attribute("name");
-                var scene = new SceneOffsetData {
-                    Offset = uint.Parse(xOffset.Value),
-                    Name = xName.Value
-                };
-                tag.Scenes.Add(scene);
-            }
-
-            var xFrames = element.Element("frames");
-            foreach (var xFrame in xFrames.Elements()) {
-                var xNumber = xFrame.Attribute("number");
-                var xLabel = xFrame.Attribute("label");
-                var frame = new FrameLabelData() {
-                    FrameNumber = uint.Parse(xNumber.Value),
-                    Label = xLabel.Value
-                };
-                tag.Frames.Add(frame);
+            switch (element.Name.LocalName) {
+                case "scenes":
+                    var xScenes = element;
+                    foreach (var xScene in xScenes.Elements()) {
+                        var xOffset = xScene.Attribute("offset");
+                        var xName = xScene.Attribute("name");
+                        var scene = new SceneOffsetData {
+                            Offset = uint.Parse(xOffset.Value),
+                            Name = xName.Value
+                        };
+                        tag.Scenes.Add(scene);
+                    }
+                    break;
+                case "frames":
+                    var xFrames = element;
+                    foreach (var xFrame in xFrames.Elements()) {
+                        var xNumber = xFrame.Attribute("number");
+                        var xLabel = xFrame.Attribute("label");
+                        var frame = new FrameLabelData() {
+                            FrameNumber = uint.Parse(xNumber.Value),
+                            Label = xLabel.Value
+                        };
+                        tag.Frames.Add(frame);
+                    }
+                    break;
             }
         }
 

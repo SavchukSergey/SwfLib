@@ -22,14 +22,14 @@ namespace Code.SwfLib.SwfMill.Data {
             };
 
             if (scaleX != null || scaleY != null) {
-                matrix.ScaleX = int.Parse(scaleX.Value);
-                matrix.ScaleY = int.Parse(scaleY.Value);
+                matrix.ScaleX = CommonFormatter.ParseDouble(scaleX.Value);
+                matrix.ScaleY = CommonFormatter.ParseDouble(scaleY.Value);
                 matrix.HasScale = true;
             }
 
             if (skewX != null || skewY != null) {
-                matrix.RotateSkew0 = int.Parse(skewX.Value);
-                matrix.RotateSkew1 = int.Parse(skewY.Value);
+                matrix.RotateSkew0 = CommonFormatter.ParseDouble(skewX.Value);
+                matrix.RotateSkew1 = CommonFormatter.ParseDouble(skewY.Value);
                 matrix.HasRotate = true;
             }
 
