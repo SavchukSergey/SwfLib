@@ -1,5 +1,6 @@
 ﻿using System;
 using Code.SwfLib.Actions;
+using Code.SwfLib.SwfMill.Actions;
 using Code.SwfLib.SwfMill.DataFormatting;
 using NUnit.Framework;
 
@@ -9,7 +10,7 @@ namespace Code.SwfLib.SwfMill.Tests {
 
         [Test]
         public void CreateTest() {
-            var ser = new ActionXmlSerializer();
+            var ser = new XActionWriter();
             var actionFactory = new ActionsFactory();
             var vals = Enum.GetValues(typeof(ActionCode));
             foreach (ActionCode type in vals) {

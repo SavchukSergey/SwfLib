@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using Code.SwfLib.Gradients;
+using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Gradients;
 using Code.SwfLib.Tags.ShapeTags;

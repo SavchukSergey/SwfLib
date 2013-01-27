@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Code.SwfLib.Actions;
 using Code.SwfLib.Shapes;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
@@ -229,6 +231,10 @@ namespace Code.SwfLib {
         #region Action tags
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DoActionTag tag, SwfStreamWriter writer) {
+            var actionWriter = new ActionWriter(writer);
+            foreach (var action in tag.ActionRecords) {
+                actionWriter.WriteAction(action);
+            }
             return null;
         }
 
@@ -416,11 +422,11 @@ namespace Code.SwfLib {
             writer.WriteUInt16((ushort)tag.Glyphs.Count);
 
             var offsetTable = new uint[tag.Glyphs.Count];
-            
+
             var shapesStream = new MemoryStream();
             var shapesSwfWriter = new SwfStreamWriter(shapesStream);
             for (int i = 0; i < tag.Glyphs.Count; i++) {
-                offsetTable[i] = (uint) shapesStream.Position;
+                offsetTable[i] = (uint)shapesStream.Position;
                 var glyph = tag.Glyphs[i];
                 writer.FlushBits();
                 shapesSwfWriter.WriteShapeRecordsRGB(glyph.Records, 1, 0);

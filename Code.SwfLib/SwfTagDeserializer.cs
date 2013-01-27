@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,7 +7,6 @@ using Code.SwfLib.Data;
 using Code.SwfLib.Filters;
 using Code.SwfLib.Fonts;
 using Code.SwfLib.Shapes;
-using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
@@ -296,7 +293,7 @@ namespace Code.SwfLib {
         #region Actions tags
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DoActionTag tag, SwfStreamReader reader) {
-            var actionReader = new ActionsReader(reader);
+            var actionReader = new ActionReader(reader);
             ActionBase action;
             do {
                 action = actionReader.ReadAction();

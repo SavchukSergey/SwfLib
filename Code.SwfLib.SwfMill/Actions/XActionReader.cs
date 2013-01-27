@@ -1,0 +1,465 @@
+﻿using System;
+using System.Xml.Linq;
+using Code.SwfLib.Actions;
+
+namespace Code.SwfLib.SwfMill.Actions {
+    public class XActionReader : IActionVisitor<XElement, ActionBase> {
+
+        private readonly ActionsFactory _factory = new ActionsFactory();
+
+        public ActionBase Deserialize(XElement xAction) {
+            var actionCode = XActionNames.FromNodeName(xAction.Name.LocalName);
+            var action = _factory.Create(actionCode);
+            action.AcceptVisitor(this, xAction);
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGotoFrame action, XElement xAction) {
+            var xFrame = xAction.Attribute("frame");
+            action.Frame = ushort.Parse(xFrame.Value);
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGetURL action, XElement xAction) {
+            var xUrl = xAction.Attribute("url");
+            var xTarget = xAction.Attribute("target");
+            action.UrlString = xUrl.Value;
+            action.TargetString = xTarget.Value;
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionNextFrame action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionPreviousFrame action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionPlay action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStop action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionToggleQuality action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStopSounds action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionWaitForFrame action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionSetTarget action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGoToLabel action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionAdd action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDivide action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionMultiply action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionSubtract action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionEquals action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionLess action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionAnd action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionNot action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionOr action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStringAdd action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStringEquals action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStringExtract action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStringLength action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionMBStringExtract action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionMBStringLength action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStringLess action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionPop action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionPush action, XElement xAction) {
+            var xItems = xAction.Element("items");
+            foreach (var xItem in xItems.Elements()) {
+                var xValue = xItem.Attribute("value");
+                switch (xItem.Name.LocalName) {
+                    case "StackString":
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.String, String = xValue.Value });
+                        break;
+                    case "StackFloat":
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Float, Float = float.Parse(xValue.Value) });
+                        break;
+                    case "StackNull":
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Null });
+                        break;
+                    case "StackUndefined":
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Undefined });
+                        break;
+                    case "StackRegister":
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Register, Register = byte.Parse(xValue.Value) });
+                        break;
+                    case "StackBoolean":
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Boolean, Boolean = byte.Parse(xValue.Value) });
+                        break;
+                    case "StackDouble":
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Double, Double = double.Parse(xValue.Value) });
+                        break;
+                    case "StackInteger":
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Integer, Integer = int.Parse(xValue.Value) });
+                        break;
+                    case "StackConstant8":
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant8, Constant8 = byte.Parse(xValue.Value) });
+                        break;
+                    case "StackConstant16":
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant16, Constant16 = ushort.Parse(xValue.Value) });
+                        break;
+                    default:
+                        throw new NotSupportedException();
+                }
+            }
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionAsciiToChar action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionCharToAscii action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionToInteger action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionMBAsciiToChar action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionMBCharToAscii action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionCall action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionIf action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionJump action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGetVariable action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionSetVariable action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGetURL2 action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGetProperty action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGotoFrame2 action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionRemoveSprite action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionSetProperty action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionSetTarget2 action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStartDrag action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionWaitForFrame2 action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionCloneSprite action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionEndDrag action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGetTime action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionRandomNumber action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionTrace action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionCallFunction action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionCallMethod action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionConstantPool action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDefineFunction action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDefineLocal action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDefineLocal2 action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDelete action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDelete2 action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionEnumerate action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionEquals2 action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGetMember action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionInitArray action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionInitObject action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionNewMethod action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionNewObject action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionSetMember action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionTargetPath action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionWith action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionToNumber action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionToString action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionTypeOf action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionAdd2 action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionLess2 action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionModulo action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionBitAnd action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionBitLShift action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionBitOr action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionBitRShift action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionBitURShift action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionBitXor action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDecrement action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionIncrement action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionPushDuplicate action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionReturn action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStackSwap action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStoreRegister action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionInstanceOf action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionEnumerate2 action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStrictEquals action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGreater action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStringGreater action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDefineFunction2 action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionExtends action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionCastOp action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionImplementsOp action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionTry action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionThrow action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionEnd action, XElement xAction) {
+            return action;
+        }
+
+        ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionUnknown action, XElement xAction) {
+            return action;
+        }
+    }
+}

@@ -2,8 +2,8 @@
 using System.Xml.Linq;
 using Code.SwfLib.Actions;
 
-namespace Code.SwfLib.SwfMill.DataFormatting {
-    public class ActionXmlSerializer : IActionVisitor<object, XElement> {
+namespace Code.SwfLib.SwfMill.Actions {
+    public class XActionWriter : IActionVisitor<object, XElement> {
 
         public XElement Serialize(ActionBase action) {
             return action.AcceptVisitor(this, null);
@@ -16,7 +16,7 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetURL action, object param) {
-            return new XElement("GoToFrame",
+            return new XElement("GetURL",
                 new XAttribute("url", action.UrlString),
                 new XAttribute("target", action.TargetString));
         }
@@ -447,10 +447,6 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
                 new XAttribute("register", action.RegisterNumber));
         }
 
-        public XElement Visit(ActionEnd action, object arg) {
-            return new XElement("EndAction");
-        }
-
         #endregion
 
         #region SWF 6
@@ -504,6 +500,10 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         }
 
         #endregion
+
+        public XElement Visit(ActionEnd action, object arg) {
+            return new XElement("EndAction");
+        }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionUnknown action, object arg) {
             return new XElement("Unknown",

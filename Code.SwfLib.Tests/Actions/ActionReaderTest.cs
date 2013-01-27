@@ -16,7 +16,7 @@ namespace Code.SwfLib.Tests.Actions {
                     mem.WriteByte((byte)type);
                     mem.Seek(0, SeekOrigin.Begin);
                     var reader = new SwfStreamReader(mem);
-                    var actionReader = new ActionsReader(reader);
+                    var actionReader = new ActionReader(reader);
                     var action = actionReader.ReadAction();
                     Assert.IsNotNull(action);
                     var actualType = action.ActionCode;

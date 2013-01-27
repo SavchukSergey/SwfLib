@@ -88,7 +88,7 @@
     <Compile Include="Actions\ActionGreater.cs" />
     <Compile Include="Actions\ActionImplementsOp.cs" />
     <Compile Include="Actions\ActionInstanceOf.cs" />
-    <Compile Include="Actions\ActionsReader.cs" />
+    <Compile Include="Actions\ActionReader.cs" />
     <Compile Include="Actions\ActionStackSwap.cs" />
     <Compile Include="Actions\ActionStoreRegister.cs" />
     <Compile Include="Actions\ActionStrictEquals.cs" />

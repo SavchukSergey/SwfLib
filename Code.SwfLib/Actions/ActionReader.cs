@@ -1,12 +1,12 @@
 ﻿using System;
 
 namespace Code.SwfLib.Actions {
-    public class ActionsReader : IActionVisitor<ushort, ActionBase> {
+    public class ActionReader : IActionVisitor<ushort, ActionBase> {
 
         private readonly SwfStreamReader _reader;
         private readonly ActionsFactory _factory;
 
-        public ActionsReader(SwfStreamReader reader) {
+        public ActionReader(SwfStreamReader reader) {
             _reader = reader;
             _factory = new ActionsFactory();
         }

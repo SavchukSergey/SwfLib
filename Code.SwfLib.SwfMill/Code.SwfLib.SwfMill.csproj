@@ -52,7 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataFormatting\ActionXmlSerializer.cs" />
+    <Compile Include="Actions\XActionNames.cs" />
+    <Compile Include="Actions\XActionReader.cs" />
+    <Compile Include="Actions\XActionWriter.cs" />
     <Compile Include="DataFormatting\FillStyleRGBAFormatter.cs" />
     <Compile Include="DataFormatting\DataFormatterBase.cs" />
     <Compile Include="DataFormatting\DataFormatters.cs" />
