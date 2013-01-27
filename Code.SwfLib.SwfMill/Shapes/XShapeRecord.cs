@@ -191,14 +191,6 @@ namespace Code.SwfLib.SwfMill.Shapes {
                         default:
                             OnUnknownAttributeFound(attribute);
                             break;
-
-                    }
-                }
-                foreach (var elem in xShape.Elements()) {
-                    switch (elem.Name.LocalName) {
-                        default:
-                            OnUnknownElementFound(elem);
-                            break;
                     }
                 }
             }

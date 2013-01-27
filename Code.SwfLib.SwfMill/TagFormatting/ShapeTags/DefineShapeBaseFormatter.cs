@@ -35,7 +35,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         protected sealed override void AcceptTagAttribute(T tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    AcceptShapeAttribute(tag, attrib);
+                    break;
             }
         }
 
@@ -63,6 +64,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         protected virtual void FormatAdditionalBounds(T tag, XElement elem) { }
 
         protected virtual void AcceptShapeTagElement(T tag, XElement element) { }
+
+        protected virtual void AcceptShapeAttribute(T tag, XAttribute attribute) { }
 
         protected override ushort? GetObjectID(T tag) {
             return tag.ShapeID;
