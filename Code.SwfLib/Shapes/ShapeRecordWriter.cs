@@ -34,7 +34,6 @@ namespace Code.SwfLib.Shapes {
 
         private static void WriteStyleChangeShapeRecord(SwfStreamWriter writer, StyleChangeShapeRecord record, ref uint fillStylesBits, ref uint lineStylesBits) {
             writer.WriteBit(false);
-            writer.WriteBit(false);
             var stateNewStyles = record.StateNewStyles;
             var stateFillStyle0 = record.FillStyle0.HasValue;
             var stateFillStyle1 = record.FillStyle1.HasValue;
@@ -47,7 +46,7 @@ namespace Code.SwfLib.Shapes {
             writer.WriteBit(stateMoveTo);
             if (stateMoveTo) {
                 var cnt = new BitsCount(record.MoveDeltaX, record.MoveDeltaY);
-                var moveBits = cnt.GetSignedBits();
+                var moveBits = cnt.GetUnsignedBits();
                 writer.WriteUnsignedBits(moveBits, 5);
                 writer.WriteSignedBits(record.MoveDeltaX, moveBits);
                 writer.WriteSignedBits(record.MoveDeltaY, moveBits);
@@ -70,46 +69,43 @@ namespace Code.SwfLib.Shapes {
         }
 
         ShapeRecordWriteContext IShapeRecordVisitor<ShapeRecordWriteContext, ShapeRecordWriteContext>.Visit(StyleChangeShapeRecordRGB record, ShapeRecordWriteContext ctx) {
-            if (record.StateNewStyles) {
-                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count + 1).GetUnsignedBits();
-                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count + 1).GetUnsignedBits();
-            }
-
             var writer = ctx.Writer;
             WriteStyleChangeShapeRecord(writer, record, ref ctx.FillStyleBits, ref ctx.LineStyleBits);
             if (record.StateNewStyles) {
                 writer.WriteFillStylesRGB(record.FillStyles);
                 writer.WriteLineStylesRGB(record.LineStyles);
+                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count + 1).GetUnsignedBits();
+                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count + 1).GetUnsignedBits();
+                writer.WriteUnsignedBits(ctx.FillStyleBits, 4);
+                writer.WriteUnsignedBits(ctx.LineStyleBits, 4);
             }
             return ctx;
         }
 
         ShapeRecordWriteContext IShapeRecordVisitor<ShapeRecordWriteContext, ShapeRecordWriteContext>.Visit(StyleChangeShapeRecordRGBA record, ShapeRecordWriteContext ctx) {
-            if (record.StateNewStyles) {
-                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count + 1).GetUnsignedBits();
-                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count + 1).GetUnsignedBits();
-            }
-
             var writer = ctx.Writer;
             WriteStyleChangeShapeRecord(writer, record, ref ctx.FillStyleBits, ref ctx.LineStyleBits);
             if (record.StateNewStyles) {
                 writer.WriteFillStylesRGBA(record.FillStyles);
                 writer.WriteLineStylesRGBA(record.LineStyles);
+                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count + 1).GetUnsignedBits();
+                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count + 1).GetUnsignedBits();
+                writer.WriteUnsignedBits(ctx.FillStyleBits, 4);
+                writer.WriteUnsignedBits(ctx.LineStyleBits, 4);
             }
             return ctx;
         }
 
         ShapeRecordWriteContext IShapeRecordVisitor<ShapeRecordWriteContext, ShapeRecordWriteContext>.Visit(StyleChangeShapeRecordEx record, ShapeRecordWriteContext ctx) {
-            if (record.StateNewStyles) {
-                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count + 1).GetUnsignedBits();
-                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count + 1).GetUnsignedBits();
-            }
-
             var writer = ctx.Writer;
             WriteStyleChangeShapeRecord(writer, record, ref ctx.FillStyleBits, ref ctx.LineStyleBits);
             if (record.StateNewStyles) {
                 writer.WriteFillStylesRGBA(record.FillStyles);
                 writer.WriteLineStylesEx(record.LineStyles);
+                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count + 1).GetUnsignedBits();
+                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count + 1).GetUnsignedBits();
+                writer.WriteUnsignedBits(ctx.FillStyleBits, 4);
+                writer.WriteUnsignedBits(ctx.LineStyleBits, 4);
             }
             return ctx;
         }
@@ -123,11 +119,11 @@ namespace Code.SwfLib.Shapes {
             var numBits = actualBits - 2u;
             writer.WriteUnsignedBits(numBits, 4);
             bool genLineFlags = record.DeltaX != 0 && record.DeltaY != 0;
-            bool vertFlag = record.DeltaY != 0;
             writer.WriteBit(genLineFlags);
+            bool vertFlag = record.DeltaY != 0;
             if (!genLineFlags) writer.WriteBit(vertFlag);
-            if (genLineFlags || !vertFlag) writer.WriteSignedBits(record.DeltaX, actualBits);
-            if (genLineFlags || vertFlag) writer.WriteSignedBits(record.DeltaY, actualBits);
+            if (!genLineFlags || !vertFlag) writer.WriteSignedBits(record.DeltaX, actualBits);
+            if (!genLineFlags || vertFlag) writer.WriteSignedBits(record.DeltaY, actualBits);
             return ctx;
         }
 

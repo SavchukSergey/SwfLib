@@ -56,9 +56,12 @@ namespace Code.SwfLib.SwfMill.Shapes {
                 NoVScale = CommonFormatter.ParseBool(xNoVScale.Value),
                 PixelHinting = CommonFormatter.ParseBool(xPixelHinting.Value),
                 NoClose = CommonFormatter.ParseBool(xNoClose.Value),
-                EndCapStyle = (CapStyle)byte.Parse(xEndCapStyle.Value),
-                Reserved = byte.Parse(xReserved.Value)
+                EndCapStyle = (CapStyle)byte.Parse(xEndCapStyle.Value)
             };
+
+            if (xReserved != null) {
+                res.Reserved = byte.Parse(xReserved.Value);
+            }
 
             if (res.JoinStyle == JoinStyle.Miter) {
                 var xMiterFactor = xLineStyle.Attribute("miterFactor");
