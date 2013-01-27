@@ -16,5 +16,12 @@ namespace Code.SwfLib.SwfMill.Shapes {
             return xShape;
         }
 
+        public static Glyph FromXml(XElement xGlyph, Glyph glyph) {
+            var xEdges = xGlyph.Element("edges");
+            foreach (var xShapeRecord in xEdges.Elements()) {
+                glyph.Records.Add(XShapeRecord.RGBFromXml(xShapeRecord));
+            }
+            return glyph;
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         void ITagFormatter.AcceptElement(SwfTagBase tag, XElement element) {
-            AcceptTagElement((T)tag, element);
+            AcceptElement((T)tag, element);
         }
 
         public virtual void InitTag(T tag, XElement element) {

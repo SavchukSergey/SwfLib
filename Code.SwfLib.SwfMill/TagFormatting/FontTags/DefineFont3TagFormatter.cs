@@ -76,6 +76,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                     tag.HasLayout = true;
                     //TODO: read bounds
                     break;
+                case "glyphs":
+                    foreach (var xGlyph in element.Elements()) {
+                        tag.Glyphs.Add(XGlyph.FromXml(xGlyph));
+                    }
+                    break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
             }
@@ -93,9 +98,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
             var xGlyphs = new XElement("glyphs");
             foreach (var glyph in tag.Glyphs) {
-                var xGlyph = new XElement("Glyph");
-                xGlyph.Add(new XAttribute("map", glyph.Code));
-                xGlyph.Add(XGlyphShape.ToXml(glyph));
+                var xGlyph = XGlyph.ToXml(glyph);
                 xGlyphs.Add(xGlyph);
             }
             xTag.Add(xGlyphs);

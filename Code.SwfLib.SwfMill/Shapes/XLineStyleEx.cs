@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ShapeTags;
@@ -15,12 +16,14 @@ namespace Code.SwfLib.SwfMill.Shapes {
                 new XAttribute("noHScale", lineStyle.NoHScale ? "1" : "0"),
                 new XAttribute("noVScale", lineStyle.NoVScale ? "1" : "0"),
                 new XAttribute("pixelHinting", lineStyle.PixelHinting ? "1" : "0"),
-                new XAttribute("reserved", lineStyle.Reserved),
                 new XAttribute("noClose", lineStyle.NoClose ? "1" : "0"),
                 new XAttribute("endCapStyle", (byte)lineStyle.EndCapStyle)
                 );
+            if (lineStyle.Reserved != 0) {
+                res.Add(new XAttribute("reserved", lineStyle.Reserved));
+            }
             if (lineStyle.JoinStyle == JoinStyle.Miter) {
-                res.Add(new XAttribute("miterFactor", lineStyle.MilterLimitFactor));
+                res.Add(new XAttribute("miterFactor", CommonFormatter.Format(lineStyle.MilterLimitFactor)));
             }
             if (lineStyle.HasFill) {
                 res.Add(new XElement("fillStyle", XFillStyle.ToXml(lineStyle.FillStyle)));
@@ -31,7 +34,45 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         public static LineStyleEx FromXml(XElement xLineStyle) {
-            throw new NotImplementedException();
+            var xWidth = xLineStyle.Attribute("width");
+            var xStartCapStyle = xLineStyle.Attribute("startCapStyle");
+            var xJointStyle = xLineStyle.Attribute("jointStyle");
+            var xHasFill = xLineStyle.Attribute("hasFill");
+            var xNoHScale = xLineStyle.Attribute("noHScale");
+            var xNoVScale = xLineStyle.Attribute("noVScale");
+            var xPixelHinting = xLineStyle.Attribute("pixelHinting");
+            var xNoClose = xLineStyle.Attribute("noClose");
+            var xEndCapStyle = xLineStyle.Attribute("endCapStyle");
+
+            var xReserved = xLineStyle.Attribute("reserved");
+
+            var res = new LineStyleEx {
+                Width = ushort.Parse(xWidth.Value),
+                StartCapStyle = (CapStyle)byte.Parse(xStartCapStyle.Value),
+                JoinStyle = (JoinStyle)byte.Parse(xJointStyle.Value),
+                HasFill = CommonFormatter.ParseBool(xHasFill.Value),
+                NoHScale = CommonFormatter.ParseBool(xNoHScale.Value),
+                NoVScale = CommonFormatter.ParseBool(xNoVScale.Value),
+                PixelHinting = CommonFormatter.ParseBool(xPixelHinting.Value),
+                NoClose = CommonFormatter.ParseBool(xNoClose.Value),
+                EndCapStyle = (CapStyle)byte.Parse(xEndCapStyle.Value),
+                Reserved = byte.Parse(xReserved.Value)
+            };
+
+            if (res.JoinStyle == JoinStyle.Miter) {
+                var xMiterFactor = xLineStyle.Attribute("miterFactor");
+                res.MilterLimitFactor = CommonFormatter.ParseDouble(xMiterFactor.Value);
+            }
+
+            var xFillStyle = xLineStyle.Element("fillStyle");
+            var xFillColor = xLineStyle.Element("fillColor");
+            if (xFillStyle != null) {
+                res.FillStyle = XFillStyle.FromXmlRGBA(xFillStyle.Elements().First());
+            }
+            if (xFillColor != null) {
+                res.Color = XColorRGBA.FromXml(xFillColor.Elements().First());
+            }
+            return res;
         }
     }
 }
