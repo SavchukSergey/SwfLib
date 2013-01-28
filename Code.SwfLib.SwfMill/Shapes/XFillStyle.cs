@@ -14,14 +14,30 @@ namespace Code.SwfLib.SwfMill.Shapes {
         public static XElement ToXml(FillStyleRGB fillStyle) {
             var res = new XElement(GetNodeName(fillStyle.FillStyleType));
             switch (fillStyle.FillStyleType) {
+                case FillStyleType.SolidColor:
+                    res.Add(new XElement("color", XColorRGB.ToXml(fillStyle.Color)));
+                    break;
                 case FillStyleType.LinearGradient:
                     AddSpreadMode(res, fillStyle.Gradient.SpreadMode);
                     AddInterpolationMode(res, fillStyle.Gradient.InterpolationMode);
                     AddMatrix(res, fillStyle.GradientMatrix);
                     AddGradientColors(res, fillStyle.Gradient.GradientRecords);
                     break;
-                case FillStyleType.SolidColor:
-                    res.Add(new XElement("color", XColorRGB.ToXml(fillStyle.Color)));
+                case FillStyleType.RepeatingBitmap:
+                    AddBitmapId(res, fillStyle.BitmapID);
+                    AddMatrix(res, fillStyle.BitmapMatrix);
+                    break;
+                case FillStyleType.ClippedBitmap:
+                    AddBitmapId(res, fillStyle.BitmapID);
+                    AddMatrix(res, fillStyle.BitmapMatrix);
+                    break;
+                case FillStyleType.NonSmoothedRepeatingBitmap:
+                    AddBitmapId(res, fillStyle.BitmapID);
+                    AddMatrix(res, fillStyle.BitmapMatrix);
+                    break;
+                case FillStyleType.NonSmoothedClippedBitmap:
+                    AddBitmapId(res, fillStyle.BitmapID);
+                    AddMatrix(res, fillStyle.BitmapMatrix);
                     break;
             }
             return res;
@@ -30,14 +46,30 @@ namespace Code.SwfLib.SwfMill.Shapes {
         public static XElement ToXml(FillStyleRGBA fillStyle) {
             var res = new XElement(GetNodeName(fillStyle.FillStyleType));
             switch (fillStyle.FillStyleType) {
+                case FillStyleType.SolidColor:
+                    res.Add(new XElement("color", XColorRGBA.ToXml(fillStyle.Color)));
+                    break;
                 case FillStyleType.LinearGradient:
                     AddSpreadMode(res, fillStyle.Gradient.SpreadMode);
                     AddInterpolationMode(res, fillStyle.Gradient.InterpolationMode);
                     AddMatrix(res, fillStyle.GradientMatrix);
                     AddGradientColors(res, fillStyle.Gradient.GradientRecords);
                     break;
-                case FillStyleType.SolidColor:
-                    res.Add(new XElement("color", XColorRGBA.ToXml(fillStyle.Color)));
+                case FillStyleType.RepeatingBitmap:
+                    AddBitmapId(res, fillStyle.BitmapID);
+                    AddMatrix(res, fillStyle.BitmapMatrix);
+                    break;
+                case FillStyleType.ClippedBitmap:
+                    AddBitmapId(res, fillStyle.BitmapID);
+                    AddMatrix(res, fillStyle.BitmapMatrix);
+                    break;
+                case FillStyleType.NonSmoothedRepeatingBitmap:
+                    AddBitmapId(res, fillStyle.BitmapID);
+                    AddMatrix(res, fillStyle.BitmapMatrix);
+                    break;
+                case FillStyleType.NonSmoothedClippedBitmap:
+                    AddBitmapId(res, fillStyle.BitmapID);
+                    AddMatrix(res, fillStyle.BitmapMatrix);
                     break;
             }
             return res;
@@ -49,6 +81,15 @@ namespace Code.SwfLib.SwfMill.Shapes {
                     return ParseSolidRGB(xFillStyle);
                 case "LinearGradient":
                     return ParseLinearRGB(xFillStyle);
+                case "RepeatingBitmap":
+                    return ParseRepeatingBitmapRGB(xFillStyle);
+                case "ClippedBitmap":
+                    return ParseClippedBitmapRGB(xFillStyle);
+                case "NonSmoothedRepeatingBitmap":
+                    return ParseNonSmoothedRepeatingBitmapRGB(xFillStyle);
+                case "NonSmoothedClippedBitmap":
+                    return ParseNonSmoothedClippedBitmapRGB(xFillStyle);
+
                 //TODO: other fill styles
                 default:
                     throw new NotSupportedException();
@@ -61,6 +102,14 @@ namespace Code.SwfLib.SwfMill.Shapes {
                     return ParseSolidRGBA(xFillStyle);
                 case "LinearGradient":
                     return ParseLinearRGBA(xFillStyle);
+                case "RepeatingBitmap":
+                    return ParseRepeatingBitmapRGBA(xFillStyle);
+                case "ClippedBitmap":
+                    return ParseClippedBitmapRGBA(xFillStyle);
+                case "NonSmoothedRepeatingBitmap":
+                    return ParseNonSmoothedRepeatingBitmapRGBA(xFillStyle);
+                case "NonSmoothedClippedBitmap":
+                    return ParseNonSmoothedClippedBitmapRGBA(xFillStyle);
                 //TODO: other fill styles
                 default:
                     throw new NotSupportedException();
@@ -172,12 +221,94 @@ namespace Code.SwfLib.SwfMill.Shapes {
             return (InterpolationMode)Enum.Parse(typeof(InterpolationMode), xMode.Value);
         }
 
+        private static void AddBitmapId(XElement xml, ushort bitmapId) {
+            xml.Add(new XAttribute("objectID", bitmapId.ToString()));
+        }
+
+        private static ushort GetBitmapId(XElement xml) {
+            return ushort.Parse(xml.Attribute("objectID").Value);
+        }
+
+        public static FillStyleRGB ParseRepeatingBitmapRGB(XElement xFillStyle) {
+            return new FillStyleRGB {
+                FillStyleType = FillStyleType.RepeatingBitmap,
+                BitmapID = GetBitmapId(xFillStyle),
+                BitmapMatrix = GetMatrix(xFillStyle)
+            };
+        }
+
+        public static FillStyleRGBA ParseRepeatingBitmapRGBA(XElement xFillStyle) {
+            return new FillStyleRGBA {
+                FillStyleType = FillStyleType.RepeatingBitmap,
+                BitmapID = GetBitmapId(xFillStyle),
+                BitmapMatrix = GetMatrix(xFillStyle)
+            };
+        }
+
+        public static FillStyleRGB ParseNonSmoothedRepeatingBitmapRGB(XElement xFillStyle) {
+            return new FillStyleRGB {
+                FillStyleType = FillStyleType.NonSmoothedRepeatingBitmap,
+                BitmapID = GetBitmapId(xFillStyle),
+                BitmapMatrix = GetMatrix(xFillStyle)
+            };
+        }
+
+        public static FillStyleRGBA ParseNonSmoothedRepeatingBitmapRGBA(XElement xFillStyle) {
+            return new FillStyleRGBA {
+                FillStyleType = FillStyleType.NonSmoothedRepeatingBitmap,
+                BitmapID = GetBitmapId(xFillStyle),
+                BitmapMatrix = GetMatrix(xFillStyle)
+            };
+        }
+
+
+        public static FillStyleRGB ParseClippedBitmapRGB(XElement xFillStyle) {
+            return new FillStyleRGB {
+                FillStyleType = FillStyleType.ClippedBitmap,
+                BitmapID = GetBitmapId(xFillStyle),
+                BitmapMatrix = GetMatrix(xFillStyle)
+            };
+        }
+
+        public static FillStyleRGBA ParseClippedBitmapRGBA(XElement xFillStyle) {
+            return new FillStyleRGBA {
+                FillStyleType = FillStyleType.ClippedBitmap,
+                BitmapID = GetBitmapId(xFillStyle),
+                BitmapMatrix = GetMatrix(xFillStyle)
+            };
+        }
+
+        public static FillStyleRGB ParseNonSmoothedClippedBitmapRGB(XElement xFillStyle) {
+            return new FillStyleRGB {
+                FillStyleType = FillStyleType.NonSmoothedClippedBitmap,
+                BitmapID = GetBitmapId(xFillStyle),
+                BitmapMatrix = GetMatrix(xFillStyle)
+            };
+        }
+
+        public static FillStyleRGBA ParseNonSmoothedClippedBitmapRGBA(XElement xFillStyle) {
+            return new FillStyleRGBA {
+                FillStyleType = FillStyleType.NonSmoothedClippedBitmap,
+                BitmapID = GetBitmapId(xFillStyle),
+                BitmapMatrix = GetMatrix(xFillStyle)
+            };
+        }
+
+
         private static string GetNodeName(FillStyleType type) {
             switch (type) {
                 case FillStyleType.LinearGradient:
                     return "LinearGradient";
                 case FillStyleType.SolidColor:
                     return "Solid";
+                case FillStyleType.RepeatingBitmap:
+                    return "RepeatingBitmap";
+                case FillStyleType.ClippedBitmap:
+                    return "ClippedBitmap";
+                case FillStyleType.NonSmoothedRepeatingBitmap:
+                    return "NonSmoothedRepeatingBitmap";
+                case FillStyleType.NonSmoothedClippedBitmap:
+                    return "NonSmoothedClippedBitmap";
                 default:
                     throw new NotSupportedException();
             }
