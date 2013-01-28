@@ -19,6 +19,8 @@ namespace Code.SwfLib.SwfMill.Filters {
                 return XGlowFilter.ToXml(filter);
             }
 
+            //TODO: other filters
+
             public XElement Visit(BevelFilter filter, object arg) {
                 throw new NotImplementedException();
             }
@@ -44,6 +46,20 @@ namespace Code.SwfLib.SwfMill.Filters {
 
         public static XElement ToXml(BaseFilter filter) {
             return filter.AcceptVisitor(_writer, null);
+        }
+
+        public static BaseFilter FromXml(XElement xFilter) {
+            switch (xFilter.Name.LocalName) {
+                case XDropShadowFilter.TAG_NAME:
+                    return XDropShadowFilter.FromXml(xFilter);
+                case XBlurFilter.TAG_NAME:
+                    return XBlurFilter.FromXml(xFilter);
+                case XGlowFilter.TAG_NAME:
+                    return XGlowFilter.FromXml(xFilter);
+                //TODO: other filters
+                default:
+                    throw new NotSupportedException();
+            }
         }
     }
 }

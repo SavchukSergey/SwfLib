@@ -45,8 +45,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
 
         protected override void AcceptPlaceTagElement(PlaceObject3Tag tag, XElement element) {
             switch (element.Name.LocalName) {
-                case FILTERS_ELEM:
-                    //TODO: Read filters
+                case "filters":
+                    foreach (var xFilter in element.Elements())
+                    {
+                        tag.Filters.Add(XFilter.FromXml(xFilter));
+                    }
                     break;
                 case EVENTS_ELEM:
                     //TODO: Read transform
