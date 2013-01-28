@@ -53,6 +53,11 @@ namespace Code.SwfLib {
             WriteUnsignedBits(low, 16);
         }
 
+        public void WriteFixed(double val) {
+            var integer = (int)(val * 65536);
+            WriteInt32(integer);
+        }
+
         #region Bit writing
 
         private struct BitContext {
@@ -123,6 +128,11 @@ namespace Code.SwfLib {
         }
 
         public void WriteSInt16(short val) {
+            FlushBits();
+            _writer.Write(val);
+        }
+
+        public void WriteInt32(int val) {
             FlushBits();
             _writer.Write(val);
         }

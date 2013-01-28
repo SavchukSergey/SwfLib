@@ -143,7 +143,6 @@ namespace Code.SwfLib {
                 tag.ClipDepth = reader.ReadUInt16();
             }
 
-            //TODO: uncomment
             if (hasFilterList) {
                 var count = reader.ReadByte();
                 for (var i = 0; i < count; i++) {
@@ -151,6 +150,8 @@ namespace Code.SwfLib {
                     tag.Filters.Add(filter);
                 }
             }
+
+            //TODO: uncomment
 
             //if (hasBlendMode) {
             //    tag.BlendMode = reader.ReadByte();

@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Code.SwfLib.Actions;
+using Code.SwfLib.Filters;
 using Code.SwfLib.Fonts;
 using Code.SwfLib.Shapes;
 using Code.SwfLib.Tags;
@@ -112,7 +113,13 @@ namespace Code.SwfLib {
                 writer.WriteUInt16(tag.ClipDepth.Value);
             }
 
-            //TODO: writer filters
+            if (tag.Filters.Count > 0) {
+                writer.WriteByte((byte) tag.Filters.Count);
+                foreach (var filter in tag.Filters) {
+                    writer.WriteFilter(filter);
+                }
+            }
+
             return null;
         }
 

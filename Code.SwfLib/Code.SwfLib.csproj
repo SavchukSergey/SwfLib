@@ -177,6 +177,7 @@
     <Compile Include="Filters\FilterFactory.cs" />
     <Compile Include="Filters\FilterReader.cs" />
     <Compile Include="Filters\FilterStreamEx.cs" />
+    <Compile Include="Filters\FilterWriter.cs" />
     <Compile Include="Filters\GlowFilter.cs" />
     <Compile Include="Filters\DropShadowFilter.cs" />
     <Compile Include="Filters\FilterType.cs" />

@@ -23,7 +23,7 @@ namespace Code.SwfLib.SwfMill.Filters {
             var xBlurX = xFilter.Attribute("blurX");
             var xBlurY = xFilter.Attribute("blurY");
             var xPasses = xFilter.Attribute("passes");
-            var xReserved = xFilter.Attribute("passes");
+            var xReserved = xFilter.Attribute("reserved");
 
             return new BlurFilter {
                 BlurX = CommonFormatter.ParseDouble(xBlurX.Value),
