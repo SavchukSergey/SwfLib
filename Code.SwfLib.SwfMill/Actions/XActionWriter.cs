@@ -303,13 +303,13 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction action, object param) {
             var res = new XElement("DeclareFunction");
-            res.Add(new XAttribute("name", action.FunctionName),
-                new XAttribute("argc", action.Params.Length),
-                new XAttribute("length", action.Body.Length)
+            res.Add(new XAttribute("name", action.Name),
+                new XAttribute("argc", action.Args.Count)//,
+                //new XAttribute("length", action.Body.Length)
             );
             //TODO: method body
             var args = new XElement("args");
-            foreach (var arg in action.Params) {
+            foreach (var arg in action.Args) {
                 throw new NotImplementedException();
             }
             res.Add(args);
@@ -476,7 +476,17 @@ namespace Code.SwfLib.SwfMill.Actions {
         #region SWF 7
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction2 action, object param) {
-            throw new NotImplementedException();
+            var res = new XElement("DeclareFunction2");
+            if (!string.IsNullOrEmpty(action.Name)) {
+                res.Add(new XAttribute("name", action.Name));
+            }
+            var xArgs = new XElement("args");
+            foreach (var arg in action.Args) {
+                xArgs.Add(new XElement("Arg", new XAttribute("name", arg)));
+            }
+            res.Add(xArgs);
+            //TODO: other fields
+            return res;
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionExtends action, object param) {

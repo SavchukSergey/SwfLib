@@ -102,6 +102,7 @@
     <Compile Include="Actions\ActionUnknown.cs" />
     <Compile Include="Actions\ActionWith.cs" />
     <Compile Include="Actions\ActionWriter.cs" />
+    <Compile Include="Actions\RegisterParam.cs" />
     <Compile Include="BitsCount.cs" />
     <Compile Include="ClipActionsStreamExt.cs" />
     <Compile Include="ColorTransformStreamExt.cs" />

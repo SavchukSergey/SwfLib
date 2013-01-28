@@ -1,11 +1,14 @@
-﻿namespace Code.SwfLib.Actions {
+﻿using System.Collections.Generic;
+
+namespace Code.SwfLib.Actions {
     public class ActionDefineFunction : ActionBase {
 
-        public string FunctionName;
+        public string Name;
 
-        public string[] Params;
+        public readonly IList<string> Args = new List<string>();
 
-        public byte[] Body;
+        public readonly List<ActionBase> Actions = new List<ActionBase>();
+
 
         public override ActionCode ActionCode {
             get { return ActionCode.DefineFunction; }

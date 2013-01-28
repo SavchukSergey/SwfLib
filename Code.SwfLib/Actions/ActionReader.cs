@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Code.SwfLib.Actions {
     public class ActionReader : IActionVisitor<ushort, ActionBase> {
@@ -310,16 +311,17 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionDefineFunction action, ushort length) {
-            string name = _reader.ReadString();
-            ushort count = _reader.ReadUInt16();
-            var parameters = new string[count];
-            for (var i = 0; i < count; i++) {
-                parameters[i] = _reader.ReadString();
+            action.Name = _reader.ReadString();
+            var args = _reader.ReadUInt16();
+            for (var i = 0; i < args; i++) {
+                action.Args.Add(_reader.ReadString());
             }
-            ushort bodySize = _reader.ReadUInt16();
-            action.FunctionName = name;
-            action.Params = parameters;
-            action.Body = _reader.ReadBytes(bodySize);
+            var codeSize = _reader.ReadUInt16();
+            var pos = _reader.BaseStream.Position;
+            while ((_reader.BaseStream.Position - pos) < codeSize) {
+                var subaction = ReadAction();
+                action.Actions.Add(subaction);
+            }
             return action;
         }
 
@@ -482,6 +484,33 @@ namespace Code.SwfLib.Actions {
         #region SWF 7
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionDefineFunction2 action, ushort length) {
+            action.Name = _reader.ReadString();
+            var args = _reader.ReadUInt16();
+            action.RegisterCount = _reader.ReadByte();
+
+            action.PreloadParent = _reader.ReadBit();
+            action.PreloadRoot = _reader.ReadBit();
+            action.SuppressSuper = _reader.ReadBit();
+            action.PreloadSuper = _reader.ReadBit();
+            action.SuppressArguments = _reader.ReadBit();
+            action.PreloadArguments = _reader.ReadBit();
+            action.SuppressThis = _reader.ReadBit();
+            action.PreloadThis = _reader.ReadBit();
+            action.Reserved = (byte)_reader.ReadUnsignedBits(7);
+            action.PreloadGlobal = _reader.ReadBit();
+
+            for (var i = 0; i < args; i++) {
+                action.Args.Add(new RegisterParam {
+                    Register = _reader.ReadByte(),
+                    Name = _reader.ReadString()
+                });
+            }
+            var codeSize = _reader.ReadUInt16();
+            var pos = _reader.BaseStream.Position;
+            while ((_reader.BaseStream.Position - pos) < codeSize) {
+                var subaction = ReadAction();
+                action.Actions.Add(subaction);
+            }
             return action;
         }
 
