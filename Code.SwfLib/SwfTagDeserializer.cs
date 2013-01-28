@@ -481,7 +481,8 @@ namespace Code.SwfLib {
             int glyphsCount = reader.ReadUInt16();
 
             var offsetTable = new uint[glyphsCount];
-            for (var i = 0; i < glyphsCount; i++) {
+            for (var i = 0; i < glyphsCount; i++)
+            {
                 offsetTable[i] = tag.WideOffsets ? reader.ReadUInt32() : reader.ReadUInt16();
             }
             uint codeTableOffset = tag.WideOffsets ? reader.ReadUInt32() : reader.ReadUInt16();

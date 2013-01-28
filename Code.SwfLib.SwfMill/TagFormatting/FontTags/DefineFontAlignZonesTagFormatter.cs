@@ -21,7 +21,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         protected override void AcceptTagAttribute(DefineFontAlignZonesTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case CSM_HINT_ATTRIB:
-                    tag.CsmTableHint = (CSMTableHint)(byte.Parse(attrib.Value) << 6);
+                    tag.CsmTableHint = (CSMTableHint)(byte.Parse(attrib.Value));
                     break;
                 case "reserved":
                     tag.Reserved = byte.Parse(attrib.Value);

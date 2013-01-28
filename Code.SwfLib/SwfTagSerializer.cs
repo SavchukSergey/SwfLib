@@ -114,7 +114,7 @@ namespace Code.SwfLib {
             }
 
             if (tag.Filters.Count > 0) {
-                writer.WriteByte((byte) tag.Filters.Count);
+                writer.WriteByte((byte)tag.Filters.Count);
                 foreach (var filter in tag.Filters) {
                     writer.WriteFilter(filter);
                 }
@@ -447,11 +447,12 @@ namespace Code.SwfLib {
             }
 
             var offsetTableSize = (uint)(tag.WideOffsets ? 4 * tag.Glyphs.Count : 2 * tag.Glyphs.Count);
-
+            var firstShapeOffset = offsetTableSize + (tag.WideOffsets ? 4 * tag.Glyphs.Count : 2 * tag.Glyphs.Count);
+            
             foreach (var offset in offsetTable) {
-                var resOffset = offset + offsetTableSize;
+                var resOffset = offset + firstShapeOffset;
                 if (tag.WideOffsets) {
-                    writer.WriteUInt32(resOffset);
+                    writer.WriteUInt32((uint) resOffset);
                 } else {
                     writer.WriteUInt16((ushort)resOffset);
                 }

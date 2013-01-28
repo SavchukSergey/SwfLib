@@ -2,7 +2,6 @@
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Fonts;
-using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
@@ -70,11 +69,20 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                     break;
                 case "advance":
                     tag.HasLayout = true;
-                    //TODO: read advances
+                    var advanceIndex = 0;
+                    foreach (var xAdvance in element.Elements()) {
+                        var xValue = xAdvance.Attribute("value");
+                        tag.Glyphs[advanceIndex].Advance = short.Parse(xValue.Value);
+                        advanceIndex++;
+                    }
                     break;
                 case "bounds":
                     tag.HasLayout = true;
-                    //TODO: read bounds
+                    var boundIndex = 0;
+                    foreach (var xBound in element.Elements()) {
+                        tag.Glyphs[boundIndex].Bounds = XRect.FromXml(xBound);
+                        boundIndex++;
+                    }
                     break;
                 case "glyphs":
                     foreach (var xGlyph in element.Elements()) {

@@ -54,7 +54,7 @@ namespace Code.SwfLib {
         }
 
         public void WriteFixed(double val) {
-            var integer = (int)(val * 65536);
+            var integer = (int)Math.Round(val * 65536);
             WriteInt32(integer);
         }
 

@@ -27,7 +27,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     tag.Move = ParseBoolFromDigit(attrib);
                     break;
                 case MORPH_ATTRIB:
-                    //TODO: read morph
+                    tag.Ratio = ushort.Parse(attrib.Value);
                     break;
                 case ALL_FLAGS1_ATTRIB:
                     //TODO: read flags1
@@ -46,8 +46,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         protected override void AcceptPlaceTagElement(PlaceObject3Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "filters":
-                    foreach (var xFilter in element.Elements())
-                    {
+                    foreach (var xFilter in element.Elements()) {
                         tag.Filters.Add(XFilter.FromXml(xFilter));
                     }
                     break;
