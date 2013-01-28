@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.Shapes.Records;
@@ -61,8 +62,8 @@ namespace Code.SwfLib.SwfMill.Shapes {
             private static XElement FormatShapeSetup(StyleChangeShapeRecord styleChange) {
                 var setup = new XElement("ShapeSetup");
                 //if (styleChange.MoveDeltaX != 0 || styleChange.MoveDeltaY != 0) {
-                    setup.Add(new XAttribute("x", styleChange.MoveDeltaX));
-                    setup.Add(new XAttribute("y", styleChange.MoveDeltaY));
+                setup.Add(new XAttribute("x", styleChange.MoveDeltaX));
+                setup.Add(new XAttribute("y", styleChange.MoveDeltaY));
                 //}
                 if (styleChange.FillStyle0.HasValue) {
                     setup.Add(new XAttribute("fillStyle0", styleChange.FillStyle0.Value));
@@ -79,7 +80,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         private class Reader : IShapeRecordVisitor<XElement, IShapeRecord> {
-            public IShapeRecord Visit(EndShapeRecord record, XElement arg) {
+            public IShapeRecord Visit(EndShapeRecord record, XElement xShapeRecord) {
                 return record;
             }
 
@@ -113,46 +114,27 @@ namespace Code.SwfLib.SwfMill.Shapes {
             }
 
             public IShapeRecord Visit(StraightEdgeShapeRecord record, XElement xShape) {
-                var result = new StraightEdgeShapeRecord();
-                foreach (var attribute in xShape.Attributes()) {
-                    switch (attribute.Name.LocalName) {
-                        case "x":
-                            result.DeltaX = int.Parse(attribute.Value);
-                            break;
-                        case "y":
-                            result.DeltaY = int.Parse(attribute.Value);
-                            break;
-                        default:
-                            OnUnknownAttributeFound(attribute);
-                            break;
-
-                    }
-                }
-                foreach (var elem in xShape.Elements()) {
-                    switch (elem.Name.LocalName) {
-                        default:
-                            OnUnknownElementFound(elem);
-                            break;
-                    }
-                }
-                return result;
+                var xDeltaX = xShape.Attribute("x");
+                var xDeltaY = xShape.Attribute("y");
+                record.DeltaX = int.Parse(xDeltaX.Value);
+                record.DeltaY = int.Parse(xDeltaY.Value);
+                return record;
             }
 
             public IShapeRecord Visit(CurvedEdgeShapeRecord record, XElement xShape) {
-                var result = new CurvedEdgeShapeRecord();
                 foreach (var attribute in xShape.Attributes()) {
                     switch (attribute.Name.LocalName) {
                         case "x1":
-                            result.ControlDeltaX = int.Parse(attribute.Value);
+                            record.ControlDeltaX = int.Parse(attribute.Value);
                             break;
                         case "y1":
-                            result.ControlDeltaY = int.Parse(attribute.Value);
+                            record.ControlDeltaY = int.Parse(attribute.Value);
                             break;
                         case "x2":
-                            result.AnchorDeltaX = int.Parse(attribute.Value);
+                            record.AnchorDeltaX = int.Parse(attribute.Value);
                             break;
                         case "y2":
-                            result.AnchorDeltaY = int.Parse(attribute.Value);
+                            record.AnchorDeltaY = int.Parse(attribute.Value);
                             break;
                         default:
                             OnUnknownAttributeFound(attribute);
@@ -160,14 +142,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
 
                     }
                 }
-                foreach (var elem in xShape.Elements()) {
-                    switch (elem.Name.LocalName) {
-                        default:
-                            OnUnknownElementFound(elem);
-                            break;
-                    }
-                }
-                return result;
+                return record;
             }
 
             private static void ReadStyleChange(StyleChangeShapeRecord record, XElement xShape) {
@@ -193,10 +168,6 @@ namespace Code.SwfLib.SwfMill.Shapes {
                             break;
                     }
                 }
-            }
-
-            private static void OnUnknownElementFound(XElement elem) {
-                throw new FormatException("Unknown element " + elem.Name.LocalName);
             }
 
             private static void OnUnknownAttributeFound(XAttribute elem) {
@@ -232,7 +203,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
         private static ShapeRecordType GetShapeRecordType(XElement xShape) {
             switch (xShape.Name.LocalName) {
                 case "ShapeSetup":
-                    if (xShape.Attributes().Any()) {
+                    if (xShape.Attributes().Any() || xShape.Elements().Any()) {
                         return ShapeRecordType.StyleChangeRecord;
                     }
                     return ShapeRecordType.EndRecord;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -13,7 +12,12 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         public static LineStyleRGB FromXml(XElement xLineStyle) {
-            throw new NotImplementedException();
+            var xWidth = xLineStyle.Attribute("width");
+            var xColor = xLineStyle.Element("color").Element("Color");
+            return new LineStyleRGB {
+                Width = ushort.Parse(xWidth.Value),
+                Color = XColorRGB.FromXml(xColor)
+            };
         }
     }
 }

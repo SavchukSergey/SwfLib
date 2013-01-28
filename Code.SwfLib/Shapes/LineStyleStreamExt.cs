@@ -16,9 +16,9 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void ReadToLineStylesRGBA(this SwfStreamReader reader, IList<LineStyleRGBA> lineStyles, bool allowBigArray) {
+        public static void ReadToLineStylesRGBA(this SwfStreamReader reader, IList<LineStyleRGBA> lineStyles) {
             ushort cnt = reader.ReadByte();
-            if (allowBigArray && cnt == 255) {
+            if (cnt == 255) {
                 cnt = reader.ReadUInt16();
             }
             for (var i = 0; i < cnt; i++) {
@@ -26,9 +26,9 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void ReadToLineStylesEx(this SwfStreamReader reader, IList<LineStyleEx> lineStyles, bool allowBigArray) {
+        public static void ReadToLineStylesEx(this SwfStreamReader reader, IList<LineStyleEx> lineStyles) {
             ushort cnt = reader.ReadByte();
-            if (allowBigArray && cnt == 255) {
+            if (cnt == 255) {
                 cnt = reader.ReadUInt16();
             }
             for (var i = 0; i < cnt; i++) {
@@ -36,10 +36,13 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void WriteLineStylesRGB(this SwfStreamWriter writer, IList<LineStyleRGB> styles) {
+        public static void WriteLineStylesRGB(this SwfStreamWriter writer, IList<LineStyleRGB> styles, bool allowBigArray) {
             if (styles.Count < 255) {
                 writer.WriteByte((byte)styles.Count);
             } else {
+                if (!allowBigArray) {
+                    throw new InvalidOperationException("DefineShape supports up to 255 fill style records");
+                }
                 writer.WriteByte(255);
                 writer.WriteUInt16((ushort)styles.Count);
             }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -263,9 +262,11 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
 
-            writer.WriteFillStylesRGB(tag.FillStyles);
-            writer.WriteLineStylesRGB(tag.LineStyles);
+            writer.WriteFillStylesRGB(tag.FillStyles, false);
+            writer.WriteLineStylesRGB(tag.LineStyles, false);
             writer.WriteShapeRecordsRGB(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+
+            writer.FlushBits();
             return null;
         }
 
@@ -273,8 +274,8 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
 
-            writer.WriteFillStylesRGB(tag.FillStyles);
-            writer.WriteLineStylesRGB(tag.LineStyles);
+            writer.WriteFillStylesRGB(tag.FillStyles, true);
+            writer.WriteLineStylesRGB(tag.LineStyles, true);
             writer.WriteShapeRecordsRGB(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
 
             writer.FlushBits();
@@ -303,6 +304,8 @@ namespace Code.SwfLib {
             writer.WriteFillStylesRGBA(tag.FillStyles);
             writer.WriteLineStylesEx(tag.LineStyles);
             writer.WriteShapeRecordsEx(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+
+            writer.FlushBits();
             return null;
         }
 
@@ -432,20 +435,20 @@ namespace Code.SwfLib {
             for (int i = 0; i < tag.Glyphs.Count; i++) {
                 offsetTable[i] = (uint)shapesStream.Position;
                 var glyph = tag.Glyphs[i];
-                writer.FlushBits();
                 shapesSwfWriter.WriteShapeRecordsRGB(glyph.Records, 1, 0);
-            }
-            shapesSwfWriter.FlushBits();
-
-            foreach (var offset in offsetTable) {
-                if (tag.WideOffsets) {
-                    writer.WriteUInt32(offset);
-                } else {
-                    writer.WriteUInt16((ushort)offset);
-                }
+                shapesSwfWriter.FlushBits();
             }
 
             var offsetTableSize = (uint)(tag.WideOffsets ? 4 * tag.Glyphs.Count : 2 * tag.Glyphs.Count);
+
+            foreach (var offset in offsetTable) {
+                var resOffset = offset + offsetTableSize;
+                if (tag.WideOffsets) {
+                    writer.WriteUInt32(resOffset);
+                } else {
+                    writer.WriteUInt16((ushort)resOffset);
+                }
+            }
 
             var codeTableOffset = offsetTableSize + (uint)shapesStream.Length;
             if (tag.WideOffsets) {

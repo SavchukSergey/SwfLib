@@ -1,4 +1,5 @@
-﻿using Code.SwfLib.Shapes.Records;
+﻿using System.Diagnostics;
+using Code.SwfLib.Shapes.Records;
 
 namespace Code.SwfLib.Shapes {
     public class ShapeRecordWriter : IShapeRecordVisitor<ShapeRecordWriter.ShapeRecordWriteContext, ShapeRecordWriter.ShapeRecordWriteContext> {
@@ -6,6 +7,7 @@ namespace Code.SwfLib.Shapes {
         private struct ShapeRecordWriteContext {
             public uint FillStyleBits;
             public uint LineStyleBits;
+            public bool AllowBigArray;
             public SwfStreamWriter Writer;
         }
 
@@ -25,6 +27,7 @@ namespace Code.SwfLib.Shapes {
             var ctx = new ShapeRecordWriteContext {
                 FillStyleBits = fillBitsCount,
                 LineStyleBits = lineBitsCount,
+                AllowBigArray = allowBigArray,
                 Writer = writer
             };
             ctx = record.AcceptVisitor(this, ctx);
@@ -46,7 +49,7 @@ namespace Code.SwfLib.Shapes {
             writer.WriteBit(stateMoveTo);
             if (stateMoveTo) {
                 var cnt = new BitsCount(record.MoveDeltaX, record.MoveDeltaY);
-                var moveBits = cnt.GetUnsignedBits();
+                var moveBits = cnt.GetSignedBits();
                 writer.WriteUnsignedBits(moveBits, 5);
                 writer.WriteSignedBits(record.MoveDeltaX, moveBits);
                 writer.WriteSignedBits(record.MoveDeltaY, moveBits);
@@ -72,8 +75,8 @@ namespace Code.SwfLib.Shapes {
             var writer = ctx.Writer;
             WriteStyleChangeShapeRecord(writer, record, ref ctx.FillStyleBits, ref ctx.LineStyleBits);
             if (record.StateNewStyles) {
-                writer.WriteFillStylesRGB(record.FillStyles);
-                writer.WriteLineStylesRGB(record.LineStyles);
+                writer.WriteFillStylesRGB(record.FillStyles, ctx.AllowBigArray);
+                writer.WriteLineStylesRGB(record.LineStyles, ctx.AllowBigArray);
                 ctx.FillStyleBits = new BitsCount(record.FillStyles.Count + 1).GetUnsignedBits();
                 ctx.LineStyleBits = new BitsCount(record.LineStyles.Count + 1).GetUnsignedBits();
                 writer.WriteUnsignedBits(ctx.FillStyleBits, 4);
@@ -116,14 +119,13 @@ namespace Code.SwfLib.Shapes {
             writer.WriteBit(true);
             var actualBits = new BitsCount(record.DeltaX, record.DeltaY).GetSignedBits();
             if (actualBits < 2) actualBits = 2;
-            var numBits = actualBits - 2u;
-            writer.WriteUnsignedBits(numBits, 4);
+            writer.WriteUnsignedBits(actualBits - 2u, 4);
             bool genLineFlags = record.DeltaX != 0 && record.DeltaY != 0;
             writer.WriteBit(genLineFlags);
             bool vertFlag = record.DeltaY != 0;
             if (!genLineFlags) writer.WriteBit(vertFlag);
-            if (!genLineFlags || !vertFlag) writer.WriteSignedBits(record.DeltaX, actualBits);
-            if (!genLineFlags || vertFlag) writer.WriteSignedBits(record.DeltaY, actualBits);
+            if (genLineFlags || !vertFlag) writer.WriteSignedBits(record.DeltaX, actualBits);
+            if (genLineFlags || vertFlag) writer.WriteSignedBits(record.DeltaY, actualBits);
             return ctx;
         }
 
@@ -133,8 +135,7 @@ namespace Code.SwfLib.Shapes {
             writer.WriteBit(false);
             var actualBits = new BitsCount(record.ControlDeltaX, record.ControlDeltaY, record.AnchorDeltaX, record.AnchorDeltaY).GetSignedBits();
             if (actualBits < 2) actualBits = 2;
-            var numBits = actualBits - 2u;
-            writer.WriteUnsignedBits(numBits, 4);
+            writer.WriteUnsignedBits(actualBits - 2u, 4);
             writer.WriteSignedBits(record.ControlDeltaX, actualBits);
             writer.WriteSignedBits(record.ControlDeltaY, actualBits);
             writer.WriteSignedBits(record.AnchorDeltaX, actualBits);

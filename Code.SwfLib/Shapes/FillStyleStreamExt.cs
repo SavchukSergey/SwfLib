@@ -19,9 +19,9 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void ReadToFillStylesRGBA(this SwfStreamReader reader, IList<FillStyleRGBA> fillStyles, bool allowBigArray) {
+        public static void ReadToFillStylesRGBA(this SwfStreamReader reader, IList<FillStyleRGBA> fillStyles) {
             ushort count = reader.ReadByte();
-            if (allowBigArray && count == 255) {
+            if (count == 255) {
                 count = reader.ReadUInt16();
             }
             for (var i = 0; i < count; i++) {
@@ -31,10 +31,13 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void WriteFillStylesRGB(this SwfStreamWriter writer, IList<FillStyleRGB> styles) {
+        public static void WriteFillStylesRGB(this SwfStreamWriter writer, IList<FillStyleRGB> styles, bool allowBigArray) {
             if (styles.Count < 255) {
                 writer.WriteByte((byte)styles.Count);
             } else {
+                if (!allowBigArray) {
+                    throw new InvalidOperationException("DefineShape supports up to 255 fill style records");
+                }
                 writer.WriteByte(255);
                 writer.WriteUInt16((ushort)styles.Count);
             }

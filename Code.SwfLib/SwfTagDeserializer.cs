@@ -344,8 +344,8 @@ namespace Code.SwfLib {
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShape3Tag tag, SwfStreamReader reader) {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
-            reader.ReadToFillStylesRGBA(tag.FillStyles, true);
-            reader.ReadToLineStylesRGBA(tag.LineStyles, true);
+            reader.ReadToFillStylesRGBA(tag.FillStyles);
+            reader.ReadToLineStylesRGBA(tag.LineStyles);
             reader.ReadToShapeRecordsRGBA(tag.ShapeRecords);
             return tag;
         }
@@ -355,8 +355,8 @@ namespace Code.SwfLib {
             reader.ReadRect(out tag.ShapeBounds);
             reader.ReadRect(out tag.EdgeBounds);
             tag.Flags = reader.ReadByte();
-            reader.ReadToFillStylesRGBA(tag.FillStyles, true);
-            reader.ReadToLineStylesEx(tag.LineStyles, true);
+            reader.ReadToFillStylesRGBA(tag.FillStyles);
+            reader.ReadToLineStylesEx(tag.LineStyles);
             reader.ReadToShapeRecordsEx(tag.ShapeRecords);
             return tag;
         }
@@ -486,12 +486,11 @@ namespace Code.SwfLib {
             uint codeTableOffset = tag.WideOffsets ? reader.ReadUInt32() : reader.ReadUInt16();
 
             for (var i = 0; i < glyphsCount; i++) {
-                reader.AlignToByte();
                 var glyph = new Glyph();
                 reader.ReadToShapeRecordsRGB(glyph.Records);
                 tag.Glyphs.Add(glyph);
+                reader.AlignToByte();
             }
-            reader.AlignToByte();
 
             for (var i = 0; i < glyphsCount; i++) {
                 var glyph = tag.Glyphs[i];
