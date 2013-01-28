@@ -67,6 +67,14 @@ namespace Code.SwfLib.Tests.Samples {
             return ToHex(hash);
         }
 
+        protected string GetTagHash(SwfTagBase tag) {
+            var file = new SwfFile();
+            file.FileInfo.Version = 10;
+            var ser = new SwfTagSerializer(file);
+            var tagData = ser.GetTagData(tag);
+            return GetTagHash(tagData);
+        }
+
         protected string ToHex(byte[] data) {
             const string hex = "0123456789abcdef";
             return data.Aggregate("", (seed, bt) => seed + hex[bt >> 4] + hex[bt & 0x0f]);

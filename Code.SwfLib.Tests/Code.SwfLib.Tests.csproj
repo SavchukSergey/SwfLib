@@ -66,9 +66,10 @@
     <Compile Include="ExternalEtalonTests\SwfStreamReaderExtTest.cs" />
     <Compile Include="SamplesTest.cs" />
     <Compile Include="Samples\BaseSampleTest.cs" />
-    <Compile Include="Samples\DefineShape3TagTest.cs" />
-    <Compile Include="Samples\DefineShape4TagTest.cs" />
-    <Compile Include="Samples\DefineShapeTagTest.cs" />
+    <Compile Include="Samples\Fonts\DefineFont3Test.cs" />
+    <Compile Include="Samples\Shapes\DefineShape3TagTest.cs" />
+    <Compile Include="Samples\Shapes\DefineShape4TagTest.cs" />
+    <Compile Include="Samples\Shapes\DefineShapeTagTest.cs" />
     <Compile Include="SwfFileTest.cs" />
     <Compile Include="SwfStreamReaderExtTest.cs" />
     <Compile Include="SwfStreamReaderTest.cs" />

@@ -1,10 +1,9 @@
 ﻿using System.Linq;
-using Code.SwfLib.Shapes;
 using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags.ShapeTags;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests.Samples {
+namespace Code.SwfLib.Tests.Samples.Shapes {
     [TestFixture]
     public class DefineShape4TagTest : BaseSampleTest {
 
@@ -46,6 +45,8 @@ namespace Code.SwfLib.Tests.Samples {
             var lastShape = tag.ShapeRecords.Last() as EndShapeRecord;
             Assert.IsNotNull(firstShape);
             Assert.IsNotNull(lastShape);
+
+            Assert.AreEqual("6de111f18ae52ef83b08ff85603ce4e3", GetTagHash(tag));
         }
 
     }

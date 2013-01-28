@@ -1,13 +1,12 @@
 ﻿using System.Linq;
 using Code.SwfLib.Data;
 using Code.SwfLib.Gradients;
-using Code.SwfLib.Shapes;
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags.ShapeTags;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests.Samples {
+namespace Code.SwfLib.Tests.Samples.Shapes {
     [TestFixture]
     public class DefineShape3TagTest : BaseSampleTest {
 
@@ -49,6 +48,8 @@ namespace Code.SwfLib.Tests.Samples {
             var lastShape = tag.ShapeRecords.Last() as EndShapeRecord;
             Assert.IsNotNull(firstShape);
             Assert.IsNotNull(lastShape);
+
+            //Assert.AreEqual("a120edb8a47355bb3729d8330595ae84", GetTagHash(tag));
         }
     }
 }
