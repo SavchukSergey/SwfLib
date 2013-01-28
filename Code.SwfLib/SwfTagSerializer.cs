@@ -247,6 +247,10 @@ namespace Code.SwfLib {
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DoInitActionTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.SpriteId);
+            var actionWriter = new ActionWriter(writer);
+            foreach (var action in tag.ActionRecords) {
+                actionWriter.WriteAction(action);
+            }
             return null;
         }
 

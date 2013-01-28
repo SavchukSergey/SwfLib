@@ -31,9 +31,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
         }
 
         protected override XElement FormatTagElement(DoActionTag tag, XElement xTag) {
-            var res = new XElement(SwfTagNameMapping.DO_ACTION_TAG);
+            var res = new XElement(TagName);
             var actions = new XElement(ACTIONS_ELEM);
-            //TODO: process functions bodies.
             foreach (var action in tag.ActionRecords) {
                 actions.Add(_writer.Serialize(action));
             }

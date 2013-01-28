@@ -136,6 +136,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             var xItems = xAction.Element("items");
             foreach (var xItem in xItems.Elements()) {
                 var xValue = xItem.Attribute("value");
+                var xReg = xItem.Attribute("reg");
                 switch (xItem.Name.LocalName) {
                     case "StackString":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.String, String = xValue.Value });
@@ -150,7 +151,7 @@ namespace Code.SwfLib.SwfMill.Actions {
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Undefined });
                         break;
                     case "StackRegister":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Register, Register = byte.Parse(xValue.Value) });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Register, Register = byte.Parse(xReg.Value) });
                         break;
                     case "StackBoolean":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Boolean, Boolean = byte.Parse(xValue.Value) });
@@ -161,7 +162,7 @@ namespace Code.SwfLib.SwfMill.Actions {
                     case "StackInteger":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Integer, Integer = uint.Parse(xValue.Value) });
                         break;
-                    case "StackConstant8":
+                    case "StackDictionaryLookup":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant8, Constant8 = byte.Parse(xValue.Value) });
                         break;
                     case "StackConstant16":
@@ -199,6 +200,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionIf action, XElement xAction) {
+            action.BranchOffset = short.Parse(xAction.Attribute("byteOffset").Value);
             return action;
         }
 

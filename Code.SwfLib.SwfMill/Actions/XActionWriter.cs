@@ -12,7 +12,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         #region SWF 3
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGotoFrame action, object param) {
-            return new XElement("GoToFrame", new XAttribute("frame", action.Frame));
+            return new XElement(XActionNames.FromAction(action), new XAttribute("frame", action.Frame));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetURL action, object param) {
@@ -94,7 +94,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionNot action, object param) {
-            return new XElement("Not");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionOr action, object param) {
@@ -151,7 +151,7 @@ namespace Code.SwfLib.SwfMill.Actions {
                         xItems.Add(new XElement("StackUndefined"));
                         break;
                     case ActionPushItemType.Register:
-                        xItems.Add(new XElement("StackRegister", new XAttribute("value", item.Register)));
+                        xItems.Add(new XElement("StackRegister", new XAttribute("reg", item.Register)));
                         break;
                     case ActionPushItemType.Boolean:
                         xItems.Add(new XElement("StackBoolean", new XAttribute("value", item.Boolean)));
@@ -163,7 +163,7 @@ namespace Code.SwfLib.SwfMill.Actions {
                         xItems.Add(new XElement("StackInteger", new XAttribute("value", item.Integer)));
                         break;
                     case ActionPushItemType.Constant8:
-                        xItems.Add(new XElement("StackConstant8", new XAttribute("value", item.Constant8)));
+                        xItems.Add(new XElement("StackDictionaryLookup", new XAttribute("value", item.Constant8)));
                         break;
                     case ActionPushItemType.Constant16:
                         xItems.Add(new XElement("StackConstant16", new XAttribute("value", item.Constant16)));
@@ -202,8 +202,8 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionIf action, object param) {
-            return new XElement("If",
-                new XAttribute("offset", action.BranchOffset));
+            return new XElement(XActionNames.FromAction(action),
+                new XAttribute("byteOffset", action.BranchOffset));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionJump action, object param) {
@@ -482,9 +482,18 @@ namespace Code.SwfLib.SwfMill.Actions {
             }
             var xArgs = new XElement("args");
             foreach (var arg in action.Args) {
-                xArgs.Add(new XElement("Arg", new XAttribute("name", arg)));
+                xArgs.Add(new XElement("Arg",
+                    new XAttribute("name", arg.Name),
+                    new XAttribute("register", arg.Register)));
             }
             res.Add(xArgs);
+
+            var xActions = new XElement("actions");
+            foreach (var subaction in action.Actions) {
+                xActions.Add(Serialize(subaction));
+            }
+            res.Add(xActions);
+
             //TODO: other fields
             return res;
         }

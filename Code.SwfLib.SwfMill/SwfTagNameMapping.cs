@@ -12,8 +12,6 @@ namespace Code.SwfLib.SwfMill {
         public const string DEFINE_FONT_TAG = "DefineFont";
         public const string DEFINE_FONT_ALIGN_ZONES_TAG = "DefineFontAlignZones";
         public const string DEFINE_FONT_INFO_TAG = "DefineFontInfo";
-        public const string DO_ACTION_TAG = "DoAction";
-        public const string DO_INIT_ACTION_TAG = "DoInitAction";
         public const string SET_BACKGROUND_COLOR_TAG = "SetBackgroundColor";
         public const string SCRIPT_LIMITES_TAG = "ScriptLimits";
         public const string DO_ABC_TAG = "DoAbc";

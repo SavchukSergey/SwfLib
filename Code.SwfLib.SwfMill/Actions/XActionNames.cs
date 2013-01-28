@@ -21,10 +21,14 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.Play, "Play");
             Register(ActionCode.Stop, "Stop");
             Register(ActionCode.ToggleQuality, "ToggleQuality");
+
         }
 
         private static void RegisterSWF4() {
+            Register(ActionCode.Not, "LogicalNOT");
+
             Register(ActionCode.Push, "PushData");
+            Register(ActionCode.If, "BranchIfTrue");
             Register(ActionCode.SetVariable, "SetVariable");
         }
 
@@ -35,6 +39,14 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         public static ActionCode FromNodeName(string tagName) {
             return _nodeNameToCode[tagName];
+        }
+
+        public static string FromActionCode(ActionCode code) {
+            return _codeToNodeName[code];
+        }
+
+        public static string FromAction(ActionBase action) {
+            return FromActionCode(action.ActionCode);
         }
     }
 }

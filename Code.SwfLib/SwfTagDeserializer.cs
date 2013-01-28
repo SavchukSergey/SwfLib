@@ -305,6 +305,12 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DoInitActionTag tag, SwfStreamReader reader) {
             tag.SpriteId = reader.ReadUInt16();
+            var actionReader = new ActionReader(reader);
+            ActionBase action;
+            do {
+                action = actionReader.ReadAction();
+                tag.ActionRecords.Add(action);
+            } while (!(action is ActionEnd));
             return tag;
         }
 
