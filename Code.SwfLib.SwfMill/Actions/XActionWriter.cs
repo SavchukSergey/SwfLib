@@ -66,7 +66,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         #region SWF 4
 
         XElement IActionVisitor<object, XElement>.Visit(ActionAdd action, object param) {
-            return new XElement("Add");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDivide action, object param) {
@@ -74,7 +74,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionMultiply action, object param) {
-            return new XElement("Multiply");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSubtract action, object param) {
@@ -163,7 +163,7 @@ namespace Code.SwfLib.SwfMill.Actions {
                         xItems.Add(new XElement("StackInteger", new XAttribute("value", item.Integer)));
                         break;
                     case ActionPushItemType.Constant8:
-                        xItems.Add(new XElement("StackDictionaryLookup", new XAttribute("value", item.Constant8)));
+                        xItems.Add(new XElement("StackDictionaryLookup", new XAttribute("index", item.Constant8)));
                         break;
                     case ActionPushItemType.Constant16:
                         xItems.Add(new XElement("StackConstant16", new XAttribute("value", item.Constant16)));
@@ -207,8 +207,8 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionJump action, object param) {
-            return new XElement("Jump",
-              new XAttribute("offset", action.BranchOffset));
+            return new XElement(XActionNames.FromAction(action),
+              new XAttribute("byteOffset", action.BranchOffset));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetVariable action, object param) {
@@ -337,7 +337,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionEquals2 action, object arg) {
-            return new XElement("Equals2");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetMember action, object arg) {
@@ -357,7 +357,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionNewObject action, object arg) {
-            return new XElement("NewObject");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSetMember action, object param) {
@@ -386,11 +386,11 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionAdd2 action, object arg) {
-            return new XElement("Add2");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionLess2 action, object arg) {
-            return new XElement("Less2");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionModulo action, object arg) {
@@ -430,7 +430,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionPushDuplicate action, object arg) {
-            return new XElement("PushDuplicate");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionReturn action, object param) {
@@ -443,8 +443,8 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStoreRegister action, object arg) {
-            return new XElement("StoreRegister",
-                new XAttribute("register", action.RegisterNumber));
+            return new XElement(XActionNames.FromAction(action),
+                new XAttribute("reg", action.RegisterNumber));
         }
 
         #endregion
@@ -482,9 +482,9 @@ namespace Code.SwfLib.SwfMill.Actions {
             }
             var xArgs = new XElement("args");
             foreach (var arg in action.Args) {
-                xArgs.Add(new XElement("Arg",
+                xArgs.Add(new XElement("Parameter",
                     new XAttribute("name", arg.Name),
-                    new XAttribute("register", arg.Register)));
+                    new XAttribute("reg", arg.Register)));
             }
             res.Add(xArgs);
 

@@ -87,7 +87,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
                     return ParseClippedBitmapRGB(xFillStyle);
                 case "NonSmoothedRepeatingBitmap":
                     return ParseNonSmoothedRepeatingBitmapRGB(xFillStyle);
-                case "NonSmoothedClippedBitmap":
+                case "ClippedBitmap2":
                     return ParseNonSmoothedClippedBitmapRGB(xFillStyle);
 
                 //TODO: other fill styles
@@ -108,7 +108,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
                     return ParseClippedBitmapRGBA(xFillStyle);
                 case "NonSmoothedRepeatingBitmap":
                     return ParseNonSmoothedRepeatingBitmapRGBA(xFillStyle);
-                case "NonSmoothedClippedBitmap":
+                case "ClippedBitmap2":
                     return ParseNonSmoothedClippedBitmapRGBA(xFillStyle);
                 //TODO: other fill styles
                 default:
@@ -308,7 +308,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
                 case FillStyleType.NonSmoothedRepeatingBitmap:
                     return "NonSmoothedRepeatingBitmap";
                 case FillStyleType.NonSmoothedClippedBitmap:
-                    return "NonSmoothedClippedBitmap";
+                    return "ClippedBitmap2";
                 default:
                     throw new NotSupportedException();
             }

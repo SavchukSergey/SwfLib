@@ -11,6 +11,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.End, "EndAction");
             RegisterSWF3();
             RegisterSWF4();
+            RegisterSWF5();
         }
 
         private static void RegisterSWF3() {
@@ -25,12 +26,26 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         private static void RegisterSWF4() {
+            Register(ActionCode.Add, "Add");
+            Register(ActionCode.Multiply, "Mulitply");
+
             Register(ActionCode.Not, "LogicalNOT");
 
             Register(ActionCode.Push, "PushData");
             Register(ActionCode.If, "BranchIfTrue");
+            Register(ActionCode.Jump, "BranchAlways");
             Register(ActionCode.SetVariable, "SetVariable");
         }
+
+        private static void RegisterSWF5() {
+            Register(ActionCode.Add2, "AddTyped");
+            Register(ActionCode.Less2, "LessThanTyped");
+            Register(ActionCode.Equals2, "EqualTyped");
+            Register(ActionCode.NewObject, "New");
+            Register(ActionCode.PushDuplicate, "Duplicate");
+            Register(ActionCode.StoreRegister, "StoreRegister");
+        }
+
 
         private static void Register(ActionCode actionCode, string nodeName) {
             _codeToNodeName[actionCode] = nodeName;

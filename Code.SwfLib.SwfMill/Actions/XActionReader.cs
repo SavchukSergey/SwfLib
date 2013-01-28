@@ -137,6 +137,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             foreach (var xItem in xItems.Elements()) {
                 var xValue = xItem.Attribute("value");
                 var xReg = xItem.Attribute("reg");
+                var xIndex = xItem.Attribute("index");
                 switch (xItem.Name.LocalName) {
                     case "StackString":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.String, String = xValue.Value });
@@ -163,7 +164,7 @@ namespace Code.SwfLib.SwfMill.Actions {
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Integer, Integer = uint.Parse(xValue.Value) });
                         break;
                     case "StackDictionaryLookup":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant8, Constant8 = byte.Parse(xValue.Value) });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant8, Constant8 = byte.Parse(xIndex.Value) });
                         break;
                     case "StackConstant16":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant16, Constant16 = ushort.Parse(xValue.Value) });
@@ -205,6 +206,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionJump action, XElement xAction) {
+            action.BranchOffset = short.Parse(xAction.Attribute("byteOffset").Value);
             return action;
         }
 
@@ -409,6 +411,8 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStoreRegister action, XElement xAction) {
+            var xRegister = xAction.Attribute("reg");
+            action.RegisterNumber = byte.Parse(xRegister.Value);
             return action;
         }
 
@@ -433,6 +437,10 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDefineFunction2 action, XElement xAction) {
+            var xName = xAction.Attribute("name");
+            action.Name = xName != null ? xName.Value : "";
+
+            //TODO: other fields
             return action;
         }
 
