@@ -444,6 +444,35 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDefineFunction2 action, SwfStreamWriter writer) {
+            writer.WriteString(action.Name ?? "");
+            writer.WriteUInt16((ushort)action.Args.Count);
+            writer.WriteByte(action.RegisterCount);
+
+            writer.WriteBit(action.PreloadParent);
+            writer.WriteBit(action.PreloadRoot);
+            writer.WriteBit(action.SuppressSuper);
+            writer.WriteBit(action.PreloadSuper);
+            writer.WriteBit(action.SuppressArguments);
+            writer.WriteBit(action.PreloadArguments);
+            writer.WriteBit(action.SuppressThis);
+            writer.WriteBit(action.PreloadThis);
+            writer.WriteUnsignedBits(action.Reserved, 7);
+            writer.WriteBit(action.PreloadGlobal);
+
+            foreach (var arg in action.Args) {
+                writer.WriteByte(arg.Register);
+                writer.WriteString(arg.Name);
+            }
+
+            var mem = new MemoryStream();
+            var subWriter = new ActionWriter(new SwfStreamWriter(mem));
+            foreach (var subAction in action.Actions) {
+                subWriter.WriteAction(subAction);
+            }
+
+            writer.WriteUInt16((ushort) mem.Length);
+
+            writer.WriteBytes(mem.ToArray());
             return null;
         }
 
