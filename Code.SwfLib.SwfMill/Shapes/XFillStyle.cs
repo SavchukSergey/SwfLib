@@ -70,7 +70,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
         #region Solid
 
         private static FillStyleRGB ParseSolidRGB(XElement xFillStyle) {
-            var xColor = xFillStyle.Element("color");
+            var xColor = xFillStyle.Element("color").Element("Color");
             return new FillStyleRGB {
                 FillStyleType = FillStyleType.SolidColor,
                 Color = XColorRGB.FromXml(xColor)
@@ -78,7 +78,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         private static FillStyleRGBA ParseSolidRGBA(XElement xFillStyle) {
-            var xColor = xFillStyle.Element("color");
+            var xColor = xFillStyle.Element("color").Element("Color");
             return new FillStyleRGBA {
                 FillStyleType = FillStyleType.SolidColor,
                 Color = XColorRGBA.FromXml(xColor)
