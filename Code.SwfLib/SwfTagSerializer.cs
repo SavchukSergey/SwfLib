@@ -655,11 +655,28 @@ namespace Code.SwfLib {
             foreach (var record in tag.Characters) {
                 buttonsWriter.WriteButtonRecordEx(record);
             }
-            writer.WriteUInt16((ushort) mem.Length);
+            var actionsOffset = tag.Conditions.Count > 0 ? mem.Length : 0;
+            writer.WriteUInt16((ushort)actionsOffset);
 
             writer.WriteBytes(mem.ToArray());
 
-            //TODO: CONDTIONS
+            if (tag.Conditions.Count > 0) {
+                for (var i = 0; i < tag.Conditions.Count; i++) {
+                    var cond = tag.Conditions[i];
+                    var condMem = new MemoryStream();
+                    var condWriter = new SwfStreamWriter(condMem);
+                    condWriter.WriteButtonCondition(cond);
+
+                    if (i != tag.Conditions.Count - 1) {
+                        writer.WriteUInt16((ushort)condMem.Length);
+                    } else {
+                        writer.WriteUInt16(0);
+                    }
+
+                    writer.WriteBytes(mem.ToArray());
+                }
+            }
+
             return null;
         }
 

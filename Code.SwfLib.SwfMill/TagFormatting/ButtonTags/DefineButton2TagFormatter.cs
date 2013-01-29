@@ -31,7 +31,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
         protected override void AcceptTagElement(DefineButton2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BUTTONS_ELEM:
-                    //TODO: read buttons
+                    foreach (var xButton in element.Elements()) {
+                        tag.Characters.Add(XButtonRecordEx.FromXml(xButton));
+                    }
                     break;
                 case CONDITIONS_ELEM:
                     //TODO: read conditions;
@@ -47,11 +49,18 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
             if (tag.ReservedFlags != 0) {
                 res.Add(new XAttribute("reserved", tag.ReservedFlags));
             }
+
             var xButtons = new XElement("buttons");
             foreach (var button in tag.Characters) {
                 xButtons.Add(XButtonRecordEx.ToXml(button));
             }
             res.Add(xButtons);
+
+            var xConditions = new XElement("conditions");
+            foreach (var condition in tag.Conditions) {
+                xConditions.Add(XButtonCondition.ToXml(condition));
+            }
+            res.Add(xConditions);
             return res;
         }
 

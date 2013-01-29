@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace Code.SwfLib.Actions {
     public class ActionReader : IActionVisitor<ushort, ActionBase> {

@@ -202,12 +202,12 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionIf action, XElement xAction) {
-            action.BranchOffset = short.Parse(xAction.Attribute("byteOffset").Value);
+            action.BranchOffset = ParseBranchOffset(xAction.Attribute("byteOffset").Value);
             return action;
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionJump action, XElement xAction) {
-            action.BranchOffset = short.Parse(xAction.Attribute("byteOffset").Value);
+            action.BranchOffset = ParseBranchOffset(xAction.Attribute("byteOffset").Value);
             return action;
         }
 
@@ -507,6 +507,12 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionUnknown action, XElement xAction) {
             return action;
+        }
+
+
+        private short ParseBranchOffset(string val) {
+            var uval = ushort.Parse(val);
+            return (short)uval;
         }
     }
 }

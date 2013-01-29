@@ -55,6 +55,7 @@
     <Compile Include="Actions\XActionNames.cs" />
     <Compile Include="Actions\XActionReader.cs" />
     <Compile Include="Actions\XActionWriter.cs" />
+    <Compile Include="Buttons\XButtonCondition.cs" />
     <Compile Include="Buttons\XButtonRecordEx.cs" />
     <Compile Include="DataFormatting\FillStyleRGBAFormatter.cs" />
     <Compile Include="DataFormatting\DataFormatterBase.cs" />

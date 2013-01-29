@@ -685,7 +685,15 @@ namespace Code.SwfLib {
                 tag.Characters.Add(reader.ReadButtonRecordEx());
             }
 
-            //TODO: CONDTIONS
+            if (actionsOffset != 0) {
+                uint next;
+                do {
+                    next = reader.ReadUInt16();
+                    var condition = reader.ReadButtonCondition();
+                    tag.Conditions.Add(condition);
+                } while (next != 0);
+            }
+
             return tag;
         }
 

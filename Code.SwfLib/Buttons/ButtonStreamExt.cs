@@ -1,4 +1,5 @@
-﻿using Code.SwfLib.Data;
+﻿using Code.SwfLib.Actions;
+using Code.SwfLib.Data;
 using Code.SwfLib.Filters;
 
 namespace Code.SwfLib.Buttons {
@@ -47,6 +48,48 @@ namespace Code.SwfLib.Buttons {
                 if (button.BlendMode.HasValue) {
                     writer.WriteByte((byte)button.BlendMode.Value);
                 }
+            }
+        }
+
+        public static ButtonCondition ReadButtonCondition(this SwfStreamReader reader) {
+            var res = new ButtonCondition {
+                IdleToOverDown = reader.ReadBit(),
+                OutDownToIdle = reader.ReadBit(),
+                OutDownToOverDown = reader.ReadBit(),
+                OverDownToOutDown = reader.ReadBit(),
+                OverDownToOverUp = reader.ReadBit(),
+                OverUpToOverDown = reader.ReadBit(),
+                OverUpToIdle = reader.ReadBit(),
+                IdleToOverUp = reader.ReadBit(),
+                KeyPress = (byte)reader.ReadUnsignedBits(7),
+                OverDownToIdle = reader.ReadBit()
+            };
+
+            var ar = new ActionReader(reader);
+            ActionBase action;
+            do {
+                action = ar.ReadAction();
+                res.Actions.Add(action);
+            } while (!(action is ActionEnd));
+            return res;
+        }
+
+        public static void WriteButtonCondition(this SwfStreamWriter writer, ButtonCondition cond) {
+            var res = new ButtonCondition();
+            writer.WriteBit(res.IdleToOverDown);
+            writer.WriteBit(res.OutDownToIdle);
+            writer.WriteBit(res.OutDownToOverDown);
+            writer.WriteBit(res.OverDownToOutDown);
+            writer.WriteBit(res.OverDownToOverUp);
+            writer.WriteBit(res.OverUpToOverDown);
+            writer.WriteBit(res.OverUpToIdle);
+            writer.WriteBit(res.IdleToOverUp);
+            writer.WriteUnsignedBits(res.KeyPress, 7);
+            writer.WriteBit(res.OverDownToIdle);
+
+            var aw = new ActionWriter(writer);
+            foreach (var action in cond.Actions) {
+                aw.WriteAction(action);
             }
         }
     }
