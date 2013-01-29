@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Code.SwfLib.Actions;
+using Code.SwfLib.Buttons;
 using Code.SwfLib.Filters;
 using Code.SwfLib.Fonts;
 using Code.SwfLib.Shapes;
@@ -114,10 +115,7 @@ namespace Code.SwfLib {
             }
 
             if (tag.Filters.Count > 0) {
-                writer.WriteByte((byte)tag.Filters.Count);
-                foreach (var filter in tag.Filters) {
-                    writer.WriteFilter(filter);
-                }
+                writer.WriteFilterList(tag.Filters);
             }
 
             return null;
@@ -452,11 +450,11 @@ namespace Code.SwfLib {
 
             var offsetTableSize = (uint)(tag.WideOffsets ? 4 * tag.Glyphs.Count : 2 * tag.Glyphs.Count);
             var firstShapeOffset = offsetTableSize + (tag.WideOffsets ? 4 * tag.Glyphs.Count : 2 * tag.Glyphs.Count);
-            
+
             foreach (var offset in offsetTable) {
                 var resOffset = offset + firstShapeOffset;
                 if (tag.WideOffsets) {
-                    writer.WriteUInt32((uint) resOffset);
+                    writer.WriteUInt32((uint)resOffset);
                 } else {
                     writer.WriteUInt16((ushort)resOffset);
                 }
@@ -649,6 +647,19 @@ namespace Code.SwfLib {
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineButton2Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.ButtonID);
+            writer.WriteUnsignedBits(tag.ReservedFlags, 7);
+            writer.WriteBit(tag.TrackAsMenu);
+
+            var mem = new MemoryStream();
+            var buttonsWriter = new SwfStreamWriter(mem);
+            foreach (var record in tag.Characters) {
+                buttonsWriter.WriteButtonRecordEx(record);
+            }
+            writer.WriteUInt16((ushort) mem.Length);
+
+            writer.WriteBytes(mem.ToArray());
+
+            //TODO: CONDTIONS
             return null;
         }
 

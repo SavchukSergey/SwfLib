@@ -32,8 +32,7 @@ namespace Code.SwfLib.SwfMill.Data {
 
         public static XElement ToXml(ColorTransformRGBA transform) {
             var res = new XElement("ColorTransform2");
-            if (transform.HasMultTerms)
-            {
+            if (transform.HasMultTerms) {
                 res.Add(new XAttribute("factorRed", transform.RedMultTerm));
                 res.Add(new XAttribute("factorGreen", transform.GreenMultTerm));
                 res.Add(new XAttribute("factorBlue", transform.BlueMultTerm));

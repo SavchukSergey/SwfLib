@@ -104,6 +104,9 @@
     <Compile Include="Actions\ActionWriter.cs" />
     <Compile Include="Actions\RegisterParam.cs" />
     <Compile Include="BitsCount.cs" />
+    <Compile Include="Buttons\ButtonRecord.cs" />
+    <Compile Include="Buttons\ButtonRecordEx.cs" />
+    <Compile Include="Buttons\ButtonStreamExt.cs" />
     <Compile Include="ClipActionsStreamExt.cs" />
     <Compile Include="ColorTransformStreamExt.cs" />
     <Compile Include="Actions\ActionAdd.cs" />
@@ -168,6 +171,7 @@
     <Compile Include="Actions\ActionWaitForFrame2.cs" />
     <Compile Include="Actions\ClipActions.cs" />
     <Compile Include="Actions\IActionVisitor.cs" />
+    <Compile Include="Data\BlendMode.cs" />
     <Compile Include="Data\ColorTransformRGBA.cs" />
     <Compile Include="Data\FrameLabelData.cs" />
     <Compile Include="Filters\BaseFilter.cs" />

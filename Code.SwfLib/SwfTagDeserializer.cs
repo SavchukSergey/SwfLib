@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Code.SwfLib.Actions;
+using Code.SwfLib.Buttons;
 using Code.SwfLib.Data;
 using Code.SwfLib.Filters;
 using Code.SwfLib.Fonts;
@@ -144,11 +145,7 @@ namespace Code.SwfLib {
             }
 
             if (hasFilterList) {
-                var count = reader.ReadByte();
-                for (var i = 0; i < count; i++) {
-                    var filter = reader.ReadFilter();
-                    tag.Filters.Add(filter);
-                }
+                reader.ReadFilterList(tag.Filters);
             }
 
             //TODO: uncomment
@@ -487,8 +484,7 @@ namespace Code.SwfLib {
             int glyphsCount = reader.ReadUInt16();
 
             var offsetTable = new uint[glyphsCount];
-            for (var i = 0; i < glyphsCount; i++)
-            {
+            for (var i = 0; i < glyphsCount; i++) {
                 offsetTable[i] = tag.WideOffsets ? reader.ReadUInt32() : reader.ReadUInt16();
             }
             uint codeTableOffset = tag.WideOffsets ? reader.ReadUInt32() : reader.ReadUInt16();
@@ -680,6 +676,16 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineButton2Tag tag, SwfStreamReader reader) {
             tag.ButtonID = reader.ReadUInt16();
+            tag.ReservedFlags = (byte)reader.ReadUnsignedBits(7);
+            tag.TrackAsMenu = reader.ReadBit();
+            var baseOffset = reader.BaseStream.Position;
+            var actionsOffset = reader.ReadUInt16();
+
+            while (actionsOffset != 0 ? (reader.BaseStream.Position - baseOffset) < actionsOffset : !reader.IsEOF) {
+                tag.Characters.Add(reader.ReadButtonRecordEx());
+            }
+
+            //TODO: CONDTIONS
             return tag;
         }
 

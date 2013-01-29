@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Buttons;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ButtonTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
@@ -13,10 +15,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
         protected override void AcceptTagAttribute(DefineButton2Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case MENU_ATTRIB:
-                    //TODO: read menu
+                    tag.TrackAsMenu = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case BUTTONS_SIZE_ATTRIB:
-                    //TODO: read buttons size
+                    break;
+                //TODO: read conditions
+                case "reserved":
+                    tag.ReservedFlags = byte.Parse(attrib.Value);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -37,7 +42,17 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
         }
 
         protected override XElement FormatTagElement(DefineButton2Tag tag, XElement xTag) {
-            return xTag;
+            var res = new XElement(TagName,
+                new XAttribute(MENU_ATTRIB, CommonFormatter.Format(tag.TrackAsMenu)));
+            if (tag.ReservedFlags != 0) {
+                res.Add(new XAttribute("reserved", tag.ReservedFlags));
+            }
+            var xButtons = new XElement("buttons");
+            foreach (var button in tag.Characters) {
+                xButtons.Add(XButtonRecordEx.ToXml(button));
+            }
+            res.Add(xButtons);
+            return res;
         }
 
         public override string TagName {
