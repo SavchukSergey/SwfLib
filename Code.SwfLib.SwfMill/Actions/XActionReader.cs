@@ -284,6 +284,19 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDefineFunction action, XElement xAction) {
+            var xName = xAction.Attribute("name");
+            var xArgs = xAction.Element("args");
+            var xActions = xAction.Element("actions");
+
+            action.Name = xName.Value;
+            foreach (var xArg in xArgs.Elements()) {
+                action.Args.Add(xArg.Attribute("name").Value);
+            }
+
+            var ar = new XActionReader();
+            foreach (var xSubAction in xActions.Elements()) {
+                action.Actions.Add(ar.Deserialize(xSubAction));
+            }
             return action;
         }
 

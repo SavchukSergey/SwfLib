@@ -305,15 +305,21 @@ namespace Code.SwfLib.SwfMill.Actions {
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction action, object param) {
             var res = new XElement("DeclareFunction");
             res.Add(new XAttribute("name", action.Name),
-                new XAttribute("argc", action.Args.Count)//,
-                //new XAttribute("length", action.Body.Length)
+                new XAttribute("argc", action.Args.Count)
             );
-            //TODO: method body
             var args = new XElement("args");
             foreach (var arg in action.Args) {
-                throw new NotImplementedException();
+                res.Add(new XElement("Arg", new XAttribute("name", arg)));
             }
             res.Add(args);
+
+            var aw = new XActionWriter();
+            var xActions = new XElement("actions");
+            foreach (var subaction in action.Actions) {
+                xActions.Add(aw.Serialize(subaction));
+            }
+            res.Add(xActions);
+
             return res;
         }
 

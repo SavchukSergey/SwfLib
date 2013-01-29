@@ -290,6 +290,20 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDefineFunction action, SwfStreamWriter writer) {
+            writer.WriteString(action.Name ?? "");
+            writer.WriteUInt16((ushort)action.Args.Count);
+            foreach (var arg in action.Args) {
+                writer.WriteString(arg);
+            }
+
+            var awmem = new MemoryStream();
+            var aw = new ActionWriter(new SwfStreamWriter(awmem));
+            foreach (var subaction in action.Actions) {
+                aw.WriteAction(subaction);
+            }
+
+            writer.WriteUInt16((ushort)awmem.Length);
+            writer.WriteBytes(awmem.ToArray());
             return null;
         }
 
@@ -470,7 +484,7 @@ namespace Code.SwfLib.Actions {
                 subWriter.WriteAction(subAction);
             }
 
-            writer.WriteUInt16((ushort) mem.Length);
+            writer.WriteUInt16((ushort)mem.Length);
 
             writer.WriteBytes(mem.ToArray());
             return null;
