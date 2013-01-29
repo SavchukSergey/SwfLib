@@ -19,6 +19,7 @@ namespace Code.SwfLib.Buttons {
                 button.PlaceDepth = reader.ReadUInt16();
                 button.PlaceMatrix = reader.ReadMatrix();
                 button.ColorTransform = reader.ReadColorTransformRGBA();
+                reader.AlignToByte();
                 if (hasFilterList) {
                     reader.ReadFilterList(button.Filters);
                 }
@@ -42,6 +43,8 @@ namespace Code.SwfLib.Buttons {
                 writer.WriteUInt16(button.PlaceDepth);
                 writer.WriteMatrix(ref button.PlaceMatrix);
                 writer.WriteColorTransformRGBA(button.ColorTransform);
+                writer.FlushBits();
+
                 if (button.Filters.Count > 0) {
                     writer.WriteFilterList(button.Filters);
                 }
@@ -75,17 +78,16 @@ namespace Code.SwfLib.Buttons {
         }
 
         public static void WriteButtonCondition(this SwfStreamWriter writer, ButtonCondition cond) {
-            var res = new ButtonCondition();
-            writer.WriteBit(res.IdleToOverDown);
-            writer.WriteBit(res.OutDownToIdle);
-            writer.WriteBit(res.OutDownToOverDown);
-            writer.WriteBit(res.OverDownToOutDown);
-            writer.WriteBit(res.OverDownToOverUp);
-            writer.WriteBit(res.OverUpToOverDown);
-            writer.WriteBit(res.OverUpToIdle);
-            writer.WriteBit(res.IdleToOverUp);
-            writer.WriteUnsignedBits(res.KeyPress, 7);
-            writer.WriteBit(res.OverDownToIdle);
+            writer.WriteBit(cond.IdleToOverDown);
+            writer.WriteBit(cond.OutDownToIdle);
+            writer.WriteBit(cond.OutDownToOverDown);
+            writer.WriteBit(cond.OverDownToOutDown);
+            writer.WriteBit(cond.OverDownToOverUp);
+            writer.WriteBit(cond.OverUpToOverDown);
+            writer.WriteBit(cond.OverUpToIdle);
+            writer.WriteBit(cond.IdleToOverUp);
+            writer.WriteUnsignedBits(cond.KeyPress, 7);
+            writer.WriteBit(cond.OverDownToIdle);
 
             var aw = new ActionWriter(writer);
             foreach (var action in cond.Actions) {

@@ -655,7 +655,7 @@ namespace Code.SwfLib {
             foreach (var record in tag.Characters) {
                 buttonsWriter.WriteButtonRecordEx(record);
             }
-            var actionsOffset = tag.Conditions.Count > 0 ? mem.Length : 0;
+            var actionsOffset = tag.Conditions.Count > 0 ? (mem.Length + 2) : 0;
             writer.WriteUInt16((ushort)actionsOffset);
 
             writer.WriteBytes(mem.ToArray());
@@ -668,12 +668,12 @@ namespace Code.SwfLib {
                     condWriter.WriteButtonCondition(cond);
 
                     if (i != tag.Conditions.Count - 1) {
-                        writer.WriteUInt16((ushort)condMem.Length);
+                        writer.WriteUInt16((ushort)(condMem.Length + 2));
                     } else {
                         writer.WriteUInt16(0);
                     }
 
-                    writer.WriteBytes(mem.ToArray());
+                    writer.WriteBytes(condMem.ToArray());
                 }
             }
 

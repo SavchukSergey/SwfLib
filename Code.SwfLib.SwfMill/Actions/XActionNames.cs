@@ -45,6 +45,8 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.Jump, "BranchAlways");
             Register(ActionCode.GetVariable, "GetVariable");
             Register(ActionCode.SetVariable, "SetVariable");
+            Register(ActionCode.GetURL2, "GetURL2");
+            Register(ActionCode.GetProperty, "GetProperty");
 
             Register(ActionCode.GetTime, "GetTimer");
             Register(ActionCode.Trace, "Trace");

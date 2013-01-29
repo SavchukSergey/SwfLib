@@ -221,12 +221,12 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetURL2 action, object param) {
-            return new XElement("GetURL2",
+            return new XElement(XActionNames.FromAction(action),
                new XAttribute("flags", action.Flags));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetProperty action, object param) {
-            return new XElement("GetProperty");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGotoFrame2 action, object param) {

@@ -220,6 +220,8 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGetURL2 action, XElement xAction) {
+            var xFlags = xAction.Attribute("flags");
+            action.Flags = byte.Parse(xFlags.Value);
             return action;
         }
 

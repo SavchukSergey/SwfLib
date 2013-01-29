@@ -209,10 +209,12 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionIf action, SwfStreamWriter writer) {
+            writer.WriteSInt16(action.BranchOffset);
             return null;
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionJump action, SwfStreamWriter writer) {
+            writer.WriteSInt16(action.BranchOffset);
             return null;
         }
 
@@ -234,6 +236,10 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGotoFrame2 action, SwfStreamWriter writer) {
+            writer.WriteByte(action.Flags);
+            if (action.SceneBiasFlag) {
+                writer.WriteUInt16(action.SceneBias);
+            }
             return null;
         }
 
@@ -286,7 +292,7 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionConstantPool action, SwfStreamWriter writer) {
-            writer.WriteUInt16((ushort) action.ConstantPool.Count);
+            writer.WriteUInt16((ushort)action.ConstantPool.Count);
             foreach (var str in action.ConstantPool) {
                 writer.WriteString(str);
             }

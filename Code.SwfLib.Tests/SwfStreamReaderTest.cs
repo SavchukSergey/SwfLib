@@ -84,6 +84,34 @@ namespace Code.SwfLib.Tests {
         }
 
         [Test]
+        public void ReadUnsignedBits2Test() {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(false);
+            writer.WriteBit(true);
+            writer.WriteBit(false);
+            writer.WriteBit(true);
+            writer.WriteBit(false);
+
+            mem.Seek(0, SeekOrigin.Begin);
+            var reader = new SwfStreamReader(mem);
+
+            Assert.AreEqual(false, reader.ReadBit());
+            Assert.AreEqual(false, reader.ReadBit());
+            Assert.AreEqual(false, reader.ReadBit());
+            Assert.AreEqual(false, reader.ReadBit());
+
+            Assert.AreEqual(true, reader.ReadBit());
+            Assert.AreEqual(false, reader.ReadBit());
+            Assert.AreEqual(true, reader.ReadBit());
+            Assert.AreEqual(false, reader.ReadBit());
+        }
+
+        [Test]
         public void ReadUnsignedBitsTest() {
             var mem = new MemoryStream();
             mem.WriteByte(0xaa);

@@ -19,7 +19,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
                     break;
                 case BUTTONS_SIZE_ATTRIB:
                     break;
-                //TODO: read conditions
                 case "reserved":
                     tag.ReservedFlags = byte.Parse(attrib.Value);
                     break;
@@ -36,7 +35,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
                     }
                     break;
                 case CONDITIONS_ELEM:
-                    //TODO: read conditions;
+                    foreach (var xCondition in element.Elements()) {
+                        tag.Conditions.Add(XButtonCondition.FromXml(xCondition));
+                    }
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
@@ -44,24 +45,23 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
         }
 
         protected override XElement FormatTagElement(DefineButton2Tag tag, XElement xTag) {
-            var res = new XElement(TagName,
-                new XAttribute(MENU_ATTRIB, CommonFormatter.Format(tag.TrackAsMenu)));
+            xTag.Add(new XAttribute(MENU_ATTRIB, CommonFormatter.Format(tag.TrackAsMenu)));
             if (tag.ReservedFlags != 0) {
-                res.Add(new XAttribute("reserved", tag.ReservedFlags));
+                xTag.Add(new XAttribute("reserved", tag.ReservedFlags));
             }
 
             var xButtons = new XElement("buttons");
             foreach (var button in tag.Characters) {
                 xButtons.Add(XButtonRecordEx.ToXml(button));
             }
-            res.Add(xButtons);
+            xTag.Add(xButtons);
 
             var xConditions = new XElement("conditions");
             foreach (var condition in tag.Conditions) {
                 xConditions.Add(XButtonCondition.ToXml(condition));
             }
-            res.Add(xConditions);
-            return res;
+            xTag.Add(xConditions);
+            return xTag;
         }
 
         public override string TagName {

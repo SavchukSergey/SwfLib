@@ -194,7 +194,6 @@ namespace Code.SwfLib {
             var low = (ulong)(l & 0xffffffff);
             WriteUInt32((uint)hi);
             WriteUInt32((uint)low);
-            _writer.Write(low);
         }
 
         public void WriteShortFloat(double value) {
