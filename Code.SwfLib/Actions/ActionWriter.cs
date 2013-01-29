@@ -286,6 +286,10 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionConstantPool action, SwfStreamWriter writer) {
+            writer.WriteUInt16((ushort) action.ConstantPool.Count);
+            foreach (var str in action.ConstantPool) {
+                writer.WriteString(str);
+            }
             return null;
         }
 

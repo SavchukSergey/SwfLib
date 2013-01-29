@@ -293,7 +293,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionConstantPool action, object param) {
-            var res = new XElement("Dictionary");
+            var res = new XElement(XActionNames.FromAction(action));
             var strings = new XElement("strings");
             foreach (var item in action.ConstantPool) {
                 strings.Add(new XElement("String", new XAttribute("value", item)));
@@ -538,7 +538,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         #endregion
 
         public XElement Visit(ActionEnd action, object arg) {
-            return new XElement("EndAction");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionUnknown action, object arg) {

@@ -280,6 +280,10 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionConstantPool action, XElement xAction) {
+            var xStrings = xAction.Element("strings");
+            foreach (var xString in xStrings.Elements()) {
+                action.ConstantPool.Add(xString.Attribute("value").Value);
+            }
             return action;
         }
 

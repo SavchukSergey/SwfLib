@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Code.SwfLib.Actions;
 
 namespace Code.SwfLib.SwfMill.Actions {
@@ -45,6 +46,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         private static void RegisterSWF5() {
+            Register(ActionCode.ConstantPool, "Dictionary");
             Register(ActionCode.ToString, "DefineString");
             Register(ActionCode.Add2, "AddTyped");
             Register(ActionCode.Less2, "LessThanTyped");
@@ -61,7 +63,9 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         public static ActionCode FromNodeName(string tagName) {
-            return _nodeNameToCode[tagName];
+            ActionCode code;
+            if (_nodeNameToCode.TryGetValue(tagName, out code)) return code;
+            throw new NotSupportedException("Action " + tagName + " is not recognized");
         }
 
         public static string FromActionCode(ActionCode code) {

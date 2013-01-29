@@ -301,11 +301,9 @@ namespace Code.SwfLib.Actions {
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionConstantPool action, ushort length) {
             ushort count = _reader.ReadUInt16();
-            var pool = new string[count];
             for (var i = 0; i < count; i++) {
-                pool[i] = _reader.ReadString();
+                action.ConstantPool.Add(_reader.ReadString());
             }
-            action.ConstantPool = pool;
             return action;
         }
 

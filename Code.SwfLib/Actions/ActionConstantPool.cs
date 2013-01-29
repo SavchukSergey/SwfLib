@@ -1,7 +1,9 @@
-﻿namespace Code.SwfLib.Actions {
+﻿using System.Collections.Generic;
+
+namespace Code.SwfLib.Actions {
     public class ActionConstantPool : ActionBase {
 
-        public string[] ConstantPool;
+        public readonly IList<string> ConstantPool = new List<string>();
 
         public override ActionCode ActionCode {
             get { return ActionCode.ConstantPool; }
