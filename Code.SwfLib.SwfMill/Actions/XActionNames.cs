@@ -33,6 +33,7 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         private static void RegisterSWF4() {
             Register(ActionCode.Add, "Add");
+            Register(ActionCode.Divide, "Divide");
             Register(ActionCode.Multiply, "Mulitply");
             Register(ActionCode.Subtract, "Substract");
 
@@ -46,18 +47,31 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.SetVariable, "SetVariable");
 
             Register(ActionCode.GetTime, "GetTimer");
+            Register(ActionCode.Trace, "Trace");
         }
 
         private static void RegisterSWF5() {
             Register(ActionCode.CallFunction, "CallFunction");
             Register(ActionCode.CallMethod, "CallMethod");
             Register(ActionCode.ConstantPool, "Dictionary");
+            Register(ActionCode.DefineFunction, "DeclareFunction");
+            Register(ActionCode.Delete, "Delete");
+            Register(ActionCode.GetMember, "GetMember");
+            Register(ActionCode.NewMethod, "NewMethod");
+            Register(ActionCode.NewObject, "New");
+            Register(ActionCode.SetMember, "SetMember");
+
             Register(ActionCode.ToString, "DefineString");
+            
             Register(ActionCode.Add2, "AddTyped");
             Register(ActionCode.Less2, "LessThanTyped");
+
             Register(ActionCode.Equals2, "EqualTyped");
-            Register(ActionCode.NewObject, "New");
+            
             Register(ActionCode.PushDuplicate, "Duplicate");
+            Register(ActionCode.Decrement, "Decrement");
+            Register(ActionCode.Increment, "Increment");
+            Register(ActionCode.Return, "Return");
             Register(ActionCode.StoreRegister, "StoreRegister");
         }
 

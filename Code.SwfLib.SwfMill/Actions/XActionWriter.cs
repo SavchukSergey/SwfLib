@@ -71,7 +71,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDivide action, object param) {
-            return new XElement("Divide");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionMultiply action, object param) {
@@ -277,7 +277,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionTrace action, object param) {
-            return new XElement("Trace");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         #endregion
@@ -303,7 +303,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction action, object param) {
-            var res = new XElement("DeclareFunction");
+            var res = new XElement(XActionNames.FromAction(action));
             res.Add(new XAttribute("name", action.Name),
                 new XAttribute("argc", action.Args.Count)
             );
@@ -332,7 +332,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDelete action, object arg) {
-            return new XElement("Delete");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDelete2 action, object arg) {
@@ -348,7 +348,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetMember action, object arg) {
-            return new XElement("GetMember");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionInitArray action, object arg) {
@@ -360,7 +360,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionNewMethod action, object arg) {
-            return new XElement("NewMethod");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionNewObject action, object arg) {
@@ -368,7 +368,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSetMember action, object param) {
-            return new XElement("SetMember");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionTargetPath action, object arg) {
@@ -429,11 +429,11 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDecrement action, object arg) {
-            return new XElement("Decrement");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionIncrement action, object arg) {
-            return new XElement("Increment");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionPushDuplicate action, object arg) {
@@ -441,7 +441,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionReturn action, object param) {
-            return new XElement("Return");
+            return new XElement(XActionNames.FromAction(action));
         }
 
 

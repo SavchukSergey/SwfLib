@@ -23,7 +23,10 @@ namespace Code.SwfLib.SwfMill.Buttons {
             if (xReserved != null) {
                 res.Reserved = byte.Parse(xReserved.Value);
             }
-            res.BlendMode = (BlendMode)byte.Parse(xBlendMode.Value);
+
+            if (xBlendMode != null) {
+                res.BlendMode = (BlendMode)byte.Parse(xBlendMode.Value);
+            }
 
             if (!res.IsEndButton) {
 
