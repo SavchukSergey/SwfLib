@@ -313,10 +313,9 @@ namespace Code.SwfLib.SwfMill.Actions {
             }
             res.Add(args);
 
-            var aw = new XActionWriter();
             var xActions = new XElement("actions");
             foreach (var subaction in action.Actions) {
-                xActions.Add(aw.Serialize(subaction));
+                xActions.Add(XAction.ToXml(subaction));
             }
             res.Add(xActions);
 

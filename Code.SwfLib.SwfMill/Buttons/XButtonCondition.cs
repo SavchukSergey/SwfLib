@@ -20,9 +20,8 @@ namespace Code.SwfLib.SwfMill.Buttons {
                 );
 
             var xActions = new XElement("actions");
-            var aw = new XActionWriter();
             foreach (var action in condition.Actions) {
-                xActions.Add(aw.Serialize(action));
+                xActions.Add(XAction.ToXml(action));
             }
             res.Add(xActions);
             return res;

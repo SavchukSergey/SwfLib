@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\XAction.cs" />
     <Compile Include="Actions\XActionNames.cs" />
     <Compile Include="Actions\XActionReader.cs" />
     <Compile Include="Actions\XActionWriter.cs" />

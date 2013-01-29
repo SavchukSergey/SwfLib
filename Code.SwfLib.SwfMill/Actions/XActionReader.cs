@@ -293,9 +293,8 @@ namespace Code.SwfLib.SwfMill.Actions {
                 action.Args.Add(xArg.Attribute("name").Value);
             }
 
-            var ar = new XActionReader();
             foreach (var xSubAction in xActions.Elements()) {
-                action.Actions.Add(ar.Deserialize(xSubAction));
+                action.Actions.Add(XAction.FromXml(xSubAction));
             }
             return action;
         }

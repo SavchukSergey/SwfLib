@@ -8,9 +8,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
 
         private const string ACTIONS_ELEM = "actions";
 
-        private readonly XActionWriter _writer = new XActionWriter();
-        private readonly XActionReader _reader = new XActionReader();
-
         protected override void AcceptTagAttribute(DoInitActionTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case "sprite":
@@ -25,7 +22,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             switch (element.Name.LocalName) {
                 case ACTIONS_ELEM:
                     foreach (var xAction in element.Elements()) {
-                        var action = _reader.Deserialize(xAction);
+                        var action = XAction.FromXml(xAction);
                         tag.ActionRecords.Add(action);
                     }
                     break;
@@ -39,7 +36,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             res.Add(new XAttribute("sprite", tag.SpriteId));
             var actions = new XElement(ACTIONS_ELEM);
             foreach (var action in tag.ActionRecords) {
-                actions.Add(_writer.Serialize(action));
+                actions.Add(XAction.ToXml(action));
             }
             res.Add(actions);
             return res;
