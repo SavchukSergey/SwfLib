@@ -28,6 +28,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         private static void RegisterSWF4() {
             Register(ActionCode.Add, "Add");
             Register(ActionCode.Multiply, "Mulitply");
+            Register(ActionCode.Subtract, "Substract");
 
             Register(ActionCode.Not, "LogicalNOT");
 

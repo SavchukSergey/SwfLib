@@ -78,7 +78,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSubtract action, object param) {
-            return new XElement("Subtract");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionEquals action, object param) {
@@ -477,14 +477,12 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction2 action, object param) {
             var res = new XElement("DeclareFunction2");
-            if (!string.IsNullOrEmpty(action.Name)) {
-                res.Add(new XAttribute("name", action.Name));
-            }
+            res.Add(new XAttribute("name", action.Name ?? ""));
             var xArgs = new XElement("args");
             foreach (var arg in action.Args) {
                 xArgs.Add(new XElement("Parameter",
-                    new XAttribute("name", arg.Name),
-                    new XAttribute("reg", arg.Register)));
+                    new XAttribute("reg", arg.Register),
+                    new XAttribute("name", arg.Name)));
             }
             res.Add(xArgs);
 

@@ -11,6 +11,9 @@ using Code.SwfLib.Tags.ShapeTags;
 namespace Code.SwfLib.SwfMill.Shapes {
     public class XFillStyle {
 
+        private const string CLIPPED_BITMAP = "ClippedBitmap";
+        private const string REPEATING_BITMAP = "RepeatingBitmap";
+
         public static XElement ToXml(FillStyleRGB fillStyle) {
             var res = new XElement(GetNodeName(fillStyle.FillStyleType));
             switch (fillStyle.FillStyleType) {
@@ -81,9 +84,9 @@ namespace Code.SwfLib.SwfMill.Shapes {
                     return ParseSolidRGB(xFillStyle);
                 case "LinearGradient":
                     return ParseLinearRGB(xFillStyle);
-                case "RepeatingBitmap":
+                case REPEATING_BITMAP:
                     return ParseRepeatingBitmapRGB(xFillStyle);
-                case "ClippedBitmap":
+                case CLIPPED_BITMAP:
                     return ParseClippedBitmapRGB(xFillStyle);
                 case "NonSmoothedRepeatingBitmap":
                     return ParseNonSmoothedRepeatingBitmapRGB(xFillStyle);
@@ -102,9 +105,9 @@ namespace Code.SwfLib.SwfMill.Shapes {
                     return ParseSolidRGBA(xFillStyle);
                 case "LinearGradient":
                     return ParseLinearRGBA(xFillStyle);
-                case "RepeatingBitmap":
+                case REPEATING_BITMAP:
                     return ParseRepeatingBitmapRGBA(xFillStyle);
-                case "ClippedBitmap":
+                case CLIPPED_BITMAP:
                     return ParseClippedBitmapRGBA(xFillStyle);
                 case "NonSmoothedRepeatingBitmap":
                     return ParseNonSmoothedRepeatingBitmapRGBA(xFillStyle);
@@ -302,9 +305,9 @@ namespace Code.SwfLib.SwfMill.Shapes {
                 case FillStyleType.SolidColor:
                     return "Solid";
                 case FillStyleType.RepeatingBitmap:
-                    return "RepeatingBitmap";
+                    return REPEATING_BITMAP;
                 case FillStyleType.ClippedBitmap:
-                    return "ClippedBitmap";
+                    return CLIPPED_BITMAP;
                 case FillStyleType.NonSmoothedRepeatingBitmap:
                     return "NonSmoothedRepeatingBitmap";
                 case FillStyleType.NonSmoothedClippedBitmap:
