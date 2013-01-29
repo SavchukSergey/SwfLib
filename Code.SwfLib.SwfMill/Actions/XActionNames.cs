@@ -13,6 +13,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             RegisterSWF3();
             RegisterSWF4();
             RegisterSWF5();
+            RegisterSWF7();
 
             //Unsorted
             Register(ActionCode.InitArray, "DeclareArray");
@@ -37,15 +38,19 @@ namespace Code.SwfLib.SwfMill.Actions {
 
             Register(ActionCode.Not, "LogicalNOT");
 
+            Register(ActionCode.Pop, "Pop");
             Register(ActionCode.Push, "PushData");
             Register(ActionCode.If, "BranchIfTrue");
             Register(ActionCode.Jump, "BranchAlways");
+            Register(ActionCode.GetVariable, "GetVariable");
             Register(ActionCode.SetVariable, "SetVariable");
 
             Register(ActionCode.GetTime, "GetTimer");
         }
 
         private static void RegisterSWF5() {
+            Register(ActionCode.CallFunction, "CallFunction");
+            Register(ActionCode.CallMethod, "CallMethod");
             Register(ActionCode.ConstantPool, "Dictionary");
             Register(ActionCode.ToString, "DefineString");
             Register(ActionCode.Add2, "AddTyped");
@@ -56,6 +61,9 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.StoreRegister, "StoreRegister");
         }
 
+        public static void RegisterSWF7() {
+            Register(ActionCode.DefineFunction2, "DeclareFunction2");
+        }
 
         private static void Register(ActionCode actionCode, string nodeName) {
             _codeToNodeName[actionCode] = nodeName;

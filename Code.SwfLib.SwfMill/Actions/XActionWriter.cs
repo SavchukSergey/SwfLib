@@ -131,7 +131,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionPop action, object param) {
-            return new XElement("Pop");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionPush action, object param) {
@@ -213,11 +213,11 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetVariable action, object param) {
-            return new XElement("GetVariable");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionSetVariable action, object param) {
-            return new XElement("SetVariable");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetURL2 action, object param) {
@@ -285,11 +285,11 @@ namespace Code.SwfLib.SwfMill.Actions {
         #region SWF 5
 
         XElement IActionVisitor<object, XElement>.Visit(ActionCallFunction action, object arg) {
-            return new XElement("CallFunction");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionCallMethod action, object arg) {
-            return new XElement("CallMethod");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionConstantPool action, object param) {
@@ -483,7 +483,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         #region SWF 7
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction2 action, object param) {
-            var res = new XElement("DeclareFunction2");
+            var res = new XElement(XActionNames.FromAction(action));
             res.Add(new XAttribute("name", action.Name ?? ""));
             res.Add(new XAttribute("argc", action.Args.Count));
             res.Add(new XAttribute("regc", action.RegisterCount));
