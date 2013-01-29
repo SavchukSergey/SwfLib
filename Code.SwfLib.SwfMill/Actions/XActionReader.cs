@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.Actions;
+using Code.SwfLib.SwfMill.Data;
 
 namespace Code.SwfLib.SwfMill.Actions {
     public class XActionReader : IActionVisitor<XElement, ActionBase> {
@@ -438,9 +439,45 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDefineFunction2 action, XElement xAction) {
             var xName = xAction.Attribute("name");
-            action.Name = xName != null ? xName.Value : "";
+            var xRegisterCount = xAction.Attribute("regc");
+            var xPreloadParent = xAction.Attribute("preloadParent");
+            var xPreloadRoot = xAction.Attribute("preloadRoot");
+            var xSuppressSuper = xAction.Attribute("suppressSuper");
+            var xPreloadSuper = xAction.Attribute("preloadSuper");
+            var xSuppressArguments = xAction.Attribute("suppressArguments");
+            var xPreloadArguments = xAction.Attribute("preloadArguments");
+            var xSuppressThis = xAction.Attribute("suppressThis");
+            var xPreloadThis = xAction.Attribute("preloadThis");
+            var xReserved = xAction.Attribute("reserved");
+            var xPreloadGlobal = xAction.Attribute("preloadGlobal");
 
-            //TODO: other fields
+            action.Name = xName != null ? xName.Value : "";
+            action.RegisterCount = byte.Parse(xRegisterCount.Value);
+            action.PreloadParent = CommonFormatter.ParseBool(xPreloadParent.Value);
+            action.PreloadRoot = CommonFormatter.ParseBool(xPreloadRoot.Value);
+            action.SuppressSuper = CommonFormatter.ParseBool(xSuppressSuper.Value);
+            action.PreloadSuper = CommonFormatter.ParseBool(xPreloadSuper.Value);
+            action.SuppressArguments = CommonFormatter.ParseBool(xSuppressArguments.Value);
+            action.PreloadArguments = CommonFormatter.ParseBool(xPreloadArguments.Value);
+            action.SuppressThis = CommonFormatter.ParseBool(xSuppressThis.Value);
+            action.PreloadThis = CommonFormatter.ParseBool(xPreloadThis.Value);
+            action.Reserved = byte.Parse(xReserved.Value);
+            action.PreloadGlobal = CommonFormatter.ParseBool(xPreloadGlobal.Value);
+
+            var xArgs = xAction.Element("args");
+            foreach (var xArg in xArgs.Elements()) {
+                var xReg = xArg.Attribute("reg");
+                var xArgName = xArg.Attribute("name");
+                action.Args.Add(new RegisterParam {
+                    Register = byte.Parse(xReg.Value),
+                    Name = xArgName.Value
+                });
+            }
+
+            var xActions = xAction.Element("actions");
+            foreach (var xSubAction in xActions.Elements()) {
+                action.Actions.Add(Deserialize(xSubAction));
+            }
             return action;
         }
 

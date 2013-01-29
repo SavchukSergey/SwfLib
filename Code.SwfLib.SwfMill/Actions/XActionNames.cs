@@ -12,6 +12,10 @@ namespace Code.SwfLib.SwfMill.Actions {
             RegisterSWF3();
             RegisterSWF4();
             RegisterSWF5();
+
+            //Unsorted
+            Register(ActionCode.InitArray, "DeclareArray");
+            Register(ActionCode.Greater, "GreaterThanTyped");
         }
 
         private static void RegisterSWF3() {

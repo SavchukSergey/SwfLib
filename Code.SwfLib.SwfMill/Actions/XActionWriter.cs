@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.Actions;
+using Code.SwfLib.SwfMill.Data;
 
 namespace Code.SwfLib.SwfMill.Actions {
     public class XActionWriter : IActionVisitor<object, XElement> {
@@ -345,7 +346,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionInitArray action, object arg) {
-            return new XElement("InitArray");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionInitObject action, object arg) {
@@ -464,7 +465,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGreater action, object param) {
-            return new XElement("Greater");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStringGreater action, object param) {
@@ -478,6 +479,19 @@ namespace Code.SwfLib.SwfMill.Actions {
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction2 action, object param) {
             var res = new XElement("DeclareFunction2");
             res.Add(new XAttribute("name", action.Name ?? ""));
+            res.Add(new XAttribute("argc", action.Args.Count));
+            res.Add(new XAttribute("regc", action.RegisterCount));
+            res.Add(new XAttribute("preloadParent", CommonFormatter.Format(action.PreloadParent)));
+            res.Add(new XAttribute("preloadRoot", CommonFormatter.Format(action.PreloadRoot)));
+            res.Add(new XAttribute("suppressSuper", CommonFormatter.Format(action.SuppressSuper)));
+            res.Add(new XAttribute("preloadSuper", CommonFormatter.Format(action.PreloadSuper)));
+            res.Add(new XAttribute("suppressArguments", CommonFormatter.Format(action.SuppressArguments)));
+            res.Add(new XAttribute("preloadArguments", CommonFormatter.Format(action.PreloadArguments)));
+            res.Add(new XAttribute("suppressThis", CommonFormatter.Format(action.SuppressThis)));
+            res.Add(new XAttribute("preloadThis", CommonFormatter.Format(action.PreloadThis)));
+            res.Add(new XAttribute("reserved", action.Reserved));
+            res.Add(new XAttribute("preloadGlobal", CommonFormatter.Format(action.PreloadGlobal)));
+
             var xArgs = new XElement("args");
             foreach (var arg in action.Args) {
                 xArgs.Add(new XElement("Parameter",
@@ -492,7 +506,6 @@ namespace Code.SwfLib.SwfMill.Actions {
             }
             res.Add(xActions);
 
-            //TODO: other fields
             return res;
         }
 
