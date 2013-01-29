@@ -7,6 +7,8 @@
 
         public uint? LineStyle;
 
+        public bool StateMoveTo;
+
         public int MoveDeltaX;
 
         public int MoveDeltaY;

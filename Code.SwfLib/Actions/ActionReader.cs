@@ -172,7 +172,7 @@ namespace Code.SwfLib.Actions {
                         item.Double = _reader.ReadDouble();
                         break;
                     case ActionPushItemType.Integer:
-                        item.Integer = _reader.ReadUInt32();
+                        item.Integer = _reader.ReadInt32();
                         break;
                     case ActionPushItemType.Constant8:
                         item.Constant8 = _reader.ReadByte();

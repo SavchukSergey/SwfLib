@@ -41,7 +41,7 @@ namespace Code.SwfLib.Shapes {
             var stateFillStyle0 = record.FillStyle0.HasValue;
             var stateFillStyle1 = record.FillStyle1.HasValue;
             var stateLineStyle = record.LineStyle.HasValue;
-            var stateMoveTo = record.MoveDeltaX != 0 || record.MoveDeltaY != 0;
+            var stateMoveTo = record.StateMoveTo;
             writer.WriteBit(stateNewStyles);
             writer.WriteBit(stateLineStyle);
             writer.WriteBit(stateFillStyle1);

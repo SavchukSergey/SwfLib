@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Code.SwfLib.Shapes.Records;
+﻿using Code.SwfLib.Shapes.Records;
 
 namespace Code.SwfLib.Shapes {
     public abstract class ShapeRecordReader<T, TStyleChange>
@@ -17,6 +16,7 @@ namespace Code.SwfLib.Shapes {
                 if (stateNewStyles || stateLineStyle || stateFillStyle1 || stateFillStyle0 || stateMoveTo) {
                     var styleChange = CreateStyleChangeRecord();
                     styleChange.StateNewStyles = stateNewStyles;
+                    styleChange.StateMoveTo = stateMoveTo;
                     if (stateMoveTo) {
                         var moveBits = reader.ReadUnsignedBits(5);
                         styleChange.MoveDeltaX = reader.ReadSignedBits(moveBits);

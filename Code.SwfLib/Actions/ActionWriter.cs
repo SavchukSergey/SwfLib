@@ -169,7 +169,7 @@ namespace Code.SwfLib.Actions {
                         writer.WriteDouble(item.Double);
                         break;
                     case ActionPushItemType.Integer:
-                        writer.WriteUInt32(item.Integer);
+                        writer.WriteInt32(item.Integer);
                         break;
                     case ActionPushItemType.Constant8:
                         writer.WriteByte(item.Constant8);

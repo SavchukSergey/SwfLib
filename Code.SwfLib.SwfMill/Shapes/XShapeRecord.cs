@@ -61,10 +61,10 @@ namespace Code.SwfLib.SwfMill.Shapes {
 
             private static XElement FormatShapeSetup(StyleChangeShapeRecord styleChange) {
                 var setup = new XElement("ShapeSetup");
-                //if (styleChange.MoveDeltaX != 0 || styleChange.MoveDeltaY != 0) {
-                setup.Add(new XAttribute("x", styleChange.MoveDeltaX));
-                setup.Add(new XAttribute("y", styleChange.MoveDeltaY));
-                //}
+                if (styleChange.StateMoveTo) {
+                    setup.Add(new XAttribute("x", styleChange.MoveDeltaX));
+                    setup.Add(new XAttribute("y", styleChange.MoveDeltaY));
+                }
                 if (styleChange.FillStyle0.HasValue) {
                     setup.Add(new XAttribute("fillStyle0", styleChange.FillStyle0.Value));
                 }
@@ -158,9 +158,11 @@ namespace Code.SwfLib.SwfMill.Shapes {
                             record.LineStyle = uint.Parse(attribute.Value);
                             break;
                         case "x":
+                            record.StateMoveTo = true;
                             record.MoveDeltaX = int.Parse(attribute.Value);
                             break;
                         case "y":
+                            record.StateMoveTo = true;
                             record.MoveDeltaY = int.Parse(attribute.Value);
                             break;
                         default:

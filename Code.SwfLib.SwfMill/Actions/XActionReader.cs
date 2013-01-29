@@ -161,7 +161,7 @@ namespace Code.SwfLib.SwfMill.Actions {
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Double, Double = double.Parse(xValue.Value) });
                         break;
                     case "StackInteger":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Integer, Integer = uint.Parse(xValue.Value) });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Integer, Integer = int.Parse(xValue.Value) });
                         break;
                     case "StackDictionaryLookup":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant8, Constant8 = byte.Parse(xIndex.Value) });
