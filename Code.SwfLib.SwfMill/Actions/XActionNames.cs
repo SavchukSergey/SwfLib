@@ -40,9 +40,12 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.If, "BranchIfTrue");
             Register(ActionCode.Jump, "BranchAlways");
             Register(ActionCode.SetVariable, "SetVariable");
+
+            Register(ActionCode.GetTime, "GetTimer");
         }
 
         private static void RegisterSWF5() {
+            Register(ActionCode.ToString, "DefineString");
             Register(ActionCode.Add2, "AddTyped");
             Register(ActionCode.Less2, "LessThanTyped");
             Register(ActionCode.Equals2, "EqualTyped");

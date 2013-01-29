@@ -269,7 +269,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGetTime action, object param) {
-            return new XElement("GetTime");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionRandomNumber action, object param) {
@@ -313,12 +313,13 @@ namespace Code.SwfLib.SwfMill.Actions {
             }
             res.Add(args);
 
-            var xActions = new XElement("actions");
-            foreach (var subaction in action.Actions) {
-                xActions.Add(XAction.ToXml(subaction));
+            if (action.Actions.Count > 0) {
+                var xActions = new XElement("actions");
+                foreach (var subaction in action.Actions) {
+                    xActions.Add(XAction.ToXml(subaction));
+                }
+                res.Add(xActions);
             }
-            res.Add(xActions);
-
             return res;
         }
 
@@ -384,7 +385,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionToString action, object arg) {
-            return new XElement("ToString");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionTypeOf action, object arg) {
