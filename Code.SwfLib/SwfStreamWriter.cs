@@ -189,7 +189,12 @@ namespace Code.SwfLib {
         }
 
         public void WriteDouble(double value) {
-            _writer.Write(value);
+            var l = BitConverter.DoubleToInt64Bits(value);
+            var hi = (ulong)(l >> 32);
+            var low = (ulong)(l & 0xffffffff);
+            WriteUInt32((uint)hi);
+            WriteUInt32((uint)low);
+            _writer.Write(low);
         }
 
         public void WriteShortFloat(double value) {

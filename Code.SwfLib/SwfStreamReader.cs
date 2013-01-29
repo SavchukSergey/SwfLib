@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using Code.SwfLib.Tags;
 
@@ -136,7 +138,10 @@ namespace Code.SwfLib {
         }
 
         public double ReadDouble() {
-            return _reader.ReadDouble();
+            ulong hi = ReadUInt32();
+            ulong low = ReadUInt32();
+            var l = (hi << 32) | low;
+            return BitConverter.Int64BitsToDouble((long) l);
         }
 
         public float ReadShortFloat() {

@@ -104,6 +104,7 @@
     <Compile Include="Actions\ActionWriter.cs" />
     <Compile Include="Actions\RegisterParam.cs" />
     <Compile Include="BitsCount.cs" />
+    <Compile Include="Buttons\ButtonCondition.cs" />
     <Compile Include="Buttons\ButtonRecord.cs" />
     <Compile Include="Buttons\ButtonRecordEx.cs" />
     <Compile Include="Buttons\ButtonStreamExt.cs" />
