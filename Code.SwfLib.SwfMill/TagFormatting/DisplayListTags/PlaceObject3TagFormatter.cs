@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.ClipActions;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Filters;
 using Code.SwfLib.Tags.DisplayListTags;
@@ -12,7 +13,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string ALL_FLAGS1_ATTRIB = "allflags1";
         private const string ALL_FLAGS2_ATTRIB = "allflags2";
         private const string BITMAP_CACHING_ATTRIB = "bitmapCaching";
-        private const string EVENTS_ELEM = "events";
 
 
         protected override void AcceptPlaceAttribute(PlaceObject3Tag tag, XAttribute attrib) {
@@ -50,8 +50,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                         tag.Filters.Add(XFilter.FromXml(xFilter));
                     }
                     break;
-                case EVENTS_ELEM:
-                    //TODO: Read events
+                case "events":
+                    tag.HasClipActions = true;
+                    XClipActionsList.FromXml(element, tag.ClipActions);
                     break;
                 case "colorTransform":
                     tag.ColorTransform = XColorTransformRGBA.FromXml(element.Element("ColorTransform2"));
@@ -84,6 +85,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     xFilters.Add(XFilter.ToXml(filter));
                 }
                 elem.Add(xFilters);
+            }
+            if (tag.HasClipActions) {
+                elem.Add(XClipActionsList.ToXml(tag.ClipActions));
             }
         }
 

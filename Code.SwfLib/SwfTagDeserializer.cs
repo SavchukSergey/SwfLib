@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Code.SwfLib.Actions;
 using Code.SwfLib.Buttons;
+using Code.SwfLib.ClipActions;
 using Code.SwfLib.Data;
 using Code.SwfLib.Filters;
 using Code.SwfLib.Fonts;
@@ -59,7 +60,7 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(PlaceObject2Tag tag, SwfStreamReader reader) {
-            tag.HasClipActions = reader.ReadBit(); //TODO: Check swf version
+            tag.HasClipActions = reader.ReadBit();
             tag.HasClipDepth = reader.ReadBit();
             tag.HasName = reader.ReadBit();
             tag.HasRatio = reader.ReadBit();
@@ -87,7 +88,7 @@ namespace Code.SwfLib {
                 tag.ClipDepth = reader.ReadUInt16();
             }
             if (tag.HasClipActions) {
-                reader.ReadClipActions(_file.FileInfo.Version, out tag.ClipActions);
+                reader.ReadClipActions(_file.FileInfo.Version, tag.ClipActions);
             }
             return tag;
         }
@@ -157,10 +158,9 @@ namespace Code.SwfLib {
                 tag.BitmapCache = reader.ReadByte();
             }
 
-            //TODO: read clip actions
-            //if (tag.HasClipActions) {
-            //    reader.ReadClipActions(_file.FileInfo.Version, out tag.ClipActions);
-            //}
+            if (tag.HasClipActions) {
+                reader.ReadClipActions(_file.FileInfo.Version, tag.ClipActions);
+            }
             return tag;
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Code.SwfLib.Actions;
 using Code.SwfLib.Buttons;
+using Code.SwfLib.ClipActions;
 using Code.SwfLib.Filters;
 using Code.SwfLib.Fonts;
 using Code.SwfLib.Shapes;
@@ -66,7 +67,7 @@ namespace Code.SwfLib {
             if (tag.HasName) writer.WriteString(tag.Name);
             if (tag.HasClipDepth) writer.WriteUInt16(tag.ClipDepth);
             if (tag.HasClipActions) {
-                writer.WriteClipActions(_file.FileInfo.Version, ref tag.ClipActions);
+                writer.WriteClipActions(_file.FileInfo.Version, tag.ClipActions);
             }
             return null;
         }
@@ -123,6 +124,10 @@ namespace Code.SwfLib {
 
             if (tag.BlendMode.HasValue) {
                 writer.WriteByte((byte)tag.BlendMode.Value);
+            }
+
+            if (tag.HasClipActions) {
+                writer.WriteClipActions(_file.FileInfo.Version, tag.ClipActions);
             }
             return null;
         }

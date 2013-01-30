@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.ClipActions;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.DisplayListTags;
 
@@ -13,7 +14,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string ALL_FLAGS2_ATTRIB = "allflags2";
         private const string CLIP_DEPTH = "clipDepth";
         private const string COLOR_TRANSFORM_ELEM = "colorTransform";
-        private const string CLIP_ACTIONS_ELEM = "events";
 
         protected override void AcceptPlaceAttribute(PlaceObject2Tag tag, XAttribute attrib) {
             tag.Move = true;
@@ -51,9 +51,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     tag.ColorTransform = XColorTransformRGBA.FromXml(element.Element("ColorTransform2"));
                     tag.HasColorTransform = true;
                     break;
-                case CLIP_ACTIONS_ELEM:
+                case "events":
                     tag.HasClipActions = true;
-                    tag.ClipActions.RawData = Convert.FromBase64String(element.Value);
+                    XClipActionsList.FromXml(element, tag.ClipActions);
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
@@ -71,7 +71,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                 elem.Add(new XAttribute(CLIP_DEPTH, tag.ClipDepth));
             }
             if (tag.HasClipActions) {
-                elem.Add(new XElement(CLIP_ACTIONS_ELEM, Convert.ToBase64String(tag.ClipActions.RawData)));
+                elem.Add(XClipActionsList.ToXml(tag.ClipActions));
             }
             if (tag.HasRatio) {
                 elem.Add(new XAttribute(MORPH_ATTRIB, tag.Ratio));

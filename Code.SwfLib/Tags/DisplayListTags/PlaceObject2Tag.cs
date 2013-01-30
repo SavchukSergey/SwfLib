@@ -1,4 +1,4 @@
-﻿using Code.SwfLib.Actions;
+﻿using Code.SwfLib.ClipActions;
 using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Tags.DisplayListTags {
@@ -28,7 +28,7 @@ namespace Code.SwfLib.Tags.DisplayListTags {
 
         public ushort ClipDepth;
 
-        public ClipActions ClipActions;
+        public readonly ClipActionsList ClipActions = new ClipActionsList();
 
         public override SwfTagType TagType {
             get { return SwfTagType.PlaceObject2; }

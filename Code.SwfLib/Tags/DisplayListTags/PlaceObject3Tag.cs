@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Actions;
+using Code.SwfLib.ClipActions;
 using Code.SwfLib.Data;
 using Code.SwfLib.Filters;
 
@@ -31,7 +31,7 @@ namespace Code.SwfLib.Tags.DisplayListTags {
 
         public ColorTransformRGBA? ColorTransform;
 
-        public ClipActions ClipActions;
+        public readonly ClipActionsList ClipActions = new ClipActionsList();
 
         public BlendMode? BlendMode;
 

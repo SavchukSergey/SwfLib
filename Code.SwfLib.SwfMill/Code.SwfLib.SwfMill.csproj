@@ -58,6 +58,7 @@
     <Compile Include="Actions\XActionWriter.cs" />
     <Compile Include="Buttons\XButtonCondition.cs" />
     <Compile Include="Buttons\XButtonRecordEx.cs" />
+    <Compile Include="ClipActions\XClipActionsList.cs" />
     <Compile Include="DataFormatting\FillStyleRGBAFormatter.cs" />
     <Compile Include="DataFormatting\DataFormatterBase.cs" />
     <Compile Include="DataFormatting\DataFormatters.cs" />
