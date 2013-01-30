@@ -30,10 +30,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     tag.Ratio = ushort.Parse(attrib.Value);
                     break;
                 case ALL_FLAGS1_ATTRIB:
-                    //TODO: read flags1
+                    tag.HasClipActions = true;
+                    var flags1 = int.Parse(attrib.Value);
+                    XClipEventFlags.SetFlags1(ref tag.ClipActions.Flags, flags1);
                     break;
                 case ALL_FLAGS2_ATTRIB:
-                    //TODO: read flags2
+                    tag.HasClipActions = true;
+                    var flags2 = int.Parse(attrib.Value);
+                    XClipEventFlags.SetFlags2(ref tag.ClipActions.Flags, flags2);
                     break;
                 case BITMAP_CACHING_ATTRIB:
                     tag.BitmapCache = byte.Parse(attrib.Value);
@@ -68,6 +72,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             }
             if (tag.ClassName != null) {
                 elem.Add(new XAttribute("className", tag.ClassName));
+            }
+            if (tag.HasClipActions) {
+                var flags1 = XClipEventFlags.GetFlags1(tag.ClipActions.Flags);
+                var flags2 = XClipEventFlags.GetFlags2(tag.ClipActions.Flags);
+                elem.Add(new XAttribute("allflags1", flags1));
+                elem.Add(new XAttribute("allflags2", flags2));
             }
             if (tag.Ratio.HasValue) {
                 elem.Add(new XAttribute("morph", tag.Ratio.Value));

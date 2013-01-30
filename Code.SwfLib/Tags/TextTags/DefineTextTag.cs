@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Data;
-using Code.SwfLib.Data.Text;
+using Code.SwfLib.Text;
 
 namespace Code.SwfLib.Tags.TextTags {
     public class DefineTextTag : TextBaseTag {

@@ -16,8 +16,11 @@ namespace Code.SwfLib.SwfMill.ClipActions {
                 res.Add(xActions);
             }
 
+            res.Add(new XAttribute("flags1", XClipEventFlags.GetFlags1(clipAction.Flags)));
+            res.Add(new XAttribute("flags2", XClipEventFlags.GetFlags2(clipAction.Flags)));
+
             return res;
-            //TODO: write flags, key code
+            //TODO: key code
         }
 
         public static ClipActionRecord FromXml(XElement xClipAction) {
@@ -28,8 +31,10 @@ namespace Code.SwfLib.SwfMill.ClipActions {
                     res.Actions.Add(XAction.FromXml(xAction));
                 }
             }
+            XClipEventFlags.SetFlags1(ref res.Flags, int.Parse(xClipAction.Attribute("flags1").Value));
+            XClipEventFlags.SetFlags2(ref res.Flags, int.Parse(xClipAction.Attribute("flags2").Value));
             return res;
-            //TODO: read flags, keycode
+            //TODO: read keycode
         }
     }
 }

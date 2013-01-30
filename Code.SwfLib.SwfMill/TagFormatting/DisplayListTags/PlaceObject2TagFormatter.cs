@@ -35,10 +35,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     tag.Move = ParseBoolFromDigit(attrib);
                     break;
                 case ALL_FLAGS1_ATTRIB:
-                    //TODO: read flags1. Is this HasClipActions?
+                    tag.HasClipActions = true;
+                    var flags1 = int.Parse(attrib.Value);
+                    XClipEventFlags.SetFlags1(ref tag.ClipActions.Flags, flags1);
                     break;
                 case ALL_FLAGS2_ATTRIB:
-                    //TODO: read flags2
+                    tag.HasClipActions = true;
+                   var flags2 = int.Parse(attrib.Value);
+                    XClipEventFlags.SetFlags2(ref tag.ClipActions.Flags, flags2);
                     break;
                 default:
                     throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
@@ -63,6 +67,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         protected override void FormatPlaceElement(PlaceObject2Tag tag, XElement elem) {
             if (tag.HasName) {
                 elem.Add(new XAttribute(NAME_ATTRIB, tag.Name));
+            }
+            if (tag.HasClipActions) {
+                var flags1 = XClipEventFlags.GetFlags1(tag.ClipActions.Flags);
+                var flags2 = XClipEventFlags.GetFlags2(tag.ClipActions.Flags);
+                elem.Add(new XAttribute("allflags1", flags1));
+                elem.Add(new XAttribute("allflags2", flags2));
             }
             if (tag.HasColorTransform) {
                 elem.Add(new XElement(COLOR_TRANSFORM_ELEM, XColorTransformRGBA.ToXml(tag.ColorTransform)));

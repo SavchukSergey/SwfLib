@@ -60,6 +60,7 @@
     <Compile Include="Buttons\XButtonRecordEx.cs" />
     <Compile Include="ClipActions\XClipActionRecord.cs" />
     <Compile Include="ClipActions\XClipActionsList.cs" />
+    <Compile Include="ClipActions\XClipEventFlags.cs" />
     <Compile Include="DataFormatting\FillStyleRGBAFormatter.cs" />
     <Compile Include="DataFormatting\DataFormatterBase.cs" />
     <Compile Include="DataFormatting\DataFormatters.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="TagFormatterFactory.cs" />
     <Compile Include="TagFormatting\VideoTags\DefineVideoStreamTagFormatter.cs" />
     <Compile Include="TagFormatting\VideoTags\VideoFrameTagFormatter.cs" />
+    <Compile Include="Text\XTextRecord.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Code.SwfLib\Code.SwfLib.csproj">

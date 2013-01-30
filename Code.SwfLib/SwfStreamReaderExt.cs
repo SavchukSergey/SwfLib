@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Code.SwfLib.Data;
-using Code.SwfLib.Data.Text;
 
 namespace Code.SwfLib {
     public static class SwfStreamReaderExt {
@@ -25,6 +24,12 @@ namespace Code.SwfLib {
             header.FrameRate = reader.ReadFixedPoint8();
             header.FrameCount = reader.ReadUInt16();
             return header;
+        }
+
+        public static SwfRGB ReadRGB(this SwfStreamReader reader) {
+            SwfRGB color;
+            reader.ReadRGB(out color);
+            return color;
         }
 
         public static void ReadRGB(this SwfStreamReader reader, out SwfRGB color) {
@@ -115,43 +120,7 @@ namespace Code.SwfLib {
 
         }
 
-        public static IList<TextRecord> ReadTextRecord(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
-            var res = new List<TextRecord>();
-            bool isEnd;
-            do {
-                var record = new TextRecord();
-                bool type = reader.ReadBit();
-                uint reservedFlags = reader.ReadUnsignedBits(3);
-                bool hasFont = reader.ReadBit();
-                bool hasColor = reader.ReadBit();
-                bool hasYOffset = reader.ReadBit();
-                bool hasXOffset = reader.ReadBit();
 
-                isEnd = !(type || (reservedFlags != 0) || hasFont || hasColor || hasYOffset || hasXOffset);
-
-                if (!isEnd) {
-                    record.FontID = hasFont ? (ushort?)reader.ReadUInt16() : null;
-                    if (hasColor) {
-                        SwfRGB color;
-                        reader.ReadRGB(out color);
-                        record.TextColor = color;
-                    } else {
-                        record.TextColor = null;
-                    }
-                    record.XOffset = hasXOffset ? (short?)reader.ReadSInt16() : null;
-                    record.YOffset = hasYOffset ? (short?)reader.ReadSInt16() : null;
-                    record.TextHeight = hasFont ? (ushort?)reader.ReadUInt16() : null;
-                    var count = reader.ReadByte();
-                    for (var i = 0; i < count; i++) {
-                        var entry = reader.ReadGlyphEntry(glyphBits, advanceBits);
-                        record.Glyphs.Add(entry);
-                    }
-                    reader.AlignToByte();
-                }
-                res.Add(record);
-            } while (!isEnd);
-            return res;
-        }
 
 
     }

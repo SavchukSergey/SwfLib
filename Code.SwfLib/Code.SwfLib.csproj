@@ -230,9 +230,8 @@
     <Compile Include="Data\ColorTransformRGB.cs" />
     <Compile Include="Data\SwfMorphShapeWithStyle.cs" />
     <Compile Include="Data\SwfRGBA.cs" />
-    <Compile Include="Data\Text\GlyphEntry.cs" />
-    <Compile Include="Data\Text\TextRecord.cs" />
-    <Compile Include="Data\Text\TextRecordFlags.cs" />
+    <Compile Include="Text\GlyphEntry.cs" />
+    <Compile Include="Text\TextRecord.cs" />
     <Compile Include="Shapes\FillStyleStreamExt.cs" />
     <Compile Include="Shapes\LineStyleStreamExt.cs" />
     <Compile Include="ShapeRecordStreamExt.cs" />
@@ -345,7 +344,7 @@
     <Compile Include="Tags\UnknownTag.cs" />
     <Compile Include="Tags\VideoTags\DefineVideoStreamTag.cs" />
     <Compile Include="Tags\VideoTags\VideoFrameTag.cs" />
-    <Compile Include="TextRecordStreamExt.cs" />
+    <Compile Include="Text\TextStreamExt.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -19,6 +19,7 @@ using Code.SwfLib.Tags.FontTags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
+using Code.SwfLib.Text;
 
 namespace Code.SwfLib {
     public class SwfTagDeserializer : ISwfTagVisitor<SwfStreamReader, SwfTagBase> {
@@ -112,19 +113,13 @@ namespace Code.SwfLib {
 
             tag.Depth = reader.ReadUInt16();
 
-            if (tag.HasCharacter) {
-                tag.CharacterID = reader.ReadUInt16();
-            }
-
-            //if (hasClassName || (tag.HasImage && tag.HasCharacter)) {
-            //    tag.ClassName = reader.ReadString();
-            //}
-
-            //TODO: according to adobe spec. Class name should go before character id.
-            if (hasClassName) {
+            if (hasClassName) { //Adobe says class name is also present when (hasImage && hasCharacter)
                 tag.ClassName = reader.ReadString();
             }
 
+            if (tag.HasCharacter) {
+                tag.CharacterID = reader.ReadUInt16();
+            }
 
             if (tag.HasMatrix) {
                 tag.Matrix = reader.ReadMatrix();

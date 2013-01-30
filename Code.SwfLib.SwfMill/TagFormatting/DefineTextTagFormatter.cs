@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Text;
 using Code.SwfLib.Tags.TextTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting {
@@ -37,7 +38,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         private static void ReadRecords(DefineTextTag tag, XElement recordsElem) {
             var elem = recordsElem.Element(XName.Get("TextRecord")).Element(XName.Get("records"));
             foreach (var recordElem in elem.Elements()) {
-                tag.TextRecords.Add(SwfMillPrimitives.ParseTextRecord(recordElem));
+                tag.TextRecords.Add(XTextRecord.FromXml(recordElem));
             }
         }
 
@@ -47,10 +48,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             xTag.Add(new XElement("bounds", XRect.ToXml(tag.TextBounds)));
             xTag.Add(new XElement("transform", XMatrix.ToXml(tag.TextMatrix)));
             //TODO: remove unnessary nested nodes. Swfmill requires them
-            xTag.Add(new XElement(XName.Get("records"),
-                                 new XElement(XName.Get("TextRecord"),
-                                              new XElement(XName.Get("records"),
-                                                           tag.TextRecords.Select(SwfMillPrimitives.FormatTextRecord)
+            xTag.Add(new XElement("records",
+                                 new XElement("TextRecord",
+                                              new XElement("records",
+                                                           tag.TextRecords.Select(XTextRecord.ToXml)
                                                   )
                                      )));
             //TODO: Other fields

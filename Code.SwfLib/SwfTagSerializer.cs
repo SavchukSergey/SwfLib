@@ -17,6 +17,7 @@ using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.FontTags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.TextTags;
+using Code.SwfLib.Text;
 
 namespace Code.SwfLib {
     public class SwfTagSerializer : ISwfTagVisitor<SwfStreamWriter, SwfTagData> {
@@ -91,15 +92,13 @@ namespace Code.SwfLib {
 
             writer.WriteUInt16(tag.Depth);
 
-            if (tag.HasCharacter) {
-                writer.WriteUInt16(tag.CharacterID);
-            }
-
-            //TODO: according to adobe spec. Class name should go before character id.
-            if (tag.ClassName != null) {
+            if (tag.ClassName != null) { //Adobe says class name is also present when (hasImage && hasCharacter)
                 writer.WriteString(tag.ClassName);
             }
 
+            if (tag.HasCharacter) {
+                writer.WriteUInt16(tag.CharacterID);
+            }
 
             if (tag.HasMatrix) {
                 writer.WriteMatrix(ref tag.Matrix);
@@ -124,6 +123,10 @@ namespace Code.SwfLib {
 
             if (tag.BlendMode.HasValue) {
                 writer.WriteByte((byte)tag.BlendMode.Value);
+            }
+
+            if (tag.BitmapCache.HasValue) {
+                writer.WriteByte(tag.BitmapCache.Value);
             }
 
             if (tag.HasClipActions) {
@@ -560,7 +563,6 @@ namespace Code.SwfLib {
                 writer.FlushBits();
             }
             writer.FlushBits();
-            //TODO: What if end record is missed?
             return null;
         }
 
