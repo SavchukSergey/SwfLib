@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Xml.Linq;
-using Code.SwfLib.Data;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill {
@@ -42,7 +42,7 @@ namespace Code.SwfLib.SwfMill {
             var hdr = root.Element(XName.Get("Header"));
             file.Header.FrameRate = double.Parse(hdr.Attribute(XName.Get("framerate")).Value);
             file.Header.FrameCount = ushort.Parse(hdr.Attribute(XName.Get("frames")).Value);
-            file.Header.FrameSize = ParseRect(hdr.Element(XName.Get("size")).Element(XName.Get("Rectangle")));
+            file.Header.FrameSize = XRect.FromXml(hdr.Element(XName.Get("size")).Element(XName.Get("Rectangle")));
 
             var formatterFactory = new TagFormatterFactory(fileInfo.Version);
             var tags = hdr.Element(XName.Get("tags"));
@@ -61,16 +61,6 @@ namespace Code.SwfLib.SwfMill {
             return file;
         }
 
-        private static SwfRect ParseRect(XElement elem) {
-            if (elem.Name.LocalName != "Rectangle") throw new FormatException("Invalid rectangle");
-            SwfRect rect;
-            rect.XMin = int.Parse(elem.Attribute(XName.Get("left")).Value);
-            rect.YMin = int.Parse(elem.Attribute(XName.Get("top")).Value);
-            rect.XMax = int.Parse(elem.Attribute(XName.Get("right")).Value);
-            rect.YMax = int.Parse(elem.Attribute(XName.Get("bottom")).Value);
-            return rect;
-        }
-
         private XElement GetRoot(SwfFile file) {
             return new XElement(XName.Get("swf"),
                                 new XAttribute(XName.Get("version"), file.FileInfo.Version),
@@ -80,7 +70,7 @@ namespace Code.SwfLib.SwfMill {
         }
 
         private XElement GetTagsXml(IEnumerable<SwfTagBase> tags) {
-            return new XElement(XName.Get("tags"), tags.Select(item => BuildTagXml(item)));
+            return new XElement(XName.Get("tags"), tags.Select(BuildTagXml));
         }
 
         private XElement BuildTagXml(SwfTagBase tag) {
@@ -90,21 +80,12 @@ namespace Code.SwfLib.SwfMill {
 
 
         private XElement GetSwfHeaderXml(SwfFile file) {
-            //TODO: This is strange that swfmill wants tags to be inside header... 
             var header = file.Header;
             return new XElement(XName.Get("Header"),
                                 new XAttribute(XName.Get("framerate"), header.FrameRate),
                                 new XAttribute(XName.Get("frames"), header.FrameCount),
-                                new XElement(XName.Get("size"), GetRectangleXml(header.FrameSize)),
+                                new XElement(XName.Get("size"), XRect.ToXml(header.FrameSize)),
                                 GetTagsXml(file.Tags));
-        }
-
-        private static XElement GetRectangleXml(SwfRect rect) {
-            return new XElement(XName.Get("Rectangle"),
-                                new XAttribute(XName.Get("left"), rect.XMin),
-                                new XAttribute(XName.Get("right"), rect.XMax),
-                                new XAttribute(XName.Get("top"), rect.YMin),
-                                new XAttribute(XName.Get("bottom"), rect.YMax));
         }
 
         private static bool IsCompressed(SwfFile file) {

@@ -1,10 +1,13 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Code.SwfLib.Data;
 
 namespace Code.SwfLib.SwfMill.Data {
     public static class XRect {
 
         public static SwfRect FromXml(XElement xRect) {
+            if (xRect.Name.LocalName != "Rectangle") throw new FormatException("Invalid rectangle");
+
             var xLeft = xRect.Attribute("left");
             var xRight = xRect.Attribute("right");
             var xTop = xRect.Attribute("top");
