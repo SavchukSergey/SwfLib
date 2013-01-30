@@ -239,8 +239,10 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGotoFrame2 action, ushort length) {
-            action.Flags = _reader.ReadByte();
-            if (action.SceneBiasFlag) {
+            action.Reserved = (byte) _reader.ReadUnsignedBits(6);
+            var hasBias = _reader.ReadBit();
+            action.Play = _reader.ReadBit();
+            if (hasBias) {
                 action.SceneBias = _reader.ReadUInt16();
             }
             return action;

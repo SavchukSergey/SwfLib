@@ -1,9 +1,9 @@
 ﻿namespace Code.SwfLib.Tags.ControlTags {
     public class FrameLabelTag : ControlBaseTag {
         
-        public byte AnchorFlag;
-
         public string Name { get; set; }
+
+        public byte? AnchorFlag;
 
         public override SwfTagType TagType {
             get { return SwfTagType.FrameLabel; }

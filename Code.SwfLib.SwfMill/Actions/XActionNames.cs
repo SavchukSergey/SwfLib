@@ -47,6 +47,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.SetVariable, "SetVariable");
             Register(ActionCode.GetURL2, "GetURL2");
             Register(ActionCode.GetProperty, "GetProperty");
+            Register(ActionCode.GotoFrame2, "GotoExpression");
 
             Register(ActionCode.GetTime, "GetTimer");
             Register(ActionCode.Trace, "Trace");
@@ -57,6 +58,8 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.CallMethod, "CallMethod");
             Register(ActionCode.ConstantPool, "Dictionary");
             Register(ActionCode.DefineFunction, "DeclareFunction");
+            Register(ActionCode.DefineLocal, "SetLocalVariable");
+            //Register(ActionCode.DefineLocal2, "DefineLocal2");
             Register(ActionCode.Delete, "Delete");
             Register(ActionCode.GetMember, "GetMember");
             Register(ActionCode.NewMethod, "NewMethod");

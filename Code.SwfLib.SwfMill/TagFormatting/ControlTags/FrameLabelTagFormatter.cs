@@ -21,7 +21,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         protected override void AcceptTagElement(FrameLabelTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case FLAGS_ELEM:
-                    //TODO: read flags
+                    var xValue = element.Attribute("value");
+                    if (xValue != null) {
+                        tag.AnchorFlag = byte.Parse(xValue.Value);
+                    }
                     break;
                 default:
                     throw new FormatException("Invalid element " + element.Name.LocalName);
@@ -29,9 +32,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         }
 
         protected override XElement FormatTagElement(FrameLabelTag tag, XElement xTag) {
-            xTag.Add(new XAttribute(XName.Get(LABEL_ATTRIB), tag.Name));
-
-            //TODO: Flags
+            xTag.Add(new XAttribute(LABEL_ATTRIB, tag.Name));
+            var xFlags = new XElement(FLAGS_ELEM);
+            if (tag.AnchorFlag.HasValue) {
+                xFlags.Add(new XAttribute("value", tag.AnchorFlag.Value));
+            }
+            xTag.Add(xFlags);
             return xTag;
         }
 

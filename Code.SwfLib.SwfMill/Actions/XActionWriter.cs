@@ -230,12 +230,14 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionGotoFrame2 action, object param) {
-            var res = new XElement("GoToFrame2",
-                new XAttribute("play", action.Play));
-            if (action.SceneBiasFlag) {
-                res.Add(new XAttribute("bias", action.SceneBias));
+            var res = new XElement(XActionNames.FromAction(action),
+                new XAttribute("play", CommonFormatter.Format(action.Play)));
+            if (action.SceneBias.HasValue) {
+                res.Add(new XAttribute("bias", action.SceneBias.Value));
             }
-            res.Add(new XAttribute("reserved", action.Reserved));
+            if (action.Reserved != 0) {
+                res.Add(new XAttribute("reserved", action.Reserved));
+            }
             return res;
         }
 
@@ -324,7 +326,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineLocal action, object arg) {
-            return new XElement("DefineLocal");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineLocal2 action, object arg) {

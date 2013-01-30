@@ -230,6 +230,16 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGotoFrame2 action, XElement xAction) {
+            var xPlay = xAction.Attribute("play");
+            var xBias = xAction.Attribute("bias");
+            var xReserved = xAction.Attribute("reserved");
+            action.Play = CommonFormatter.ParseBool(xPlay.Value);
+            if (xBias != null) {
+                action.SceneBias = ushort.Parse(xBias.Value);
+            }
+            if (xReserved != null) {
+                action.Reserved = byte.Parse(xReserved.Value);
+            }
             return action;
         }
 

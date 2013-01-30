@@ -236,9 +236,11 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGotoFrame2 action, SwfStreamWriter writer) {
-            writer.WriteByte(action.Flags);
-            if (action.SceneBiasFlag) {
-                writer.WriteUInt16(action.SceneBias);
+            writer.WriteUnsignedBits(action.Reserved, 6);
+            writer.WriteBit(action.SceneBias.HasValue);
+            writer.WriteBit(action.Play);
+            if (action.SceneBias.HasValue) {
+                writer.WriteUInt16(action.SceneBias.Value);
             }
             return null;
         }
