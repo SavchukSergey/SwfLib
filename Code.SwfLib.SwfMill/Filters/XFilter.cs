@@ -19,26 +19,24 @@ namespace Code.SwfLib.SwfMill.Filters {
                 return XGlowFilter.ToXml(filter);
             }
 
-            //TODO: other filters
-
             public XElement Visit(BevelFilter filter, object arg) {
-                throw new NotImplementedException();
+                return XBevelFilter.ToXml(filter);
             }
 
             public XElement Visit(GradientGlowFilter filter, object arg) {
-                throw new NotImplementedException();
+                return XGradientGlowFilter.ToXml(filter);
             }
 
             public XElement Visit(ConvolutionFilter filter, object arg) {
-                throw new NotImplementedException();
+                return XConvolutionFilter.ToXml(filter);
             }
 
             public XElement Visit(ColorMatrixFilter filter, object arg) {
-                throw new NotImplementedException();
+                return XColorMatrixFilter.ToXml(filter);
             }
 
             public XElement Visit(GradientBevelFilter filter, object arg) {
-                throw new NotImplementedException();
+                return XGradientBevelFilter.ToXml(filter);
             }
         }
 
@@ -56,7 +54,16 @@ namespace Code.SwfLib.SwfMill.Filters {
                     return XBlurFilter.FromXml(xFilter);
                 case XGlowFilter.TAG_NAME:
                     return XGlowFilter.FromXml(xFilter);
-                //TODO: other filters
+                case XBevelFilter.TAG_NAME:
+                    return XBevelFilter.FromXml(xFilter);
+                case XGradientGlowFilter.TAG_NAME:
+                    return XGradientGlowFilter.FromXml(xFilter);
+                case XConvolutionFilter.TAG_NAME:
+                    return XConvolutionFilter.FromXml(xFilter);
+                case XColorMatrixFilter.TAG_NAME:
+                    return XColorMatrixFilter.FromXml(xFilter);
+                case XGradientBevelFilter.TAG_NAME:
+                    return XGradientBevelFilter.FromXml(xFilter);
                 default:
                     throw new NotSupportedException();
             }

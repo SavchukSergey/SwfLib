@@ -72,10 +72,15 @@
     <Compile Include="Data\XColorTransformRGB.cs" />
     <Compile Include="Data\XMatrix.cs" />
     <Compile Include="Data\XRect.cs" />
+    <Compile Include="Filters\XColorMatrixFilter.cs" />
+    <Compile Include="Filters\XBevelFilter.cs" />
     <Compile Include="Filters\XBlurFilter.cs" />
+    <Compile Include="Filters\XConvolutionFilter.cs" />
     <Compile Include="Filters\XDropShadowFilter.cs" />
     <Compile Include="Filters\XFilter.cs" />
     <Compile Include="Filters\XGlowFilter.cs" />
+    <Compile Include="Filters\XGradientBevelFilter.cs" />
+    <Compile Include="Filters\XGradientGlowFilter.cs" />
     <Compile Include="Fonts\XGlyph.cs" />
     <Compile Include="Fonts\XKerningRecord.cs" />
     <Compile Include="Fonts\XZoneData.cs" />
