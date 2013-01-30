@@ -50,7 +50,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             xTag.Add(new XElement(XName.Get("records"),
                                  new XElement(XName.Get("TextRecord"),
                                               new XElement(XName.Get("records"),
-                                                           tag.TextRecords.Select(item => SwfMillPrimitives.FormatTextRecord(item))
+                                                           tag.TextRecords.Select(SwfMillPrimitives.FormatTextRecord)
                                                   )
                                      )));
             //TODO: Other fields

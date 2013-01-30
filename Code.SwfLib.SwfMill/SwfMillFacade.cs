@@ -29,7 +29,7 @@ namespace Code.SwfLib.SwfMill {
 
         public SwfFile ReadFromXml(XDocument doc) {
             var root = doc.Root;
-            SwfFile file = new SwfFile();
+            var file = new SwfFile();
             SwfFileInfo fileInfo;
             if (root == null || root.Name.LocalName != "swf") {
                 throw new FormatException("Expected swf as root");

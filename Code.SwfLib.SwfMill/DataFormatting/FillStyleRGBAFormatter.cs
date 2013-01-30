@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Linq;
-using Code.SwfLib.Gradients;
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.SwfMill.Gradients;
 using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.DataFormatting {
@@ -16,12 +13,6 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
         protected override void InitData(XElement element, out FillStyleRGBA data) {
             data = new FillStyleRGBA();
             switch (element.Name.LocalName) {
-                case "LinearGradient":
-                    data.FillStyleType = FillStyleType.LinearGradient;
-                    break;
-                case "Solid":
-                    data.FillStyleType = FillStyleType.SolidColor;
-                    break;
                 case "ClippedBitmap":
                     data.FillStyleType = FillStyleType.ClippedBitmap;
                     break;
@@ -38,29 +29,6 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         protected override void AcceptElement(XElement element, ref FillStyleRGBA data) {
             switch (data.FillStyleType) {
-                case FillStyleType.SolidColor:
-                    switch (element.Name.LocalName) {
-                        case "color":
-                            data.Color = XColorRGBA.FromXml(element.Element("Color"));
-                            break;
-                        default:
-                            OnUnknownElementFound(element);
-                            break;
-                    }
-                    break;
-                case FillStyleType.LinearGradient:
-                    switch (element.Name.LocalName) {
-                        case "matrix":
-                            data.GradientMatrix = XMatrix.FromXml(element.Element("Transform"));
-                            break;
-                        case "gradientColors":
-                            ParseGradientColorsTo(element, data.Gradient.GradientRecords);
-                            break;
-                        default:
-                            OnUnknownElementFound(element);
-                            break;
-                    }
-                    break;
                 case FillStyleType.RadialGradient:
                     throw new NotImplementedException();
                 case FillStyleType.FocalGradient:
@@ -87,20 +55,6 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         protected override void AcceptAttribute(XAttribute attrib, ref FillStyleRGBA data) {
             switch (data.FillStyleType) {
-                case FillStyleType.SolidColor:
-                    switch (attrib.Name.LocalName) {
-                        default:
-                            OnUnknownAttributeFound(attrib);
-                            break;
-                    }
-                    break;
-                case FillStyleType.LinearGradient:
-                    switch (attrib.Name.LocalName) {
-                        default:
-                            OnUnknownAttributeFound(attrib);
-                            break;
-                    }
-                    break;
                 case FillStyleType.RadialGradient:
                     throw new NotImplementedException();
                 case FillStyleType.FocalGradient:
@@ -126,8 +80,6 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         public override XElement Format(ref FillStyleRGBA data) {
             switch (data.FillStyleType) {
-                case FillStyleType.LinearGradient:
-                    return FormatLinearGradientRGBFillStyle(ref data);
                 case FillStyleType.RadialGradient:
                     return FormatRadialGradientRGBFillStyle(ref data);
                 case FillStyleType.FocalGradient:
@@ -178,33 +130,6 @@ namespace Code.SwfLib.SwfMill.DataFormatting {
 
         private static XElement FormatRadialGradientRGBFillStyle(ref FillStyleRGBA style) {
             throw new NotImplementedException();
-        }
-
-        private XElement FormatLinearGradientRGBFillStyle(ref FillStyleRGBA style) {
-            return new XElement(XName.Get("LinearGradient"),
-                new XElement("matrix", XMatrix.ToXml(style.GradientMatrix)),
-                FormatGradientRecord(style.Gradient.GradientRecords)
-                );
-        }
-
-        private XElement FormatGradientRecord(IEnumerable<GradientRecordRGBA> gradients) {
-            var list = new XElement(XName.Get("gradientColors"));
-            foreach (var gradient in gradients) {
-                var color = gradient.Color;
-                list.Add(new XElement(XName.Get("GradientItem"),
-                    new XAttribute(XName.Get("position"), gradient.Ratio),
-                    new XElement("color", XColorRGBA.ToXml(color))
-                ));
-            }
-            return list;
-        }
-
-
-        private void ParseGradientColorsTo(XElement element, IList<GradientRecordRGBA> records) {
-            foreach (var item in element.Elements(XName.Get("GradientItem"))) {
-                var record = XGradientRecordRGBA.FromXml(item);
-                records.Add(record);
-            }
         }
 
     }
