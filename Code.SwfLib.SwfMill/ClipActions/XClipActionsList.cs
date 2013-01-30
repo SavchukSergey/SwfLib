@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Code.SwfLib.ClipActions;
 
 namespace Code.SwfLib.SwfMill.ClipActions {
@@ -7,11 +6,16 @@ namespace Code.SwfLib.SwfMill.ClipActions {
 
         public static XElement ToXml(ClipActionsList clipActions) {
             var res = new XElement("events");
-            throw new NotImplementedException();
+            foreach (var clipAction in clipActions.Records) {
+                res.Add(XClipActionRecord.ToXml(clipAction));
+            }
+            return res;
         }
 
-        public static XElement FromXml(XElement xClipActions, ClipActionsList clipActions) {
-            throw new NotImplementedException();
+        public static void FromXml(XElement xClipActions, ClipActionsList clipActions) {
+            foreach (var xClipAction in xClipActions.Elements()) {
+                clipActions.Records.Add(XClipActionRecord.FromXml(xClipAction));
+            }
         }
     }
 }
