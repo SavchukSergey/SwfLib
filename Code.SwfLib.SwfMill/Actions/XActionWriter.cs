@@ -330,7 +330,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineLocal2 action, object arg) {
-            return new XElement("DefineLocal2");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionDelete action, object arg) {

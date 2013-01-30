@@ -89,13 +89,16 @@ namespace Code.SwfLib {
             writer.WriteBit(tag.Filters.Count > 0);
 
             writer.WriteUInt16(tag.Depth);
-            if (tag.ClassName != null) {
-                writer.WriteString(tag.ClassName);
-            }
 
             if (tag.HasCharacter) {
                 writer.WriteUInt16(tag.CharacterID);
             }
+
+            //TODO: according to adobe spec. Class name should go before character id.
+            if (tag.ClassName != null) {
+                writer.WriteString(tag.ClassName);
+            }
+
 
             if (tag.HasMatrix) {
                 writer.WriteMatrix(ref tag.Matrix);
@@ -118,6 +121,9 @@ namespace Code.SwfLib {
                 writer.WriteFilterList(tag.Filters);
             }
 
+            if (tag.BlendMode.HasValue) {
+                writer.WriteByte((byte)tag.BlendMode.Value);
+            }
             return null;
         }
 

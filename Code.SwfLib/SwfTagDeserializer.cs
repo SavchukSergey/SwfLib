@@ -119,6 +119,7 @@ namespace Code.SwfLib {
             //    tag.ClassName = reader.ReadString();
             //}
 
+            //TODO: according to adobe spec. Class name should go before character id.
             if (hasClassName) {
                 tag.ClassName = reader.ReadString();
             }
@@ -148,16 +149,15 @@ namespace Code.SwfLib {
                 reader.ReadFilterList(tag.Filters);
             }
 
-            //TODO: uncomment
+            if (hasBlendMode) {
+                tag.BlendMode = (BlendMode?) reader.ReadByte();
+            }
 
-            //if (hasBlendMode) {
-            //    tag.BlendMode = reader.ReadByte();
-            //}
+            if (hasCacheAsBitmap) {
+                tag.BitmapCache = reader.ReadByte();
+            }
 
-            //if (hasCacheAsBitmap) {
-            //    tag.BitmapCache = reader.ReadByte();
-            //}
-
+            //TODO: read clip actions
             //if (tag.HasClipActions) {
             //    reader.ReadClipActions(_file.FileInfo.Version, out tag.ClipActions);
             //}

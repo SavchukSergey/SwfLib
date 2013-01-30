@@ -59,7 +59,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.ConstantPool, "Dictionary");
             Register(ActionCode.DefineFunction, "DeclareFunction");
             Register(ActionCode.DefineLocal, "SetLocalVariable");
-            //Register(ActionCode.DefineLocal2, "DefineLocal2");
+            Register(ActionCode.DefineLocal2, "DeclareLocalVariable");
             Register(ActionCode.Delete, "Delete");
             Register(ActionCode.GetMember, "GetMember");
             Register(ActionCode.NewMethod, "NewMethod");

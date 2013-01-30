@@ -33,7 +33,7 @@ namespace Code.SwfLib.Tags.DisplayListTags {
 
         public ClipActions ClipActions;
 
-        public byte? BlendMode;
+        public BlendMode? BlendMode;
 
         public readonly IList<BaseFilter> Filters = new List<BaseFilter>();
 

@@ -12,8 +12,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string ALL_FLAGS1_ATTRIB = "allflags1";
         private const string ALL_FLAGS2_ATTRIB = "allflags2";
         private const string BITMAP_CACHING_ATTRIB = "bitmapCaching";
-        private const string FILTERS_ELEM = "filters";
         private const string EVENTS_ELEM = "events";
+
 
         protected override void AcceptPlaceAttribute(PlaceObject3Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
@@ -51,7 +51,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     }
                     break;
                 case EVENTS_ELEM:
-                    //TODO: Read transform
+                    //TODO: Read events
                     break;
                 case "colorTransform":
                     tag.ColorTransform = XColorTransformRGBA.FromXml(element.Element("ColorTransform2"));
