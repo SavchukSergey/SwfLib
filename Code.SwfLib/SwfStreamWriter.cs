@@ -224,7 +224,7 @@ namespace Code.SwfLib {
                 res |= (ushort)(e << 10);
                 res |= (ushort)m;
             }
-            _writer.Write(res);
+            WriteUInt16(res);
         }
     }
 }

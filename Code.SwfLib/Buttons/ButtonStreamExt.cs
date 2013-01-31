@@ -1,4 +1,5 @@
-﻿using Code.SwfLib.Actions;
+﻿using System.Diagnostics;
+using Code.SwfLib.Actions;
 using Code.SwfLib.Data;
 using Code.SwfLib.Filters;
 
@@ -31,7 +32,8 @@ namespace Code.SwfLib.Buttons {
             return button;
         }
 
-        public static void WriteButtonRecordEx(this SwfStreamWriter writer, ButtonRecordEx button) {
+        public static void WriteButtonRecordEx(this SwfStreamWriter writer, ButtonRecordEx button)
+        {
             writer.WriteUnsignedBits(button.Reserved, 2);
             writer.WriteBit(button.BlendMode.HasValue);
             writer.WriteBit(button.Filters.Count > 0);

@@ -1,16 +1,36 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Fonts;
-using Code.SwfLib.Tags.FontTags;
+using Code.SwfLib.SwfMill.Data;
 
 namespace Code.SwfLib.SwfMill.Fonts {
     public static class XZoneRecord {
 
+        public static ZoneRecord FromXml(XElement xZoneRecord) {
+            var zoneArray = new ZoneRecord();
+            var xZoneX = xZoneRecord.Attribute("zoneX");
+            var xZoneY = xZoneRecord.Attribute("zoneY");
+            var xReserved = xZoneRecord.Attribute("reserved");
+            zoneArray.ZoneX = CommonFormatter.ParseBool(xZoneX.Value);
+            zoneArray.ZoneY = CommonFormatter.ParseBool(xZoneY.Value);
+            if (xReserved != null) {
+                zoneArray.Reserved = byte.Parse(xReserved.Value);
+            }
+
+            foreach (var xZoneData in xZoneRecord.Element("zones").Elements()) {
+                zoneArray.Data.Add(XZoneData.FromXml(xZoneData));
+            }
+            return zoneArray;
+        }
+
         public static XElement ToXml(ZoneRecord zoneRecord) {
             var res = new XElement("ZoneArray",
-                new XAttribute("zoneX", zoneRecord.ZoneX ? "1" : "0"),
-                new XAttribute("zoneY", zoneRecord.ZoneY ? "1" : "0")
+                new XAttribute("zoneX", CommonFormatter.Format(zoneRecord.ZoneX)),
+                new XAttribute("zoneY", CommonFormatter.Format(zoneRecord.ZoneY))
             );
-            
+            if (zoneRecord.Reserved != 0) {
+                res.Add(new XAttribute("reserved", zoneRecord.Reserved));
+            }
+
             var xZones = new XElement("zones");
             foreach (var data in zoneRecord.Data) {
                 xZones.Add(XZoneData.ToXml(data));

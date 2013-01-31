@@ -1,33 +1,15 @@
-﻿using Code.SwfLib.Tags.FontTags;
+﻿using System.Collections.Generic;
 
 namespace Code.SwfLib.Fonts {
     public class ZoneRecord {
 
-        public ZoneData[] Data;
-
-        public ZoneRecordFlags Flags;
+        public readonly IList<ZoneData> Data = new List<ZoneData>();
 
         public byte Reserved;
 
-        public bool ZoneX {
-            get {
-                return (Flags & ZoneRecordFlags.ZoneX) != 0;
-            }
-            set {
-                if (value) Flags |= ZoneRecordFlags.ZoneX;
-                else Flags &= ~ZoneRecordFlags.ZoneX;
-            }
-        }
+        public bool ZoneX;
 
-        public bool ZoneY {
-            get {
-                return (Flags & ZoneRecordFlags.ZoneY) != 0;
-            }
-            set {
-                if (value) Flags |= ZoneRecordFlags.ZoneY;
-                else Flags &= ~ZoneRecordFlags.ZoneY;
-            }
-        }
+        public bool ZoneY;
 
     }
 }

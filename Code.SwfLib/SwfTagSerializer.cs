@@ -531,12 +531,14 @@ namespace Code.SwfLib {
             writer.WriteUnsignedBits(tag.Reserved, 6);
 
             foreach (var zoneArray in tag.ZoneTable) {
-                writer.WriteByte((byte)zoneArray.Data.Length);
+                writer.WriteByte((byte)zoneArray.Data.Count);
                 foreach (var zoneData in zoneArray.Data) {
                     writer.WriteShortFloat(zoneData.Position);
                     writer.WriteShortFloat(zoneData.Size);
                 }
-                writer.WriteByte((byte)zoneArray.Flags);
+                writer.WriteUnsignedBits(zoneArray.Reserved, 6);
+                writer.WriteBit(zoneArray.ZoneX);
+                writer.WriteBit(zoneArray.ZoneY);
             }
 
             return null;

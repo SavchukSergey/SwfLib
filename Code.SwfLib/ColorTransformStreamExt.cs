@@ -1,11 +1,11 @@
-﻿using Code.SwfLib.Data;
+﻿using System;
+using Code.SwfLib.Data;
 
 namespace Code.SwfLib {
     public static class ColorTransformStreamExt {
 
         public static ColorTransformRGB ReadColorTransformRGB(this SwfStreamReader reader) {
             ColorTransformRGB transform;
-            reader.AlignToByte();
             bool hasAddTerms = reader.ReadBit();
             bool hasMultTerms = reader.ReadBit();
             var bits = reader.ReadUnsignedBits(4);
@@ -31,11 +31,11 @@ namespace Code.SwfLib {
                 transform.BlueAddTerm = 0;
                 transform.HasAddTerms = false;
             }
+            reader.AlignToByte();
             return transform;
         }
 
         public static void WriteColorTransformRGB(this SwfStreamWriter writer, ref ColorTransformRGB tranform) {
-            writer.FlushBits();
             var bitsCounter = new BitsCount(0);
             if (tranform.HasAddTerms) {
                 bitsCounter.AddValue(tranform.RedAddTerm);
@@ -71,7 +71,6 @@ namespace Code.SwfLib {
         }
 
         public static void ReadColorTransformRGBA(this SwfStreamReader reader, out ColorTransformRGBA transform) {
-            reader.AlignToByte();
             bool hasAddTerms = reader.ReadBit();
             bool hasMultTerms = reader.ReadBit();
             var bits = reader.ReadUnsignedBits(4);
@@ -101,6 +100,7 @@ namespace Code.SwfLib {
                 transform.AlphaAddTerm = 0;
                 transform.HasAddTerms = false;
             }
+            reader.AlignToByte();
         }
 
         public static void WriteColorTransformRGBA(this SwfStreamWriter writer, ColorTransformRGBA transform) {
@@ -108,7 +108,6 @@ namespace Code.SwfLib {
         }
 
         public static void WriteColorTransformRGBA(this SwfStreamWriter writer, ref ColorTransformRGBA tranform) {
-            writer.FlushBits();
             var bitsCounter = new BitsCount(0);
             if (tranform.HasAddTerms) {
                 bitsCounter.AddValue(tranform.RedAddTerm);
@@ -124,7 +123,7 @@ namespace Code.SwfLib {
             }
             writer.WriteBit(tranform.HasAddTerms);
             writer.WriteBit(tranform.HasMultTerms);
-            var bits = bitsCounter.GetSignedBits();
+            var bits = Math.Max(bitsCounter.GetSignedBits(), 1);
             writer.WriteUnsignedBits(bits, 4);
             if (tranform.HasMultTerms) {
                 writer.WriteSignedBits(tranform.RedMultTerm, bits);

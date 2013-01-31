@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Code.SwfLib.Data;
+﻿using Code.SwfLib.Data;
 
 namespace Code.SwfLib {
     public static class SwfStreamReaderExt {
@@ -81,12 +79,6 @@ namespace Code.SwfLib {
 
         public static SwfMatrix ReadMatrix(this SwfStreamReader reader) {
             SwfMatrix matrix;
-            reader.ReadMatrix(out matrix);
-            return matrix;
-        }
-
-        public static void ReadMatrix(this SwfStreamReader reader, out SwfMatrix matrix) {
-            reader.AlignToByte();
             matrix.HasScale = reader.ReadBit();
             if (matrix.HasScale) {
                 var bits = (byte)reader.ReadUnsignedBits(5);
@@ -109,6 +101,7 @@ namespace Code.SwfLib {
             matrix.TranslateX = reader.ReadSignedBits(translateBits);
             matrix.TranslateY = reader.ReadSignedBits(translateBits);
             reader.AlignToByte();
+            return matrix;
         }
 
 

@@ -540,24 +540,19 @@ namespace Code.SwfLib {
             tag.CsmTableHint = (CSMTableHint)reader.ReadUnsignedBits(2);
             tag.Reserved = (byte)reader.ReadUnsignedBits(6);
 
-            var fontInfo = _file.IterateTagsRecursively()
-                .OfType<DefineFont3Tag>()
-                .FirstOrDefault(item => item.FontID == tag.FontID);
-            if (fontInfo == null) {
-                throw new InvalidDataException("Couldn't find corresponding DefineFont3Tag");
-            }
             while (!reader.IsEOF) {
                 var zone = new ZoneRecord();
                 int count = reader.ReadByte();
-                zone.Data = new ZoneData[count];
                 for (var j = 0; j < count; j++) {
                     var zoneData = new ZoneData {
                         Position = reader.ReadShortFloat(),
                         Size = reader.ReadShortFloat()
                     };
-                    zone.Data[j] = zoneData;
+                    zone.Data.Add(zoneData);
                 }
-                zone.Flags = (ZoneRecordFlags)reader.ReadByte();
+                zone.Reserved = (byte) reader.ReadUnsignedBits(6);
+                zone.ZoneX = reader.ReadBit();
+                zone.ZoneY = reader.ReadBit();
                 tag.ZoneTable.Add(zone);
             }
             return tag;

@@ -4,8 +4,7 @@
         private uint _positiveMask;
         private uint _negativeMask;
 
-        public BitsCount(int originalValue)
-        {
+        public BitsCount(int originalValue) {
             _positiveMask = 0x00000000;
             _negativeMask = 0xffffffff;
             AddValue(originalValue);
@@ -35,7 +34,11 @@
         public void AddValue(uint val) {
             _positiveMask |= val;
         }
-        //TODO: Check for zero bits where used
+
+        public bool IsEmpty {
+            get { return _positiveMask == 0 && _negativeMask == 0xffffffff; }
+        }
+
         public uint GetSignedBits() {
             uint mask = (_positiveMask | (~_negativeMask)) << 1;
             if (mask == 0) return 0;
@@ -47,7 +50,6 @@
             return 0;
         }
 
-        //TODO: Check for zero bits where used
         public uint GetUnsignedBits() {
             uint mask = _positiveMask | (~_negativeMask);
             if (mask == 0) return 0;
