@@ -18,7 +18,7 @@ namespace Code.SwfLib.Tests {
             file.Header.FrameSize = new SwfRect(0, 0, 100, 100);
             file.Header.FrameRate = 20.0;
             file.Header.FrameCount = 1;
-            file.Tags.Add(new FileAttributesTag { Attributes = SwfFileAttributes.UseNetwork});
+            file.Tags.Add(new FileAttributesTag { UseNetwork = true});
             file.Tags.Add(new SetBackgroundColorTag {Color = new SwfRGB(10, 224, 224)});
             file.Tags.Add(new ShowFrameTag());
             file.Tags.Add(new EndTag());

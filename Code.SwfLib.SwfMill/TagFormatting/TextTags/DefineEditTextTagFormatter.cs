@@ -31,7 +31,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
         private const string SIZE_ELEM = "size";
         private const string COLOR_ELEM = "color";
 
-        //TODO: Font class name and wasStatic which is not supported by swfmill
+        //TODO: Font class name which is not supported by swfmill
         //TODO: check bit flags seting+check fields list
         protected override bool AcceptTagAttribute(DefineEditTextTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
@@ -76,7 +76,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                     break;
                 case MAX_LENGTH_ATTRIB:
                     tag.MaxLength = ushort.Parse(attrib.Value);
-                    tag.HasMaxLength = true;
                     break;
                 case ALIGN_ATTRIB:
                     tag.Align = byte.Parse(attrib.Value);
@@ -105,6 +104,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                     tag.HasText = true;
                     tag.InitialText = attrib.Value;
                     break;
+                case "static":
+                    tag.WasStatic = CommonFormatter.ParseBool(attrib.Value);
+                    break;
                 default:
                     return false;
             }
@@ -113,16 +115,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
 
         protected override bool AcceptTagElement(DefineEditTextTag tag, XElement element) {
             switch (element.Name.LocalName) {
-                //case DATA_TAG:
-                //    //TODO: set data
-                //    FromBase64(element);
-                //    break;
                 case SIZE_ELEM:
                     tag.Bounds = XRect.FromXml(element.Element("Rectangle"));
                     break;
                 case COLOR_ELEM:
                     tag.TextColor = XColorRGBA.FromXml(element.Element("Color"));
-                    tag.HasTextColor = true;
                     break;
                 default:
                     return false;
@@ -140,17 +137,19 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             xTag.Add(new XAttribute(HAS_LAYOUT_ATTRIB, FormatBoolToDigit(tag.HasLayout)));
             xTag.Add(new XAttribute(NOT_SELECTABLE_ATTRIB, FormatBoolToDigit(tag.NoSelect)));
             xTag.Add(new XAttribute(BORDER_ATTRIB, FormatBoolToDigit(tag.Border)));
-            //res.Add(new XAttribute(STATIC_ATTRIB, FormatBoolToDigit(tag.WasStatic)));
+            xTag.Add(new XAttribute("static", CommonFormatter.Format(tag.WasStatic)));
             xTag.Add(new XAttribute(IS_HTML_ATTRIB, FormatBoolToDigit(tag.HTML)));
             xTag.Add(new XAttribute(USE_OUTLINES_ATTRIB, FormatBoolToDigit(tag.UseOutlines)));
             if (tag.HasFont) {
                 xTag.Add(new XAttribute(FONT_REF_ATTRIB, tag.FontID));
                 xTag.Add(new XAttribute(FONT_HEIGHT_ATTRIB, tag.FontHeight));
             }
-            if (tag.HasTextColor) {
-                xTag.Add(new XElement("color", XColorRGBA.ToXml(tag.TextColor)));
+            if (tag.TextColor.HasValue) {
+                xTag.Add(new XElement("color", XColorRGBA.ToXml(tag.TextColor.Value)));
             }
-            xTag.Add(new XAttribute(MAX_LENGTH_ATTRIB, tag.MaxLength));
+            if (tag.MaxLength.HasValue) {
+                xTag.Add(new XAttribute(MAX_LENGTH_ATTRIB, tag.MaxLength.Value));
+            }
             if (tag.HasLayout) {
                 xTag.Add(new XAttribute(ALIGN_ATTRIB, tag.Align));
                 xTag.Add(new XAttribute(LEFT_MARGIN_ATTRIB, tag.LeftMargin));

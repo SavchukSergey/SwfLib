@@ -205,7 +205,15 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(FileAttributesTag tag, SwfStreamWriter writer) {
-            writer.WriteUInt32((uint)tag.Attributes);
+            writer.WriteBit(tag.Reserved0);
+            writer.WriteBit(tag.UseDirectBlit);
+            writer.WriteBit(tag.UseGPU);
+            writer.WriteBit(tag.HasMetadata);
+            writer.WriteBit(tag.AllowAbc);
+            writer.WriteBit(tag.SuppressCrossDomainCaching);
+            writer.WriteBit(tag.SwfRelativeUrls);
+            writer.WriteBit(tag.UseNetwork);
+            writer.WriteUnsignedBits(tag.Reserved, 24);
             return null;
         }
 
@@ -433,6 +441,7 @@ namespace Code.SwfLib {
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont3Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
+            return null;
 
             var wideCodes = tag.Glyphs.Any(item => item.Code > 255);
             writer.WriteBit(tag.HasLayout);
@@ -579,8 +588,8 @@ namespace Code.SwfLib {
             writer.WriteBit(tag.Multiline);
             writer.WriteBit(tag.Password);
             writer.WriteBit(tag.ReadOnly);
-            writer.WriteBit(tag.HasTextColor);
-            writer.WriteBit(tag.HasMaxLength);
+            writer.WriteBit(tag.TextColor.HasValue);
+            writer.WriteBit(tag.MaxLength.HasValue);
             writer.WriteBit(tag.HasFont);
             writer.WriteBit(tag.HasFontClass);
             writer.WriteBit(tag.AutoSize);
@@ -599,11 +608,11 @@ namespace Code.SwfLib {
             if (tag.HasFont) {
                 writer.WriteUInt16(tag.FontHeight);
             }
-            if (tag.HasTextColor) {
-                writer.WriteRGBA(ref tag.TextColor);
+            if (tag.TextColor.HasValue) {
+                writer.WriteRGBA(tag.TextColor.Value);
             }
-            if (tag.HasMaxLength) {
-                writer.WriteUInt16(tag.MaxLength);
+            if (tag.MaxLength.HasValue) {
+                writer.WriteUInt16(tag.MaxLength.Value);
             }
             if (tag.HasLayout) {
                 writer.WriteByte(tag.Align);

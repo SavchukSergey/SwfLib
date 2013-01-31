@@ -146,7 +146,7 @@ namespace Code.SwfLib {
             }
 
             if (hasBlendMode) {
-                tag.BlendMode = (BlendMode?) reader.ReadByte();
+                tag.BlendMode = (BlendMode?)reader.ReadByte();
             }
 
             if (hasCacheAsBitmap) {
@@ -231,7 +231,15 @@ namespace Code.SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(FileAttributesTag tag, SwfStreamReader reader) {
-            tag.Attributes = (SwfFileAttributes)reader.ReadUInt32();
+            tag.Reserved0 = reader.ReadBit();
+            tag.UseDirectBlit = reader.ReadBit();
+            tag.UseGPU = reader.ReadBit();
+            tag.HasMetadata = reader.ReadBit();
+            tag.AllowAbc = reader.ReadBit();
+            tag.SuppressCrossDomainCaching = reader.ReadBit();
+            tag.SwfRelativeUrls = reader.ReadBit();
+            tag.UseNetwork = reader.ReadBit();
+            tag.Reserved = reader.ReadUnsignedBits(24);
             return tag;
         }
 
@@ -406,7 +414,7 @@ namespace Code.SwfLib {
             if (tag.BitmapFormat == 3) {
                 tag.BitmapColorTableSize = reader.ReadByte();
             }
-            tag.ZlibBitmapData = reader.ReadBytes((int)reader.BytesLeft);
+            tag.ZlibBitmapData = reader.ReadRest();
             return tag;
         }
 
@@ -418,7 +426,7 @@ namespace Code.SwfLib {
             if (tag.BitmapFormat == 3) {
                 tag.BitmapColorTableSize = reader.ReadByte();
             }
-            tag.ZlibBitmapData = reader.ReadBytes((int)reader.BytesLeft);
+            tag.ZlibBitmapData = reader.ReadRest();
             return tag;
         }
 
@@ -461,6 +469,8 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFont3Tag tag, SwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
+            tag.FontName = "";
+            return tag;
 
             tag.HasLayout = reader.ReadBit();
             tag.ShiftJIS = reader.ReadBit();
@@ -581,14 +591,16 @@ namespace Code.SwfLib {
             tag.CharacterID = reader.ReadUInt16();
             reader.ReadRect(out tag.Bounds);
             reader.AlignToByte();
+
             tag.HasText = reader.ReadBit();
             tag.WordWrap = reader.ReadBit();
             tag.Multiline = reader.ReadBit();
             tag.Password = reader.ReadBit();
             tag.ReadOnly = reader.ReadBit();
-            tag.HasTextColor = reader.ReadBit();
-            tag.HasMaxLength = reader.ReadBit();
+            var hasTextColor = reader.ReadBit();
+            var hasMaxLength = reader.ReadBit();
             tag.HasFont = reader.ReadBit();
+
             tag.HasFontClass = reader.ReadBit();
             tag.AutoSize = reader.ReadBit();
             tag.HasLayout = reader.ReadBit();
@@ -597,6 +609,7 @@ namespace Code.SwfLib {
             tag.WasStatic = reader.ReadBit();
             tag.HTML = reader.ReadBit();
             tag.UseOutlines = reader.ReadBit();
+
             if (tag.HasFont) {
                 tag.FontID = reader.ReadUInt16();
             }
@@ -606,10 +619,10 @@ namespace Code.SwfLib {
             if (tag.HasFont) {
                 tag.FontHeight = reader.ReadUInt16();
             }
-            if (tag.HasTextColor) {
-                reader.ReadRGBA(out tag.TextColor);
+            if (hasTextColor) {
+                tag.TextColor = reader.ReadRGBA();
             }
-            if (tag.HasMaxLength) {
+            if (hasMaxLength) {
                 tag.MaxLength = reader.ReadUInt16();
             }
             if (tag.HasLayout) {

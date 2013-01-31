@@ -325,7 +325,6 @@
     <Compile Include="Tags\DisplayListTags\PlaceObject3Tag.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObject2Tag.cs" />
     <Compile Include="Tags\DisplayListTags\ShowFrameTag.cs" />
-    <Compile Include="Tags\ControlTags\SwfFileAttributes.cs" />
     <Compile Include="Tags\SwfTagBase.cs" />
     <Compile Include="Tags\DebugIDTag.cs" />
     <Compile Include="Tags\ActionsTags\DoABCDefineTag.cs" />

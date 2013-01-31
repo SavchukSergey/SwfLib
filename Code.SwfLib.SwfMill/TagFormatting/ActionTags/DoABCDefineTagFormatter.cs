@@ -8,7 +8,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
         }
 
         public override string TagName {
-            get { return "DoABCDefine"; }
+            get { return "DoAbc"; }
         }
 
     }

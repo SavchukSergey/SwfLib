@@ -7,14 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
         protected override void FormatTagElement(DefineBitsJPEG2Tag tag, XElement xTag) {
         }
 
-        protected override ushort? GetObjectID(DefineBitsJPEG2Tag tag) {
-            return tag.CharacterID;
-        }
-
-        protected override void SetObjectID(DefineBitsJPEG2Tag tag, ushort value) {
-            tag.CharacterID = value;
-        }
-
         protected override byte[] GetData(DefineBitsJPEG2Tag tag) {
             return tag.ImageData;
         }

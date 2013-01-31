@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
@@ -20,6 +21,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         protected override bool AcceptTagAttribute(FileAttributesTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
+                case "reserved0":
+                    tag.Reserved0 = CommonFormatter.ParseBool(attrib.Value);
+                    break;
+                case USE_DIRECT_BLIT:
+                    tag.UseDirectBlit = SwfMillPrimitives.ParseBoolean(attrib);
+                    break;
+                case USE_GPU:
+                    tag.UseGPU = SwfMillPrimitives.ParseBoolean(attrib);
+                    break;
                 case HAS_METADATA_ATTRIB:
                     tag.HasMetadata = ParseBoolFromDigit(attrib);
                     break;
@@ -27,7 +37,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                     tag.AllowAbc = ParseBoolFromDigit(attrib);
                     break;
                 case SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB:
-                    tag.SupressCrossDomainCaching = ParseBoolFromDigit(attrib);
+                    tag.SuppressCrossDomainCaching = ParseBoolFromDigit(attrib);
                     break;
                 case SWF_RELATIVE_URLS_ATTRIB:
                     tag.SwfRelativeUrls = ParseBoolFromDigit(attrib);
@@ -35,11 +45,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 case USE_NETWORK_ATTRIB:
                     tag.UseNetwork = ParseBoolFromDigit(attrib);
                     break;
-                case USE_GPU:
-                    tag.UseGPU = SwfMillPrimitives.ParseBoolean(attrib);
-                    break;
-                case USE_DIRECT_BLIT:
-                    tag.UseDirectBlit = SwfMillPrimitives.ParseBoolean(attrib);
+                case "reserved":
+                    tag.Reserved = uint.Parse(attrib.Value);
                     break;
                 default:
                     return false;
@@ -48,20 +55,19 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         }
 
         protected override void FormatTagElement(FileAttributesTag tag, XElement xTag) {
-            xTag.Add(new XAttribute(XName.Get(HAS_METADATA_ATTRIB), FormatBoolToDigit(tag.HasMetadata)));
-            xTag.Add(new XAttribute(XName.Get(USE_NETWORK_ATTRIB), FormatBoolToDigit(tag.UseNetwork)));
-            xTag.Add(new XAttribute(XName.Get(ALLOW_ABC_ATTRIB), FormatBoolToDigit(tag.AllowAbc)));
-            xTag.Add(new XAttribute(XName.Get(SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB), FormatBoolToDigit(tag.SupressCrossDomainCaching)));
-            xTag.Add(new XAttribute(XName.Get(SWF_RELATIVE_URLS_ATTRIB), FormatBoolToDigit(tag.SwfRelativeUrls)));
-            if (_version >= 10) {
-                xTag.Add(new XAttribute(XName.Get(USE_GPU), FormatBoolToDigit(tag.UseGPU)));
-                xTag.Add(new XAttribute(XName.Get(USE_DIRECT_BLIT), FormatBoolToDigit(tag.UseDirectBlit)));
+            xTag.Add(new XAttribute("reserved0", CommonFormatter.Format(tag.Reserved0)));
+            xTag.Add(new XAttribute(USE_DIRECT_BLIT, CommonFormatter.Format(tag.UseDirectBlit)));
+            xTag.Add(new XAttribute(USE_GPU, CommonFormatter.Format(tag.UseGPU)));
+            xTag.Add(new XAttribute(XName.Get(HAS_METADATA_ATTRIB), CommonFormatter.Format(tag.HasMetadata)));
+            xTag.Add(new XAttribute(XName.Get(ALLOW_ABC_ATTRIB), CommonFormatter.Format(tag.AllowAbc)));
+            xTag.Add(new XAttribute(XName.Get(SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB), CommonFormatter.Format(tag.SuppressCrossDomainCaching)));
+            xTag.Add(new XAttribute(XName.Get(SWF_RELATIVE_URLS_ATTRIB), CommonFormatter.Format(tag.SwfRelativeUrls)));
+            xTag.Add(new XAttribute(XName.Get(USE_NETWORK_ATTRIB), CommonFormatter.Format(tag.UseNetwork)));
+            if (tag.Reserved != 0) {
+                xTag.Add(new XAttribute("reserved", tag.Reserved));
             }
         }
 
-        private static string CheckFileAttribute(SwfFileAttributes all, SwfFileAttributes toTest) {
-            return (all & toTest) > 0 ? "1" : "0";
-        }
 
         public override string TagName {
             get { return "FileAttributes"; }

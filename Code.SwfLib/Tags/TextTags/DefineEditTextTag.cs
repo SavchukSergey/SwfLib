@@ -17,10 +17,6 @@ namespace Code.SwfLib.Tags.TextTags {
 
         public bool ReadOnly;
 
-        public bool HasTextColor;
-
-        public bool HasMaxLength;
-
         public bool HasFont;
 
         public bool HasFontClass;
@@ -45,9 +41,9 @@ namespace Code.SwfLib.Tags.TextTags {
 
         public ushort FontHeight;
 
-        public SwfRGBA TextColor;
+        public SwfRGBA? TextColor;
 
-        public ushort MaxLength;
+        public ushort? MaxLength;
 
         //TODO: Use enum
         public byte Align;
