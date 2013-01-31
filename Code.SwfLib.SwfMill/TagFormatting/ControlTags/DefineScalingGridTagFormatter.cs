@@ -7,9 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         protected override void FormatTagElement(DefineScalingGridTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagElement(DefineScalingGridTag tag, XElement element) {
-        }
-
         public override string TagName {
             get { return "DefineScalingGrid"; }
         }

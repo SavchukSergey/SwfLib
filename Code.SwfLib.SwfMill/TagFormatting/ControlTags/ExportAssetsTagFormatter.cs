@@ -9,7 +9,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         private const string SYMBOLS_TAGS = "symbols";
 
-        protected override void AcceptTagElement(ExportAssetsTag tag, XElement element) {
+        protected override bool AcceptTagElement(ExportAssetsTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case SYMBOLS_TAGS:
                     ReadSymbols(tag, element);
@@ -17,6 +17,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 default:
                     return false;
             }
+            return true;
         }
 
         protected override void FormatTagElement(ExportAssetsTag tag, XElement xTag) {

@@ -14,7 +14,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             xTag.Add(xOffsets);
         }
 
-        protected override void AcceptTagElement(DefineFontTag tag, XElement element) {
+        protected override bool AcceptTagElement(DefineFontTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "offsets":
                     foreach (var xOffset in element.Elements()) {
@@ -23,8 +23,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                     }
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         public override string TagName {

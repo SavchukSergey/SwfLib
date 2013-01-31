@@ -6,9 +6,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         protected override void FormatTagElement(ProtectTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagElement(ProtectTag tag, XElement element) {
-        }
-
         public override string TagName {
             get { return "Protect"; }
         }

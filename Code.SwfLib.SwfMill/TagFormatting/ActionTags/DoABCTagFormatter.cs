@@ -25,14 +25,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             return true;
         }
 
-        protected override void AcceptTagElement(DoABCTag tag, XElement element) {
+        protected override bool AcceptTagElement(DoABCTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "abc":
                     tag.ABCData = Convert.FromBase64String(element.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         public override string TagName {

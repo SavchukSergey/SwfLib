@@ -30,16 +30,16 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             return true;
         }
 
-        protected sealed override void AcceptTagElement(T tag, XElement element) {
+        protected sealed override bool AcceptTagElement(T tag, XElement element) {
             switch (element.Name.LocalName) {
                 case TRANSFORM_ELEM:
                     tag.Matrix = XMatrix.FromXml(element.Element(TRANSFORM_TYPE_ELEM));
                     HasMatrix(tag, true);
                     break;
                 default:
-                    AcceptPlaceTagElement(tag, element);
-                    break;
+                    return AcceptPlaceTagElement(tag, element);
             }
+            return true;
         }
 
         protected abstract void FormatPlaceElement(T tag, XElement elem);
@@ -53,7 +53,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         protected virtual bool AcceptPlaceAttribute(T tag, XAttribute attrib) {
             return false;
         }
-        protected abstract void AcceptPlaceTagElement(T tag, XElement element);
+        protected virtual bool AcceptPlaceTagElement(T tag, XElement element) {
+            return false;
+        }
 
         protected override ushort? GetObjectID(T tag) {
             if (!HasCharacter(tag)) return null;

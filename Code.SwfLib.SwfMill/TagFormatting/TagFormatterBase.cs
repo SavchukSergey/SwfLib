@@ -72,7 +72,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                     tag.RestData = Convert.FromBase64String(element.Value);
                     break;
                 default:
-                    AcceptTagElement(tag, element);
+                    var handled = AcceptTagElement(tag, element);
+                    if (!handled) throw new FormatException("Invalid element " + element.Name.LocalName);
                     break;
             }
         }
@@ -83,7 +84,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return false;
         }
 
-        protected abstract void AcceptTagElement(T tag, XElement element);
+        protected virtual bool AcceptTagElement(T tag, XElement element) {
+            return false;
+        }
 
         public abstract string TagName { get; }
 
@@ -95,11 +98,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         #endregion
-
-        protected string FormatFloat(double value) {
-            string res = value.ToString();
-            return res;
-        }
 
         protected byte[] FromBase64(XElement dataElement) {
             //TODO: why different depth??

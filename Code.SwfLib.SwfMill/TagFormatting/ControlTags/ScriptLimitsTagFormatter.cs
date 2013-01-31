@@ -27,10 +27,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             return true;
         }
 
-        protected override void AcceptTagElement(ScriptLimitsTag tag, XElement element) {
-            return false;
-        }
-
         public override string TagName {
             get { return "ScriptLimits"; }
         }

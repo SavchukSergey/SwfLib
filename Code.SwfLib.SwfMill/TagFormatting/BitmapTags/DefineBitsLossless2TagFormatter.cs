@@ -41,7 +41,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             return true;
         }
 
-        protected override void AcceptTagElement(DefineBitsLossless2Tag tag, XElement element) {
+        protected override bool AcceptTagElement(DefineBitsLossless2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case DATA_TAG:
                     tag.ZlibBitmapData = XBinary.FromXml(element.Element("data"));
@@ -49,6 +49,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
                 default:
                     return false;
             }
+            return true;
         }
 
         public override string TagName {

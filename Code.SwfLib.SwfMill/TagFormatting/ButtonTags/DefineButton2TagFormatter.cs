@@ -28,7 +28,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
             return true;
         }
 
-        protected override void AcceptTagElement(DefineButton2Tag tag, XElement element) {
+        protected override bool AcceptTagElement(DefineButton2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BUTTONS_ELEM:
                     foreach (var xButton in element.Elements()) {
@@ -43,6 +43,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
                 default:
                     return false;
             }
+            return true;
         }
 
         protected override void FormatTagElement(DefineButton2Tag tag, XElement xTag) {

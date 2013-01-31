@@ -12,7 +12,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         private const string TRANSFORM_ELEM = "transform";
         private const string RECORDS_ELEM = "records";
 
-        protected override void AcceptTagElement(DefineTextTag tag, XElement element) {
+        protected override bool AcceptTagElement(DefineTextTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BOUNDS_ELEM:
                     tag.TextBounds = XRect.FromXml(element.Element(XName.Get("Rectangle")));
@@ -26,6 +26,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                 default:
                     return false;
             }
+            return true;
         }
 
         private static void ReadRecords(DefineTextTag tag, XElement recordsElem) {

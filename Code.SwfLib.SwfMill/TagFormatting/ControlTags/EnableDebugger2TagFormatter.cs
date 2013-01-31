@@ -5,12 +5,12 @@ using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class EnableDebugger2TagFormatter : TagFormatterBase<EnableDebugger2Tag> {
-        
+
         protected override void FormatTagElement(EnableDebugger2Tag tag, XElement xTag) {
             xTag.Add(new XElement("data", XBinary.ToXml(tag.Data)));
         }
 
-        protected override void AcceptTagElement(EnableDebugger2Tag tag, XElement element) {
+        protected override bool AcceptTagElement(EnableDebugger2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "data":
                     tag.Data = XBinary.FromXml(element.Element("data"));
@@ -18,6 +18,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 default:
                     return false;
             }
+            return true;
         }
 
         public override string TagName {

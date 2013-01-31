@@ -47,13 +47,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             return true;
         }
 
-        protected override void AcceptTagElement(FileAttributesTag tag, XElement element) {
-            switch (element.Name.LocalName) {
-                default:
-                    return false;
-            }
-        }
-
         protected override void FormatTagElement(FileAttributesTag tag, XElement xTag) {
             xTag.Add(new XAttribute(XName.Get(HAS_METADATA_ATTRIB), FormatBoolToDigit(tag.HasMetadata)));
             xTag.Add(new XAttribute(XName.Get(USE_NETWORK_ATTRIB), FormatBoolToDigit(tag.UseNetwork)));

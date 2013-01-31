@@ -32,7 +32,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             return true;
         }
 
-        protected override void AcceptTagElement(DefineFontAlignZonesTag tag, XElement element) {
+        protected override bool AcceptTagElement(DefineFontAlignZonesTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case ZONE_ARRAYS_ELEM:
                     foreach (var record in ParseZoneArrays(element)) {
@@ -40,8 +40,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                     }
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void FormatTagElement(DefineFontAlignZonesTag tag, XElement xTag) {

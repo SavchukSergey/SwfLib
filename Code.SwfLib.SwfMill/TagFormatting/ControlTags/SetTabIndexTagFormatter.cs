@@ -7,9 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         protected override void FormatTagElement(SetTabIndexTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagElement(SetTabIndexTag tag, XElement element) {
-        }
-
         public override string TagName {
             get { return "SetTabIndex"; }
         }

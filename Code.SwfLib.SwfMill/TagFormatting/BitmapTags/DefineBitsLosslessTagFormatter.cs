@@ -41,14 +41,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             return true;
         }
 
-        protected override void AcceptTagElement(DefineBitsLosslessTag tag, XElement element) {
+        protected override bool AcceptTagElement(DefineBitsLosslessTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case DATA_TAG:
                     tag.ZlibBitmapData = XBinary.FromXml(element.Element("data"));
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         public override string TagName {

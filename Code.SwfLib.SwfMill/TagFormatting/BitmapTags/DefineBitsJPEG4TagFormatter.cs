@@ -23,7 +23,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             return true;
         }
 
-        protected override void AcceptTagElement(DefineBitsJPEG4Tag tag, XElement element) {
+        protected override bool AcceptTagElement(DefineBitsJPEG4Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "data":
                     tag.ImageData = XBinary.FromXml(element.Element("data"));
@@ -34,6 +34,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
                 default:
                     return false;
             }
+            return true;
         }
 
         public override string TagName {

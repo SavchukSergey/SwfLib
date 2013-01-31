@@ -9,7 +9,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             xTag.Add(new XElement("data", XBinary.ToXml(tag.Data)));
         }
 
-        protected override void AcceptTagElement(DebugIDTag tag, XElement element) {
+        protected override bool AcceptTagElement(DebugIDTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "data":
                     tag.Data = XBinary.FromXml(element.Element("data"));
@@ -17,6 +17,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                 default:
                     return false;
             }
+            return true;
         }
 
         public override string TagName {

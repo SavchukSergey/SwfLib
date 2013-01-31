@@ -50,7 +50,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             return true;
         }
 
-        protected override void AcceptPlaceTagElement(PlaceObject2Tag tag, XElement element) {
+        protected override bool AcceptPlaceTagElement(PlaceObject2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case COLOR_TRANSFORM_ELEM:
                     tag.ColorTransform = XColorTransformRGBA.FromXml(element.Element("ColorTransform2"));
@@ -63,6 +63,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                 default:
                     return false;
             }
+            return true;
         }
 
         protected override void FormatPlaceElement(PlaceObject2Tag tag, XElement elem) {

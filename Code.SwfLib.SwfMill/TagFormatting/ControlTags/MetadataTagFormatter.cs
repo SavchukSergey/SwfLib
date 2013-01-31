@@ -19,7 +19,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         //TODO:value can come as a text not an xml and though won't get here.
 
-        protected override void AcceptTagElement(MetadataTag tag, XElement element) {
+        protected override bool AcceptTagElement(MetadataTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "RDF":
                     tag.Metadata = element.ToString();
@@ -27,6 +27,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 default:
                     return false;
             }
+            return true;
         }
 
         public override string TagName {

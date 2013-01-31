@@ -16,14 +16,17 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             xTag.Add(xSymbols);
         }
 
-        protected override void AcceptTagElement(SymbolClassTag tag, XElement element) {
+        protected override bool AcceptTagElement(SymbolClassTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "symbols":
                     foreach (var xSymbol in element.Elements("Symbol")) {
                         tag.References.Add(ParseReference(xSymbol));
                     }
                     break;
+                default:
+                    return false;
             }
+            return true;
         }
 
         protected SwfSymbolReference ParseReference(XElement xSymbol) {

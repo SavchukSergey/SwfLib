@@ -19,7 +19,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             return true;
         }
 
-        protected override void AcceptTagElement(FrameLabelTag tag, XElement element) {
+        protected override bool AcceptTagElement(FrameLabelTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case FLAGS_ELEM:
                     var xValue = element.Attribute("value");
@@ -30,6 +30,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 default:
                     return false;
             }
+            return true;
         }
 
         protected override void FormatTagElement(FrameLabelTag tag, XElement xTag) {

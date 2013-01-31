@@ -37,7 +37,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        protected sealed override void AcceptTagElement(T tag, XElement element) {
+        protected sealed override bool AcceptTagElement(T tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BOUNDS_ELEM:
                     tag.ShapeBounds = XRect.FromXml(element.Element("Rectangle"));
@@ -51,16 +51,18 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                     ReadShapes(tag, xShape);
                     break;
                 default:
-                    AcceptShapeTagElement(tag, element);
-                    break;
+                    return AcceptShapeTagElement(tag, element);
             }
+            return true;
         }
 
         protected virtual void FormatAdditionalAttributes(T tag, XElement xTag) { }
 
         protected virtual void FormatAdditionalBounds(T tag, XElement elem) { }
 
-        protected virtual void AcceptShapeTagElement(T tag, XElement element) { }
+        protected virtual bool AcceptShapeTagElement(T tag, XElement element) {
+            return false;
+        }
 
         protected virtual bool AcceptShapeAttribute(T tag, XAttribute attribute) {
             return false;

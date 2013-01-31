@@ -7,9 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         protected override void FormatTagElement(EndTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagElement(EndTag tag, XElement element) {
-        }
-
         public override string TagName {
             get { return "End"; }
         }

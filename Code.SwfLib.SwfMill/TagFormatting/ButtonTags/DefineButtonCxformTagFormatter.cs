@@ -6,9 +6,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
         protected override void FormatTagElement(DefineButtonCxformTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagElement(DefineButtonCxformTag tag, XElement element) {
-        }
-
         public override string TagName {
             get { return "DefineButtonCxform"; }
         }

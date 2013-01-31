@@ -26,7 +26,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         }
 
-        protected override void AcceptTagElement(DefineSceneAndFrameLabelDataTag tag, XElement element) {
+        protected override bool AcceptTagElement(DefineSceneAndFrameLabelDataTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "scenes":
                     var xScenes = element;
@@ -52,7 +52,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                         tag.Frames.Add(frame);
                     }
                     break;
+                default:
+                    return false;
             }
+            return true;
         }
 
         public override string TagName {

@@ -8,7 +8,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         private const string COLOR_ELEM = "color";
 
-        protected override void AcceptTagElement(SetBackgroundColorTag tag, XElement element) {
+        protected override bool AcceptTagElement(SetBackgroundColorTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case COLOR_ELEM:
                     tag.Color = XColorRGB.FromXml(element.Element("Color"));
@@ -16,6 +16,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 default:
                     return false;
             }
+            return true;
         }
 
         protected override void FormatTagElement(SetBackgroundColorTag tag, XElement xTag) {

@@ -7,7 +7,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoActionTagFormatter : TagFormatterBase<DoActionTag> {
         private const string ACTIONS_ELEM = "actions";
 
-        protected override void AcceptTagElement(DoActionTag tag, XElement element) {
+        protected override bool AcceptTagElement(DoActionTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case ACTIONS_ELEM:
                     foreach (var xAction in element.Elements()) {
@@ -18,6 +18,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
                 default:
                     return false;
             }
+            return true;
         }
 
         protected override void FormatTagElement(DoActionTag tag, XElement xTag) {

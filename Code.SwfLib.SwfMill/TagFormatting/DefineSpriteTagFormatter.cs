@@ -27,7 +27,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return true;
         }
 
-        protected override void AcceptTagElement(DefineSpriteTag tag, XElement element) {
+        protected override bool AcceptTagElement(DefineSpriteTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case TAGS_ELEMENTS:
                     ReadTags(tag, element);
@@ -35,6 +35,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                 default:
                     return false;
             }
+            return true;
         }
 
         protected override void FormatTagElement(DefineSpriteTag tag, XElement xTag) {

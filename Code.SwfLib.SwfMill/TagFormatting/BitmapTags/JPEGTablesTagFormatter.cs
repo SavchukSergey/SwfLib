@@ -10,7 +10,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             xTag.Add(new XElement("data", XBinary.ToXml(tag.JPEGData))); 
         }
 
-        protected override void AcceptTagElement(JPEGTablesTag tag, XElement element) {
+        protected override bool AcceptTagElement(JPEGTablesTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "data":
                     tag.JPEGData = XBinary.FromXml(element.Element("data"));
@@ -18,6 +18,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
                 default:
                     return false;
             }
+            return true;
         }
 
         public override string TagName {

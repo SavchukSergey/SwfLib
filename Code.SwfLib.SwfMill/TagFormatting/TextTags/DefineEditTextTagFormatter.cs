@@ -111,7 +111,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             return true;
         }
 
-        protected override void AcceptTagElement(DefineEditTextTag tag, XElement element) {
+        protected override bool AcceptTagElement(DefineEditTextTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 //case DATA_TAG:
                 //    //TODO: set data
@@ -125,8 +125,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                     tag.HasTextColor = true;
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void FormatTagElement(DefineEditTextTag tag, XElement xTag) {
