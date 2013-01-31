@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.DataFormatting;
 using Code.SwfLib.Tags;
 
@@ -42,16 +43,21 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         public XElement FormatElement(T tag) {
-            var res = new XElement(TagName);
+            var xTag = new XElement(TagName);
             var objectID = GetObjectID(tag);
             if (objectID.HasValue) {
-                res.Add(new XAttribute(OBJECT_ID_ATTRIB, objectID.Value));
+                xTag.Add(new XAttribute(OBJECT_ID_ATTRIB, objectID.Value));
             }
-            FormatTagElement(tag, res);
+            var data = GetData(tag);
+            if (data != null) {
+                xTag.Add(new XElement("data", XBinary.ToXml(data)));
+            }
+
+            FormatTagElement(tag, xTag);
             if (tag.RestData != null && tag.RestData.Length > 0) {
-                res.Add(new XElement(REST_ELEM, Convert.ToBase64String(tag.RestData)));
+                xTag.Add(new XElement(REST_ELEM, Convert.ToBase64String(tag.RestData)));
             }
-            return res;
+            return xTag;
         }
 
         public void AcceptAttribute(T tag, XAttribute attrib) {
@@ -95,6 +101,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         protected virtual void SetObjectID(T tag, ushort value) {
+        }
+
+        protected virtual byte[] GetData(T tag) {
+            return null;
         }
 
         #endregion

@@ -5,9 +5,8 @@ using Code.SwfLib.Tags.BitmapTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class JPEGTablesTagFormatter : TagFormatterBase<JPEGTablesTag> {
-        
+
         protected override void FormatTagElement(JPEGTablesTag tag, XElement xTag) {
-            xTag.Add(new XElement("data", XBinary.ToXml(tag.JPEGData))); 
         }
 
         protected override bool AcceptTagElement(JPEGTablesTag tag, XElement element) {
@@ -19,6 +18,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
                     return false;
             }
             return true;
+        }
+
+        protected override byte[] GetData(JPEGTablesTag tag) {
+            return tag.JPEGData;
         }
 
         public override string TagName {

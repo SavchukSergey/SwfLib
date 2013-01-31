@@ -5,9 +5,8 @@ using Code.SwfLib.Tags.BitmapTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class DefineBitsTagFormatter : TagFormatterBase<DefineBitsTag> {
-        
+
         protected override void FormatTagElement(DefineBitsTag tag, XElement xTag) {
-            xTag.Add(new XElement("data", XBinary.ToXml(tag.JPEGData)));
         }
 
         protected override bool AcceptTagElement(DefineBitsTag tag, XElement element) {
@@ -19,6 +18,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
                     return false;
             }
             return true;
+        }
+
+        protected override byte[] GetData(DefineBitsTag tag) {
+            return tag.JPEGData;
         }
 
         public override string TagName {

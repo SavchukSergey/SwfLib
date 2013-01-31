@@ -8,7 +8,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
 
         protected override void FormatTagElement(DefineBitsJPEG4Tag tag, XElement xTag) {
             xTag.Add(new XAttribute("deblock", tag.DeblockParam));
-            xTag.Add(new XElement("data", XBinary.ToXml(tag.ImageData)));
             xTag.Add(new XElement("alpha", XBinary.ToXml(tag.BitmapAlphaData)));
         }
 
@@ -35,6 +34,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
                     return false;
             }
             return true;
+        }
+
+        protected override byte[] GetData(DefineBitsJPEG4Tag tag) {
+            return tag.ImageData;
         }
 
         public override string TagName {

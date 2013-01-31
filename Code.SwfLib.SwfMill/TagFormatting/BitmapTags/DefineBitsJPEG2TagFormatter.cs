@@ -7,7 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class DefineBitsJPEG2TagFormatter : DefineBitmapBaseTagFormatter<DefineBitsJPEG2Tag> {
 
         protected override void FormatTagElement(DefineBitsJPEG2Tag tag, XElement xTag) {
-            xTag.Add(new XElement("data", XBinary.ToXml(tag.ImageData)));
         }
 
         protected override bool AcceptTagElement(DefineBitsJPEG2Tag tag, XElement element) {
@@ -21,10 +20,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             return true;
         }
 
-        public override string TagName {
-            get { return "DefineBitsJPEG2"; }
-        }
-
         protected override ushort? GetObjectID(DefineBitsJPEG2Tag tag) {
             return tag.CharacterID;
         }
@@ -32,5 +27,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
         protected override void SetObjectID(DefineBitsJPEG2Tag tag, ushort value) {
             tag.CharacterID = value;
         }
+
+        protected override byte[] GetData(DefineBitsJPEG2Tag tag) {
+            return tag.ImageData;
+        }
+        
+        public override string TagName {
+            get { return "DefineBitsJPEG2"; }
+        }
+
     }
 }

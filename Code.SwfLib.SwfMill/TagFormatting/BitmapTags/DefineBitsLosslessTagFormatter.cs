@@ -5,7 +5,7 @@ using Code.SwfLib.Tags.BitmapTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class DefineBitsLosslessTagFormatter : DefineBitmapBaseTagFormatter<DefineBitsLosslessTag> {
-       
+
         private const string FORMAT_ATTRIB = "format";
         private const string N_COLOR_MAP_ATTRIB = "n_colormap";
 
@@ -16,11 +16,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             if (tag.BitmapFormat == 3) {
                 xTag.Add(new XAttribute(N_COLOR_MAP_ATTRIB, tag.BitmapColorTableSize));
             }
-            if (tag.ZlibBitmapData != null) {
-                xTag.Add(new XElement("data", XBinary.ToXml(tag.ZlibBitmapData)));
-            }
         }
-        
+
         protected override bool AcceptTagAttribute(DefineBitsLosslessTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case FORMAT_ATTRIB:
@@ -50,6 +47,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
                     return false;
             }
             return true;
+        }
+
+        protected override byte[] GetData(DefineBitsLosslessTag tag) {
+            return tag.ZlibBitmapData;
         }
 
         public override string TagName {

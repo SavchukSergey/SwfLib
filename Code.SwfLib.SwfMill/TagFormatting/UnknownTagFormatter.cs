@@ -32,12 +32,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         protected override void FormatTagElement(UnknownTag tag, XElement xTag) {
             xTag.Add(new XAttribute(XName.Get("id"), string.Format("0x{0:x}", (int)tag.TagType)));
-            xTag.Add(new XElement(XName.Get("data"), Convert.ToBase64String(tag.Data)));
         }
 
         private static uint ParseHex(string value) {
             value = value.Replace("0x", "");
             return uint.Parse(value, NumberStyles.HexNumber | NumberStyles.AllowHexSpecifier);
+        }
+
+        protected override byte[] GetData(UnknownTag tag) {
+            return tag.Data;
         }
 
         public override string TagName {

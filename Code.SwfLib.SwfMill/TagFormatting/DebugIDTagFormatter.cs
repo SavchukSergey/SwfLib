@@ -6,7 +6,6 @@ using Code.SwfLib.Tags;
 namespace Code.SwfLib.SwfMill.TagFormatting {
     public class DebugIDTagFormatter : TagFormatterBase<DebugIDTag> {
         protected override void FormatTagElement(DebugIDTag tag, XElement xTag) {
-            xTag.Add(new XElement("data", XBinary.ToXml(tag.Data)));
         }
 
         protected override bool AcceptTagElement(DebugIDTag tag, XElement element) {
@@ -18,6 +17,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                     return false;
             }
             return true;
+        }
+
+        protected override byte[] GetData(DebugIDTag tag) {
+            return tag.Data;
         }
 
         public override string TagName {

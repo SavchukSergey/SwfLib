@@ -7,7 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class EnableDebugger2TagFormatter : TagFormatterBase<EnableDebugger2Tag> {
 
         protected override void FormatTagElement(EnableDebugger2Tag tag, XElement xTag) {
-            xTag.Add(new XElement("data", XBinary.ToXml(tag.Data)));
         }
 
         protected override bool AcceptTagElement(EnableDebugger2Tag tag, XElement element) {
@@ -19,6 +18,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                     return false;
             }
             return true;
+        }
+
+        protected override byte[] GetData(EnableDebugger2Tag tag) {
+            return tag.Data;
         }
 
         public override string TagName {
