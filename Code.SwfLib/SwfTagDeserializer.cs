@@ -51,7 +51,7 @@ namespace Code.SwfLib {
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(PlaceObjectTag tag, SwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             tag.Depth = reader.ReadUInt16();
-            reader.ReadMatrix(out tag.Matrix);
+            tag.Matrix = reader.ReadMatrix();
             if (!reader.IsEOF) {
                 tag.ColorTransform = reader.ReadColorTransformRGB();
             } else {
@@ -74,7 +74,7 @@ namespace Code.SwfLib {
                 tag.CharacterID = reader.ReadUInt16();
             }
             if (tag.HasMatrix) {
-                reader.ReadMatrix(out tag.Matrix);
+                tag.Matrix = reader.ReadMatrix();
             }
             if (tag.HasColorTransform) {
                 reader.ReadColorTransformRGBA(out tag.ColorTransform);
@@ -573,7 +573,7 @@ namespace Code.SwfLib {
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineTextTag tag, SwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             reader.ReadRect(out tag.TextBounds);
-            reader.ReadMatrix(out tag.TextMatrix);
+            tag.TextMatrix = reader.ReadMatrix();
             uint glyphBits = reader.ReadByte();
             uint advanceBits = reader.ReadByte();
             tag.TextRecords.Clear();

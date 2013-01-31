@@ -70,11 +70,11 @@ namespace Code.SwfLib.Shapes {
                     break;
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
-                    reader.ReadMatrix(out fillStyle.GradientMatrix);
+                    fillStyle.GradientMatrix = reader.ReadMatrix();
                     reader.ReadGradientRGB(out fillStyle.Gradient);
                     break;
                 case FillStyleType.FocalGradient:
-                    reader.ReadMatrix(out fillStyle.GradientMatrix);
+                    fillStyle.GradientMatrix = reader.ReadMatrix();
                     reader.ReadFocalGradient(out fillStyle.FocalGradient);
                     break;
                 case FillStyleType.RepeatingBitmap:
@@ -82,7 +82,7 @@ namespace Code.SwfLib.Shapes {
                 case FillStyleType.NonSmoothedRepeatingBitmap:
                 case FillStyleType.NonSmoothedClippedBitmap:
                     fillStyle.BitmapID = reader.ReadUInt16();
-                    reader.ReadMatrix(out fillStyle.BitmapMatrix);
+                    fillStyle.BitmapMatrix = reader.ReadMatrix();
                     break;
                 default:
                     throw new NotSupportedException("Fill style " + type + " is not supported");
@@ -105,11 +105,11 @@ namespace Code.SwfLib.Shapes {
                     break;
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
-                    reader.ReadMatrix(out fillStyle.GradientMatrix);
+                    fillStyle.GradientMatrix = reader.ReadMatrix();
                     reader.ReadGradientRGBA(out fillStyle.Gradient);
                     break;
                 case FillStyleType.FocalGradient:
-                    reader.ReadMatrix(out fillStyle.GradientMatrix);
+                    fillStyle.GradientMatrix = reader.ReadMatrix();
                     reader.ReadFocalGradient(out fillStyle.FocalGradient);
                     break;
                 case FillStyleType.RepeatingBitmap:
@@ -117,7 +117,7 @@ namespace Code.SwfLib.Shapes {
                 case FillStyleType.NonSmoothedRepeatingBitmap:
                 case FillStyleType.NonSmoothedClippedBitmap:
                     fillStyle.BitmapID = reader.ReadUInt16();
-                    reader.ReadMatrix(out fillStyle.BitmapMatrix);
+                    fillStyle.BitmapMatrix = reader.ReadMatrix();
                     break;
                 default:
                     throw new NotSupportedException("Fill style " + type + " is not supported");

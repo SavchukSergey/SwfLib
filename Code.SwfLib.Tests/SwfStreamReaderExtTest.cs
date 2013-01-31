@@ -141,8 +141,7 @@ namespace Code.SwfLib.Tests
                 "1", "10011", "011.01000000.00000000", "000.10000000.00000000",
                 "00110", "010000", "011000");
             var reader = new SwfStreamReader(mem);
-            SwfMatrix matrix;
-            reader.ReadMatrix(out matrix);
+            SwfMatrix matrix = reader.ReadMatrix();
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
             Assert.AreEqual(matrix.ScaleX, 2.5);
             Assert.AreEqual(matrix.ScaleY, 1.75);

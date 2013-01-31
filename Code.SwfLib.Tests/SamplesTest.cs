@@ -1,12 +1,62 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tests.Samples;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
     [TestFixture]
-    public class SamplesTest : BaseSampleTest{
+    public class SamplesTest : BaseSampleTest {
+
+        [Ignore]
+        [Test]
+        public void Test() {
+            const string source = @"D:\Sergey\swf\";
+            var first = Path.Combine(source, "first.swf");
+            var second = Path.Combine(source, "second.swf");
+            var firstTags = GetTagsMap(IterateTags(first));
+            var secondTags = GetTagsMap(IterateTags(second));
+
+            foreach (var tag in firstTags.ToList()) {
+                if (secondTags.ContainsKey(tag.Key)) {
+                    firstTags.Remove(tag.Key);
+                    secondTags.Remove(tag.Key);
+                }
+            }
+            foreach (var tag in secondTags.ToList()) {
+                if (firstTags.ContainsKey(tag.Key)) {
+                    firstTags.Remove(tag.Key);
+                    secondTags.Remove(tag.Key);
+                }
+            }
+
+            foreach (var tag in firstTags) {
+                if (tag.Value != null) {
+                    SaveTag(tag.Value, Path.Combine(source, "first"));
+                    ReadTag(tag.Value);
+                }
+            }
+            foreach (var tag in secondTags) {
+                if (tag.Value != null) {
+                    SaveTag(tag.Value, Path.Combine(source, "second"));
+                    ReadTag(tag.Value);
+                }
+            }
+        }
+
+        protected IDictionary<string, SwfTagData> GetTagsMap(IEnumerable<SwfTagData> tags) {
+            return tags
+                .Select(item => new { Hash = item.Type.ToString() + " " + GetTagHash(item), Tag = item })
+                .GroupBy(item => item.Hash)
+                .ToDictionary(item => item.Key, item => item.First().Tag);
+        }
+
+        protected void ReadTag(SwfTagData tagData)
+        {
+            var tagReader = new SwfTagDeserializer(new SwfFile()).ReadTag(tagData);
+        }
 
         [Test]
         [Ignore]
@@ -26,34 +76,46 @@ namespace Code.SwfLib.Tests {
             }
             foreach (var f in source.GetFiles("*.swf")) {
                 try {
-                    using (var stream = File.Open(f.FullName, FileMode.Open)) {
-                        var file = new SwfFile();
-                        var reader = new SwfStreamReader(stream);
-                        file.FileInfo = reader.ReadSwfFileInfo();
-                        reader = GetSwfStreamReader(file.FileInfo, stream);
-                        file.Header = reader.ReadSwfHeader();
-
-                        while (!reader.IsEOF) {
-                            var tagData = reader.ReadTagData();
-
-                            var tagDir = Path.Combine(target, string.Format("{0}", tagData.Type));
-                            if (!Directory.Exists(tagDir)) {
-                                Directory.CreateDirectory(tagDir);
-                            }
-                            var binFilepath = Path.Combine(tagDir, GetFileName(tagData));
-                            using (var bin = File.Open(binFilepath, FileMode.Create)) {
-                                bin.Write(tagData.Data, 0, tagData.Data.Length);
-                                bin.Flush();
-                            }
-                        }
-
+                    var tags = IterateTags(f.FullName);
+                    foreach (var tagData in tags) {
+                        SaveTag(tagData, target);
                     }
+
                 } catch {
                     Console.WriteLine("Couldn't grab {0}", f.FullName);
                 }
             }
         }
 
+        protected void SaveTag(SwfTagData tagData, string root) {
+            var tagDir = Path.Combine(root, string.Format("{0}", tagData.Type));
+            if (!Directory.Exists(tagDir)) {
+                Directory.CreateDirectory(tagDir);
+            }
+            var binFilepath = Path.Combine(tagDir, GetFileName(tagData));
+            using (var bin = File.Open(binFilepath, FileMode.Create)) {
+                bin.Write(tagData.Data, 0, tagData.Data.Length);
+                bin.Flush();
+            }
+        }
+
+        protected IEnumerable<SwfTagData> IterateTags(string path) {
+            using (var stream = File.Open(path, FileMode.Open)) {
+                var file = new SwfFile();
+                var reader = new SwfStreamReader(stream);
+                file.FileInfo = reader.ReadSwfFileInfo();
+                reader = GetSwfStreamReader(file.FileInfo, stream);
+                file.Header = reader.ReadSwfHeader();
+
+                while (!reader.IsEOF) {
+                    var tagData = reader.ReadTagData();
+
+                    yield return tagData;
+                }
+
+            }
+
+        }
         protected string GetFileName(SwfTagData tagData) {
             return string.Format("{0}.bin", GetTagHash(tagData));
         }

@@ -14,7 +14,8 @@ namespace Code.SwfLib.Buttons {
             button.StateDown = reader.ReadBit();
             button.StateOver = reader.ReadBit();
             button.StateUp = reader.ReadBit();
-            if (!button.IsEndButton) {
+            var isEnd = !hasBlendMode && !hasFilterList && button.IsEndButton;
+            if (!isEnd) {
                 button.CharacterID = reader.ReadUInt16();
                 button.PlaceDepth = reader.ReadUInt16();
                 button.PlaceMatrix = reader.ReadMatrix();
