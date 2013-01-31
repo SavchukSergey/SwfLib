@@ -32,6 +32,7 @@ namespace Code.SwfLib {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             tag.AcceptVistor(this, writer);
+            writer.FlushBits();
             if (tag.RestData != null && tag.RestData.Length > 0) {
                 writer.WriteBytes(tag.RestData);
             }

@@ -77,6 +77,7 @@ namespace Code.SwfLib {
             if (_bitContext.BitIndex >= 8) {
                 _writer.Write(_bitContext.CachedByte);
                 _bitContext.BitIndex = 0;
+                _bitContext.CachedByte = 0;
             }
         }
 

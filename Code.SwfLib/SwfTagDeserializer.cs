@@ -550,7 +550,7 @@ namespace Code.SwfLib {
                     };
                     zone.Data.Add(zoneData);
                 }
-                zone.Reserved = (byte) reader.ReadUnsignedBits(6);
+                zone.Reserved = (byte)reader.ReadUnsignedBits(6);
                 zone.ZoneX = reader.ReadBit();
                 zone.ZoneY = reader.ReadBit();
                 tag.ZoneTable.Add(zone);
