@@ -50,7 +50,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         protected override void AcceptTagElement(FileAttributesTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
         }
 

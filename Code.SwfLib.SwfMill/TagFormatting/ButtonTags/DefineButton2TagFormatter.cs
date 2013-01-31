@@ -41,7 +41,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
                     }
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
         }
 

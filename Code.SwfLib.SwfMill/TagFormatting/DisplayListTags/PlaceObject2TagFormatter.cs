@@ -61,7 +61,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     XClipActionsList.FromXml(element, tag.ClipActions);
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
         }
 

@@ -48,7 +48,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             return true;
         }
 
-        protected override void AcceptPlaceTagElement(PlaceObject3Tag tag, XElement element) {
+        protected override bool AcceptPlaceTagElement(PlaceObject3Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "filters":
                     foreach (var xFilter in element.Elements()) {
@@ -63,8 +63,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     tag.ColorTransform = XColorTransformRGBA.FromXml(element.Element("ColorTransform2"));
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void FormatPlaceElement(PlaceObject3Tag tag, XElement elem) {

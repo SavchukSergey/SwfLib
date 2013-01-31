@@ -22,7 +22,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             XStyleList.FromXml(xStyleList, tag.FillStyles, tag.LineStyles);
         }
 
-        protected override void AcceptShapeTagElement(DefineShapeTag tag, XElement element) {
+        protected override bool AcceptShapeTagElement(DefineShapeTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 
                 default:

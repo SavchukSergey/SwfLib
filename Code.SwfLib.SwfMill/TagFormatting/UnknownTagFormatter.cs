@@ -19,14 +19,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return true;
         }
 
-        protected override void AcceptTagElement(UnknownTag tag, XElement element) {
+        protected override bool AcceptTagElement(UnknownTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case DATA_TAG:
                     tag.Data = FromBase64(element);
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void FormatTagElement(UnknownTag tag, XElement xTag) {

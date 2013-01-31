@@ -61,7 +61,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             return true;
         }
 
-        protected override void AcceptTagElement(DefineFont3Tag tag, XElement element) {
+        protected override bool AcceptTagElement(DefineFont3Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "wideKerning":
                     tag.HasLayout = true;
@@ -92,8 +92,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                     }
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void FormatTagElement(DefineFont3Tag tag, XElement xTag) {

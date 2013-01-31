@@ -32,7 +32,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
                     tag.BitmapAlphaData = XBinary.FromXml(element.Element("data"));
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
         }
 

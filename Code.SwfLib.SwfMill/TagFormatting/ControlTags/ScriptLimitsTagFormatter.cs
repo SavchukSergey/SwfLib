@@ -28,7 +28,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         }
 
         protected override void AcceptTagElement(ScriptLimitsTag tag, XElement element) {
-            throw new FormatException("Invalid element " + element.Name.LocalName);
+            return false;
         }
 
         public override string TagName {

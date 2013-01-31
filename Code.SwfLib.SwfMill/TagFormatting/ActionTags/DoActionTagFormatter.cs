@@ -16,7 +16,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
                     }
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
         }
 

@@ -21,13 +21,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             return true;
         }
 
-        protected override void AcceptTagElement(DefineFontNameTag tag, XElement element) {
-            switch (element.Name.LocalName) {
-                default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
-            }
-        }
-
         protected override void FormatTagElement(DefineFontNameTag tag, XElement xTag) {
             xTag.Add(new XAttribute(XName.Get(NAME_ATTRIB), tag.FontName));
             xTag.Add(new XAttribute(XName.Get(COPYRIGHT_ATTRIB), tag.FontCopyright));

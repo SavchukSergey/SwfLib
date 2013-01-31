@@ -31,13 +31,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             return true;
         }
 
-        protected override void AcceptTagElement(CSMTextSettingsTag tag, XElement element) {
-            switch (element.Name.LocalName) {
-                default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
-            }
-        }
-
         protected override void FormatTagElement(CSMTextSettingsTag tag, XElement xTag) {
             xTag.Add(new XAttribute(XName.Get("useFlashType"), tag.UseFlashType));
             xTag.Add(new XAttribute(XName.Get("gridFit"), tag.GridFit));

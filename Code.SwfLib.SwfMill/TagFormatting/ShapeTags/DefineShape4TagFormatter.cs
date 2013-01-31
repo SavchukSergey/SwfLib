@@ -60,15 +60,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             elem.Add(new XElement(EDGE_BOUNDS_ELEM, XRect.ToXml(tag.EdgeBounds)));
         }
 
-        protected override void AcceptShapeTagElement(DefineShape4Tag tag, XElement element) {
+        protected override bool AcceptShapeTagElement(DefineShape4Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case EDGE_BOUNDS_ELEM:
                     tag.EdgeBounds = XRect.FromXml(element.Element("Rectangle"));
                     break;
                 default:
-                    AcceptShapeTagElement(tag, element);
-                    break;
+                    return false;
             }
+            return true;
         }
 
         public override string TagName {

@@ -7,9 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
         protected override void FormatTagElement(DoABCDefineTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagElement(DoABCDefineTag tag, XElement element) {
-        }
-
         public override string TagName {
             get { return "DoABCDefine"; }
         }

@@ -33,7 +33,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                     ReadTags(tag, element);
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
         }
 

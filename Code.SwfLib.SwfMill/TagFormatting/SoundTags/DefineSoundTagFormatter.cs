@@ -6,9 +6,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
         protected override void FormatTagElement(DefineSoundTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagElement(DefineSoundTag tag, XElement element) {
-        }
-
         public override string TagName {
             get { return "DefineSound"; }
         }

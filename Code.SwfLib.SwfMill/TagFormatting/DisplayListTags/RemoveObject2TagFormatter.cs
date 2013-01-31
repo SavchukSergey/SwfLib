@@ -18,13 +18,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             return true;
         }
 
-        protected override void AcceptTagElement(RemoveObject2Tag tag, XElement element) {
-            switch (element.Name.LocalName) {
-                default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
-            }
-        }
-
         protected override void FormatTagElement(RemoveObject2Tag tag, XElement xTag) {
             xTag.Add(new XAttribute(DEPTH_ATTRIB, tag.Depth));
         }

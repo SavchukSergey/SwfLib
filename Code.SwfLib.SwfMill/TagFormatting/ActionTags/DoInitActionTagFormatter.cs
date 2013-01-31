@@ -19,7 +19,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             return true;
         }
 
-        protected override void AcceptTagElement(DoInitActionTag tag, XElement element) {
+        protected override bool AcceptTagElement(DoInitActionTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case ACTIONS_ELEM:
                     foreach (var xAction in element.Elements()) {
@@ -28,8 +28,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
                     }
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void FormatTagElement(DoInitActionTag tag, XElement xTag) {

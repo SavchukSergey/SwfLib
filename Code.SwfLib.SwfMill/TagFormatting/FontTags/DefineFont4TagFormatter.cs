@@ -2,11 +2,9 @@
 using Code.SwfLib.Tags.FontTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
+    //TODO: format & parse
     public class DefineFont4TagFormatter : DefineFontBaseFormatter<DefineFont4Tag> {
         protected override void FormatTagElement(DefineFont4Tag tag, XElement xTag) {
-        }
-
-        protected override void AcceptTagElement(DefineFont4Tag tag, XElement element) {
         }
 
         public override string TagName {

@@ -28,7 +28,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                     }
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
         }
 

@@ -8,9 +8,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             //TODO: format & parse
         }
 
-        protected override void AcceptTagElement(ProductInfoTag tag, XElement element) {
-        }
-
         public override string TagName {
             get { return "ProductInfo"; }
         }

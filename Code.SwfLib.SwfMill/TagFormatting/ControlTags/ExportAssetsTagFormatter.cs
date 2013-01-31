@@ -15,7 +15,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                     ReadSymbols(tag, element);
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
         }
 

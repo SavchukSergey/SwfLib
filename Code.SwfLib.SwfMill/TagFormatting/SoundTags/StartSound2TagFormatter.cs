@@ -7,9 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
         protected override void FormatTagElement(StartSound2Tag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagElement(StartSound2Tag tag, XElement element) {
-        }
-
         public override string TagName {
             get { return "StartSound2"; }
         }

@@ -14,14 +14,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             }
         }
 
-        protected override void AcceptPlaceTagElement(PlaceObjectTag tag, XElement element) {
+        protected override bool AcceptPlaceTagElement(PlaceObjectTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case COLOR_TRANSFORM_ELEM:
                     tag.ColorTransform = XColorTransformRGB.FromXml(element.Element(COLOR_TRANSFORM_TYPE_ELEM));
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override bool HasCharacter(PlaceObjectTag tag) {

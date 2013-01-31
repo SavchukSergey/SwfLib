@@ -14,7 +14,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                     tag.Color = XColorRGB.FromXml(element.Element("Color"));
                     break;
                 default:
-                    throw new FormatException("Invalid element " + element.Name.LocalName);
+                    return false;
             }
         }
 
