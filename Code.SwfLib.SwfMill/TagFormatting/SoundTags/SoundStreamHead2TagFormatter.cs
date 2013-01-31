@@ -4,16 +4,13 @@ using Code.SwfLib.Tags.SoundTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
     public class SoundStreamHead2TagFormatter : TagFormatterBase<SoundStreamHead2Tag> {
         
-        protected override XElement FormatTagElement(SoundStreamHead2Tag tag, XElement xTag) {
-            return xTag;
+        protected override void FormatTagElement(SoundStreamHead2Tag tag, XElement xTag) {
         }
 
         protected override void AcceptTagAttribute(SoundStreamHead2Tag tag, XAttribute attrib) {
-            throw new System.NotImplementedException();
         }
 
         protected override void AcceptTagElement(SoundStreamHead2Tag tag, XElement element) {
-            throw new System.NotImplementedException();
         }
 
         public override string TagName {

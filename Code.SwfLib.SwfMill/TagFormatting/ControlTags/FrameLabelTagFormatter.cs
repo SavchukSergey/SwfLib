@@ -31,14 +31,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        protected override XElement FormatTagElement(FrameLabelTag tag, XElement xTag) {
+        protected override void FormatTagElement(FrameLabelTag tag, XElement xTag) {
             xTag.Add(new XAttribute(LABEL_ATTRIB, tag.Name));
             var xFlags = new XElement(FLAGS_ELEM);
             if (tag.AnchorFlag.HasValue) {
                 xFlags.Add(new XAttribute("value", tag.AnchorFlag.Value));
             }
             xTag.Add(xFlags);
-            return xTag;
         }
 
         public override string TagName {

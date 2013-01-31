@@ -95,7 +95,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        protected override XElement FormatTagElement(DefineFont3Tag tag, XElement xTag) {
+        protected override void FormatTagElement(DefineFont3Tag tag, XElement xTag) {
             xTag.Add(new XAttribute(LANGUAGE_ATTRIB, tag.Language));
             xTag.Add(new XAttribute(SHIFT_JIS_ATTRIB, FormatBoolToDigit(tag.ShiftJIS)));
             xTag.Add(new XAttribute(UNICODE_ATTRIB, FormatBoolToDigit(tag.SmallText)));
@@ -138,7 +138,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                 xTag.Add(xKerningRecords);
             }
 
-            return xTag;
         }
 
         public override string TagName {

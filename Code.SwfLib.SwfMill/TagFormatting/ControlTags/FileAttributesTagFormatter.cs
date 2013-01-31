@@ -53,7 +53,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        protected override XElement FormatTagElement(FileAttributesTag tag, XElement xTag) {
+        protected override void FormatTagElement(FileAttributesTag tag, XElement xTag) {
             xTag.Add(new XAttribute(XName.Get(HAS_METADATA_ATTRIB), FormatBoolToDigit(tag.HasMetadata)));
             xTag.Add(new XAttribute(XName.Get(USE_NETWORK_ATTRIB), FormatBoolToDigit(tag.UseNetwork)));
             xTag.Add(new XAttribute(XName.Get(ALLOW_ABC_ATTRIB), FormatBoolToDigit(tag.AllowAbc)));
@@ -63,7 +63,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 xTag.Add(new XAttribute(XName.Get(USE_GPU), FormatBoolToDigit(tag.UseGPU)));
                 xTag.Add(new XAttribute(XName.Get(USE_DIRECT_BLIT), FormatBoolToDigit(tag.UseDirectBlit)));
             }
-            return xTag;
         }
 
         private static string CheckFileAttribute(SwfFileAttributes all, SwfFileAttributes toTest) {

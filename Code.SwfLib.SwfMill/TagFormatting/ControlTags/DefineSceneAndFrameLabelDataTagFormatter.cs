@@ -5,7 +5,7 @@ using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
     public class DefineSceneAndFrameLabelDataTagFormatter : TagFormatterBase<DefineSceneAndFrameLabelDataTag> {
-        protected override XElement FormatTagElement(DefineSceneAndFrameLabelDataTag tag, XElement xTag) {
+        protected override void FormatTagElement(DefineSceneAndFrameLabelDataTag tag, XElement xTag) {
             var xScenes = new XElement("scenes");
             foreach (var scene in tag.Scenes) {
                 var xScene = new XElement("Scene",
@@ -24,11 +24,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
             xTag.Add(xFrames);
 
-            return xTag;
         }
 
         protected override void AcceptTagAttribute(DefineSceneAndFrameLabelDataTag tag, XAttribute attrib) {
-            throw new NotImplementedException();
         }
 
         protected override void AcceptTagElement(DefineSceneAndFrameLabelDataTag tag, XElement element) {

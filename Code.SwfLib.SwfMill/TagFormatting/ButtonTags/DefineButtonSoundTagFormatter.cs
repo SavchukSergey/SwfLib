@@ -4,16 +4,13 @@ using Code.SwfLib.Tags.ButtonTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
     public class DefineButtonSoundTagFormatter : DefineButtonBaseTagFormatter<DefineButtonSoundTag> {
         
-        protected override XElement FormatTagElement(DefineButtonSoundTag tag, XElement xTag) {
-            return xTag;
+        protected override void FormatTagElement(DefineButtonSoundTag tag, XElement xTag) {
         }
 
         protected override void AcceptTagAttribute(DefineButtonSoundTag tag, XAttribute attrib) {
-            throw new System.NotImplementedException();
         }
 
         protected override void AcceptTagElement(DefineButtonSoundTag tag, XElement element) {
-            throw new System.NotImplementedException();
         }
 
         public override string TagName {

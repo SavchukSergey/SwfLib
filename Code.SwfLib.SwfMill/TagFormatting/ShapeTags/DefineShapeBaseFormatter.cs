@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ShapeTags;
 
@@ -10,7 +9,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         private const string SHAPES_ELEM = "shapes";
         private const string STYLES_ELEM = "styles";
 
-        protected sealed override XElement FormatTagElement(T tag, XElement xTag) {
+        protected sealed override void FormatTagElement(T tag, XElement xTag) {
             FormatAdditionalAttributes(tag, xTag);
 
             xTag.Add(new XElement(BOUNDS_ELEM, XRect.ToXml(tag.ShapeBounds)));
@@ -22,8 +21,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
             var xShapes = new XElement(SHAPES_ELEM, FormatShape(tag));
             xTag.Add(xShapes);
-
-            return xTag;
         }
 
         protected abstract XElement FormatStyles(T tag);

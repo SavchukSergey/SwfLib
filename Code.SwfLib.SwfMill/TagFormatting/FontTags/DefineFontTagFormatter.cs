@@ -5,14 +5,13 @@ using Code.SwfLib.Tags.FontTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
     public class DefineFontTagFormatter : TagFormatterBase<DefineFontTag> {
 
-        protected override XElement FormatTagElement(DefineFontTag tag, XElement xTag) {
+        protected override void FormatTagElement(DefineFontTag tag, XElement xTag) {
             var xOffsets = new XElement("offsets");
             foreach (var offset in tag.OffsetTable) {
                 var xOffset = new XElement("offset", new XAttribute("value", offset));
                 xOffsets.Add(xOffset);
             }
             xTag.Add(xOffsets);
-            return xTag;
         }
 
         protected override void AcceptTagAttribute(DefineFontTag tag, XAttribute attrib) {

@@ -27,10 +27,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        protected override XElement FormatTagElement(DefineFontNameTag tag, XElement xTag) {
+        protected override void FormatTagElement(DefineFontNameTag tag, XElement xTag) {
             xTag.Add(new XAttribute(XName.Get(NAME_ATTRIB), tag.FontName));
             xTag.Add(new XAttribute(XName.Get(COPYRIGHT_ATTRIB), tag.FontCopyright));
-            return xTag;
         }
 
         public override string TagName {

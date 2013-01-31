@@ -5,11 +5,10 @@ using Code.SwfLib.Tags.ActionsTags;
 namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoABCTagFormatter : TagFormatterBase<DoABCTag> {
 
-        protected override XElement FormatTagElement(DoABCTag tag, XElement xTag) {
-            return new XElement(SwfTagNameMapping.DO_ABC_TAG,
-                new XAttribute("flags", tag.Flags),
-                new XAttribute("name", tag.Name),
-                new XElement("abc", Convert.ToBase64String(tag.ABCData)));
+        protected override void FormatTagElement(DoABCTag tag, XElement xTag) {
+            xTag.Add(new XAttribute("flags", tag.Flags));
+            xTag.Add(new XAttribute("name", tag.Name));
+            xTag.Add(new XElement("abc", Convert.ToBase64String(tag.ABCData)));
         }
 
         protected override void AcceptTagAttribute(DoABCTag tag, XAttribute attrib) {

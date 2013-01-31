@@ -19,8 +19,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             }
         }
 
-        protected override XElement FormatTagElement(ShowFrameTag tag, XElement xTag) {
-            return xTag;
+        protected override void FormatTagElement(ShowFrameTag tag, XElement xTag) {
         }
 
         public override string TagName {

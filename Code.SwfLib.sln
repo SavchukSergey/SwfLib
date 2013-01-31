@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{8CD70156-C735-47BC-AA5E-DF4AE0EE4E57}"
 	ProjectSection(SolutionItems) = preProject
+		docs\swf-file-format-spec.pdf = docs\swf-file-format-spec.pdf
 		docs\swf_file_format_spec_v10.pdf = docs\swf_file_format_spec_v10.pdf
 		docs\swf_file_format_spec_v9.pdf = docs\swf_file_format_spec_v9.pdf
 		docs\swfmill-schema.xml = docs\swfmill-schema.xml

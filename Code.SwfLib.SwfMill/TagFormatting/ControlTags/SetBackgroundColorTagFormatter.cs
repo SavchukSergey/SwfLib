@@ -25,9 +25,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        protected override XElement FormatTagElement(SetBackgroundColorTag tag, XElement xTag) {
+        protected override void FormatTagElement(SetBackgroundColorTag tag, XElement xTag) {
             xTag.Add(new XElement("color", XColorRGB.ToXml(tag.Color)));
-            return xTag;
         }
 
         public override string TagName {

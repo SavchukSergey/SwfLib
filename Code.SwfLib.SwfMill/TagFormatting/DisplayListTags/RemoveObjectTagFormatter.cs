@@ -4,16 +4,14 @@ using Code.SwfLib.Tags.DisplayListTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class RemoveObjectTagFormatter : TagFormatterBase<RemoveObjectTag> {
-        protected override XElement FormatTagElement(RemoveObjectTag tag, XElement xTag) {
-            return xTag;
+        protected override void FormatTagElement(RemoveObjectTag tag, XElement xTag) {
+            //TODO: format & parse
         }
 
         protected override void AcceptTagAttribute(RemoveObjectTag tag, XAttribute attrib) {
-            throw new NotImplementedException();
         }
 
         protected override void AcceptTagElement(RemoveObjectTag tag, XElement element) {
-            throw new NotImplementedException();
         }
 
         public override string TagName {

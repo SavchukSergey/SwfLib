@@ -43,7 +43,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             }
         }
 
-        protected override XElement FormatTagElement(DefineFontAlignZonesTag tag, XElement xTag) {
+        protected override void FormatTagElement(DefineFontAlignZonesTag tag, XElement xTag) {
             xTag.Add(new XAttribute(CSM_HINT_ATTRIB, (byte)tag.CsmTableHint));
             if (tag.Reserved > 0) {
                 xTag.Add(new XAttribute("reserved", tag.Reserved));
@@ -53,7 +53,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                 xZoneArrays.Add(XZoneRecord.ToXml(record));
             }
             xTag.Add(xZoneArrays);
-            return xTag;
         }
 
 

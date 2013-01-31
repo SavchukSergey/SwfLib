@@ -3,16 +3,13 @@ using Code.SwfLib.Tags.ShapeMorphingTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ShapeMorphingTags {
     public class DefineMorphShape2TagFormatter : TagFormatterBase<DefineMorphShape2Tag> {
-        protected override XElement FormatTagElement(DefineMorphShape2Tag tag, XElement xTag) {
-            return xTag;
+        protected override void FormatTagElement(DefineMorphShape2Tag tag, XElement xTag) {
         }
 
         protected override void AcceptTagAttribute(DefineMorphShape2Tag tag, XAttribute attrib) {
-            throw new System.NotImplementedException();
         }
 
         protected override void AcceptTagElement(DefineMorphShape2Tag tag, XElement element) {
-            throw new System.NotImplementedException();
         }
 
         public override string TagName {

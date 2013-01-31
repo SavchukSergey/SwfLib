@@ -31,15 +31,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             }
         }
 
-        protected override XElement FormatTagElement(DoInitActionTag tag, XElement xTag) {
-            var res = new XElement(TagName);
-            res.Add(new XAttribute("sprite", tag.SpriteId));
+        protected override void FormatTagElement(DoInitActionTag tag, XElement xTag) {
+            xTag.Add(new XAttribute("sprite", tag.SpriteId));
             var actions = new XElement(ACTIONS_ELEM);
             foreach (var action in tag.ActionRecords) {
                 actions.Add(XAction.ToXml(action));
             }
-            res.Add(actions);
-            return res;
+            xTag.Add(actions);
         }
 
         public override string TagName {

@@ -44,7 +44,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         //TODO: simulate swfmill incorrect structure of TextRecord (parsing, formating)
 
-        protected override XElement FormatTagElement(DefineTextTag tag, XElement xTag) {
+        protected override void FormatTagElement(DefineTextTag tag, XElement xTag) {
             xTag.Add(new XElement("bounds", XRect.ToXml(tag.TextBounds)));
             xTag.Add(new XElement("transform", XMatrix.ToXml(tag.TextMatrix)));
             //TODO: remove unnessary nested nodes. Swfmill requires them
@@ -55,7 +55,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                                                   )
                                      )));
             //TODO: Other fields
-            return xTag;
         }
 
         public override string TagName {

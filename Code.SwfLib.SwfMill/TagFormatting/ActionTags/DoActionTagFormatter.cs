@@ -27,14 +27,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             }
         }
 
-        protected override XElement FormatTagElement(DoActionTag tag, XElement xTag) {
-            var res = new XElement(TagName);
+        protected override void FormatTagElement(DoActionTag tag, XElement xTag) {
             var actions = new XElement(ACTIONS_ELEM);
             foreach (var action in tag.ActionRecords) {
                 actions.Add(XAction.ToXml(action));
             }
-            res.Add(actions);
-            return res;
+            xTag.Add(actions);
         }
 
         public override string TagName {

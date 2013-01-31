@@ -24,9 +24,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             }
         }
 
-        protected override XElement FormatTagElement(RemoveObject2Tag tag, XElement xTag) {
+        protected override void FormatTagElement(RemoveObject2Tag tag, XElement xTag) {
             xTag.Add(new XAttribute(DEPTH_ATTRIB, tag.Depth));
-            return xTag;
         }
 
         public override string TagName {

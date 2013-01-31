@@ -47,7 +47,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             if (objectID.HasValue) {
                 res.Add(new XAttribute(OBJECT_ID_ATTRIB, objectID.Value));
             }
-            res = FormatTagElement(tag, res);
+            FormatTagElement(tag, res);
             if (tag.RestData != null && tag.RestData.Length > 0) {
                 res.Add(new XElement(REST_ELEM, Convert.ToBase64String(tag.RestData)));
             }
@@ -76,7 +76,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        protected abstract XElement FormatTagElement(T tag, XElement xTag);
+        protected abstract void FormatTagElement(T tag, XElement xTag);
         protected abstract void AcceptTagAttribute(T tag, XAttribute attrib);
         protected abstract void AcceptTagElement(T tag, XElement element);
 

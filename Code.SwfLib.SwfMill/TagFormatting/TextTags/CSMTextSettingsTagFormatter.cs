@@ -37,7 +37,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             }
         }
 
-        protected override XElement FormatTagElement(CSMTextSettingsTag tag, XElement xTag) {
+        protected override void FormatTagElement(CSMTextSettingsTag tag, XElement xTag) {
             xTag.Add(new XAttribute(XName.Get("useFlashType"), tag.UseFlashType));
             xTag.Add(new XAttribute(XName.Get("gridFit"), tag.GridFit));
 
@@ -47,7 +47,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             xTag.Add(new XAttribute(XName.Get("sharpness"), tag.Sharpness.ToString(CultureInfo.InvariantCulture)));
             //TODO: hide reserved attr
             //new XAttribute(XName.Get("reserved"), tag.Reserved)
-            return xTag;
         }
 
         public override string TagName {

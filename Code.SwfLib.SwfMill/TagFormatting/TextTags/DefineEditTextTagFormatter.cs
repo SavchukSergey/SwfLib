@@ -128,7 +128,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             }
         }
 
-        protected override XElement FormatTagElement(DefineEditTextTag tag, XElement xTag) {
+        protected override void FormatTagElement(DefineEditTextTag tag, XElement xTag) {
             xTag.Add(new XElement(SIZE_ELEM, XRect.ToXml(tag.Bounds)));
             xTag.Add(new XAttribute(WORD_WRAP_ATTRIB, SwfMillPrimitives.GetStringValue(tag.WordWrap)));
             xTag.Add(new XAttribute(MULTILINE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Multiline)));
@@ -160,7 +160,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             if (tag.HasText) {
                 xTag.Add(new XAttribute(INITIAL_TEXT_ATTRIB, tag.InitialText));
             }
-            return xTag;
         }
 
         public override string TagName {

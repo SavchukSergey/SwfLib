@@ -9,7 +9,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
         private const string FORMAT_ATTRIB = "format";
         private const string N_COLOR_MAP_ATTRIB = "n_colormap";
 
-        protected override XElement FormatTagElement(DefineBitsLossless2Tag tag, XElement xTag) {
+        protected override void FormatTagElement(DefineBitsLossless2Tag tag, XElement xTag) {
             xTag.Add(new XAttribute(FORMAT_ATTRIB, tag.BitmapFormat));
             xTag.Add( new XAttribute(WIDTH_ATTRIB, tag.BitmapWidth));
             xTag.Add(new XAttribute(HEIGHT_ATTRIB, tag.BitmapHeight));
@@ -19,7 +19,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             if (tag.ZlibBitmapData != null) {
                 xTag.Add(new XElement("data", XBinary.ToXml(tag.ZlibBitmapData)));
             }
-            return xTag;
         }
 
         protected override void AcceptTagAttribute(DefineBitsLossless2Tag tag, XAttribute attrib) {

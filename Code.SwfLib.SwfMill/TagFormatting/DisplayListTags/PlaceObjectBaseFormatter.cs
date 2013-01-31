@@ -8,7 +8,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string DEPTH_ATTRIB = "depth";
         private const string TRANSFORM_ELEM = "transform";
 
-        protected sealed override XElement FormatTagElement(T tag, XElement xTag) {
+        protected sealed override void FormatTagElement(T tag, XElement xTag) {
             xTag.Add(new XAttribute(DEPTH_ATTRIB, tag.Depth));
 
             if (HasMatrix(tag)) {
@@ -16,7 +16,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             }
 
             FormatPlaceElement(tag, xTag);
-            return xTag;
         }
 
         protected sealed override void AcceptTagAttribute(T tag, XAttribute attrib) {

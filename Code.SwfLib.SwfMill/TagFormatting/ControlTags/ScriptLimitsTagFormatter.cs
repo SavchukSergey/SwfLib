@@ -8,10 +8,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         private const string MAX_RECURSION_ATTRIB = "maxRecursionDepth";
         private const string TIMEOUT_ATTRIB = "timeout";
 
-        protected override XElement FormatTagElement(ScriptLimitsTag tag, XElement xTag) {
+        protected override void FormatTagElement(ScriptLimitsTag tag, XElement xTag) {
             xTag.Add(new XAttribute(XName.Get(MAX_RECURSION_ATTRIB), tag.MaxRecursionDepth));
             xTag.Add(new XAttribute(XName.Get(TIMEOUT_ATTRIB), tag.ScriptTimeoutSeconds));
-            return xTag;
         }
 
         protected override void AcceptTagAttribute(ScriptLimitsTag tag, XAttribute attrib) {

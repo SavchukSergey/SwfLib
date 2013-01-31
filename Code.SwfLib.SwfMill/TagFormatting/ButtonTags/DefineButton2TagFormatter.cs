@@ -44,7 +44,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
             }
         }
 
-        protected override XElement FormatTagElement(DefineButton2Tag tag, XElement xTag) {
+        protected override void FormatTagElement(DefineButton2Tag tag, XElement xTag) {
             xTag.Add(new XAttribute(MENU_ATTRIB, CommonFormatter.Format(tag.TrackAsMenu)));
             if (tag.ReservedFlags != 0) {
                 xTag.Add(new XAttribute("reserved", tag.ReservedFlags));
@@ -61,7 +61,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
                 xConditions.Add(XButtonCondition.ToXml(condition));
             }
             xTag.Add(xConditions);
-            return xTag;
         }
 
         public override string TagName {
