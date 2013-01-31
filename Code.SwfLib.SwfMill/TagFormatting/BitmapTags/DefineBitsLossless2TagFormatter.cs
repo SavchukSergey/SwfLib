@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
+﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.BitmapTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
@@ -38,19 +36,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             return true;
         }
 
-        protected override bool AcceptTagElement(DefineBitsLossless2Tag tag, XElement element) {
-            switch (element.Name.LocalName) {
-                case DATA_TAG:
-                    tag.ZlibBitmapData = XBinary.FromXml(element.Element("data"));
-                    break;
-                default:
-                    return false;
-            }
-            return true;
-        }
-
         protected override byte[] GetData(DefineBitsLossless2Tag tag) {
             return tag.ZlibBitmapData;
+        }
+
+        protected override void SetData(DefineBitsLossless2Tag tag, byte[] data) {
+            tag.ZlibBitmapData = data;
         }
 
         public override string TagName {

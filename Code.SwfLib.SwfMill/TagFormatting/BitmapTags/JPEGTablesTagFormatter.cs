@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
+﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.BitmapTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
@@ -9,19 +7,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
         protected override void FormatTagElement(JPEGTablesTag tag, XElement xTag) {
         }
 
-        protected override bool AcceptTagElement(JPEGTablesTag tag, XElement element) {
-            switch (element.Name.LocalName) {
-                case "data":
-                    tag.JPEGData = XBinary.FromXml(element.Element("data"));
-                    break;
-                default:
-                    return false;
-            }
-            return true;
-        }
-
         protected override byte[] GetData(JPEGTablesTag tag) {
             return tag.JPEGData;
+        }
+
+        protected override void SetData(JPEGTablesTag tag, byte[] data) {
+            tag.JPEGData = data;
         }
 
         public override string TagName {

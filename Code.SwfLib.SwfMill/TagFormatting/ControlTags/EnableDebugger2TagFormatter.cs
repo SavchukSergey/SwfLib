@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
+﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
@@ -9,19 +7,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         protected override void FormatTagElement(EnableDebugger2Tag tag, XElement xTag) {
         }
 
-        protected override bool AcceptTagElement(EnableDebugger2Tag tag, XElement element) {
-            switch (element.Name.LocalName) {
-                case "data":
-                    tag.Data = XBinary.FromXml(element.Element("data"));
-                    break;
-                default:
-                    return false;
-            }
-            return true;
-        }
-
         protected override byte[] GetData(EnableDebugger2Tag tag) {
             return tag.Data;
+        }
+
+        protected override void SetData(EnableDebugger2Tag tag, byte[] data) {
+            tag.Data = data;
         }
 
         public override string TagName {

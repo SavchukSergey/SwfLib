@@ -7,10 +7,10 @@ using Code.SwfLib.Tags;
 namespace Code.SwfLib.SwfMill.TagFormatting {
     public abstract class TagFormatterBase<T> : ITagFormatter<T> where T : SwfTagBase {
 
-        private const string REST_ELEM = "rest";
         private const string OBJECT_ID_ATTRIB = "objectID";
+        private const string DATA_TAG = "data";
+        private const string REST_ELEM = "rest";
 
-        protected const string DATA_TAG = "data";
         protected const string NAME_ATTRIB = "name";
         protected const string WIDTH_ATTRIB = "width";
         protected const string HEIGHT_ATTRIB = "height";
@@ -77,6 +77,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                 case REST_ELEM:
                     tag.RestData = Convert.FromBase64String(element.Value);
                     break;
+                case DATA_TAG:
+                    var data = XBinary.FromXml(element.Element("data"));
+                    SetData(tag, data);
+                    break;
                 default:
                     var handled = AcceptTagElement(tag, element);
                     if (!handled) throw new FormatException("Invalid element " + element.Name.LocalName);
@@ -105,6 +109,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         protected virtual byte[] GetData(T tag) {
             return null;
+        }
+
+        protected virtual void SetData(T tag, byte[] data) {
+
         }
 
         #endregion

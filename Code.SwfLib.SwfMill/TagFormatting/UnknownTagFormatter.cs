@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Xml.Linq;
 using Code.SwfLib.Tags;
 
@@ -19,17 +18,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return true;
         }
 
-        protected override bool AcceptTagElement(UnknownTag tag, XElement element) {
-            switch (element.Name.LocalName) {
-                case DATA_TAG:
-                    tag.Data = FromBase64(element);
-                    break;
-                default:
-                    return false;
-            }
-            return true;
-        }
-
         protected override void FormatTagElement(UnknownTag tag, XElement xTag) {
             xTag.Add(new XAttribute(XName.Get("id"), string.Format("0x{0:x}", (int)tag.TagType)));
         }
@@ -41,6 +29,10 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         protected override byte[] GetData(UnknownTag tag) {
             return tag.Data;
+        }
+
+        protected override void SetData(UnknownTag tag, byte[] data) {
+            tag.Data = data;
         }
 
         public override string TagName {
