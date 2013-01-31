@@ -11,7 +11,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
             xTag.Add(new XElement("abc", Convert.ToBase64String(tag.ABCData)));
         }
 
-        protected override void AcceptTagAttribute(DoABCTag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(DoABCTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case "flags":
                     tag.Flags = uint.Parse(attrib.Value);
@@ -20,8 +20,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
                     tag.Name = attrib.Value;
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(DoABCTag tag, XElement element) {

@@ -18,7 +18,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             _version = version;
         }
 
-        protected override void AcceptTagAttribute(FileAttributesTag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(FileAttributesTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case HAS_METADATA_ATTRIB:
                     tag.HasMetadata = ParseBoolFromDigit(attrib);
@@ -42,8 +42,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                     tag.UseDirectBlit = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(FileAttributesTag tag, XElement element) {

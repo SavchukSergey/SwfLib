@@ -36,7 +36,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
             }
         }
 
-        protected override void AcceptShapeAttribute(DefineShape4Tag tag, XAttribute attrib) {
+        protected override bool AcceptShapeAttribute(DefineShape4Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case "nonScalingStrokes":
                     tag.UsesNonScalingStrokes = ParseBoolFromDigit(attrib);
@@ -51,8 +51,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
                     tag.ReservedFlags = byte.Parse(attrib.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void FormatAdditionalBounds(DefineShape4Tag tag, XElement elem) {

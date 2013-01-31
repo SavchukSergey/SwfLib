@@ -15,7 +15,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string CLIP_DEPTH = "clipDepth";
         private const string COLOR_TRANSFORM_ELEM = "colorTransform";
 
-        protected override void AcceptPlaceAttribute(PlaceObject2Tag tag, XAttribute attrib) {
+        protected override bool AcceptPlaceAttribute(PlaceObject2Tag tag, XAttribute attrib) {
             tag.Move = true;
 
             switch (attrib.Name.LocalName) {
@@ -45,8 +45,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     XClipEventFlags.SetFlags2(ref tag.ClipActions.Flags, flags2);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptPlaceTagElement(PlaceObject2Tag tag, XElement element) {

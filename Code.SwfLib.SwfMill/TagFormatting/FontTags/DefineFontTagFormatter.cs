@@ -14,13 +14,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             xTag.Add(xOffsets);
         }
 
-        protected override void AcceptTagAttribute(DefineFontTag tag, XAttribute attrib) {
-            switch (attrib.Name.LocalName) {
-                default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
-            }
-        }
-
         protected override void AcceptTagElement(DefineFontTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "offsets":

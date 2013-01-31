@@ -12,14 +12,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             xTag.Add(new XElement("alpha", XBinary.ToXml(tag.BitmapAlphaData)));
         }
 
-        protected override void AcceptTagAttribute(DefineBitsJPEG4Tag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(DefineBitsJPEG4Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case "deblock":
                     tag.DeblockParam = ushort.Parse(attrib.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(DefineBitsJPEG4Tag tag, XElement element) {

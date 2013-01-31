@@ -7,9 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
         protected override void FormatTagElement(DefineText2Tag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagAttribute(DefineText2Tag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(DefineText2Tag tag, XElement element) {
         }
 

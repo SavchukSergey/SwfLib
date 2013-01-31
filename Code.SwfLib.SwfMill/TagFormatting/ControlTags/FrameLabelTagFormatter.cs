@@ -8,14 +8,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         private const string LABEL_ATTRIB = "label";
         private const string FLAGS_ELEM = "flags";
 
-        protected override void AcceptTagAttribute(FrameLabelTag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(FrameLabelTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case LABEL_ATTRIB:
                     tag.Name = attrib.Value;
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(FrameLabelTag tag, XElement element) {

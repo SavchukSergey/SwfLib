@@ -17,7 +17,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
         private const string LANGUAGE_ATTRIB = "language";
 
-        protected override void AcceptTagAttribute(DefineFont3Tag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(DefineFont3Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case NAME_ATTRIB:
                     tag.FontName = attrib.Value;
@@ -56,8 +56,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                     tag.Leading = short.Parse(attrib.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(DefineFont3Tag tag, XElement element) {

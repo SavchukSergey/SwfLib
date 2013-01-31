@@ -7,7 +7,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
         protected const string COPYRIGHT_ATTRIB = "copyright";
 
-        protected override void AcceptTagAttribute(DefineFontNameTag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(DefineFontNameTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case NAME_ATTRIB:
                     tag.FontName = attrib.Value;
@@ -16,8 +16,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                     tag.FontCopyright = attrib.Value;
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(DefineFontNameTag tag, XElement element) {

@@ -7,9 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.VideoTags {
         protected override void FormatTagElement(VideoFrameTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagAttribute(VideoFrameTag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(VideoFrameTag tag, XElement element) {
         }
 

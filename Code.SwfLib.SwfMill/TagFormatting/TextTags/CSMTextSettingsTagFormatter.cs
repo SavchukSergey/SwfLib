@@ -11,7 +11,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
         private const string THICKNESS = "thickness";
         private const string SHARPNESS = "sharpness";
 
-        protected override void AcceptTagAttribute(CSMTextSettingsTag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(CSMTextSettingsTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case USE_FLASH_TYPE_ATTRIB:
                     tag.UseFlashType = byte.Parse(attrib.Value);
@@ -26,8 +26,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                     tag.Sharpness = float.Parse(attrib.Value, CultureInfo.InvariantCulture);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(CSMTextSettingsTag tag, XElement element) {

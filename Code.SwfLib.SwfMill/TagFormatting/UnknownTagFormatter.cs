@@ -8,14 +8,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         private const string ID_ATTRIB = "id";
 
-        protected override void AcceptTagAttribute(UnknownTag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(UnknownTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case ID_ATTRIB:
                     tag.SetTagType((SwfTagType)ParseHex(attrib.Value));
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(UnknownTag tag, XElement element) {

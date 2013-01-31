@@ -18,7 +18,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         private const string ZONES_ELEM = "zones";
         private const string ZONE_DATA_ELEM = "ZoneData";
 
-        protected override void AcceptTagAttribute(DefineFontAlignZonesTag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(DefineFontAlignZonesTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case CSM_HINT_ATTRIB:
                     tag.CsmTableHint = (CSMTableHint)(byte.Parse(attrib.Value));
@@ -27,8 +27,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                     tag.Reserved = byte.Parse(attrib.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(DefineFontAlignZonesTag tag, XElement element) {

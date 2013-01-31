@@ -12,7 +12,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
         private const string BUTTONS_ELEM = "buttons";
         private const string CONDITIONS_ELEM = "conditions";
 
-        protected override void AcceptTagAttribute(DefineButton2Tag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(DefineButton2Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case MENU_ATTRIB:
                     tag.TrackAsMenu = CommonFormatter.ParseBool(attrib.Value);
@@ -23,8 +23,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
                     tag.ReservedFlags = byte.Parse(attrib.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(DefineButton2Tag tag, XElement element) {

@@ -21,7 +21,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             }
         }
 
-        protected override void AcceptTagAttribute(DefineBitsLossless2Tag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(DefineBitsLossless2Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case FORMAT_ATTRIB:
                     tag.BitmapFormat = byte.Parse(attrib.Value);
@@ -36,8 +36,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
                     tag.BitmapColorTableSize = byte.Parse(attrib.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(DefineBitsLossless2Tag tag, XElement element) {

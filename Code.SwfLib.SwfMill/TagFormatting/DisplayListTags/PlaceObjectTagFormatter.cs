@@ -14,9 +14,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             }
         }
 
-        protected override void AcceptPlaceAttribute(PlaceObjectTag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptPlaceTagElement(PlaceObjectTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case COLOR_TRANSFORM_ELEM:

@@ -7,14 +7,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
 
         private const string DEPTH_ATTRIB = "depth";
 
-        protected override void AcceptTagAttribute(RemoveObject2Tag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(RemoveObject2Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case DEPTH_ATTRIB:
                     tag.Depth = ushort.Parse(attrib.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(RemoveObject2Tag tag, XElement element) {

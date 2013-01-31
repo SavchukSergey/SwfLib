@@ -9,13 +9,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         private const string SYMBOLS_TAGS = "symbols";
 
-        protected override void AcceptTagAttribute(ExportAssetsTag tag, XAttribute attrib) {
-            switch (attrib.Name.LocalName) {
-                default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
-            }
-        }
-
         protected override void AcceptTagElement(ExportAssetsTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case SYMBOLS_TAGS:

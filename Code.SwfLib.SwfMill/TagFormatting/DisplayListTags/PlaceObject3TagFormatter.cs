@@ -15,7 +15,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         private const string BITMAP_CACHING_ATTRIB = "bitmapCaching";
 
 
-        protected override void AcceptPlaceAttribute(PlaceObject3Tag tag, XAttribute attrib) {
+        protected override bool AcceptPlaceAttribute(PlaceObject3Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case NAME_ATTRIB:
                     tag.Name = attrib.Value;
@@ -43,8 +43,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     tag.BitmapCache = byte.Parse(attrib.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptPlaceTagElement(PlaceObject3Tag tag, XElement element) {

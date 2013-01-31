@@ -6,9 +6,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeMorphingTags {
         protected override void FormatTagElement(DefineMorphShapeTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagAttribute(DefineMorphShapeTag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(DefineMorphShapeTag tag, XElement element) {
         }
 

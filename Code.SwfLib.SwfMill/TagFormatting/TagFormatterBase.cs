@@ -60,7 +60,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
                     SetObjectID(tag, ushort.Parse(attrib.Value));
                     break;
                 default:
-                    AcceptTagAttribute(tag, attrib);
+                    var handled = AcceptTagAttribute(tag, attrib);
+                    if (!handled) throw new FormatException(string.Format("Unhandled attribute '{0}' in tag '{1}'", attrib.Name.LocalName, tag.TagType));
                     break;
             }
         }
@@ -77,7 +78,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         protected abstract void FormatTagElement(T tag, XElement xTag);
-        protected abstract void AcceptTagAttribute(T tag, XAttribute attrib);
+
+        protected virtual bool AcceptTagAttribute(T tag, XAttribute attrib) {
+            return false;
+        }
+
         protected abstract void AcceptTagElement(T tag, XElement element);
 
         public abstract string TagName { get; }

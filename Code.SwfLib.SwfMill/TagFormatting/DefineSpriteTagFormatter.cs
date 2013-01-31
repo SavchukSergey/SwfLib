@@ -16,14 +16,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             _subFormatterFactory = new TagFormatterFactory(version);
         }
 
-        protected override void AcceptTagAttribute(DefineSpriteTag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(DefineSpriteTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case FRAMES_ATTRIB:
                     tag.FramesCount = ushort.Parse(attrib.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(DefineSpriteTag tag, XElement element) {

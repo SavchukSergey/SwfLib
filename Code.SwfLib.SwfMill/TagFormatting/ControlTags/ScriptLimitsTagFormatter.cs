@@ -13,7 +13,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             xTag.Add(new XAttribute(XName.Get(TIMEOUT_ATTRIB), tag.ScriptTimeoutSeconds));
         }
 
-        protected override void AcceptTagAttribute(ScriptLimitsTag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(ScriptLimitsTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case MAX_RECURSION_ATTRIB:
                     tag.MaxRecursionDepth = ushort.Parse(attrib.Value);
@@ -22,8 +22,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                     tag.ScriptTimeoutSeconds = ushort.Parse(attrib.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(ScriptLimitsTag tag, XElement element) {

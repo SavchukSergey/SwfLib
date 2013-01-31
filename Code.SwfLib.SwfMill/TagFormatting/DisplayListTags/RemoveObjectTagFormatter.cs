@@ -8,9 +8,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             //TODO: format & parse
         }
 
-        protected override void AcceptTagAttribute(RemoveObjectTag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(RemoveObjectTag tag, XElement element) {
         }
 

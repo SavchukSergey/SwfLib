@@ -8,14 +8,15 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
 
         private const string ACTIONS_ELEM = "actions";
 
-        protected override void AcceptTagAttribute(DoInitActionTag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(DoInitActionTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case "sprite":
                     tag.SpriteId = ushort.Parse(attrib.Value);
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(DoInitActionTag tag, XElement element) {

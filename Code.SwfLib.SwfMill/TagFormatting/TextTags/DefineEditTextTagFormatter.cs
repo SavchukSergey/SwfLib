@@ -33,7 +33,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
 
         //TODO: Font class name and wasStatic which is not supported by swfmill
         //TODO: check bit flags seting+check fields list
-        protected override void AcceptTagAttribute(DefineEditTextTag tag, XAttribute attrib) {
+        protected override bool AcceptTagAttribute(DefineEditTextTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case WORD_WRAP_ATTRIB:
                     tag.WordWrap = SwfMillPrimitives.ParseBoolean(attrib);
@@ -106,8 +106,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                     tag.InitialText = attrib.Value;
                     break;
                 default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
+                    return false;
             }
+            return true;
         }
 
         protected override void AcceptTagElement(DefineEditTextTag tag, XElement element) {

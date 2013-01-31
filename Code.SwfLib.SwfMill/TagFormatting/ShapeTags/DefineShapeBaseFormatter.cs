@@ -29,11 +29,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         protected abstract void ReadShapes(T tag, XElement xShape);
         protected abstract void ReadStyles(T tag, XElement xStyleList);
 
-        protected sealed override void AcceptTagAttribute(T tag, XAttribute attrib) {
+        protected sealed override bool AcceptTagAttribute(T tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 default:
-                    AcceptShapeAttribute(tag, attrib);
-                    break;
+                    var handled = AcceptShapeAttribute(tag, attrib);
+                    return handled;
             }
         }
 
@@ -62,7 +62,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
 
         protected virtual void AcceptShapeTagElement(T tag, XElement element) { }
 
-        protected virtual void AcceptShapeAttribute(T tag, XAttribute attribute) { }
+        protected virtual bool AcceptShapeAttribute(T tag, XAttribute attribute) {
+            return false;
+        }
 
         protected override ushort? GetObjectID(T tag) {
             return tag.ShapeID;

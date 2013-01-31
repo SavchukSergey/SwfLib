@@ -6,9 +6,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
         protected override void FormatTagElement(SoundStreamHeadTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagAttribute(SoundStreamHeadTag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(SoundStreamHeadTag tag, XElement element) {
         }
 

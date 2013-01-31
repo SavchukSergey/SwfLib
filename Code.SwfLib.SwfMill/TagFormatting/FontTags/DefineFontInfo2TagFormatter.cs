@@ -7,9 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
         protected override void FormatTagElement(DefineFontInfo2Tag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagAttribute(DefineFontInfo2Tag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(DefineFontInfo2Tag tag, XElement element) {
         }
 
