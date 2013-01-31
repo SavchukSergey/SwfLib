@@ -17,13 +17,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-        protected override void AcceptTagAttribute(MetadataTag tag, XAttribute attrib) {
-            switch (attrib.Name.LocalName) {
-                default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
-            }
-        }
-
         //TODO:value can come as a text not an xml and though won't get here.
 
         protected override void AcceptTagElement(MetadataTag tag, XElement element) {

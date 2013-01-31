@@ -7,9 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         protected override void FormatTagElement(ImportAssets2Tag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagAttribute(ImportAssets2Tag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(ImportAssets2Tag tag, XElement element) {
         }
 

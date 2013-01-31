@@ -8,13 +8,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         private const string COLOR_ELEM = "color";
 
-        protected override void AcceptTagAttribute(SetBackgroundColorTag tag, XAttribute attrib) {
-            switch (attrib.Name.LocalName) {
-                default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
-            }
-        }
-
         protected override void AcceptTagElement(SetBackgroundColorTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case COLOR_ELEM:

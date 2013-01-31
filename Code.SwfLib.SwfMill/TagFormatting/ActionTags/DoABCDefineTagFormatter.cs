@@ -3,11 +3,8 @@ using Code.SwfLib.Tags.ActionsTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoABCDefineTagFormatter : TagFormatterBase<DoABCDefineTag> {
-        
-        protected override void FormatTagElement(DoABCDefineTag tag, XElement xTag) {
-        }
 
-        protected override void AcceptTagAttribute(DoABCDefineTag tag, XAttribute attrib) {
+        protected override void FormatTagElement(DoABCDefineTag tag, XElement xTag) {
         }
 
         protected override void AcceptTagElement(DoABCDefineTag tag, XElement element) {

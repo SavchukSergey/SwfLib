@@ -16,10 +16,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             xTag.Add(xSymbols);
         }
 
-        protected override void AcceptTagAttribute(SymbolClassTag tag, XAttribute attrib) {
-            throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
-        }
-
         protected override void AcceptTagElement(SymbolClassTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "symbols":

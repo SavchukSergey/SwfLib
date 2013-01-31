@@ -7,9 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         protected override void FormatTagElement(EnableDebuggerTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagAttribute(EnableDebuggerTag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(EnableDebuggerTag tag, XElement element) {
         }
 

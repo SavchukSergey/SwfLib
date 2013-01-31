@@ -6,9 +6,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected override void FormatTagElement(DefineBinaryDataTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagAttribute(DefineBinaryDataTag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(DefineBinaryDataTag tag, XElement element) {
         }
 

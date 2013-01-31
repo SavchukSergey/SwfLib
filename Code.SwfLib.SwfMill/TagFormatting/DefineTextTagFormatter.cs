@@ -12,13 +12,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         private const string TRANSFORM_ELEM = "transform";
         private const string RECORDS_ELEM = "records";
 
-        protected override void AcceptTagAttribute(DefineTextTag tag, XAttribute attrib) {
-            switch (attrib.Name.LocalName) {
-                default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
-            }
-        }
-
         protected override void AcceptTagElement(DefineTextTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case BOUNDS_ELEM:

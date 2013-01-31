@@ -9,9 +9,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             xTag.Add(new XElement("data", XBinary.ToXml(tag.Data)));
         }
 
-        protected override void AcceptTagAttribute(DebugIDTag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(DebugIDTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "data":

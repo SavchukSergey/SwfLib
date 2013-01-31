@@ -7,9 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
         protected override void FormatTagElement(DefineButtonSoundTag tag, XElement xTag) {
         }
 
-        protected override void AcceptTagAttribute(DefineButtonSoundTag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(DefineButtonSoundTag tag, XElement element) {
         }
 

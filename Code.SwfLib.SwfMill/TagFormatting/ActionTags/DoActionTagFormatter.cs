@@ -7,13 +7,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoActionTagFormatter : TagFormatterBase<DoActionTag> {
         private const string ACTIONS_ELEM = "actions";
 
-        protected override void AcceptTagAttribute(DoActionTag tag, XAttribute attrib) {
-            switch (attrib.Name.LocalName) {
-                default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
-            }
-        }
-
         protected override void AcceptTagElement(DoActionTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case ACTIONS_ELEM:

@@ -26,9 +26,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         }
 
-        protected override void AcceptTagAttribute(DefineSceneAndFrameLabelDataTag tag, XAttribute attrib) {
-        }
-
         protected override void AcceptTagElement(DefineSceneAndFrameLabelDataTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "scenes":

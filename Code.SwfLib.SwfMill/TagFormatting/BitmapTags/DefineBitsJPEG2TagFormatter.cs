@@ -10,13 +10,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
             xTag.Add(new XElement("data", XBinary.ToXml(tag.ImageData)));
         }
 
-        protected override void AcceptTagAttribute(DefineBitsJPEG2Tag tag, XAttribute attrib) {
-            switch (attrib.Name.LocalName) {
-                default:
-                    throw new FormatException("Invalid attribute " + attrib.Name.LocalName);
-            }
-        }
-
         protected override void AcceptTagElement(DefineBitsJPEG2Tag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "data":
