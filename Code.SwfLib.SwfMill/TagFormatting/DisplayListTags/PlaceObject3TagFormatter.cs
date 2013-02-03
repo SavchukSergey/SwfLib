@@ -39,6 +39,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     var flags2 = int.Parse(attrib.Value);
                     XClipEventFlags.SetFlags2(ref tag.ClipActions.Flags, flags2);
                     break;
+                case "hasImage":
+                    tag.HasImage = CommonFormatter.ParseBool(attrib.Value);
+                    break;
                 case BITMAP_CACHING_ATTRIB:
                     tag.BitmapCache = byte.Parse(attrib.Value);
                     break;
@@ -85,6 +88,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                 elem.Add(new XAttribute("morph", tag.Ratio.Value));
             }
             elem.Add(new XAttribute("replace", CommonFormatter.Format(tag.Move)));
+            elem.Add(new XAttribute("hasImage", CommonFormatter.Format(tag.HasImage)));
             if (tag.BitmapCache.HasValue) {
                 elem.Add(new XAttribute(BITMAP_CACHING_ATTRIB, tag.BitmapCache.Value));
             }
