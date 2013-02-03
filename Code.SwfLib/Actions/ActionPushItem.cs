@@ -19,5 +19,13 @@
 
         public ushort Constant16;
 
+        public override string ToString() {
+            switch (Type) {
+                case ActionPushItemType.String:
+                    return "String: " + String;
+                default:
+                    return base.ToString();
+            }
+        }
     }
 }
