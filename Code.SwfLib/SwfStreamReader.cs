@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Code.SwfLib.Tags;
@@ -14,7 +13,7 @@ namespace Code.SwfLib {
             get { return _reader.BaseStream.Position == _reader.BaseStream.Length; }
         }
 
-        public Stream BaseStream {
+        public virtual Stream BaseStream {
             get {
                 return _baseStream;
             }
@@ -49,32 +48,32 @@ namespace Code.SwfLib {
             return value / 65536.0;
         }
 
-        public ushort ReadUInt16() {
+        public virtual ushort ReadUInt16() {
             return _reader.ReadUInt16();
         }
 
-        public short ReadSInt16() {
+        public virtual short ReadSInt16() {
             return _reader.ReadInt16();
         }
 
-        public uint ReadUInt32() {
+        public virtual uint ReadUInt32() {
             return _reader.ReadUInt32();
         }
 
-        public ulong ReadUInt64() {
+        public virtual ulong ReadUInt64() {
             return _reader.ReadUInt64();
         }
 
-        public int ReadInt32() {
+        public virtual int ReadInt32() {
             return _reader.ReadInt32();
         }
 
-        public byte ReadByte() {
+        public virtual byte ReadByte() {
             AlignToByte();
             return _reader.ReadByte();
         }
 
-        public byte[] ReadBytes(int count) {
+        public virtual byte[] ReadBytes(int count) {
             return _reader.ReadBytes(count);
         }
 
@@ -82,11 +81,11 @@ namespace Code.SwfLib {
             return ReadBytes((int)BytesLeft);
         }
 
-        public long BytesLeft {
+        public virtual long BytesLeft {
             get { return _reader.BaseStream.Length - _reader.BaseStream.Position; }
         }
 
-        public uint ReadEncodedU32() {
+        public virtual uint ReadEncodedU32() {
             AlignToByte();
             uint val = 0;
             var bt = _reader.ReadByte();
@@ -114,7 +113,7 @@ namespace Code.SwfLib {
         /// Reads Null-terminated string
         /// </summary>
         /// <returns></returns>
-        public string ReadString() {
+        public virtual string ReadString() {
             var dataStream = new MemoryStream();
             byte bt = 1;
             while (bt > 0) {
@@ -133,11 +132,11 @@ namespace Code.SwfLib {
             return Encoding.UTF8.GetString(dataStream.ToArray());
         }
 
-        public float ReadSingle() {
+        public virtual float ReadSingle() {
             return _reader.ReadSingle();
         }
 
-        public double ReadDouble() {
+        public virtual double ReadDouble() {
             ulong hi = ReadUInt32();
             ulong low = ReadUInt32();
             var l = (hi << 32) | low;
@@ -168,7 +167,7 @@ namespace Code.SwfLib {
 
         private BitContext _bitContext;
 
-        public bool ReadBit() {
+        public virtual bool ReadBit() {
             var bitIndex = _bitContext.BitIndex & 0x07;
             if (bitIndex == 0) {
                 _bitContext.CachedByte = ReadByte();
@@ -177,7 +176,7 @@ namespace Code.SwfLib {
             return ((_bitContext.CachedByte << bitIndex) & 0x80) != 0;
         }
 
-        public int ReadSignedBits(uint count) {
+        public virtual int ReadSignedBits(uint count) {
             if (count == 0) return 0;
             bool sign = ReadBit();
             var res = sign ? uint.MaxValue : 0;
@@ -189,7 +188,7 @@ namespace Code.SwfLib {
             return (int)res;
         }
 
-        public uint ReadUnsignedBits(uint count) {
+        public virtual uint ReadUnsignedBits(uint count) {
             if (count == 0) return 0;
             uint res = 0;
             for (var i = 0; i < count; i++) {
@@ -199,7 +198,7 @@ namespace Code.SwfLib {
             return res;
         }
 
-        public void AlignToByte() {
+        public virtual void AlignToByte() {
             _bitContext.BitIndex = 0;
             _bitContext.CachedByte = 0;
         }

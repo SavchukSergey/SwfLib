@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
 using Code.SwfLib.Actions;
 using Code.SwfLib.Buttons;
@@ -31,10 +29,14 @@ namespace Code.SwfLib {
         }
 
         public SwfTagBase ReadTag(SwfTagData tagData) {
-            var type = tagData.Type;
-            var tag = _factory.Create(type);
             var stream = new MemoryStream(tagData.Data);
             var reader = new SwfStreamReader(stream);
+            var type = tagData.Type;
+            return ReadTag(type, reader);
+        }
+
+        public SwfTagBase ReadTag(SwfTagType type, SwfStreamReader reader) {
+            var tag = _factory.Create(type);
             tag.AcceptVistor(this, reader);
             tag.RestData = reader.BytesLeft > 0 ? reader.ReadRest() : null;
             return tag;

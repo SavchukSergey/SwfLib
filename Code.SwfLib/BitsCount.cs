@@ -27,6 +27,8 @@
         }
 
         public void AddValue(int val) {
+            if (val < 0) val--; //TODO: Compensates adobe not optimal bit count calculation...
+
             if (val >= 0) _positiveMask |= (uint)val;
             else _negativeMask &= (uint)val;
         }

@@ -50,6 +50,7 @@ namespace Code.SwfLib.Shapes {
             if (stateMoveTo) {
                 var cnt = new BitsCount(record.MoveDeltaX, record.MoveDeltaY);
                 var moveBits = cnt.GetSignedBits();
+                if (moveBits < 1) moveBits = 1; //TODO: adobe?
                 writer.WriteUnsignedBits(moveBits, 5);
                 writer.WriteSignedBits(record.MoveDeltaX, moveBits);
                 writer.WriteSignedBits(record.MoveDeltaY, moveBits);
@@ -77,8 +78,9 @@ namespace Code.SwfLib.Shapes {
             if (record.StateNewStyles) {
                 writer.WriteFillStylesRGB(record.FillStyles, ctx.AllowBigArray);
                 writer.WriteLineStylesRGB(record.LineStyles, ctx.AllowBigArray);
-                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count + 1).GetUnsignedBits();
-                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count + 1).GetUnsignedBits();
+                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count).GetUnsignedBits();
+                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count).GetUnsignedBits();
+                if (ctx.FillStyleBits < 1) ctx.FillStyleBits = 1; //TODO: adobe?
                 writer.WriteUnsignedBits(ctx.FillStyleBits, 4);
                 writer.WriteUnsignedBits(ctx.LineStyleBits, 4);
             }
@@ -91,8 +93,9 @@ namespace Code.SwfLib.Shapes {
             if (record.StateNewStyles) {
                 writer.WriteFillStylesRGBA(record.FillStyles);
                 writer.WriteLineStylesRGBA(record.LineStyles);
-                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count + 1).GetUnsignedBits();
-                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count + 1).GetUnsignedBits();
+                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count).GetUnsignedBits();
+                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count).GetUnsignedBits();
+                if (ctx.FillStyleBits < 1) ctx.FillStyleBits = 1; //TODO: adobe?
                 writer.WriteUnsignedBits(ctx.FillStyleBits, 4);
                 writer.WriteUnsignedBits(ctx.LineStyleBits, 4);
             }
@@ -105,8 +108,9 @@ namespace Code.SwfLib.Shapes {
             if (record.StateNewStyles) {
                 writer.WriteFillStylesRGBA(record.FillStyles);
                 writer.WriteLineStylesEx(record.LineStyles);
-                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count + 1).GetUnsignedBits();
-                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count + 1).GetUnsignedBits();
+                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count).GetUnsignedBits();
+                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count).GetUnsignedBits();
+                if (ctx.FillStyleBits < 1) ctx.FillStyleBits = 1; //TODO: adobe?
                 writer.WriteUnsignedBits(ctx.FillStyleBits, 4);
                 writer.WriteUnsignedBits(ctx.LineStyleBits, 4);
             }

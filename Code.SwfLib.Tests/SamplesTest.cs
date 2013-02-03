@@ -4,11 +4,38 @@ using System.IO;
 using System.Linq;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tests.Samples;
+using Code.SwfLib.Tests.Utils;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
     [TestFixture]
     public class SamplesTest : BaseSampleTest {
+
+        [Test]
+        [Ignore]
+        public void Sample1Test() {
+            var path = "Sample - 1.swf";
+            var file = ReadSwfFile(path);
+            var mem = new MemoryStream();
+            file.WriteTo(mem);
+            mem.Seek(0, SeekOrigin.Begin);
+
+            var firstTags = IterateTags(OpenEmbeddedResource(path)).ToList();
+            var secondTags = IterateTags(mem).ToList();
+
+            var deserializer = new SwfTagDeserializer(file);
+            for (var i = 0; i < firstTags.Count; i++) {
+                var firstTag = firstTags[i];
+                var secondTag = secondTags[i];
+                var firstType = firstTag.Type;
+                var secondType = secondTag.Type;
+                if (firstType != secondType) throw new InvalidOperationException();
+                //if (firstType == SwfTagType.DefineSprite) continue; //For now
+                var dual = new DualSwfStreamReader(new MemoryStream(firstTag.Data), new MemoryStream(secondTag.Data));
+                //var dual = new SwfStreamReader(new MemoryStream(firstTag.Data));
+                deserializer.ReadTag(firstType, dual);
+            }
+        }
 
         [Ignore]
         [Test]
@@ -104,21 +131,24 @@ namespace Code.SwfLib.Tests {
 
         protected IEnumerable<SwfTagData> IterateTags(string path) {
             using (var stream = File.Open(path, FileMode.Open)) {
-                var file = new SwfFile();
-                var reader = new SwfStreamReader(stream);
-                file.FileInfo = reader.ReadSwfFileInfo();
-                reader = GetSwfStreamReader(file.FileInfo, stream);
-                file.Header = reader.ReadSwfHeader();
-
-                while (!reader.IsEOF) {
-                    var tagData = reader.ReadTagData();
-
-                    yield return tagData;
-                }
-
+                return IterateTags(stream);
             }
-
         }
+
+        protected IEnumerable<SwfTagData> IterateTags(Stream stream) {
+            var file = new SwfFile();
+            var reader = new SwfStreamReader(stream);
+            file.FileInfo = reader.ReadSwfFileInfo();
+            reader = GetSwfStreamReader(file.FileInfo, stream);
+            file.Header = reader.ReadSwfHeader();
+
+            while (!reader.IsEOF) {
+                var tagData = reader.ReadTagData();
+
+                yield return tagData;
+            }
+        }
+
         protected string GetFileName(SwfTagData tagData) {
             return string.Format("{0}.bin", GetTagHash(tagData));
         }

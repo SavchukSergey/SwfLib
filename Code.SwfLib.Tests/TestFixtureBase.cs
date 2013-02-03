@@ -65,6 +65,12 @@ namespace Code.SwfLib.Tests {
             return new string(res);
         }
 
+        protected SwfFile ReadSwfFile(string resourceName) {
+            using (var stream = OpenEmbeddedResource(resourceName)) {
+                return SwfFile.ReadFrom(stream);
+            }
+        }
+
         protected Stream OpenEmbeddedResource(string resourceName) {
             var fullPath = "Code.SwfLib.Tests.Resources.";
             if (!string.IsNullOrEmpty(EmbeddedResourceFolder)) fullPath += EmbeddedResourceFolder + ".";

@@ -36,7 +36,7 @@ namespace Code.SwfLib {
             if (tag.RestData != null && tag.RestData.Length > 0) {
                 writer.WriteBytes(tag.RestData);
             }
-            return new SwfTagData { Type = tag.TagType, Data = mem.ToArray() };
+            return new SwfTagData { Type = tag.TagType, Data = mem.ToArray()};
         }
 
         #region Display list tags

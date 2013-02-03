@@ -45,12 +45,8 @@ namespace Code.SwfLib {
         }
 
         public void WriteFixedPoint16(double val, uint bits) {
-            var integer = Math.Floor(val);
-            var fraction = val - integer;
-            var low = (ushort)(fraction * 65536);
-            var hi = (ushort)integer;
-            WriteUnsignedBits(hi, bits - 16);
-            WriteUnsignedBits(low, 16);
+            var integer = (int)Math.Floor(val * 65536);
+            WriteSignedBits(integer, bits);
         }
 
         public void WriteFixed(double val) {
