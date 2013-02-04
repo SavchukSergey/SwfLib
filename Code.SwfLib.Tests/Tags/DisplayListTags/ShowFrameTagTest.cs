@@ -19,6 +19,8 @@ namespace Code.SwfLib.Tests.Tags.DisplayListTags {
             };
             var res = tagReader.ReadTag<ShowFrameTag>(tagData);
             Assert.IsNotNull(res);
+
+            Assert.IsNull(res.RestData);
         }
 
         [Test]

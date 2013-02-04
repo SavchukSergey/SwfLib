@@ -1,31 +1,35 @@
 ﻿using System.IO;
 using Code.SwfLib.Tags;
-using Code.SwfLib.Tags.ControlTags;
+using Code.SwfLib.Tags.DisplayListTags;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests.Tags.ControlTags {
+namespace Code.SwfLib.Tests.Tags.DisplayListTags {
     [TestFixture]
-    public class EndTagTest : TestFixtureBase {
+    public class RemoveObject2TagTest : TestFixtureBase {
 
-        private static readonly byte[] _etalon = new byte[] { };
+        private static readonly byte[] _etalon = new byte[] {0x30, 0x40 };
 
         [Test]
         public void ReadTest() {
             var mem = new MemoryStream(_etalon);
             var tagReader = new SwfTagDeserializer(new SwfFile());
             var tagData = new SwfTagData {
-                Type = SwfTagType.End,
+                Type = SwfTagType.RemoveObject2,
                 Data = mem.ToArray()
             };
-            var res = tagReader.ReadTag<EndTag>(tagData);
+            var res = tagReader.ReadTag<RemoveObject2Tag>(tagData);
             Assert.IsNotNull(res);
+
+            Assert.AreEqual(0x4030, res.Depth);
 
             Assert.IsNull(res.RestData);
         }
 
         [Test]
         public void WriteTest() {
-            var tag = new EndTag();
+            var tag = new RemoveObject2Tag {
+                Depth = 0x4030
+            };
 
             var tagWriter = new SwfTagSerializer(new SwfFile());
             var tagData = tagWriter.GetTagData(tag);
