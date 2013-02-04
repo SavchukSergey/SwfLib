@@ -58,6 +58,7 @@
     <Compile Include="Actions\ActionWriterTest.cs" />
     <Compile Include="Actions\SwfActionFactoryTest.cs" />
     <Compile Include="AssertExt.cs" />
+    <Compile Include="BasicTypes\BitTest.cs" />
     <Compile Include="BasicTypes\RectTest.cs" />
     <Compile Include="Bin2BinTests.cs" />
     <Compile Include="BitsCountTest.cs" />
