@@ -442,16 +442,14 @@ namespace Code.SwfLib {
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont3Tag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
-            return null;
 
-            var wideCodes = tag.Glyphs.Any(item => item.Code > 255);
             writer.WriteBit(tag.HasLayout);
             writer.WriteBit(tag.ShiftJIS);
             writer.WriteBit(tag.SmallText);
             writer.WriteBit(tag.ANSI);
 
             writer.WriteBit(tag.WideOffsets);
-            writer.WriteBit(wideCodes);
+            writer.WriteBit(tag.WideCodes);
             writer.WriteBit(tag.Italic);
             writer.WriteBit(tag.Bold);
 
@@ -493,7 +491,7 @@ namespace Code.SwfLib {
 
             writer.WriteBytes(shapesStream.ToArray());
             foreach (var glyph in tag.Glyphs) {
-                if (wideCodes) {
+                if (tag.WideCodes) {
                     writer.WriteUInt16(glyph.Code);
                 } else {
                     writer.WriteByte((byte)glyph.Code);
@@ -515,7 +513,7 @@ namespace Code.SwfLib {
 
                 writer.WriteUInt16((ushort)tag.KerningRecords.Count);
                 foreach (var kerningRecord in tag.KerningRecords) {
-                    writer.WriteKerningRecord(kerningRecord, wideCodes);
+                    writer.WriteKerningRecord(kerningRecord, tag.WideCodes);
                 }
             }
             return null;

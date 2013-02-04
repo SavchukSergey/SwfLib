@@ -22,7 +22,7 @@ namespace Code.SwfLib.Tests.Samples.Fonts {
             var lastShape = tag.Glyphs.Last();
             Assert.AreEqual(120, lastShape.Code);
             Assert.AreEqual(43, lastShape.Records.Count);
-            //Assert.AreEqual("cbf1ec2485e16c9b624af319cb8d32af", GetTagHash(tag));
+            Assert.AreEqual("cbf1ec2485e16c9b624af319cb8d32af", GetTagHash(tag));
         }
 
     }

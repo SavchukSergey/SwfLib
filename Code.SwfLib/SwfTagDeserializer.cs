@@ -471,8 +471,6 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFont3Tag tag, SwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
-            tag.FontName = "";
-            return tag;
 
             tag.HasLayout = reader.ReadBit();
             tag.ShiftJIS = reader.ReadBit();
@@ -480,7 +478,7 @@ namespace Code.SwfLib {
             tag.ANSI = reader.ReadBit();
 
             tag.WideOffsets = reader.ReadBit();
-            var wideCodes = reader.ReadBit();
+            tag.WideCodes = reader.ReadBit();
             tag.Italic = reader.ReadBit();
             tag.Bold = reader.ReadBit();
 
@@ -505,7 +503,7 @@ namespace Code.SwfLib {
 
             for (var i = 0; i < glyphsCount; i++) {
                 var glyph = tag.Glyphs[i];
-                glyph.Code = wideCodes ? reader.ReadUInt16() : reader.ReadByte();
+                glyph.Code = tag.WideCodes ? reader.ReadUInt16() : reader.ReadByte();
             }
 
             if (tag.HasLayout) {
@@ -525,7 +523,7 @@ namespace Code.SwfLib {
 
                 var kerningCounts = reader.ReadUInt16();
                 for (var i = 0; i < kerningCounts; i++) {
-                    tag.KerningRecords.Add(reader.ReadKerningRecord(wideCodes));
+                    tag.KerningRecords.Add(reader.ReadKerningRecord(tag.WideCodes));
                 }
             }
             return tag;

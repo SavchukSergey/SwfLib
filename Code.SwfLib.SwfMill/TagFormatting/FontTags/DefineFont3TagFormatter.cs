@@ -37,6 +37,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                 case WIDE_GLYPH_OFFSETS_ATTRIB:
                     tag.WideOffsets = ParseBoolFromDigit(attrib);
                     break;
+                case "wideCodes":
+                    tag.WideCodes = CommonFormatter.ParseBool(attrib.Value);
+                    break;
                 case ITALIC_ATTRIB:
                     tag.Italic = ParseBoolFromDigit(attrib);
                     break;
@@ -103,6 +106,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             xTag.Add(new XAttribute(UNICODE_ATTRIB, FormatBoolToDigit(tag.SmallText)));
             xTag.Add(new XAttribute(ANSI_ATTRIB, FormatBoolToDigit(tag.ANSI)));
             xTag.Add(new XAttribute(WIDE_GLYPH_OFFSETS_ATTRIB, FormatBoolToDigit(tag.WideOffsets)));
+            xTag.Add(new XAttribute("wideCodes", CommonFormatter.Format(tag.WideCodes)));
             xTag.Add(new XAttribute(ITALIC_ATTRIB, FormatBoolToDigit(tag.Italic)));
             xTag.Add(new XAttribute(BOLD_ATTRIB, FormatBoolToDigit(tag.Bold)));
             xTag.Add(new XAttribute(NAME_ATTRIB, tag.FontName));
