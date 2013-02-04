@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Code.SwfLib.Actions;
 using Code.SwfLib.Buttons;
@@ -36,7 +36,7 @@ namespace Code.SwfLib {
             if (tag.RestData != null && tag.RestData.Length > 0) {
                 writer.WriteBytes(tag.RestData);
             }
-            return new SwfTagData { Type = tag.TagType, Data = mem.ToArray()};
+            return new SwfTagData { Type = tag.TagType, Data = mem.ToArray() };
         }
 
         #region Display list tags
@@ -459,37 +459,22 @@ namespace Code.SwfLib {
             writer.WriteBytes(name);
             writer.WriteUInt16((ushort)tag.Glyphs.Count);
 
-            var offsetTable = new uint[tag.Glyphs.Count];
-
-            var shapesStream = new MemoryStream();
-            var shapesSwfWriter = new SwfStreamWriter(shapesStream);
-            for (int i = 0; i < tag.Glyphs.Count; i++) {
-                offsetTable[i] = (uint)shapesStream.Position;
-                var glyph = tag.Glyphs[i];
-                shapesSwfWriter.WriteShapeRecordsRGB(glyph.Records, 1, 0);
-                shapesSwfWriter.FlushBits();
-            }
+            var offsets = new List<uint>();
+            var shapesData = SerializeGlyphsData(tag.Glyphs, offsets);
 
             var offsetTableSize = (uint)(tag.WideOffsets ? 4 * tag.Glyphs.Count : 2 * tag.Glyphs.Count);
-            var firstShapeOffset = offsetTableSize + (tag.WideOffsets ? 4 * tag.Glyphs.Count : 2 * tag.Glyphs.Count);
+            var firstShapeOffset = offsetTableSize + (uint)(tag.WideOffsets ? 4 : 2);
 
-            foreach (var offset in offsetTable) {
-                var resOffset = offset + firstShapeOffset;
-                if (tag.WideOffsets) {
-                    writer.WriteUInt32((uint)resOffset);
-                } else {
-                    writer.WriteUInt16((ushort)resOffset);
-                }
-            }
+            WriteOffsets(writer, offsets, firstShapeOffset, tag.WideOffsets);
 
-            var codeTableOffset = offsetTableSize + (uint)shapesStream.Length;
+            var codeTableOffset = offsetTableSize + (uint)shapesData.Length;
             if (tag.WideOffsets) {
                 writer.WriteUInt32(codeTableOffset);
             } else {
                 writer.WriteUInt16((ushort)codeTableOffset);
             }
 
-            writer.WriteBytes(shapesStream.ToArray());
+            writer.WriteBytes(shapesData);
             foreach (var glyph in tag.Glyphs) {
                 if (tag.WideCodes) {
                     writer.WriteUInt16(glyph.Code);
@@ -517,6 +502,28 @@ namespace Code.SwfLib {
                 }
             }
             return null;
+        }
+
+        private void WriteOffsets(SwfStreamWriter writer, IEnumerable<uint> offsets, uint baseOffset, bool wideOffsets) {
+            foreach (var offset in offsets) {
+                var resOffset = offset + baseOffset;
+                if (wideOffsets) {
+                    writer.WriteUInt32(resOffset);
+                } else {
+                    writer.WriteUInt16((ushort)resOffset);
+                }
+            }
+        }
+
+        private byte[] SerializeGlyphsData(IEnumerable<Glyph> glyphs, IList<uint> offsets) {
+            var shapesStream = new MemoryStream();
+            var shapesSwfWriter = new SwfStreamWriter(shapesStream);
+            foreach (var glyph in glyphs) {
+                offsets.Add((uint)shapesStream.Position);
+                shapesSwfWriter.WriteShapeRecordsRGB(glyph.Records, 1, 0);
+                shapesSwfWriter.FlushBits();
+            }
+            return shapesStream.ToArray();
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont4Tag tag, SwfStreamWriter writer) {
