@@ -1,5 +1,6 @@
 ﻿using System;
 using Code.SwfLib.Data;
+using Code.SwfLib.Utils;
 
 namespace Code.SwfLib {
     public static class ColorTransformStreamExt {
@@ -40,7 +41,7 @@ namespace Code.SwfLib {
         }
 
         public static void WriteColorTransformRGB(this SwfStreamWriter writer, ref ColorTransformRGB tranform) {
-            var bitsCounter = new BitsCount(0);
+            var bitsCounter = new SignedBitsCount(0);
             if (tranform.HasAddTerms) {
                 bitsCounter.AddValue(tranform.RedAddTerm);
                 bitsCounter.AddValue(tranform.GreenAddTerm);
@@ -53,7 +54,7 @@ namespace Code.SwfLib {
             }
             writer.WriteBit(tranform.HasAddTerms);
             writer.WriteBit(tranform.HasMultTerms);
-            var bits = bitsCounter.GetSignedBits();
+            var bits = bitsCounter.GetBits();
             writer.WriteUnsignedBits(bits, 4);
             if (tranform.HasMultTerms) {
                 writer.WriteSignedBits(tranform.RedMultTerm, bits);
@@ -112,7 +113,7 @@ namespace Code.SwfLib {
         }
 
         public static void WriteColorTransformRGBA(this SwfStreamWriter writer, ref ColorTransformRGBA tranform) {
-            var bitsCounter = new BitsCount(0);
+            var bitsCounter = new SignedBitsCount(0);
             if (tranform.HasAddTerms) {
                 bitsCounter.AddValue(tranform.RedAddTerm);
                 bitsCounter.AddValue(tranform.GreenAddTerm);
@@ -127,7 +128,7 @@ namespace Code.SwfLib {
             }
             writer.WriteBit(tranform.HasAddTerms);
             writer.WriteBit(tranform.HasMultTerms);
-            var bits = bitsCounter.GetSignedBits();
+            var bits = bitsCounter.GetBits();
             writer.WriteUnsignedBits(bits, 4);
             if (tranform.HasMultTerms) {
                 writer.WriteSignedBits(tranform.RedMultTerm, bits);

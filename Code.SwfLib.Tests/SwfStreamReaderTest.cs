@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Utils;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
@@ -15,7 +16,7 @@ namespace Code.SwfLib.Tests {
             const ushort hi = val >> 16;
             const ushort low = val & 0xffff;
             const double expected = hi + low / 65536.0;
-            var bits = new BitsCount(hi).GetSignedBits();
+            var bits = new SignedBitsCount(hi).GetBits();
             writer.WriteUnsignedBits(hi, bits);
             writer.WriteUnsignedBits(low, 16);
             writer.FlushBits();
@@ -30,7 +31,7 @@ namespace Code.SwfLib.Tests {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             const int val = -81920;
-            var bits = new BitsCount(val).GetSignedBits();
+            var bits = new SignedBitsCount(val).GetBits();
             writer.WriteSignedBits(val, bits);
             writer.FlushBits();
             mem.Seek(0, SeekOrigin.Begin);

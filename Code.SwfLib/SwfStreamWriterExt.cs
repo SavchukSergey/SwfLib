@@ -1,5 +1,6 @@
 ﻿using System;
 using Code.SwfLib.Data;
+using Code.SwfLib.Utils;
 
 namespace Code.SwfLib {
     public static class SwfStreamWriterExt {
@@ -56,8 +57,8 @@ namespace Code.SwfLib {
         }
 
         public static void WriteRect(this SwfStreamWriter writer, ref SwfRect rect) {
-            var btCount = new BitsCount(rect.XMin, rect.XMax, rect.YMin, rect.YMax);
-            var bits = btCount.GetSignedBits();
+            var btCount = new SignedBitsCount(rect.XMin, rect.XMax, rect.YMin, rect.YMax);
+            var bits = btCount.GetBits();
             if (bits < 1) bits = 1;
             writer.WriteUnsignedBits(bits, 5);
             writer.WriteSignedBits(rect.XMin, bits);
@@ -77,7 +78,7 @@ namespace Code.SwfLib {
             if (hasScale) {
                 var sx = (int)(matrix.ScaleX * 65536.0);
                 var sy = (int)(matrix.ScaleY * 65536.0);
-                var scaleBits = new BitsCount(sx, sy).GetSignedBits();
+                var scaleBits = new SignedBitsCount(sx, sy).GetBits();
                 if (scaleBits < 1) scaleBits = 1;
                 writer.WriteUnsignedBits(scaleBits, 5);
                 writer.WriteFixedPoint16(matrix.ScaleX, scaleBits);
@@ -88,13 +89,13 @@ namespace Code.SwfLib {
             if (hasRotate) {
                 var rx = (int)(matrix.RotateSkew0 * 65536.0);
                 var ry = (int)(matrix.RotateSkew1 * 65536.0);
-                var rotateBits = new BitsCount(rx, ry).GetSignedBits();
+                var rotateBits = new SignedBitsCount(rx, ry).GetBits();
                 if (rotateBits < 1) rotateBits = 1;
                 writer.WriteUnsignedBits(rotateBits, 5);
                 writer.WriteFixedPoint16(matrix.RotateSkew0, rotateBits);
                 writer.WriteFixedPoint16(matrix.RotateSkew1, rotateBits);
             }
-            var translateBits = new BitsCount(matrix.TranslateX, matrix.TranslateY).GetSignedBits();
+            var translateBits = new SignedBitsCount(matrix.TranslateX, matrix.TranslateY).GetBits();
             writer.WriteUnsignedBits(translateBits, 5);
             writer.WriteSignedBits(matrix.TranslateX, translateBits);
             writer.WriteSignedBits(matrix.TranslateY, translateBits);

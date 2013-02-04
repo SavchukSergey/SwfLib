@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Code.SwfLib.Actions;
@@ -18,6 +17,7 @@ using Code.SwfLib.Tags.FontTags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.TextTags;
 using Code.SwfLib.Text;
+using Code.SwfLib.Utils;
 
 namespace Code.SwfLib {
     public class SwfTagSerializer : ISwfTagVisitor<SwfStreamWriter, SwfTagData> {
@@ -296,7 +296,7 @@ namespace Code.SwfLib {
 
             writer.WriteFillStylesRGB(tag.FillStyles, false);
             writer.WriteLineStylesRGB(tag.LineStyles, false);
-            writer.WriteShapeRecordsRGB(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+            writer.WriteShapeRecordsRGB(tag.ShapeRecords, new UnsignedBitsCount((uint) tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint) tag.LineStyles.Count).GetBits());
 
             writer.FlushBits();
             return null;
@@ -308,7 +308,7 @@ namespace Code.SwfLib {
 
             writer.WriteFillStylesRGB(tag.FillStyles, true);
             writer.WriteLineStylesRGB(tag.LineStyles, true);
-            writer.WriteShapeRecordsRGB(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+            writer.WriteShapeRecordsRGB(tag.ShapeRecords, new UnsignedBitsCount((uint) tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint) tag.LineStyles.Count).GetBits());
 
             writer.FlushBits();
             return null;
@@ -320,7 +320,7 @@ namespace Code.SwfLib {
 
             writer.WriteFillStylesRGBA(tag.FillStyles);
             writer.WriteLineStylesRGBA(tag.LineStyles);
-            writer.WriteShapeRecordsRGBA(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+            writer.WriteShapeRecordsRGBA(tag.ShapeRecords, new UnsignedBitsCount((uint) tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint) tag.LineStyles.Count).GetBits());
 
             writer.FlushBits();
             return null;
@@ -335,7 +335,7 @@ namespace Code.SwfLib {
 
             writer.WriteFillStylesRGBA(tag.FillStyles);
             writer.WriteLineStylesEx(tag.LineStyles);
-            writer.WriteShapeRecordsEx(tag.ShapeRecords, new BitsCount(tag.FillStyles.Count).GetUnsignedBits(), new BitsCount(tag.LineStyles.Count).GetUnsignedBits());
+            writer.WriteShapeRecordsEx(tag.ShapeRecords, new UnsignedBitsCount((uint) tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint) tag.LineStyles.Count).GetBits());
 
             writer.FlushBits();
             return null;
@@ -562,16 +562,16 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteRect(ref tag.TextBounds);
             writer.WriteMatrix(ref tag.TextMatrix);
-            var glyphBitsCounter = new BitsCount(0);
-            var advanceBitsCounter = new BitsCount(0);
+            var glyphBitsCounter = new UnsignedBitsCount(0);
+            var advanceBitsCounter = new SignedBitsCount(0);
             foreach (var textRecord in tag.TextRecords) {
                 foreach (var glyph in textRecord.Glyphs) {
                     glyphBitsCounter.AddValue(glyph.GlyphIndex);
                     advanceBitsCounter.AddValue(glyph.GlyphAdvance);
                 }
             }
-            var glyphBits = glyphBitsCounter.GetUnsignedBits();
-            var advanceBits = advanceBitsCounter.GetSignedBits();
+            var glyphBits = glyphBitsCounter.GetBits();
+            var advanceBits = advanceBitsCounter.GetBits();
 
             writer.WriteByte((byte)glyphBits);
             writer.WriteByte((byte)advanceBits);
@@ -587,16 +587,16 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteRect(ref tag.TextBounds);
             writer.WriteMatrix(ref tag.TextMatrix);
-            var glyphBitsCounter = new BitsCount(0);
-            var advanceBitsCounter = new BitsCount(0);
+            var glyphBitsCounter = new UnsignedBitsCount(0);
+            var advanceBitsCounter = new SignedBitsCount(0);
             foreach (var textRecord in tag.TextRecords) {
                 foreach (var glyph in textRecord.Glyphs) {
                     glyphBitsCounter.AddValue(glyph.GlyphIndex);
                     advanceBitsCounter.AddValue(glyph.GlyphAdvance);
                 }
             }
-            var glyphBits = glyphBitsCounter.GetUnsignedBits();
-            var advanceBits = advanceBitsCounter.GetSignedBits();
+            var glyphBits = glyphBitsCounter.GetBits();
+            var advanceBits = advanceBitsCounter.GetBits();
 
             writer.WriteByte((byte)glyphBits);
             writer.WriteByte((byte)advanceBits);

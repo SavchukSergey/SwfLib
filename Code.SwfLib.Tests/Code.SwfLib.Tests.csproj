@@ -64,7 +64,7 @@
     <Compile Include="BasicTypes\MatrixTest.cs" />
     <Compile Include="BasicTypes\RectTest.cs" />
     <Compile Include="Bin2BinTests.cs" />
-    <Compile Include="BitsCountTest.cs" />
+    <Compile Include="Utils\UnsignedBitsCountTest.cs" />
     <Compile Include="ColorTransformStreamExtTest.cs" />
     <Compile Include="Tags\ControlTags\EndTagTest.cs" />
     <Compile Include="Tags\DefineShapeTest.cs" />
@@ -72,6 +72,7 @@
     <Compile Include="Tags\DisplayListTags\RemoveObject2TagTest.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObjectTagTest.cs" />
     <Compile Include="Tags\DisplayListTags\ShowFrameTagTest.cs" />
+    <Compile Include="Utils\SignedBitsCountTest.cs" />
     <Compile Include="Utils\DualSwfStreamReader.cs" />
     <Compile Include="ExternalEtalonTests\DefineShapeTagTest.cs" />
     <Compile Include="ExternalEtalonTests\ExternalEtalonTestFixtureBase.cs" />

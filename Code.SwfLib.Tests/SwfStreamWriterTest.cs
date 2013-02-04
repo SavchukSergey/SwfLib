@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Utils;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
@@ -15,7 +16,7 @@ namespace Code.SwfLib.Tests {
             const ushort hi = val >> 16;
             const ushort low = val & 0xffff;
             const double expected = hi + low / 65536.0;
-            var bits = new BitsCount(hi).GetSignedBits() + 16;
+            var bits = new SignedBitsCount(hi).GetBits() + 16;
             writer.WriteFixedPoint16(expected, bits);
             writer.FlushBits();
             mem.Seek(0, SeekOrigin.Begin);
@@ -28,7 +29,7 @@ namespace Code.SwfLib.Tests {
         public void WriteNegativeFixedPoint16FromBitsTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            var bits = new BitsCount(-81920).GetSignedBits();
+            var bits = new SignedBitsCount(-81920).GetBits();
             writer.WriteFixedPoint16(-1.25, bits);
             writer.FlushBits();
             mem.Seek(0, SeekOrigin.Begin);

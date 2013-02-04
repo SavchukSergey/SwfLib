@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Code.SwfLib.Shapes.Records;
+using Code.SwfLib.Utils;
 
 namespace Code.SwfLib.Shapes {
     public class ShapeRecordWriter : IShapeRecordVisitor<ShapeRecordWriter.ShapeRecordWriteContext, ShapeRecordWriter.ShapeRecordWriteContext> {
@@ -48,9 +49,9 @@ namespace Code.SwfLib.Shapes {
             writer.WriteBit(stateFillStyle0);
             writer.WriteBit(stateMoveTo);
             if (stateMoveTo) {
-                var cnt = new BitsCount(record.MoveDeltaX, record.MoveDeltaY);
-                var moveBits = cnt.GetSignedBits();
-                if (moveBits < 1) moveBits = 1; //TODO: adobe?
+                var cnt = new SignedBitsCount(record.MoveDeltaX, record.MoveDeltaY);
+                var moveBits = cnt.GetBits();
+                if (moveBits < 1) moveBits = 1; //TODO: adobe?.. remove.. shoudl work
                 writer.WriteUnsignedBits(moveBits, 5);
                 writer.WriteSignedBits(record.MoveDeltaX, moveBits);
                 writer.WriteSignedBits(record.MoveDeltaY, moveBits);
@@ -78,8 +79,8 @@ namespace Code.SwfLib.Shapes {
             if (record.StateNewStyles) {
                 writer.WriteFillStylesRGB(record.FillStyles, ctx.AllowBigArray);
                 writer.WriteLineStylesRGB(record.LineStyles, ctx.AllowBigArray);
-                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count).GetUnsignedBits();
-                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count).GetUnsignedBits();
+                ctx.FillStyleBits = new UnsignedBitsCount((uint) record.FillStyles.Count).GetBits();
+                ctx.LineStyleBits = new UnsignedBitsCount((uint) record.LineStyles.Count).GetBits();
                 if (ctx.FillStyleBits < 1) ctx.FillStyleBits = 1; //TODO: adobe?
                 writer.WriteUnsignedBits(ctx.FillStyleBits, 4);
                 writer.WriteUnsignedBits(ctx.LineStyleBits, 4);
@@ -93,8 +94,8 @@ namespace Code.SwfLib.Shapes {
             if (record.StateNewStyles) {
                 writer.WriteFillStylesRGBA(record.FillStyles);
                 writer.WriteLineStylesRGBA(record.LineStyles);
-                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count).GetUnsignedBits();
-                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count).GetUnsignedBits();
+                ctx.FillStyleBits = new UnsignedBitsCount((uint) record.FillStyles.Count).GetBits();
+                ctx.LineStyleBits = new UnsignedBitsCount((uint) record.LineStyles.Count).GetBits();
                 if (ctx.FillStyleBits < 1) ctx.FillStyleBits = 1; //TODO: adobe?
                 writer.WriteUnsignedBits(ctx.FillStyleBits, 4);
                 writer.WriteUnsignedBits(ctx.LineStyleBits, 4);
@@ -108,8 +109,8 @@ namespace Code.SwfLib.Shapes {
             if (record.StateNewStyles) {
                 writer.WriteFillStylesRGBA(record.FillStyles);
                 writer.WriteLineStylesEx(record.LineStyles);
-                ctx.FillStyleBits = new BitsCount(record.FillStyles.Count).GetUnsignedBits();
-                ctx.LineStyleBits = new BitsCount(record.LineStyles.Count).GetUnsignedBits();
+                ctx.FillStyleBits = new UnsignedBitsCount((uint) record.FillStyles.Count).GetBits();
+                ctx.LineStyleBits = new UnsignedBitsCount((uint) record.LineStyles.Count).GetBits();
                 if (ctx.FillStyleBits < 1) ctx.FillStyleBits = 1; //TODO: adobe?
                 writer.WriteUnsignedBits(ctx.FillStyleBits, 4);
                 writer.WriteUnsignedBits(ctx.LineStyleBits, 4);
@@ -121,7 +122,7 @@ namespace Code.SwfLib.Shapes {
             var writer = ctx.Writer;
             writer.WriteBit(true);
             writer.WriteBit(true);
-            var actualBits = new BitsCount(record.DeltaX, record.DeltaY).GetSignedBits();
+            var actualBits = new SignedBitsCount(record.DeltaX, record.DeltaY).GetBits();
             if (actualBits < 2) actualBits = 2;
             writer.WriteUnsignedBits(actualBits - 2u, 4);
             bool genLineFlags = record.DeltaX != 0 && record.DeltaY != 0;
@@ -137,7 +138,7 @@ namespace Code.SwfLib.Shapes {
             var writer = ctx.Writer;
             writer.WriteBit(true);
             writer.WriteBit(false);
-            var actualBits = new BitsCount(record.ControlDeltaX, record.ControlDeltaY, record.AnchorDeltaX, record.AnchorDeltaY).GetSignedBits();
+            var actualBits = new SignedBitsCount(record.ControlDeltaX, record.ControlDeltaY, record.AnchorDeltaX, record.AnchorDeltaY).GetBits();
             if (actualBits < 2) actualBits = 2;
             writer.WriteUnsignedBits(actualBits - 2u, 4);
             writer.WriteSignedBits(record.ControlDeltaX, actualBits);
