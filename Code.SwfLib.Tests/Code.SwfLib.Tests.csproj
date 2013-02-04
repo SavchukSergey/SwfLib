@@ -64,6 +64,7 @@
     <Compile Include="Bin2BinTests.cs" />
     <Compile Include="BitsCountTest.cs" />
     <Compile Include="ColorTransformStreamExtTest.cs" />
+    <Compile Include="Tags\ControlTags\EndTagTest.cs" />
     <Compile Include="Tags\DefineShapeTest.cs" />
     <Compile Include="Utils\DualSwfStreamReader.cs" />
     <Compile Include="ExternalEtalonTests\DefineShapeTagTest.cs" />
