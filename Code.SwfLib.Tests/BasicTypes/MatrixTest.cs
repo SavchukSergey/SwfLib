@@ -6,6 +6,25 @@ namespace Code.SwfLib.Tests.BasicTypes {
     public class MatrixTest : TestFixtureBase {
 
         [Test]
+        public void ReadEmptyMatrixTest() {
+            var mem = new MemoryStream(new byte[] { 0 });
+            var reader = new SwfStreamReader(mem);
+            var matrix = reader.ReadMatrix();
+            Assert.IsFalse(matrix.HasScale);
+            Assert.IsFalse(matrix.HasRotate);
+            Assert.AreEqual(0, matrix.TranslateX);
+            Assert.AreEqual(0, matrix.TranslateY);
+        }
+
+        [Test]
+        public void WriteEmptyMatrixTest() {
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteMatrix(new SwfMatrix ());
+            Assert.AreEqual(new byte[] {0}, mem.ToArray());
+        }
+
+        [Test]
         public void ReadMatrixFromBitsTest() {
             var mem = new MemoryStream();
             WriteBits(mem,

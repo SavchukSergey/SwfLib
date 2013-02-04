@@ -63,6 +63,10 @@ namespace Code.SwfLib {
             writer.FlushBits();
         }
 
+        public static void WriteMatrix(this SwfStreamWriter writer, SwfMatrix matrix) {
+            writer.WriteMatrix(ref matrix);
+        }
+
         public static void WriteMatrix(this SwfStreamWriter writer, ref SwfMatrix matrix) {
             bool hasScale = matrix.HasScale;
             writer.WriteBit(hasScale);
