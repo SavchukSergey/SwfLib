@@ -68,6 +68,7 @@
     <Compile Include="ColorTransformStreamExtTest.cs" />
     <Compile Include="Tags\ControlTags\EndTagTest.cs" />
     <Compile Include="Tags\DefineShapeTest.cs" />
+    <Compile Include="Tags\DisplayListTags\PlaceObjectTagTest.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObject2TagTest.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObjectTagTest.cs" />
     <Compile Include="Tags\DisplayListTags\ShowFrameTagTest.cs" />
