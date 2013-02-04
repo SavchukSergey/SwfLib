@@ -64,6 +64,7 @@
     <Compile Include="BasicTypes\MatrixTest.cs" />
     <Compile Include="BasicTypes\RectTest.cs" />
     <Compile Include="Bin2BinTests.cs" />
+    <Compile Include="Tags\DisplayListTags\PlaceObject3TagTest.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject2TagTest.cs" />
     <Compile Include="Utils\UnsignedBitsCountTest.cs" />
     <Compile Include="ColorTransformStreamExtTest.cs" />
