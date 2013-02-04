@@ -335,7 +335,7 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShapeTag tag, SwfStreamReader reader) {
             tag.ShapeID = reader.ReadUInt16();
-            reader.ReadRect(out tag.ShapeBounds);
+            tag.ShapeBounds = reader.ReadRect();
             reader.ReadToFillStylesRGB(tag.FillStyles, false);
             reader.ReadToLineStylesRGB(tag.LineStyles, false);
             reader.ReadToShapeRecordsRGB(tag.ShapeRecords);

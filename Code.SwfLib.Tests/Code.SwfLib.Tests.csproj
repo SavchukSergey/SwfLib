@@ -58,9 +58,11 @@
     <Compile Include="Actions\ActionWriterTest.cs" />
     <Compile Include="Actions\SwfActionFactoryTest.cs" />
     <Compile Include="AssertExt.cs" />
+    <Compile Include="BasicTypes\RectTest.cs" />
     <Compile Include="Bin2BinTests.cs" />
     <Compile Include="BitsCountTest.cs" />
     <Compile Include="ColorTransformStreamExtTest.cs" />
+    <Compile Include="Tags\DefineShapeTest.cs" />
     <Compile Include="Utils\DualSwfStreamReader.cs" />
     <Compile Include="ExternalEtalonTests\DefineShapeTagTest.cs" />
     <Compile Include="ExternalEtalonTests\ExternalEtalonTestFixtureBase.cs" />

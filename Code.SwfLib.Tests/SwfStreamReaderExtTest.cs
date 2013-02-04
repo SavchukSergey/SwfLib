@@ -115,22 +115,6 @@ namespace Code.SwfLib.Tests
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }
 
-        [Test]
-        public void ReadRectTest()
-        {
-            var mem = new MemoryStream();
-            WriteBits(mem, "01100", "0000.00000100", "0100.10001111", "0000.00001000", "0000.11101110");
-            var reader = new SwfStreamReader(mem);
-            SwfRect rect;
-            reader.ReadRect(out rect);
-            Assert.AreEqual(0x004, rect.XMin, "Left");
-            Assert.AreEqual(0x48f, rect.XMax, "Right");
-            Assert.AreEqual(0x008, rect.YMin, "Top");
-            Assert.AreEqual(0x0ee, rect.YMax, "Bottom");
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-
-        }
 
         [Test]
         public void ReadMatrixFromBitsTest()
