@@ -610,9 +610,9 @@ namespace Code.SwfLib {
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineEditTextTag tag, SwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
-            writer.WriteRect(ref tag.Bounds);
-            writer.FlushBits();
-            writer.WriteBit(tag.HasText);
+            writer.WriteRect(tag.Bounds);
+
+            writer.WriteBit(tag.InitialText != null);
             writer.WriteBit(tag.WordWrap);
             writer.WriteBit(tag.Multiline);
             writer.WriteBit(tag.Password);
@@ -620,6 +620,7 @@ namespace Code.SwfLib {
             writer.WriteBit(tag.TextColor.HasValue);
             writer.WriteBit(tag.MaxLength.HasValue);
             writer.WriteBit(tag.HasFont);
+
             writer.WriteBit(tag.HasFontClass);
             writer.WriteBit(tag.AutoSize);
             writer.WriteBit(tag.HasLayout);
@@ -628,6 +629,7 @@ namespace Code.SwfLib {
             writer.WriteBit(tag.WasStatic);
             writer.WriteBit(tag.HTML);
             writer.WriteBit(tag.UseOutlines);
+
             if (tag.HasFont) {
                 writer.WriteUInt16(tag.FontID);
             }
@@ -651,7 +653,7 @@ namespace Code.SwfLib {
                 writer.WriteSInt16(tag.Leading);
             }
             writer.WriteString(tag.VariableName);
-            if (tag.HasText) {
+            if (tag.InitialText != null) {
                 writer.WriteString(tag.InitialText);
             }
             return null;

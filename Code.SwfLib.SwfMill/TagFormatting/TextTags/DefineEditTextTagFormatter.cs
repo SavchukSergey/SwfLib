@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.TextTags;
 
@@ -31,10 +30,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
         private const string SIZE_ELEM = "size";
         private const string COLOR_ELEM = "color";
 
-        //TODO: Font class name which is not supported by swfmill
-        //TODO: check bit flags seting+check fields list
         protected override bool AcceptTagAttribute(DefineEditTextTag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
+                case INITIAL_TEXT_ATTRIB:
+                    tag.InitialText = attrib.Value;
+                    break;
                 case WORD_WRAP_ATTRIB:
                     tag.WordWrap = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
@@ -47,12 +47,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                 case READONLY_ATTRIB:
                     tag.ReadOnly = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
+
                 case AUTOSIZE_ATTRIB:
                     tag.AutoSize = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
                 case HAS_LAYOUT_ATTRIB:
-                    tag.HasLayout = SwfMillPrimitives.ParseBoolean(attrib);
-                    //TODO: why does swfmill sets it?
+                    tag.HasLayout = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case NOT_SELECTABLE_ATTRIB:
                     tag.NoSelect = SwfMillPrimitives.ParseBoolean(attrib);
@@ -60,15 +60,22 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                 case HAS_BORDER_ATTRIB:
                     tag.Border = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
+                case "static":
+                    tag.WasStatic = CommonFormatter.ParseBool(attrib.Value);
+                    break;
                 case IS_HTML_ATTRIB:
                     tag.HTML = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
                 case USE_OUTLINES_ATTRIB:
                     tag.UseOutlines = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
+
                 case FONT_REF_ATTRIB:
                     tag.FontID = ushort.Parse(attrib.Value);
                     tag.HasFont = true;
+                    break;
+                case "fontClass":
+                    tag.FontClass = attrib.Value;
                     break;
                 case FONT_HEIGHT_ATTRIB:
                     tag.FontHeight = ushort.Parse(attrib.Value);
@@ -77,6 +84,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                 case MAX_LENGTH_ATTRIB:
                     tag.MaxLength = ushort.Parse(attrib.Value);
                     break;
+
                 case ALIGN_ATTRIB:
                     tag.Align = byte.Parse(attrib.Value);
                     tag.HasLayout = true;
@@ -100,13 +108,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                 case VARIABLE_NAME_ATTRIB:
                     tag.VariableName = attrib.Value;
                     break;
-                case INITIAL_TEXT_ATTRIB:
-                    tag.HasText = true;
-                    tag.InitialText = attrib.Value;
-                    break;
-                case "static":
-                    tag.WasStatic = CommonFormatter.ParseBool(attrib.Value);
-                    break;
                 default:
                     return false;
             }
@@ -129,10 +130,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
 
         protected override void FormatTagElement(DefineEditTextTag tag, XElement xTag) {
             xTag.Add(new XElement(SIZE_ELEM, XRect.ToXml(tag.Bounds)));
+
             xTag.Add(new XAttribute(WORD_WRAP_ATTRIB, SwfMillPrimitives.GetStringValue(tag.WordWrap)));
             xTag.Add(new XAttribute(MULTILINE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Multiline)));
             xTag.Add(new XAttribute(PASSWORD_ATTRIB, SwfMillPrimitives.GetStringValue(tag.Password)));
             xTag.Add(new XAttribute(READONLY_ATTRIB, SwfMillPrimitives.GetStringValue(tag.ReadOnly)));
+
             xTag.Add(new XAttribute(AUTOSIZE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.AutoSize)));
             xTag.Add(new XAttribute(HAS_LAYOUT_ATTRIB, FormatBoolToDigit(tag.HasLayout)));
             xTag.Add(new XAttribute(NOT_SELECTABLE_ATTRIB, FormatBoolToDigit(tag.NoSelect)));
@@ -140,8 +143,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             xTag.Add(new XAttribute("static", CommonFormatter.Format(tag.WasStatic)));
             xTag.Add(new XAttribute(IS_HTML_ATTRIB, FormatBoolToDigit(tag.HTML)));
             xTag.Add(new XAttribute(USE_OUTLINES_ATTRIB, FormatBoolToDigit(tag.UseOutlines)));
+
             if (tag.HasFont) {
                 xTag.Add(new XAttribute(FONT_REF_ATTRIB, tag.FontID));
+            }
+            if (tag.FontClass != null) {
+                xTag.Add(new XAttribute("fontClass", tag.FontClass));
+            }
+            if (tag.HasFont) {
                 xTag.Add(new XAttribute(FONT_HEIGHT_ATTRIB, tag.FontHeight));
             }
             if (tag.TextColor.HasValue) {
@@ -158,7 +167,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                 xTag.Add(new XAttribute(LEADING_ATTRIB, tag.Leading));
             }
             xTag.Add(new XAttribute(VARIABLE_NAME_ATTRIB, tag.VariableName));
-            if (tag.HasText) {
+            if (tag.InitialText != null) {
                 xTag.Add(new XAttribute(INITIAL_TEXT_ATTRIB, tag.InitialText));
             }
         }

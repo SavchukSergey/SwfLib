@@ -592,10 +592,9 @@ namespace Code.SwfLib {
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineEditTextTag tag, SwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
-            reader.ReadRect(out tag.Bounds);
-            reader.AlignToByte();
+            tag.Bounds = reader.ReadRect();
 
-            tag.HasText = reader.ReadBit();
+            var hasText = reader.ReadBit();
             tag.WordWrap = reader.ReadBit();
             tag.Multiline = reader.ReadBit();
             tag.Password = reader.ReadBit();
@@ -636,7 +635,7 @@ namespace Code.SwfLib {
                 tag.Leading = reader.ReadSInt16();
             }
             tag.VariableName = reader.ReadString();
-            if (tag.HasText) {
+            if (hasText) {
                 tag.InitialText = reader.ReadString();
             }
             return tag;

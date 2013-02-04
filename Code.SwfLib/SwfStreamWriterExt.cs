@@ -51,6 +51,10 @@ namespace Code.SwfLib {
             writer.WriteByte(val.Blue);
         }
 
+        public static void WriteRect(this SwfStreamWriter writer, SwfRect rect) {
+            writer.WriteRect(ref rect);
+        }
+
         public static void WriteRect(this SwfStreamWriter writer, ref SwfRect rect) {
             var btCount = new BitsCount(rect.XMin, rect.XMax, rect.YMin, rect.YMax);
             var bits = btCount.GetSignedBits();

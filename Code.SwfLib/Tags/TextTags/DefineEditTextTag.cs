@@ -7,8 +7,6 @@ namespace Code.SwfLib.Tags.TextTags {
 
         public SwfRect Bounds;
 
-        public bool HasText;
-
         public bool WordWrap;
 
         public bool Multiline;
