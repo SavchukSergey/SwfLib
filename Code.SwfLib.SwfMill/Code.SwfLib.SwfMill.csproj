@@ -142,6 +142,7 @@
     <Compile Include="TagFormatting\SoundTags\SoundStreamHeadTagFormatter.cs" />
     <Compile Include="TagFormatting\SoundTags\StartSound2TagFormatter.cs" />
     <Compile Include="TagFormatting\SoundTags\StartSoundTagFormatter.cs" />
+    <Compile Include="TagFormatting\TextTags\BaseDefineTextTagFormatter.cs" />
     <Compile Include="TagFormatting\TextTags\CSMTextSettingsTagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsJPEG2TagFormatter.cs" />
     <Compile Include="TagFormatting\BitmapTags\DefineBitsLosslessTagFormatter.cs" />
@@ -157,7 +158,7 @@
     <Compile Include="TagFormatting\ShapeTags\DefineShape4TagFormatter.cs" />
     <Compile Include="TagFormatting\ShapeTags\DefineShapeTagFormatter.cs" />
     <Compile Include="TagFormatting\DefineSpriteTagFormatter.cs" />
-    <Compile Include="TagFormatting\DefineTextTagFormatter.cs" />
+    <Compile Include="TagFormatting\TextTags\DefineTextTagFormatter.cs" />
     <Compile Include="TagFormatting\ActionTags\DoActionTagFormatter.cs" />
     <Compile Include="TagFormatting\ActionTags\DoInitActionTagFormatter.cs" />
     <Compile Include="TagFormatting\ControlTags\ExportAssetsTagFormatter.cs" />

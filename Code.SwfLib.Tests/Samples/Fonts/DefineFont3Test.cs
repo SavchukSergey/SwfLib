@@ -12,7 +12,7 @@ namespace Code.SwfLib.Tests.Samples.Fonts {
             Assert.IsNotNull(tag);
             Assert.AreEqual(17, tag.FontID);
 
-            Assert.AreEqual("BlacklightD", tag.FontName);
+            Assert.AreEqual("BlacklightD\0", tag.FontName);
             Assert.AreEqual(24, tag.Glyphs.Count);
 
             var secondGlyph = tag.Glyphs[1];

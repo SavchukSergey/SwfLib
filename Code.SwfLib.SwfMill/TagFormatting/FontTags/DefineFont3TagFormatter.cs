@@ -109,7 +109,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
             xTag.Add(new XAttribute("wideCodes", CommonFormatter.Format(tag.WideCodes)));
             xTag.Add(new XAttribute(ITALIC_ATTRIB, FormatBoolToDigit(tag.Italic)));
             xTag.Add(new XAttribute(BOLD_ATTRIB, FormatBoolToDigit(tag.Bold)));
-            xTag.Add(new XAttribute(NAME_ATTRIB, tag.FontName));
+            xTag.Add(new XAttribute(NAME_ATTRIB, tag.FontName.TrimEnd('\0')));
 
             var xGlyphs = new XElement("glyphs");
             foreach (var glyph in tag.Glyphs) {

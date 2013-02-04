@@ -42,7 +42,7 @@ namespace Code.SwfLib.SwfMill {
             var hdr = root.Element(XName.Get("Header"));
             file.Header.FrameRate = double.Parse(hdr.Attribute(XName.Get("framerate")).Value);
             file.Header.FrameCount = ushort.Parse(hdr.Attribute(XName.Get("frames")).Value);
-            file.Header.FrameSize = XRect.FromXml(hdr.Element(XName.Get("size")).Element(XName.Get("Rectangle")));
+            file.Header.FrameSize = XRect.FromXml(hdr.Element(XName.Get("size")).Element("Rectangle"));
 
             var formatterFactory = new TagFormatterFactory(fileInfo.Version);
             var tags = hdr.Element(XName.Get("tags"));

@@ -1,5 +1,10 @@
-﻿namespace Code.SwfLib.Tags.TextTags {
-    public class DefineText2Tag : TextBaseTag {
+﻿using System.Collections.Generic;
+using Code.SwfLib.Text;
+
+namespace Code.SwfLib.Tags.TextTags {
+    public class DefineText2Tag : DefineTextBaseTag {
+
+        public readonly IList<TextRecordRGBA> TextRecords = new List<TextRecordRGBA>();
 
         public override SwfTagType TagType {
             get { return SwfTagType.DefineText2; }

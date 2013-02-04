@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Text {
-    public class TextRecord {
+    public abstract class TextRecordBase {
 
         public bool Type;
 
@@ -13,8 +12,6 @@ namespace Code.SwfLib.Text {
         }
 
         public ushort? FontID;
-
-        public SwfRGB? TextColor;
 
         public short? XOffset;
 

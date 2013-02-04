@@ -230,8 +230,11 @@
     <Compile Include="Data\ColorTransformRGB.cs" />
     <Compile Include="Data\SwfMorphShapeWithStyle.cs" />
     <Compile Include="Data\SwfRGBA.cs" />
+    <Compile Include="Tags\TextTags\DefineTextBaseTag.cs" />
+    <Compile Include="Text\TextRecordBase.cs" />
+    <Compile Include="Text\TextRecordRGBA.cs" />
     <Compile Include="Text\GlyphEntry.cs" />
-    <Compile Include="Text\TextRecord.cs" />
+    <Compile Include="Text\TextRecordRGB.cs" />
     <Compile Include="Shapes\FillStyleStreamExt.cs" />
     <Compile Include="Shapes\LineStyleStreamExt.cs" />
     <Compile Include="ShapeRecordStreamExt.cs" />

@@ -576,7 +576,7 @@ namespace Code.SwfLib {
             writer.WriteByte((byte)glyphBits);
             writer.WriteByte((byte)advanceBits);
             foreach (var textRecord in tag.TextRecords) {
-                writer.WriteTextRecord(textRecord, glyphBits, advanceBits);
+                writer.WriteTextRecordRGB(textRecord, glyphBits, advanceBits);
                 writer.FlushBits();
             }
             writer.FlushBits();
@@ -584,6 +584,27 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineText2Tag tag, SwfStreamWriter writer) {
+            writer.WriteUInt16(tag.CharacterID);
+            writer.WriteRect(ref tag.TextBounds);
+            writer.WriteMatrix(ref tag.TextMatrix);
+            var glyphBitsCounter = new BitsCount(0);
+            var advanceBitsCounter = new BitsCount(0);
+            foreach (var textRecord in tag.TextRecords) {
+                foreach (var glyph in textRecord.Glyphs) {
+                    glyphBitsCounter.AddValue(glyph.GlyphIndex);
+                    advanceBitsCounter.AddValue(glyph.GlyphAdvance);
+                }
+            }
+            var glyphBits = glyphBitsCounter.GetUnsignedBits();
+            var advanceBits = advanceBitsCounter.GetSignedBits();
+
+            writer.WriteByte((byte)glyphBits);
+            writer.WriteByte((byte)advanceBits);
+            foreach (var textRecord in tag.TextRecords) {
+                writer.WriteTextRecordRGBA(textRecord, glyphBits, advanceBits);
+                writer.FlushBits();
+            }
+            writer.FlushBits(); 
             return null;
         }
 

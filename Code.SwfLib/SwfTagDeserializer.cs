@@ -485,7 +485,7 @@ namespace Code.SwfLib {
 
             tag.Language = reader.ReadByte();
             int nameLength = reader.ReadByte();
-            tag.FontName = Encoding.UTF8.GetString(reader.ReadBytes(nameLength)).TrimEnd('\0');
+            tag.FontName = Encoding.UTF8.GetString(reader.ReadBytes(nameLength));
 
             int glyphsCount = reader.ReadUInt16();
 
@@ -572,14 +572,21 @@ namespace Code.SwfLib {
             tag.TextMatrix = reader.ReadMatrix();
             uint glyphBits = reader.ReadByte();
             uint advanceBits = reader.ReadByte();
-            tag.TextRecords.Clear();
-            foreach (var record in reader.ReadTextRecord(glyphBits, advanceBits)) {
+            foreach (var record in reader.ReadTextRecordsRGB(glyphBits, advanceBits)) {
                 tag.TextRecords.Add(record);
             }
             return tag;
         }
 
         SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineText2Tag tag, SwfStreamReader reader) {
+            tag.CharacterID = reader.ReadUInt16();
+            reader.ReadRect(out tag.TextBounds);
+            tag.TextMatrix = reader.ReadMatrix();
+            uint glyphBits = reader.ReadByte();
+            uint advanceBits = reader.ReadByte();
+            foreach (var record in reader.ReadTextRecordsRGBA(glyphBits, advanceBits)) {
+                tag.TextRecords.Add(record);
+            }
             return tag;
         }
 
