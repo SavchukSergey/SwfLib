@@ -123,59 +123,8 @@ namespace Code.SwfLib.Tests {
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }
 
-        [Test]
-        public void WriteRectTest() {
-            var rect = new SwfRect {
-                XMin = 0x004,
-                XMax = 0x48f,
-                YMin = 0x008,
-                YMax = 0x0ee
-            };
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-            writer.WriteRect(ref rect);
-            writer.FlushBits();
-            CheckBits(mem, "01100", "0000.00000100", "0100.10001111", "0000.00001000", "0000.11101110");
-            mem.Seek(0, SeekOrigin.Begin);
-        }
 
-        [Test]
-        public void WriteRectMustBeByteAlignedTest() {
-            var rect = new SwfRect {
-                XMin = 0x004,
-                XMax = 0x48f,
-                YMin = 0x008,
-                YMax = 0x0ee
-            };
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-            writer.WriteSignedBits(0xa8 >> 3, 5);
-            writer.WriteRect(ref rect);
-            writer.FlushBits();
-            CheckBits(mem, "10101000", "01100", "0000.00000100", "0100.10001111", "0000.00001000", "0000.11101110");
-            mem.Seek(0, SeekOrigin.Begin);
-        }
-
-        [Test]
-        public void WriteMatrixFromBitsTest() {
-            var mem = new MemoryStream();
-            var matrix = new SwfMatrix {
-                HasScale = true,
-                ScaleX = 2.5,
-                ScaleY = 1.75,
-                HasRotate = true,
-                RotateSkew0 = 3.25,
-                RotateSkew1 = 0.5,
-                TranslateX = 16,
-                TranslateY = 24
-            };
-            var writer = new SwfStreamWriter(mem);
-            writer.WriteMatrix(ref matrix);
-            CheckBits(mem,
-                "1", "10011", "010.10000000.00000000", "001.11000000.00000000",
-                "1", "10011", "011.01000000.00000000", "000.10000000.00000000",
-                "00110", "010000", "011000");
-        }
+     
 
     }
 }

@@ -52,7 +52,6 @@ namespace Code.SwfLib {
         }
 
         public static void WriteRect(this SwfStreamWriter writer, ref SwfRect rect) {
-            writer.FlushBits();
             var btCount = new BitsCount(rect.XMin, rect.XMax, rect.YMin, rect.YMax);
             var bits = btCount.GetSignedBits();
             if (bits < 1) bits = 1;
@@ -61,6 +60,7 @@ namespace Code.SwfLib {
             writer.WriteSignedBits(rect.XMax, bits);
             writer.WriteSignedBits(rect.YMin, bits);
             writer.WriteSignedBits(rect.YMax, bits);
+            writer.FlushBits();
         }
 
         public static void WriteMatrix(this SwfStreamWriter writer, ref SwfMatrix matrix) {

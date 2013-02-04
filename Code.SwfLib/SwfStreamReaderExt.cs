@@ -69,12 +69,12 @@ namespace Code.SwfLib {
         }
 
         public static void ReadRect(this SwfStreamReader reader, out SwfRect rect) {
-            reader.AlignToByte();
             var bits = reader.ReadUnsignedBits(5);
             rect.XMin = reader.ReadSignedBits(bits);
             rect.XMax = reader.ReadSignedBits(bits);
             rect.YMin = reader.ReadSignedBits(bits);
             rect.YMax = reader.ReadSignedBits(bits);
+            reader.AlignToByte();
         }
 
         public static SwfMatrix ReadMatrix(this SwfStreamReader reader) {

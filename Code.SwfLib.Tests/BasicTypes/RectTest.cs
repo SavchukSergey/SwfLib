@@ -35,7 +35,6 @@ namespace Code.SwfLib.Tests.BasicTypes {
             Assert.AreEqual(new byte[] { 0x78, 0x00, 0x05, 0x5f, 0x00, 0x00, 0x0f, 0xa0, 0x00 }, mem.ToArray());
         }
 
-
         [Test]
         public void ReadRectMustBeByteAlignedTest() {
             var etalon = new SwfRect {
@@ -82,6 +81,23 @@ namespace Code.SwfLib.Tests.BasicTypes {
             SwfRect rect = reader.ReadRect();
             Assert.IsTrue(AreEqual(etalon, rect));
             Assert.AreEqual(mem.Length, mem.Position);
+        }
+
+
+        [Test]
+        public void WriteRectTest2() {
+            var rect = new SwfRect {
+                XMin = 0x004,
+                XMax = 0x48f,
+                YMin = 0x008,
+                YMax = 0x0ee
+            };
+            var mem = new MemoryStream();
+            var writer = new SwfStreamWriter(mem);
+            writer.WriteRect(ref rect);
+            writer.FlushBits();
+            CheckBits(mem, "01100", "0000.00000100", "0100.10001111", "0000.00001000", "0000.11101110");
+            mem.Seek(0, SeekOrigin.Begin);
         }
 
         private static bool AreEqual(SwfRect a, SwfRect b) {
