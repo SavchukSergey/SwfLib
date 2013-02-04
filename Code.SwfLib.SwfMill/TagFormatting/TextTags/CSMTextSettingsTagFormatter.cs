@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.TextTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
@@ -19,11 +20,17 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                 case GRID_FIT:
                     tag.GridFit = byte.Parse(attrib.Value);
                     break;
+                case "reservedFlags":
+                    tag.ReservedFlags = byte.Parse(attrib.Value);
+                    break;
                 case THICKNESS:
                     tag.Thickness = float.Parse(attrib.Value, CultureInfo.InvariantCulture);
                     break;
                 case SHARPNESS:
                     tag.Sharpness = float.Parse(attrib.Value, CultureInfo.InvariantCulture);
+                    break;
+                case "reserved":
+                    tag.Reserved = byte.Parse(attrib.Value);
                     break;
                 default:
                     return false;
@@ -35,12 +42,14 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             xTag.Add(new XAttribute(XName.Get("useFlashType"), tag.UseFlashType));
             xTag.Add(new XAttribute(XName.Get("gridFit"), tag.GridFit));
 
-            //TODO: reserved flagss
-            //new XAttribute(XName.Get("reservedFlags"), tag.ReservedFlags),
-            xTag.Add(new XAttribute(XName.Get("thickness"), tag.Thickness.ToString(CultureInfo.InvariantCulture)));
-            xTag.Add(new XAttribute(XName.Get("sharpness"), tag.Sharpness.ToString(CultureInfo.InvariantCulture)));
-            //TODO: hide reserved attr
-            //new XAttribute(XName.Get("reserved"), tag.Reserved)
+            if (tag.ReservedFlags != 0) {
+                xTag.Add(new XAttribute("reservedFlags", tag.ReservedFlags));
+            }
+            xTag.Add(new XAttribute(XName.Get("thickness"), CommonFormatter.Format(tag.Thickness)));
+            xTag.Add(new XAttribute(XName.Get("sharpness"), CommonFormatter.Format(tag.Sharpness)));
+            if (tag.Reserved != 0) {
+                xTag.Add(new XAttribute("reserved", tag.ReservedFlags));
+            }
         }
 
         public override string TagName {
