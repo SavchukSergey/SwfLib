@@ -72,6 +72,7 @@ namespace Code.SwfLib {
             tag.HasMatrix = reader.ReadBit();
             tag.HasCharacter = reader.ReadBit();
             tag.Move = reader.ReadBit();
+
             tag.Depth = reader.ReadUInt16();
             if (tag.HasCharacter) {
                 tag.CharacterID = reader.ReadUInt16();

@@ -130,9 +130,8 @@ namespace Code.SwfLib.Tests {
         }
 
         protected IEnumerable<SwfTagData> IterateTags(string path) {
-            using (var stream = File.Open(path, FileMode.Open)) {
-                return IterateTags(stream);
-            }
+            var stream = File.Open(path, FileMode.Open);
+            return IterateTags(stream);
         }
 
         protected IEnumerable<SwfTagData> IterateTags(Stream stream) {
