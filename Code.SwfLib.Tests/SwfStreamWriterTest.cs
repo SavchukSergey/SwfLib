@@ -51,37 +51,7 @@ namespace Code.SwfLib.Tests {
             Assert.AreEqual(hi, mem.ReadByte());
         }
 
-        [Test]
-        public void WriteBitTest() {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-
-            writer.WriteBit(true);
-            writer.WriteBit(false);
-            writer.WriteBit(true);
-            writer.WriteBit(false);
-            writer.WriteBit(true);
-            writer.WriteBit(false);
-            writer.WriteBit(true);
-            writer.WriteBit(false);
-
-            writer.WriteBit(true);
-            writer.WriteBit(true);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(true);
-            writer.WriteBit(true);
-
-            mem.Seek(0, SeekOrigin.Begin);
-
-            Assert.AreEqual(0xaa, mem.ReadByte(), "Byte 0");
-            Assert.AreEqual(0xc3, mem.ReadByte(), "Byte 1");
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-        }
-
+        
         [Test]
         public void WriteByteAfterBitsTest() {
             var mem = new MemoryStream();
@@ -104,64 +74,7 @@ namespace Code.SwfLib.Tests {
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
         }
 
-        [Test]
-        public void WriteUnsignedBitsTest() {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-            writer.WriteUnsignedBits(0xaac3 >> 6, 10);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(true);
-            writer.WriteBit(true);
-
-            mem.Seek(0, SeekOrigin.Begin);
-            Assert.AreEqual(0xaa, mem.ReadByte());
-            Assert.AreEqual(0xc3, mem.ReadByte());
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-        }
-
-        [Test]
-        public void WriteSignedBitsPositiveTest() {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-            writer.WriteSignedBits(171, 10);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(true);
-            writer.WriteBit(true);
-
-            mem.Seek(0, SeekOrigin.Begin);
-
-            Assert.AreEqual(0x2a, mem.ReadByte());
-            Assert.AreEqual(0xc3, mem.ReadByte());
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-        }
-
-        [Test]
-        public void WriteSignedBitsNegativeTest() {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-            writer.WriteSignedBits(-341, 10);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(false);
-            writer.WriteBit(true);
-            writer.WriteBit(true);
-
-            mem.Seek(0, SeekOrigin.Begin);
-
-            Assert.AreEqual(0xaa, mem.ReadByte());
-            Assert.AreEqual(0xc3, mem.ReadByte());
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-        }
+       
 
         [Test]
         public void FlushBitsTest() {
