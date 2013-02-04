@@ -35,6 +35,10 @@ namespace Code.SwfLib {
             return transform;
         }
 
+        public static void WriteColorTransformRGB(this SwfStreamWriter writer, ColorTransformRGB tranform) {
+            writer.WriteColorTransformRGB(ref tranform);
+        }
+
         public static void WriteColorTransformRGB(this SwfStreamWriter writer, ref ColorTransformRGB tranform) {
             var bitsCounter = new BitsCount(0);
             if (tranform.HasAddTerms) {
@@ -123,7 +127,7 @@ namespace Code.SwfLib {
             }
             writer.WriteBit(tranform.HasAddTerms);
             writer.WriteBit(tranform.HasMultTerms);
-            var bits = Math.Max(bitsCounter.GetSignedBits(), 1);
+            var bits = bitsCounter.GetSignedBits();
             writer.WriteUnsignedBits(bits, 4);
             if (tranform.HasMultTerms) {
                 writer.WriteSignedBits(tranform.RedMultTerm, bits);
