@@ -66,6 +66,7 @@
     <Compile Include="ColorTransformStreamExtTest.cs" />
     <Compile Include="Tags\ControlTags\EndTagTest.cs" />
     <Compile Include="Tags\DefineShapeTest.cs" />
+    <Compile Include="Tags\DisplayListTags\ShowFrameTagTest.cs" />
     <Compile Include="Utils\DualSwfStreamReader.cs" />
     <Compile Include="ExternalEtalonTests\DefineShapeTagTest.cs" />
     <Compile Include="ExternalEtalonTests\ExternalEtalonTestFixtureBase.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="ExternalEtalonTests\Tag2BinaryVisitorTest.cs" />
     <Compile Include="TagSerialization\FileAttributesTagTest.cs" />
     <Compile Include="TagSerialization\TagSerializationTestBase.cs" />
-    <Compile Include="TagSerialization\EndTagTest.cs" />
     <Compile Include="Tags\SwfTagsFactoryTest.cs" />
     <Compile Include="TestFixtureBase.cs" />
   </ItemGroup>
