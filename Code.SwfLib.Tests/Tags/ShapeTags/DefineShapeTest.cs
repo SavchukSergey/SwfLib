@@ -6,7 +6,7 @@ using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ShapeTags;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests.Tags {
+namespace Code.SwfLib.Tests.Tags.ShapeTags {
     [TestFixture]
     public class DefineShapeTest : TestFixtureBase {
 

@@ -69,7 +69,7 @@
     <Compile Include="Utils\UnsignedBitsCountTest.cs" />
     <Compile Include="ColorTransformStreamExtTest.cs" />
     <Compile Include="Tags\ControlTags\EndTagTest.cs" />
-    <Compile Include="Tags\DefineShapeTest.cs" />
+    <Compile Include="Tags\ShapeTags\DefineShapeTest.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObjectTagTest.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObject2TagTest.cs" />
     <Compile Include="Tags\DisplayListTags\RemoveObjectTagTest.cs" />
@@ -129,9 +129,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Matrix-compiled.swf" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\DefineShape\DefineShape2.bin" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Bin2Bin\DefineFont3Tag\1.75.tag" />
