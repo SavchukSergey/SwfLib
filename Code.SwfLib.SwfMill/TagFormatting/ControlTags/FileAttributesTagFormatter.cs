@@ -55,7 +55,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         }
 
         protected override void FormatTagElement(FileAttributesTag tag, XElement xTag) {
-            xTag.Add(new XAttribute("reserved0", CommonFormatter.Format(tag.Reserved0)));
+            if (tag.Reserved0) {
+                xTag.Add(new XAttribute("reserved0", CommonFormatter.Format(tag.Reserved0)));
+            }
             xTag.Add(new XAttribute(USE_DIRECT_BLIT, CommonFormatter.Format(tag.UseDirectBlit)));
             xTag.Add(new XAttribute(USE_GPU, CommonFormatter.Format(tag.UseGPU)));
             xTag.Add(new XAttribute(XName.Get(HAS_METADATA_ATTRIB), CommonFormatter.Format(tag.HasMetadata)));

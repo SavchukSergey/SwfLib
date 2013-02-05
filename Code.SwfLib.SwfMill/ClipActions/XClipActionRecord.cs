@@ -19,8 +19,8 @@ namespace Code.SwfLib.SwfMill.ClipActions {
             res.Add(new XAttribute("flags1", XClipEventFlags.GetFlags1(clipAction.Flags)));
             res.Add(new XAttribute("flags2", XClipEventFlags.GetFlags2(clipAction.Flags)));
 
+            res.Add(new XAttribute("keyCode", clipAction.KeyCode));
             return res;
-            //TODO: key code
         }
 
         public static ClipActionRecord FromXml(XElement xClipAction) {
@@ -33,8 +33,9 @@ namespace Code.SwfLib.SwfMill.ClipActions {
             }
             XClipEventFlags.SetFlags1(ref res.Flags, int.Parse(xClipAction.Attribute("flags1").Value));
             XClipEventFlags.SetFlags2(ref res.Flags, int.Parse(xClipAction.Attribute("flags2").Value));
+
+            res.KeyCode = byte.Parse(xClipAction.Attribute("keyCode").Value);
             return res;
-            //TODO: read keycode
         }
     }
 }
