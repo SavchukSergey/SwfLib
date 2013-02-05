@@ -126,7 +126,7 @@ namespace Code.SwfLib.Shapes {
             writer.WriteUnsignedBits(actualBits - 2u, 4);
             bool genLineFlags = record.DeltaX != 0 && record.DeltaY != 0;
             writer.WriteBit(genLineFlags);
-            bool vertFlag = record.DeltaY != 0;
+            bool vertFlag = record.DeltaX == 0;
             if (!genLineFlags) writer.WriteBit(vertFlag);
             if (genLineFlags || !vertFlag) writer.WriteSignedBits(record.DeltaX, actualBits);
             if (genLineFlags || vertFlag) writer.WriteSignedBits(record.DeltaY, actualBits);
