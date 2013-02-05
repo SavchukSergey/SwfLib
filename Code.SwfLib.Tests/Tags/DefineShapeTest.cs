@@ -29,6 +29,14 @@ namespace Code.SwfLib.Tests.Tags {
             0x7b, 0xfd, 0x2e, 0x10, 0x00
         };
 
+        private static readonly byte[] _etalon2 = new byte[] {
+            0x07, 0x00, 0x78, 0x00, 0x07, 0x1c, 0x00, 0x00,
+            0x03, 0x84, 0x00, 0x01, 0x00, 0xff, 0xff, 0xff,
+            0x00, 0x10, 0x15, 0xee, 0x38, 0x03, 0x84, 0x7d,
+            0x23, 0x90, 0x74, 0xc7, 0xc7, 0xa3, 0x8e, 0x0e,
+            0x97, 0x08, 0x00
+        };
+
         [Test]
         public void ReadTest() {
             var mem = new MemoryStream(_etalon0);
@@ -39,29 +47,6 @@ namespace Code.SwfLib.Tests.Tags {
             };
             var res = tagReader.ReadTag<DefineShapeTag>(tagData);
             AssertExt.AreEqual(GetDefineShapeTag0(), res);
-
-            //Assert.IsFalse(firstShape.FillStyle0.HasValue);
-            //Assert.IsFalse(firstShape.FillStyle1.HasValue);
-            //Assert.IsTrue(firstShape.LineStyle.HasValue);
-            //Assert.IsTrue(firstShape.StateMoveTo);
-
-            //Assert.AreEqual(1, firstShape.LineStyle.Value);
-            //Assert.AreEqual(4900, firstShape.MoveDeltaX);
-            //Assert.AreEqual(1680, firstShape.MoveDeltaY);
-
-            //Assert.AreEqual(0, secondShape.DeltaX);
-            //Assert.AreEqual(2320, secondShape.DeltaY);
-
-            //Assert.AreEqual(-2880, thirdShape.DeltaX);
-            //Assert.AreEqual(0, thirdShape.DeltaY);
-
-            //Assert.AreEqual(0, fourthShape.DeltaX);
-            //Assert.AreEqual(-2320, fourthShape.DeltaY);
-
-            //Assert.AreEqual(2880, fifthShape.DeltaX);
-            //Assert.AreEqual(0, fifthShape.DeltaY);
-
-            //Assert.IsNotNull(sixthShape);
         }
 
         [Test]
@@ -83,29 +68,6 @@ namespace Code.SwfLib.Tests.Tags {
             };
             var res = tagReader.ReadTag<DefineShapeTag>(tagData);
             AssertExt.AreEqual(GetDefineShapeTag1(), res);
-
-            //Assert.IsFalse(firstShape.FillStyle0.HasValue);
-            //Assert.IsFalse(firstShape.FillStyle1.HasValue);
-            //Assert.IsTrue(firstShape.LineStyle.HasValue);
-            //Assert.IsTrue(firstShape.StateMoveTo);
-
-            //Assert.AreEqual(1, firstShape.LineStyle.Value);
-            //Assert.AreEqual(4900, firstShape.MoveDeltaX);
-            //Assert.AreEqual(1680, firstShape.MoveDeltaY);
-
-            //Assert.AreEqual(0, secondShape.DeltaX);
-            //Assert.AreEqual(2320, secondShape.DeltaY);
-
-            //Assert.AreEqual(-2880, thirdShape.DeltaX);
-            //Assert.AreEqual(0, thirdShape.DeltaY);
-
-            //Assert.AreEqual(0, fourthShape.DeltaX);
-            //Assert.AreEqual(-2320, fourthShape.DeltaY);
-
-            //Assert.AreEqual(2880, fifthShape.DeltaX);
-            //Assert.AreEqual(0, fifthShape.DeltaY);
-
-            //Assert.IsNotNull(sixthShape);
         }
 
         [Test]
@@ -115,6 +77,27 @@ namespace Code.SwfLib.Tests.Tags {
             var tagData = tagWriter.GetTagData(tag);
 
             Assert.AreEqual(_etalon1, tagData.Data);
+        }
+
+        [Test]
+        public void Read2Test() {
+            var mem = new MemoryStream(_etalon2);
+            var tagReader = new SwfTagDeserializer(new SwfFile());
+            var tagData = new SwfTagData {
+                Type = SwfTagType.DefineShape,
+                Data = mem.ToArray()
+            };
+            var res = tagReader.ReadTag<DefineShapeTag>(tagData);
+            AssertExt.AreEqual(GetDefineShapeTag2(), res);
+        }
+
+        [Test]
+        public void Write2Test() {
+            var tag = GetDefineShapeTag2();
+            var tagWriter = new SwfTagSerializer(new SwfFile());
+            var tagData = tagWriter.GetTagData(tag);
+
+            Assert.AreEqual(_etalon2, tagData.Data);
         }
 
 
@@ -167,38 +150,26 @@ namespace Code.SwfLib.Tests.Tags {
         }
 
         private static DefineShapeTag GetDefineShapeTag2() {
-            var tag = new DefineShapeTag();
-            tag.ShapeID = 7;
-            tag.ShapeBounds.XMin = 0;
-            tag.ShapeBounds.XMax = 14560;
-            tag.ShapeBounds.YMin = 0;
-            tag.ShapeBounds.YMax = 1800;
-            tag.FillStyles.Add(new FillStyleRGB {
-                FillStyleType = FillStyleType.SolidColor,
-                Color = new SwfRGB(255, 255, 255)
-            });
-            tag.ShapeRecords.Add(new StyleChangeShapeRecordRGB {
-                MoveDeltaX = 14560,
-                MoveDeltaY = 1800,
-                FillStyle1 = 1
-            });
-            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
-                DeltaX = -14560,
-                DeltaY = 0
-            });
-            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
-                DeltaX = 0,
-                DeltaY = -1800
-            });
-            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
-                DeltaX = 14560,
-                DeltaY = 0
-            });
-            tag.ShapeRecords.Add(new StraightEdgeShapeRecord {
-                DeltaX = 0,
-                DeltaY = 1800
-            });
-            tag.ShapeRecords.Add(new EndShapeRecord());
+            var tag = new DefineShapeTag {
+                ShapeID = 7,
+                ShapeBounds = { XMin = 0, XMax = 14560, YMin = 0, YMax = 1800 },
+                FillStyles = {
+                    new FillStyleRGB { FillStyleType = FillStyleType.SolidColor, Color = new SwfRGB(255, 255, 255) }
+                },
+                ShapeRecords = {
+                    new StyleChangeShapeRecordRGB {
+                        MoveDeltaX = 14560,
+                        MoveDeltaY = 1800,
+                        StateMoveTo = true,
+                        FillStyle1 = 1
+                    },
+                    new StraightEdgeShapeRecord {DeltaX = -14560, DeltaY = 0 },
+                    new StraightEdgeShapeRecord { DeltaX = 0, DeltaY = -1800 },
+                    new StraightEdgeShapeRecord { DeltaX = 14560, DeltaY = 0},
+                    new StraightEdgeShapeRecord { DeltaX = 0, DeltaY = 1800},
+                    new EndShapeRecord()
+                },
+            };
             return tag;
         }
     }
