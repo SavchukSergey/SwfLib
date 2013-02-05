@@ -23,6 +23,10 @@ namespace Code.SwfLib.Tests.Samples {
                     var hash = GetTagHash(tagData);
                     if (tagHash == hash) {
                         var tagReader = new SwfTagDeserializer(file);
+                        //using (var dump = File.Open(@"D:\temp\1.bin", FileMode.Create)) {
+                        //    dump.Write(tagData.Data, 0, tagData.Data.Length);
+                        //    dump.Flush();
+                        //}
                         return tagReader.ReadTag<T>(tagData);
                     }
                 }

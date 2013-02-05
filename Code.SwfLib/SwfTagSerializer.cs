@@ -296,7 +296,7 @@ namespace Code.SwfLib {
 
             writer.WriteFillStylesRGB(tag.FillStyles, false);
             writer.WriteLineStylesRGB(tag.LineStyles, false);
-            writer.WriteShapeRecordsRGB(tag.ShapeRecords, new UnsignedBitsCount((uint) tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint) tag.LineStyles.Count).GetBits());
+            writer.WriteShapeRecordsRGB(tag.ShapeRecords, new UnsignedBitsCount((uint)tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint)tag.LineStyles.Count).GetBits());
 
             writer.FlushBits();
             return null;
@@ -308,7 +308,7 @@ namespace Code.SwfLib {
 
             writer.WriteFillStylesRGB(tag.FillStyles, true);
             writer.WriteLineStylesRGB(tag.LineStyles, true);
-            writer.WriteShapeRecordsRGB(tag.ShapeRecords, new UnsignedBitsCount((uint) tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint) tag.LineStyles.Count).GetBits());
+            writer.WriteShapeRecordsRGB(tag.ShapeRecords, new UnsignedBitsCount((uint)tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint)tag.LineStyles.Count).GetBits());
 
             writer.FlushBits();
             return null;
@@ -320,7 +320,7 @@ namespace Code.SwfLib {
 
             writer.WriteFillStylesRGBA(tag.FillStyles);
             writer.WriteLineStylesRGBA(tag.LineStyles);
-            writer.WriteShapeRecordsRGBA(tag.ShapeRecords, new UnsignedBitsCount((uint) tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint) tag.LineStyles.Count).GetBits());
+            writer.WriteShapeRecordsRGBA(tag.ShapeRecords, new UnsignedBitsCount((uint)tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint)tag.LineStyles.Count).GetBits());
 
             writer.FlushBits();
             return null;
@@ -335,7 +335,7 @@ namespace Code.SwfLib {
 
             writer.WriteFillStylesRGBA(tag.FillStyles);
             writer.WriteLineStylesEx(tag.LineStyles);
-            writer.WriteShapeRecordsEx(tag.ShapeRecords, new UnsignedBitsCount((uint) tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint) tag.LineStyles.Count).GetBits());
+            writer.WriteShapeRecordsEx(tag.ShapeRecords, new UnsignedBitsCount((uint)tag.FillStyles.Count).GetBits(), new UnsignedBitsCount((uint)tag.LineStyles.Count).GetBits());
 
             writer.FlushBits();
             return null;
@@ -462,14 +462,15 @@ namespace Code.SwfLib {
             var offsets = new List<uint>();
             var shapesData = SerializeGlyphsData(tag.Glyphs, offsets);
 
-            var offsetTableSize = (uint)(tag.WideOffsets ? 4 * tag.Glyphs.Count : 2 * tag.Glyphs.Count);
-            var firstShapeOffset = offsetTableSize + (uint)(tag.WideOffsets ? 4 : 2);
+            var offsetBytes = (uint)(tag.WideOffsets ? 4 : 2);
+            var offsetTableSize = offsetBytes * tag.Glyphs.Count;
+            var firstShapeOffset = offsetTableSize + offsetBytes;
 
-            WriteOffsets(writer, offsets, firstShapeOffset, tag.WideOffsets);
+            WriteOffsets(writer, offsets, (uint) firstShapeOffset, tag.WideOffsets);
 
-            var codeTableOffset = offsetTableSize + (uint)shapesData.Length;
+            var codeTableOffset = firstShapeOffset + (uint)shapesData.Length;
             if (tag.WideOffsets) {
-                writer.WriteUInt32(codeTableOffset);
+                writer.WriteUInt32((uint) codeTableOffset);
             } else {
                 writer.WriteUInt16((ushort)codeTableOffset);
             }
@@ -604,7 +605,7 @@ namespace Code.SwfLib {
                 writer.WriteTextRecordRGBA(textRecord, glyphBits, advanceBits);
                 writer.FlushBits();
             }
-            writer.FlushBits(); 
+            writer.FlushBits();
             return null;
         }
 

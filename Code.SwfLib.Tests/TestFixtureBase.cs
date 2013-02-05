@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Code.SwfLib.Tags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
@@ -83,10 +84,18 @@ namespace Code.SwfLib.Tests {
 
         protected byte[] GetEmbeddedResourceData(string resourceName) {
             using (var stream = OpenEmbeddedResource(resourceName)) {
-                byte[] data = new byte[stream.Length];
+                var data = new byte[stream.Length];
                 stream.Read(data, 0, data.Length);
                 return data;
             }
+        }
+
+        protected SwfTagData ReadEmbeddedTagData(string resourceName, SwfTagType type) {
+            var resourcePath = GetType().Namespace + "." + resourceName;
+            var stream = GetType().Assembly.GetManifestResourceStream(resourcePath);
+            var data = new byte[stream.Length];
+            stream.Read(data, 0, data.Length);
+            return new SwfTagData { Data = data, Type = type };
         }
 
         protected virtual string EmbeddedResourceFolder { get { return ""; } }

@@ -1,15 +1,19 @@
 ﻿using System.Linq;
+using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.FontTags;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests.Samples.Fonts {
+namespace Code.SwfLib.Tests.Tags.FontTags {
     [TestFixture]
-    public class DefineFont3Test : BaseSampleTest {
+    public class DefineFont3TagTest : TestFixtureBase {
 
         [Test]
-        public void Test1() {
-            var tag = ReadTag<DefineFont3Tag>("Sample - 1.swf", "cbf1ec2485e16c9b624af319cb8d32af");
+        public void ReadTest() {
+            var tagData = ReadEmbeddedTagData("DefineFont3Tag.bin", SwfTagType.DefineFont3);
+            var tagReader = new SwfTagDeserializer(new SwfFile());
+            var tag = tagReader.ReadTag<DefineFont3Tag>(tagData);
             Assert.IsNotNull(tag);
+
             Assert.AreEqual(17, tag.FontID);
 
             Assert.AreEqual("BlacklightD\0", tag.FontName);
@@ -22,8 +26,13 @@ namespace Code.SwfLib.Tests.Samples.Fonts {
             var lastShape = tag.Glyphs.Last();
             Assert.AreEqual(120, lastShape.Code);
             Assert.AreEqual(43, lastShape.Records.Count);
-            Assert.AreEqual("cbf1ec2485e16c9b624af319cb8d32af", GetTagHash(tag));
-        }
 
+            var tagWriter = new SwfTagSerializer(new SwfFile());
+            var writtenTagData = tagWriter.GetTagData(tag);
+
+            Assert.AreEqual(tagData.Data, writtenTagData.Data);
+
+            Assert.IsNull(tag.RestData);
+        }
     }
 }

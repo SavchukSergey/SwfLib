@@ -66,6 +66,7 @@
     <Compile Include="Bin2BinTests.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject3TagTest.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject2TagTest.cs" />
+    <Compile Include="Tags\FontTags\DefineFont3TagTest.cs" />
     <Compile Include="Utils\UnsignedBitsCountTest.cs" />
     <Compile Include="ColorTransformStreamExtTest.cs" />
     <Compile Include="Tags\ControlTags\EndTagTest.cs" />
@@ -80,7 +81,6 @@
     <Compile Include="ExternalEtalonTests\SwfStreamReaderExtTest.cs" />
     <Compile Include="SamplesTest.cs" />
     <Compile Include="Samples\BaseSampleTest.cs" />
-    <Compile Include="Samples\Fonts\DefineFont3Test.cs" />
     <Compile Include="Samples\Shapes\DefineShape3TagTest.cs" />
     <Compile Include="Samples\Shapes\DefineShape4TagTest.cs" />
     <Compile Include="Samples\Shapes\DefineShapeTagTest.cs" />
@@ -166,6 +166,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Samples\Sample - 1.swf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tags\FontTags\DefineFont3Tag.bin" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
