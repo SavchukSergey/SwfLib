@@ -27,7 +27,6 @@
         }
 
         public void AddValue(int val) {
-            //if (val < 0) val--; //TODO: Compensates adobe not optimal bit count calculation...
             if (val > _max) _max = val;
             if (val < _min) _min = val;
         }
@@ -37,7 +36,7 @@
         }
 
         public uint GetBits() {
-            if (_min == 0 && _max == 0) return 0;
+            if (_min == 0 && _max == 0) return 1;
             uint mask = 0;
             if (_min != int.MaxValue && _min < 0) {
                 mask |= ~(uint)_min;

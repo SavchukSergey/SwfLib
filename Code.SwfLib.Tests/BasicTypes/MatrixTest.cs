@@ -21,7 +21,7 @@ namespace Code.SwfLib.Tests.BasicTypes {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteMatrix(new SwfMatrix ());
-            Assert.AreEqual(new byte[] {0}, mem.ToArray());
+            Assert.AreEqual(new byte[] {0x02, 0x00}, mem.ToArray());
         }
 
         [Test]

@@ -8,7 +8,7 @@ namespace Code.SwfLib.Tests.Tags.DisplayListTags {
     [TestFixture]
     public class PlaceObjectTagTest : TestFixtureBase {
 
-        private static readonly byte[] _etalon = new byte[] { 0x10, 0x20, 0x30, 0x40, 0x00, 0x00 };
+        private static readonly byte[] _etalon = new byte[] { 0x10, 0x20, 0x30, 0x40, 0x02, 0x00, 0x04 };
 
         [Test]
         public void ReadTest() {

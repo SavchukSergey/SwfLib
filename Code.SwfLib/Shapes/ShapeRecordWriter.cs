@@ -51,7 +51,6 @@ namespace Code.SwfLib.Shapes {
             if (stateMoveTo) {
                 var cnt = new SignedBitsCount(record.MoveDeltaX, record.MoveDeltaY);
                 var moveBits = cnt.GetBits();
-                if (moveBits < 1) moveBits = 1; //TODO: adobe?.. remove.. shoudl work
                 writer.WriteUnsignedBits(moveBits, 5);
                 writer.WriteSignedBits(record.MoveDeltaX, moveBits);
                 writer.WriteSignedBits(record.MoveDeltaY, moveBits);

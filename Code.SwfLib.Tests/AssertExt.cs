@@ -1,7 +1,6 @@
 ﻿using System;
 using Code.SwfLib.Data;
 using Code.SwfLib.Gradients;
-using Code.SwfLib.Shapes;
 using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags.ShapeTags;
 using NUnit.Framework;
@@ -64,8 +63,27 @@ namespace Code.SwfLib.Tests {
             Assert.AreEqual(expected.FillStyle0, actual.FillStyle0, "{0}: FillStyle0", message);
             Assert.AreEqual(expected.FillStyle1, actual.FillStyle1, "{0}: FillStyle1", message);
             Assert.AreEqual(expected.LineStyle, actual.LineStyle, "{0}: LineStyle", message);
+            Assert.AreEqual(expected.StateMoveTo, actual.StateMoveTo, "{0}: StateMoveTo", message);
             Assert.AreEqual(expected.MoveDeltaX, actual.MoveDeltaX, "{0}: MoveDeltaX", message);
             Assert.AreEqual(expected.MoveDeltaY, actual.MoveDeltaY, "{0}: MoveDeltaY", message);
+            Assert.AreEqual(expected.StateNewStyles, actual.StateNewStyles, "{0}: StateNewStyles", message);
+
+            if (expected is StyleChangeShapeRecordRGB && actual is StyleChangeShapeRecordRGB) {
+                AreEqual((StyleChangeShapeRecordRGB)expected, (StyleChangeShapeRecordRGB)actual, message);
+            } else if (expected is StyleChangeShapeRecordRGBA && actual is StyleChangeShapeRecordRGBA) {
+                AreEqual((StyleChangeShapeRecordRGBA)expected, (StyleChangeShapeRecordRGBA)actual, message);
+            } else {
+                throw new NotSupportedException(string.Format("{0}: Can't compare {1} and {2}", message,
+                                                            expected.GetType(), actual.GetType()));
+            }
+        }
+
+        private static void AreEqual(StyleChangeShapeRecordRGB expected, StyleChangeShapeRecordRGB actual, string message) {
+            Assert.AreEqual(expected.FillStyles.Count, actual.FillStyles.Count);
+        }
+
+        private static void AreEqual(StyleChangeShapeRecordRGBA expected, StyleChangeShapeRecordRGBA actual, string message) {
+            Assert.AreEqual(expected.FillStyles.Count, actual.FillStyles.Count);
         }
 
         public static void AreEqual(StraightEdgeShapeRecord expected, StraightEdgeShapeRecord actual, string message) {
@@ -76,8 +94,9 @@ namespace Code.SwfLib.Tests {
         public static void AreEqual(EndShapeRecord expected, EndShapeRecord actual, string message) {
         }
 
-        public static void AreEqual(LineStyleRGB expected, LineStyleRGB rgb, string s) {
-            throw new NotImplementedException();
+        public static void AreEqual(LineStyleRGB expected, LineStyleRGB actual, string message) {
+            Assert.AreEqual(expected.Width, actual.Width, "Width");
+            AreEqual(expected.Color, actual.Color, "Color");
         }
 
         public static void AreEqual(FillStyleRGB expected, FillStyleRGB actual, string message) {
@@ -150,6 +169,9 @@ namespace Code.SwfLib.Tests {
         }
 
         public static void AreEqual(SwfMatrix expected, SwfMatrix actual, string message) {
+            Assert.AreEqual(expected.HasScale, actual.HasScale, message + ": HasScale");
+            Assert.AreEqual(expected.HasRotate, actual.HasRotate, message + ": HasRotate");
+
             Assert.AreEqual(expected.ScaleX, actual.ScaleX, message + ": ScaleX");
             Assert.AreEqual(expected.ScaleY, actual.ScaleY, message + ": ScaleY");
             Assert.AreEqual(expected.RotateSkew0, actual.RotateSkew0, message + ": RotateSkew0");

@@ -28,7 +28,7 @@ namespace Code.SwfLib.Tests.Utils {
         [Test]
         public void GetBitsZeroTest() {
             var bits = new SignedBitsCount(0);
-            Assert.AreEqual(0, bits.GetBits());
+            Assert.AreEqual(1, bits.GetBits());
         }
 
         [Test]

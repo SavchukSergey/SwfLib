@@ -20,7 +20,7 @@ namespace Code.SwfLib.Tests.BasicTypes {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
             writer.WriteColorTransformRGB(new ColorTransformRGB());
-            Assert.AreEqual(new byte[] { 0 }, mem.ToArray());
+            Assert.AreEqual(new byte[] { 4 }, mem.ToArray());
         }
 
     }
