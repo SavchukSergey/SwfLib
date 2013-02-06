@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.Records;
 
 namespace Code.SwfLib.Tags.ShapeTags {

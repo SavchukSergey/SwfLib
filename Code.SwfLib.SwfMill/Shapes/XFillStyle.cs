@@ -144,7 +144,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
         private static FillStyleRGB ParseLinearRGB(XElement xFillStyle) {
             var res = new FillStyleRGB {
                 FillStyleType = FillStyleType.LinearGradient,
-                Gradient = {
+                Gradient = new GradientRGB {
                     SpreadMode = GetSpreadMode(xFillStyle),
                     InterpolationMode = GetInterpolationMode(xFillStyle),
                 },
@@ -160,7 +160,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
         private static FillStyleRGBA ParseLinearRGBA(XElement xFillStyle) {
             var res = new FillStyleRGBA {
                 FillStyleType = FillStyleType.LinearGradient,
-                Gradient = {
+                Gradient = new GradientRGBA {
                     SpreadMode = GetSpreadMode(xFillStyle),
                     InterpolationMode = GetInterpolationMode(xFillStyle),
                 },

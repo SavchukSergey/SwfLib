@@ -1,6 +1,6 @@
 ﻿using System;
 using Code.SwfLib.Data;
-using Code.SwfLib.Gradients;
+using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tests.Asserts;
@@ -105,7 +105,7 @@ namespace Code.SwfLib.Tests {
             AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
             AssertColors.AreEqual(expected.Color, actual.Color, "Color");
             Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
-            AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
+            AssertGradients.AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
             AssertGradients.AreEqual(expected.Gradient, actual.Gradient, "Gradient");
             AreEqual(expected.GradientMatrix, actual.GradientMatrix, "GradientMatrix");
         }
@@ -115,17 +115,12 @@ namespace Code.SwfLib.Tests {
             AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
             AssertColors.AreEqual(expected.Color, actual.Color, "Color");
             Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
-            AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
+            AssertGradients.AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
             AssertGradients.AreEqual(expected.Gradient, actual.Gradient, "Gradient");
             AreEqual(expected.GradientMatrix, actual.GradientMatrix, "GradientMatrix");
         }
 
        
-
-        public static void AreEqual(FocalGradient expected, FocalGradient actual, string message) {
-            //TODO: Implement
-        }
-
         public static void AreEqual(SwfMatrix expected, SwfMatrix actual, string message) {
             Assert.AreEqual(expected.HasScale, actual.HasScale, message + ": HasScale");
             Assert.AreEqual(expected.HasRotate, actual.HasRotate, message + ": HasRotate");

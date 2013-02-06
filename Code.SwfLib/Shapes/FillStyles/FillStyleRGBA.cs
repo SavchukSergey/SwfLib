@@ -1,8 +1,7 @@
 ﻿using Code.SwfLib.Data;
 using Code.SwfLib.Gradients;
-using Code.SwfLib.Shapes.FillStyles;
 
-namespace Code.SwfLib.Tags.ShapeTags {
+namespace Code.SwfLib.Shapes.FillStyles {
     public struct FillStyleRGBA {
 
         public FillStyleType FillStyleType;
@@ -13,7 +12,7 @@ namespace Code.SwfLib.Tags.ShapeTags {
 
         public GradientRGBA Gradient;
 
-        public FocalGradient FocalGradient;
+        public FocalGradientRGBA FocalGradient;
 
         public ushort BitmapID;
 

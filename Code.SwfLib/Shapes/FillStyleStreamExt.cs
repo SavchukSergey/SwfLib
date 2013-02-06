@@ -71,11 +71,11 @@ namespace Code.SwfLib.Shapes {
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
                     fillStyle.GradientMatrix = reader.ReadMatrix();
-                    reader.ReadGradientRGB(out fillStyle.Gradient);
+                    fillStyle.Gradient = reader.ReadGradientRGB();
                     break;
                 case FillStyleType.FocalGradient:
                     fillStyle.GradientMatrix = reader.ReadMatrix();
-                    reader.ReadFocalGradient(out fillStyle.FocalGradient);
+                    fillStyle.FocalGradient = reader.ReadFocalGradientRGB();
                     break;
                 case FillStyleType.RepeatingBitmap:
                 case FillStyleType.ClippedBitmap:
@@ -106,11 +106,11 @@ namespace Code.SwfLib.Shapes {
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
                     fillStyle.GradientMatrix = reader.ReadMatrix();
-                    reader.ReadGradientRGBA(out fillStyle.Gradient);
+                    fillStyle.Gradient = reader.ReadGradientRGBA();
                     break;
                 case FillStyleType.FocalGradient:
                     fillStyle.GradientMatrix = reader.ReadMatrix();
-                    reader.ReadFocalGradient(out fillStyle.FocalGradient);
+                    fillStyle.FocalGradient = reader.ReadFocalGradientRGBA();
                     break;
                 case FillStyleType.RepeatingBitmap:
                 case FillStyleType.ClippedBitmap:
@@ -133,11 +133,11 @@ namespace Code.SwfLib.Shapes {
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
                     writer.WriteMatrix(ref fillStyle.GradientMatrix);
-                    writer.WriteGradientRGB(ref fillStyle.Gradient);
+                    writer.WriteGradientRGB(fillStyle.Gradient);
                     break;
                 case FillStyleType.FocalGradient:
                     writer.WriteMatrix(ref fillStyle.GradientMatrix);
-                    writer.WriteFocalGradient(ref fillStyle.FocalGradient);
+                    writer.WriteFocalGradientRGB(fillStyle.FocalGradient);
                     break;
                 case FillStyleType.RepeatingBitmap:
                 case FillStyleType.ClippedBitmap:
@@ -160,11 +160,11 @@ namespace Code.SwfLib.Shapes {
                 case FillStyleType.LinearGradient:
                 case FillStyleType.RadialGradient:
                     writer.WriteMatrix(ref fillStyle.GradientMatrix);
-                    writer.WriteGradientRGBA(ref fillStyle.Gradient);
+                    writer.WriteGradientRGBA(fillStyle.Gradient);
                     break;
                 case FillStyleType.FocalGradient:
                     writer.WriteMatrix(ref fillStyle.GradientMatrix);
-                    writer.WriteFocalGradient(ref fillStyle.FocalGradient);
+                    writer.WriteFocalGradientRGBA(fillStyle.FocalGradient);
                     break;
                 case FillStyleType.RepeatingBitmap:
                 case FillStyleType.ClippedBitmap:

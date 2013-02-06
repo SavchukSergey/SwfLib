@@ -3,8 +3,10 @@
 namespace Code.SwfLib.Gradients {
     public static class GradientStreamExt {
 
-        public static void ReadGradientRGB(this SwfStreamReader reader, out GradientRGB gradient) {
-            gradient = new GradientRGB {
+        #region Linear Gradient
+
+        public static GradientRGB ReadGradientRGB(this SwfStreamReader reader) {
+            var gradient = new GradientRGB {
                 SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
                 InterpolationMode = (InterpolationMode)reader.ReadUnsignedBits(2)
             };
@@ -14,10 +16,11 @@ namespace Code.SwfLib.Gradients {
                 reader.ReadGradientRecordRGB(out record);
                 gradient.GradientRecords.Add(record);
             }
+            return gradient;
         }
 
-        public static void ReadGradientRGBA(this SwfStreamReader reader, out GradientRGBA gradient) {
-            gradient = new GradientRGBA {
+        public static GradientRGBA ReadGradientRGBA(this SwfStreamReader reader) {
+            var gradient = new GradientRGBA {
                 SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
                 InterpolationMode = (InterpolationMode)reader.ReadUnsignedBits(2)
             };
@@ -27,9 +30,10 @@ namespace Code.SwfLib.Gradients {
                 reader.ReadGradientRecordRGBA(out record);
                 gradient.GradientRecords.Add(record);
             }
+            return gradient;
         }
 
-        public static void WriteGradientRGBA(this SwfStreamWriter writer, ref GradientRGBA gradient) {
+        public static void WriteGradientRGBA(this SwfStreamWriter writer, GradientRGBA gradient) {
             writer.WriteUnsignedBits((uint)gradient.SpreadMode, 2);
             writer.WriteUnsignedBits((uint)gradient.InterpolationMode, 2);
             var count = gradient.GradientRecords.Count;
@@ -42,7 +46,7 @@ namespace Code.SwfLib.Gradients {
             }
         }
 
-        public static void WriteGradientRGB(this SwfStreamWriter writer, ref GradientRGB gradient) {
+        public static void WriteGradientRGB(this SwfStreamWriter writer, GradientRGB gradient) {
             writer.WriteUnsignedBits((uint)gradient.SpreadMode, 2);
             writer.WriteUnsignedBits((uint)gradient.InterpolationMode, 2);
             var count = gradient.GradientRecords.Count;
@@ -54,6 +58,72 @@ namespace Code.SwfLib.Gradients {
                 writer.WriteGradientRecordRGB(ref record);
             }
         }
+
+        #endregion
+
+        #region Focal gradients
+
+        public static FocalGradientRGB ReadFocalGradientRGB(this SwfStreamReader reader) {
+            var gradient = new FocalGradientRGB {
+                SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
+                InterpolationMode = (InterpolationMode)reader.ReadUnsignedBits(2)
+            };
+            var count = reader.ReadUnsignedBits(4);
+            for (var i = 0; i < count; i++) {
+                GradientRecordRGB record;
+                reader.ReadGradientRecordRGB(out record);
+                gradient.GradientRecords.Add(record);
+            }
+            gradient.FocalPoint = reader.ReadFixedPoint8();
+            return gradient;
+        }
+
+        public static FocalGradientRGBA ReadFocalGradientRGBA(this SwfStreamReader reader) {
+            var gradient = new FocalGradientRGBA {
+                SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
+                InterpolationMode = (InterpolationMode)reader.ReadUnsignedBits(2)
+            };
+            var count = reader.ReadUnsignedBits(4);
+            for (var i = 0; i < count; i++) {
+                GradientRecordRGBA record;
+                reader.ReadGradientRecordRGBA(out record);
+                gradient.GradientRecords.Add(record);
+            }
+            gradient.FocalPoint = reader.ReadFixedPoint8();
+            return gradient;
+        }
+
+        public static void WriteFocalGradientRGBA(this SwfStreamWriter writer, FocalGradientRGBA gradient) {
+            writer.WriteUnsignedBits((uint)gradient.SpreadMode, 2);
+            writer.WriteUnsignedBits((uint)gradient.InterpolationMode, 2);
+            var count = gradient.GradientRecords.Count;
+            if (count > 15)
+                throw new ArgumentOutOfRangeException("gradient", "Can't serialize more them 15 gradient points");
+            writer.WriteUnsignedBits((uint)count, 4);
+            for (var i = 0; i < count; i++) {
+                var record = gradient.GradientRecords[i];
+                writer.WriteGradientRecordRGBA(ref record);
+            }
+            writer.WriteFixedPoint8(gradient.FocalPoint);
+        }
+
+        public static void WriteFocalGradientRGB(this SwfStreamWriter writer, FocalGradientRGB gradient) {
+            writer.WriteUnsignedBits((uint)gradient.SpreadMode, 2);
+            writer.WriteUnsignedBits((uint)gradient.InterpolationMode, 2);
+            var count = gradient.GradientRecords.Count;
+            if (count > 15)
+                throw new ArgumentOutOfRangeException("gradient", "Can't serialize more them 15 gradient points");
+            writer.WriteUnsignedBits((uint)count, 4);
+            for (var i = 0; i < count; i++) {
+                GradientRecordRGB record = gradient.GradientRecords[i];
+                writer.WriteGradientRecordRGB(ref record);
+            }
+            writer.WriteFixedPoint8(gradient.FocalPoint);
+        }
+
+        #endregion
+
+        #region Gradient records
 
         public static void ReadGradientRecordRGB(this SwfStreamReader reader, out GradientRecordRGB record) {
             record.Ratio = reader.ReadByte();
@@ -75,12 +145,7 @@ namespace Code.SwfLib.Gradients {
             writer.WriteRGBA(ref record.Color);
         }
 
-        public static void ReadFocalGradient(this SwfStreamReader reader, out FocalGradient gradient) {
-            throw new NotImplementedException();
-        }
+        #endregion
 
-        public static void WriteFocalGradient(this SwfStreamWriter writer, ref FocalGradient gradient) {
-            throw new NotImplementedException();
-        }
     }
 }

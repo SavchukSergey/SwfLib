@@ -13,7 +13,7 @@ namespace Code.SwfLib.Tags.ShapeTags {
 
         public GradientRGB Gradient;
 
-        public FocalGradient FocalGradient;
+        public FocalGradientRGB FocalGradient;
 
         public ushort BitmapID;
 

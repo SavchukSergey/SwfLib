@@ -103,6 +103,9 @@
     <Compile Include="Actions\ActionWith.cs" />
     <Compile Include="Actions\ActionWriter.cs" />
     <Compile Include="Actions\RegisterParam.cs" />
+    <Compile Include="Gradients\BaseGradientRGB.cs" />
+    <Compile Include="Gradients\BaseGradientRGBA.cs" />
+    <Compile Include="Gradients\FocalGradientRGBA.cs" />
     <Compile Include="Utils\UnsignedBitsCount.cs" />
     <Compile Include="Buttons\ButtonCondition.cs" />
     <Compile Include="Buttons\ButtonRecord.cs" />
@@ -217,7 +220,7 @@
     <Compile Include="Tags\ButtonTags\DefineButtonBaseTag.cs" />
     <Compile Include="Shapes\FillStyles\FillStyleRGBA.cs" />
     <Compile Include="Shapes\FillStyles\FillStyleRGB.cs" />
-    <Compile Include="Gradients\FocalGradient.cs" />
+    <Compile Include="Gradients\FocalGradientRGB.cs" />
     <Compile Include="Gradients\GradientRGB.cs" />
     <Compile Include="Gradients\GradientRecordRGB.cs" />
     <Compile Include="Gradients\InterpolationMode.cs" />
