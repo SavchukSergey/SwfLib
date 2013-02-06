@@ -26,6 +26,13 @@ namespace Code.SwfLib.SwfMill.Shapes {
                     AddMatrix(res, fillStyle.GradientMatrix);
                     AddGradientColors(res, fillStyle.Gradient.GradientRecords);
                     break;
+                case FillStyleType.FocalGradient:
+                    AddSpreadMode(res, fillStyle.Gradient.SpreadMode);
+                    AddInterpolationMode(res, fillStyle.Gradient.InterpolationMode);
+                    AddMatrix(res, fillStyle.GradientMatrix);
+                    AddGradientColors(res, fillStyle.Gradient.GradientRecords);
+                    AddFocalPoint(res, fillStyle.FocalGradient.FocalPoint);
+                    break;
                 case FillStyleType.RepeatingBitmap:
                     AddBitmapId(res, fillStyle.BitmapID);
                     AddMatrix(res, fillStyle.BitmapMatrix);
@@ -58,6 +65,13 @@ namespace Code.SwfLib.SwfMill.Shapes {
                     AddMatrix(res, fillStyle.GradientMatrix);
                     AddGradientColors(res, fillStyle.Gradient.GradientRecords);
                     break;
+                case FillStyleType.FocalGradient:
+                    AddSpreadMode(res, fillStyle.Gradient.SpreadMode);
+                    AddInterpolationMode(res, fillStyle.Gradient.InterpolationMode);
+                    AddMatrix(res, fillStyle.GradientMatrix);
+                    AddGradientColors(res, fillStyle.Gradient.GradientRecords);
+                    AddFocalPoint(res, fillStyle.FocalGradient.FocalPoint);
+                    break;
                 case FillStyleType.RepeatingBitmap:
                     AddBitmapId(res, fillStyle.BitmapID);
                     AddMatrix(res, fillStyle.BitmapMatrix);
@@ -84,6 +98,8 @@ namespace Code.SwfLib.SwfMill.Shapes {
                     return ParseSolidRGB(xFillStyle);
                 case "LinearGradient":
                     return ParseLinearRGB(xFillStyle);
+                case "FocalGradient":
+                    return ParseFocalGradientRGB(xFillStyle);
                 case REPEATING_BITMAP:
                     return ParseRepeatingBitmapRGB(xFillStyle);
                 case CLIPPED_BITMAP:
@@ -105,6 +121,8 @@ namespace Code.SwfLib.SwfMill.Shapes {
                     return ParseSolidRGBA(xFillStyle);
                 case "LinearGradient":
                     return ParseLinearRGBA(xFillStyle);
+                case "FocalGradient":
+                    return ParseFocalGradientRGBA(xFillStyle);
                 case REPEATING_BITMAP:
                     return ParseRepeatingBitmapRGBA(xFillStyle);
                 case CLIPPED_BITMAP:
@@ -175,6 +193,44 @@ namespace Code.SwfLib.SwfMill.Shapes {
 
         #endregion
 
+        #region Focal Gradient
+
+        private static FillStyleRGB ParseFocalGradientRGB(XElement xFillStyle) {
+            var res = new FillStyleRGB {
+                FillStyleType = FillStyleType.FocalGradient,
+                FocalGradient = new FocalGradientRGB {
+                    SpreadMode = GetSpreadMode(xFillStyle),
+                    InterpolationMode = GetInterpolationMode(xFillStyle),
+                    FocalPoint = GetFocalPoint(xFillStyle)
+                },
+                GradientMatrix = GetMatrix(xFillStyle)
+            };
+            var xGradientColors = xFillStyle.Element("gradientColors");
+            foreach (var xRecord in xGradientColors.Elements("GradientItem")) {
+                res.Gradient.GradientRecords.Add(XGradientRecordRGB.FromXml(xRecord));
+            }
+            return res;
+        }
+
+        private static FillStyleRGBA ParseFocalGradientRGBA(XElement xFillStyle) {
+            var res = new FillStyleRGBA {
+                FillStyleType = FillStyleType.FocalGradient,
+                FocalGradient = new FocalGradientRGBA() {
+                    SpreadMode = GetSpreadMode(xFillStyle),
+                    InterpolationMode = GetInterpolationMode(xFillStyle),
+                    FocalPoint = GetFocalPoint(xFillStyle)
+                },
+                GradientMatrix = GetMatrix(xFillStyle)
+            };
+            var xGradientColors = xFillStyle.Element("gradientColors");
+            foreach (var xRecord in xGradientColors.Elements("GradientItem")) {
+                res.Gradient.GradientRecords.Add(XGradientRecordRGBA.FromXml(xRecord));
+            }
+            return res;
+        }
+
+        #endregion
+
         private static void AddGradientColors(XElement xml, IEnumerable<GradientRecordRGB> records) {
             var xColors = new XElement("gradientColors");
             foreach (var record in records) {
@@ -222,6 +278,15 @@ namespace Code.SwfLib.SwfMill.Shapes {
             var res = InterpolationMode.Normal;
             if (xMode == null) return res;
             return (InterpolationMode)Enum.Parse(typeof(InterpolationMode), xMode.Value);
+        }
+
+        private static void AddFocalPoint(XElement xml, double value) {
+            xml.Add(new XAttribute("focalPoint", CommonFormatter.Format(value)));
+        }
+
+        private static double GetFocalPoint(XElement xFillStyle) {
+            var xFocalPoint = xFillStyle.Attribute("focalPoint");
+            return CommonFormatter.ParseDouble(xFocalPoint.Value);
         }
 
         private static void AddBitmapId(XElement xml, ushort bitmapId) {
@@ -302,6 +367,8 @@ namespace Code.SwfLib.SwfMill.Shapes {
             switch (type) {
                 case FillStyleType.LinearGradient:
                     return "LinearGradient";
+                case FillStyleType.FocalGradient:
+                    return "FocalGradient";
                 case FillStyleType.SolidColor:
                     return "Solid";
                 case FillStyleType.RepeatingBitmap:
