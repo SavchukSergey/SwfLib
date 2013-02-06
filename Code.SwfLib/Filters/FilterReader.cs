@@ -47,7 +47,19 @@ namespace Code.SwfLib.Filters {
         }
 
         BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(BevelFilter filter, SwfStreamReader reader) {
-            throw new NotImplementedException();
+            filter.ShadowColor = reader.ReadRGBA();
+            filter.HighlightColor = reader.ReadRGBA();
+            filter.BlurX = reader.ReadFixed();
+            filter.BlurY = reader.ReadFixed();
+            filter.Angle = reader.ReadFixed();
+            filter.Distance = reader.ReadFixed();
+            filter.Strength = reader.ReadFixedPoint8();
+            filter.InnerShadow = reader.ReadBit();
+            filter.Knockout = reader.ReadBit();
+            filter.CompositeSource = reader.ReadBit();
+            filter.OnTop = reader.ReadBit();
+            filter.Passes = reader.ReadUnsignedBits(4);
+            return filter;
         }
 
         BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(GradientGlowFilter filter, SwfStreamReader reader) {

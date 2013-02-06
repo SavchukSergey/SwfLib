@@ -46,7 +46,19 @@ namespace Code.SwfLib.Filters {
         }
 
         object IFilterVisitor<SwfStreamWriter, object>.Visit(BevelFilter filter, SwfStreamWriter writer) {
-            throw new NotImplementedException();
+            writer.WriteRGBA(filter.ShadowColor);
+            writer.WriteRGBA(filter.HighlightColor);
+            writer.WriteFixed(filter.BlurX);
+            writer.WriteFixed(filter.BlurY);
+            writer.WriteFixed(filter.Angle);
+            writer.WriteFixed(filter.Distance);
+            writer.WriteFixedPoint8(filter.Strength);
+            writer.WriteBit(filter.InnerShadow);
+            writer.WriteBit(filter.Knockout);
+            writer.WriteBit(filter.CompositeSource);
+            writer.WriteBit(filter.OnTop);
+            writer.WriteUnsignedBits(filter.Passes, 4);
+            return null;
         }
 
         object IFilterVisitor<SwfStreamWriter, object>.Visit(GradientGlowFilter filter, SwfStreamWriter writer) {

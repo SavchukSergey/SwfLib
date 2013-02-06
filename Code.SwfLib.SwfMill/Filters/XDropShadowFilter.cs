@@ -8,21 +8,18 @@ namespace Code.SwfLib.SwfMill.Filters {
         public const string TAG_NAME = "DropShadow";
 
         public static XElement ToXml(DropShadowFilter filter) {
-            var res = new XElement(TAG_NAME,
+            return new XElement(TAG_NAME,
                 new XAttribute("angle", CommonFormatter.Format(filter.Angle)),
                 new XAttribute("blurX", CommonFormatter.Format(filter.BlurX)),
                 new XAttribute("blurY", CommonFormatter.Format(filter.BlurY)),
                 new XAttribute("distance", CommonFormatter.Format(filter.Distance)),
                 new XAttribute("innerShadow", CommonFormatter.Format(filter.InnerShadow)),
                 new XAttribute("knockout", CommonFormatter.Format(filter.Knockout)),
+                new XAttribute("compositeSource", CommonFormatter.Format(filter.CompositeSource)),
                 new XAttribute("passes", filter.Passes),
                 new XAttribute("strength", CommonFormatter.Format(filter.Strength)),
                 new XElement("color", XColorRGBA.ToXml(filter.Color))
             );
-            if (!filter.CompositeSource) {
-                res.Add(new XAttribute("compositeSource", CommonFormatter.Format(filter.CompositeSource)));
-            }
-            return res;
         }
 
         public static DropShadowFilter FromXml(XElement xFilter) {
