@@ -19,13 +19,13 @@ namespace Code.SwfLib.Filters {
 
         public int MatrixX {
             get {
-                return Matrix != null ? Matrix.GetLength(0) : 0;
+                return Matrix != null ? Matrix.GetLength(1) : 0;
             }
         }
 
         public int MatrixY {
             get {
-                return Matrix != null ? Matrix.GetLength(1) : 0;
+                return Matrix != null ? Matrix.GetLength(0) : 0;
             }
         }
 

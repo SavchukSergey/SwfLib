@@ -59,10 +59,10 @@ namespace Code.SwfLib.Filters {
             var matrixY = reader.ReadByte();
             filter.Divisor = reader.ReadSingle();
             filter.Bias = reader.ReadSingle();
-            filter.Matrix = new double[matrixX, matrixY];
+            filter.Matrix = new double[matrixY, matrixX];
             for (var x = 0; x < matrixX; x++) {
                 for (var y = 0; y < matrixY; y++) {
-                    filter.Matrix[x, y] = reader.ReadSingle();
+                    filter.Matrix[y, x] = reader.ReadSingle();
                 }
             }
             filter.DefaultColor = reader.ReadRGBA();

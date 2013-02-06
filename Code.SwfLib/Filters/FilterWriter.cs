@@ -62,7 +62,7 @@ namespace Code.SwfLib.Filters {
 
             for (var x = 0; x < filter.MatrixX; x++) {
                 for (var y = 0; y < filter.MatrixY; y++) {
-                    writer.WriteSingle((float)filter.Matrix[x, y]);
+                    writer.WriteSingle((float)filter.Matrix[y, x]);
                 }
             }
 

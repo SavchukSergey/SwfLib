@@ -3,6 +3,7 @@ using Code.SwfLib.Data;
 using Code.SwfLib.Gradients;
 using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags.ShapeTags;
+using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
@@ -112,7 +113,7 @@ namespace Code.SwfLib.Tests {
         public static void AreEqual(FillStyleRGBA expected, FillStyleRGBA actual, string message) {
             Assert.AreEqual(expected.BitmapID, actual.BitmapID, "BitmapID");
             AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
-            AreEqual(expected.Color, actual.Color, "Color");
+            AssertColors.AreEqual(expected.Color, actual.Color, "Color");
             Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
             AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
             AreEqual(expected.Gradient, actual.Gradient, "Gradient");
@@ -148,19 +149,13 @@ namespace Code.SwfLib.Tests {
 
         public static void AreEqual(GradientRecordRGBA expected, GradientRecordRGBA actual, string message) {
             Assert.AreEqual(expected.Ratio, actual.Ratio, message + ": Ratio");
-            AreEqual(expected.Color, actual.Color, message + ": Color");
+            AssertColors.AreEqual(expected.Color, actual.Color, message + ": Color");
         }
 
         public static void AreEqual(FocalGradient expected, FocalGradient actual, string message) {
             //TODO: Implement
         }
 
-        public static void AreEqual(SwfRGBA expected, SwfRGBA actual, string message) {
-            Assert.AreEqual(expected.Red, actual.Red, message + ": Red");
-            Assert.AreEqual(expected.Green, actual.Green, message + ": Green");
-            Assert.AreEqual(expected.Blue, actual.Blue, message + ": Blue");
-            Assert.AreEqual(expected.Alpha, actual.Alpha, message + ": Alpha");
-        }
 
         public static void AreEqual(SwfRGB expected, SwfRGB actual, string message) {
             Assert.AreEqual(expected.Red, actual.Red, message + ": Red");

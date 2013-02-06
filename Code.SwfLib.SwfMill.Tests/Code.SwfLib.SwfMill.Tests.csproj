@@ -57,6 +57,7 @@
     <Compile Include="AssertExt.cs" />
     <Compile Include="ActionXmlSerializerTest.cs" />
     <Compile Include="EnumerableExt.cs" />
+    <Compile Include="Filters\XConvolutionFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Resources\TagFormatting\FontTags\DefineFontAlignZones.xml" />
     <Compile Include="SwfMillFacadeTest.cs" />
@@ -72,6 +73,10 @@
     <ProjectReference Include="..\Code.SwfLib.SwfMill\Code.SwfLib.SwfMill.csproj">
       <Project>{4CE22FF7-ABF5-4894-BCDE-402DBDD42B80}</Project>
       <Name>Code.SwfLib.SwfMill</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Code.SwfLib.Tests\Code.SwfLib.Tests.csproj">
+      <Project>{F7862DFF-3B7F-4E5C-B448-9E6E4C04FBF7}</Project>
+      <Name>Code.SwfLib.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Code.SwfLib\Code.SwfLib.csproj">
       <Project>{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}</Project>
