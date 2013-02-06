@@ -59,7 +59,30 @@ namespace Code.SwfLib.Filters {
         }
 
         BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(ColorMatrixFilter filter, SwfStreamReader reader) {
-            throw new NotImplementedException();
+            filter.R0 = reader.ReadSingle();
+            filter.R1 = reader.ReadSingle();
+            filter.R2 = reader.ReadSingle();
+            filter.R3 = reader.ReadSingle();
+            filter.R4 = reader.ReadSingle();
+
+            filter.G0 = reader.ReadSingle();
+            filter.G1 = reader.ReadSingle();
+            filter.G2 = reader.ReadSingle();
+            filter.G3 = reader.ReadSingle();
+            filter.G4 = reader.ReadSingle();
+
+            filter.B0 = reader.ReadSingle();
+            filter.B1 = reader.ReadSingle();
+            filter.B2 = reader.ReadSingle();
+            filter.B3 = reader.ReadSingle();
+            filter.B4 = reader.ReadSingle();
+
+            filter.A0 = reader.ReadSingle();
+            filter.A1 = reader.ReadSingle();
+            filter.A2 = reader.ReadSingle();
+            filter.A3 = reader.ReadSingle();
+            filter.A4 = reader.ReadSingle();
+            return filter;
         }
 
         BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(GradientBevelFilter filter, SwfStreamReader reader) {

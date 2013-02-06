@@ -58,7 +58,30 @@ namespace Code.SwfLib.Filters {
         }
 
         object IFilterVisitor<SwfStreamWriter, object>.Visit(ColorMatrixFilter filter, SwfStreamWriter writer) {
-            throw new NotImplementedException();
+            writer.WriteSingle((float)filter.R0);
+            writer.WriteSingle((float)filter.R1);
+            writer.WriteSingle((float)filter.R2);
+            writer.WriteSingle((float)filter.R3);
+            writer.WriteSingle((float)filter.R4);
+
+            writer.WriteSingle((float)filter.G0);
+            writer.WriteSingle((float)filter.G1);
+            writer.WriteSingle((float)filter.G2);
+            writer.WriteSingle((float)filter.G3);
+            writer.WriteSingle((float)filter.G4);
+
+            writer.WriteSingle((float)filter.B0);
+            writer.WriteSingle((float)filter.B1);
+            writer.WriteSingle((float)filter.B2);
+            writer.WriteSingle((float)filter.B3);
+            writer.WriteSingle((float)filter.B4);
+
+            writer.WriteSingle((float)filter.A0);
+            writer.WriteSingle((float)filter.A1);
+            writer.WriteSingle((float)filter.A2);
+            writer.WriteSingle((float)filter.A3);
+            writer.WriteSingle((float)filter.A4);
+            return null;
         }
 
         object IFilterVisitor<SwfStreamWriter, object>.Visit(GradientBevelFilter filter, SwfStreamWriter writer) {
