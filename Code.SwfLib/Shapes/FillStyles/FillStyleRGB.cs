@@ -1,8 +1,7 @@
 ﻿using Code.SwfLib.Data;
 using Code.SwfLib.Gradients;
-using Code.SwfLib.Shapes.FillStyles;
 
-namespace Code.SwfLib.Tags.ShapeTags {
+namespace Code.SwfLib.Shapes.FillStyles {
     public struct FillStyleRGB {
 
         public FillStyleType FillStyleType;
