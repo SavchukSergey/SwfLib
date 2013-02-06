@@ -54,7 +54,23 @@ namespace Code.SwfLib.Filters {
         }
 
         object IFilterVisitor<SwfStreamWriter, object>.Visit(ConvolutionFilter filter, SwfStreamWriter writer) {
-            throw new NotImplementedException();
+            writer.WriteByte((byte)filter.MatrixX);
+            writer.WriteByte((byte)filter.MatrixY);
+
+            writer.WriteSingle((float)filter.Divisor);
+            writer.WriteSingle((float)filter.Bias);
+
+            for (var x = 0; x < filter.MatrixX; x++) {
+                for (var y = 0; y < filter.MatrixY; y++) {
+                    writer.WriteSingle((float)filter.Matrix[x, y]);
+                }
+            }
+
+            writer.WriteRGBA(filter.DefaultColor);
+            writer.WriteUnsignedBits(filter.Reserved, 6);
+            writer.WriteBit(filter.Clamp);
+            writer.WriteBit(filter.PreserveAlpha);
+            return null;
         }
 
         object IFilterVisitor<SwfStreamWriter, object>.Visit(ColorMatrixFilter filter, SwfStreamWriter writer) {

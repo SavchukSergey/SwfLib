@@ -5,7 +5,7 @@ using Code.SwfLib.Filters;
 namespace Code.SwfLib.SwfMill.Filters {
     public class XConvolutionFilter {
 
-        public const string TAG_NAME = "XConvolutionFilter";
+        public const string TAG_NAME = "ConvolutionFilter";
 
         public static XElement ToXml(ConvolutionFilter filter) {
             //TODO:ConvolutionFilter
