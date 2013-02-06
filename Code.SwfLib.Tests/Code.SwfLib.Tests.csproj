@@ -59,6 +59,7 @@
     <Compile Include="Actions\SwfActionFactoryTest.cs" />
     <Compile Include="AssertExt.cs" />
     <Compile Include="Asserts\AssertColors.cs" />
+    <Compile Include="Asserts\AssertGradients.cs" />
     <Compile Include="BasicTypes\BitTest.cs" />
     <Compile Include="BasicTypes\ColorTransformRGBTest.cs" />
     <Compile Include="BasicTypes\ColorTransformRGBATest.cs" />

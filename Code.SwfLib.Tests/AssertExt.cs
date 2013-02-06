@@ -97,16 +97,16 @@ namespace Code.SwfLib.Tests {
 
         public static void AreEqual(LineStyleRGB expected, LineStyleRGB actual, string message) {
             Assert.AreEqual(expected.Width, actual.Width, "Width");
-            AreEqual(expected.Color, actual.Color, "Color");
+            AssertColors.AreEqual(expected.Color, actual.Color, "Color");
         }
 
         public static void AreEqual(FillStyleRGB expected, FillStyleRGB actual, string message) {
             Assert.AreEqual(expected.BitmapID, actual.BitmapID, "BitmapID");
             AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
-            AreEqual(expected.Color, actual.Color, "Color");
+            AssertColors.AreEqual(expected.Color, actual.Color, "Color");
             Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
             AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
-            AreEqual(expected.Gradient, actual.Gradient, "Gradient");
+            AssertGradients.AreEqual(expected.Gradient, actual.Gradient, "Gradient");
             AreEqual(expected.GradientMatrix, actual.GradientMatrix, "GradientMatrix");
         }
 
@@ -116,51 +116,14 @@ namespace Code.SwfLib.Tests {
             AssertColors.AreEqual(expected.Color, actual.Color, "Color");
             Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
             AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
-            AreEqual(expected.Gradient, actual.Gradient, "Gradient");
+            AssertGradients.AreEqual(expected.Gradient, actual.Gradient, "Gradient");
             AreEqual(expected.GradientMatrix, actual.GradientMatrix, "GradientMatrix");
         }
 
-        public static void AreEqual(GradientRGB expected, GradientRGB actual, string message) {
-            Assert.AreEqual(expected.SpreadMode, actual.SpreadMode, message + ": SpreadMode");
-            Assert.AreEqual(expected.InterpolationMode, actual.InterpolationMode, message + ": InterpolationMode");
-            Assert.AreEqual(expected.GradientRecords.Count, actual.GradientRecords.Count, message + ": GradientRecords.Count");
-            for (var i = 0; i < expected.GradientRecords.Count; i++) {
-                var exp = expected.GradientRecords[i];
-                var act = actual.GradientRecords[i];
-                AreEqual(exp, act, message + ": GradientRecords[" + i + "]");
-            }
-        }
-
-        public static void AreEqual(GradientRGBA expected, GradientRGBA actual, string message) {
-            Assert.AreEqual(expected.SpreadMode, actual.SpreadMode, message + ": SpreadMode");
-            Assert.AreEqual(expected.InterpolationMode, actual.InterpolationMode, message + ": InterpolationMode");
-            Assert.AreEqual(expected.GradientRecords.Count, actual.GradientRecords.Count, message + ": GradientRecords.Count");
-            for (var i = 0; i < expected.GradientRecords.Count; i++) {
-                var exp = expected.GradientRecords[i];
-                var act = actual.GradientRecords[i];
-                AreEqual(exp, act, message + ": GradientRecords[" + i + "]");
-            }
-        }
-
-        public static void AreEqual(GradientRecordRGB expected, GradientRecordRGB actual, string message) {
-            Assert.AreEqual(expected.Ratio, actual.Ratio, message + ": Ratio");
-            AreEqual(expected.Color, actual.Color, message + ": Color");
-        }
-
-        public static void AreEqual(GradientRecordRGBA expected, GradientRecordRGBA actual, string message) {
-            Assert.AreEqual(expected.Ratio, actual.Ratio, message + ": Ratio");
-            AssertColors.AreEqual(expected.Color, actual.Color, message + ": Color");
-        }
+       
 
         public static void AreEqual(FocalGradient expected, FocalGradient actual, string message) {
             //TODO: Implement
-        }
-
-
-        public static void AreEqual(SwfRGB expected, SwfRGB actual, string message) {
-            Assert.AreEqual(expected.Red, actual.Red, message + ": Red");
-            Assert.AreEqual(expected.Green, actual.Green, message + ": Green");
-            Assert.AreEqual(expected.Blue, actual.Blue, message + ": Blue");
         }
 
         public static void AreEqual(SwfMatrix expected, SwfMatrix actual, string message) {
