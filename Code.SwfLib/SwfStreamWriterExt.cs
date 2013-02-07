@@ -28,6 +28,10 @@ namespace Code.SwfLib {
             writer.WriteUInt16(header.FrameCount);
         }
 
+        public static void WriteRGB(this SwfStreamWriter writer, SwfRGB val) {
+            writer.WriteRGB(ref val);
+        }
+
         public static void WriteRGB(this SwfStreamWriter writer, ref SwfRGB val) {
             writer.WriteByte(val.Red);
             writer.WriteByte(val.Green);

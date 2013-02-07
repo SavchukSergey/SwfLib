@@ -140,7 +140,7 @@ namespace Code.SwfLib.Shapes {
                 writer.WriteFixedPoint8(lineStyle.MilterLimitFactor);
             }
             if (lineStyle.HasFill) {
-                writer.WriteFillStyleRGBA(ref lineStyle.FillStyle);
+                writer.WriteFillStyleRGBA(lineStyle.FillStyle);
             } else {
                 writer.WriteRGBA(ref lineStyle.Color);
             }

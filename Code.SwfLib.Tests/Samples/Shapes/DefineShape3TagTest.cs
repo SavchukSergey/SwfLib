@@ -4,6 +4,7 @@ using Code.SwfLib.Gradients;
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags.ShapeTags;
+using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Samples.Shapes {
@@ -23,25 +24,26 @@ namespace Code.SwfLib.Tests.Samples.Shapes {
             Assert.AreEqual(1, tag.FillStyles.Count);
             var fillStyle = tag.FillStyles[0];
 
-            Assert.AreEqual(FillStyleType.LinearGradient, fillStyle.FillStyleType);
-            Assert.AreEqual(0, fillStyle.GradientMatrix.ScaleX);
-            Assert.AreEqual(0, fillStyle.GradientMatrix.ScaleY);
-            Assert.AreEqual(0.05499267578125000, fillStyle.GradientMatrix.RotateSkew0);
-            Assert.AreEqual(-0.05493164062500000, fillStyle.GradientMatrix.RotateSkew1);
-            Assert.AreEqual(7280, fillStyle.GradientMatrix.TranslateX);
-            Assert.AreEqual(900, fillStyle.GradientMatrix.TranslateY);
+            AssertFillStyles.AreEqual(new LinearGradientFillStyleRGBA {
+                GradientMatrix = {
+                    ScaleX = 0,
+                    ScaleY = 0,
+                    HasScale = true,
+                    RotateSkew0 = 0.05499267578125000,
+                    RotateSkew1 = -0.05493164062500000,
+                    HasRotate = true,
+                    TranslateX = 7280,
+                    TranslateY = 900
+                },
+                Gradient = new GradientRGBA {
+                    InterpolationMode = InterpolationMode.Normal,
+                    GradientRecords = {
+                        new GradientRecordRGBA {Color = new SwfRGBA(0,0,0,0), Ratio = 0},
+                        new GradientRecordRGBA {Color = new SwfRGBA(0,0,0,204), Ratio = 255},
+                    }
+                }
+            }, fillStyle, "FillStyles[0]");
 
-            Assert.AreEqual(InterpolationMode.Normal, fillStyle.Gradient.InterpolationMode);
-            Assert.AreEqual(2, fillStyle.Gradient.GradientRecords.Count);
-
-            var rec0 = fillStyle.Gradient.GradientRecords[0];
-            var rec1 = fillStyle.Gradient.GradientRecords[1];
-
-            Assert.AreEqual(0, rec0.Ratio);
-            Assert.AreEqual(new SwfRGBA(0, 0, 0, 0), rec0.Color);
-
-            Assert.AreEqual(255, rec1.Ratio);
-            Assert.AreEqual(new SwfRGBA(0, 0, 0, 204), rec1.Color);
 
             Assert.AreEqual(6, tag.ShapeRecords.Count);
             var firstShape = tag.ShapeRecords.First() as StyleChangeShapeRecord;

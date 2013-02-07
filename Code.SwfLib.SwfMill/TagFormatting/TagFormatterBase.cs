@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.SwfMill.DataFormatting;
 using Code.SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting {
@@ -18,8 +17,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
 
         protected const string TRANSFORM_TYPE_ELEM = "Transform";
         protected const string COLOR_TRANSFORM_TYPE_ELEM = "ColorTransform";
-
-        protected readonly static DataFormatters _formatters = new DataFormatters();
 
         #region ITagFormatter
 

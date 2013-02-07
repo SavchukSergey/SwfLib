@@ -31,7 +31,7 @@ namespace Code.SwfLib.Tests {
             for (var i = 0; i < expected.FillStyles.Count; i++) {
                 var exp = expected.FillStyles[i];
                 var act = actual.FillStyles[i];
-                AreEqual(exp, act, "FillStyles[" + i + "]");
+                AssertFillStyles.AreEqual(exp, act, "FillStyles[" + i + "]");
             }
             Assert.AreEqual(expected.LineStyles.Count, actual.LineStyles.Count, "LineStyles.Count");
             for (var i = 0; i < expected.LineStyles.Count; i++) {
@@ -100,27 +100,6 @@ namespace Code.SwfLib.Tests {
             AssertColors.AreEqual(expected.Color, actual.Color, "Color");
         }
 
-        public static void AreEqual(FillStyleRGB expected, FillStyleRGB actual, string message) {
-            Assert.AreEqual(expected.BitmapID, actual.BitmapID, "BitmapID");
-            AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
-            AssertColors.AreEqual(expected.Color, actual.Color, "Color");
-            Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
-            AssertGradients.AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
-            AssertGradients.AreEqual(expected.Gradient, actual.Gradient, "Gradient");
-            AreEqual(expected.GradientMatrix, actual.GradientMatrix, "GradientMatrix");
-        }
-
-        public static void AreEqual(FillStyleRGBA expected, FillStyleRGBA actual, string message) {
-            Assert.AreEqual(expected.BitmapID, actual.BitmapID, "BitmapID");
-            AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
-            AssertColors.AreEqual(expected.Color, actual.Color, "Color");
-            Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
-            AssertGradients.AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
-            AssertGradients.AreEqual(expected.Gradient, actual.Gradient, "Gradient");
-            AreEqual(expected.GradientMatrix, actual.GradientMatrix, "GradientMatrix");
-        }
-
-       
         public static void AreEqual(SwfMatrix expected, SwfMatrix actual, string message) {
             Assert.AreEqual(expected.HasScale, actual.HasScale, message + ": HasScale");
             Assert.AreEqual(expected.HasRotate, actual.HasRotate, message + ": HasRotate");

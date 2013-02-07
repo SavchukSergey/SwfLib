@@ -1,7 +1,6 @@
 ﻿using System;
 using Code.SwfLib.Actions;
 using Code.SwfLib.SwfMill.Actions;
-using Code.SwfLib.SwfMill.DataFormatting;
 using NUnit.Framework;
 
 namespace Code.SwfLib.SwfMill.Tests {

@@ -1,22 +1,9 @@
-﻿using Code.SwfLib.Data;
-using Code.SwfLib.Gradients;
+﻿namespace Code.SwfLib.Shapes.FillStyles {
+    public abstract class FillStyleRGB {
 
-namespace Code.SwfLib.Shapes.FillStyles {
-    public struct FillStyleRGB {
+        public abstract FillStyleType Type { get; }
 
-        public FillStyleType FillStyleType;
-
-        public SwfRGB Color;
-
-        public SwfMatrix GradientMatrix;
-
-        public GradientRGB Gradient;
-
-        public FocalGradientRGB FocalGradient;
-
-        public ushort BitmapID;
-
-        public SwfMatrix BitmapMatrix;
+        public abstract TResult AcceptVisitor<TArg, TResult>(IFillStyleRGBVisitor<TArg, TResult> visitor, TArg arg);
 
     }
 }

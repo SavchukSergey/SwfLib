@@ -2,6 +2,7 @@
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags.ShapeTags;
+using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Samples.Shapes {
@@ -19,10 +20,9 @@ namespace Code.SwfLib.Tests.Samples.Shapes {
             Assert.AreEqual(71, tag.ShapeBounds.YMax);
 
             Assert.AreEqual(1, tag.FillStyles.Count);
-            Assert.AreEqual(FillStyleType.SolidColor, tag.FillStyles[0].FillStyleType);
-            Assert.AreEqual(255, tag.FillStyles[0].Color.Red);
-            Assert.AreEqual(255, tag.FillStyles[0].Color.Green);
-            Assert.AreEqual(255, tag.FillStyles[0].Color.Blue);
+            AssertFillStyles.AreEqual(new SolidFillStyleRGB {
+                Color = { Red = 255, Green = 255, Blue = 255 }
+            }, tag.FillStyles[0], "FillStyles[0]");
 
             Assert.AreEqual(0, tag.LineStyles.Count);
 
@@ -65,10 +65,9 @@ namespace Code.SwfLib.Tests.Samples.Shapes {
             Assert.AreEqual(38, tag.ShapeBounds.YMax);
 
             Assert.AreEqual(1, tag.FillStyles.Count);
-            Assert.AreEqual(FillStyleType.SolidColor, tag.FillStyles[0].FillStyleType);
-            Assert.AreEqual(255, tag.FillStyles[0].Color.Red);
-            Assert.AreEqual(255, tag.FillStyles[0].Color.Green);
-            Assert.AreEqual(255, tag.FillStyles[0].Color.Blue);
+            AssertFillStyles.AreEqual(new SolidFillStyleRGB {
+                Color = { Red = 255, Green = 255, Blue = 255 }
+            }, tag.FillStyles[0], "FillStyles[0]");
 
             Assert.AreEqual(0, tag.LineStyles.Count);
 

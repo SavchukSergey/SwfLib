@@ -126,8 +126,9 @@ namespace Code.SwfLib.Tests.Tags.ShapeTags {
                 ShapeID = 2,
                 ShapeBounds = { XMin = 0, XMax = 5354, YMin = 0, YMax = 1800 },
                 FillStyles = {
-                    new FillStyleRGB {
-                        FillStyleType = FillStyleType.NonSmoothedRepeatingBitmap,
+                    new BitmapFillStyleRGB {
+                        Mode = BitmapMode.Repeat,
+                        Smoothing = false,
                         BitmapID = 1,
                         BitmapMatrix = new SwfMatrix {
                             ScaleX = 20.0,
@@ -154,7 +155,7 @@ namespace Code.SwfLib.Tests.Tags.ShapeTags {
                 ShapeID = 7,
                 ShapeBounds = { XMin = 0, XMax = 14560, YMin = 0, YMax = 1800 },
                 FillStyles = {
-                    new FillStyleRGB { FillStyleType = FillStyleType.SolidColor, Color = new SwfRGB(255, 255, 255) }
+                    new SolidFillStyleRGB { Color = new SwfRGB(255, 255, 255) }
                 },
                 ShapeRecords = {
                     new StyleChangeShapeRecordRGB {

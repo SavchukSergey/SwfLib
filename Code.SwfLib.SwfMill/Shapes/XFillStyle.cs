@@ -1,115 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Linq;
-using Code.SwfLib.Data;
-using Code.SwfLib.Gradients;
 using Code.SwfLib.Shapes.FillStyles;
-using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.SwfMill.Gradients;
-using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public class XFillStyle {
 
-        private const string CLIPPED_BITMAP = "ClippedBitmap";
-        private const string REPEATING_BITMAP = "RepeatingBitmap";
-
         public static XElement ToXml(FillStyleRGB fillStyle) {
-            var res = new XElement(GetNodeName(fillStyle.FillStyleType));
-            switch (fillStyle.FillStyleType) {
+            switch (fillStyle.Type) {
                 case FillStyleType.SolidColor:
-                    res.Add(new XElement("color", XColorRGB.ToXml(fillStyle.Color)));
-                    break;
+                    return XSolidFillStyle.ToXml((SolidFillStyleRGB)fillStyle);
                 case FillStyleType.LinearGradient:
-                    AddSpreadMode(res, fillStyle.Gradient.SpreadMode);
-                    AddInterpolationMode(res, fillStyle.Gradient.InterpolationMode);
-                    AddMatrix(res, fillStyle.GradientMatrix);
-                    AddGradientColors(res, fillStyle.Gradient.GradientRecords);
-                    break;
+                    return XLinearGradientFillStyle.ToXml((LinearGradientFillStyleRGB)fillStyle);
+                case FillStyleType.RadialGradient:
+                    return XRadialGradientFillStyle.ToXml((RadialGradientFillStyleRGB)fillStyle);
                 case FillStyleType.FocalGradient:
-                    AddSpreadMode(res, fillStyle.Gradient.SpreadMode);
-                    AddInterpolationMode(res, fillStyle.Gradient.InterpolationMode);
-                    AddMatrix(res, fillStyle.GradientMatrix);
-                    AddGradientColors(res, fillStyle.Gradient.GradientRecords);
-                    AddFocalPoint(res, fillStyle.FocalGradient.FocalPoint);
-                    break;
+                    return XFocalGradientFillStyle.ToXml((FocalGradientFillStyleRGB)fillStyle);
                 case FillStyleType.RepeatingBitmap:
-                    AddBitmapId(res, fillStyle.BitmapID);
-                    AddMatrix(res, fillStyle.BitmapMatrix);
-                    break;
                 case FillStyleType.ClippedBitmap:
-                    AddBitmapId(res, fillStyle.BitmapID);
-                    AddMatrix(res, fillStyle.BitmapMatrix);
-                    break;
                 case FillStyleType.NonSmoothedRepeatingBitmap:
-                    AddBitmapId(res, fillStyle.BitmapID);
-                    AddMatrix(res, fillStyle.BitmapMatrix);
-                    break;
                 case FillStyleType.NonSmoothedClippedBitmap:
-                    AddBitmapId(res, fillStyle.BitmapID);
-                    AddMatrix(res, fillStyle.BitmapMatrix);
-                    break;
+                    return XBitmapFillStyle.ToXml((BitmapFillStyleRGB)fillStyle);
+                default:
+                    throw new NotSupportedException();
             }
-            return res;
         }
 
         public static XElement ToXml(FillStyleRGBA fillStyle) {
-            var res = new XElement(GetNodeName(fillStyle.FillStyleType));
-            switch (fillStyle.FillStyleType) {
+            switch (fillStyle.Type) {
                 case FillStyleType.SolidColor:
-                    res.Add(new XElement("color", XColorRGBA.ToXml(fillStyle.Color)));
-                    break;
+                    return XSolidFillStyle.ToXml((SolidFillStyleRGBA)fillStyle);
                 case FillStyleType.LinearGradient:
-                    AddSpreadMode(res, fillStyle.Gradient.SpreadMode);
-                    AddInterpolationMode(res, fillStyle.Gradient.InterpolationMode);
-                    AddMatrix(res, fillStyle.GradientMatrix);
-                    AddGradientColors(res, fillStyle.Gradient.GradientRecords);
-                    break;
+                    return XLinearGradientFillStyle.ToXml((LinearGradientFillStyleRGBA)fillStyle);
+                case FillStyleType.RadialGradient:
+                    return XRadialGradientFillStyle.ToXml((RadialGradientFillStyleRGBA)fillStyle);
                 case FillStyleType.FocalGradient:
-                    AddSpreadMode(res, fillStyle.Gradient.SpreadMode);
-                    AddInterpolationMode(res, fillStyle.Gradient.InterpolationMode);
-                    AddMatrix(res, fillStyle.GradientMatrix);
-                    AddGradientColors(res, fillStyle.Gradient.GradientRecords);
-                    AddFocalPoint(res, fillStyle.FocalGradient.FocalPoint);
-                    break;
+                    return XFocalGradientFillStyle.ToXml((FocalGradientFillStyleRGBA)fillStyle);
                 case FillStyleType.RepeatingBitmap:
-                    AddBitmapId(res, fillStyle.BitmapID);
-                    AddMatrix(res, fillStyle.BitmapMatrix);
-                    break;
                 case FillStyleType.ClippedBitmap:
-                    AddBitmapId(res, fillStyle.BitmapID);
-                    AddMatrix(res, fillStyle.BitmapMatrix);
-                    break;
                 case FillStyleType.NonSmoothedRepeatingBitmap:
-                    AddBitmapId(res, fillStyle.BitmapID);
-                    AddMatrix(res, fillStyle.BitmapMatrix);
-                    break;
                 case FillStyleType.NonSmoothedClippedBitmap:
-                    AddBitmapId(res, fillStyle.BitmapID);
-                    AddMatrix(res, fillStyle.BitmapMatrix);
-                    break;
+                    return XBitmapFillStyle.ToXml((BitmapFillStyleRGBA)fillStyle);
+                default:
+                    throw new NotSupportedException();
             }
-            return res;
         }
 
         public static FillStyleRGB FromXmlRGB(XElement xFillStyle) {
             switch (xFillStyle.Name.LocalName) {
-                case "Solid":
-                    return ParseSolidRGB(xFillStyle);
-                case "LinearGradient":
-                    return ParseLinearRGB(xFillStyle);
-                case "FocalGradient":
-                    return ParseFocalGradientRGB(xFillStyle);
-                case REPEATING_BITMAP:
-                    return ParseRepeatingBitmapRGB(xFillStyle);
-                case CLIPPED_BITMAP:
-                    return ParseClippedBitmapRGB(xFillStyle);
-                case "NonSmoothedRepeatingBitmap":
-                    return ParseNonSmoothedRepeatingBitmapRGB(xFillStyle);
-                case "ClippedBitmap2":
-                    return ParseNonSmoothedClippedBitmapRGB(xFillStyle);
-
-                //TODO: other fill styles
+                case XSolidFillStyle.SOLID:
+                    return XSolidFillStyle.FromXmlRGB(xFillStyle);
+                case XLinearGradientFillStyle.LINEAR_GRADIENT:
+                    return XLinearGradientFillStyle.FromXmlRGB(xFillStyle);
+                case XRadialGradientFillStyle.RADIAL_GRADIENT:
+                    return XRadialGradientFillStyle.FromXmlRGB(xFillStyle);
+                case XFocalGradientFillStyle.FOCAL_GRADIENT:
+                    return XFocalGradientFillStyle.FromXmlRGB(xFillStyle);
+                case XBitmapFillStyle.REPEATING_BITMAP:
+                    return XBitmapFillStyle.ParseRepeatingBitmapRGB(xFillStyle);
+                case XBitmapFillStyle.CLIPPED_BITMAP:
+                    return XBitmapFillStyle.ParseClippedBitmapRGB(xFillStyle);
+                case XBitmapFillStyle.NON_SMOOTHED_REPEATING_BITMAP:
+                    return XBitmapFillStyle.ParseNonSmoothedRepeatingBitmapRGB(xFillStyle);
+                case XBitmapFillStyle.NON_SMOOTHED_CLIPPED_BITMAP:
+                    return XBitmapFillStyle.ParseNonSmoothedClippedBitmapRGB(xFillStyle);
                 default:
                     throw new NotSupportedException();
             }
@@ -117,268 +70,22 @@ namespace Code.SwfLib.SwfMill.Shapes {
 
         public static FillStyleRGBA FromXmlRGBA(XElement xFillStyle) {
             switch (xFillStyle.Name.LocalName) {
-                case "Solid":
-                    return ParseSolidRGBA(xFillStyle);
-                case "LinearGradient":
-                    return ParseLinearRGBA(xFillStyle);
-                case "FocalGradient":
-                    return ParseFocalGradientRGBA(xFillStyle);
-                case REPEATING_BITMAP:
-                    return ParseRepeatingBitmapRGBA(xFillStyle);
-                case CLIPPED_BITMAP:
-                    return ParseClippedBitmapRGBA(xFillStyle);
-                case "NonSmoothedRepeatingBitmap":
-                    return ParseNonSmoothedRepeatingBitmapRGBA(xFillStyle);
-                case "ClippedBitmap2":
-                    return ParseNonSmoothedClippedBitmapRGBA(xFillStyle);
-                //TODO: other fill styles
-                default:
-                    throw new NotSupportedException();
-            }
-        }
-
-        #region Solid
-
-        private static FillStyleRGB ParseSolidRGB(XElement xFillStyle) {
-            var xColor = xFillStyle.Element("color").Element("Color");
-            return new FillStyleRGB {
-                FillStyleType = FillStyleType.SolidColor,
-                Color = XColorRGB.FromXml(xColor)
-            };
-        }
-
-        private static FillStyleRGBA ParseSolidRGBA(XElement xFillStyle) {
-            var xColor = xFillStyle.Element("color").Element("Color");
-            return new FillStyleRGBA {
-                FillStyleType = FillStyleType.SolidColor,
-                Color = XColorRGBA.FromXml(xColor)
-            };
-        }
-
-        #endregion
-
-        #region Linear Gradient
-
-        private static FillStyleRGB ParseLinearRGB(XElement xFillStyle) {
-            var res = new FillStyleRGB {
-                FillStyleType = FillStyleType.LinearGradient,
-                Gradient = new GradientRGB {
-                    SpreadMode = GetSpreadMode(xFillStyle),
-                    InterpolationMode = GetInterpolationMode(xFillStyle),
-                },
-                GradientMatrix = GetMatrix(xFillStyle)
-            };
-            var xGradientColors = xFillStyle.Element("gradientColors");
-            foreach (var xRecord in xGradientColors.Elements("GradientItem")) {
-                res.Gradient.GradientRecords.Add(XGradientRecordRGB.FromXml(xRecord));
-            }
-            return res;
-        }
-
-        private static FillStyleRGBA ParseLinearRGBA(XElement xFillStyle) {
-            var res = new FillStyleRGBA {
-                FillStyleType = FillStyleType.LinearGradient,
-                Gradient = new GradientRGBA {
-                    SpreadMode = GetSpreadMode(xFillStyle),
-                    InterpolationMode = GetInterpolationMode(xFillStyle),
-                },
-                GradientMatrix = GetMatrix(xFillStyle)
-            };
-            var xGradientColors = xFillStyle.Element("gradientColors");
-            foreach (var xRecord in xGradientColors.Elements("GradientItem")) {
-                res.Gradient.GradientRecords.Add(XGradientRecordRGBA.FromXml(xRecord));
-            }
-            return res;
-        }
-
-        #endregion
-
-        #region Focal Gradient
-
-        private static FillStyleRGB ParseFocalGradientRGB(XElement xFillStyle) {
-            var res = new FillStyleRGB {
-                FillStyleType = FillStyleType.FocalGradient,
-                FocalGradient = new FocalGradientRGB {
-                    SpreadMode = GetSpreadMode(xFillStyle),
-                    InterpolationMode = GetInterpolationMode(xFillStyle),
-                    FocalPoint = GetFocalPoint(xFillStyle)
-                },
-                GradientMatrix = GetMatrix(xFillStyle)
-            };
-            var xGradientColors = xFillStyle.Element("gradientColors");
-            foreach (var xRecord in xGradientColors.Elements("GradientItem")) {
-                res.Gradient.GradientRecords.Add(XGradientRecordRGB.FromXml(xRecord));
-            }
-            return res;
-        }
-
-        private static FillStyleRGBA ParseFocalGradientRGBA(XElement xFillStyle) {
-            var res = new FillStyleRGBA {
-                FillStyleType = FillStyleType.FocalGradient,
-                FocalGradient = new FocalGradientRGBA() {
-                    SpreadMode = GetSpreadMode(xFillStyle),
-                    InterpolationMode = GetInterpolationMode(xFillStyle),
-                    FocalPoint = GetFocalPoint(xFillStyle)
-                },
-                GradientMatrix = GetMatrix(xFillStyle)
-            };
-            var xGradientColors = xFillStyle.Element("gradientColors");
-            foreach (var xRecord in xGradientColors.Elements("GradientItem")) {
-                res.Gradient.GradientRecords.Add(XGradientRecordRGBA.FromXml(xRecord));
-            }
-            return res;
-        }
-
-        #endregion
-
-        private static void AddGradientColors(XElement xml, IEnumerable<GradientRecordRGB> records) {
-            var xColors = new XElement("gradientColors");
-            foreach (var record in records) {
-                var xRecord = XGradientRecordRGB.ToXml(record);
-                xColors.Add(xRecord);
-            }
-            xml.Add(xColors);
-        }
-
-        private static void AddGradientColors(XElement xml, IEnumerable<GradientRecordRGBA> records) {
-            var xColors = new XElement("gradientColors");
-            foreach (var record in records) {
-                var xRecord = XGradientRecordRGBA.ToXml(record);
-                xColors.Add(xRecord);
-            }
-            xml.Add(xColors);
-        }
-
-        private static void AddMatrix(XElement xml, SwfMatrix matrix) {
-            xml.Add(new XElement("matrix", XMatrix.ToXml(matrix)));
-        }
-
-        private static SwfMatrix GetMatrix(XElement xFillStyle) {
-            var xMatrix = xFillStyle.Element("matrix");
-            return XMatrix.FromXml(xMatrix.Element("Transform"));
-        }
-
-        private static void AddSpreadMode(XElement xml, SpreadMode mode) {
-            xml.Add(new XAttribute("spreadMode", mode.ToString()));
-        }
-
-        private static SpreadMode GetSpreadMode(XElement xFillStyle) {
-            var xMode = xFillStyle.Attribute("spreadMode");
-            var res = SpreadMode.Pad;
-            if (xMode == null) return res;
-            return (SpreadMode)Enum.Parse(typeof(SpreadMode), xMode.Value);
-        }
-
-        private static void AddInterpolationMode(XElement xml, InterpolationMode mode) {
-            xml.Add(new XAttribute("interpolationMode", mode.ToString()));
-        }
-
-        private static InterpolationMode GetInterpolationMode(XElement xFillStyle) {
-            var xMode = xFillStyle.Attribute("interpolationMode");
-            var res = InterpolationMode.Normal;
-            if (xMode == null) return res;
-            return (InterpolationMode)Enum.Parse(typeof(InterpolationMode), xMode.Value);
-        }
-
-        private static void AddFocalPoint(XElement xml, double value) {
-            xml.Add(new XAttribute("focalPoint", CommonFormatter.Format(value)));
-        }
-
-        private static double GetFocalPoint(XElement xFillStyle) {
-            var xFocalPoint = xFillStyle.Attribute("focalPoint");
-            return CommonFormatter.ParseDouble(xFocalPoint.Value);
-        }
-
-        private static void AddBitmapId(XElement xml, ushort bitmapId) {
-            xml.Add(new XAttribute("objectID", bitmapId.ToString()));
-        }
-
-        private static ushort GetBitmapId(XElement xml) {
-            return ushort.Parse(xml.Attribute("objectID").Value);
-        }
-
-        public static FillStyleRGB ParseRepeatingBitmapRGB(XElement xFillStyle) {
-            return new FillStyleRGB {
-                FillStyleType = FillStyleType.RepeatingBitmap,
-                BitmapID = GetBitmapId(xFillStyle),
-                BitmapMatrix = GetMatrix(xFillStyle)
-            };
-        }
-
-        public static FillStyleRGBA ParseRepeatingBitmapRGBA(XElement xFillStyle) {
-            return new FillStyleRGBA {
-                FillStyleType = FillStyleType.RepeatingBitmap,
-                BitmapID = GetBitmapId(xFillStyle),
-                BitmapMatrix = GetMatrix(xFillStyle)
-            };
-        }
-
-        public static FillStyleRGB ParseNonSmoothedRepeatingBitmapRGB(XElement xFillStyle) {
-            return new FillStyleRGB {
-                FillStyleType = FillStyleType.NonSmoothedRepeatingBitmap,
-                BitmapID = GetBitmapId(xFillStyle),
-                BitmapMatrix = GetMatrix(xFillStyle)
-            };
-        }
-
-        public static FillStyleRGBA ParseNonSmoothedRepeatingBitmapRGBA(XElement xFillStyle) {
-            return new FillStyleRGBA {
-                FillStyleType = FillStyleType.NonSmoothedRepeatingBitmap,
-                BitmapID = GetBitmapId(xFillStyle),
-                BitmapMatrix = GetMatrix(xFillStyle)
-            };
-        }
-
-
-        public static FillStyleRGB ParseClippedBitmapRGB(XElement xFillStyle) {
-            return new FillStyleRGB {
-                FillStyleType = FillStyleType.ClippedBitmap,
-                BitmapID = GetBitmapId(xFillStyle),
-                BitmapMatrix = GetMatrix(xFillStyle)
-            };
-        }
-
-        public static FillStyleRGBA ParseClippedBitmapRGBA(XElement xFillStyle) {
-            return new FillStyleRGBA {
-                FillStyleType = FillStyleType.ClippedBitmap,
-                BitmapID = GetBitmapId(xFillStyle),
-                BitmapMatrix = GetMatrix(xFillStyle)
-            };
-        }
-
-        public static FillStyleRGB ParseNonSmoothedClippedBitmapRGB(XElement xFillStyle) {
-            return new FillStyleRGB {
-                FillStyleType = FillStyleType.NonSmoothedClippedBitmap,
-                BitmapID = GetBitmapId(xFillStyle),
-                BitmapMatrix = GetMatrix(xFillStyle)
-            };
-        }
-
-        public static FillStyleRGBA ParseNonSmoothedClippedBitmapRGBA(XElement xFillStyle) {
-            return new FillStyleRGBA {
-                FillStyleType = FillStyleType.NonSmoothedClippedBitmap,
-                BitmapID = GetBitmapId(xFillStyle),
-                BitmapMatrix = GetMatrix(xFillStyle)
-            };
-        }
-
-
-        private static string GetNodeName(FillStyleType type) {
-            switch (type) {
-                case FillStyleType.LinearGradient:
-                    return "LinearGradient";
-                case FillStyleType.FocalGradient:
-                    return "FocalGradient";
-                case FillStyleType.SolidColor:
-                    return "Solid";
-                case FillStyleType.RepeatingBitmap:
-                    return REPEATING_BITMAP;
-                case FillStyleType.ClippedBitmap:
-                    return CLIPPED_BITMAP;
-                case FillStyleType.NonSmoothedRepeatingBitmap:
-                    return "NonSmoothedRepeatingBitmap";
-                case FillStyleType.NonSmoothedClippedBitmap:
-                    return "ClippedBitmap2";
+                case XSolidFillStyle.SOLID:
+                    return XSolidFillStyle.FromXmlRGBA(xFillStyle);
+                case XLinearGradientFillStyle.LINEAR_GRADIENT:
+                    return XLinearGradientFillStyle.FromXmlRGBA(xFillStyle);
+                case XRadialGradientFillStyle.RADIAL_GRADIENT:
+                    return XRadialGradientFillStyle.FromXmlRGBA(xFillStyle);
+                case XFocalGradientFillStyle.FOCAL_GRADIENT:
+                    return XFocalGradientFillStyle.FromXmlRGBA(xFillStyle);
+                case XBitmapFillStyle.REPEATING_BITMAP:
+                    return XBitmapFillStyle.ParseRepeatingBitmapRGBA(xFillStyle);
+                case XBitmapFillStyle.CLIPPED_BITMAP:
+                    return XBitmapFillStyle.ParseClippedBitmapRGBA(xFillStyle);
+                case XBitmapFillStyle.NON_SMOOTHED_REPEATING_BITMAP:
+                    return XBitmapFillStyle.ParseNonSmoothedRepeatingBitmapRGBA(xFillStyle);
+                case XBitmapFillStyle.NON_SMOOTHED_CLIPPED_BITMAP:
+                    return XBitmapFillStyle.ParseNonSmoothedClippedBitmapRGBA(xFillStyle);
                 default:
                     throw new NotSupportedException();
             }
