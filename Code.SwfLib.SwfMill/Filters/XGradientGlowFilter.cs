@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Code.SwfLib.Filters;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Gradients;
@@ -7,7 +6,7 @@ using Code.SwfLib.SwfMill.Gradients;
 namespace Code.SwfLib.SwfMill.Filters {
     public static class XGradientGlowFilter {
 
-        public const string TAG_NAME = "GradientGlowFilter";
+        public const string TAG_NAME = "GradientGlow";
 
         public static XElement ToXml(GradientGlowFilter filter) {
             var res = new XElement(TAG_NAME,

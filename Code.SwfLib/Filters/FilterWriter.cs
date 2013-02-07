@@ -82,8 +82,6 @@ namespace Code.SwfLib.Filters {
 
             writer.WriteUnsignedBits(filter.Passes, 4);
             return null;
-
-            throw new NotImplementedException();
         }
 
         object IFilterVisitor<SwfStreamWriter, object>.Visit(ConvolutionFilter filter, SwfStreamWriter writer) {
@@ -134,7 +132,26 @@ namespace Code.SwfLib.Filters {
         }
 
         object IFilterVisitor<SwfStreamWriter, object>.Visit(GradientBevelFilter filter, SwfStreamWriter writer) {
-            throw new NotImplementedException();
+            writer.WriteByte((byte)filter.GradientColors.Count);
+            foreach (var record in filter.GradientColors) {
+                writer.WriteRGBA(record.Color);
+            }
+            foreach (var record in filter.GradientColors) {
+                writer.WriteByte(record.Ratio);
+            }
+            writer.WriteFixed(filter.BlurX);
+            writer.WriteFixed(filter.BlurY);
+            writer.WriteFixed(filter.Angle);
+
+            writer.WriteFixed(filter.Distance);
+            writer.WriteFixedPoint8(filter.Strength);
+            writer.WriteBit(filter.InnerGlow);
+            writer.WriteBit(filter.Knockout);
+            writer.WriteBit(filter.CompositeSource);
+            writer.WriteBit(filter.OnTop);
+
+            writer.WriteUnsignedBits(filter.Passes, 4);
+            return null;
         }
     }
 }
