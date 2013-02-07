@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.SwfLib.Gradients;
 
 namespace Code.SwfLib.Filters {
     public class FilterReader : IFilterVisitor<SwfStreamReader, BaseFilter> {
@@ -63,7 +64,26 @@ namespace Code.SwfLib.Filters {
         }
 
         BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(GradientGlowFilter filter, SwfStreamReader reader) {
-            throw new NotImplementedException();
+            var count = reader.ReadByte();
+            for (var i = 0; i < count; i++) {
+                var record = new GradientRecordRGBA();
+                record.Color = reader.ReadRGBA();
+                filter.GradientColors.Add(record);
+            }
+            for (var i = 0; i < count; i++) {
+                filter.GradientColors[i].Ratio = reader.ReadByte();
+            }
+            filter.BlurX = reader.ReadFixed();
+            filter.BlurY = reader.ReadFixed();
+            filter.Angle = reader.ReadFixed();
+            filter.Distance = reader.ReadFixed();
+            filter.Strength = reader.ReadFixedPoint8();
+            filter.InnerGlow = reader.ReadBit();
+            filter.Knockout = reader.ReadBit();
+            filter.CompositeSource = reader.ReadBit();
+            filter.OnTop = reader.ReadBit();
+            filter.Passes = reader.ReadUnsignedBits(4);
+            return filter;
         }
 
         BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(ConvolutionFilter filter, SwfStreamReader reader) {

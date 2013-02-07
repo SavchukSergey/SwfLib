@@ -8,7 +8,7 @@ namespace Code.SwfLib.SwfMill.Filters {
         public const string TAG_NAME = "Glow";
 
         public static XElement ToXml(GlowFilter filter) {
-            var res = new XElement("Glow",
+            var res = new XElement(TAG_NAME,
                 new XAttribute("blurX", CommonFormatter.Format(filter.BlurX)),
                 new XAttribute("blurY", CommonFormatter.Format(filter.BlurY)),
                 new XAttribute("innerGlow", CommonFormatter.Format(filter.InnerGlow)),

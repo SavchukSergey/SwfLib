@@ -1,7 +1,7 @@
 ﻿using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Gradients {
-    public struct GradientRecordRGB {
+    public class GradientRecordRGB {
 
         public byte Ratio;
 

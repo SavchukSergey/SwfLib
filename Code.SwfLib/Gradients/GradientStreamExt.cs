@@ -12,8 +12,7 @@ namespace Code.SwfLib.Gradients {
             };
             var count = reader.ReadUnsignedBits(4);
             for (var i = 0; i < count; i++) {
-                GradientRecordRGB record;
-                reader.ReadGradientRecordRGB(out record);
+                GradientRecordRGB record = reader.ReadGradientRecordRGB();
                 gradient.GradientRecords.Add(record);
             }
             return gradient;
@@ -26,8 +25,7 @@ namespace Code.SwfLib.Gradients {
             };
             var count = reader.ReadUnsignedBits(4);
             for (var i = 0; i < count; i++) {
-                GradientRecordRGBA record;
-                reader.ReadGradientRecordRGBA(out record);
+                GradientRecordRGBA record = reader.ReadGradientRecordRGBA();
                 gradient.GradientRecords.Add(record);
             }
             return gradient;
@@ -70,8 +68,7 @@ namespace Code.SwfLib.Gradients {
             };
             var count = reader.ReadUnsignedBits(4);
             for (var i = 0; i < count; i++) {
-                GradientRecordRGB record;
-                reader.ReadGradientRecordRGB(out record);
+                GradientRecordRGB record = reader.ReadGradientRecordRGB();
                 gradient.GradientRecords.Add(record);
             }
             gradient.FocalPoint = reader.ReadFixedPoint8();
@@ -85,8 +82,7 @@ namespace Code.SwfLib.Gradients {
             };
             var count = reader.ReadUnsignedBits(4);
             for (var i = 0; i < count; i++) {
-                GradientRecordRGBA record;
-                reader.ReadGradientRecordRGBA(out record);
+                GradientRecordRGBA record = reader.ReadGradientRecordRGBA();
                 gradient.GradientRecords.Add(record);
             }
             gradient.FocalPoint = reader.ReadFixedPoint8();
@@ -125,14 +121,20 @@ namespace Code.SwfLib.Gradients {
 
         #region Gradient records
 
-        public static void ReadGradientRecordRGB(this SwfStreamReader reader, out GradientRecordRGB record) {
-            record.Ratio = reader.ReadByte();
-            reader.ReadRGB(out record.Color);
+        public static GradientRecordRGB ReadGradientRecordRGB(this SwfStreamReader reader) {
+            var record = new GradientRecordRGB {
+                Ratio = reader.ReadByte(),
+                Color = reader.ReadRGB()
+            };
+            return record;
         }
 
-        public static void ReadGradientRecordRGBA(this SwfStreamReader reader, out GradientRecordRGBA record) {
-            record.Ratio = reader.ReadByte();
-            reader.ReadRGBA(out record.Color);
+        public static GradientRecordRGBA ReadGradientRecordRGBA(this SwfStreamReader reader) {
+            var record = new GradientRecordRGBA {
+                Ratio = reader.ReadByte(),
+                Color = reader.ReadRGBA()
+            };
+            return record;
         }
 
         public static void WriteGradientRecordRGB(this SwfStreamWriter writer, ref GradientRecordRGB record) {

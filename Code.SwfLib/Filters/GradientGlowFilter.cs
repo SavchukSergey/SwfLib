@@ -1,6 +1,31 @@
-﻿namespace Code.SwfLib.Filters {
+﻿using System.Collections.Generic;
+using Code.SwfLib.Gradients;
+
+namespace Code.SwfLib.Filters {
     public class GradientGlowFilter : BaseFilter {
-        
+
+        public readonly IList<GradientRecordRGBA> GradientColors = new List<GradientRecordRGBA>();
+
+        public double BlurX;
+
+        public double BlurY;
+
+        public double Angle;
+
+        public double Distance;
+
+        public double Strength;
+
+        public bool InnerGlow;
+
+        public bool Knockout;
+
+        public bool CompositeSource;
+
+        public bool OnTop;
+
+        public uint Passes;
+
         public override FilterType Type {
             get { return FilterType.GradientGlow; }
         }
