@@ -1,6 +1,7 @@
 ﻿namespace Code.SwfLib.Actions {
     public class ActionGetURL2 : ActionBase {
 
+        //TODO: split into separate flags
         public byte Flags;
 
         public override ActionCode ActionCode {

@@ -52,6 +52,10 @@ namespace Code.SwfLib.Tests.Actions {
                 if ((byte)type >= 0x80) {
                     var testTypeName = GetType().Namespace + "." + type + "ActionTest";
                     var testType = GetType().Assembly.GetType(testTypeName);
+                    if (testType == null) {
+                        Console.WriteLine("Test for reading/writing {0} action must exist", type);
+                        continue;
+                    }
                     Assert.IsNotNull(testType, "Test for reading/writing {0} action must exist", type);
                     var readMethod = testType.GetMethod("ReadTest");
                     Assert.IsNotNull(readMethod, "ReadTest must present");

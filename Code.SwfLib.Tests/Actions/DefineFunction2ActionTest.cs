@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Code.SwfLib.Actions;
+﻿using Code.SwfLib.Actions;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Actions {
@@ -17,8 +16,7 @@ namespace Code.SwfLib.Tests.Actions {
 
 
         [Test]
-        public void ReadTest()
-        {
+        public void ReadTest() {
             var action = ReadAction<ActionDefineFunction2>(_etalon);
             Assert.AreEqual("func", action.Name);
             Assert.AreEqual(10, action.RegisterCount);
