@@ -54,8 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\ActionReaderTest.cs" />
-    <Compile Include="Actions\ActionWriterTest.cs" />
+    <Compile Include="Actions\ActionCommonTest.cs" />
+    <Compile Include="Actions\BaseActionTest.cs" />
+    <Compile Include="Actions\ConstantPoolActionTest.cs" />
+    <Compile Include="Actions\WaitForFrame2ActionTest.cs" />
+    <Compile Include="Actions\GoToLabelActionTest.cs" />
+    <Compile Include="Actions\SetTargetActionTest.cs" />
+    <Compile Include="Actions\WaitForFrameActionTest.cs" />
+    <Compile Include="Actions\StoreRegisterActionTest.cs" />
+    <Compile Include="Actions\GetURLActionTest.cs" />
+    <Compile Include="Actions\GotoFrameActionTest.cs" />
     <Compile Include="Actions\SwfActionFactoryTest.cs" />
     <Compile Include="AssertExt.cs" />
     <Compile Include="Asserts\AssertColors.cs" />

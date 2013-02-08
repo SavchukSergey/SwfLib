@@ -263,6 +263,7 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionWaitForFrame2 action, SwfStreamWriter writer) {
+            writer.WriteByte(action.SkipCount);
             return null;
         }
 
