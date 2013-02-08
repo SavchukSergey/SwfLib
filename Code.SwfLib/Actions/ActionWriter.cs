@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Code.SwfLib.Actions {
@@ -515,6 +516,28 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionTry action, SwfStreamWriter writer) {
+            writer.WriteUnsignedBits(action.Reserved, 5);
+            writer.WriteBit(action.CatchInRegister);
+            writer.WriteBit(action.FinallyBlock);
+            writer.WriteBit(action.CatchBlock);
+
+            var tryBlock = GetBody(action.Try);
+            var catchBlock = action.CatchBlock ? GetBody(action.Catch) : null;
+            var finallyBlock = action.FinallyBlock ? GetBody(action.Finally) : null;
+
+            writer.WriteUInt16((ushort)tryBlock.Length);
+            writer.WriteUInt16(catchBlock != null ? (ushort)catchBlock.Length : (ushort)0);
+            writer.WriteUInt16(finallyBlock != null ? (ushort)finallyBlock.Length : (ushort)0);
+
+            if (action.CatchInRegister) {
+                writer.WriteByte(action.CatchRegister);
+            } else {
+                writer.WriteString(action.CatchName);
+            }
+
+            writer.WriteBytes(tryBlock);
+            if (catchBlock != null) writer.WriteBytes(catchBlock);
+            if (finallyBlock != null) writer.WriteBytes(finallyBlock);
             return null;
         }
 
@@ -528,6 +551,15 @@ namespace Code.SwfLib.Actions {
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionUnknown action, SwfStreamWriter writer) {
             return null;
+        }
+
+        private static byte[] GetBody(IEnumerable<ActionBase> actions) {
+            var mem = new MemoryStream();
+            var aw = new ActionWriter(new SwfStreamWriter(mem));
+            foreach (var action in actions) {
+                aw.WriteAction(action);
+            }
+            return mem.ToArray();
         }
     }
 }

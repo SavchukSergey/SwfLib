@@ -524,6 +524,37 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionTry action, XElement xAction) {
+            var xReserved = xAction.Attribute("reserved");
+            var xCatchReg = xAction.Attribute("catchReg");
+            var xCatchName = xAction.Attribute("catchName");
+            var xTry = xAction.Element("try");
+            var xCatch = xAction.Element("catch");
+            var xFinally = xAction.Element("finally");
+
+            if (xReserved != null) {
+                action.Reserved = byte.Parse(xReserved.Value);
+            }
+            if (xCatchReg != null && xCatchName == null) {
+                action.CatchInRegister = true;
+                action.CatchRegister = byte.Parse(xCatchReg.Value);
+            } else if (xCatchReg == null && xCatchName != null) {
+                action.CatchInRegister = false;
+                action.CatchName = xCatchName.Value;
+            } else if (xCatchReg != null && xCatchName != null) {
+                throw new InvalidOperationException("catchReg and catchName are mutally exclusive");
+            } else {
+                throw new InvalidOperationException("Either catchReg or catchName must be specified");
+            }
+
+            XAction.FromXml(xTry, action.Try);
+            if (xCatch != null) {
+                action.CatchBlock = true;
+                XAction.FromXml(xCatch, action.Catch);
+            }
+            if (xFinally != null) {
+                action.FinallyBlock = true;
+                XAction.FromXml(xFinally, action.Finally);
+            }
             return action;
         }
 

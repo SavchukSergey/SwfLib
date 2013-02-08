@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Code.SwfLib.Actions {
     public class ActionReader : IActionVisitor<ushort, ActionBase> {
@@ -239,7 +241,7 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionGotoFrame2 action, ushort length) {
-            action.Reserved = (byte) _reader.ReadUnsignedBits(6);
+            action.Reserved = (byte)_reader.ReadUnsignedBits(6);
             var hasBias = _reader.ReadBit();
             action.Play = _reader.ReadBit();
             if (hasBias) {
@@ -526,6 +528,25 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionTry action, ushort length) {
+            action.Reserved = (byte)_reader.ReadUnsignedBits(5);
+            action.CatchInRegister = _reader.ReadBit();
+            action.FinallyBlock = _reader.ReadBit();
+            action.CatchBlock = _reader.ReadBit();
+            var trySize = _reader.ReadUInt16();
+            var catchSize = _reader.ReadUInt16();
+            var finallySize = _reader.ReadUInt16();
+            if (action.CatchInRegister) {
+                action.CatchRegister = _reader.ReadByte();
+            } else {
+                action.CatchName = _reader.ReadString();
+            }
+            ReadActions(_reader, trySize, action.Try);
+            if (action.CatchBlock) {
+                ReadActions(_reader, catchSize, action.Catch);
+            }
+            if (action.FinallyBlock) {
+                ReadActions(_reader, finallySize, action.Finally);
+            }
             return action;
         }
 
@@ -543,5 +564,13 @@ namespace Code.SwfLib.Actions {
             return action;
         }
 
+        private static void ReadActions(SwfStreamReader reader, int length, IList<ActionBase> actions) {
+            var bytes = reader.ReadBytes(length);
+            var mem = new MemoryStream(bytes);
+            var ar = new ActionReader(new SwfStreamReader(mem));
+            while (mem.Position != mem.Length) {
+                actions.Add(ar.ReadAction());
+            }
+        }
     }
 }

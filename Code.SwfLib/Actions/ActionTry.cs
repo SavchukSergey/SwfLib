@@ -1,6 +1,27 @@
-﻿namespace Code.SwfLib.Actions {
-    public class ActionTry : ActionBase {
-        
+﻿using System.Collections.Generic;
+
+namespace Code.SwfLib.Actions {
+    public class ActionTry : ActionBase
+    {
+
+        public byte Reserved;
+
+        public bool CatchInRegister;
+
+        public bool FinallyBlock;
+
+        public bool CatchBlock;
+
+        public string CatchName;
+
+        public byte CatchRegister;
+
+        public readonly IList<ActionBase> Try = new List<ActionBase>();
+
+        public readonly IList<ActionBase> Catch = new List<ActionBase>();
+
+        public readonly IList<ActionBase> Finally = new List<ActionBase>();
+
         public override ActionCode ActionCode {
             get { return ActionCode.Try; }
         }

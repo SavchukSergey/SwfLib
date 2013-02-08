@@ -448,7 +448,7 @@ namespace Code.SwfLib.SwfMill.Actions {
 
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStackSwap action, object arg) {
-            return new XElement("StackSwap");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionStoreRegister action, object arg) {
@@ -522,15 +522,31 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionCastOp action, object param) {
-            return new XElement("CastOp");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionImplementsOp action, object param) {
-            return new XElement("ImplementsOp");
+            return new XElement(XActionNames.FromAction(action));
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionTry action, object param) {
-            throw new NotImplementedException();
+            var res = new XElement(XActionNames.FromAction(action));
+            if (action.Reserved != 0) {
+                res.Add(new XAttribute("reserved", action.Reserved));
+            }
+            if (action.CatchInRegister) {
+                res.Add(new XAttribute("catchReg", action.CatchRegister));
+            } else {
+                res.Add(new XAttribute("catchName", action.CatchName));
+            }
+            res.Add(XAction.ToXml(action.Try, new XElement("try")));
+            if (action.CatchBlock) {
+                res.Add(XAction.ToXml(action.Catch, new XElement("catch")));
+            }
+            if (action.FinallyBlock) {
+                res.Add(XAction.ToXml(action.Finally, new XElement("finally")));
+            }
+            return res;
         }
 
         XElement IActionVisitor<object, XElement>.Visit(ActionThrow action, object param) {

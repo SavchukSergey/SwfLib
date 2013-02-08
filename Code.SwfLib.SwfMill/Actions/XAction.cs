@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Collections.Generic;
+using System.Xml.Linq;
 using Code.SwfLib.Actions;
 
 namespace Code.SwfLib.SwfMill.Actions {
@@ -13,6 +14,19 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         public static ActionBase FromXml(XElement xAction) {
             return _reader.Deserialize(xAction);
+        }
+
+        public static XElement ToXml(IList<ActionBase> actions, XElement xActions) {
+            foreach (var action in actions) {
+                xActions.Add(ToXml(action));
+            }
+            return xActions;
+        }
+
+        public static void FromXml(XElement xActions, IList<ActionBase> actions) {
+            foreach (var xAction in xActions.Elements()) {
+                actions.Add(FromXml(xAction));
+            }
         }
     }
 }

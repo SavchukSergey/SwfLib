@@ -77,11 +77,14 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.Decrement, "Decrement");
             Register(ActionCode.Increment, "Increment");
             Register(ActionCode.Return, "Return");
+            Register(ActionCode.StackSwap, "StackSwap");
             Register(ActionCode.StoreRegister, "StoreRegister");
         }
 
         public static void RegisterSWF7() {
             Register(ActionCode.DefineFunction2, "DeclareFunction2");
+            Register(ActionCode.Try, "Try");
+            Register(ActionCode.CastOp, "CastOp");
         }
 
         private static void Register(ActionCode actionCode, string nodeName) {
