@@ -1,5 +1,7 @@
 ﻿namespace Code.SwfLib.Actions {
     public class ActionWith : ActionBase {
+        
+        //TODO: there is no sense in this field... Wouldn't usefull to have list of actions
         public ushort Size;
 
         public override ActionCode ActionCode {
