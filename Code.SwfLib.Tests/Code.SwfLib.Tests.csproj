@@ -57,6 +57,7 @@
     <Compile Include="Actions\ActionCommonTest.cs" />
     <Compile Include="Actions\BaseActionTest.cs" />
     <Compile Include="Actions\ConstantPoolActionTest.cs" />
+    <Compile Include="Actions\DefineFunction2ActionTest.cs" />
     <Compile Include="Actions\WaitForFrame2ActionTest.cs" />
     <Compile Include="Actions\GoToLabelActionTest.cs" />
     <Compile Include="Actions\SetTargetActionTest.cs" />

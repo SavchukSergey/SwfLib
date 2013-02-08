@@ -27,7 +27,7 @@ namespace Code.SwfLib.Actions {
 
         public bool PreloadGlobal { get; set; }
 
-        public readonly IList<RegisterParam> Args = new List<RegisterParam>();
+        public readonly IList<RegisterParam> Parameters = new List<RegisterParam>();
 
         public readonly List<ActionBase> Actions = new List<ActionBase>();
 

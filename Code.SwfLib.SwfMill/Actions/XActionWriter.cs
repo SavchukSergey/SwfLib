@@ -487,7 +487,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction2 action, object param) {
             var res = new XElement(XActionNames.FromAction(action));
             res.Add(new XAttribute("name", action.Name ?? ""));
-            res.Add(new XAttribute("argc", action.Args.Count));
+            res.Add(new XAttribute("argc", action.Parameters.Count));
             res.Add(new XAttribute("regc", action.RegisterCount));
             res.Add(new XAttribute("preloadParent", CommonFormatter.Format(action.PreloadParent)));
             res.Add(new XAttribute("preloadRoot", CommonFormatter.Format(action.PreloadRoot)));
@@ -501,7 +501,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             res.Add(new XAttribute("preloadGlobal", CommonFormatter.Format(action.PreloadGlobal)));
 
             var xArgs = new XElement("args");
-            foreach (var arg in action.Args) {
+            foreach (var arg in action.Parameters) {
                 xArgs.Add(new XElement("Parameter",
                     new XAttribute("reg", arg.Register),
                     new XAttribute("name", arg.Name)));

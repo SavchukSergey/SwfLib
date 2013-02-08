@@ -498,7 +498,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             foreach (var xArg in xArgs.Elements()) {
                 var xReg = xArg.Attribute("reg");
                 var xArgName = xArg.Attribute("name");
-                action.Args.Add(new RegisterParam {
+                action.Parameters.Add(new RegisterParam {
                     Register = byte.Parse(xReg.Value),
                     Name = xArgName.Value
                 });

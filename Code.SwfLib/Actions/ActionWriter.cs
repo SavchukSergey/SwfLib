@@ -473,7 +473,7 @@ namespace Code.SwfLib.Actions {
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDefineFunction2 action, SwfStreamWriter writer) {
             writer.WriteString(action.Name ?? "");
-            writer.WriteUInt16((ushort)action.Args.Count);
+            writer.WriteUInt16((ushort)action.Parameters.Count);
             writer.WriteByte(action.RegisterCount);
 
             writer.WriteBit(action.PreloadParent);
@@ -487,7 +487,7 @@ namespace Code.SwfLib.Actions {
             writer.WriteUnsignedBits(action.Reserved, 7);
             writer.WriteBit(action.PreloadGlobal);
 
-            foreach (var arg in action.Args) {
+            foreach (var arg in action.Parameters) {
                 writer.WriteByte(arg.Register);
                 writer.WriteString(arg.Name);
             }

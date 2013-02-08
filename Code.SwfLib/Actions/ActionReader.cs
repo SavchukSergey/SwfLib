@@ -501,7 +501,7 @@ namespace Code.SwfLib.Actions {
             action.PreloadGlobal = _reader.ReadBit();
 
             for (var i = 0; i < args; i++) {
-                action.Args.Add(new RegisterParam {
+                action.Parameters.Add(new RegisterParam {
                     Register = _reader.ReadByte(),
                     Name = _reader.ReadString()
                 });
