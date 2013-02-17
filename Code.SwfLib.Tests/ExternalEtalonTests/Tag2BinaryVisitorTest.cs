@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.BitmapTags;
-using Code.SwfLib.Tags.ControlTags;
-using Code.SwfLib.Tags.DisplayListTags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.ExternalEtalonTests {
@@ -31,32 +28,6 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             if (etalon.Binary == null) throw new InvalidOperationException("Couldn't find etalon tag");
 
             AssertExt.AreEqual(etalon.Binary, mem.ToArray(), "Checking DefineBitsJPEG2");
-        }
-
-       
-        [Test]
-        public void ShowFrameTagTest() {
-            var tag = new ShowFrameTag();
-            Compare(tag, "ShowFrameTag.bin");
-        }
-
-        private void Compare(SwfTagBase tag, string resourceName) {
-            var file = new SwfFile();
-            file.FileInfo.Version = 10;
-
-            var visitor = new SwfTagSerializer(file);
-            var res = visitor.GetTagData(tag);
-            Assert.IsNotNull(res, "Should return a value");
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-            writer.WriteTagData(res);
-            mem.Seek(0, SeekOrigin.Begin);
-            var etalonStream = GetType().Assembly.GetManifestResourceStream("Code.SwfLib.Tests.Resources.Tag2Binary." + resourceName);
-            if (etalonStream == null) throw new Exception("Etalong stream not found");
-
-            byte[] etalon = new byte[etalonStream.Length];
-            etalonStream.Read(etalon, 0, etalon.Length);
-            AssertExt.AreEqual(etalon, mem.ToArray(), "Checking with etalon data");
         }
 
         protected override string EmbeddedResourceFolder {

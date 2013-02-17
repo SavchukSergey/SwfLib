@@ -124,12 +124,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Tag2Binary\ShowFrameTag.bin" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\SwfTagReader\ShowFrameTag.bin" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Tag2Binary\DefineBitsJPEG2.jpg" />
   </ItemGroup>
   <ItemGroup>
