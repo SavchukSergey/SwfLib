@@ -54,6 +54,10 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionWaitForFrame action, XElement xAction) {
+            var xFrame = xAction.Attribute("frame");
+            var xSkip = xAction.Attribute("skipCount");
+            action.Frame = ushort.Parse(xFrame.Value);
+            action.SkipCount = byte.Parse(xSkip.Value);
             return action;
         }
 
@@ -62,6 +66,8 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGoToLabel action, XElement xAction) {
+            var xLabel = xAction.Attribute("label");
+            action.Label = xLabel.Value;
             return action;
         }
 

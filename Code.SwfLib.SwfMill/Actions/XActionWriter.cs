@@ -47,28 +47,28 @@ namespace Code.SwfLib.SwfMill.Actions {
             return arg;
         }
 
-        XElement IActionVisitor<XElement, XElement>.Visit(ActionWaitForFrame action, XElement param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionWaitForFrame action, XElement arg) {
             return new XElement("WaitForFrame",
                new XAttribute("frame", action.Frame),
                new XAttribute("skipCount", action.SkipCount));
         }
 
-        XElement IActionVisitor<XElement, XElement>.Visit(ActionSetTarget action, XElement param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionSetTarget action, XElement arg) {
             return new XElement("SetTarget",
                  new XAttribute("target", action.TargetName));
         }
 
-        XElement IActionVisitor<XElement, XElement>.Visit(ActionGoToLabel action, XElement param) {
-            return new XElement("GoToLabel",
-                  new XAttribute("label", action.Label));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionGoToLabel action, XElement arg) {
+            arg.Add(new XAttribute("label", action.Label));
+            return arg;
         }
 
         #endregion
 
         #region SWF 4
 
-        XElement IActionVisitor<XElement, XElement>.Visit(ActionAdd action, XElement param) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionAdd action, XElement arg) {
+            return arg;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionDivide action, XElement arg) {

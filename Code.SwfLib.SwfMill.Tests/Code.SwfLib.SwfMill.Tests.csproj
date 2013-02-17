@@ -55,10 +55,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\BaseXActionTest.cs" />
+    <Compile Include="Actions\CallXActionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Actions\ConstantPoolXActionTest.cs" />
     <Compile Include="Actions\GetURL2XActionTest.cs" />
     <Compile Include="Actions\GetURLXActionTest.cs" />
     <Compile Include="Actions\GotoFrame2XActionTest.cs" />
+    <Compile Include="Actions\GotoFrameXActionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actions\GoToLabelXActionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actions\WaitForFrameActionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Actions\XActionCommonTest.cs" />
     <Compile Include="AssertExt.cs" />
     <Compile Include="ActionXmlSerializerTest.cs" />

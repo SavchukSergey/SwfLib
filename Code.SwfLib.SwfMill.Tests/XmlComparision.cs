@@ -85,7 +85,7 @@ namespace Code.SwfLib.SwfMill.Tests {
 
         protected void OnElementNameDifference(XElement first, XElement second) {
             var path = GetElementPath(first);
-            OnDifference("Elements differs at " + path);
+            OnDifference("Elements differs at " + path + ". First is " + first.Name.LocalName + ", Second is " + second.Name.LocalName);
         }
 
         protected void OnAttributeValueDifference(XAttribute first, XAttribute second) {
