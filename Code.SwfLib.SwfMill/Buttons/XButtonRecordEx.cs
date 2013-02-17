@@ -36,7 +36,7 @@ namespace Code.SwfLib.SwfMill.Buttons {
                 var xDepth = xRecord.Attribute("depth");
                 res.PlaceDepth = ushort.Parse(xDepth.Value);
 
-                var xMatrix = xRecord.Element("transform").Element("Transform");
+                var xMatrix = xRecord.Element("transform").Element(XMatrix.TAG_NAME);
                 res.PlaceMatrix = XMatrix.FromXml(xMatrix);
 
                 var xColorTransform = xRecord.Element("colorTransform").Element("ColorTransform2");

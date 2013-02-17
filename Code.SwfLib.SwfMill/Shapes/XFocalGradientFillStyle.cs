@@ -77,7 +77,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
 
         private static SwfMatrix GetMatrix(XElement xFillStyle) {
             var xMatrix = xFillStyle.Element("matrix");
-            return XMatrix.FromXml(xMatrix.Element("Transform"));
+            return XMatrix.FromXml(xMatrix.Element(XMatrix.TAG_NAME));
         }
 
 

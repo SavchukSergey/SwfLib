@@ -15,7 +15,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
                     tag.TextBounds = XRect.FromXml(element.Element("Rectangle"));
                     break;
                 case TRANSFORM_ELEM:
-                    tag.TextMatrix = XMatrix.FromXml(element.Element("Transform"));
+                    tag.TextMatrix = XMatrix.FromXml(element.Element(XMatrix.TAG_NAME));
                     break;
                 case RECORDS_ELEM:
                     ReadRecords(tag, element);
