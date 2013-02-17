@@ -39,13 +39,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
         protected override bool AcceptShapeAttribute(DefineShape4Tag tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case "nonScalingStrokes":
-                    tag.UsesNonScalingStrokes = ParseBoolFromDigit(attrib);
+                    tag.UsesNonScalingStrokes = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case "scalingStrokes":
-                    tag.UsesScalingStrokes = ParseBoolFromDigit(attrib);
+                    tag.UsesScalingStrokes = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case "fillWindingRule":
-                    tag.UsesFillWindingRule = ParseBoolFromDigit(attrib);
+                    tag.UsesFillWindingRule = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case "reserved":
                     tag.ReservedFlags = byte.Parse(attrib.Value);

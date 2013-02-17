@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.ClipActions;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.DisplayListTags;
@@ -32,7 +31,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     tag.HasRatio = true;
                     break;
                 case REPLACE_ATTRIB:
-                    tag.Move = ParseBoolFromDigit(attrib);
+                    tag.Move = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case ALL_FLAGS1_ATTRIB:
                     tag.HasClipActions = true;

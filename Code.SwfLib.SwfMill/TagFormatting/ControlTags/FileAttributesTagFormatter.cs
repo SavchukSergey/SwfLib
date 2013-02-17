@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ControlTags;
 
@@ -31,19 +30,19 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                     tag.UseGPU = SwfMillPrimitives.ParseBoolean(attrib);
                     break;
                 case HAS_METADATA_ATTRIB:
-                    tag.HasMetadata = ParseBoolFromDigit(attrib);
+                    tag.HasMetadata = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case ALLOW_ABC_ATTRIB:
-                    tag.AllowAbc = ParseBoolFromDigit(attrib);
+                    tag.AllowAbc = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB:
-                    tag.SuppressCrossDomainCaching = ParseBoolFromDigit(attrib);
+                    tag.SuppressCrossDomainCaching = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case SWF_RELATIVE_URLS_ATTRIB:
-                    tag.SwfRelativeUrls = ParseBoolFromDigit(attrib);
+                    tag.SwfRelativeUrls = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case USE_NETWORK_ATTRIB:
-                    tag.UseNetwork = ParseBoolFromDigit(attrib);
+                    tag.UseNetwork = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case "reserved":
                     tag.Reserved = uint.Parse(attrib.Value);
@@ -60,11 +59,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             }
             xTag.Add(new XAttribute(USE_DIRECT_BLIT, CommonFormatter.Format(tag.UseDirectBlit)));
             xTag.Add(new XAttribute(USE_GPU, CommonFormatter.Format(tag.UseGPU)));
-            xTag.Add(new XAttribute(XName.Get(HAS_METADATA_ATTRIB), CommonFormatter.Format(tag.HasMetadata)));
-            xTag.Add(new XAttribute(XName.Get(ALLOW_ABC_ATTRIB), CommonFormatter.Format(tag.AllowAbc)));
-            xTag.Add(new XAttribute(XName.Get(SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB), CommonFormatter.Format(tag.SuppressCrossDomainCaching)));
-            xTag.Add(new XAttribute(XName.Get(SWF_RELATIVE_URLS_ATTRIB), CommonFormatter.Format(tag.SwfRelativeUrls)));
-            xTag.Add(new XAttribute(XName.Get(USE_NETWORK_ATTRIB), CommonFormatter.Format(tag.UseNetwork)));
+            xTag.Add(new XAttribute(HAS_METADATA_ATTRIB, CommonFormatter.Format(tag.HasMetadata)));
+            xTag.Add(new XAttribute(ALLOW_ABC_ATTRIB, CommonFormatter.Format(tag.AllowAbc)));
+            xTag.Add(new XAttribute(SUPPRESS_CROSSDOMAIN_CACHING_ATTRIB, CommonFormatter.Format(tag.SuppressCrossDomainCaching)));
+            xTag.Add(new XAttribute(SWF_RELATIVE_URLS_ATTRIB, CommonFormatter.Format(tag.SwfRelativeUrls)));
+            xTag.Add(new XAttribute(USE_NETWORK_ATTRIB, CommonFormatter.Format(tag.UseNetwork)));
             if (tag.Reserved != 0) {
                 xTag.Add(new XAttribute("reserved", tag.Reserved));
             }

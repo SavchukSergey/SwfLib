@@ -123,17 +123,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return Convert.FromBase64String(dataElement.Value);
         }
 
-        protected bool ParseBoolFromDigit(XAttribute attrib) {
-            switch (attrib.Value) {
-                case "1":
-                    return true;
-                case "0":
-                    return false;
-                default:
-                    throw new FormatException("Invalid attribute value");
-            }
-        }
-
         protected string FormatBoolToDigit(bool val) {
             return val ? "1" : "0";
         }

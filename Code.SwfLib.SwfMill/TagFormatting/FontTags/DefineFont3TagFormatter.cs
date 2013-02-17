@@ -26,25 +26,25 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
                     tag.Language = byte.Parse(attrib.Value);
                     break;
                 case SHIFT_JIS_ATTRIB:
-                    tag.ShiftJIS = ParseBoolFromDigit(attrib);
+                    tag.ShiftJIS = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case UNICODE_ATTRIB:
-                    tag.SmallText = ParseBoolFromDigit(attrib);
+                    tag.SmallText = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case ANSI_ATTRIB:
-                    tag.ANSI = ParseBoolFromDigit(attrib);
+                    tag.ANSI = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case WIDE_GLYPH_OFFSETS_ATTRIB:
-                    tag.WideOffsets = ParseBoolFromDigit(attrib);
+                    tag.WideOffsets = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case "wideCodes":
                     tag.WideCodes = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case ITALIC_ATTRIB:
-                    tag.Italic = ParseBoolFromDigit(attrib);
+                    tag.Italic = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case BOLD_ATTRIB:
-                    tag.Bold = ParseBoolFromDigit(attrib);
+                    tag.Bold = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case "ascent":
                     tag.HasLayout = true;

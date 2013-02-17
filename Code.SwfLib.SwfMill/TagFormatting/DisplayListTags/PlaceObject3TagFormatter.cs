@@ -24,7 +24,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
                     tag.ClassName = attrib.Value;
                     break;
                 case REPLACE_ATTRIB:
-                    tag.Move = ParseBoolFromDigit(attrib);
+                    tag.Move = CommonFormatter.ParseBool(attrib.Value);
                     break;
                 case MORPH_ATTRIB:
                     tag.Ratio = ushort.Parse(attrib.Value);
