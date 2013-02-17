@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Code.SwfLib.Data;
+using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
@@ -15,14 +16,13 @@ namespace Code.SwfLib.Tests {
             var color = reader.ReadColorTransformRGB();
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
 
-            Assert.IsTrue(color.HasMultTerms);
-            Assert.IsFalse(color.HasAddTerms);
-
-            Assert.AreEqual(10, color.RedMultTerm);
-            Assert.AreEqual(224, color.GreenMultTerm);
-            Assert.AreEqual(-10, color.BlueMultTerm);
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            AssertData.AreEqual(new ColorTransformRGB {
+                HasMultTerms = true,
+                HasAddTerms = false,
+                RedMultTerm = 10,
+                GreenMultTerm = 224,
+                BlueMultTerm = -10
+            }, color, "ColorTransform");
         }
 
         [Test]
@@ -33,14 +33,13 @@ namespace Code.SwfLib.Tests {
             var reader = new SwfStreamReader(mem);
             var color = reader.ReadColorTransformRGB();
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-            Assert.IsTrue(color.HasAddTerms);
-            Assert.IsFalse(color.HasMultTerms);
-
-            Assert.AreEqual(10, color.RedAddTerm);
-            Assert.AreEqual(-10, color.GreenAddTerm);
-            Assert.AreEqual(224, color.BlueAddTerm);
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            AssertData.AreEqual(new ColorTransformRGB {
+                HasAddTerms = true,
+                HasMultTerms = false,
+                RedAddTerm = 10,
+                GreenAddTerm = -10,
+                BlueAddTerm = 224
+            }, color, "ColorTransform");
         }
 
         [Test]
@@ -51,15 +50,16 @@ namespace Code.SwfLib.Tests {
             var reader = new SwfStreamReader(mem);
             var color = reader.ReadColorTransformRGB();
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-            Assert.AreEqual(10, color.RedMultTerm);
-            Assert.AreEqual(-10, color.GreenMultTerm);
-            Assert.AreEqual(224, color.BlueMultTerm);
-
-            Assert.AreEqual(-9, color.RedAddTerm);
-            Assert.AreEqual(129, color.GreenAddTerm);
-            Assert.AreEqual(16, color.BlueAddTerm);
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            AssertData.AreEqual(new ColorTransformRGB {
+                HasAddTerms = true,
+                HasMultTerms = true,
+                RedMultTerm = 10,
+                GreenMultTerm = -10,
+                BlueMultTerm = 224,
+                RedAddTerm = -9,
+                GreenAddTerm = 129,
+                BlueAddTerm = 16
+            }, color, "ColorTransform");
         }
 
         [Test]
@@ -71,16 +71,14 @@ namespace Code.SwfLib.Tests {
             ColorTransformRGBA color;
             reader.ReadColorTransformRGBA(out color);
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-
-            Assert.IsTrue(color.HasMultTerms);
-            Assert.IsFalse(color.HasAddTerms);
-
-            Assert.AreEqual(10, color.RedMultTerm);
-            Assert.AreEqual(224, color.GreenMultTerm);
-            Assert.AreEqual(-10, color.BlueMultTerm);
-            Assert.AreEqual(17, color.AlphaMultTerm);
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            AssertData.AreEqual(new ColorTransformRGBA {
+                HasAddTerms = false,
+                HasMultTerms = true,
+                RedMultTerm = 10,
+                GreenMultTerm = 224,
+                BlueMultTerm = -10,
+                AlphaMultTerm = 17
+            }, color, "ColorTransform");
         }
 
         [Test]
@@ -92,16 +90,14 @@ namespace Code.SwfLib.Tests {
             ColorTransformRGBA color;
             reader.ReadColorTransformRGBA(out color);
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-            
-            Assert.IsTrue(color.HasAddTerms);
-            Assert.IsFalse(color.HasMultTerms);
-
-            Assert.AreEqual(10, color.RedAddTerm);
-            Assert.AreEqual(-10, color.GreenAddTerm);
-            Assert.AreEqual(224, color.BlueAddTerm);
-            Assert.AreEqual(192, color.AlphaAddTerm);
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            AssertData.AreEqual(new ColorTransformRGBA {
+                HasAddTerms = true,
+                HasMultTerms = false,
+                RedAddTerm = 10,
+                GreenAddTerm = -10,
+                BlueAddTerm = 224,
+                AlphaAddTerm = 192
+            }, color, "ColorTransform");
         }
 
         [Test]
@@ -114,17 +110,18 @@ namespace Code.SwfLib.Tests {
             ColorTransformRGBA color;
             reader.ReadColorTransformRGBA(out color);
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-            Assert.AreEqual(10, color.RedMultTerm);
-            Assert.AreEqual(-10, color.GreenMultTerm);
-            Assert.AreEqual(224, color.BlueMultTerm);
-            Assert.AreEqual(176, color.AlphaMultTerm);
-
-            Assert.AreEqual(-9, color.RedAddTerm);
-            Assert.AreEqual(129, color.GreenAddTerm);
-            Assert.AreEqual(16, color.BlueAddTerm);
-            Assert.AreEqual(15, color.AlphaAddTerm);
-
-            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+            AssertData.AreEqual(new ColorTransformRGBA {
+                HasAddTerms = true,
+                HasMultTerms = true,
+                RedMultTerm = 10,
+                GreenMultTerm = -10,
+                BlueMultTerm = 224,
+                AlphaMultTerm = 176,
+                RedAddTerm = -9,
+                GreenAddTerm  =129,
+                BlueAddTerm = 16,
+                AlphaAddTerm = 15
+            }, color, "ColorTransform");
         }
 
         [Test]
