@@ -3,6 +3,7 @@ using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.Filters;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Filters {
     public class XConvolutionFilter {
@@ -36,16 +37,15 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static ConvolutionFilter FromXml(XElement xFilter) {
-            var xDivisor = xFilter.Attribute("divisor");
-            var xBias = xFilter.Attribute("bias");
+            const string node = "Convolution";
             var xMatrix = xFilter.Element("matrix");
             var xReserved = xFilter.Attribute("reserved");
             var xClamp = xFilter.Attribute("clamp");
             var xPreserveAlpha = xFilter.Attribute("preserveAlpha");
 
             var filter = new ConvolutionFilter {
-                Divisor = CommonFormatter.ParseDouble(xDivisor.Value),
-                Bias = CommonFormatter.ParseDouble(xBias.Value)
+                Divisor = xFilter.RequiredDoubleAttribute("divisor", node),
+                Bias = xFilter.RequiredDoubleAttribute("bias", node)
             };
 
             var xRows = xMatrix.Elements().ToList();
