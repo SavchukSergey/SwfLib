@@ -8,26 +8,26 @@ namespace Code.SwfLib.Tests {
     [TestFixture]
     public class SwfFileTest {
 
-        [Ignore]
         [Test]
-        public void SimpleBackgroundTest() {
+        public void ReadWriteTest() {
 
-            var file = new SwfFile();
-            file.FileInfo.Format = "FWS";
-            file.FileInfo.Version = 8;
-            file.Header.FrameSize = new SwfRect(0, 0, 100, 100);
-            file.Header.FrameRate = 20.0;
-            file.Header.FrameCount = 1;
-            file.Tags.Add(new FileAttributesTag { UseNetwork = true});
-            file.Tags.Add(new SetBackgroundColorTag {Color = new SwfRGB(10, 224, 224)});
-            file.Tags.Add(new ShowFrameTag());
-            file.Tags.Add(new EndTag());
-            var swf = SwfFile.ReadFrom(null);
-            using (var stream = File.Open(@"D:\temp\bgTest.swf", FileMode.Create, FileAccess.ReadWrite))
-            {
-                file.WriteTo(stream);
-            }
-            
+            var file = new SwfFile {
+                FileInfo = { Format = "FWS", Version = 8 },
+                Header = { FrameSize = new SwfRect(0, 0, 100, 100), FrameRate = 20.0, FrameCount = 1 },
+                Tags = {
+                    new FileAttributesTag { UseNetwork = true },
+                    new SetBackgroundColorTag { Color = new SwfRGB(10, 224, 224) },
+                    new ShowFrameTag(),
+                    new EndTag()
+                }
+            };
+            var mem = new MemoryStream();
+            file.WriteTo(mem);
+            mem.Seek(0, SeekOrigin.Begin);
+
+            var other = SwfFile.ReadFrom(mem);
+            Assert.AreEqual(file.Tags.Count, other.Tags.Count);
+
         }
     }
 }
