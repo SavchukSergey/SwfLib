@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\XActionCommonTest.cs" />
     <Compile Include="AssertExt.cs" />
     <Compile Include="ActionXmlSerializerTest.cs" />
     <Compile Include="EnumerableExt.cs" />

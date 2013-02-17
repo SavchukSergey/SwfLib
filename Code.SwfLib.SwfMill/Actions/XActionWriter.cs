@@ -4,60 +4,61 @@ using Code.SwfLib.Actions;
 using Code.SwfLib.SwfMill.Data;
 
 namespace Code.SwfLib.SwfMill.Actions {
-    public class XActionWriter : IActionVisitor<object, XElement> {
+    public class XActionWriter : IActionVisitor<XElement, XElement> {
 
         public XElement Serialize(ActionBase action) {
-            return action.AcceptVisitor(this, null);
+            var xAction = new XElement(XActionNames.FromAction(action));
+            return action.AcceptVisitor(this, xAction);
         }
 
         #region SWF 3
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionGotoFrame action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionGotoFrame action, XElement param) {
             return new XElement(XActionNames.FromAction(action), new XAttribute("frame", action.Frame));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionGetURL action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionGetURL action, XElement param) {
             return new XElement("GetURL",
                 new XAttribute("url", action.UrlString),
                 new XAttribute("target", action.TargetString));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionNextFrame action, object param) {
-            return new XElement("NextFrame");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionNextFrame action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionPreviousFrame action, object param) {
-            return new XElement("PreviousFrame");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionPreviousFrame action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionPlay action, object param) {
-            return new XElement("Play");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionPlay action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStop action, object param) {
-            return new XElement("Stop");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStop action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionToggleQuality action, object param) {
-            return new XElement("ToggleQuality");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionToggleQuality action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStopSounds action, object param) {
-            return new XElement("StopSounds");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStopSounds action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionWaitForFrame action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionWaitForFrame action, XElement param) {
             return new XElement("WaitForFrame",
                new XAttribute("frame", action.Frame),
                new XAttribute("skipCount", action.SkipCount));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionSetTarget action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionSetTarget action, XElement param) {
             return new XElement("SetTarget",
                  new XAttribute("target", action.TargetName));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionGoToLabel action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionGoToLabel action, XElement param) {
             return new XElement("GoToLabel",
                   new XAttribute("label", action.Label));
         }
@@ -66,75 +67,75 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         #region SWF 4
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionAdd action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionAdd action, XElement param) {
             return new XElement(XActionNames.FromAction(action));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionDivide action, object param) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionDivide action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionMultiply action, object param) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionMultiply action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionSubtract action, object param) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionSubtract action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionEquals action, object param) {
-            return new XElement("Equals");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionEquals action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionLess action, object param) {
-            return new XElement("Less");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionLess action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionAnd action, object param) {
-            return new XElement("And");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionAnd action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionNot action, object param) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionNot action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionOr action, object param) {
-            return new XElement("Or");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionOr action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStringAdd action, object param) {
-            return new XElement("StringAdd");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStringAdd action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStringEquals action, object param) {
-            return new XElement("StringEquals");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStringEquals action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStringExtract action, object param) {
-            return new XElement("StringExtract");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStringExtract action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStringLength action, object param) {
-            return new XElement("StringLength");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStringLength action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionMBStringExtract action, object param) {
-            return new XElement("MBStringExtract");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionMBStringExtract action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionMBStringLength action, object param) {
-            return new XElement("MBStringLength");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionMBStringLength action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStringLess action, object param) {
-            return new XElement("StringLess");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStringLess action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionPop action, object param) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionPop action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionPush action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionPush action, XElement param) {
             var xAction = new XElement("PushData");
             var xItems = new XElement("items");
             foreach (var item in action.Items) {
@@ -177,59 +178,59 @@ namespace Code.SwfLib.SwfMill.Actions {
             return xAction;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionAsciiToChar action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionAsciiToChar action, XElement param) {
             return new XElement("AsciiToChar");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionCharToAscii action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionCharToAscii action, XElement param) {
             return new XElement("CharToAscii");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionToInteger action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionToInteger action, XElement param) {
             return new XElement("ToInteger");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionMBAsciiToChar action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionMBAsciiToChar action, XElement param) {
             return new XElement("MBAsciiToChar");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionMBCharToAscii action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionMBCharToAscii action, XElement param) {
             return new XElement("MBCharToAscii");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionCall action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionCall action, XElement param) {
             //TODO; why it doesn't have args
             return new XElement("Call");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionIf action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionIf action, XElement param) {
             return new XElement(XActionNames.FromAction(action),
                 new XAttribute("byteOffset", FormatBranchOffset(action.BranchOffset)));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionJump action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionJump action, XElement param) {
             return new XElement(XActionNames.FromAction(action),
               new XAttribute("byteOffset", FormatBranchOffset(action.BranchOffset)));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionGetVariable action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionGetVariable action, XElement param) {
             return new XElement(XActionNames.FromAction(action));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionSetVariable action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionSetVariable action, XElement param) {
             return new XElement(XActionNames.FromAction(action));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionGetURL2 action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionGetURL2 action, XElement param) {
             return new XElement(XActionNames.FromAction(action),
                new XAttribute("flags", action.Flags));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionGetProperty action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionGetProperty action, XElement param) {
             return new XElement(XActionNames.FromAction(action));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionGotoFrame2 action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionGotoFrame2 action, XElement param) {
             var res = new XElement(XActionNames.FromAction(action),
                 new XAttribute("play", CommonFormatter.Format(action.Play)));
             if (action.SceneBias.HasValue) {
@@ -241,44 +242,44 @@ namespace Code.SwfLib.SwfMill.Actions {
             return res;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionRemoveSprite action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionRemoveSprite action, XElement param) {
             return new XElement("RemoveSprite");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionSetProperty action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionSetProperty action, XElement param) {
             return new XElement("SetProperty");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionSetTarget2 action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionSetTarget2 action, XElement param) {
             return new XElement("SetTarget2");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStartDrag action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStartDrag action, XElement param) {
             return new XElement("StartDrag");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionWaitForFrame2 action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionWaitForFrame2 action, XElement param) {
             return new XElement("WaitForFrame2",
              new XAttribute("skipCount", action.SkipCount));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionCloneSprite action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionCloneSprite action, XElement param) {
             return new XElement("CloneSprite");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionEndDrag action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionEndDrag action, XElement param) {
             return new XElement("EndDrag");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionGetTime action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionGetTime action, XElement param) {
             return new XElement(XActionNames.FromAction(action));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionRandomNumber action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionRandomNumber action, XElement param) {
             return new XElement("RandomNumber");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionTrace action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionTrace action, XElement param) {
             return new XElement(XActionNames.FromAction(action));
         }
 
@@ -286,15 +287,15 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         #region SWF 5
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionCallFunction action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionCallFunction action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionCallMethod action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionCallMethod action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionConstantPool action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionConstantPool action, XElement param) {
             var res = new XElement(XActionNames.FromAction(action));
             var strings = new XElement("strings");
             foreach (var item in action.ConstantPool) {
@@ -304,7 +305,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             return res;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionDefineFunction action, XElement param) {
             var res = new XElement(XActionNames.FromAction(action));
             res.Add(new XAttribute("name", action.Name),
                 new XAttribute("argc", action.Args.Count)
@@ -325,133 +326,133 @@ namespace Code.SwfLib.SwfMill.Actions {
             return res;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionDefineLocal action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionDefineLocal action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionDefineLocal2 action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionDefineLocal2 action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionDelete action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionDelete action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionDelete2 action, object arg) {
-            return new XElement("Delete2");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionDelete2 action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionEnumerate action, object arg) {
-            return new XElement("Enumerate");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionEnumerate action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionEquals2 action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionEquals2 action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionGetMember action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionGetMember action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionInitArray action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionInitArray action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionInitObject action, object arg) {
-            return new XElement("InitObject");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionInitObject action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionNewMethod action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionNewMethod action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionNewObject action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionNewObject action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionSetMember action, object param) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionSetMember action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionTargetPath action, object arg) {
-            return new XElement("TargetPath");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionTargetPath action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionWith action, object arg) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionWith action, XElement arg) {
             return new XElement("With",
               new XAttribute("size", action.Size));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionToNumber action, object arg) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionToNumber action, XElement arg) {
             return new XElement("ToNumber");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionToString action, object arg) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionToString action, XElement arg) {
             return new XElement(XActionNames.FromAction(action));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionTypeOf action, object arg) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionTypeOf action, XElement arg) {
             return new XElement("TypeOf");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionAdd2 action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionAdd2 action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionLess2 action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionLess2 action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionModulo action, object arg) {
-            return new XElement("Modulo");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionModulo action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionBitAnd action, object arg) {
-            return new XElement("BitAnd");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionBitAnd action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionBitLShift action, object arg) {
-            return new XElement("BitLShift");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionBitLShift action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionBitOr action, object arg) {
-            return new XElement("BitOr");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionBitOr action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionBitRShift action, object arg) {
-            return new XElement("BitRShift");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionBitRShift action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionBitURShift action, object arg) {
-            return new XElement("BitURShift");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionBitURShift action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionBitXor action, object arg) {
-            return new XElement("BitXor");
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionBitXor action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionDecrement action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionDecrement action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionIncrement action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionIncrement action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionPushDuplicate action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionPushDuplicate action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionReturn action, object param) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionReturn action, XElement arg) {
+            return arg;
         }
 
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStackSwap action, object arg) {
-            return new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStackSwap action, XElement arg) {
+            return arg;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStoreRegister action, object arg) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStoreRegister action, XElement arg) {
             return new XElement(XActionNames.FromAction(action),
                 new XAttribute("reg", action.RegisterNumber));
         }
@@ -460,23 +461,23 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         #region SWF 6
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionInstanceOf action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionInstanceOf action, XElement param) {
             return new XElement("InstanceOf");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionEnumerate2 action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionEnumerate2 action, XElement param) {
             return new XElement("Enumerate2");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStrictEquals action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStrictEquals action, XElement param) {
             return new XElement("StrictEquals");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionGreater action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionGreater action, XElement param) {
             return new XElement(XActionNames.FromAction(action));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionStringGreater action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionStringGreater action, XElement param) {
             return new XElement("StringGreater");
         }
 
@@ -484,7 +485,7 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         #region SWF 7
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionDefineFunction2 action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionDefineFunction2 action, XElement param) {
             var res = new XElement(XActionNames.FromAction(action));
             res.Add(new XAttribute("name", action.Name ?? ""));
             res.Add(new XAttribute("argc", action.Parameters.Count));
@@ -517,19 +518,19 @@ namespace Code.SwfLib.SwfMill.Actions {
             return res;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionExtends action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionExtends action, XElement param) {
             return new XElement("Extends");
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionCastOp action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionCastOp action, XElement param) {
             return new XElement(XActionNames.FromAction(action));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionImplementsOp action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionImplementsOp action, XElement param) {
             return new XElement(XActionNames.FromAction(action));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionTry action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionTry action, XElement param) {
             var res = new XElement(XActionNames.FromAction(action));
             if (action.Reserved != 0) {
                 res.Add(new XAttribute("reserved", action.Reserved));
@@ -549,17 +550,17 @@ namespace Code.SwfLib.SwfMill.Actions {
             return res;
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionThrow action, object param) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionThrow action, XElement param) {
             return new XElement("Throw");
         }
 
         #endregion
 
-        public XElement Visit(ActionEnd action, object arg) {
+        public XElement Visit(ActionEnd action, XElement arg) {
             return new XElement(XActionNames.FromAction(action));
         }
 
-        XElement IActionVisitor<object, XElement>.Visit(ActionUnknown action, object arg) {
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionUnknown action, XElement arg) {
             return new XElement("Unknown",
                 new XAttribute("type", action.ActionCode));
         }

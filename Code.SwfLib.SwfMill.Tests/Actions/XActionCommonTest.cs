@@ -1,27 +1,23 @@
 ﻿using System;
-using System.IO;
+using System.Xml.Linq;
 using Code.SwfLib.Actions;
+using Code.SwfLib.SwfMill.Actions;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests.Actions {
+namespace Code.SwfLib.SwfMill.Tests.Actions {
     [TestFixture]
-    public class ActionCommonTest {
+    public class XActionCommonTest {
 
         [Test]
         public void ReadOneByteActionsTest() {
             var vals = Enum.GetValues(typeof(ActionCode));
             foreach (ActionCode type in vals) {
                 if ((byte)type < 0x80) {
-                    var mem = new MemoryStream();
-                    mem.WriteByte((byte)type);
-                    mem.Seek(0, SeekOrigin.Begin);
-                    var reader = new SwfStreamReader(mem);
-                    var actionReader = new ActionReader(reader);
-                    var action = actionReader.ReadAction();
+                    var xAction = new XElement(XActionNames.FromActionCode(type));
+                    var action = XAction.FromXml(xAction);
                     Assert.IsNotNull(action);
                     var actualType = action.ActionCode;
                     Assert.AreEqual(type, actualType);
-                    Assert.AreEqual(1, mem.Position);
                 }
             }
         }
@@ -33,13 +29,8 @@ namespace Code.SwfLib.Tests.Actions {
             foreach (ActionCode type in vals) {
                 if ((byte)type < 0x80) {
                     var action = factory.Create(type);
-                    var mem = new MemoryStream();
-                    var writer = new SwfStreamWriter(mem);
-                    var actionWriter = new ActionWriter(writer);
-                    actionWriter.WriteAction(action);
-                    var buffer = mem.ToArray();
-                    Assert.AreEqual(1, buffer.Length);
-                    Assert.AreEqual((byte)type, buffer[0]);
+                    var xAction = XAction.ToXml(action);
+                    Assert.AreEqual(xAction.Name.LocalName, XActionNames.FromActionCode(type));
                 }
             }
         }
