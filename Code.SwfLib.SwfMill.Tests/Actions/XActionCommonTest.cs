@@ -38,9 +38,7 @@ namespace Code.SwfLib.SwfMill.Tests.Actions {
 
         //TODO: Test for reading/writing Try action must exist
         //TODO: Test for reading/writing Push action must exist
-        //TODO: Test for reading/writing Jump action must exist
         //TODO: Test for reading/writing DefineFunction action must exist
-        //TODO: Test for reading/writing If action must exist
         [Test]
         public void MultiByteActionTestExistsTest() {
             var vals = Enum.GetValues(typeof(ActionCode));

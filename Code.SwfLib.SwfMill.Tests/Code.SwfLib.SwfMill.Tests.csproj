@@ -71,6 +71,8 @@
     <Compile Include="Actions\GoToLabelXActionTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Actions\IfXActionTest.cs" />
+    <Compile Include="Actions\JumpXActionTest.cs" />
     <Compile Include="Actions\SetTargetXActionTest.cs">
       <SubType>Code</SubType>
     </Compile>
