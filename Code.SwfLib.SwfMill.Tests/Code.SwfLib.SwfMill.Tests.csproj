@@ -59,6 +59,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Actions\ConstantPoolXActionTest.cs" />
+    <Compile Include="Actions\DefineFunction2XActionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Actions\GetURL2XActionTest.cs" />
     <Compile Include="Actions\GetURLXActionTest.cs" />
     <Compile Include="Actions\GotoFrame2XActionTest.cs" />
@@ -68,7 +71,19 @@
     <Compile Include="Actions\GoToLabelXActionTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Actions\WaitForFrameActionTest.cs">
+    <Compile Include="Actions\SetTargetXActionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actions\StoreRegisterXActionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actions\WaitForFrame2XActionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actions\WaitForFrameXActionTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actions\WithXActionTest.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Actions\XActionCommonTest.cs" />

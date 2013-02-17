@@ -62,6 +62,8 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionSetTarget action, XElement xAction) {
+            var xTarget = xAction.Attribute("target");
+            action.TargetName = xTarget.Value;
             return action;
         }
 
@@ -266,6 +268,8 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionWaitForFrame2 action, XElement xAction) {
+            var xSkip = xAction.Attribute("skipCount");
+            action.SkipCount = byte.Parse(xSkip.Value);
             return action;
         }
 
