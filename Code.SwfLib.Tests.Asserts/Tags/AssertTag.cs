@@ -15,6 +15,14 @@ namespace Code.SwfLib.Tests.Asserts.Tags {
             Assert.AreEqual(expected.RestData, actual.RestData);
         }
 
+        public static void AreEqual(PlaceObject3Tag expected, PlaceObject3Tag actual) {
+            Assert.AreEqual(expected.CharacterID, actual.CharacterID);
+            Assert.AreEqual(expected.Depth, actual.Depth);
+            AssertData.AreEqual(expected.Matrix, actual.Matrix, "Matrix");
+            AssertFilters.AreEqual(expected.Filters, actual.Filters);
+            Assert.AreEqual(expected.RestData, actual.RestData);
+        }
+
         public static void AreEqual(DefineShapeTag expected, DefineShapeTag actual) {
             Assert.AreEqual(expected.ShapeID, actual.ShapeID);
             AssertData.AreEqual(expected.ShapeBounds, actual.ShapeBounds, "ShapeBounds");

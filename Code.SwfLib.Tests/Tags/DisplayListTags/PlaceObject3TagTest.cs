@@ -3,6 +3,7 @@ using Code.SwfLib.Data;
 using Code.SwfLib.Filters;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.DisplayListTags;
+using Code.SwfLib.Tests.Asserts.Tags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Tags.DisplayListTags {
@@ -21,23 +22,22 @@ namespace Code.SwfLib.Tests.Tags.DisplayListTags {
             };
             var res = tagReader.ReadTag<PlaceObject3Tag>(tagData);
             Assert.IsNotNull(res);
-
-            Assert.AreEqual(0, res.CharacterID);
-            Assert.AreEqual(17, res.Depth);
-            Assert.IsFalse(res.Matrix.HasScale);
-            Assert.IsFalse(res.Matrix.HasRotate);
-            Assert.AreEqual(0, res.Matrix.TranslateX);
-            Assert.AreEqual(0, res.Matrix.TranslateY);
-            Assert.AreEqual(1, res.Filters.Count);
-            var filter = (BlurFilter)res.Filters[0];
-            Assert.AreEqual(1, filter.Passes);
-
-            Assert.IsNull(res.RestData);
+            AssertTag.AreEqual(GetPlaceObject3Tag(), res);
         }
 
         [Test]
-        public void WriteTest() {
-            var tag = new PlaceObject3Tag {
+        public void WriteTest()
+        {
+            var tag = GetPlaceObject3Tag();
+
+            var tagWriter = new SwfTagSerializer(new SwfFile());
+            var tagData = tagWriter.GetTagData(tag);
+
+            Assert.AreEqual(_etalon, tagData.Data);
+        }
+
+        private static PlaceObject3Tag GetPlaceObject3Tag() {
+            return new PlaceObject3Tag {
                 Depth = 17,
                 HasMatrix = false,
                 Matrix = new SwfMatrix(),
@@ -47,11 +47,6 @@ namespace Code.SwfLib.Tests.Tags.DisplayListTags {
                     new BlurFilter {BlurX = 5335 / 65536.0, BlurY = 0, Passes = 1}
                 }
             };
-
-            var tagWriter = new SwfTagSerializer(new SwfFile());
-            var tagData = tagWriter.GetTagData(tag);
-
-            Assert.AreEqual(_etalon, tagData.Data);
         }
 
     }

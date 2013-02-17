@@ -1,4 +1,6 @@
-﻿using Code.SwfLib.Filters;
+﻿using System;
+using System.Collections.Generic;
+using Code.SwfLib.Filters;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Asserts {
@@ -20,6 +22,34 @@ namespace Code.SwfLib.Tests.Asserts {
             Assert.AreEqual(expected.Reserved, actual.Reserved);
             Assert.AreEqual(expected.Clamp, actual.Clamp);
             Assert.AreEqual(expected.PreserveAlpha, actual.PreserveAlpha);
+        }
+
+        public static void AreEqual(BlurFilter expected, BlurFilter actual) {
+            Assert.AreEqual(expected.BlurX, actual.BlurX);
+            Assert.AreEqual(expected.BlurY, actual.BlurY);
+            Assert.AreEqual(expected.Passes, actual.Passes);
+            Assert.AreEqual(expected.Reserved, actual.Reserved);
+        }
+
+        public static void AreEqual(BaseFilter expected, BaseFilter actual) {
+            Assert.AreEqual(expected.Type, actual.Type);
+            switch (expected.Type) {
+                case FilterType.Blur:
+                    AreEqual((BlurFilter)expected, (BlurFilter)actual);
+                    break;
+                case FilterType.Convolution:
+                    AreEqual((ConvolutionFilter)expected, (ConvolutionFilter)actual);
+                    break;
+                default:
+                    throw new NotSupportedException();
+            }
+        }
+
+        public static void AreEqual(IList<BaseFilter> expected, IList<BaseFilter> actual) {
+            Assert.AreEqual(expected.Count, actual.Count);
+            for (var i = 0; i < expected.Count; i++) {
+                AreEqual(expected[i], actual[i]);
+            }
         }
     }
 }
