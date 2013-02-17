@@ -1,14 +1,17 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Data {
     public static class XMatrix {
 
         public const string TAG_NAME = "Transform";
 
-        public static SwfMatrix FromXml(XElement xMatrix) {
-            var xMoveX = xMatrix.Attribute("transX");
-            var xMoveY = xMatrix.Attribute("transY");
+        public static SwfMatrix FromXml(XElement xMatrix)
+        {
+            const string node = "Matrix";
+            var xMoveX = xMatrix.RequiredIntAttribute("transX", node);
+            var xMoveY = xMatrix.RequiredIntAttribute("transY", node);
 
             var scaleX = xMatrix.Attribute("scaleX");
             var scaleY = xMatrix.Attribute("scaleY");
@@ -17,8 +20,8 @@ namespace Code.SwfLib.SwfMill.Data {
             var skewY = xMatrix.Attribute("skewY");
 
             var matrix = new SwfMatrix {
-                TranslateX = int.Parse(xMoveX.Value),
-                TranslateY = int.Parse(xMoveY.Value),
+                TranslateX = xMoveX,
+                TranslateY = xMoveY,
                 ScaleX = 1,
                 ScaleY = 1
             };
