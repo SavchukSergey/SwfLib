@@ -46,7 +46,7 @@ namespace Code.SwfLib.SwfMill.Tests.Actions {
             var vals = Enum.GetValues(typeof(ActionCode));
             foreach (ActionCode type in vals) {
                 if ((byte)type >= 0x80) {
-                    var testTypeName = GetType().Namespace + "." + type + "ActionTest";
+                    var testTypeName = GetType().Namespace + "." + type + "XActionTest";
                     var testType = GetType().Assembly.GetType(testTypeName);
                     if (testType == null) {
                         Console.WriteLine("Test for reading/writing {0} action must exist", type);
