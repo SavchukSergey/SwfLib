@@ -110,7 +110,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExternalEtalonTests\Tag2BinaryVisitorTest.cs" />
     <Compile Include="Tags\ControlTags\FileAttributesTagTest.cs" />
-    <Compile Include="TagSerialization\TagSerializationTestBase.cs" />
     <Compile Include="Tags\SwfTagsFactoryTest.cs" />
     <Compile Include="TestFixtureBase.cs" />
   </ItemGroup>

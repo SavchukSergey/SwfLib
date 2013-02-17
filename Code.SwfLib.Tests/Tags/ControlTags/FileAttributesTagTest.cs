@@ -2,12 +2,11 @@
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tests.Asserts.Tags;
-using Code.SwfLib.Tests.TagSerialization;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Tags.ControlTags {
     [TestFixture]
-    public class FileAttributesTagTest : TagSerializationTestBase {
+    public class FileAttributesTagTest : TestFixtureBase {
 
         private static readonly byte[] _etalon = new byte[] { 0x11, 0x00, 0x00, 0x00 };
 
