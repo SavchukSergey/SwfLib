@@ -33,12 +33,7 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
             AssertExt.AreEqual(etalon.Binary, mem.ToArray(), "Checking DefineBitsJPEG2");
         }
 
-        [Test]
-        public void SetBackgroundColorTagTest() {
-            var tag = new SetBackgroundColorTag { Color = new SwfRGB(0x0a, 0xc0, 0x80) };
-            Compare(tag, "SetBackgroundColorTag.bin");
-        }
-
+       
         [Test]
         public void ShowFrameTagTest() {
             var tag = new ShowFrameTag();

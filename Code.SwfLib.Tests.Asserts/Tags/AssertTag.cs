@@ -65,5 +65,10 @@ namespace Code.SwfLib.Tests.Asserts.Tags {
             Assert.AreEqual(expected.Metadata, actual.Metadata);
             Assert.AreEqual(expected.RestData, actual.RestData);
         }
+
+        public static void AreEqual(SetBackgroundColorTag expected, SetBackgroundColorTag actual) {
+            AssertColors.AreEqual(expected.Color, actual.Color, "Color");
+            Assert.AreEqual(expected.RestData, actual.RestData);
+        }
     }
 }
