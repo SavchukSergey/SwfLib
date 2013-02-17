@@ -85,7 +85,6 @@
     <Compile Include="Tags\DisplayListTags\PlaceObject2TagTest.cs" />
     <Compile Include="Tags\FontTags\DefineFont3TagTest.cs" />
     <Compile Include="Utils\UnsignedBitsCountTest.cs" />
-    <Compile Include="ColorTransformStreamExtTest.cs" />
     <Compile Include="Tags\ControlTags\EndTagTest.cs" />
     <Compile Include="Tags\ShapeTags\DefineShapeTest.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObjectTagTest.cs" />
