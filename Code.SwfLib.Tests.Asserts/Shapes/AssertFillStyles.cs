@@ -2,7 +2,7 @@
 using Code.SwfLib.Shapes.FillStyles;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests.Asserts {
+namespace Code.SwfLib.Tests.Asserts.Shapes {
     public static class AssertFillStyles {
 
         public static void AreEqual(FillStyleRGB expected, FillStyleRGB actual, string message) {
@@ -42,12 +42,12 @@ namespace Code.SwfLib.Tests.Asserts {
         }
 
         public static void AreEqual(LinearGradientFillStyleRGB expected, LinearGradientFillStyleRGB actual, string message) {
-            AssertExt.AreEqual(expected.GradientMatrix, actual.GradientMatrix, message);
+            AssertData.AreEqual(expected.GradientMatrix, actual.GradientMatrix, message);
             AssertGradients.AreEqual(expected.Gradient, actual.Gradient, message + ".Gradient");
         }
 
         public static void AreEqual(LinearGradientFillStyleRGBA expected, LinearGradientFillStyleRGBA actual, string message) {
-            AssertExt.AreEqual(expected.GradientMatrix, actual.GradientMatrix, message);
+            AssertData.AreEqual(expected.GradientMatrix, actual.GradientMatrix, message);
             AssertGradients.AreEqual(expected.Gradient, actual.Gradient, message + ".Gradient");
         }
 
@@ -55,31 +55,15 @@ namespace Code.SwfLib.Tests.Asserts {
             Assert.AreEqual(expected.Mode, actual.Mode, message + ".Mode");
             Assert.AreEqual(expected.Smoothing, actual.Smoothing, message + ".Smoothing");
             Assert.AreEqual(expected.BitmapID, actual.BitmapID, "BitmapID");
-            AssertExt.AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
+            AssertData.AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
         }
 
         public static void AreEqual(BitmapFillStyleRGBA expected, BitmapFillStyleRGBA actual, string message) {
             Assert.AreEqual(expected.Mode, actual.Mode, message + ".Mode");
             Assert.AreEqual(expected.Smoothing, actual.Smoothing, message + ".Smoothing");
             Assert.AreEqual(expected.BitmapID, actual.BitmapID, "BitmapID");
-            AssertExt.AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
+            AssertData.AreEqual(expected.BitmapMatrix, actual.BitmapMatrix, "BitmapMatrix");
         }
 
-        //public static void AreEqual(FillStyleRGB expected, FillStyleRGB actual, string message) {
-     
-        //    AssertColors.AreEqual(expected.Color, actual.Color, "Color");
-        //    Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
-        //    AssertGradients.AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
-        //    AssertGradients.AreEqual(expected.Gradient, actual.Gradient, "Gradient");
-        //    AreEqual(expected.GradientMatrix, actual.GradientMatrix, "GradientMatrix");
-        //}
-
-        //public static void AreEqual(FillStyleRGBA expected, FillStyleRGBA actual, string message) {
-        //    AssertColors.AreEqual(expected.Color, actual.Color, "Color");
-        //    Assert.AreEqual(expected.FillStyleType, actual.FillStyleType, "FillStyleType");
-        //    AssertGradients.AreEqual(expected.FocalGradient, actual.FocalGradient, "FocalGradient");
-        //    AssertGradients.AreEqual(expected.Gradient, actual.Gradient, "Gradient");
-        //    AreEqual(expected.GradientMatrix, actual.GradientMatrix, "GradientMatrix");
-        //}
     }
 }

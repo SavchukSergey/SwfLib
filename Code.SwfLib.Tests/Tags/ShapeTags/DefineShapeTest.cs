@@ -4,6 +4,7 @@ using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ShapeTags;
+using Code.SwfLib.Tests.Asserts.Tags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Tags.ShapeTags {
@@ -46,7 +47,7 @@ namespace Code.SwfLib.Tests.Tags.ShapeTags {
                 Data = mem.ToArray()
             };
             var res = tagReader.ReadTag<DefineShapeTag>(tagData);
-            AssertExt.AreEqual(GetDefineShapeTag0(), res);
+            AssertTag.AreEqual(GetDefineShapeTag0(), res);
         }
 
         [Test]
@@ -67,7 +68,7 @@ namespace Code.SwfLib.Tests.Tags.ShapeTags {
                 Data = mem.ToArray()
             };
             var res = tagReader.ReadTag<DefineShapeTag>(tagData);
-            AssertExt.AreEqual(GetDefineShapeTag1(), res);
+            AssertTag.AreEqual(GetDefineShapeTag1(), res);
         }
 
         [Test]
@@ -88,7 +89,7 @@ namespace Code.SwfLib.Tests.Tags.ShapeTags {
                 Data = mem.ToArray()
             };
             var res = tagReader.ReadTag<DefineShapeTag>(tagData);
-            AssertExt.AreEqual(GetDefineShapeTag2(), res);
+            AssertTag.AreEqual(GetDefineShapeTag2(), res);
         }
 
         [Test]

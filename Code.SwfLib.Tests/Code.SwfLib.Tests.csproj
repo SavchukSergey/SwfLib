@@ -73,9 +73,6 @@
     <Compile Include="Actions\GotoFrameActionTest.cs" />
     <Compile Include="Actions\SwfActionFactoryTest.cs" />
     <Compile Include="AssertExt.cs" />
-    <Compile Include="Asserts\AssertColors.cs" />
-    <Compile Include="Asserts\AssertFillStyles.cs" />
-    <Compile Include="Asserts\AssertGradients.cs" />
     <Compile Include="BasicTypes\BitTest.cs" />
     <Compile Include="BasicTypes\ColorRGBATest.cs" />
     <Compile Include="BasicTypes\ColorRGBTest.cs" />
@@ -87,7 +84,6 @@
     <Compile Include="Tags\DisplayListTags\PlaceObject3TagTest.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject2TagTest.cs" />
     <Compile Include="Tags\FontTags\DefineFont3TagTest.cs" />
-    <Compile Include="Asserts\AssertFilters.cs" />
     <Compile Include="Utils\UnsignedBitsCountTest.cs" />
     <Compile Include="ColorTransformStreamExtTest.cs" />
     <Compile Include="Tags\ControlTags\EndTagTest.cs" />
@@ -119,6 +115,10 @@
     <Compile Include="TestFixtureBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Code.SwfLib.Tests.Asserts\Code.SwfLib.Tests.Asserts.csproj">
+      <Project>{d41c8ad8-1272-4d29-8b5c-9a35d04bd688}</Project>
+      <Name>Code.SwfLib.Tests.Asserts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Code.SwfLib\Code.SwfLib.csproj">
       <Project>{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}</Project>
       <Name>Code.SwfLib</Name>

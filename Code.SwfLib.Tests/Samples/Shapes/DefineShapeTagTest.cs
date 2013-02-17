@@ -2,7 +2,7 @@
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags.ShapeTags;
-using Code.SwfLib.Tests.Asserts;
+using Code.SwfLib.Tests.Asserts.Shapes;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Samples.Shapes {

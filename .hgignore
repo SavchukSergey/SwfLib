@@ -15,6 +15,9 @@ Code.SwfLib/bin/
 Code.SwfLib/obj/
 Code.SwfLib/Code.SwfLib.csproj.user
 
+Code.SwfLib.Tests.Asserts/bin/
+Code.SwfLib.Tests.Asserts/obj/
+
 _ReSharper.Code.SwfLib/
 Code.SwfLib.4.5.resharper.user
 Code.SwfLib.suo

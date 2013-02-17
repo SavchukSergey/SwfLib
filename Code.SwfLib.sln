@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill", "Code
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill.Tests", "Code.SwfLib.SwfMill.Tests\Code.SwfLib.SwfMill.Tests.csproj", "{4EAE1D32-3036-493F-8699-1A9A7D65B277}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.Tests.Asserts", "Code.SwfLib.Tests.Asserts\Code.SwfLib.Tests.Asserts.csproj", "{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{4EAE1D32-3036-493F-8699-1A9A7D65B277}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EAE1D32-3036-493F-8699-1A9A7D65B277}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EAE1D32-3036-493F-8699-1A9A7D65B277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
