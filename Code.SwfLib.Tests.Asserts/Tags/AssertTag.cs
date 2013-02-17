@@ -60,5 +60,10 @@ namespace Code.SwfLib.Tests.Asserts.Tags {
             Assert.AreEqual(expected.UseNetwork, actual.UseNetwork);
             Assert.AreEqual(expected.RestData, actual.RestData);
         }
+
+        public static void AreEqual(MetadataTag expected, MetadataTag actual) {
+            Assert.AreEqual(expected.Metadata, actual.Metadata);
+            Assert.AreEqual(expected.RestData, actual.RestData);
+        }
     }
 }

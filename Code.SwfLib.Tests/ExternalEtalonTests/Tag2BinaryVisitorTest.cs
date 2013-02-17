@@ -34,12 +34,6 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
         }
 
         [Test]
-        public void MetadataTagTest() {
-            var tag = new MetadataTag { Metadata = "Test Meta Data" };
-            Compare(tag, "MetadataTag.bin");
-        }
-
-        [Test]
         public void SetBackgroundColorTagTest() {
             var tag = new SetBackgroundColorTag { Color = new SwfRGB(0x0a, 0xc0, 0x80) };
             Compare(tag, "SetBackgroundColorTag.bin");

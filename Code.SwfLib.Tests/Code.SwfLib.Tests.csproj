@@ -81,6 +81,7 @@
     <Compile Include="BasicTypes\MatrixTest.cs" />
     <Compile Include="BasicTypes\RectTest.cs" />
     <Compile Include="Bin2BinTests.cs" />
+    <Compile Include="Tags\ControlTags\MetadataTagTest.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject3TagTest.cs" />
     <Compile Include="Tags\DisplayListTags\PlaceObject2TagTest.cs" />
     <Compile Include="Tags\FontTags\DefineFont3TagTest.cs" />
@@ -123,16 +124,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Tag2Binary\MetadataTag.bin" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Tag2Binary\SetBackgroundColorTag.bin" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Tag2Binary\ShowFrameTag.bin" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\SwfTagReader\MetadataTag.bin" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\SwfTagReader\SetBackgroundColorTag.bin" />
