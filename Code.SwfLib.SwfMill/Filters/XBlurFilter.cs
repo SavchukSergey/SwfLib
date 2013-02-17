@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Filters;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Filters {
     public static class XBlurFilter {
@@ -20,14 +21,13 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static BlurFilter FromXml(XElement xFilter) {
-            var xBlurX = xFilter.Attribute("blurX");
-            var xBlurY = xFilter.Attribute("blurY");
+            const string node = "Blur";
             var xPasses = xFilter.Attribute("passes");
             var xReserved = xFilter.Attribute("reserved");
 
             return new BlurFilter {
-                BlurX = CommonFormatter.ParseDouble(xBlurX.Value),
-                BlurY = CommonFormatter.ParseDouble(xBlurY.Value),
+                BlurX = xFilter.RequiredDoubleAttribute("blurX", node),
+                BlurY = xFilter.RequiredDoubleAttribute("blurY", node),
                 Passes = uint.Parse(xPasses.Value),
                 Reserved = xReserved != null ? uint.Parse(xReserved.Value) : 0
             };

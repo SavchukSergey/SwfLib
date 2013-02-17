@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Filters;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Filters {
     public static class XDropShadowFilter {
@@ -23,27 +24,23 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static DropShadowFilter FromXml(XElement xFilter) {
-            var xAngle = xFilter.Attribute("angle");
-            var xBlurX = xFilter.Attribute("blurX");
-            var xBlurY = xFilter.Attribute("blurY");
-            var xDistance = xFilter.Attribute("distance");
+            const string node = "DropShadow";
             var xInnerShadow = xFilter.Attribute("innerShadow");
             var xKnockout = xFilter.Attribute("knockout");
             var xPasses = xFilter.Attribute("passes");
-            var xStrength = xFilter.Attribute("strength");
             var xCompositeSource = xFilter.Attribute("compositeSource");
 
             var xColor = xFilter.Element("color").Element("Color");
 
             return new DropShadowFilter {
-                Angle = CommonFormatter.ParseDouble(xAngle.Value),
-                BlurX = CommonFormatter.ParseDouble(xBlurX.Value),
-                BlurY = CommonFormatter.ParseDouble(xBlurY.Value),
-                Distance = CommonFormatter.ParseDouble(xDistance.Value),
+                Angle = xFilter.RequiredDoubleAttribute("angle", node),
+                BlurX = xFilter.RequiredDoubleAttribute("blurX", node),
+                BlurY = xFilter.RequiredDoubleAttribute("blurY", node),
+                Distance = xFilter.RequiredDoubleAttribute("distance", node),
                 InnerShadow = CommonFormatter.ParseBool(xInnerShadow.Value),
                 Knockout = CommonFormatter.ParseBool(xKnockout.Value),
                 Passes = uint.Parse(xPasses.Value),
-                Strength = CommonFormatter.ParseDouble(xStrength.Value),
+                Strength = xFilter.RequiredDoubleAttribute("strength", node),
                 CompositeSource = xCompositeSource == null || CommonFormatter.ParseBool(xCompositeSource.Value),
                 Color = XColorRGBA.FromXml(xColor)
             };

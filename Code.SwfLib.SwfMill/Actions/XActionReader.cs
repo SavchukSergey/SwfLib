@@ -2,6 +2,7 @@
 using System.Xml.Linq;
 using Code.SwfLib.Actions;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Actions {
     public class XActionReader : IActionVisitor<XElement, ActionBase> {
@@ -167,7 +168,7 @@ namespace Code.SwfLib.SwfMill.Actions {
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Boolean, Boolean = byte.Parse(xValue.Value) });
                         break;
                     case "StackDouble":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Double, Double = double.Parse(xValue.Value) });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Double, Double = xItem.RequiredDoubleAttribute("value", "StackDouble") });
                         break;
                     case "StackInteger":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Integer, Integer = int.Parse(xValue.Value) });

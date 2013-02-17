@@ -1,8 +1,8 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Code.SwfLib.Filters;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Gradients;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Filters {
     public static class XGradientBevelFilter {
@@ -27,11 +27,7 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static GradientBevelFilter FromXml(XElement xFilter) {
-            var xBlurX = xFilter.Attribute("blurX");
-            var xBlurY = xFilter.Attribute("blurY");
-            var xAngle = xFilter.Attribute("angle");
-            var xDistance = xFilter.Attribute("distance");
-            var xStrength = xFilter.Attribute("strength");
+            const string node = "GradientBevel";
             var xInnerGlow = xFilter.Attribute("innerGlow");
             var xKnockout = xFilter.Attribute("knockout");
             var xCompositeSource = xFilter.Attribute("compositeSource");
@@ -39,11 +35,11 @@ namespace Code.SwfLib.SwfMill.Filters {
             var xPasses = xFilter.Attribute("passes");
 
             var filter = new GradientBevelFilter {
-                BlurX = CommonFormatter.ParseDouble(xBlurX.Value),
-                BlurY = CommonFormatter.ParseDouble(xBlurY.Value),
-                Angle = CommonFormatter.ParseDouble(xAngle.Value),
-                Distance = CommonFormatter.ParseDouble(xDistance.Value),
-                Strength = CommonFormatter.ParseDouble(xStrength.Value),
+                BlurX = xFilter.RequiredDoubleAttribute("blurX", node),
+                BlurY = xFilter.RequiredDoubleAttribute("blurY", node),
+                Angle = xFilter.RequiredDoubleAttribute("angle", node),
+                Distance = xFilter.RequiredDoubleAttribute("distance", node),
+                Strength = xFilter.RequiredDoubleAttribute("strength", node),
                 InnerGlow = CommonFormatter.ParseBool(xInnerGlow.Value),
                 Knockout = CommonFormatter.ParseBool(xKnockout.Value),
                 CompositeSource = xCompositeSource == null || CommonFormatter.ParseBool(xCompositeSource.Value),
