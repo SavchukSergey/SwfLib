@@ -7,18 +7,6 @@ namespace Code.SwfLib.Tests.TagSerialization {
 
         private const int VERSION = 10;
 
-        protected void SerializeAndCheck(SwfTagBase tag, params string[] bits) {
-            var stream = SerializeTag(tag);
-            CheckBits(stream, bits);
-            Assert.AreEqual(stream.Length, stream.Position, "Should reach end of the stream");
-        }
-
-        protected T DeserializeTag<T>(params string[] bits) where T : SwfTagBase {
-            var tag = DeserializeTag(bits);
-            Assert.IsAssignableFrom(typeof(T), tag);
-            return (T)tag;
-        }
-
         protected SwfTagBase DeserializeTag(params string[] bits) {
             var mem = new MemoryStream();
             WriteBits(mem, bits);

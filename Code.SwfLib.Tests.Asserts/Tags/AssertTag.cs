@@ -1,4 +1,5 @@
-﻿using Code.SwfLib.Tags.DisplayListTags;
+﻿using Code.SwfLib.Tags.ControlTags;
+using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tests.Asserts.Shapes;
 using NUnit.Framework;
@@ -44,7 +45,20 @@ namespace Code.SwfLib.Tests.Asserts.Tags {
                 var act = actual.ShapeRecords[i];
                 AssertShape.AreEqual(exp, act, "ShapeRecords[" + i + "]");
             }
+            Assert.AreEqual(expected.RestData, actual.RestData);
         }
 
+        public static void AreEqual(FileAttributesTag expected, FileAttributesTag actual) {
+            Assert.AreEqual(expected.AllowAbc, actual.AllowAbc);
+            Assert.AreEqual(expected.HasMetadata, actual.HasMetadata);
+            Assert.AreEqual(expected.Reserved, actual.Reserved);
+            Assert.AreEqual(expected.Reserved0, actual.Reserved0);
+            Assert.AreEqual(expected.SuppressCrossDomainCaching, actual.SuppressCrossDomainCaching);
+            Assert.AreEqual(expected.SwfRelativeUrls, actual.SwfRelativeUrls);
+            Assert.AreEqual(expected.UseDirectBlit, actual.UseDirectBlit);
+            Assert.AreEqual(expected.UseGPU, actual.UseGPU);
+            Assert.AreEqual(expected.UseNetwork, actual.UseNetwork);
+            Assert.AreEqual(expected.RestData, actual.RestData);
+        }
     }
 }
