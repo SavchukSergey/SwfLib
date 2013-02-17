@@ -49,13 +49,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             foreach (var tagElem in tagsElement.Elements()) {
                 var subTag = SwfTagNameMapping.CreateTagByXmlName(tagElem.Name.LocalName);
                 var formatter = formatterFactory.GetFormatter(subTag);
-                formatter.InitTag(subTag, tagElem);
-                foreach (var attrib in tagElem.Attributes()) {
-                    formatter.AcceptAttribute(subTag, attrib);
-                }
-                foreach (var elem in tagElem.Elements()) {
-                    formatter.AcceptElement(subTag, elem);
-                }
+                subTag = formatter.ParseTo(tagElem, subTag);
                 tag.Tags.Add(subTag);
             }
 

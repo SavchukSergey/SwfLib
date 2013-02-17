@@ -33,7 +33,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         protected sealed override bool AcceptTagElement(T tag, XElement element) {
             switch (element.Name.LocalName) {
                 case TRANSFORM_ELEM:
-                    tag.Matrix = XMatrix.FromXml(element.Element(TRANSFORM_TYPE_ELEM));
+                    tag.Matrix = XMatrix.FromXml(element.Element(XMatrix.TAG_NAME));
                     HasMatrix(tag, true);
                     break;
                 default:

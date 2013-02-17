@@ -17,7 +17,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
         protected override bool AcceptPlaceTagElement(PlaceObjectTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case COLOR_TRANSFORM_ELEM:
-                    tag.ColorTransform = XColorTransformRGB.FromXml(element.Element(COLOR_TRANSFORM_TYPE_ELEM));
+                    tag.ColorTransform = XColorTransformRGB.FromXml(element.Element(XColorTransformRGB.TAG_NAME));
                     break;
                 default:
                     return false;

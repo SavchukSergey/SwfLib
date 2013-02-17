@@ -12,7 +12,7 @@ namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
         private readonly F _formatter = new F();
 
         protected void ConvertToXmlAndCompare(T tag, string resourceXml) {
-            var doc = _formatter.FormatElement(tag);
+            var doc = _formatter.FormatTag(tag);
             new XmlComparision(XmlDifferenceHandler).Compare(doc, XDocument.Load(new StreamReader(OpenEmbeddedResource(resourceXml))).Root);
         }
 
@@ -39,17 +39,10 @@ namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
             return ParseTag(tagElem);
         }
 
-        protected T ParseTag(XElement tagElem) {
+        protected T ParseTag(XElement xTag) {
             var formatter = new F();
             var tag = new T();
-            formatter.InitTag(tag, tagElem);
-            foreach (var attrib in tagElem.Attributes()) {
-                formatter.AcceptAttribute(tag, attrib);
-            }
-            foreach (var elem in tagElem.Elements()) {
-                formatter.AcceptElement(tag, elem);
-            }
-            return tag;
+            return formatter.ParseTo(xTag, tag);
         }
 
         protected void DoubleConversionFromResourceTest(string resourceXml) {
@@ -60,7 +53,7 @@ namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
 
             var tag = ParseTag(xOriginalTag);
             var formatter = new F();
-            var xResultTag = formatter.FormatElement(tag);
+            var xResultTag = formatter.FormatTag(tag);
             new XmlComparision(Assert.Fail).Compare(xOriginalTag, xResultTag);
         }
 

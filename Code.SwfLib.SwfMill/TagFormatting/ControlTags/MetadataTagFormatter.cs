@@ -9,7 +9,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
             xTag.Add(XElement.Parse(tag.Metadata));
         }
 
-        public override void InitTag(MetadataTag tag, XElement element) {
+        protected override void InitTag(MetadataTag tag, XElement element) {
             base.InitTag(tag, element);
             var val = element.Value.Trim();
             if (!string.IsNullOrEmpty(val)) {

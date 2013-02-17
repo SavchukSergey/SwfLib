@@ -14,32 +14,18 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected const string WIDTH_ATTRIB = "width";
         protected const string HEIGHT_ATTRIB = "height";
 
-
-        protected const string TRANSFORM_TYPE_ELEM = "Transform";
-        protected const string COLOR_TRANSFORM_TYPE_ELEM = "ColorTransform";
-
-        #region ITagFormatter
-
-        public void InitTag(SwfTagBase tag, XElement element) {
-            InitTag((T)tag, element);
+        public T ParseTo(XElement xTag, T tag) {
+            InitTag(tag, xTag);
+            foreach (var attrib in xTag.Attributes()) {
+                AcceptAttribute(tag, attrib);
+            }
+            foreach (var elem in xTag.Elements()) {
+                AcceptElement(tag, elem);
+            }
+            return tag;
         }
 
-        XElement ITagFormatter.FormatTag(SwfTagBase tag) {
-            return FormatElement((T)tag);
-        }
-
-        void ITagFormatter.AcceptAttribute(SwfTagBase tag, XAttribute attrib) {
-            AcceptAttribute((T)tag, attrib);
-        }
-
-        void ITagFormatter.AcceptElement(SwfTagBase tag, XElement element) {
-            AcceptElement((T)tag, element);
-        }
-
-        public virtual void InitTag(T tag, XElement element) {
-        }
-
-        public XElement FormatElement(T tag) {
+        public XElement FormatTag(T tag) {
             var xTag = new XElement(TagName);
             var objectID = GetObjectID(tag);
             if (objectID.HasValue) {
@@ -57,7 +43,11 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return xTag;
         }
 
-        public void AcceptAttribute(T tag, XAttribute attrib) {
+
+        protected virtual void InitTag(T tag, XElement element) {
+        }
+
+        protected void AcceptAttribute(T tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
                     SetObjectID(tag, ushort.Parse(attrib.Value));
@@ -69,7 +59,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        public void AcceptElement(T tag, XElement element) {
+        protected void AcceptElement(T tag, XElement element) {
             switch (element.Name.LocalName) {
                 case REST_ELEM:
                     tag.RestData = Convert.FromBase64String(element.Value);
@@ -85,8 +75,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             }
         }
 
-        protected abstract void FormatTagElement(T tag, XElement xTag);
-
         protected virtual bool AcceptTagAttribute(T tag, XAttribute attrib) {
             return false;
         }
@@ -94,6 +82,20 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected virtual bool AcceptTagElement(T tag, XElement element) {
             return false;
         }
+
+        protected abstract void FormatTagElement(T tag, XElement xTag);
+
+        #region ITagFormatter
+
+        SwfTagBase ITagFormatter.ParseTo(XElement xTag, SwfTagBase tag) {
+            return ParseTo(xTag, (T)tag);
+        }
+
+        XElement ITagFormatter.FormatTag(SwfTagBase tag) {
+            return FormatTag((T)tag);
+        }
+
+        #endregion
 
         public abstract string TagName { get; }
 
@@ -111,8 +113,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         protected virtual void SetData(T tag, byte[] data) {
 
         }
-
-        #endregion
 
         protected byte[] FromBase64(XElement dataElement) {
             //TODO: why different depth??

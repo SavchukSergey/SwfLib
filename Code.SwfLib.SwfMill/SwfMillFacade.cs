@@ -45,17 +45,11 @@ namespace Code.SwfLib.SwfMill {
             file.Header.FrameSize = XRect.FromXml(hdr.Element(XName.Get("size")).Element("Rectangle"));
 
             var formatterFactory = new TagFormatterFactory(fileInfo.Version);
-            var tags = hdr.Element(XName.Get("tags"));
-            foreach (var tagElem in tags.Elements()) {
-                var tag = SwfTagNameMapping.CreateTagByXmlName(tagElem.Name.LocalName);
+            var tags = hdr.Element("tags");
+            foreach (var xTag in tags.Elements()) {
+                var tag = SwfTagNameMapping.CreateTagByXmlName(xTag.Name.LocalName);
                 var formatter = formatterFactory.GetFormatter(tag);
-                formatter.InitTag(tag, tagElem);
-                foreach (var attrib in tagElem.Attributes()) {
-                    formatter.AcceptAttribute(tag, attrib);
-                }
-                foreach (var elem in tagElem.Elements()) {
-                    formatter.AcceptElement(tag, elem);
-                }
+                tag = formatter.ParseTo(xTag, tag);
                 file.Tags.Add(tag);
             }
             return file;

@@ -4,6 +4,8 @@ using Code.SwfLib.Data;
 namespace Code.SwfLib.SwfMill.Data {
     public static class XColorTransformRGB {
 
+        public const string TAG_NAME = "ColorTransform";
+
         public static ColorTransformRGB FromXml(XElement xTransform) {
             var xFactorRed = xTransform.Attribute("factorRed");
             var xFactorGreen = xTransform.Attribute("factorGreen");
@@ -27,7 +29,7 @@ namespace Code.SwfLib.SwfMill.Data {
         }
 
         public static XElement ToXml(ColorTransformRGB transform) {
-            var res = new XElement("ColorTransform");
+            var res = new XElement(TAG_NAME);
             if (transform.HasMultTerms) {
                 res.Add(new XAttribute("factorRed", transform.RedMultTerm));
                 res.Add(new XAttribute("factorGreen", transform.GreenMultTerm));

@@ -4,6 +4,8 @@ using Code.SwfLib.Data;
 namespace Code.SwfLib.SwfMill.Data {
     public static class XMatrix {
 
+        public const string TAG_NAME = "Transform";
+
         public static SwfMatrix FromXml(XElement xMatrix) {
             var xMoveX = xMatrix.Attribute("transX");
             var xMoveY = xMatrix.Attribute("transY");
@@ -37,7 +39,7 @@ namespace Code.SwfLib.SwfMill.Data {
         }
 
         public static XElement ToXml(SwfMatrix matrix) {
-            var res = new XElement("Transform",
+            var res = new XElement(TAG_NAME,
                  new XAttribute("transX", matrix.TranslateX),
                  new XAttribute("transY", matrix.TranslateY));
             if (matrix.HasScale) {
