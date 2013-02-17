@@ -137,12 +137,12 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
             xTag.Add(new XAttribute(READONLY_ATTRIB, SwfMillPrimitives.GetStringValue(tag.ReadOnly)));
 
             xTag.Add(new XAttribute(AUTOSIZE_ATTRIB, SwfMillPrimitives.GetStringValue(tag.AutoSize)));
-            xTag.Add(new XAttribute(HAS_LAYOUT_ATTRIB, FormatBoolToDigit(tag.HasLayout)));
-            xTag.Add(new XAttribute(NOT_SELECTABLE_ATTRIB, FormatBoolToDigit(tag.NoSelect)));
-            xTag.Add(new XAttribute(BORDER_ATTRIB, FormatBoolToDigit(tag.Border)));
+            xTag.Add(new XAttribute(HAS_LAYOUT_ATTRIB, CommonFormatter.Format(tag.HasLayout)));
+            xTag.Add(new XAttribute(NOT_SELECTABLE_ATTRIB, CommonFormatter.Format(tag.NoSelect)));
+            xTag.Add(new XAttribute(BORDER_ATTRIB, CommonFormatter.Format(tag.Border)));
             xTag.Add(new XAttribute("static", CommonFormatter.Format(tag.WasStatic)));
-            xTag.Add(new XAttribute(IS_HTML_ATTRIB, FormatBoolToDigit(tag.HTML)));
-            xTag.Add(new XAttribute(USE_OUTLINES_ATTRIB, FormatBoolToDigit(tag.UseOutlines)));
+            xTag.Add(new XAttribute(IS_HTML_ATTRIB, CommonFormatter.Format(tag.HTML)));
+            xTag.Add(new XAttribute(USE_OUTLINES_ATTRIB, CommonFormatter.Format(tag.UseOutlines)));
 
             if (tag.HasFont) {
                 xTag.Add(new XAttribute(FONT_REF_ATTRIB, tag.FontID));

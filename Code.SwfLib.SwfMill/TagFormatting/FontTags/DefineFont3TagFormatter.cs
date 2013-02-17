@@ -102,13 +102,13 @@ namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
 
         protected override void FormatTagElement(DefineFont3Tag tag, XElement xTag) {
             xTag.Add(new XAttribute(LANGUAGE_ATTRIB, tag.Language));
-            xTag.Add(new XAttribute(SHIFT_JIS_ATTRIB, FormatBoolToDigit(tag.ShiftJIS)));
-            xTag.Add(new XAttribute(UNICODE_ATTRIB, FormatBoolToDigit(tag.SmallText)));
-            xTag.Add(new XAttribute(ANSI_ATTRIB, FormatBoolToDigit(tag.ANSI)));
-            xTag.Add(new XAttribute(WIDE_GLYPH_OFFSETS_ATTRIB, FormatBoolToDigit(tag.WideOffsets)));
+            xTag.Add(new XAttribute(SHIFT_JIS_ATTRIB, CommonFormatter.Format(tag.ShiftJIS)));
+            xTag.Add(new XAttribute(UNICODE_ATTRIB, CommonFormatter.Format(tag.SmallText)));
+            xTag.Add(new XAttribute(ANSI_ATTRIB, CommonFormatter.Format(tag.ANSI)));
+            xTag.Add(new XAttribute(WIDE_GLYPH_OFFSETS_ATTRIB, CommonFormatter.Format(tag.WideOffsets)));
             xTag.Add(new XAttribute("wideCodes", CommonFormatter.Format(tag.WideCodes)));
-            xTag.Add(new XAttribute(ITALIC_ATTRIB, FormatBoolToDigit(tag.Italic)));
-            xTag.Add(new XAttribute(BOLD_ATTRIB, FormatBoolToDigit(tag.Bold)));
+            xTag.Add(new XAttribute(ITALIC_ATTRIB, CommonFormatter.Format(tag.Italic)));
+            xTag.Add(new XAttribute(BOLD_ATTRIB, CommonFormatter.Format(tag.Bold)));
             xTag.Add(new XAttribute(NAME_ATTRIB, tag.FontName.TrimEnd('\0')));
 
             var xGlyphs = new XElement("glyphs");

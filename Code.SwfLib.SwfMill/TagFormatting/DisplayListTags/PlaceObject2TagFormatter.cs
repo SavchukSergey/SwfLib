@@ -87,7 +87,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
             if (tag.HasRatio) {
                 elem.Add(new XAttribute(MORPH_ATTRIB, tag.Ratio));
             }
-            elem.Add(new XAttribute(REPLACE_ATTRIB, FormatBoolToDigit(tag.Move)));
+            elem.Add(new XAttribute(REPLACE_ATTRIB, CommonFormatter.Format(tag.Move)));
         }
 
         protected override bool HasCharacter(PlaceObject2Tag tag) {

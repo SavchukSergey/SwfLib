@@ -123,10 +123,6 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
             return Convert.FromBase64String(dataElement.Value);
         }
 
-        protected string FormatBoolToDigit(bool val) {
-            return val ? "1" : "0";
-        }
-
         protected static byte[] ReadBase64(XElement data) {
             string val = data.Value
                 .Replace(" ", "")
