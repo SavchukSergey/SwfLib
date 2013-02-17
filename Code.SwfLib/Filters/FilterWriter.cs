@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Code.SwfLib.Filters {
+﻿namespace Code.SwfLib.Filters {
     public class FilterWriter : IFilterVisitor<SwfStreamWriter, object> {
 
         public void Write(SwfStreamWriter writer, BaseFilter filter) {

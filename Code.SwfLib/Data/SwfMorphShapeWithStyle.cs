@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Code.SwfLib.Data
-{
-    public struct SwfMorphShapeWithStyle
-    {
+﻿namespace Code.SwfLib.Data {
+    //TODO: is it used?
+    public struct SwfMorphShapeWithStyle {
     }
 }

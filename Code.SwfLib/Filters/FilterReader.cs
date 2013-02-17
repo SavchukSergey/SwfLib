@@ -1,5 +1,4 @@
-﻿using System;
-using Code.SwfLib.Gradients;
+﻿using Code.SwfLib.Gradients;
 
 namespace Code.SwfLib.Filters {
     public class FilterReader : IFilterVisitor<SwfStreamReader, BaseFilter> {

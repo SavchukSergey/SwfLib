@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Code.SwfLib.Actions;
+﻿using Code.SwfLib.Actions;
 using Code.SwfLib.Data;
 using Code.SwfLib.Filters;
 
