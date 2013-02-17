@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Code.SwfLib.Buttons;
 using Code.SwfLib.SwfMill.Actions;
 using Code.SwfLib.SwfMill.Data;

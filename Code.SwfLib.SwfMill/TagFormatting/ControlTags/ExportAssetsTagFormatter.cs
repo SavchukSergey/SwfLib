@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags.ControlTags;

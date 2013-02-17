@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using Code.SwfLib.ClipActions;
+﻿using Code.SwfLib.ClipActions;
 
 namespace Code.SwfLib.SwfMill.ClipActions {
     public static class XClipEventFlags {

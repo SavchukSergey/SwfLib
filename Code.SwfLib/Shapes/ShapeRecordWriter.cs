@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Code.SwfLib.Shapes.Records;
+﻿using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Utils;
 
 namespace Code.SwfLib.Shapes {

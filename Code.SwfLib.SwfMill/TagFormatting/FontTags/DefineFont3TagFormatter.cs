@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Fonts;
 using Code.SwfLib.Tags.FontTags;
