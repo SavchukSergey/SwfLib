@@ -1,4 +1,5 @@
-﻿using Code.SwfLib.Gradients;
+﻿using System.Collections.Generic;
+using Code.SwfLib.Gradients;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Asserts {
@@ -62,6 +63,13 @@ namespace Code.SwfLib.Tests.Asserts {
         public static void AreEqual(GradientRecordRGBA expected, GradientRecordRGBA actual, string message) {
             Assert.AreEqual(expected.Ratio, actual.Ratio, message + ": Ratio");
             AssertColors.AreEqual(expected.Color, actual.Color, message + ": Color");
+        }
+
+        public static void AreEqual(IList<GradientRecordRGBA> expected, IList<GradientRecordRGBA> actual, string message) {
+            Assert.AreEqual(expected.Count, actual.Count, message + ".Count");
+            for (var i = 0; i < expected.Count; i++) {
+                AreEqual(expected[i], actual[i], ".Item[" + i + "]");
+            }
         }
     }
 }
