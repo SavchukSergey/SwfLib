@@ -31,6 +31,17 @@ namespace Code.SwfLib.Tests.Asserts {
             Assert.AreEqual(expected.Reserved, actual.Reserved);
         }
 
+        public static void AreEqual(GlowFilter expected, GlowFilter actual) {
+            Assert.AreEqual(expected.BlurX, actual.BlurX);
+            Assert.AreEqual(expected.BlurY, actual.BlurY);
+            AssertColors.AreEqual(expected.Color, actual.Color, "Color");
+            Assert.AreEqual(expected.CompositeSource, actual.CompositeSource);
+            Assert.AreEqual(expected.InnerGlow, actual.InnerGlow);
+            Assert.AreEqual(expected.Knockout, actual.Knockout);
+            Assert.AreEqual(expected.Passes, actual.Passes);
+            Assert.AreEqual(expected.Strength, actual.Strength);
+        }
+
         public static void AreEqual(ColorMatrixFilter expected, ColorMatrixFilter actual) {
             Assert.AreEqual(expected.R0, actual.R0);
             Assert.AreEqual(expected.R1, actual.R1);
@@ -62,6 +73,9 @@ namespace Code.SwfLib.Tests.Asserts {
             switch (expected.Type) {
                 case FilterType.Blur:
                     AreEqual((BlurFilter)expected, (BlurFilter)actual);
+                    break;
+                case FilterType.Glow:
+                    AreEqual((GlowFilter)expected, (GlowFilter)actual);
                     break;
                 case FilterType.Convolution:
                     AreEqual((ConvolutionFilter)expected, (ConvolutionFilter)actual);

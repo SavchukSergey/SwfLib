@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Filters;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Filters {
     public static class XGlowFilter {
@@ -24,23 +25,24 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static GlowFilter FromXml(XElement xFilter) {
-            var xBlurX = xFilter.Attribute("blurX");
-            var xBlurY = xFilter.Attribute("blurY");
-            var xInnerGlow = xFilter.Attribute("innerGlow");
-            var xKnockout = xFilter.Attribute("knockout");
-            var xPasses = xFilter.Attribute("passes");
-            var xStrength = xFilter.Attribute("strength");
+            const string NODE = "Glow";
+            var xBlurX = xFilter.RequiredAttribute("blurX", NODE);
+            var xBlurY = xFilter.RequiredAttribute("blurY", NODE);
+            var xInnerGlow = xFilter.RequiredAttribute("innerGlow", NODE);
+            var xKnockout = xFilter.RequiredAttribute("knockout", NODE);
+            var xPasses = xFilter.RequiredAttribute("passes", NODE);
+            var xStrength = xFilter.RequiredAttribute("strength", NODE);
             var xCompositeSource = xFilter.Attribute("compositeSource");
 
             var xColor = xFilter.Element("color").Element("Color");
 
             return new GlowFilter {
-                BlurX = CommonFormatter.ParseDouble(xBlurX.Value),
-                BlurY = CommonFormatter.ParseDouble(xBlurY.Value),
-                InnerGlow = CommonFormatter.ParseBool(xInnerGlow.Value),
-                Knockout = CommonFormatter.ParseBool(xKnockout.Value),
-                Passes = uint.Parse(xPasses.Value),
-                Strength = CommonFormatter.ParseDouble(xStrength.Value),
+                BlurX = CommonFormatter.ParseDouble(xBlurX),
+                BlurY = CommonFormatter.ParseDouble(xBlurY),
+                InnerGlow = CommonFormatter.ParseBool(xInnerGlow),
+                Knockout = CommonFormatter.ParseBool(xKnockout),
+                Passes = uint.Parse(xPasses),
+                Strength = CommonFormatter.ParseDouble(xStrength),
                 CompositeSource = xCompositeSource == null || CommonFormatter.ParseBool(xCompositeSource.Value),
                 Color = XColorRGBA.FromXml(xColor)
             };
