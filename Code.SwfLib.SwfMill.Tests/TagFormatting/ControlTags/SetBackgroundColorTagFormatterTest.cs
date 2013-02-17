@@ -3,7 +3,7 @@ using Code.SwfLib.SwfMill.TagFormatting.ControlTags;
 using Code.SwfLib.Tags.ControlTags;
 using NUnit.Framework;
 
-namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
+namespace Code.SwfLib.SwfMill.Tests.TagFormatting.ControlTags {
     [TestFixture]
     public class SetBackgroundColorTagFormatterTest : BaseTagFormattingTest<SetBackgroundColorTag, SetBackgroundColorTagFormatter> {
 

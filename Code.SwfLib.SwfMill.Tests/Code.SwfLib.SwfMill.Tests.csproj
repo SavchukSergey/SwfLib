@@ -101,7 +101,7 @@
     <Compile Include="TagFormatting\BaseTagFormattingTest.cs" />
     <Compile Include="TagFormatting\EndTagFormatterTest.cs" />
     <Compile Include="TagFormatting\FontTags\DefineFontAlignZonesTagFormatterTest.cs" />
-    <Compile Include="TagFormatting\SetBackgroundColorTagFormatterTest.cs" />
+    <Compile Include="TagFormatting\ControlTags\SetBackgroundColorTagFormatterTest.cs" />
     <Compile Include="TagFormatting\ShowFrameTagFormatterTest.cs" />
     <Compile Include="XmlComparision.cs" />
   </ItemGroup>
