@@ -92,6 +92,7 @@
     <Compile Include="AssertExt.cs" />
     <Compile Include="ActionXmlSerializerTest.cs" />
     <Compile Include="EnumerableExt.cs" />
+    <Compile Include="Filters\XColorMatrixFilterTest.cs" />
     <Compile Include="Filters\XBlurFilterTest.cs" />
     <Compile Include="Filters\XConvolutionFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

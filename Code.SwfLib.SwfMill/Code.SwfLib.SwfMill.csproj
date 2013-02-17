@@ -181,6 +181,7 @@
     <Compile Include="TagFormatting\VideoTags\DefineVideoStreamTagFormatter.cs" />
     <Compile Include="TagFormatting\VideoTags\VideoFrameTagFormatter.cs" />
     <Compile Include="Text\XTextRecord.cs" />
+    <Compile Include="Utils\XElementUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Code.SwfLib\Code.SwfLib.csproj">

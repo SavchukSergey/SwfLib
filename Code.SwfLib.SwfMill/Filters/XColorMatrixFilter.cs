@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Filters;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Filters {
     public static class XColorMatrixFilter {
@@ -36,54 +37,55 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static ColorMatrixFilter FromXml(XElement xFilter) {
-            var xR0 = xFilter.Attribute("r0");
-            var xR1 = xFilter.Attribute("r1");
-            var xR2 = xFilter.Attribute("r2");
-            var xR3 = xFilter.Attribute("r3");
-            var xR4 = xFilter.Attribute("r4");
+            const string NODE = "ColorMatrix";
+            var xR0 = xFilter.RequiredAttribute("r0", NODE);
+            var xR1 = xFilter.RequiredAttribute("r1", NODE);
+            var xR2 = xFilter.RequiredAttribute("r2", NODE);
+            var xR3 = xFilter.RequiredAttribute("r3", NODE);
+            var xR4 = xFilter.RequiredAttribute("r4", NODE);
 
-            var xG0 = xFilter.Attribute("g0");
-            var xG1 = xFilter.Attribute("g1");
-            var xG2 = xFilter.Attribute("g2");
-            var xG3 = xFilter.Attribute("g3");
-            var xG4 = xFilter.Attribute("g4");
+            var xG0 = xFilter.RequiredAttribute("g0", NODE);
+            var xG1 = xFilter.RequiredAttribute("g1", NODE);
+            var xG2 = xFilter.RequiredAttribute("g2", NODE);
+            var xG3 = xFilter.RequiredAttribute("g3", NODE);
+            var xG4 = xFilter.RequiredAttribute("g4", NODE);
 
-            var xB0 = xFilter.Attribute("b0");
-            var xB1 = xFilter.Attribute("b1");
-            var xB2 = xFilter.Attribute("b2");
-            var xB3 = xFilter.Attribute("b3");
-            var xB4 = xFilter.Attribute("b4");
+            var xB0 = xFilter.RequiredAttribute("b0", NODE);
+            var xB1 = xFilter.RequiredAttribute("b1", NODE);
+            var xB2 = xFilter.RequiredAttribute("b2", NODE);
+            var xB3 = xFilter.RequiredAttribute("b3", NODE);
+            var xB4 = xFilter.RequiredAttribute("b4", NODE);
 
-            var xA0 = xFilter.Attribute("a0");
-            var xA1 = xFilter.Attribute("a1");
-            var xA2 = xFilter.Attribute("a2");
-            var xA3 = xFilter.Attribute("a3");
-            var xA4 = xFilter.Attribute("a4");
+            var xA0 = xFilter.RequiredAttribute("a0", NODE);
+            var xA1 = xFilter.RequiredAttribute("a1", NODE);
+            var xA2 = xFilter.RequiredAttribute("a2", NODE);
+            var xA3 = xFilter.RequiredAttribute("a3", NODE);
+            var xA4 = xFilter.RequiredAttribute("a4", NODE);
 
             return new ColorMatrixFilter {
-                R0 = CommonFormatter.ParseDouble(xR0.Value),
-                R1 = CommonFormatter.ParseDouble(xR1.Value),
-                R2 = CommonFormatter.ParseDouble(xR2.Value),
-                R3 = CommonFormatter.ParseDouble(xR3.Value),
-                R4 = CommonFormatter.ParseDouble(xR4.Value),
+                R0 = CommonFormatter.ParseDouble(xR0),
+                R1 = CommonFormatter.ParseDouble(xR1),
+                R2 = CommonFormatter.ParseDouble(xR2),
+                R3 = CommonFormatter.ParseDouble(xR3),
+                R4 = CommonFormatter.ParseDouble(xR4),
 
-                G0 = CommonFormatter.ParseDouble(xG0.Value),
-                G1 = CommonFormatter.ParseDouble(xG1.Value),
-                G2 = CommonFormatter.ParseDouble(xG2.Value),
-                G3 = CommonFormatter.ParseDouble(xG3.Value),
-                G4 = CommonFormatter.ParseDouble(xG4.Value),
+                G0 = CommonFormatter.ParseDouble(xG0),
+                G1 = CommonFormatter.ParseDouble(xG1),
+                G2 = CommonFormatter.ParseDouble(xG2),
+                G3 = CommonFormatter.ParseDouble(xG3),
+                G4 = CommonFormatter.ParseDouble(xG4),
 
-                B0 = CommonFormatter.ParseDouble(xB0.Value),
-                B1 = CommonFormatter.ParseDouble(xB1.Value),
-                B2 = CommonFormatter.ParseDouble(xB2.Value),
-                B3 = CommonFormatter.ParseDouble(xB3.Value),
-                B4 = CommonFormatter.ParseDouble(xB4.Value),
+                B0 = CommonFormatter.ParseDouble(xB0),
+                B1 = CommonFormatter.ParseDouble(xB1),
+                B2 = CommonFormatter.ParseDouble(xB2),
+                B3 = CommonFormatter.ParseDouble(xB3),
+                B4 = CommonFormatter.ParseDouble(xB4),
 
-                A0 = CommonFormatter.ParseDouble(xA0.Value),
-                A1 = CommonFormatter.ParseDouble(xA1.Value),
-                A2 = CommonFormatter.ParseDouble(xA2.Value),
-                A3 = CommonFormatter.ParseDouble(xA3.Value),
-                A4 = CommonFormatter.ParseDouble(xA4.Value)
+                A0 = CommonFormatter.ParseDouble(xA0),
+                A1 = CommonFormatter.ParseDouble(xA1),
+                A2 = CommonFormatter.ParseDouble(xA2),
+                A3 = CommonFormatter.ParseDouble(xA3),
+                A4 = CommonFormatter.ParseDouble(xA4)
             };
         }
 

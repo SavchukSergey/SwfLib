@@ -31,6 +31,32 @@ namespace Code.SwfLib.Tests.Asserts {
             Assert.AreEqual(expected.Reserved, actual.Reserved);
         }
 
+        public static void AreEqual(ColorMatrixFilter expected, ColorMatrixFilter actual) {
+            Assert.AreEqual(expected.R0, actual.R0);
+            Assert.AreEqual(expected.R1, actual.R1);
+            Assert.AreEqual(expected.R2, actual.R2);
+            Assert.AreEqual(expected.R3, actual.R3);
+            Assert.AreEqual(expected.R4, actual.R4);
+
+            Assert.AreEqual(expected.G0, actual.G0);
+            Assert.AreEqual(expected.G1, actual.G1);
+            Assert.AreEqual(expected.G2, actual.G2);
+            Assert.AreEqual(expected.G3, actual.G3);
+            Assert.AreEqual(expected.G4, actual.G4);
+
+            Assert.AreEqual(expected.B0, actual.B0);
+            Assert.AreEqual(expected.B1, actual.B1);
+            Assert.AreEqual(expected.B2, actual.B2);
+            Assert.AreEqual(expected.B3, actual.B3);
+            Assert.AreEqual(expected.B4, actual.B4);
+
+            Assert.AreEqual(expected.A0, actual.A0);
+            Assert.AreEqual(expected.A1, actual.A1);
+            Assert.AreEqual(expected.A2, actual.A2);
+            Assert.AreEqual(expected.A3, actual.A3);
+            Assert.AreEqual(expected.A4, actual.A4);
+        }
+
         public static void AreEqual(BaseFilter expected, BaseFilter actual) {
             Assert.AreEqual(expected.Type, actual.Type);
             switch (expected.Type) {
@@ -39,6 +65,9 @@ namespace Code.SwfLib.Tests.Asserts {
                     break;
                 case FilterType.Convolution:
                     AreEqual((ConvolutionFilter)expected, (ConvolutionFilter)actual);
+                    break;
+                case FilterType.ColorMatrix:
+                    AreEqual((ColorMatrixFilter)expected, (ColorMatrixFilter)actual);
                     break;
                 default:
                     throw new NotSupportedException();
