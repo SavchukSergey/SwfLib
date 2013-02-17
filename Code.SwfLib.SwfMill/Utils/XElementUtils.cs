@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Data;
 
 namespace Code.SwfLib.SwfMill.Utils {
     public static class XElementUtils {
@@ -22,6 +23,12 @@ namespace Code.SwfLib.SwfMill.Utils {
             int val;
             if (int.TryParse(str, out val)) return val;
             throw new InvalidOperationException(message + "'s attribute " + attributeName + " is not an integer");
+        }
+
+        public static bool RequiredBoolAttribute(this XElement node, string attributeName, string message) {
+            var str = node.RequiredAttribute(attributeName, message);
+            //TODO: try parse instead of strict parse
+            return CommonFormatter.ParseBool(str);
         }
     }
 }

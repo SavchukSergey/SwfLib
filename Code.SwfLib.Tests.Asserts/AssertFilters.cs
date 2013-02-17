@@ -56,6 +56,20 @@ namespace Code.SwfLib.Tests.Asserts {
             Assert.AreEqual(expected.OnTop, actual.OnTop);
         }
 
+        public static void AreEqual(GradientBevelFilter expected, GradientBevelFilter actual) {
+            Assert.AreEqual(expected.BlurX, actual.BlurX);
+            Assert.AreEqual(expected.BlurY, actual.BlurY);
+            AssertGradients.AreEqual(expected.GradientColors, actual.GradientColors, "GradientColors");
+            Assert.AreEqual(expected.CompositeSource, actual.CompositeSource);
+            Assert.AreEqual(expected.InnerGlow, actual.InnerGlow);
+            Assert.AreEqual(expected.Knockout, actual.Knockout);
+            Assert.AreEqual(expected.Passes, actual.Passes);
+            Assert.AreEqual(expected.Strength, actual.Strength);
+            Assert.AreEqual(expected.Angle, actual.Angle);
+            Assert.AreEqual(expected.Distance, actual.Distance);
+            Assert.AreEqual(expected.OnTop, actual.OnTop);
+        }
+
         public static void AreEqual(DropShadowFilter expected, DropShadowFilter actual) {
             Assert.AreEqual(expected.BlurX, actual.BlurX);
             Assert.AreEqual(expected.BlurY, actual.BlurY);
@@ -106,6 +120,9 @@ namespace Code.SwfLib.Tests.Asserts {
                     break;
                 case FilterType.GradientGlow:
                     AreEqual((GradientGlowFilter)expected, (GradientGlowFilter)actual);
+                    break;
+                case FilterType.GradientBevel:
+                    AreEqual((GradientBevelFilter)expected, (GradientBevelFilter)actual);
                     break;
                 case FilterType.Convolution:
                     AreEqual((ConvolutionFilter)expected, (ConvolutionFilter)actual);

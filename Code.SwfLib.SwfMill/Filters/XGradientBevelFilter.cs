@@ -28,10 +28,7 @@ namespace Code.SwfLib.SwfMill.Filters {
 
         public static GradientBevelFilter FromXml(XElement xFilter) {
             const string node = "GradientBevel";
-            var xInnerGlow = xFilter.Attribute("innerGlow");
-            var xKnockout = xFilter.Attribute("knockout");
             var xCompositeSource = xFilter.Attribute("compositeSource");
-            var xOnTop = xFilter.Attribute("onTop");
             var xPasses = xFilter.Attribute("passes");
 
             var filter = new GradientBevelFilter {
@@ -40,10 +37,10 @@ namespace Code.SwfLib.SwfMill.Filters {
                 Angle = xFilter.RequiredDoubleAttribute("angle", node),
                 Distance = xFilter.RequiredDoubleAttribute("distance", node),
                 Strength = xFilter.RequiredDoubleAttribute("strength", node),
-                InnerGlow = CommonFormatter.ParseBool(xInnerGlow.Value),
-                Knockout = CommonFormatter.ParseBool(xKnockout.Value),
+                InnerGlow = xFilter.RequiredBoolAttribute("innerGlow", node),
+                Knockout = xFilter.RequiredBoolAttribute("knockout", node),
                 CompositeSource = xCompositeSource == null || CommonFormatter.ParseBool(xCompositeSource.Value),
-                OnTop = CommonFormatter.ParseBool(xOnTop.Value),
+                OnTop = xFilter.RequiredBoolAttribute("onTop", node),
                 Passes = uint.Parse(xPasses.Value),
             };
 
