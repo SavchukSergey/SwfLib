@@ -2,6 +2,7 @@
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.DisplayListTags;
+using Code.SwfLib.Tests.Asserts.Tags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Tags.DisplayListTags {
@@ -20,20 +21,21 @@ namespace Code.SwfLib.Tests.Tags.DisplayListTags {
             };
             var res = tagReader.ReadTag<PlaceObject2Tag>(tagData);
             Assert.IsNotNull(res);
-
-            Assert.AreEqual(0, res.CharacterID);
-            Assert.AreEqual(5, res.Depth);
-            Assert.IsFalse(res.Matrix.HasScale);
-            Assert.IsFalse(res.Matrix.HasRotate);
-            Assert.AreEqual(0, res.Matrix.TranslateX);
-            Assert.AreEqual(0, res.Matrix.TranslateY);
-
-            Assert.IsNull(res.RestData);
+            AssertTag.AreEqual(GetPlaceObjectTag(), res);
         }
 
         [Test]
         public void WriteTest() {
-            var tag = new PlaceObject2Tag {
+            var tag = GetPlaceObjectTag();
+
+            var tagWriter = new SwfTagSerializer(new SwfFile());
+            var tagData = tagWriter.GetTagData(tag);
+
+            Assert.AreEqual(_etalon, tagData.Data);
+        }
+
+        private static PlaceObject2Tag GetPlaceObjectTag() {
+            return new PlaceObject2Tag {
                 Depth = 0x05,
                 HasMatrix = false,
                 Matrix = new SwfMatrix(),
@@ -41,11 +43,6 @@ namespace Code.SwfLib.Tests.Tags.DisplayListTags {
                 Move = true,
                 ColorTransform = new ColorTransformRGBA()
             };
-
-            var tagWriter = new SwfTagSerializer(new SwfFile());
-            var tagData = tagWriter.GetTagData(tag);
-
-            Assert.AreEqual(_etalon, tagData.Data);
         }
 
     }

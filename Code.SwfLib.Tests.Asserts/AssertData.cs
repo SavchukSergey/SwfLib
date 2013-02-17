@@ -23,5 +23,20 @@ namespace Code.SwfLib.Tests.Asserts {
             Assert.AreEqual(expected.YMax, actual.YMax, message + ": YMax");
         }
 
+        public static void AreEqual(ColorTransformRGBA expected, ColorTransformRGBA actual, string message) {
+            Assert.AreEqual(expected.HasAddTerms, actual.HasAddTerms, message + ".HasAddTerms");
+            Assert.AreEqual(expected.HasMultTerms, actual.HasMultTerms, message + ".HasMultTerms");
+
+            Assert.AreEqual(expected.RedAddTerm, actual.RedAddTerm, message + ".RedAddTerm");
+            Assert.AreEqual(expected.GreenAddTerm, actual.GreenAddTerm, message + ".GreenAddTerm");
+            Assert.AreEqual(expected.BlueAddTerm, actual.BlueAddTerm, message + ".BlueAddTerm");
+            Assert.AreEqual(expected.AlphaAddTerm, actual.AlphaAddTerm, message + ".AlphaAddTerm");
+
+            Assert.AreEqual(expected.RedMultTerm, actual.RedMultTerm, message + ".RedMultTerm");
+            Assert.AreEqual(expected.GreenMultTerm, actual.GreenMultTerm, message + ".GreenMultTerm");
+            Assert.AreEqual(expected.BlueMultTerm, actual.BlueMultTerm, message + ".BlueMultTerm");
+            Assert.AreEqual(expected.AlphaMultTerm, actual.AlphaMultTerm, message + ".AlphaMultTerm");
+
+        }
     }
 }

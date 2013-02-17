@@ -1,9 +1,19 @@
-﻿using Code.SwfLib.Tags.ShapeTags;
+﻿using Code.SwfLib.Tags.DisplayListTags;
+using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tests.Asserts.Shapes;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Asserts.Tags {
     public static class AssertTag {
+
+        public static void AreEqual(PlaceObject2Tag expected, PlaceObject2Tag actual) {
+            Assert.AreEqual(expected.CharacterID, actual.CharacterID);
+            Assert.AreEqual(expected.Depth, actual.Depth);
+            AssertData.AreEqual(expected.Matrix, actual.Matrix, "Matrix");
+            Assert.AreEqual(expected.HasColorTransform, actual.HasColorTransform, "HasColorTransform");
+            AssertData.AreEqual(expected.ColorTransform, actual.ColorTransform, "ColorTransform");
+            Assert.AreEqual(expected.RestData, actual.RestData);
+        }
 
         public static void AreEqual(DefineShapeTag expected, DefineShapeTag actual) {
             Assert.AreEqual(expected.ShapeID, actual.ShapeID);
