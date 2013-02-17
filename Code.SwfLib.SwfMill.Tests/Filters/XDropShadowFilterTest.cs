@@ -6,31 +6,31 @@ using NUnit.Framework;
 
 namespace Code.SwfLib.SwfMill.Tests.Filters {
     [TestFixture]
-    public class XGlowFilterTest {
-        private const string ETALON = @"<Glow blurX='1.5' blurY='-2.4' strength='20.5' innerGlow='1' knockout='1' passes='2' compositeSource='1'>
+    public class XDropShadowFilterTest {
+        private const string ETALON = @"<DropShadow blurX='1.5' blurY='-2.4' strength='20.5' innerShadow='1' knockout='1' passes='2' angle='0.75' distance='2.9' compositeSource='1'>
     <color>
         <Color red='137' green='24' blue='87' alpha='20' />
     </color>
-</Glow>
+</DropShadow>
 ";
 
         [Test]
         public void FromXmlTest() {
-            var filter = XGlowFilter.FromXml(XElement.Parse(ETALON));
+            var filter = XDropShadowFilter.FromXml(XElement.Parse(ETALON));
             AssertFilters.AreEqual(GetSample(), filter);
         }
 
         [Test]
         public void ToXmlTest() {
             var filter = GetSample();
-            var xResult = XGlowFilter.ToXml(filter);
+            var xResult = XDropShadowFilter.ToXml(filter);
 
             var xOriginal = XElement.Parse(ETALON);
             new XmlComparision(Assert.Fail).Compare(xOriginal, xResult);
         }
 
-        private GlowFilter GetSample() {
-            return new GlowFilter {
+        private DropShadowFilter GetSample() {
+            return new DropShadowFilter {
                 BlurX = 1.5,
                 BlurY = -2.4,
                 Color = {
@@ -41,9 +41,11 @@ namespace Code.SwfLib.SwfMill.Tests.Filters {
                 },
                 Strength = 20.5,
                 CompositeSource = true,
-                InnerGlow = true,
+                InnerShadow = true,
                 Knockout = true,
-                Passes = 2
+                Passes = 2,
+                Angle = 0.75,
+                Distance = 2.9
             };
         }
     }

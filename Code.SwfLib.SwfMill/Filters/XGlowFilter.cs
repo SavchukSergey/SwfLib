@@ -16,11 +16,9 @@ namespace Code.SwfLib.SwfMill.Filters {
                 new XAttribute("knockout", CommonFormatter.Format(filter.Knockout)),
                 new XAttribute("passes", filter.Passes),
                 new XAttribute("strength", CommonFormatter.Format(filter.Strength)),
-                new XElement("color", XColorRGBA.ToXml(filter.Color))
+                new XElement("color", XColorRGBA.ToXml(filter.Color)),
+                new XAttribute("compositeSource", CommonFormatter.Format(filter.CompositeSource))
             );
-            if (!filter.CompositeSource) {
-                res.Add(new XAttribute("compositeSource", CommonFormatter.Format(filter.CompositeSource)));
-            }
             return res;
         }
 

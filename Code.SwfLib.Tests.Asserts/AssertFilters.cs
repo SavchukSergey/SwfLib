@@ -42,6 +42,19 @@ namespace Code.SwfLib.Tests.Asserts {
             Assert.AreEqual(expected.Strength, actual.Strength);
         }
 
+        public static void AreEqual(DropShadowFilter expected, DropShadowFilter actual) {
+            Assert.AreEqual(expected.BlurX, actual.BlurX);
+            Assert.AreEqual(expected.BlurY, actual.BlurY);
+            AssertColors.AreEqual(expected.Color, actual.Color, "Color");
+            Assert.AreEqual(expected.CompositeSource, actual.CompositeSource);
+            Assert.AreEqual(expected.InnerShadow, actual.InnerShadow);
+            Assert.AreEqual(expected.Knockout, actual.Knockout);
+            Assert.AreEqual(expected.Passes, actual.Passes);
+            Assert.AreEqual(expected.Strength, actual.Strength);
+            Assert.AreEqual(expected.Angle, actual.Angle);
+            Assert.AreEqual(expected.Distance, actual.Distance);
+        }
+
         public static void AreEqual(ColorMatrixFilter expected, ColorMatrixFilter actual) {
             Assert.AreEqual(expected.R0, actual.R0);
             Assert.AreEqual(expected.R1, actual.R1);
@@ -82,6 +95,9 @@ namespace Code.SwfLib.Tests.Asserts {
                     break;
                 case FilterType.ColorMatrix:
                     AreEqual((ColorMatrixFilter)expected, (ColorMatrixFilter)actual);
+                    break;
+                case FilterType.DropShadow:
+                    AreEqual((DropShadowFilter)expected, (DropShadowFilter)actual);
                     break;
                 default:
                     throw new NotSupportedException();
