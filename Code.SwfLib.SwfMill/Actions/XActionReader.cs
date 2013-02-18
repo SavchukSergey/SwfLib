@@ -52,9 +52,8 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionWaitForFrame action, XElement xAction) {
-            var xSkip = xAction.Attribute("skipCount");
             action.Frame = xAction.RequiredUShortAttribute("frame");
-            action.SkipCount = byte.Parse(xSkip.Value);
+            action.SkipCount = xAction.RequiredByteAttribute("skipCount");
             return action;
         }
 
@@ -140,8 +139,6 @@ namespace Code.SwfLib.SwfMill.Actions {
             var xItems = xAction.Element("items");
             foreach (var xItem in xItems.Elements()) {
                 var xValue = xItem.Attribute("value");
-                var xReg = xItem.Attribute("reg");
-                var xIndex = xItem.Attribute("index");
                 switch (xItem.Name.LocalName) {
                     case "StackString":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.String, String = xItem.RequiredStringAttribute("value") });
@@ -156,10 +153,10 @@ namespace Code.SwfLib.SwfMill.Actions {
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Undefined });
                         break;
                     case "StackRegister":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Register, Register = byte.Parse(xReg.Value) });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Register, Register = xItem.RequiredByteAttribute("reg") });
                         break;
                     case "StackBoolean":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Boolean, Boolean = byte.Parse(xValue.Value) });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Boolean, Boolean = xItem.RequiredByteAttribute("value") });
                         break;
                     case "StackDouble":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Double, Double = xItem.RequiredDoubleAttribute("value") });
@@ -168,7 +165,7 @@ namespace Code.SwfLib.SwfMill.Actions {
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Integer, Integer = xItem.RequiredIntAttribute("value") });
                         break;
                     case "StackDictionaryLookup":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant8, Constant8 = byte.Parse(xIndex.Value) });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant8, Constant8 = xItem.RequiredByteAttribute("index") });
                         break;
                     case "StackConstant16":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant16, Constant16 = xItem.RequiredUShortAttribute("value") });
@@ -223,8 +220,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGetURL2 action, XElement xAction) {
-            var xFlags = xAction.Attribute("flags");
-            action.Flags = byte.Parse(xFlags.Value);
+            action.Flags = xAction.RequiredByteAttribute("flags");
             return action;
         }
 
@@ -233,10 +229,9 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGotoFrame2 action, XElement xAction) {
-            var xPlay = xAction.Attribute("play");
             var xBias = xAction.Attribute("bias");
             var xReserved = xAction.Attribute("reserved");
-            action.Play = CommonFormatter.ParseBool(xPlay.Value);
+            action.Play = xAction.RequiredBoolAttribute("play");
             if (xBias != null) {
                 action.SceneBias = ushort.Parse(xBias.Value);
             }
@@ -263,8 +258,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionWaitForFrame2 action, XElement xAction) {
-            var xSkip = xAction.Attribute("skipCount");
-            action.SkipCount = byte.Parse(xSkip.Value);
+            action.SkipCount = xAction.RequiredByteAttribute("skipCount");
             return action;
         }
 
@@ -299,7 +293,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionConstantPool action, XElement xAction) {
             var xStrings = xAction.Element("strings");
             foreach (var xString in xStrings.Elements()) {
-                action.ConstantPool.Add(xString.Attribute("value").Value);
+                action.ConstantPool.Add(xString.RequiredStringAttribute("value"));
             }
             return action;
         }
@@ -310,7 +304,7 @@ namespace Code.SwfLib.SwfMill.Actions {
 
             action.Name = xAction.RequiredStringAttribute("name");
             foreach (var xArg in xArgs.Elements()) {
-                action.Args.Add(xArg.Attribute("name").Value);
+                action.Args.Add(xArg.RequiredStringAttribute("name"));
             }
 
             if (xActions != null) {
@@ -446,8 +440,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionStoreRegister action, XElement xAction) {
-            var xRegister = xAction.Attribute("reg");
-            action.RegisterNumber = byte.Parse(xRegister.Value);
+            action.RegisterNumber = xAction.RequiredByteAttribute("reg");
             return action;
         }
 

@@ -41,6 +41,13 @@ namespace Code.SwfLib.SwfMill.Utils {
             throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not an unsigned short integer. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
+        public static byte RequiredByteAttribute(this XElement node, string attributeName) {
+            var str = node.RequiredAttribute(attributeName);
+            byte val;
+            if (byte.TryParse(str, out val)) return val;
+            throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not a byte. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
+        }
+
         public static bool RequiredBoolAttribute(this XElement node, string attributeName) {
             var str = node.RequiredAttribute(attributeName);
             switch (str) {
@@ -61,7 +68,7 @@ namespace Code.SwfLib.SwfMill.Utils {
             while (node != null) {
                 if (!string.IsNullOrEmpty(res)) res = "/" + res;
                 var nodeName = node.Name.LocalName;
-                if (nodeName == "tags" || nodeName == "actions" || nodeName == "items") {
+                if (nodeName == "tags" || nodeName == "actions" || nodeName == "items" || nodeName == "strings") {
                     var index = GetNodeIndex(child);
                     res = "[" + index + "]" + res;
                 }
