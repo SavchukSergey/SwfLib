@@ -59,6 +59,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Actions\ConstantPoolXActionTest.cs" />
+    <Compile Include="Actions\PushXActionTest.cs" />
     <Compile Include="Actions\DefineFunction2XActionTest.cs">
       <SubType>Code</SubType>
     </Compile>
