@@ -17,16 +17,13 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGotoFrame action, XElement xAction) {
-            var xFrame = xAction.Attribute("frame");
-            action.Frame = ushort.Parse(xFrame.Value);
+            action.Frame = xAction.RequiredUShortAttribute("frame", "GotoFrame");
             return action;
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGetURL action, XElement xAction) {
-            var xUrl = xAction.Attribute("url");
-            var xTarget = xAction.Attribute("target");
-            action.UrlString = xUrl.Value;
-            action.TargetString = xTarget.Value;
+            action.UrlString = xAction.RequiredStringAttribute("url", "GetURL");
+            action.TargetString = xAction.RequiredStringAttribute("target", "GetURL");
             return action;
         }
 
@@ -55,22 +52,19 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionWaitForFrame action, XElement xAction) {
-            var xFrame = xAction.Attribute("frame");
             var xSkip = xAction.Attribute("skipCount");
-            action.Frame = ushort.Parse(xFrame.Value);
+            action.Frame = xAction.RequiredUShortAttribute("frame", "WaitForFrame");
             action.SkipCount = byte.Parse(xSkip.Value);
             return action;
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionSetTarget action, XElement xAction) {
-            var xTarget = xAction.Attribute("target");
-            action.TargetName = xTarget.Value;
+            action.TargetName = xAction.RequiredStringAttribute("target", "SetTarget");
             return action;
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGoToLabel action, XElement xAction) {
-            var xLabel = xAction.Attribute("label");
-            action.Label = xLabel.Value;
+            action.Label = xAction.RequiredStringAttribute("label", "GoToLabel");
             return action;
         }
 
@@ -150,7 +144,7 @@ namespace Code.SwfLib.SwfMill.Actions {
                 var xIndex = xItem.Attribute("index");
                 switch (xItem.Name.LocalName) {
                     case "StackString":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.String, String = xValue.Value });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.String, String = xItem.RequiredStringAttribute("value", "StackString") });
                         break;
                     case "StackFloat":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Float, Float = float.Parse(xValue.Value) });
@@ -171,13 +165,13 @@ namespace Code.SwfLib.SwfMill.Actions {
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Double, Double = xItem.RequiredDoubleAttribute("value", "StackDouble") });
                         break;
                     case "StackInteger":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Integer, Integer = int.Parse(xValue.Value) });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Integer, Integer = xItem.RequiredIntAttribute("value", "StackInteger") });
                         break;
                     case "StackDictionaryLookup":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant8, Constant8 = byte.Parse(xIndex.Value) });
                         break;
                     case "StackConstant16":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant16, Constant16 = ushort.Parse(xValue.Value) });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant16, Constant16 = xItem.RequiredUShortAttribute("value", "StackConstant16") });
                         break;
                     default:
                         throw new NotSupportedException();
@@ -311,11 +305,10 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDefineFunction action, XElement xAction) {
-            var xName = xAction.Attribute("name");
             var xArgs = xAction.Element("args");
             var xActions = xAction.Element("actions");
 
-            action.Name = xName.Value;
+            action.Name = xAction.RequiredStringAttribute("name", "DefineFunction");
             foreach (var xArg in xArgs.Elements()) {
                 action.Args.Add(xArg.Attribute("name").Value);
             }
