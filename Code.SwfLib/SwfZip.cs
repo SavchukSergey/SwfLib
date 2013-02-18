@@ -4,33 +4,28 @@ using zlib;
 namespace Code.SwfLib {
     public static class SwfZip {
 
-        public static void Compress(Stream source, Stream target) {
-            //TODO: Implement
+        public static void Compress(Stream uncompressed, Stream target) {
             var buffer = new byte[4096];
             int readBytes;
+            var zip = new ZOutputStream(target, zlibConst.Z_BEST_COMPRESSION);
             do {
-                readBytes = source.Read(buffer, 0, buffer.Length);
-                target.Write(buffer, 0, readBytes);
+                readBytes = uncompressed.Read(buffer, 0, buffer.Length);
+                zip.Write(buffer, 0, readBytes);
             } while (readBytes > 0);
+            zip.finish();
+            zip.Flush();
         }
 
-        public static void Decompress(Stream source, Stream target) {
-            source.Seek(0, SeekOrigin.Begin);
-
-            var reader = new SwfStreamReader(source);
-            var writer = new SwfStreamWriter(target);
-
-            var hdr = reader.ReadSwfFileInfo();
-            hdr.Format = "FWS";
-            writer.WriteSwfFileInfo(hdr);
-
+        public static void Decompress(Stream compressed, Stream target) {
             var zip = new ZOutputStream(target);
             int readBytes;
             var buffer = new byte[512];
             do {
-                readBytes = source.Read(buffer, 0, buffer.Length);
+                readBytes = compressed.Read(buffer, 0, buffer.Length);
                 zip.Write(buffer, 0, readBytes);
             } while (readBytes > 0);
+            zip.Flush();
+            target.Seek(0, SeekOrigin.Begin);
         }
     }
 }

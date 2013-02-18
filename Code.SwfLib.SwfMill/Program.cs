@@ -24,6 +24,9 @@ namespace Code.SwfLib.SwfMill {
                 case "decompress":
                     Decompress(args);
                     break;
+                case "compress":
+                    Compress(args);
+                    break;
                 default:
                     Console.WriteLine("Unknown command {0}", command);
                     break;
@@ -95,6 +98,26 @@ namespace Code.SwfLib.SwfMill {
             }
         }
 
+
+        static void Compress(string[] args) {
+            if (args.Length < 2) {
+                Console.WriteLine("Source file wasn't specified");
+                ShowUsage();
+                return;
+            }
+            var source = args[1];
+            var target = args.Length < 3 ? source : args[2];
+            var mem = new MemoryStream();
+            using (var file = File.Open(source, FileMode.Open, FileAccess.Read)) {
+                var facade = new SwfMillFacade();
+                facade.Compress(file, mem);
+            }
+            mem.Seek(0, SeekOrigin.Begin);
+            using (var file = File.Open(target, FileMode.Create, FileAccess.ReadWrite)) {
+                mem.WriteTo(file);
+            }
+        }
+
         static void ShowUsage() {
             Console.WriteLine("codeswfmill is swf-xml and xml-swf conversion utility.");
             Console.WriteLine("Usage:");
@@ -105,6 +128,8 @@ namespace Code.SwfLib.SwfMill {
             Console.WriteLine("\t\tconverts xml to swf");
             Console.WriteLine("\tdecompress <sourcePath> [<targetPath>]");
             Console.WriteLine("\t\tdecompresses swf file");
+            Console.WriteLine("\tcompress <sourcePath> [<targetPath>]");
+            Console.WriteLine("\t\tcompresses swf file");
             Console.WriteLine("help show this information");
         }
     }

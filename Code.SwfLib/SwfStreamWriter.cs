@@ -20,6 +20,10 @@ namespace Code.SwfLib {
             _baseStream = stream;
         }
 
+        public void Flush() {
+            _writer.Flush();
+        }
+
         public void WriteTagData(SwfTagData data) {
             var bytes = data.Data;
             if (bytes.Length >= 0x3f) {

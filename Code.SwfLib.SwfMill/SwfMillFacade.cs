@@ -20,11 +20,12 @@ namespace Code.SwfLib.SwfMill {
 
         public void Decompress(Stream source, Stream target) {
             var file = SwfFile.ReadFrom(source);
-            file.WriteTo(target);
+            file.WriteTo(target, false);
         }
 
-        public Stream Compress(Stream source, Stream target) {
-            throw new NotImplementedException();
+        public void Compress(Stream source, Stream target) {
+            var file = SwfFile.ReadFrom(source);
+            file.WriteTo(target, true);
         }
 
         public SwfFile ReadFromXml(XDocument doc) {

@@ -17,27 +17,54 @@ namespace Code.SwfLib {
             var file = new SwfFile();
             var reader = new SwfStreamReader(stream);
             file.FileInfo = reader.ReadSwfFileInfo();
-            reader = GetSWFStreamReader(file.FileInfo, stream);
+            reader = GetSwfStreamReader(file.FileInfo, stream);
             file.Header = reader.ReadSwfHeader();
             ReadTags(file, reader);
             return file;
         }
 
         public void WriteTo(Stream stream) {
-            var mem = new MemoryStream();
-            var writer = new SwfStreamWriter(mem);
-            writer.WriteSwfFileInfo(FileInfo);
-            writer.WriteSwfHeader(Header);
-            var bin = new SwfTagSerializer(this);
-            foreach (var tag in Tags) {
-                var tagData = bin.GetTagData(tag);
-                writer.WriteTagData(tagData);
+            WriteTo(stream, FileInfo.Format == "CWS");
+        }
+
+        public void WriteTo(Stream stream, bool compress) {
+            var outputWriter = new SwfStreamWriter(stream);
+
+            if (compress) {
+                var res = new MemoryStream();
+                WriteTo(res, false);
+                res.Seek(8, SeekOrigin.Begin);
+
+                var compressed = new MemoryStream();
+                SwfZip.Compress(res, compressed);
+
+                outputWriter.WriteSwfFileInfo(new SwfFileInfo {
+                    Format = "CWS",
+                    FileLength = (uint)(res.Length),
+                    Version = FileInfo.Version
+                });
+
+                compressed.WriteTo(outputWriter.BaseStream);
+            } else {
+                var mem = new MemoryStream();
+                var writer = new SwfStreamWriter(mem);
+                writer.WriteSwfHeader(Header);
+                var bin = new SwfTagSerializer(this);
+                foreach (var tag in Tags) {
+                    var tagData = bin.GetTagData(tag);
+                    writer.WriteTagData(tagData);
+                }
+                mem.Seek(0, SeekOrigin.Begin);
+
+                outputWriter.WriteSwfFileInfo(new SwfFileInfo {
+                    Format = "FWS",
+                    FileLength = (uint)(mem.Length + 8),
+                    Version = FileInfo.Version
+                });
+                mem.WriteTo(stream);
             }
-            mem.Seek(0, SeekOrigin.Begin);
-            FileInfo.Format = "FWS";
-            FileInfo.FileLength = (uint)mem.Length;
-            writer.WriteSwfFileInfo(FileInfo);
-            mem.WriteTo(stream);
+            outputWriter.Flush();
+            stream.Flush();
         }
 
         private static void ReadTags(SwfFile file, SwfStreamReader reader) {
@@ -50,24 +77,16 @@ namespace Code.SwfLib {
             }
         }
 
-        protected static SwfStreamReader GetSWFStreamReader(SwfFileInfo info, Stream stream) {
+        protected static SwfStreamReader GetSwfStreamReader(SwfFileInfo info, Stream stream) {
             switch (info.Format) {
                 case "CWS":
-                    MemoryStream mem = new MemoryStream();
+                    var mem = new MemoryStream();
                     SwfZip.Decompress(stream, mem);
-                    mem.Seek(8, SeekOrigin.Begin);
                     return new SwfStreamReader(mem);
                 case "FWS":
                     return new SwfStreamReader(stream);
                 default:
                     throw new NotSupportedException("Illegal file format");
-            }
-        }
-
-        public IEnumerable<SwfTagBase> IterateTagsRecursively() {
-            foreach (var tag in Tags) {
-                //TODO: recursion
-                yield return tag;
             }
         }
 
