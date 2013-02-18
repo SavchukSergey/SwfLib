@@ -28,8 +28,8 @@ namespace Code.SwfLib.SwfMill.Filters {
         public static BevelFilter FromXml(XElement xFilter) {
             var xCompositeSource = xFilter.Attribute("compositeSource");
 
-            var xShadowColor = xFilter.Element("shadowColor").Element("Color");
-            var xHighlightColor = xFilter.Element("highlightColor").Element("Color");
+            var xShadowColor = xFilter.RequiredElement("shadowColor").Element("Color");
+            var xHighlightColor = xFilter.RequiredElement("highlightColor").Element("Color");
 
             return new BevelFilter {
                 Angle = xFilter.RequiredDoubleAttribute("angle"),

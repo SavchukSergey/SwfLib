@@ -36,10 +36,8 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static ConvolutionFilter FromXml(XElement xFilter) {
-            var xMatrix = xFilter.Element("matrix");
+            var xMatrix = xFilter.RequiredElement("matrix");
             var xReserved = xFilter.Attribute("reserved");
-            var xClamp = xFilter.Attribute("clamp");
-            var xPreserveAlpha = xFilter.Attribute("preserveAlpha");
 
             var filter = new ConvolutionFilter {
                 Divisor = xFilter.RequiredDoubleAttribute("divisor"),
@@ -60,12 +58,12 @@ namespace Code.SwfLib.SwfMill.Filters {
                 }
             }
 
-            filter.DefaultColor = XColorRGBA.FromXml(xFilter.Element("color").Element("Color"));
+            filter.DefaultColor = XColorRGBA.FromXml(xFilter.RequiredElement("color").Element("Color"));
             if (xReserved != null) {
                 filter.Reserved = byte.Parse(xReserved.Value);
             }
-            filter.Clamp = CommonFormatter.ParseBool(xClamp.Value);
-            filter.PreserveAlpha = CommonFormatter.ParseBool(xPreserveAlpha.Value);
+            filter.Clamp = xFilter.RequiredBoolAttribute("clamp");
+            filter.PreserveAlpha = xFilter.RequiredBoolAttribute("preserveAlpha");
             return filter;
         }
 

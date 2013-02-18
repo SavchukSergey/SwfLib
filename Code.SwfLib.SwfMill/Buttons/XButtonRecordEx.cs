@@ -3,23 +3,20 @@ using Code.SwfLib.Buttons;
 using Code.SwfLib.Data;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Filters;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Buttons {
     public static class XButtonRecordEx {
 
         public static ButtonRecordEx FromXml(XElement xRecord) {
             var res = new ButtonRecordEx();
-            var xHitTest = xRecord.Attribute("hitTest");
-            var xDown = xRecord.Attribute("down");
-            var xOver = xRecord.Attribute("over");
-            var xUp = xRecord.Attribute("up");
             var xReserved = xRecord.Attribute("reserved");
             var xBlendMode = xRecord.Attribute("blendMode");
 
-            res.StateHitTest = CommonFormatter.ParseBool(xHitTest.Value);
-            res.StateDown = CommonFormatter.ParseBool(xDown.Value);
-            res.StateOver = CommonFormatter.ParseBool(xOver.Value);
-            res.StateUp = CommonFormatter.ParseBool(xUp.Value);
+            res.StateHitTest = xRecord.RequiredBoolAttribute("hitTest");
+            res.StateDown = xRecord.RequiredBoolAttribute("down");
+            res.StateOver = xRecord.RequiredBoolAttribute("over");
+            res.StateUp = xRecord.RequiredBoolAttribute("up");
             if (xReserved != null) {
                 res.Reserved = byte.Parse(xReserved.Value);
             }
@@ -30,16 +27,13 @@ namespace Code.SwfLib.SwfMill.Buttons {
 
             if (!res.IsEndButton) {
 
-                var xObjectId = xRecord.Attribute("objectID");
-                res.CharacterID = ushort.Parse(xObjectId.Value);
+                res.CharacterID = xRecord.RequiredUShortAttribute("objectID");
+                res.PlaceDepth = xRecord.RequiredUShortAttribute("depth");
 
-                var xDepth = xRecord.Attribute("depth");
-                res.PlaceDepth = ushort.Parse(xDepth.Value);
-
-                var xMatrix = xRecord.Element("transform").Element(XMatrix.TAG_NAME);
+                var xMatrix = xRecord.RequiredElement("transform").Element(XMatrix.TAG_NAME);
                 res.PlaceMatrix = XMatrix.FromXml(xMatrix);
 
-                var xColorTransform = xRecord.Element("colorTransform").Element("ColorTransform2");
+                var xColorTransform = xRecord.RequiredElement("colorTransform").Element("ColorTransform2");
                 res.ColorTransform = XColorTransformRGBA.FromXml(xColorTransform);
 
                 var xFilters = xRecord.Element("filters");
