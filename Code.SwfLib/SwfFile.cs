@@ -67,6 +67,54 @@ namespace Code.SwfLib {
             stream.Flush();
         }
 
+        public static void Compress(Stream source, Stream target) {
+            var reader = new SwfStreamReader(source);
+            var outputWriter = new SwfStreamWriter(target);
+
+            var fileInfo = reader.ReadSwfFileInfo();
+            var rest = reader.ReadRest();
+            if (fileInfo.Format == "FWS") {
+                var compressed = new MemoryStream();
+                SwfZip.Compress(new MemoryStream(rest), compressed);
+                outputWriter.WriteSwfFileInfo(new SwfFileInfo {
+                    Format = "CWS",
+                    FileLength = (uint)(rest.Length),
+                    Version = fileInfo.Version
+                });
+
+                outputWriter.WriteBytes(compressed.ToArray());
+            } else {
+                outputWriter.WriteSwfFileInfo(fileInfo);
+                outputWriter.WriteBytes(rest);
+            }
+            outputWriter.Flush();
+        }
+
+        public static void Decompress(Stream source, Stream target) {
+            var reader = new SwfStreamReader(source);
+            var outputWriter = new SwfStreamWriter(target);
+
+            var fileInfo = reader.ReadSwfFileInfo();
+            var rest = reader.ReadRest();
+            if (fileInfo.Format == "CWS") {
+                var uncompressed = new MemoryStream();
+                SwfZip.Decompress(new MemoryStream(rest), uncompressed);
+                outputWriter.WriteSwfFileInfo(new SwfFileInfo {
+                    Format = "FWS",
+                    FileLength = (uint)(uncompressed.Length),
+                    Version = fileInfo.Version
+                });
+
+                outputWriter.WriteBytes(uncompressed.ToArray());
+            } else if (fileInfo.Format == "FWS") {
+                outputWriter.WriteSwfFileInfo(fileInfo);
+                outputWriter.WriteBytes(rest);
+            } else {
+                throw new NotSupportedException("Illegal file format");
+            }
+            outputWriter.Flush();
+        }
+
         private static void ReadTags(SwfFile file, SwfStreamReader reader) {
             while (!reader.IsEOF) {
                 var ser = new SwfTagDeserializer(file);
