@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Code.SwfLib.SwfMill.Tests.Actions {
     [TestFixture]
     public class GotoFrameXActionTest : BaseXActionTest {
-        private const string _etalon = @"<GoToFrame frame='4660' />";
+        private const string _etalon = @"<GotoFrame frame='4660' />";
 
         [Test]
         public void ReadTest() {

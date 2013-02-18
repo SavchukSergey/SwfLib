@@ -18,7 +18,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         private static void RegisterSWF3() {
-            Register(ActionCode.GotoFrame, "GoToFrame");
+            Register(ActionCode.GotoFrame, "GotoFrame");
             Register(ActionCode.GetURL, "GetURL");
             Register(ActionCode.NextFrame, "NextFrame");
             Register(ActionCode.PreviousFrame, "PreviousFrame");
@@ -72,14 +72,14 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.GotoFrame2, "GotoExpression");
             Register(ActionCode.RemoveSprite, "RemoveSprite");
             Register(ActionCode.SetProperty, "SetProperty");
-            Register(ActionCode.SetTarget2, "SetTarget2");
+            Register(ActionCode.SetTarget2, "SetTargetDynamic");
             Register(ActionCode.StartDrag, "StartDrag");
             Register(ActionCode.WaitForFrame2, "WaitForFrame2");
             Register(ActionCode.CloneSprite, "CloneSprite");
             Register(ActionCode.EndDrag, "EndDrag");
 
             Register(ActionCode.GetTime, "GetTimer");
-            Register(ActionCode.RandomNumber, "RandomNumber");
+            Register(ActionCode.RandomNumber, "Random");
             Register(ActionCode.Trace, "Trace");
         }
 
@@ -103,7 +103,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.TargetPath, "TargetPath");
             Register(ActionCode.With, "With");
 
-            Register(ActionCode.ToNumber, "ToNumber");
+            Register(ActionCode.ToNumber, "DefineNumber");
             Register(ActionCode.ToString, "DefineString");
             Register(ActionCode.TypeOf, "TypeOf");
 

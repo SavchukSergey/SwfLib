@@ -58,7 +58,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionSetTarget action, XElement xAction) {
-            action.TargetName = xAction.RequiredStringAttribute("target");
+            action.TargetName = xAction.RequiredStringAttribute("label");
             return action;
         }
 

@@ -54,8 +54,8 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionSetTarget action, XElement arg) {
-            return new XElement("SetTarget",
-                 new XAttribute("target", action.TargetName));
+            arg.Add(new XAttribute("label", action.TargetName));
+            return arg;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionGoToLabel action, XElement arg) {
@@ -251,7 +251,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionSetTarget2 action, XElement param) {
-            return new XElement("SetTarget2");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionStartDrag action, XElement param) {
@@ -276,7 +276,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionRandomNumber action, XElement param) {
-            return new XElement("RandomNumber");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionTrace action, XElement param) {
@@ -384,7 +384,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionToNumber action, XElement arg) {
-            return new XElement("ToNumber");
+            return arg;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionToString action, XElement arg) {

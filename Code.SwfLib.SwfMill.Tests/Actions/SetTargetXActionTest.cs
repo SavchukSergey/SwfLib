@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Code.SwfLib.SwfMill.Tests.Actions {
     [TestFixture]
     public class SetTargetXActionTest : BaseXActionTest {
-        private const string _etalon = @"<SetTarget target='abcd' />";
+        private const string _etalon = @"<SetTarget label='abcd' />";
 
         [Test]
         public void ReadTest() {
