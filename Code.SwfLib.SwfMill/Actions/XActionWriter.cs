@@ -562,7 +562,8 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionUnknown action, XElement arg) {
             return new XElement("Unknown",
-                new XAttribute("type", action.ActionCode));
+                new XAttribute("type", (byte)action.ActionCode),
+                XBinary.ToXml(action.Data));
         }
 
         private static string FormatBranchOffset(short val) {

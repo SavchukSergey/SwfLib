@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Xml.Linq;
 using Code.SwfLib.Actions;
 using Code.SwfLib.SwfMill.Data;
@@ -10,8 +11,13 @@ namespace Code.SwfLib.SwfMill.Actions {
         private readonly ActionsFactory _factory = new ActionsFactory();
 
         public ActionBase Deserialize(XElement xAction) {
-            var actionCode = XActionNames.FromNodeName(xAction.Name.LocalName);
-            var action = _factory.Create(actionCode);
+            ActionBase action;
+            if (xAction.Name.LocalName != "Unknown") {
+                var actionCode = XActionNames.FromNodeName(xAction.Name.LocalName);
+                action = _factory.Create(actionCode);
+            } else {
+                action = new ActionUnknown((ActionCode)xAction.RequiredByteAttribute("type"));
+            }
             action.AcceptVisitor(this, xAction);
             return action;
         }
@@ -563,6 +569,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionUnknown action, XElement xAction) {
+            action.Data = XBinary.FromXml(xAction.Element("data"));
             return action;
         }
 

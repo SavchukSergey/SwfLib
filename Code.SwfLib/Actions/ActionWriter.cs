@@ -551,6 +551,7 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionUnknown action, SwfStreamWriter writer) {
+            writer.WriteBytes(action.Data);
             return null;
         }
 

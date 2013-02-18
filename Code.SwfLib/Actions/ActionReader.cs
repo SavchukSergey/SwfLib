@@ -561,6 +561,7 @@ namespace Code.SwfLib.Actions {
         #endregion
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionUnknown action, ushort length) {
+            action.Data = _reader.ReadBytes(length);
             return action;
         }
 
