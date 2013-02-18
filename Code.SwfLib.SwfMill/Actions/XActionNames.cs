@@ -28,7 +28,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.StopSounds, "StopSounds");
             Register(ActionCode.WaitForFrame, "WaitForFrame");
             Register(ActionCode.SetTarget, "SetTarget");
-            Register(ActionCode.GoToLabel, "GoToLabel");
+            Register(ActionCode.GoToLabel, "GotoLabel");
         }
 
         private static void RegisterSWF4() {
@@ -75,7 +75,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.SetTarget2, "SetTargetDynamic");
             Register(ActionCode.StartDrag, "StartDrag");
             Register(ActionCode.WaitForFrame2, "WaitForFrame2");
-            Register(ActionCode.CloneSprite, "CloneSprite");
+            Register(ActionCode.CloneSprite, "DuplicateSprite");
             Register(ActionCode.EndDrag, "EndDrag");
 
             Register(ActionCode.GetTime, "GetTimer");
@@ -111,7 +111,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.Less2, "LessThanTyped");
             Register(ActionCode.Modulo, "Modulo");
 
-            Register(ActionCode.BitAnd, "BitAnd");
+            Register(ActionCode.BitAnd, "AND");
             Register(ActionCode.BitLShift, "BitLShift");
             Register(ActionCode.BitOr, "BitOr");
             Register(ActionCode.BitRShift, "BitRShift");

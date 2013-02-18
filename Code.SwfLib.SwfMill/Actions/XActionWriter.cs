@@ -264,7 +264,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionCloneSprite action, XElement param) {
-            return new XElement("CloneSprite");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionEndDrag action, XElement param) {

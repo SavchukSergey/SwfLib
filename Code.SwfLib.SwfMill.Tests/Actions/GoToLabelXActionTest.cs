@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Code.SwfLib.SwfMill.Tests.Actions {
     [TestFixture]
     public class GoToLabelXActionTest : BaseXActionTest {
-        private const string _etalon = @"<GoToLabel label='abcd' />";
+        private const string _etalon = @"<GotoLabel label='abcd' />";
 
         [Test]
         public void ReadTest() {
