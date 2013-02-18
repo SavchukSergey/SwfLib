@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Code.SwfLib.Tags;
 
 namespace Code.SwfLib {
     public class SwfStreamReader : ISwfStreamReader {
@@ -22,16 +21,6 @@ namespace Code.SwfLib {
         public SwfStreamReader(Stream stream) {
             _reader = new BinaryReader(stream);
             _baseStream = stream;
-        }
-
-
-        public SwfTagData ReadTagData() {
-            ushort typeAndSize = ReadUInt16();
-            var type = (SwfTagType)(typeAndSize >> 6);
-            int shortSize = typeAndSize & 0x3f;
-            int size = shortSize < 0x3f ? shortSize : ReadInt32();
-            byte[] tagData = ReadBytes(size);
-            return new SwfTagData { Type = type, Data = tagData };
         }
 
         //TODO: Why unsigned

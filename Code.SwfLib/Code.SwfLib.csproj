@@ -125,6 +125,7 @@
     <Compile Include="Shapes\FillStyles\BitmapFillStyleRGBA.cs" />
     <Compile Include="Shapes\FillStyles\SolidFillStyleRGB.cs" />
     <Compile Include="Shapes\FillStyles\SolidFillStyleRGBA.cs" />
+    <Compile Include="Tags\TagStreamExt.cs" />
     <Compile Include="Utils\UnsignedBitsCount.cs" />
     <Compile Include="Buttons\ButtonCondition.cs" />
     <Compile Include="Buttons\ButtonRecord.cs" />

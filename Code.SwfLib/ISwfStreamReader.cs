@@ -1,12 +1,10 @@
 ﻿using System.IO;
-using Code.SwfLib.Tags;
 
 namespace Code.SwfLib {
     public interface ISwfStreamReader {
         bool IsEOF { get; }
         Stream BaseStream { get; }
         long BytesLeft { get; }
-        SwfTagData ReadTagData();
         double ReadFixedPoint8();
         double ReadFixed();
         double ReadFixedPoint16(uint bits);
