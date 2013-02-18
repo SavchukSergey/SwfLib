@@ -9,6 +9,12 @@ namespace Code.SwfLib.SwfMill.Utils {
             throw new SwfMillXmlException(string.Format("{0} is missing required '{1}' attribute. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
+        public static XElement RequiredElement(this XElement node, string elementName) {
+            var xChild = node.Element(elementName);
+            if (xChild != null) return xChild;
+            throw new SwfMillXmlException(string.Format("{0} is missing required '{1}' element. Path: {2}", node.Name, elementName, BuildNodePath(node)));
+        }
+
         public static string RequiredStringAttribute(this XElement node, string attributeName) {
             return node.RequiredAttribute(attributeName);
         }
@@ -18,6 +24,13 @@ namespace Code.SwfLib.SwfMill.Utils {
             double val;
             if (double.TryParse(str, out val)) return val;
             throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not a double. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
+        }
+
+        public static float RequiredFloatAttribute(this XElement node, string attributeName) {
+            var str = node.RequiredAttribute(attributeName);
+            float val;
+            if (float.TryParse(str, out val)) return val;
+            throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not a float. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
         public static uint RequiredUIntAttribute(this XElement node, string attributeName) {

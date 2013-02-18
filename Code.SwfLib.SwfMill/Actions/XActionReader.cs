@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Xml.Linq;
 using Code.SwfLib.Actions;
 using Code.SwfLib.SwfMill.Data;
@@ -142,15 +141,14 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionPush action, XElement xAction) {
-            var xItems = xAction.Element("items");
+            var xItems = xAction.RequiredElement("items");
             foreach (var xItem in xItems.Elements()) {
-                var xValue = xItem.Attribute("value");
                 switch (xItem.Name.LocalName) {
                     case "StackString":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.String, String = xItem.RequiredStringAttribute("value") });
                         break;
                     case "StackFloat":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Float, Float = float.Parse(xValue.Value) });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Float, Float = xItem.RequiredFloatAttribute("value") });
                         break;
                     case "StackNull":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Null });
@@ -208,12 +206,12 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionIf action, XElement xAction) {
-            action.BranchOffset = ParseBranchOffset(xAction.Attribute("byteOffset").Value);
+            action.BranchOffset = ParseBranchOffset(xAction.RequiredStringAttribute("byteOffset"));
             return action;
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionJump action, XElement xAction) {
-            action.BranchOffset = ParseBranchOffset(xAction.Attribute("byteOffset").Value);
+            action.BranchOffset = ParseBranchOffset(xAction.RequiredStringAttribute("byteOffset"));
             return action;
         }
 
@@ -297,7 +295,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionConstantPool action, XElement xAction) {
-            var xStrings = xAction.Element("strings");
+            var xStrings = xAction.RequiredElement("strings");
             foreach (var xString in xStrings.Elements()) {
                 action.ConstantPool.Add(xString.RequiredStringAttribute("value"));
             }
@@ -305,7 +303,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionDefineFunction action, XElement xAction) {
-            var xArgs = xAction.Element("args");
+            var xArgs = xAction.RequiredElement("args");
             var xActions = xAction.Element("actions");
 
             action.Name = xAction.RequiredStringAttribute("name");
