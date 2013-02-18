@@ -372,7 +372,12 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionWith action, XElement xAction) {
-            action.Size = xAction.RequiredUShortAttribute("size");
+            var xActions = xAction.Element("actions");
+
+            if (xActions != null) {
+                XAction.FromXml(xActions, action.Actions);
+            }
+
             return action;
         }
 

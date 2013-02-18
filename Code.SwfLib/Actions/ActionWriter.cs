@@ -376,8 +376,15 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionWith action, SwfStreamWriter writer) {
-            writer.WriteUInt16(action.Size);
-            return null;
+            var awmem = new MemoryStream();
+            var aw = new ActionWriter(new SwfStreamWriter(awmem));
+            foreach (var subaction in action.Actions) {
+                aw.WriteAction(subaction);
+            }
+
+            writer.WriteUInt16((ushort)awmem.Length);
+
+            return awmem.ToArray();
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionToNumber action, SwfStreamWriter writer) {

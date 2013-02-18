@@ -4,7 +4,11 @@ using NUnit.Framework;
 namespace Code.SwfLib.SwfMill.Tests.Actions {
     [TestFixture]
     public class WithXActionTest : BaseXActionTest {
-        private const string _etalon = @"<With size='1' />";
+        private const string _etalon = @"<With>
+    <actions>
+        <GetTimer />
+    </actions>
+</With>";
 
         [Test]
         public void ReadTest() {
@@ -13,7 +17,11 @@ namespace Code.SwfLib.SwfMill.Tests.Actions {
 
         [Test]
         public void WriteTest() {
-            WriteAction(new ActionWith { Size = 1 }, _etalon);
+            WriteAction(new ActionWith {
+                Actions = {
+                    new ActionGetTime()
+                }
+            }, _etalon);
         }
     }
 }

@@ -378,9 +378,13 @@ namespace Code.SwfLib.SwfMill.Actions {
             return arg;
         }
 
-        XElement IActionVisitor<XElement, XElement>.Visit(ActionWith action, XElement arg) {
-            arg.Add(new XAttribute("size", action.Size));
-            return arg;
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionWith action, XElement res) {
+            var xActions = new XElement("actions");
+            foreach (var subaction in action.Actions) {
+                xActions.Add(Serialize(subaction));
+            }
+            res.Add(xActions);
+            return res;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionToNumber action, XElement arg) {
@@ -485,8 +489,7 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         #region SWF 7
 
-        XElement IActionVisitor<XElement, XElement>.Visit(ActionDefineFunction2 action, XElement param) {
-            var res = new XElement(XActionNames.FromAction(action));
+        XElement IActionVisitor<XElement, XElement>.Visit(ActionDefineFunction2 action, XElement res) {
             res.Add(new XAttribute("name", action.Name ?? ""));
             res.Add(new XAttribute("argc", action.Parameters.Count));
             res.Add(new XAttribute("regc", action.RegisterCount));

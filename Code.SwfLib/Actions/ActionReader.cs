@@ -379,7 +379,13 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionWith action, ushort arg) {
-            action.Size = _reader.ReadUInt16();
+            var codeSize = _reader.ReadUInt16();
+            var pos = _reader.BaseStream.Position;
+            while ((_reader.BaseStream.Position - pos) < codeSize) {
+                var subaction = ReadAction();
+                action.Actions.Add(subaction);
+            }
+
             return action;
         }
 
