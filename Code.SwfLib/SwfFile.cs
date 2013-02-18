@@ -33,18 +33,8 @@ namespace Code.SwfLib {
             if (compress) {
                 var res = new MemoryStream();
                 WriteTo(res, false);
-                res.Seek(8, SeekOrigin.Begin);
-
-                var compressed = new MemoryStream();
-                SwfZip.Compress(res, compressed);
-
-                outputWriter.WriteSwfFileInfo(new SwfFileInfo {
-                    Format = "CWS",
-                    FileLength = (uint)(res.Length),
-                    Version = FileInfo.Version
-                });
-
-                compressed.WriteTo(outputWriter.BaseStream);
+                res.Seek(0, SeekOrigin.Begin);
+                Compress(res, stream);
             } else {
                 var mem = new MemoryStream();
                 var writer = new SwfStreamWriter(mem);

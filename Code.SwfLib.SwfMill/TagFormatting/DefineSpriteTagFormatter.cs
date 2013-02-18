@@ -38,8 +38,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting {
         }
 
         protected override void FormatTagElement(DefineSpriteTag tag, XElement xTag) {
-            xTag.Add(new XAttribute(XName.Get("frames"), tag.FramesCount));
-            xTag.Add(new XElement(XName.Get("tags"), tag.Tags.Select(BuildTagXml)));
+            xTag.Add(new XAttribute("frames", tag.FramesCount));
+            xTag.Add(new XElement("tags", tag.Tags.Select(BuildTagXml)));
         }
 
         private static void ReadTags(DefineSpriteTag tag, XElement tagsElement) {

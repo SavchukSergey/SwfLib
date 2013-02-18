@@ -746,7 +746,7 @@ namespace Code.SwfLib {
             writer.WriteUInt16(tag.SpriteID);
             writer.WriteUInt16(tag.FramesCount);
             foreach (var subtag in tag.Tags) {
-                SwfTagData subTagData = GetTagData(subtag);
+                var subTagData = GetTagData(subtag);
                 writer.WriteTagData(subTagData);
             }
             return null;
@@ -773,6 +773,7 @@ namespace Code.SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(UnknownTag tag, SwfStreamWriter writer) {
+            writer.WriteBytes(tag.Data);
             return null;
         }
     }
