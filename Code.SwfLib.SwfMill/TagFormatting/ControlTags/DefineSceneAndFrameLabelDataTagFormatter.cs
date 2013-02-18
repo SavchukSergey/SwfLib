@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.SwfMill.Utils;
 using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
@@ -30,11 +31,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 case "scenes":
                     var xScenes = element;
                     foreach (var xScene in xScenes.Elements()) {
-                        var xOffset = xScene.Attribute("offset");
-                        var xName = xScene.Attribute("name");
                         var scene = new SceneOffsetData {
-                            Offset = uint.Parse(xOffset.Value),
-                            Name = xName.Value
+                            Offset = xScene.RequiredUIntAttribute("offset", "scenes"),
+                            Name = xScene.RequiredStringAttribute("name", "scenes")
                         };
                         tag.Scenes.Add(scene);
                     }
@@ -42,11 +41,9 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                 case "frames":
                     var xFrames = element;
                     foreach (var xFrame in xFrames.Elements()) {
-                        var xNumber = xFrame.Attribute("number");
-                        var xLabel = xFrame.Attribute("label");
-                        var frame = new FrameLabelData() {
-                            FrameNumber = uint.Parse(xNumber.Value),
-                            Label = xLabel.Value
+                        var frame = new FrameLabelData {
+                            FrameNumber = xFrame.RequiredUIntAttribute("number", "frames"),
+                            Label = xFrame.RequiredStringAttribute("label",  "frames")
                         };
                         tag.Frames.Add(frame);
                     }

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<DefineSceneAndFrameLabelData>
+  <scenes>
+    <Scene name="abc" offset="20" />
+    <Scene name="abcdef" offset="30" />
+  </scenes>
+  <frames>
+    <Frame label="qwe" number="2" />
+    <Frame label="qwerty" number="5" />
+  </frames>
+</DefineSceneAndFrameLabelData>

@@ -10,7 +10,7 @@ namespace Code.SwfLib.SwfMill.Tests {
         [Test]
         [Ignore]
         public void SwfToXmlTest() {
-            var source = this.GetType().Assembly.GetManifestResourceStream("Code.SwfLib.SwfMill.Tests.FlashTest.swf");
+            var source = GetType().Assembly.GetManifestResourceStream("Code.SwfLib.SwfMill.Tests.FlashTest.swf");
             var file = SwfFile.ReadFrom(source);
             var doc = new SwfMillFacade().ConvertToXml(file);
             doc.Declaration = new XDeclaration("1", "utf-8", "yes");

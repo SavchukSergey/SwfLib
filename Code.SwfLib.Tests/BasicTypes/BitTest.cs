@@ -103,7 +103,7 @@ namespace Code.SwfLib.Tests.BasicTypes {
 
             const int bits = 10;
 
-            Assert.AreEqual(0x2ab, reader.ReadUnsignedBits((uint)bits), "Value");
+            Assert.AreEqual(0x2ab, reader.ReadUnsignedBits(bits), "Value");
 
             Assert.AreEqual(false, reader.ReadBit(), "Bit 10");
             Assert.AreEqual(false, reader.ReadBit(), "Bit 11");

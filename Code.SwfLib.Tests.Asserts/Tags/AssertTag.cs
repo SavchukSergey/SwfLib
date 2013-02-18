@@ -1,4 +1,6 @@
-﻿using Code.SwfLib.Tags.ControlTags;
+﻿using System.Collections.Generic;
+using Code.SwfLib.Data;
+using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tests.Asserts.Shapes;
@@ -69,6 +71,36 @@ namespace Code.SwfLib.Tests.Asserts.Tags {
         public static void AreEqual(SetBackgroundColorTag expected, SetBackgroundColorTag actual) {
             AssertColors.AreEqual(expected.Color, actual.Color, "Color");
             Assert.AreEqual(expected.RestData, actual.RestData);
+        }
+
+        public static void AreEqual(DefineSceneAndFrameLabelDataTag expected, DefineSceneAndFrameLabelDataTag actual, string message) {
+            AreEqual(expected.Scenes, actual.Scenes, message + ".Scenes");
+            AreEqual(expected.Frames, actual.Frames, message + ".Frames");
+            Assert.AreEqual(expected.RestData, actual.RestData);
+        }
+
+        public static void AreEqual(IList<SceneOffsetData> expected, IList<SceneOffsetData> actual, string message) {
+            Assert.AreEqual(expected.Count, actual.Count, message + ".Count");
+            for (var i = 0; i < expected.Count; i++) {
+                AreEqual(expected[i], actual[i], message + "[" + i + "]");
+            }
+        }
+
+        public static void AreEqual(IList<FrameLabelData> expected, IList<FrameLabelData> actual, string message) {
+            Assert.AreEqual(expected.Count, actual.Count, message + ".Count");
+            for (var i = 0; i < expected.Count; i++) {
+                AreEqual(expected[i], actual[i], message + "[" + i + "]");
+            }
+        }
+
+        public static void AreEqual(SceneOffsetData expected, SceneOffsetData actual, string message) {
+            Assert.AreEqual(expected.Name, actual.Name, message + ".Name");
+            Assert.AreEqual(expected.Offset, actual.Offset, message + ".Offset");
+        }
+
+        public static void AreEqual(FrameLabelData expected, FrameLabelData actual, string message) {
+            Assert.AreEqual(expected.Label, actual.Label, message + ".Label");
+            Assert.AreEqual(expected.FrameNumber, actual.FrameNumber, message + ".FrameNumber");
         }
     }
 }

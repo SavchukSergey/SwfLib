@@ -48,7 +48,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
 
         public static FocalGradientFillStyleRGBA FromXmlRGBA(XElement xFillStyle) {
             var res = new FocalGradientFillStyleRGBA {
-                Gradient = new FocalGradientRGBA() {
+                Gradient = new FocalGradientRGBA {
                     SpreadMode = GetSpreadMode(xFillStyle),
                     InterpolationMode = GetInterpolationMode(xFillStyle),
                     FocalPoint = GetFocalPoint(xFillStyle)
