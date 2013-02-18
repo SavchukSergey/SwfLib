@@ -2,6 +2,7 @@
 using System.Xml.Linq;
 using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public class XLineStyleEx {
@@ -33,27 +34,21 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         public static LineStyleEx FromXml(XElement xLineStyle) {
-            var xWidth = xLineStyle.Attribute("width");
             var xStartCapStyle = xLineStyle.Attribute("startCapStyle");
             var xJointStyle = xLineStyle.Attribute("jointStyle");
-            var xHasFill = xLineStyle.Attribute("hasFill");
-            var xNoHScale = xLineStyle.Attribute("noHScale");
-            var xNoVScale = xLineStyle.Attribute("noVScale");
-            var xPixelHinting = xLineStyle.Attribute("pixelHinting");
-            var xNoClose = xLineStyle.Attribute("noClose");
             var xEndCapStyle = xLineStyle.Attribute("endCapStyle");
 
             var xReserved = xLineStyle.Attribute("reserved");
 
             var res = new LineStyleEx {
-                Width = ushort.Parse(xWidth.Value),
+                Width = xLineStyle.RequiredUShortAttribute("width"),
                 StartCapStyle = (CapStyle)byte.Parse(xStartCapStyle.Value),
                 JoinStyle = (JoinStyle)byte.Parse(xJointStyle.Value),
-                HasFill = CommonFormatter.ParseBool(xHasFill.Value),
-                NoHScale = CommonFormatter.ParseBool(xNoHScale.Value),
-                NoVScale = CommonFormatter.ParseBool(xNoVScale.Value),
-                PixelHinting = CommonFormatter.ParseBool(xPixelHinting.Value),
-                NoClose = CommonFormatter.ParseBool(xNoClose.Value),
+                HasFill = xLineStyle.RequiredBoolAttribute("hasFill"),
+                NoHScale = xLineStyle.RequiredBoolAttribute("noHScale"),
+                NoVScale = xLineStyle.RequiredBoolAttribute("noVScale"),
+                PixelHinting = xLineStyle.RequiredBoolAttribute("pixelHinting"),
+                NoClose = xLineStyle.RequiredBoolAttribute("noClose"),
                 EndCapStyle = (CapStyle)byte.Parse(xEndCapStyle.Value)
             };
 
@@ -62,8 +57,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
             }
 
             if (res.JoinStyle == JoinStyle.Miter) {
-                var xMiterFactor = xLineStyle.Attribute("miterFactor");
-                res.MilterLimitFactor = CommonFormatter.ParseDouble(xMiterFactor.Value);
+                res.MilterLimitFactor = xLineStyle.RequiredDoubleAttribute("miterFactor");
             }
 
             var xFillStyle = xLineStyle.Element("fillStyle");
