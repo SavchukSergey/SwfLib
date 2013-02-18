@@ -1,6 +1,6 @@
 ﻿using System;
+using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.Shapes.Records;
-using Code.SwfLib.Tags.ShapeTags;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests.Asserts.Shapes {
@@ -55,6 +55,11 @@ namespace Code.SwfLib.Tests.Asserts.Shapes {
         }
 
         public static void AreEqual(LineStyleRGB expected, LineStyleRGB actual, string message) {
+            Assert.AreEqual(expected.Width, actual.Width, "Width");
+            AssertColors.AreEqual(expected.Color, actual.Color, "Color");
+        }
+
+        public static void AreEqual(LineStyleRGBA expected, LineStyleRGBA actual, string message) {
             Assert.AreEqual(expected.Width, actual.Width, "Width");
             AssertColors.AreEqual(expected.Color, actual.Color, "Color");
         }

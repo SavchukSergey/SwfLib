@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Tags.ShapeTags {
+﻿namespace Code.SwfLib.Shapes.LineStyles {
     public enum JoinStyle {
         Round = 0,
         Bevel = 1,

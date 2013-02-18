@@ -36,6 +36,13 @@ namespace Code.SwfLib.SwfMill.Utils {
             throw new InvalidOperationException(message + "'s attribute " + attributeName + " is not an integer");
         }
 
+        public static ushort RequiredUShortAttribute(this XElement node, string attributeName, string message) {
+            var str = node.RequiredAttribute(attributeName, message);
+            ushort val;
+            if (ushort.TryParse(str, out val)) return val;
+            throw new InvalidOperationException(message + "'s attribute " + attributeName + " is not an unsigned short integer");
+        }
+
         public static bool RequiredBoolAttribute(this XElement node, string attributeName, string message) {
             var str = node.RequiredAttribute(attributeName, message);
             //TODO: try parse instead of strict parse

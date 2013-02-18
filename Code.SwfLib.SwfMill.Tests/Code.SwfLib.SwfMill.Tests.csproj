@@ -101,6 +101,8 @@
     <Compile Include="Filters\XConvolutionFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Resources\TagFormatting\FontTags\DefineFontAlignZones.xml" />
+    <Compile Include="Shapes\XLineStyleRGBATest.cs" />
+    <Compile Include="Shapes\XLineStyleRGBTest.cs" />
     <Compile Include="SwfMillFacadeTest.cs" />
     <Compile Include="TagFormatterFactoryTest.cs" />
     <Compile Include="TagFormatting\BaseTagFormattingTest.cs" />
@@ -155,6 +157,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\TagFormatting\ControlTags\DefineSceneAndFrameLabelDataTag.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

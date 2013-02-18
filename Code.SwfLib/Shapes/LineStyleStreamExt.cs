@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Code.SwfLib.Shapes.LineStyles;
-using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.Shapes {
     public static class LineStyleStreamExt {

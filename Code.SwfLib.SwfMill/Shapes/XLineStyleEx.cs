@@ -2,7 +2,6 @@
 using System.Xml.Linq;
 using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public class XLineStyleEx {

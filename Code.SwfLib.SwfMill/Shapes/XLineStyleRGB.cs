@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
+using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.Tags.ShapeTags;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public class XLineStyleRGB {
@@ -12,10 +13,10 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         public static LineStyleRGB FromXml(XElement xLineStyle) {
-            var xWidth = xLineStyle.Attribute("width");
+            const string node = "lineStyle";
             var xColor = xLineStyle.Element("color").Element("Color");
             return new LineStyleRGB {
-                Width = ushort.Parse(xWidth.Value),
+                Width = xLineStyle.RequiredUShortAttribute("width", node),
                 Color = XColorRGB.FromXml(xColor)
             };
         }

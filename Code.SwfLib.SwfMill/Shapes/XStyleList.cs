@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using Code.SwfLib.Shapes.FillStyles;
-using Code.SwfLib.Tags.ShapeTags;
+using Code.SwfLib.Shapes.LineStyles;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public static class XStyleList {
