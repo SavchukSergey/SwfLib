@@ -83,6 +83,7 @@
     <Compile Include="Bin2BinTests.cs" />
     <Compile Include="Filters\BaseFilterTest.cs" />
     <Compile Include="Filters\BlurFilterTest.cs" />
+    <Compile Include="Filters\GlowFilterTest.cs" />
     <Compile Include="Filters\DropShadowFilterTest.cs" />
     <Compile Include="Filters\FilterFactoryTest.cs" />
     <Compile Include="Tags\ControlTags\MetadataTagTest.cs" />
