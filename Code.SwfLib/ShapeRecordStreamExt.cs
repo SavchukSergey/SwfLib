@@ -41,7 +41,7 @@ namespace Code.SwfLib {
         private static ShapeRecordRGBAReader _shapeRecordRGBAReader = new ShapeRecordRGBAReader();
         private static ShapeRecordExReader _shapeRecorExReader = new ShapeRecordExReader();
 
-        public static void ReadToShapeRecordsRGB(this SwfStreamReader reader, IList<IShapeRecordRGB> shapeRecords) {
+        public static void ReadToShapeRecordsRGB(this ISwfStreamReader reader, IList<IShapeRecordRGB> shapeRecords) {
             var fillStyleBits = reader.ReadUnsignedBits(4);
             var lineStyleBits = reader.ReadUnsignedBits(4);
             reader.AlignToByte();
@@ -52,7 +52,7 @@ namespace Code.SwfLib {
             } while (!(record is EndShapeRecord));
         }
 
-        public static void ReadToShapeRecordsRGBA(this SwfStreamReader reader, IList<IShapeRecordRGBA> shapeRecords) {
+        public static void ReadToShapeRecordsRGBA(this ISwfStreamReader reader, IList<IShapeRecordRGBA> shapeRecords) {
             var fillStyleBits = reader.ReadUnsignedBits(4);
             var lineStyleBits = reader.ReadUnsignedBits(4);
             reader.AlignToByte();
@@ -63,7 +63,7 @@ namespace Code.SwfLib {
             } while (!(record is EndShapeRecord));
         }
 
-        public static void ReadToShapeRecordsEx(this SwfStreamReader reader, IList<IShapeRecordEx> shapeRecords) {
+        public static void ReadToShapeRecordsEx(this ISwfStreamReader reader, IList<IShapeRecordEx> shapeRecords) {
             var fillStyleBits = reader.ReadUnsignedBits(4);
             var lineStyleBits = reader.ReadUnsignedBits(4);
             reader.AlignToByte();

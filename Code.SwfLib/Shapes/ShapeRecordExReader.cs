@@ -6,11 +6,11 @@ namespace Code.SwfLib.Shapes {
             return new StyleChangeShapeRecordEx();
         }
 
-        protected override void ReadFillStyles(SwfStreamReader reader, StyleChangeShapeRecordEx record, bool allowBigArray) {
+        protected override void ReadFillStyles(ISwfStreamReader reader, StyleChangeShapeRecordEx record, bool allowBigArray) {
             reader.ReadToFillStylesRGBA(record.FillStyles);
         }
 
-        protected override void ReadLineStyles(SwfStreamReader reader, StyleChangeShapeRecordEx record, bool allowBigArray) {
+        protected override void ReadLineStyles(ISwfStreamReader reader, StyleChangeShapeRecordEx record, bool allowBigArray) {
             reader.ReadToLineStylesEx(record.LineStyles);
         }
 

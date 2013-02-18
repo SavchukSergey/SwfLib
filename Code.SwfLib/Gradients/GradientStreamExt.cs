@@ -5,7 +5,7 @@ namespace Code.SwfLib.Gradients {
 
         #region Linear Gradient
 
-        public static GradientRGB ReadGradientRGB(this SwfStreamReader reader) {
+        public static GradientRGB ReadGradientRGB(this ISwfStreamReader reader) {
             var gradient = new GradientRGB {
                 SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
                 InterpolationMode = (InterpolationMode)reader.ReadUnsignedBits(2)
@@ -18,7 +18,7 @@ namespace Code.SwfLib.Gradients {
             return gradient;
         }
 
-        public static GradientRGBA ReadGradientRGBA(this SwfStreamReader reader) {
+        public static GradientRGBA ReadGradientRGBA(this ISwfStreamReader reader) {
             var gradient = new GradientRGBA {
                 SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
                 InterpolationMode = (InterpolationMode)reader.ReadUnsignedBits(2)
@@ -61,7 +61,7 @@ namespace Code.SwfLib.Gradients {
 
         #region Focal gradients
 
-        public static FocalGradientRGB ReadFocalGradientRGB(this SwfStreamReader reader) {
+        public static FocalGradientRGB ReadFocalGradientRGB(this ISwfStreamReader reader) {
             var gradient = new FocalGradientRGB {
                 SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
                 InterpolationMode = (InterpolationMode)reader.ReadUnsignedBits(2)
@@ -75,7 +75,7 @@ namespace Code.SwfLib.Gradients {
             return gradient;
         }
 
-        public static FocalGradientRGBA ReadFocalGradientRGBA(this SwfStreamReader reader) {
+        public static FocalGradientRGBA ReadFocalGradientRGBA(this ISwfStreamReader reader) {
             var gradient = new FocalGradientRGBA {
                 SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
                 InterpolationMode = (InterpolationMode)reader.ReadUnsignedBits(2)
@@ -121,7 +121,7 @@ namespace Code.SwfLib.Gradients {
 
         #region Gradient records
 
-        public static GradientRecordRGB ReadGradientRecordRGB(this SwfStreamReader reader) {
+        public static GradientRecordRGB ReadGradientRecordRGB(this ISwfStreamReader reader) {
             var record = new GradientRecordRGB {
                 Ratio = reader.ReadByte(),
                 Color = reader.ReadRGB()
@@ -129,7 +129,7 @@ namespace Code.SwfLib.Gradients {
             return record;
         }
 
-        public static GradientRecordRGBA ReadGradientRecordRGBA(this SwfStreamReader reader) {
+        public static GradientRecordRGBA ReadGradientRecordRGBA(this ISwfStreamReader reader) {
             var record = new GradientRecordRGBA {
                 Ratio = reader.ReadByte(),
                 Color = reader.ReadRGBA()

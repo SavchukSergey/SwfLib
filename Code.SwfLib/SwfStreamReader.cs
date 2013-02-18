@@ -4,7 +4,7 @@ using System.Text;
 using Code.SwfLib.Tags;
 
 namespace Code.SwfLib {
-    public class SwfStreamReader {
+    public class SwfStreamReader : ISwfStreamReader {
 
         private readonly BinaryReader _reader;
         private readonly Stream _baseStream;
@@ -140,7 +140,7 @@ namespace Code.SwfLib {
             ulong hi = ReadUInt32();
             ulong low = ReadUInt32();
             var l = (hi << 32) | low;
-            return BitConverter.Int64BitsToDouble((long) l);
+            return BitConverter.Int64BitsToDouble((long)l);
         }
 
         public float ReadShortFloat() {

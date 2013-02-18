@@ -4,7 +4,7 @@ using Code.SwfLib.Utils;
 namespace Code.SwfLib {
     public static class ColorTransformStreamExt {
 
-        public static ColorTransformRGB ReadColorTransformRGB(this SwfStreamReader reader) {
+        public static ColorTransformRGB ReadColorTransformRGB(this ISwfStreamReader reader) {
             ColorTransformRGB transform;
             bool hasAddTerms = reader.ReadBit();
             bool hasMultTerms = reader.ReadBit();
@@ -68,13 +68,13 @@ namespace Code.SwfLib {
             writer.FlushBits();
         }
 
-        public static ColorTransformRGBA ReadColorTransformRGBA(this SwfStreamReader reader) {
+        public static ColorTransformRGBA ReadColorTransformRGBA(this ISwfStreamReader reader) {
             ColorTransformRGBA transform;
             reader.ReadColorTransformRGBA(out transform);
             return transform;
         }
 
-        public static void ReadColorTransformRGBA(this SwfStreamReader reader, out ColorTransformRGBA transform) {
+        public static void ReadColorTransformRGBA(this ISwfStreamReader reader, out ColorTransformRGBA transform) {
             bool hasAddTerms = reader.ReadBit();
             bool hasMultTerms = reader.ReadBit();
             var bits = reader.ReadUnsignedBits(4);

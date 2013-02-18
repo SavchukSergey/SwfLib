@@ -7,11 +7,11 @@ namespace Code.SwfLib.Shapes {
             return new StyleChangeShapeRecordRGB();
         }
 
-        protected override void ReadFillStyles(SwfStreamReader reader, StyleChangeShapeRecordRGB record, bool allowBigArray) {
+        protected override void ReadFillStyles(ISwfStreamReader reader, StyleChangeShapeRecordRGB record, bool allowBigArray) {
             reader.ReadToFillStylesRGB(record.FillStyles, allowBigArray);
         }
 
-        protected override void ReadLineStyles(SwfStreamReader reader, StyleChangeShapeRecordRGB record, bool allowBigArray) {
+        protected override void ReadLineStyles(ISwfStreamReader reader, StyleChangeShapeRecordRGB record, bool allowBigArray) {
             reader.ReadToLineStylesRGB(record.LineStyles, allowBigArray);
         }
 

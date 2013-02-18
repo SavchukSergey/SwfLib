@@ -15,7 +15,7 @@ namespace Code.SwfLib {
 
         public static SwfFile ReadFrom(Stream stream) {
             var file = new SwfFile();
-            var reader = new SwfStreamReader(stream);
+            ISwfStreamReader reader = new SwfStreamReader(stream);
             file.FileInfo = reader.ReadSwfFileInfo();
             reader = GetSwfStreamReader(file.FileInfo, stream);
             file.Header = reader.ReadSwfHeader();
@@ -105,7 +105,7 @@ namespace Code.SwfLib {
             outputWriter.Flush();
         }
 
-        private static void ReadTags(SwfFile file, SwfStreamReader reader) {
+        private static void ReadTags(SwfFile file, ISwfStreamReader reader) {
             while (!reader.IsEOF) {
                 var ser = new SwfTagDeserializer(file);
                 var tagData = reader.ReadTagData();
@@ -115,7 +115,7 @@ namespace Code.SwfLib {
             }
         }
 
-        protected static SwfStreamReader GetSwfStreamReader(SwfFileInfo info, Stream stream) {
+        protected static ISwfStreamReader GetSwfStreamReader(SwfFileInfo info, Stream stream) {
             switch (info.Format) {
                 case "CWS":
                     var mem = new MemoryStream();

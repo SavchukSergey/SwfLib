@@ -5,7 +5,7 @@ namespace Code.SwfLib.Shapes {
         where T : IShapeRecord
         where TStyleChange : StyleChangeShapeRecord {
 
-        public T Read(SwfStreamReader reader, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
+        public T Read(ISwfStreamReader reader, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
             var isEdge = reader.ReadBit();
             if (!isEdge) {
                 bool stateNewStyles = reader.ReadBit();
@@ -51,7 +51,7 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        private StraightEdgeShapeRecord ReadStraigtEdgeShapeRecord(SwfStreamReader reader) {
+        private StraightEdgeShapeRecord ReadStraigtEdgeShapeRecord(ISwfStreamReader reader) {
             var record = new StraightEdgeShapeRecord();
             var numBits = reader.ReadUnsignedBits(4) + 2;
             var generalLineFlag = reader.ReadBit();
@@ -68,7 +68,7 @@ namespace Code.SwfLib.Shapes {
             return record;
         }
 
-        private CurvedEdgeShapeRecord ReadCurvedEdgeShapeRecord(SwfStreamReader reader) {
+        private CurvedEdgeShapeRecord ReadCurvedEdgeShapeRecord(ISwfStreamReader reader) {
             var record = new CurvedEdgeShapeRecord();
             var numBits = reader.ReadUnsignedBits(4) + 2;
             record.ControlDeltaX = reader.ReadSignedBits(numBits);
@@ -79,8 +79,8 @@ namespace Code.SwfLib.Shapes {
         }
 
         protected abstract TStyleChange CreateStyleChangeRecord();
-        protected abstract void ReadFillStyles(SwfStreamReader reader, TStyleChange record, bool allowBigArray);
-        protected abstract void ReadLineStyles(SwfStreamReader reader, TStyleChange record, bool allowBigArray);
+        protected abstract void ReadFillStyles(ISwfStreamReader reader, TStyleChange record, bool allowBigArray);
+        protected abstract void ReadLineStyles(ISwfStreamReader reader, TStyleChange record, bool allowBigArray);
 
         protected abstract T Adapt(EndShapeRecord record);
         protected abstract T Adapt(StraightEdgeShapeRecord record);

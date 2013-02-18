@@ -10,7 +10,7 @@ namespace Code.SwfLib.Shapes {
         private static readonly FillStyleRGBWriter _writerRGB = new FillStyleRGBWriter();
         private static readonly FillStyleRGBAWriter _writerRGBA = new FillStyleRGBAWriter();
 
-        public static void ReadToFillStylesRGB(this SwfStreamReader reader, IList<FillStyleRGB> fillStyles, bool allowBigArray) {
+        public static void ReadToFillStylesRGB(this ISwfStreamReader reader, IList<FillStyleRGB> fillStyles, bool allowBigArray) {
             ushort count = reader.ReadByte();
             if (allowBigArray && count == 255) {
                 count = reader.ReadUInt16();
@@ -21,7 +21,7 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void ReadToFillStylesRGBA(this SwfStreamReader reader, IList<FillStyleRGBA> fillStyles) {
+        public static void ReadToFillStylesRGBA(this ISwfStreamReader reader, IList<FillStyleRGBA> fillStyles) {
             ushort count = reader.ReadByte();
             if (count == 255) {
                 count = reader.ReadUInt16();
@@ -61,12 +61,12 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static FillStyleRGB ReadFillStyleRGB(this SwfStreamReader reader) {
+        public static FillStyleRGB ReadFillStyleRGB(this ISwfStreamReader reader) {
             var type = (FillStyleType)reader.ReadByte();
             return _readerRGB.Read(reader, type);
         }
 
-        public static FillStyleRGBA ReadFillStyleRGBA(this SwfStreamReader reader) {
+        public static FillStyleRGBA ReadFillStyleRGBA(this ISwfStreamReader reader) {
             var type = (FillStyleType)reader.ReadByte();
             return _readerRGBA.Read(reader, type);
         }

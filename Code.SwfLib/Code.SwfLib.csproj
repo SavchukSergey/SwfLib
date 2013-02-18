@@ -106,6 +106,7 @@
     <Compile Include="Gradients\BaseGradientRGB.cs" />
     <Compile Include="Gradients\BaseGradientRGBA.cs" />
     <Compile Include="Gradients\FocalGradientRGBA.cs" />
+    <Compile Include="ISwfStreamReader.cs" />
     <Compile Include="Shapes\FillStyles\BitmapMode.cs" />
     <Compile Include="Shapes\FillStyles\FillStyleRGBAWriter.cs" />
     <Compile Include="Shapes\FillStyles\FillStyleRGBAReader.cs" />

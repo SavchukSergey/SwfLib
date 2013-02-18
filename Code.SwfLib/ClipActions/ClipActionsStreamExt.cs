@@ -5,7 +5,7 @@ using Code.SwfLib.Actions;
 namespace Code.SwfLib.ClipActions {
     public static class ClipActionsStreamExt {
 
-        public static void ReadClipActions(this SwfStreamReader reader, byte swfVersion, ClipActionsList clipActions) {
+        public static void ReadClipActions(this ISwfStreamReader reader, byte swfVersion, ClipActionsList clipActions) {
             clipActions.Reserved = reader.ReadUInt16();
             clipActions.Flags = reader.ReadClipEventFlags(swfVersion);
             reader.ReadClipActionRecords(swfVersion, clipActions.Records);
@@ -18,7 +18,7 @@ namespace Code.SwfLib.ClipActions {
             writer.WriteClipActionRecords(swfVersion, clipActions.Records);
         }
 
-        public static void ReadClipActionRecords(this SwfStreamReader reader, byte swfVersion, IList<ClipActionRecord> target) {
+        public static void ReadClipActionRecords(this ISwfStreamReader reader, byte swfVersion, IList<ClipActionRecord> target) {
             ClipActionRecord record;
             do {
                 record = reader.ReadClipActionRecord(swfVersion);
@@ -32,7 +32,7 @@ namespace Code.SwfLib.ClipActions {
             }
         }
 
-        public static ClipActionRecord ReadClipActionRecord(this SwfStreamReader reader, byte swfVersion) {
+        public static ClipActionRecord ReadClipActionRecord(this ISwfStreamReader reader, byte swfVersion) {
             var record = new ClipActionRecord();
             record.Flags = reader.ReadClipEventFlags(swfVersion);
             if (record.Flags.IsEmpty) return record;
@@ -72,7 +72,7 @@ namespace Code.SwfLib.ClipActions {
             writer.WriteBytes(awmem.ToArray());
         }
 
-        public static ClipEventFlags ReadClipEventFlags(this SwfStreamReader reader, byte swfVersion) {
+        public static ClipEventFlags ReadClipEventFlags(this ISwfStreamReader reader, byte swfVersion) {
             var res = new ClipEventFlags {
                 ClipEventKeyUp = reader.ReadBit(),
                 ClipEventKeyDown = reader.ReadBit(),

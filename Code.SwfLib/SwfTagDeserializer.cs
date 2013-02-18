@@ -14,13 +14,15 @@ using Code.SwfLib.Tags.ButtonTags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.FontTags;
+using Code.SwfLib.Tags.ShapeMorphingTags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
+using Code.SwfLib.Tags.VideoTags;
 using Code.SwfLib.Text;
 
 namespace Code.SwfLib {
-    public class SwfTagDeserializer : ISwfTagVisitor<SwfStreamReader, SwfTagBase> {
+    public class SwfTagDeserializer : ISwfTagVisitor<ISwfStreamReader, SwfTagBase> {
         private readonly SwfFile _file;
         private readonly SwfTagsFactory _factory = new SwfTagsFactory();
 
@@ -35,7 +37,7 @@ namespace Code.SwfLib {
             return ReadTag(type, reader);
         }
 
-        public SwfTagBase ReadTag(SwfTagType type, SwfStreamReader reader) {
+        public SwfTagBase ReadTag(SwfTagType type, ISwfStreamReader reader) {
             var tag = _factory.Create(type);
             tag.AcceptVistor(this, reader);
             tag.RestData = reader.BytesLeft > 0 ? reader.ReadRest() : null;
@@ -50,7 +52,7 @@ namespace Code.SwfLib {
 
         #region Display list tags
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(PlaceObjectTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(PlaceObjectTag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             tag.Depth = reader.ReadUInt16();
             tag.Matrix = reader.ReadMatrix();
@@ -62,7 +64,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(PlaceObject2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(PlaceObject2Tag tag, ISwfStreamReader reader) {
             tag.HasClipActions = reader.ReadBit();
             tag.HasClipDepth = reader.ReadBit();
             tag.HasName = reader.ReadBit();
@@ -97,7 +99,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(PlaceObject3Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(PlaceObject3Tag tag, ISwfStreamReader reader) {
             tag.HasClipActions = reader.ReadBit();
             var hasClipDepth = reader.ReadBit();
             var hasName = reader.ReadBit();
@@ -162,18 +164,18 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(RemoveObjectTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(RemoveObjectTag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             tag.Depth = reader.ReadUInt16();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(RemoveObject2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(RemoveObject2Tag tag, ISwfStreamReader reader) {
             tag.Depth = reader.ReadUInt16();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(ShowFrameTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(ShowFrameTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
@@ -181,12 +183,12 @@ namespace Code.SwfLib {
 
         #region Control tags
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(SetBackgroundColorTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(SetBackgroundColorTag tag, ISwfStreamReader reader) {
             reader.ReadRGB(out tag.Color);
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(FrameLabelTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(FrameLabelTag tag, ISwfStreamReader reader) {
             tag.Name = reader.ReadString();
             if (!reader.IsEOF) {
                 tag.AnchorFlag = reader.ReadByte();
@@ -194,15 +196,15 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(ProtectTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(ProtectTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(EndTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(EndTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(ExportAssetsTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(ExportAssetsTag tag, ISwfStreamReader reader) {
             var count = reader.ReadUInt16();
             for (var i = 0; i < count; i++) {
                 var symbolRef = reader.ReadSymbolReference();
@@ -211,29 +213,29 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(ImportAssetsTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(ImportAssetsTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(EnableDebuggerTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(EnableDebuggerTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(EnableDebugger2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(EnableDebugger2Tag tag, ISwfStreamReader reader) {
             return new EnableDebugger2Tag { Data = reader.ReadRest() };
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(ScriptLimitsTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(ScriptLimitsTag tag, ISwfStreamReader reader) {
             tag.MaxRecursionDepth = reader.ReadUInt16();
             tag.ScriptTimeoutSeconds = reader.ReadUInt16();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(SetTabIndexTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(SetTabIndexTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(FileAttributesTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(FileAttributesTag tag, ISwfStreamReader reader) {
             tag.Reserved0 = reader.ReadBit();
             tag.UseDirectBlit = reader.ReadBit();
             tag.UseGPU = reader.ReadBit();
@@ -246,11 +248,11 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(ImportAssets2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(ImportAssets2Tag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(SymbolClassTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(SymbolClassTag tag, ISwfStreamReader reader) {
             ushort count = reader.ReadUInt16();
             for (int i = 0; i < count; i++) {
                 var reference = new SwfSymbolReference {
@@ -263,16 +265,16 @@ namespace Code.SwfLib {
 
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(MetadataTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(MetadataTag tag, ISwfStreamReader reader) {
             tag.Metadata = reader.ReadString();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineScalingGridTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineScalingGridTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineSceneAndFrameLabelDataTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineSceneAndFrameLabelDataTag tag, ISwfStreamReader reader) {
             var scenesCount = reader.ReadEncodedU32();
             for (var i = 0; i < scenesCount; i++) {
                 var item = new SceneOffsetData {
@@ -296,7 +298,7 @@ namespace Code.SwfLib {
 
         #region Actions tags
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DoActionTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DoActionTag tag, ISwfStreamReader reader) {
             var actionReader = new ActionReader(reader);
             ActionBase action;
             do {
@@ -306,7 +308,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DoInitActionTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DoInitActionTag tag, ISwfStreamReader reader) {
             tag.SpriteId = reader.ReadUInt16();
             var actionReader = new ActionReader(reader);
             ActionBase action;
@@ -317,14 +319,14 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DoABCTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DoABCTag tag, ISwfStreamReader reader) {
             tag.Flags = reader.ReadUInt32();
             tag.Name = reader.ReadString();
             tag.ABCData = reader.ReadRest();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DoABCDefineTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DoABCDefineTag tag, ISwfStreamReader reader) {
             tag.ABCData = reader.ReadRest();
             return tag;
         }
@@ -333,7 +335,7 @@ namespace Code.SwfLib {
 
         #region Shapes tags
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShapeTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineShapeTag tag, ISwfStreamReader reader) {
             tag.ShapeID = reader.ReadUInt16();
             tag.ShapeBounds = reader.ReadRect();
             reader.ReadToFillStylesRGB(tag.FillStyles, false);
@@ -342,7 +344,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShape2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineShape2Tag tag, ISwfStreamReader reader) {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
             reader.ReadToFillStylesRGB(tag.FillStyles, true);
@@ -351,7 +353,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShape3Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineShape3Tag tag, ISwfStreamReader reader) {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
             reader.ReadToFillStylesRGBA(tag.FillStyles);
@@ -360,7 +362,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineShape4Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineShape4Tag tag, ISwfStreamReader reader) {
             tag.ShapeID = reader.ReadUInt16();
             reader.ReadRect(out tag.ShapeBounds);
             reader.ReadRect(out tag.EdgeBounds);
@@ -375,24 +377,24 @@ namespace Code.SwfLib {
 
         #region Bitmap tags
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBitsTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBitsTag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             tag.JPEGData = reader.ReadRest();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(JPEGTablesTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(JPEGTablesTag tag, ISwfStreamReader reader) {
             tag.JPEGData = reader.ReadRest();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBitsJPEG2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBitsJPEG2Tag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             tag.ImageData = reader.ReadRest();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBitsJPEG3Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBitsJPEG3Tag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             var alphaDataOffset = reader.ReadUInt32();
             tag.ImageData = reader.ReadBytes((int)alphaDataOffset);
@@ -400,7 +402,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBitsJPEG4Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBitsJPEG4Tag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             var alphaDataOffset = reader.ReadUInt32();
             tag.DeblockParam = reader.ReadUInt16();
@@ -409,7 +411,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBitsLosslessTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBitsLosslessTag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             tag.BitmapFormat = reader.ReadByte();
             tag.BitmapWidth = reader.ReadUInt16();
@@ -421,7 +423,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBitsLossless2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBitsLossless2Tag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             tag.BitmapFormat = reader.ReadByte();
             tag.BitmapWidth = reader.ReadUInt16();
@@ -435,15 +437,15 @@ namespace Code.SwfLib {
 
         #endregion
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(Tags.ShapeMorphingTags.DefineMorphShapeTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineMorphShapeTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(Tags.ShapeMorphingTags.DefineMorphShape2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineMorphShape2Tag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineFontTag tag, ISwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
             var firstOffset = reader.ReadUInt16();
             var glyphsCount = firstOffset / 2;
@@ -455,22 +457,22 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontInfoTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineFontInfoTag tag, ISwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontInfo2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineFontInfo2Tag tag, ISwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFont2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineFont2Tag tag, ISwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFont3Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineFont3Tag tag, ISwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
 
             tag.HasLayout = reader.ReadBit();
@@ -531,12 +533,12 @@ namespace Code.SwfLib {
         }
 
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFont4Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineFont4Tag tag, ISwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontAlignZonesTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineFontAlignZonesTag tag, ISwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
             tag.CsmTableHint = (CSMTableHint)reader.ReadUnsignedBits(2);
             tag.Reserved = (byte)reader.ReadUnsignedBits(6);
@@ -559,14 +561,14 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineFontNameTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineFontNameTag tag, ISwfStreamReader reader) {
             tag.FontID = reader.ReadUInt16();
             tag.FontName = reader.ReadString();
             tag.FontCopyright = reader.ReadString();
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineTextTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineTextTag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             reader.ReadRect(out tag.TextBounds);
             tag.TextMatrix = reader.ReadMatrix();
@@ -578,7 +580,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineText2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineText2Tag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             reader.ReadRect(out tag.TextBounds);
             tag.TextMatrix = reader.ReadMatrix();
@@ -590,7 +592,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineEditTextTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineEditTextTag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             tag.Bounds = reader.ReadRect();
 
@@ -641,7 +643,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(CSMTextSettingsTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(CSMTextSettingsTag tag, ISwfStreamReader reader) {
             tag.TextID = reader.ReadUInt16();
             tag.UseFlashType = (byte)reader.ReadUnsignedBits(2);
             tag.GridFit = (byte)reader.ReadUnsignedBits(3);
@@ -654,37 +656,37 @@ namespace Code.SwfLib {
 
         #region Sound tags
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineSoundTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineSoundTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(StartSoundTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(StartSoundTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(StartSound2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(StartSound2Tag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(SoundStreamHeadTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(SoundStreamHeadTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(SoundStreamHead2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(SoundStreamHead2Tag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(SoundStreamBlockTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(SoundStreamBlockTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
         #endregion
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineButtonTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineButtonTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineButton2Tag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineButton2Tag tag, ISwfStreamReader reader) {
             tag.ButtonID = reader.ReadUInt16();
             tag.ReservedFlags = (byte)reader.ReadUnsignedBits(7);
             tag.TrackAsMenu = reader.ReadBit();
@@ -707,15 +709,15 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineButtonCxformTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineButtonCxformTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineButtonSoundTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineButtonSoundTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineSpriteTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineSpriteTag tag, ISwfStreamReader reader) {
             tag.SpriteID = reader.ReadUInt16();
             tag.FramesCount = reader.ReadUInt16();
             SwfTagBase subTag;
@@ -726,7 +728,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        private SwfTagBase ReadDefineSpriteSubTag(SwfStreamReader reader) {
+        private SwfTagBase ReadDefineSpriteSubTag(ISwfStreamReader reader) {
             var tagData = reader.ReadTagData();
             var tag = ReadTag(tagData);
             //TODO: Check allowed for define sprite types
@@ -735,25 +737,25 @@ namespace Code.SwfLib {
 
         #region Video tags
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(Tags.VideoTags.DefineVideoStreamTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineVideoStreamTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(Tags.VideoTags.VideoFrameTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(VideoFrameTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
         #endregion
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DefineBinaryDataTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBinaryDataTag tag, ISwfStreamReader reader) {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(DebugIDTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DebugIDTag tag, ISwfStreamReader reader) {
             return new DebugIDTag { Data = reader.ReadRest() };
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(ProductInfoTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(ProductInfoTag tag, ISwfStreamReader reader) {
             tag.ProductId = reader.ReadUInt32();
             tag.Edition = reader.ReadUInt32();
             tag.MajorVersion = reader.ReadByte();
@@ -763,7 +765,7 @@ namespace Code.SwfLib {
             return tag;
         }
 
-        SwfTagBase ISwfTagVisitor<SwfStreamReader, SwfTagBase>.Visit(UnknownTag tag, SwfStreamReader reader) {
+        SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(UnknownTag tag, ISwfStreamReader reader) {
             tag.Data = reader.ReadRest();
             return tag;
         }

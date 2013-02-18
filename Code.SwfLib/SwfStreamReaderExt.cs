@@ -3,7 +3,7 @@
 namespace Code.SwfLib {
     public static class SwfStreamReaderExt {
 
-        public static SwfFileInfo ReadSwfFileInfo(this SwfStreamReader writer) {
+        public static SwfFileInfo ReadSwfFileInfo(this ISwfStreamReader writer) {
             SwfFileInfo header;
             header.Format = new string(new[] { (char)writer.ReadByte(), (char)writer.ReadByte(), (char)writer.ReadByte() });
             header.Version = writer.ReadByte();
@@ -16,7 +16,7 @@ namespace Code.SwfLib {
             return header;
         }
 
-        public static SwfHeader ReadSwfHeader(this SwfStreamReader reader) {
+        public static SwfHeader ReadSwfHeader(this ISwfStreamReader reader) {
             SwfHeader header;
             reader.ReadRect(out header.FrameSize);
             header.FrameRate = reader.ReadFixedPoint8();
@@ -24,26 +24,26 @@ namespace Code.SwfLib {
             return header;
         }
 
-        public static SwfRGB ReadRGB(this SwfStreamReader reader) {
+        public static SwfRGB ReadRGB(this ISwfStreamReader reader) {
             SwfRGB color;
             reader.ReadRGB(out color);
             return color;
         }
 
-        public static void ReadRGB(this SwfStreamReader reader, out SwfRGB color) {
+        public static void ReadRGB(this ISwfStreamReader reader, out SwfRGB color) {
             color.Red = reader.ReadByte();
             color.Green = reader.ReadByte();
             color.Blue = reader.ReadByte();
         }
 
-        public static void ReadRGBA(this SwfStreamReader reader, out SwfRGBA color) {
+        public static void ReadRGBA(this ISwfStreamReader reader, out SwfRGBA color) {
             color.Red = reader.ReadByte();
             color.Green = reader.ReadByte();
             color.Blue = reader.ReadByte();
             color.Alpha = reader.ReadByte();
         }
 
-        public static SwfRGBA ReadRGBA(this SwfStreamReader reader) {
+        public static SwfRGBA ReadRGBA(this ISwfStreamReader reader) {
             return new SwfRGBA {
                 Red = reader.ReadByte(),
                 Green = reader.ReadByte(),
@@ -52,7 +52,7 @@ namespace Code.SwfLib {
             };
         }
 
-        public static SwfRGBA ReadARGB(this SwfStreamReader reader) {
+        public static SwfRGBA ReadARGB(this ISwfStreamReader reader) {
             var rgb = new SwfRGBA {
                 Alpha = reader.ReadByte(),
                 Red = reader.ReadByte(),
@@ -62,13 +62,13 @@ namespace Code.SwfLib {
             return rgb;
         }
 
-        public static SwfRect ReadRect(this SwfStreamReader reader) {
+        public static SwfRect ReadRect(this ISwfStreamReader reader) {
             SwfRect rect;
             ReadRect(reader, out rect);
             return rect;
         }
 
-        public static void ReadRect(this SwfStreamReader reader, out SwfRect rect) {
+        public static void ReadRect(this ISwfStreamReader reader, out SwfRect rect) {
             var bits = reader.ReadUnsignedBits(5);
             rect.XMin = reader.ReadSignedBits(bits);
             rect.XMax = reader.ReadSignedBits(bits);
@@ -77,7 +77,7 @@ namespace Code.SwfLib {
             reader.AlignToByte();
         }
 
-        public static SwfMatrix ReadMatrix(this SwfStreamReader reader) {
+        public static SwfMatrix ReadMatrix(this ISwfStreamReader reader) {
             SwfMatrix matrix;
             matrix.HasScale = reader.ReadBit();
             if (matrix.HasScale) {
@@ -105,7 +105,7 @@ namespace Code.SwfLib {
         }
 
 
-        public static SwfSymbolReference ReadSymbolReference(this SwfStreamReader reader) {
+        public static SwfSymbolReference ReadSymbolReference(this ISwfStreamReader reader) {
             return new SwfSymbolReference {
                 SymbolID = reader.ReadUInt16(),
                 SymbolName = reader.ReadString()

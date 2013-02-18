@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Code.SwfLib.Text {
     public static class TextStreamExt {
 
-        public static IList<TextRecordRGB> ReadTextRecordsRGB(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
+        public static IList<TextRecordRGB> ReadTextRecordsRGB(this ISwfStreamReader reader, uint glyphBits, uint advanceBits) {
             var res = new List<TextRecordRGB>();
             bool isEnd;
             do {
@@ -44,7 +44,7 @@ namespace Code.SwfLib.Text {
             return res;
         }
 
-        public static IList<TextRecordRGBA> ReadTextRecordsRGBA(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
+        public static IList<TextRecordRGBA> ReadTextRecordsRGBA(this ISwfStreamReader reader, uint glyphBits, uint advanceBits) {
             var res = new List<TextRecordRGBA>();
             bool isEnd;
             do {
@@ -169,7 +169,7 @@ namespace Code.SwfLib.Text {
         }
 
 
-        public static GlyphEntry ReadGlyphEntry(this SwfStreamReader reader, uint glyphBits, uint advanceBits) {
+        public static GlyphEntry ReadGlyphEntry(this ISwfStreamReader reader, uint glyphBits, uint advanceBits) {
             var entry = new GlyphEntry {
                 GlyphIndex = reader.ReadUnsignedBits(glyphBits),
                 GlyphAdvance = reader.ReadSignedBits(advanceBits)

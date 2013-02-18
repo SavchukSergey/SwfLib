@@ -5,7 +5,7 @@ using Code.SwfLib.Shapes.LineStyles;
 namespace Code.SwfLib.Shapes {
     public static class LineStyleStreamExt {
 
-        public static void ReadToLineStylesRGB(this SwfStreamReader reader, IList<LineStyleRGB> lineStyles, bool allowBigArray) {
+        public static void ReadToLineStylesRGB(this ISwfStreamReader reader, IList<LineStyleRGB> lineStyles, bool allowBigArray) {
             ushort cnt = reader.ReadByte();
             if (allowBigArray && cnt == 255) {
                 cnt = reader.ReadUInt16();
@@ -15,7 +15,7 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void ReadToLineStylesRGBA(this SwfStreamReader reader, IList<LineStyleRGBA> lineStyles) {
+        public static void ReadToLineStylesRGBA(this ISwfStreamReader reader, IList<LineStyleRGBA> lineStyles) {
             ushort cnt = reader.ReadByte();
             if (cnt == 255) {
                 cnt = reader.ReadUInt16();
@@ -25,7 +25,7 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void ReadToLineStylesEx(this SwfStreamReader reader, IList<LineStyleEx> lineStyles) {
+        public static void ReadToLineStylesEx(this ISwfStreamReader reader, IList<LineStyleEx> lineStyles) {
             ushort cnt = reader.ReadByte();
             if (cnt == 255) {
                 cnt = reader.ReadUInt16();
@@ -77,21 +77,21 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static LineStyleRGB ReadLineStyleRGB(this SwfStreamReader reader) {
+        public static LineStyleRGB ReadLineStyleRGB(this ISwfStreamReader reader) {
             var lineStyle = new LineStyleRGB();
             lineStyle.Width = reader.ReadUInt16();
             reader.ReadRGB(out lineStyle.Color);
             return lineStyle;
         }
 
-        public static LineStyleRGBA ReadLineStyleRGBA(this SwfStreamReader reader) {
+        public static LineStyleRGBA ReadLineStyleRGBA(this ISwfStreamReader reader) {
             var lineStyle = new LineStyleRGBA();
             lineStyle.Width = reader.ReadUInt16();
             reader.ReadRGBA(out lineStyle.Color);
             return lineStyle;
         }
 
-        public static LineStyleEx ReadLineStyleEx(this SwfStreamReader reader) {
+        public static LineStyleEx ReadLineStyleEx(this ISwfStreamReader reader) {
             var lineStyle = new LineStyleEx();
             lineStyle.Width = reader.ReadUInt16();
             lineStyle.StartCapStyle = (CapStyle)reader.ReadUnsignedBits(2);

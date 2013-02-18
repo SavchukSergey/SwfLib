@@ -6,7 +6,7 @@ namespace Code.SwfLib.Filters {
         private static readonly FilterReader _reader = new FilterReader();
         private static readonly FilterWriter _writer = new FilterWriter();
 
-        public static void ReadFilterList(this SwfStreamReader reader, IList<BaseFilter> target) {
+        public static void ReadFilterList(this ISwfStreamReader reader, IList<BaseFilter> target) {
             var count = reader.ReadByte();
             for (var i = 0; i < count; i++) {
                 var filter = reader.ReadFilter();
@@ -21,7 +21,7 @@ namespace Code.SwfLib.Filters {
             }
         }
 
-        public static BaseFilter ReadFilter(this SwfStreamReader reader) {
+        public static BaseFilter ReadFilter(this ISwfStreamReader reader) {
             return _reader.Read(reader);
         }
 

@@ -5,7 +5,7 @@ using Code.SwfLib.Filters;
 namespace Code.SwfLib.Buttons {
     public static class ButtonStreamExt {
 
-        public static ButtonRecordEx ReadButtonRecordEx(this SwfStreamReader reader) {
+        public static ButtonRecordEx ReadButtonRecordEx(this ISwfStreamReader reader) {
             var button = new ButtonRecordEx();
             button.Reserved = (byte)reader.ReadUnsignedBits(2);
             var hasBlendMode = reader.ReadBit();
@@ -56,7 +56,7 @@ namespace Code.SwfLib.Buttons {
             }
         }
 
-        public static ButtonCondition ReadButtonCondition(this SwfStreamReader reader) {
+        public static ButtonCondition ReadButtonCondition(this ISwfStreamReader reader) {
             var res = new ButtonCondition {
                 IdleToOverDown = reader.ReadBit(),
                 OutDownToIdle = reader.ReadBit(),

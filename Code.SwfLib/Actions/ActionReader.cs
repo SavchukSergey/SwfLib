@@ -5,10 +5,10 @@ using System.IO;
 namespace Code.SwfLib.Actions {
     public class ActionReader : IActionVisitor<ushort, ActionBase> {
 
-        private readonly SwfStreamReader _reader;
+        private readonly ISwfStreamReader _reader;
         private readonly ActionsFactory _factory;
 
-        public ActionReader(SwfStreamReader reader) {
+        public ActionReader(ISwfStreamReader reader) {
             _reader = reader;
             _factory = new ActionsFactory();
         }
@@ -571,7 +571,7 @@ namespace Code.SwfLib.Actions {
             return action;
         }
 
-        private static void ReadActions(SwfStreamReader reader, int length, IList<ActionBase> actions) {
+        private static void ReadActions(ISwfStreamReader reader, int length, IList<ActionBase> actions) {
             var bytes = reader.ReadBytes(length);
             var mem = new MemoryStream(bytes);
             var ar = new ActionReader(new SwfStreamReader(mem));

@@ -1,18 +1,18 @@
 ﻿using Code.SwfLib.Gradients;
 
 namespace Code.SwfLib.Filters {
-    public class FilterReader : IFilterVisitor<SwfStreamReader, BaseFilter> {
+    public class FilterReader : IFilterVisitor<ISwfStreamReader, BaseFilter> {
 
         private readonly FilterFactory _factory = new FilterFactory();
 
-        public BaseFilter Read(SwfStreamReader reader) {
+        public BaseFilter Read(ISwfStreamReader reader) {
             var type = (FilterType)reader.ReadByte();
             var filter = _factory.Create(type);
             filter.AcceptVisitor(this, reader);
             return filter;
         }
 
-        BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(DropShadowFilter filter, SwfStreamReader reader) {
+        BaseFilter IFilterVisitor<ISwfStreamReader, BaseFilter>.Visit(DropShadowFilter filter, ISwfStreamReader reader) {
             filter.Color = reader.ReadRGBA();
             filter.BlurX = reader.ReadFixed();
             filter.BlurY = reader.ReadFixed();
@@ -26,7 +26,7 @@ namespace Code.SwfLib.Filters {
             return filter;
         }
 
-        BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(BlurFilter filter, SwfStreamReader reader) {
+        BaseFilter IFilterVisitor<ISwfStreamReader, BaseFilter>.Visit(BlurFilter filter, ISwfStreamReader reader) {
             filter.BlurX = reader.ReadFixed();
             filter.BlurY = reader.ReadFixed();
             filter.Passes = reader.ReadUnsignedBits(5);
@@ -34,7 +34,7 @@ namespace Code.SwfLib.Filters {
             return filter;
         }
 
-        BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(GlowFilter filter, SwfStreamReader reader) {
+        BaseFilter IFilterVisitor<ISwfStreamReader, BaseFilter>.Visit(GlowFilter filter, ISwfStreamReader reader) {
             filter.Color = reader.ReadRGBA();
             filter.BlurX = reader.ReadFixed();
             filter.BlurY = reader.ReadFixed();
@@ -46,7 +46,7 @@ namespace Code.SwfLib.Filters {
             return filter;
         }
 
-        BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(BevelFilter filter, SwfStreamReader reader) {
+        BaseFilter IFilterVisitor<ISwfStreamReader, BaseFilter>.Visit(BevelFilter filter, ISwfStreamReader reader) {
             filter.ShadowColor = reader.ReadRGBA();
             filter.HighlightColor = reader.ReadRGBA();
             filter.BlurX = reader.ReadFixed();
@@ -62,7 +62,7 @@ namespace Code.SwfLib.Filters {
             return filter;
         }
 
-        BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(GradientGlowFilter filter, SwfStreamReader reader) {
+        BaseFilter IFilterVisitor<ISwfStreamReader, BaseFilter>.Visit(GradientGlowFilter filter, ISwfStreamReader reader) {
             var count = reader.ReadByte();
             for (var i = 0; i < count; i++) {
                 var record = new GradientRecordRGBA();
@@ -85,7 +85,7 @@ namespace Code.SwfLib.Filters {
             return filter;
         }
 
-        BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(ConvolutionFilter filter, SwfStreamReader reader) {
+        BaseFilter IFilterVisitor<ISwfStreamReader, BaseFilter>.Visit(ConvolutionFilter filter, ISwfStreamReader reader) {
             var matrixX = reader.ReadByte();
             var matrixY = reader.ReadByte();
             filter.Divisor = reader.ReadSingle();
@@ -103,7 +103,7 @@ namespace Code.SwfLib.Filters {
             return filter;
         }
 
-        BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(ColorMatrixFilter filter, SwfStreamReader reader) {
+        BaseFilter IFilterVisitor<ISwfStreamReader, BaseFilter>.Visit(ColorMatrixFilter filter, ISwfStreamReader reader) {
             filter.R0 = reader.ReadSingle();
             filter.R1 = reader.ReadSingle();
             filter.R2 = reader.ReadSingle();
@@ -130,7 +130,7 @@ namespace Code.SwfLib.Filters {
             return filter;
         }
 
-        BaseFilter IFilterVisitor<SwfStreamReader, BaseFilter>.Visit(GradientBevelFilter filter, SwfStreamReader reader) {
+        BaseFilter IFilterVisitor<ISwfStreamReader, BaseFilter>.Visit(GradientBevelFilter filter, ISwfStreamReader reader) {
             var count = reader.ReadByte();
             for (var i = 0; i < count; i++) {
                 var record = new GradientRecordRGBA();
