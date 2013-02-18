@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
+﻿using System.Xml.Linq;
 
 namespace Code.SwfLib.SwfMill.Utils {
     public static class XElementUtils {
@@ -8,7 +6,7 @@ namespace Code.SwfLib.SwfMill.Utils {
         public static string RequiredAttribute(this XElement node, string attributeName, string message) {
             var xAttr = node.Attribute(attributeName);
             if (xAttr != null) return xAttr.Value;
-            throw new InvalidOperationException(message + " is missing required " + attributeName + " attribute.");
+            throw new SwfMillXmlException(string.Format("{0} is missing required '{1}' attribute. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
         public static string RequiredStringAttribute(this XElement node, string attributeName, string message) {
@@ -19,34 +17,70 @@ namespace Code.SwfLib.SwfMill.Utils {
             var str = node.RequiredAttribute(attributeName, message);
             double val;
             if (double.TryParse(str, out val)) return val;
-            throw new InvalidOperationException(message + "'s attribute " + attributeName + " is not a double");
+            throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not a double. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
         public static uint RequiredUIntAttribute(this XElement node, string attributeName, string message) {
             var str = node.RequiredAttribute(attributeName, message);
             uint val;
             if (uint.TryParse(str, out val)) return val;
-            throw new InvalidOperationException(message + "'s attribute " + attributeName + " is not an unsigned integer");
+            throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not an unsigned integer. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
         public static int RequiredIntAttribute(this XElement node, string attributeName, string message) {
             var str = node.RequiredAttribute(attributeName, message);
             int val;
             if (int.TryParse(str, out val)) return val;
-            throw new InvalidOperationException(message + "'s attribute " + attributeName + " is not an integer");
+            throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not an integer. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
         public static ushort RequiredUShortAttribute(this XElement node, string attributeName, string message) {
             var str = node.RequiredAttribute(attributeName, message);
             ushort val;
             if (ushort.TryParse(str, out val)) return val;
-            throw new InvalidOperationException(message + "'s attribute " + attributeName + " is not an unsigned short integer");
+            throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not an unsigned short integer. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
         public static bool RequiredBoolAttribute(this XElement node, string attributeName, string message) {
             var str = node.RequiredAttribute(attributeName, message);
-            //TODO: try parse instead of strict parse
-            return CommonFormatter.ParseBool(str);
+            switch (str) {
+                case "0":
+                case "false":
+                    return false;
+                case "1":
+                case "true":
+                    return true;
+                default:
+                    throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not a bool value. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
+            }
+        }
+
+        public static string BuildNodePath(XElement node) {
+            string res = "";
+            var child = node;
+            while (node != null) {
+                if (!string.IsNullOrEmpty(res)) res = "/" + res;
+                var nodeName = node.Name.LocalName;
+                if (nodeName == "tags" || nodeName == "actions" || nodeName == "items") {
+                    var index = GetNodeIndex(child);
+                    res = "[" + index + "]" + res;
+                }
+                res = node.Name.LocalName + res;
+                child = node;
+                node = node.Parent;
+            }
+            return res;
+        }
+
+        private static int GetNodeIndex(XElement node) {
+            var parent = node.Parent;
+            if (parent == null) return -1;
+            var res = 0;
+            foreach (var xSub in parent.Elements()) {
+                if (xSub == node) return res;
+                res++;
+            }
+            return -1;
         }
     }
 }

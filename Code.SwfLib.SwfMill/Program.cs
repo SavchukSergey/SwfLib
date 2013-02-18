@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill {
     class Program {
@@ -62,7 +63,13 @@ namespace Code.SwfLib.SwfMill {
             using (var file = File.Open(args[1], FileMode.Open, FileAccess.Read)) {
                 var facade = new SwfMillFacade();
                 var doc = XDocument.Load(new StreamReader(file));
-                var swf = facade.ReadFromXml(doc);
+                SwfFile swf;
+                try {
+                    swf = facade.ReadFromXml(doc);
+                } catch (SwfMillXmlException exc) {
+                    Console.Error.Write(exc.Message);
+                    return;
+                }
                 using (var target = File.Open(args[2], FileMode.Create, FileAccess.ReadWrite)) {
                     swf.WriteTo(target);
                 }
