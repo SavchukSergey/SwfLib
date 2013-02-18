@@ -8,11 +8,10 @@ namespace Code.SwfLib.Tests.Filters {
 
         private static readonly byte[] _etalon = new byte[] { 0,
             24, 175, 86, 64, //color
-            0, 128, //BlurX
-            1, 0, //BlurY
-            0, 192, //Angle
-            2, 0, 0, 64, 0, 0,
-            0, 8, 7, 0,//Distance
+            0, 128, 1, 0, //BlurX
+            0, 192, 2, 0, //BlurY
+             0, 64, 0, 0, //Angle 
+            0, 8, 7, 0, //Distance
             172, 10, //Strength
             165};
 
