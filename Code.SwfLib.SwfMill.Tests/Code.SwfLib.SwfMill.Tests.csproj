@@ -93,6 +93,7 @@
     <Compile Include="AssertExt.cs" />
     <Compile Include="ActionXmlSerializerTest.cs" />
     <Compile Include="EnumerableExt.cs" />
+    <Compile Include="Filters\XBevelFilterTest.cs" />
     <Compile Include="Filters\XGradientBevelFilterTest.cs" />
     <Compile Include="Filters\XGradientGlowFilterTest.cs" />
     <Compile Include="Filters\XDropShadowFilterTest.cs" />

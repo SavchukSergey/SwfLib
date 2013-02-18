@@ -1,11 +1,12 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Filters;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Filters {
     public static class XBevelFilter {
 
-        public const string TAG_NAME = "XBevelFilter";
+        public const string TAG_NAME = "Bevel";
 
         public static XElement ToXml(BevelFilter filter) {
             return new XElement(TAG_NAME,
@@ -25,31 +26,22 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static BevelFilter FromXml(XElement xFilter) {
-            var xAngle = xFilter.Attribute("angle");
-            var xBlurX = xFilter.Attribute("blurX");
-            var xBlurY = xFilter.Attribute("blurY");
-            var xDistance = xFilter.Attribute("distance");
-            var xInnerShadow = xFilter.Attribute("innerShadow");
-            var xKnockout = xFilter.Attribute("knockout");
-            var xPasses = xFilter.Attribute("passes");
-            var xStrength = xFilter.Attribute("strength");
             var xCompositeSource = xFilter.Attribute("compositeSource");
-            var xOnTop = xFilter.Attribute("onTop");
 
             var xShadowColor = xFilter.Element("shadowColor").Element("Color");
             var xHighlightColor = xFilter.Element("highlightColor").Element("Color");
 
             return new BevelFilter {
-                Angle = CommonFormatter.ParseDouble(xAngle.Value),
-                BlurX = CommonFormatter.ParseDouble(xBlurX.Value),
-                BlurY = CommonFormatter.ParseDouble(xBlurY.Value),
-                Distance = CommonFormatter.ParseDouble(xDistance.Value),
-                InnerShadow = CommonFormatter.ParseBool(xInnerShadow.Value),
-                Knockout = CommonFormatter.ParseBool(xKnockout.Value),
-                Passes = uint.Parse(xPasses.Value),
-                Strength = CommonFormatter.ParseDouble(xStrength.Value),
+                Angle = xFilter.RequiredDoubleAttribute("angle"),
+                BlurX = xFilter.RequiredDoubleAttribute("blurX"),
+                BlurY = xFilter.RequiredDoubleAttribute("blurY"),
+                Distance = xFilter.RequiredDoubleAttribute("distance"),
+                InnerShadow = xFilter.RequiredBoolAttribute("innerShadow"),
+                Knockout = xFilter.RequiredBoolAttribute("knockout"),
+                Passes = xFilter.RequiredUIntAttribute("passes"),
+                Strength = xFilter.RequiredDoubleAttribute("strength"),
                 CompositeSource = xCompositeSource == null || CommonFormatter.ParseBool(xCompositeSource.Value),
-                OnTop = CommonFormatter.ParseBool(xOnTop.Value),
+                OnTop = xFilter.RequiredBoolAttribute("onTop"),
                 ShadowColor = XColorRGBA.FromXml(xShadowColor),
                 HighlightColor = XColorRGBA.FromXml(xHighlightColor)
             };
