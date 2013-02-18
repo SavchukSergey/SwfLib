@@ -75,9 +75,8 @@ namespace Code.SwfLib.Tests.ExternalEtalonTests {
         private static Stream DecompressIfNeeded(SwfFileInfo info, Stream stream) {
             switch (info.Format) {
                 case "CWS":
-                    MemoryStream mem = new MemoryStream();
+                    var mem = new MemoryStream();
                     SwfZip.Decompress(stream, mem);
-                    mem.Seek(8, SeekOrigin.Begin);
                     return mem;
                 case "FWS":
                     return stream;

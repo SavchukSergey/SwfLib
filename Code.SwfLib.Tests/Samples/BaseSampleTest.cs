@@ -57,7 +57,6 @@ namespace Code.SwfLib.Tests.Samples {
                 case "CWS":
                     var mem = new MemoryStream();
                     SwfZip.Decompress(stream, mem);
-                    mem.Seek(8, SeekOrigin.Begin);
                     return new SwfStreamReader(mem);
                 case "FWS":
                     return new SwfStreamReader(stream);
