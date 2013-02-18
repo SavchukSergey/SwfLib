@@ -304,13 +304,11 @@ namespace Code.SwfLib.SwfMill.Actions {
 
             action.Name = xAction.RequiredStringAttribute("name");
             foreach (var xArg in xArgs.Elements()) {
-                action.Args.Add(xArg.RequiredStringAttribute("name"));
+                action.Args.Add(xArg.RequiredStringAttribute("value"));
             }
 
             if (xActions != null) {
-                foreach (var xSubAction in xActions.Elements()) {
-                    action.Actions.Add(XAction.FromXml(xSubAction));
-                }
+                XAction.FromXml(xActions, action.Actions);
             }
             return action;
         }

@@ -91,12 +91,12 @@ namespace Code.SwfLib.SwfMill.Actions {
             Register(ActionCode.DefineLocal, "SetLocalVariable");
             Register(ActionCode.DefineLocal2, "DeclareLocalVariable");
             Register(ActionCode.Delete, "Delete");
-            Register(ActionCode.Delete2, "Delete2");
+            Register(ActionCode.Delete2, "DeleteAll");
             Register(ActionCode.Enumerate, "Enumerate");
             Register(ActionCode.Equals2, "EqualTyped");
             Register(ActionCode.GetMember, "GetMember");
             Register(ActionCode.InitArray, "DeclareArray");
-            Register(ActionCode.InitObject, "InitObject");
+            Register(ActionCode.InitObject, "DeclareObject");
             Register(ActionCode.NewMethod, "NewMethod");
             Register(ActionCode.NewObject, "New");
             Register(ActionCode.SetMember, "SetMember");
@@ -127,7 +127,7 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         private static void RegisterSWF6() {
             Register(ActionCode.InstanceOf, "InstanceOf");
-            Register(ActionCode.Enumerate2, "Enumerate2");
+            Register(ActionCode.Enumerate2, "EnumerateObject");
             Register(ActionCode.StrictEquals, "StrictEquals");
             Register(ActionCode.Greater, "GreaterThanTyped");
             Register(ActionCode.StringGreater, "StringGreater");

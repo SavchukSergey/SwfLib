@@ -312,7 +312,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             );
             var args = new XElement("args");
             foreach (var arg in action.Args) {
-                res.Add(new XElement("Arg", new XAttribute("name", arg)));
+                args.Add(new XElement("String", new XAttribute("value", arg)));
             }
             res.Add(args);
 
@@ -466,7 +466,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionEnumerate2 action, XElement param) {
-            return new XElement("Enumerate2");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionStrictEquals action, XElement param) {

@@ -68,7 +68,7 @@ namespace Code.SwfLib.SwfMill.Utils {
             while (node != null) {
                 if (!string.IsNullOrEmpty(res)) res = "/" + res;
                 var nodeName = node.Name.LocalName;
-                if (nodeName == "tags" || nodeName == "actions" || nodeName == "items" || nodeName == "strings") {
+                if (nodeName == "tags" || nodeName == "actions" || nodeName == "items" || nodeName == "strings" || nodeName == "glyphs") {
                     var index = GetNodeIndex(child);
                     res = "[" + index + "]" + res;
                 }
