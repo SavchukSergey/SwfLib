@@ -366,6 +366,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionWith action, XElement xAction) {
+            action.Size = xAction.RequiredUShortAttribute("size");
             return action;
         }
 

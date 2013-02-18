@@ -179,23 +179,23 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionAsciiToChar action, XElement param) {
-            return new XElement("AsciiToChar");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionCharToAscii action, XElement param) {
-            return new XElement("CharToAscii");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionToInteger action, XElement param) {
-            return new XElement("ToInteger");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionMBAsciiToChar action, XElement param) {
-            return new XElement("MBAsciiToChar");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionMBCharToAscii action, XElement param) {
-            return new XElement("MBCharToAscii");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionCall action, XElement param) {
@@ -243,11 +243,11 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionRemoveSprite action, XElement param) {
-            return new XElement("RemoveSprite");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionSetProperty action, XElement param) {
-            return new XElement("SetProperty");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionSetTarget2 action, XElement param) {
@@ -255,7 +255,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionStartDrag action, XElement param) {
-            return new XElement("StartDrag");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionWaitForFrame2 action, XElement param) {
@@ -379,8 +379,8 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionWith action, XElement arg) {
-            return new XElement("With",
-              new XAttribute("size", action.Size));
+            arg.Add(new XAttribute("size", action.Size));
+            return arg;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionToNumber action, XElement arg) {
@@ -388,11 +388,11 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionToString action, XElement arg) {
-            return new XElement(XActionNames.FromAction(action));
+            return arg;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionTypeOf action, XElement arg) {
-            return new XElement("TypeOf");
+            return arg;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionAdd2 action, XElement arg) {
@@ -462,7 +462,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         #region SWF 6
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionInstanceOf action, XElement param) {
-            return new XElement("InstanceOf");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionEnumerate2 action, XElement param) {
@@ -470,7 +470,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionStrictEquals action, XElement param) {
-            return new XElement("StrictEquals");
+            return param;
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionGreater action, XElement param) {
@@ -478,7 +478,7 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionStringGreater action, XElement param) {
-            return new XElement("StringGreater");
+            return param;
         }
 
         #endregion
