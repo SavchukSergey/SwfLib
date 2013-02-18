@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tests.Asserts.Utils;
 using Code.SwfLib.Tests.Samples;
 using Code.SwfLib.Tests.Utils;
 using NUnit.Framework;

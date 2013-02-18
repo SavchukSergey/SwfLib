@@ -51,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\AssertShape.cs" />
     <Compile Include="Tags\AssertTag.cs" />
+    <Compile Include="Utils\DualSwfStreamReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Code.SwfLib\Code.SwfLib.csproj">

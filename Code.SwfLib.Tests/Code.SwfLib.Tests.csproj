@@ -95,7 +95,6 @@
     <Compile Include="Tags\DisplayListTags\RemoveObjectTagTest.cs" />
     <Compile Include="Tags\DisplayListTags\ShowFrameTagTest.cs" />
     <Compile Include="Utils\SignedBitsCountTest.cs" />
-    <Compile Include="Utils\DualSwfStreamReader.cs" />
     <Compile Include="ExternalEtalonTests\ExternalEtalonTestFixtureBase.cs" />
     <Compile Include="ExternalEtalonTests\SwfStreamReaderExtTest.cs" />
     <Compile Include="SamplesTest.cs" />

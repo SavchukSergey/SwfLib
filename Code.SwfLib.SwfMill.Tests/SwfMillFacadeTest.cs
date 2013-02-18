@@ -4,8 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Tests.Utils;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tests.Asserts.Utils;
 using NUnit.Framework;
 
 namespace Code.SwfLib.SwfMill.Tests {
@@ -20,7 +20,7 @@ namespace Code.SwfLib.SwfMill.Tests {
             var doc = new SwfMillFacade().ConvertToXml(file);
             doc.Declaration = new XDeclaration("1", "utf-8", "yes");
             var res = doc.ToString();
-            using (StreamWriter writer = new StreamWriter(@"d:\Sergey\test.xml", false, Encoding.UTF8)) {
+            using (var writer = new StreamWriter(@"d:\Sergey\test.xml", false, Encoding.UTF8)) {
                 doc.Save(writer);
             }
         }
