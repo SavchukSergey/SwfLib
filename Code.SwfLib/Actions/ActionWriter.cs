@@ -17,9 +17,12 @@ namespace Code.SwfLib.Actions {
             if ((byte)type >= 0x80) {
                 var mem = new MemoryStream();
                 var writer = new SwfStreamWriter(mem);
-                action.AcceptVisitor(this, writer);
+                var rest = action.AcceptVisitor(this, writer) as byte[];
                 _writer.WriteUInt16((ushort)writer.BaseStream.Length);
                 _writer.WriteBytes(mem.ToArray());
+                if (rest != null) {
+                    _writer.WriteBytes(rest);
+                }
             }
         }
 
@@ -304,21 +307,21 @@ namespace Code.SwfLib.Actions {
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDefineFunction action, SwfStreamWriter writer) {
+            var pos = writer.BaseStream.Position;
             writer.WriteString(action.Name ?? "");
             writer.WriteUInt16((ushort)action.Args.Count);
             foreach (var arg in action.Args) {
                 writer.WriteString(arg);
             }
-
+            var len = writer.BaseStream.Position - pos + 2;
+            writer.WriteUInt16((ushort)len);
             var awmem = new MemoryStream();
             var aw = new ActionWriter(new SwfStreamWriter(awmem));
             foreach (var subaction in action.Actions) {
                 aw.WriteAction(subaction);
             }
 
-            writer.WriteUInt16((ushort)awmem.Length);
-            writer.WriteBytes(awmem.ToArray());
-            return null;
+            return awmem.ToArray();
         }
 
         object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDefineLocal action, SwfStreamWriter writer) {
@@ -471,7 +474,8 @@ namespace Code.SwfLib.Actions {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDefineFunction2 action, SwfStreamWriter writer) {
+        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDefineFunction2 action, SwfStreamWriter writer)
+        {
             writer.WriteString(action.Name ?? "");
             writer.WriteUInt16((ushort)action.Parameters.Count);
             writer.WriteByte(action.RegisterCount);
