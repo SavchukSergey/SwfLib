@@ -113,6 +113,7 @@
     <Compile Include="TagFormatting\FontTags\DefineFontAlignZonesTagFormatterTest.cs" />
     <Compile Include="TagFormatting\ControlTags\SetBackgroundColorTagFormatterTest.cs" />
     <Compile Include="TagFormatting\ShowFrameTagFormatterTest.cs" />
+    <Compile Include="Utils\DualSwfStreamReader.cs" />
     <Compile Include="XmlComparision.cs" />
   </ItemGroup>
   <ItemGroup>
