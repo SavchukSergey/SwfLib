@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.Shapes.Records;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public static class XShapeRecord {
@@ -113,10 +114,8 @@ namespace Code.SwfLib.SwfMill.Shapes {
             }
 
             public IShapeRecord Visit(StraightEdgeShapeRecord record, XElement xShape) {
-                var xDeltaX = xShape.Attribute("x");
-                var xDeltaY = xShape.Attribute("y");
-                record.DeltaX = int.Parse(xDeltaX.Value);
-                record.DeltaY = int.Parse(xDeltaY.Value);
+                record.DeltaX = xShape.RequiredIntAttribute("x");
+                record.DeltaY = xShape.RequiredIntAttribute("y");
                 return record;
             }
 

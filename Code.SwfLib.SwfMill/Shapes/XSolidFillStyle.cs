@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public static class XSolidFillStyle {
@@ -20,14 +21,14 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         public static SolidFillStyleRGB FromXmlRGB(XElement xFillStyle) {
-            var xColor = xFillStyle.Element("color").Element("Color");
+            var xColor = xFillStyle.RequiredElement("color").Element("Color");
             return new SolidFillStyleRGB {
                 Color = XColorRGB.FromXml(xColor)
             };
         }
 
         public static SolidFillStyleRGBA FromXmlRGBA(XElement xFillStyle) {
-            var xColor = xFillStyle.Element("color").Element("Color");
+            var xColor = xFillStyle.RequiredElement("color").Element("Color");
             return new SolidFillStyleRGBA {
                 Color = XColorRGBA.FromXml(xColor)
             };
