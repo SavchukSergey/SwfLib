@@ -23,6 +23,10 @@ namespace Code.SwfLib.Actions {
                 if (rest != null) {
                     _writer.WriteBytes(rest);
                 }
+#if DEBUG
+            } else {
+                action.AcceptVisitor(this, null);
+#endif
             }
         }
 

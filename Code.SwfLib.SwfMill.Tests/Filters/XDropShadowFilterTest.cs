@@ -17,7 +17,7 @@ namespace Code.SwfLib.SwfMill.Tests.Filters {
         [Test]
         public void FromXmlTest() {
             var filter = XDropShadowFilter.FromXml(XElement.Parse(ETALON));
-            AssertFilters.AreEqual(GetSample(), filter);
+            AssertFilters.AreEqual(GetSample(), filter, "DropShadow");
         }
 
         [Test]

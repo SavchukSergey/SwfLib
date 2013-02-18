@@ -27,7 +27,7 @@ namespace Code.SwfLib.SwfMill.Tests.Filters {
         [Test]
         public void FromXmlTest() {
             var filter = XGradientBevelFilter.FromXml(XElement.Parse(ETALON));
-            AssertFilters.AreEqual(GetSample(), filter);
+            AssertFilters.AreEqual(GetSample(), filter, "GradientBevel");
         }
 
         [Test]

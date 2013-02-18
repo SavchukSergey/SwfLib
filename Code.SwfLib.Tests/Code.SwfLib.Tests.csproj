@@ -81,6 +81,8 @@
     <Compile Include="BasicTypes\MatrixTest.cs" />
     <Compile Include="BasicTypes\RectTest.cs" />
     <Compile Include="Bin2BinTests.cs" />
+    <Compile Include="Filters\BaseFilterTest.cs" />
+    <Compile Include="Filters\DropShadowFilterTest.cs" />
     <Compile Include="Filters\FilterFactoryTest.cs" />
     <Compile Include="Tags\ControlTags\MetadataTagTest.cs" />
     <Compile Include="Tags\ControlTags\SetBackgroundColorTagTest.cs" />

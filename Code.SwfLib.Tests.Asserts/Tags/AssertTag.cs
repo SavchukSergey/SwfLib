@@ -22,7 +22,7 @@ namespace Code.SwfLib.Tests.Asserts.Tags {
             Assert.AreEqual(expected.CharacterID, actual.CharacterID);
             Assert.AreEqual(expected.Depth, actual.Depth);
             AssertData.AreEqual(expected.Matrix, actual.Matrix, "Matrix");
-            AssertFilters.AreEqual(expected.Filters, actual.Filters);
+            AssertFilters.AreEqual(expected.Filters, actual.Filters, "PlaceObject3.Filters");
             Assert.AreEqual(expected.RestData, actual.RestData);
         }
 
