@@ -27,21 +27,19 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static GradientGlowFilter FromXml(XElement xFilter) {
-            const string node = "GradientGlow";
             var xCompositeSource = xFilter.Attribute("compositeSource");
-            var xPasses = xFilter.Attribute("passes");
 
             var filter = new GradientGlowFilter {
-                BlurX = xFilter.RequiredDoubleAttribute("blurX", node),
-                BlurY = xFilter.RequiredDoubleAttribute("blurY", node),
-                Angle = xFilter.RequiredDoubleAttribute("angle", node),
-                Distance = xFilter.RequiredDoubleAttribute("distance", node),
-                Strength = xFilter.RequiredDoubleAttribute("strength", node),
-                InnerGlow = xFilter.RequiredBoolAttribute("innerGlow", node),
-                Knockout = xFilter.RequiredBoolAttribute("knockout", node),
+                BlurX = xFilter.RequiredDoubleAttribute("blurX"),
+                BlurY = xFilter.RequiredDoubleAttribute("blurY"),
+                Angle = xFilter.RequiredDoubleAttribute("angle"),
+                Distance = xFilter.RequiredDoubleAttribute("distance"),
+                Strength = xFilter.RequiredDoubleAttribute("strength"),
+                InnerGlow = xFilter.RequiredBoolAttribute("innerGlow"),
+                Knockout = xFilter.RequiredBoolAttribute("knockout"),
                 CompositeSource = xCompositeSource == null || CommonFormatter.ParseBool(xCompositeSource.Value),
-                OnTop = xFilter.RequiredBoolAttribute("onTop", node),
-                Passes = uint.Parse(xPasses.Value),
+                OnTop = xFilter.RequiredBoolAttribute("onTop"),
+                Passes = xFilter.RequiredUIntAttribute("passes"),
             };
 
             XGradientRecords.FromXml(xFilter.Element("gradientColors"), filter.GradientColors);

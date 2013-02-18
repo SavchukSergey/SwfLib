@@ -23,24 +23,17 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static GlowFilter FromXml(XElement xFilter) {
-            const string NODE = "Glow";
-            var xBlurX = xFilter.RequiredAttribute("blurX", NODE);
-            var xBlurY = xFilter.RequiredAttribute("blurY", NODE);
-            var xInnerGlow = xFilter.RequiredAttribute("innerGlow", NODE);
-            var xKnockout = xFilter.RequiredAttribute("knockout", NODE);
-            var xPasses = xFilter.RequiredAttribute("passes", NODE);
-            var xStrength = xFilter.RequiredAttribute("strength", NODE);
             var xCompositeSource = xFilter.Attribute("compositeSource");
 
             var xColor = xFilter.Element("color").Element("Color");
 
             return new GlowFilter {
-                BlurX = CommonFormatter.ParseDouble(xBlurX),
-                BlurY = CommonFormatter.ParseDouble(xBlurY),
-                InnerGlow = CommonFormatter.ParseBool(xInnerGlow),
-                Knockout = CommonFormatter.ParseBool(xKnockout),
-                Passes = uint.Parse(xPasses),
-                Strength = CommonFormatter.ParseDouble(xStrength),
+                BlurX = xFilter.RequiredDoubleAttribute("blurX"),
+                BlurY = xFilter.RequiredDoubleAttribute("blurY"),
+                InnerGlow = xFilter.RequiredBoolAttribute("innerGlow"),
+                Knockout = xFilter.RequiredBoolAttribute("knockout"),
+                Passes = xFilter.RequiredUIntAttribute("passes"),
+                Strength = xFilter.RequiredDoubleAttribute("strength"),
                 CompositeSource = xCompositeSource == null || CommonFormatter.ParseBool(xCompositeSource.Value),
                 Color = XColorRGBA.FromXml(xColor)
             };

@@ -17,13 +17,13 @@ namespace Code.SwfLib.SwfMill.Actions {
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGotoFrame action, XElement xAction) {
-            action.Frame = xAction.RequiredUShortAttribute("frame", "GotoFrame");
+            action.Frame = xAction.RequiredUShortAttribute("frame");
             return action;
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGetURL action, XElement xAction) {
-            action.UrlString = xAction.RequiredStringAttribute("url", "GetURL");
-            action.TargetString = xAction.RequiredStringAttribute("target", "GetURL");
+            action.UrlString = xAction.RequiredStringAttribute("url");
+            action.TargetString = xAction.RequiredStringAttribute("target");
             return action;
         }
 
@@ -53,18 +53,18 @@ namespace Code.SwfLib.SwfMill.Actions {
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionWaitForFrame action, XElement xAction) {
             var xSkip = xAction.Attribute("skipCount");
-            action.Frame = xAction.RequiredUShortAttribute("frame", "WaitForFrame");
+            action.Frame = xAction.RequiredUShortAttribute("frame");
             action.SkipCount = byte.Parse(xSkip.Value);
             return action;
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionSetTarget action, XElement xAction) {
-            action.TargetName = xAction.RequiredStringAttribute("target", "SetTarget");
+            action.TargetName = xAction.RequiredStringAttribute("target");
             return action;
         }
 
         ActionBase IActionVisitor<XElement, ActionBase>.Visit(ActionGoToLabel action, XElement xAction) {
-            action.Label = xAction.RequiredStringAttribute("label", "GoToLabel");
+            action.Label = xAction.RequiredStringAttribute("label");
             return action;
         }
 
@@ -144,7 +144,7 @@ namespace Code.SwfLib.SwfMill.Actions {
                 var xIndex = xItem.Attribute("index");
                 switch (xItem.Name.LocalName) {
                     case "StackString":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.String, String = xItem.RequiredStringAttribute("value", "StackString") });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.String, String = xItem.RequiredStringAttribute("value") });
                         break;
                     case "StackFloat":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Float, Float = float.Parse(xValue.Value) });
@@ -162,16 +162,16 @@ namespace Code.SwfLib.SwfMill.Actions {
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Boolean, Boolean = byte.Parse(xValue.Value) });
                         break;
                     case "StackDouble":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Double, Double = xItem.RequiredDoubleAttribute("value", "StackDouble") });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Double, Double = xItem.RequiredDoubleAttribute("value") });
                         break;
                     case "StackInteger":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Integer, Integer = xItem.RequiredIntAttribute("value", "StackInteger") });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Integer, Integer = xItem.RequiredIntAttribute("value") });
                         break;
                     case "StackDictionaryLookup":
                         action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant8, Constant8 = byte.Parse(xIndex.Value) });
                         break;
                     case "StackConstant16":
-                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant16, Constant16 = xItem.RequiredUShortAttribute("value", "StackConstant16") });
+                        action.Items.Add(new ActionPushItem { Type = ActionPushItemType.Constant16, Constant16 = xItem.RequiredUShortAttribute("value") });
                         break;
                     default:
                         throw new NotSupportedException();
@@ -308,7 +308,7 @@ namespace Code.SwfLib.SwfMill.Actions {
             var xArgs = xAction.Element("args");
             var xActions = xAction.Element("actions");
 
-            action.Name = xAction.RequiredStringAttribute("name", "DefineFunction");
+            action.Name = xAction.RequiredStringAttribute("name");
             foreach (var xArg in xArgs.Elements()) {
                 action.Args.Add(xArg.Attribute("name").Value);
             }

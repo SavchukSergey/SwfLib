@@ -32,8 +32,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                     var xScenes = element;
                     foreach (var xScene in xScenes.Elements()) {
                         var scene = new SceneOffsetData {
-                            Offset = xScene.RequiredUIntAttribute("offset", "scenes"),
-                            Name = xScene.RequiredStringAttribute("name", "scenes")
+                            Offset = xScene.RequiredUIntAttribute("offset"),
+                            Name = xScene.RequiredStringAttribute("name")
                         };
                         tag.Scenes.Add(scene);
                     }
@@ -42,8 +42,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
                     var xFrames = element;
                     foreach (var xFrame in xFrames.Elements()) {
                         var frame = new FrameLabelData {
-                            FrameNumber = xFrame.RequiredUIntAttribute("number", "frames"),
-                            Label = xFrame.RequiredStringAttribute("label",  "frames")
+                            FrameNumber = xFrame.RequiredUIntAttribute("number"),
+                            Label = xFrame.RequiredStringAttribute("label")
                         };
                         tag.Frames.Add(frame);
                     }

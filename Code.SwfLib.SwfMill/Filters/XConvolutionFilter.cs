@@ -36,15 +36,14 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static ConvolutionFilter FromXml(XElement xFilter) {
-            const string node = "Convolution";
             var xMatrix = xFilter.Element("matrix");
             var xReserved = xFilter.Attribute("reserved");
             var xClamp = xFilter.Attribute("clamp");
             var xPreserveAlpha = xFilter.Attribute("preserveAlpha");
 
             var filter = new ConvolutionFilter {
-                Divisor = xFilter.RequiredDoubleAttribute("divisor", node),
-                Bias = xFilter.RequiredDoubleAttribute("bias", node)
+                Divisor = xFilter.RequiredDoubleAttribute("divisor"),
+                Bias = xFilter.RequiredDoubleAttribute("bias")
             };
 
             var xRows = xMatrix.Elements().ToList();

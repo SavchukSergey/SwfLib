@@ -37,32 +37,30 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static ColorMatrixFilter FromXml(XElement xFilter) {
-            const string NODE = "ColorMatrix";
-
             return new ColorMatrixFilter {
-                R0 = xFilter.RequiredDoubleAttribute("r0", NODE),
-                R1 = xFilter.RequiredDoubleAttribute("r1", NODE),
-                R2 = xFilter.RequiredDoubleAttribute("r2", NODE),
-                R3 = xFilter.RequiredDoubleAttribute("r3", NODE),
-                R4 = xFilter.RequiredDoubleAttribute("r4", NODE),
+                R0 = xFilter.RequiredDoubleAttribute("r0"),
+                R1 = xFilter.RequiredDoubleAttribute("r1"),
+                R2 = xFilter.RequiredDoubleAttribute("r2"),
+                R3 = xFilter.RequiredDoubleAttribute("r3"),
+                R4 = xFilter.RequiredDoubleAttribute("r4"),
 
-                G0 = xFilter.RequiredDoubleAttribute("g0", NODE),
-                G1 = xFilter.RequiredDoubleAttribute("g1", NODE),
-                G2 = xFilter.RequiredDoubleAttribute("g2", NODE),
-                G3 = xFilter.RequiredDoubleAttribute("g3", NODE),
-                G4 = xFilter.RequiredDoubleAttribute("g4", NODE),
+                G0 = xFilter.RequiredDoubleAttribute("g0"),
+                G1 = xFilter.RequiredDoubleAttribute("g1"),
+                G2 = xFilter.RequiredDoubleAttribute("g2"),
+                G3 = xFilter.RequiredDoubleAttribute("g3"),
+                G4 = xFilter.RequiredDoubleAttribute("g4"),
 
-                B0 = xFilter.RequiredDoubleAttribute("b0", NODE),
-                B1 = xFilter.RequiredDoubleAttribute("b1", NODE),
-                B2 = xFilter.RequiredDoubleAttribute("b2", NODE),
-                B3 = xFilter.RequiredDoubleAttribute("b3", NODE),
-                B4 = xFilter.RequiredDoubleAttribute("b4", NODE),
+                B0 = xFilter.RequiredDoubleAttribute("b0"),
+                B1 = xFilter.RequiredDoubleAttribute("b1"),
+                B2 = xFilter.RequiredDoubleAttribute("b2"),
+                B3 = xFilter.RequiredDoubleAttribute("b3"),
+                B4 = xFilter.RequiredDoubleAttribute("b4"),
 
-                A0 = xFilter.RequiredDoubleAttribute("a0", NODE),
-                A1 = xFilter.RequiredDoubleAttribute("a1", NODE),
-                A2 = xFilter.RequiredDoubleAttribute("a2", NODE),
-                A3 = xFilter.RequiredDoubleAttribute("a3", NODE),
-                A4 = xFilter.RequiredDoubleAttribute("a4", NODE)
+                A0 = xFilter.RequiredDoubleAttribute("a0"),
+                A1 = xFilter.RequiredDoubleAttribute("a1"),
+                A2 = xFilter.RequiredDoubleAttribute("a2"),
+                A3 = xFilter.RequiredDoubleAttribute("a3"),
+                A4 = xFilter.RequiredDoubleAttribute("a4")
             };
         }
 

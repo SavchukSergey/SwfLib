@@ -13,10 +13,9 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         public static LineStyleRGBA FromXml(XElement xLineStyle) {
-            const string node = "lineStyle";
             var xColor = xLineStyle.Element("color").Element("Color");
             return new LineStyleRGBA {
-                Width = xLineStyle.RequiredUShortAttribute("width", node),
+                Width = xLineStyle.RequiredUShortAttribute("width"),
                 Color = XColorRGBA.FromXml(xColor)
             };
         }

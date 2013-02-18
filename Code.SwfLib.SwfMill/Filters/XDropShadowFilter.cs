@@ -24,23 +24,19 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static DropShadowFilter FromXml(XElement xFilter) {
-            const string node = "DropShadow";
-            var xInnerShadow = xFilter.Attribute("innerShadow");
-            var xKnockout = xFilter.Attribute("knockout");
-            var xPasses = xFilter.Attribute("passes");
             var xCompositeSource = xFilter.Attribute("compositeSource");
 
             var xColor = xFilter.Element("color").Element("Color");
 
             return new DropShadowFilter {
-                Angle = xFilter.RequiredDoubleAttribute("angle", node),
-                BlurX = xFilter.RequiredDoubleAttribute("blurX", node),
-                BlurY = xFilter.RequiredDoubleAttribute("blurY", node),
-                Distance = xFilter.RequiredDoubleAttribute("distance", node),
-                InnerShadow = CommonFormatter.ParseBool(xInnerShadow.Value),
-                Knockout = CommonFormatter.ParseBool(xKnockout.Value),
-                Passes = uint.Parse(xPasses.Value),
-                Strength = xFilter.RequiredDoubleAttribute("strength", node),
+                Angle = xFilter.RequiredDoubleAttribute("angle"),
+                BlurX = xFilter.RequiredDoubleAttribute("blurX"),
+                BlurY = xFilter.RequiredDoubleAttribute("blurY"),
+                Distance = xFilter.RequiredDoubleAttribute("distance"),
+                InnerShadow = xFilter.RequiredBoolAttribute("innerShadow"),
+                Knockout = xFilter.RequiredBoolAttribute("knockout"),
+                Passes = xFilter.RequiredUIntAttribute("passes"),
+                Strength = xFilter.RequiredDoubleAttribute("strength"),
                 CompositeSource = xCompositeSource == null || CommonFormatter.ParseBool(xCompositeSource.Value),
                 Color = XColorRGBA.FromXml(xColor)
             };

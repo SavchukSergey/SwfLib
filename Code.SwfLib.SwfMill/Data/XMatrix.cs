@@ -9,9 +9,8 @@ namespace Code.SwfLib.SwfMill.Data {
 
         public static SwfMatrix FromXml(XElement xMatrix)
         {
-            const string node = "Matrix";
-            var xMoveX = xMatrix.RequiredIntAttribute("transX", node);
-            var xMoveY = xMatrix.RequiredIntAttribute("transY", node);
+            var xMoveX = xMatrix.RequiredIntAttribute("transX");
+            var xMoveY = xMatrix.RequiredIntAttribute("transY");
 
             var scaleX = xMatrix.Attribute("scaleX");
             var scaleY = xMatrix.Attribute("scaleY");

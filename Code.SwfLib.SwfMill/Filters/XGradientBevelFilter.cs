@@ -27,20 +27,19 @@ namespace Code.SwfLib.SwfMill.Filters {
         }
 
         public static GradientBevelFilter FromXml(XElement xFilter) {
-            const string node = "GradientBevel";
             var xCompositeSource = xFilter.Attribute("compositeSource");
             var xPasses = xFilter.Attribute("passes");
 
             var filter = new GradientBevelFilter {
-                BlurX = xFilter.RequiredDoubleAttribute("blurX", node),
-                BlurY = xFilter.RequiredDoubleAttribute("blurY", node),
-                Angle = xFilter.RequiredDoubleAttribute("angle", node),
-                Distance = xFilter.RequiredDoubleAttribute("distance", node),
-                Strength = xFilter.RequiredDoubleAttribute("strength", node),
-                InnerGlow = xFilter.RequiredBoolAttribute("innerGlow", node),
-                Knockout = xFilter.RequiredBoolAttribute("knockout", node),
+                BlurX = xFilter.RequiredDoubleAttribute("blurX"),
+                BlurY = xFilter.RequiredDoubleAttribute("blurY"),
+                Angle = xFilter.RequiredDoubleAttribute("angle"),
+                Distance = xFilter.RequiredDoubleAttribute("distance"),
+                Strength = xFilter.RequiredDoubleAttribute("strength"),
+                InnerGlow = xFilter.RequiredBoolAttribute("innerGlow"),
+                Knockout = xFilter.RequiredBoolAttribute("knockout"),
                 CompositeSource = xCompositeSource == null || CommonFormatter.ParseBool(xCompositeSource.Value),
-                OnTop = xFilter.RequiredBoolAttribute("onTop", node),
+                OnTop = xFilter.RequiredBoolAttribute("onTop"),
                 Passes = uint.Parse(xPasses.Value),
             };
 
