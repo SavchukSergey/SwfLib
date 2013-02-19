@@ -155,8 +155,5 @@ namespace Code.SwfLib.Tests.Asserts.Utils {
             get { return _first.BytesLeft; }
         }
 
-        public override Stream BaseStream {
-            get { return _first.BaseStream; }
-        }
     }
 }

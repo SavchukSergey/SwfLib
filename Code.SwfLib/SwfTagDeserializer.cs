@@ -690,10 +690,10 @@ namespace Code.SwfLib {
             tag.ButtonID = reader.ReadUInt16();
             tag.ReservedFlags = (byte)reader.ReadUnsignedBits(7);
             tag.TrackAsMenu = reader.ReadBit();
-            var baseOffset = reader.BaseStream.Position;
+            var baseOffset = reader.Position;
             var actionsOffset = reader.ReadUInt16();
 
-            while (actionsOffset != 0 ? (reader.BaseStream.Position - baseOffset) < actionsOffset : !reader.IsEOF) {
+            while (actionsOffset != 0 ? (reader.Position - baseOffset) < actionsOffset : !reader.IsEOF) {
                 tag.Characters.Add(reader.ReadButtonRecordEx());
             }
 

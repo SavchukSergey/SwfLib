@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace Code.SwfLib.Actions {
-    public class ActionWriter : IActionVisitor<SwfStreamWriter, object> {
+    public class ActionWriter : IActionVisitor<ISwfStreamWriter, object> {
 
         private readonly SwfStreamWriter _writer;
 
@@ -18,7 +18,7 @@ namespace Code.SwfLib.Actions {
                 var mem = new MemoryStream();
                 var writer = new SwfStreamWriter(mem);
                 var rest = action.AcceptVisitor(this, writer) as byte[];
-                _writer.WriteUInt16((ushort)writer.BaseStream.Length);
+                _writer.WriteUInt16((ushort)writer.Length);
                 _writer.WriteBytes(mem.ToArray());
                 if (rest != null) {
                     _writer.WriteBytes(rest);
@@ -32,128 +32,128 @@ namespace Code.SwfLib.Actions {
 
         #region SWF 3
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGotoFrame action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionGotoFrame action, ISwfStreamWriter writer) {
             writer.WriteUInt16(action.Frame);
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGetURL action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionGetURL action, ISwfStreamWriter writer) {
             writer.WriteString(action.UrlString);
             writer.WriteString(action.TargetString);
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionNextFrame action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionNextFrame action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionPreviousFrame action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionPreviousFrame action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionPlay action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionPlay action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStop action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStop action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionToggleQuality action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionToggleQuality action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStopSounds action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStopSounds action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionWaitForFrame action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionWaitForFrame action, ISwfStreamWriter writer) {
             writer.WriteUInt16(action.Frame);
             writer.WriteByte(action.SkipCount);
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionSetTarget action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionSetTarget action, ISwfStreamWriter writer) {
             writer.WriteString(action.TargetName);
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGoToLabel action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionGoToLabel action, ISwfStreamWriter writer) {
             writer.WriteString(action.Label);
             return null;
         }
 
         #endregion
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionAdd action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionAdd action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDivide action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionDivide action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionMultiply action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionMultiply action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionSubtract action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionSubtract action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionEquals action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionEquals action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionLess action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionLess action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionAnd action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionAnd action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionNot action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionNot action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionOr action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionOr action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStringAdd action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStringAdd action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStringEquals action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStringEquals action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStringExtract action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStringExtract action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStringLength action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStringLength action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionMBStringExtract action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionMBStringExtract action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionMBStringLength action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionMBStringLength action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStringLess action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStringLess action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionPop action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionPop action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionPush action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionPush action, ISwfStreamWriter writer) {
             foreach (var item in action.Items) {
                 writer.WriteByte((byte)item.Type);
                 switch (item.Type) {
@@ -192,58 +192,58 @@ namespace Code.SwfLib.Actions {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionAsciiToChar action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionAsciiToChar action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionCharToAscii action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionCharToAscii action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionToInteger action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionToInteger action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionMBAsciiToChar action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionMBAsciiToChar action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionMBCharToAscii action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionMBCharToAscii action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionCall action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionCall action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionIf action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionIf action, ISwfStreamWriter writer) {
             writer.WriteSInt16(action.BranchOffset);
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionJump action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionJump action, ISwfStreamWriter writer) {
             writer.WriteSInt16(action.BranchOffset);
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGetVariable action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionGetVariable action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionSetVariable action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionSetVariable action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGetURL2 action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionGetURL2 action, ISwfStreamWriter writer) {
             writer.WriteByte(action.Flags);
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGetProperty action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionGetProperty action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGotoFrame2 action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionGotoFrame2 action, ISwfStreamWriter writer) {
             writer.WriteUnsignedBits(action.Reserved, 6);
             writer.WriteBit(action.SceneBias.HasValue);
             writer.WriteBit(action.Play);
@@ -253,56 +253,56 @@ namespace Code.SwfLib.Actions {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionRemoveSprite action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionRemoveSprite action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionSetProperty action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionSetProperty action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionSetTarget2 action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionSetTarget2 action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStartDrag action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStartDrag action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionWaitForFrame2 action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionWaitForFrame2 action, ISwfStreamWriter writer) {
             writer.WriteByte(action.SkipCount);
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionCloneSprite action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionCloneSprite action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionEndDrag action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionEndDrag action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGetTime action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionGetTime action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionRandomNumber action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionRandomNumber action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionTrace action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionTrace action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionCallFunction action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionCallFunction action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionCallMethod action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionCallMethod action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionConstantPool action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionConstantPool action, ISwfStreamWriter writer) {
             writer.WriteUInt16((ushort)action.ConstantPool.Count);
             foreach (var str in action.ConstantPool) {
                 writer.WriteString(str);
@@ -310,7 +310,7 @@ namespace Code.SwfLib.Actions {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDefineFunction action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionDefineFunction action, ISwfStreamWriter writer) {
             writer.WriteString(action.Name ?? "");
             writer.WriteUInt16((ushort)action.Args.Count);
             foreach (var arg in action.Args) {
@@ -327,59 +327,59 @@ namespace Code.SwfLib.Actions {
             return awmem.ToArray();
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDefineLocal action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionDefineLocal action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDefineLocal2 action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionDefineLocal2 action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDelete action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionDelete action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDelete2 action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionDelete2 action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionEnumerate action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionEnumerate action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionEquals2 action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionEquals2 action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGetMember action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionGetMember action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionInitArray action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionInitArray action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionInitObject action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionInitObject action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionNewMethod action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionNewMethod action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionNewObject action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionNewObject action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionSetMember action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionSetMember action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionTargetPath action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionTargetPath action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionWith action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionWith action, ISwfStreamWriter writer) {
             var awmem = new MemoryStream();
             var aw = new ActionWriter(new SwfStreamWriter(awmem));
             foreach (var subaction in action.Actions) {
@@ -391,100 +391,100 @@ namespace Code.SwfLib.Actions {
             return awmem.ToArray();
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionToNumber action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionToNumber action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionToString action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionToString action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionTypeOf action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionTypeOf action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionAdd2 action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionAdd2 action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionLess2 action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionLess2 action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionModulo action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionModulo action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionBitAnd action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionBitAnd action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionBitLShift action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionBitLShift action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionBitOr action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionBitOr action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionBitRShift action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionBitRShift action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionBitURShift action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionBitURShift action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionBitXor action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionBitXor action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDecrement action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionDecrement action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionIncrement action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionIncrement action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionPushDuplicate action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionPushDuplicate action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionReturn action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionReturn action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStackSwap action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStackSwap action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStoreRegister action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStoreRegister action, ISwfStreamWriter writer) {
             writer.WriteByte(action.RegisterNumber);
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionInstanceOf action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionInstanceOf action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionEnumerate2 action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionEnumerate2 action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStrictEquals action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStrictEquals action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionGreater action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionGreater action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionStringGreater action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionStringGreater action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionDefineFunction2 action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionDefineFunction2 action, ISwfStreamWriter writer) {
             writer.WriteString(action.Name ?? "");
             writer.WriteUInt16((ushort)action.Parameters.Count);
             writer.WriteByte(action.RegisterCount);
@@ -516,19 +516,19 @@ namespace Code.SwfLib.Actions {
             return mem.ToArray();
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionExtends action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionExtends action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionCastOp action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionCastOp action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionImplementsOp action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionImplementsOp action, ISwfStreamWriter writer) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionTry action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionTry action, ISwfStreamWriter writer) {
             writer.WriteUnsignedBits(action.Reserved, 5);
             writer.WriteBit(action.CatchInRegister);
             writer.WriteBit(action.FinallyBlock);
@@ -554,15 +554,15 @@ namespace Code.SwfLib.Actions {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionThrow action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionThrow action, ISwfStreamWriter writer) {
             return null;
         }
 
-        public object Visit(ActionEnd action, SwfStreamWriter arg) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionEnd action, ISwfStreamWriter arg) {
             return null;
         }
 
-        object IActionVisitor<SwfStreamWriter, object>.Visit(ActionUnknown action, SwfStreamWriter writer) {
+        object IActionVisitor<ISwfStreamWriter, object>.Visit(ActionUnknown action, ISwfStreamWriter writer) {
             writer.WriteBytes(action.Data);
             return null;
         }

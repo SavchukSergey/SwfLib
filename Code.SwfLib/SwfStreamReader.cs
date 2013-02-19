@@ -12,11 +12,7 @@ namespace Code.SwfLib {
             get { return _reader.BaseStream.Position == _reader.BaseStream.Length; }
         }
 
-        public virtual Stream BaseStream {
-            get {
-                return _baseStream;
-            }
-        }
+        public long Position { get { return _reader.BaseStream.Position; } }
 
         public SwfStreamReader(Stream stream) {
             _reader = new BinaryReader(stream);

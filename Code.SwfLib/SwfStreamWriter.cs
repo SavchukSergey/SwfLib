@@ -1,19 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Code.SwfLib.Tags;
 
 namespace Code.SwfLib {
-    public class SwfStreamWriter {
+
+    public class SwfStreamWriter : ISwfStreamWriter {
 
         private readonly BinaryWriter _writer;
         private readonly Stream _baseStream;
-
-        public Stream BaseStream {
-            get {
-                return _baseStream;
-            }
-        }
 
         public SwfStreamWriter(Stream stream) {
             _writer = new BinaryWriter(stream);
@@ -24,16 +18,9 @@ namespace Code.SwfLib {
             _writer.Flush();
         }
 
-        public void WriteTagData(SwfTagData data) {
-            var bytes = data.Data;
-            if (bytes.Length >= 0x3f) {
-                WriteUInt16((ushort)(((ushort)data.Type << 6) | 0x3f));
-                WriteUInt32((uint)bytes.Length);
-            } else {
-                WriteUInt16((ushort)(((ushort)data.Type << 6) | bytes.Length));
-            }
-            WriteBytes(bytes);
-        }
+
+        public long Position { get { return _baseStream.Position; } }
+        public long Length { get { return _baseStream.Length; } }
 
         /// <summary>
         /// Writes Fixed point decimal in 8:8 format

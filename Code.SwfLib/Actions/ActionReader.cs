@@ -147,8 +147,8 @@ namespace Code.SwfLib.Actions {
         }
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionPush action, ushort length) {
-            var position = _reader.BaseStream.Position;
-            while (_reader.BaseStream.Position - position < length) {
+            var position = _reader.Position;
+            while (_reader.Position - position < length) {
                 var item = new ActionPushItem();
                 var type = (ActionPushItemType)_reader.ReadByte();
                 item.Type = type;
@@ -318,8 +318,8 @@ namespace Code.SwfLib.Actions {
                 action.Args.Add(_reader.ReadString());
             }
             var codeSize = _reader.ReadUInt16();
-            var pos = _reader.BaseStream.Position;
-            while ((_reader.BaseStream.Position - pos) < codeSize) {
+            var pos = _reader.Position;
+            while ((_reader.Position - pos) < codeSize) {
                 var subaction = ReadAction();
                 action.Actions.Add(subaction);
             }
@@ -380,8 +380,8 @@ namespace Code.SwfLib.Actions {
 
         ActionBase IActionVisitor<ushort, ActionBase>.Visit(ActionWith action, ushort arg) {
             var codeSize = _reader.ReadUInt16();
-            var pos = _reader.BaseStream.Position;
-            while ((_reader.BaseStream.Position - pos) < codeSize) {
+            var pos = _reader.Position;
+            while ((_reader.Position - pos) < codeSize) {
                 var subaction = ReadAction();
                 action.Actions.Add(subaction);
             }
@@ -513,8 +513,8 @@ namespace Code.SwfLib.Actions {
                 });
             }
             var codeSize = _reader.ReadUInt16();
-            var pos = _reader.BaseStream.Position;
-            while ((_reader.BaseStream.Position - pos) < codeSize) {
+            var pos = _reader.Position;
+            while ((_reader.Position - pos) < codeSize) {
                 var subaction = ReadAction();
                 action.Actions.Add(subaction);
             }
