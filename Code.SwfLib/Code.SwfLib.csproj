@@ -40,6 +40,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -127,6 +128,8 @@
     <Compile Include="Shapes\FillStyles\BitmapFillStyleRGBA.cs" />
     <Compile Include="Shapes\FillStyles\SolidFillStyleRGB.cs" />
     <Compile Include="Shapes\FillStyles\SolidFillStyleRGBA.cs" />
+    <Compile Include="Tags\BitmapTags\DefineBitsJpegAlphaBase.cs" />
+    <Compile Include="Tags\BitmapTags\DefineBitsJpegTagBase.cs" />
     <Compile Include="Tags\TagStreamExt.cs" />
     <Compile Include="Utils\UnsignedBitsCount.cs" />
     <Compile Include="Buttons\ButtonCondition.cs" />

@@ -27,5 +27,11 @@ namespace Code.SwfLib {
             zip.Flush();
             target.Seek(0, SeekOrigin.Begin);
         }
+
+        public static byte[] Decompress(byte[] compressed) {
+            var mem = new MemoryStream();
+            Decompress(new MemoryStream(compressed), mem);
+            return mem.ToArray();
+        }
     }
 }

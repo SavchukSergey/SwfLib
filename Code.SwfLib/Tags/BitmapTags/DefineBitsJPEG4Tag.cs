@@ -1,9 +1,5 @@
 ﻿namespace Code.SwfLib.Tags.BitmapTags {
-    public class DefineBitsJPEG4Tag : BitmapBaseTag {
-
-        public byte[] ImageData;
-
-        public byte[] BitmapAlphaData;
+    public class DefineBitsJPEG4Tag : DefineBitsJpegAlphaBase {
 
         public ushort DeblockParam;
 

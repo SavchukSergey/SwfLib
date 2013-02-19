@@ -1,7 +1,5 @@
 ﻿namespace Code.SwfLib.Tags.BitmapTags {
-    public class DefineBitsJPEG2Tag : BitmapBaseTag {
-
-        public byte[] ImageData;
+    public class DefineBitsJPEG2Tag : DefineBitsJpegTagBase {
 
         public override SwfTagType TagType {
             get { return SwfTagType.DefineBitsJPEG2; }
