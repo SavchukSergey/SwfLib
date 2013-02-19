@@ -28,34 +28,6 @@ namespace Code.SwfLib {
             writer.WriteUInt16(header.FrameCount);
         }
 
-        public static void WriteRGB(this SwfStreamWriter writer, SwfRGB val) {
-            writer.WriteRGB(ref val);
-        }
-
-        public static void WriteRGB(this SwfStreamWriter writer, ref SwfRGB val) {
-            writer.WriteByte(val.Red);
-            writer.WriteByte(val.Green);
-            writer.WriteByte(val.Blue);
-        }
-
-        public static void WriteRGBA(this SwfStreamWriter writer, SwfRGBA val) {
-            writer.WriteRGBA(ref val);
-        }
-
-        public static void WriteRGBA(this SwfStreamWriter writer, ref SwfRGBA val) {
-            writer.WriteByte(val.Red);
-            writer.WriteByte(val.Green);
-            writer.WriteByte(val.Blue);
-            writer.WriteByte(val.Alpha);
-        }
-
-        public static void WriteARGB(this SwfStreamWriter writer, SwfRGBA val) {
-            writer.WriteByte(val.Alpha);
-            writer.WriteByte(val.Red);
-            writer.WriteByte(val.Green);
-            writer.WriteByte(val.Blue);
-        }
-
         public static void WriteRect(this SwfStreamWriter writer, SwfRect rect) {
             writer.WriteRect(ref rect);
         }
@@ -105,6 +77,5 @@ namespace Code.SwfLib {
             writer.WriteSignedBits(matrix.TranslateY, translateBits);
             writer.FlushBits();
         }
-
     }
 }

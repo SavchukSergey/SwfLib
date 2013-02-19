@@ -1,13 +1,12 @@
-﻿using Code.SwfLib.Data;
-using Code.SwfLib.Utils;
+﻿using Code.SwfLib.Utils;
 
-namespace Code.SwfLib {
+namespace Code.SwfLib.Data {
     public static class ColorTransformStreamExt {
 
         public static ColorTransformRGB ReadColorTransformRGB(this ISwfStreamReader reader) {
             ColorTransformRGB transform;
-            bool hasAddTerms = reader.ReadBit();
-            bool hasMultTerms = reader.ReadBit();
+            var hasAddTerms = reader.ReadBit();
+            var hasMultTerms = reader.ReadBit();
             var bits = reader.ReadUnsignedBits(4);
             if (hasMultTerms) {
                 transform.RedMultTerm = (short)reader.ReadSignedBits(bits);
@@ -75,8 +74,8 @@ namespace Code.SwfLib {
         }
 
         public static void ReadColorTransformRGBA(this ISwfStreamReader reader, out ColorTransformRGBA transform) {
-            bool hasAddTerms = reader.ReadBit();
-            bool hasMultTerms = reader.ReadBit();
+            var hasAddTerms = reader.ReadBit();
+            var hasMultTerms = reader.ReadBit();
             var bits = reader.ReadUnsignedBits(4);
             if (hasMultTerms) {
                 transform.RedMultTerm = (short)reader.ReadSignedBits(bits);

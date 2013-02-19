@@ -1,4 +1,5 @@
-﻿using Code.SwfLib.Gradients;
+﻿using Code.SwfLib.Data;
+using Code.SwfLib.Gradients;
 
 namespace Code.SwfLib.Shapes.FillStyles {
     public class FillStyleRGBWriter : IFillStyleRGBVisitor<SwfStreamWriter, object> {

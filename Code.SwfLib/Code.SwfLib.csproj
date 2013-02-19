@@ -103,6 +103,7 @@
     <Compile Include="Actions\ActionWith.cs" />
     <Compile Include="Actions\ActionWriter.cs" />
     <Compile Include="Actions\RegisterParam.cs" />
+    <Compile Include="Data\ColorStreamExt.cs" />
     <Compile Include="Gradients\BaseGradientRGB.cs" />
     <Compile Include="Gradients\BaseGradientRGBA.cs" />
     <Compile Include="Gradients\FocalGradientRGBA.cs" />
@@ -135,7 +136,7 @@
     <Compile Include="ClipActions\ClipActionRecord.cs" />
     <Compile Include="ClipActions\ClipActionsList.cs" />
     <Compile Include="ClipActions\ClipEventFlags.cs" />
-    <Compile Include="ColorTransformStreamExt.cs" />
+    <Compile Include="Data\ColorTransformStreamExt.cs" />
     <Compile Include="Actions\ActionAdd.cs" />
     <Compile Include="Actions\ActionAnd.cs" />
     <Compile Include="Actions\ActionAsciiToChar.cs" />

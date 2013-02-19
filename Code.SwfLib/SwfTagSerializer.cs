@@ -4,6 +4,7 @@ using System.Text;
 using Code.SwfLib.Actions;
 using Code.SwfLib.Buttons;
 using Code.SwfLib.ClipActions;
+using Code.SwfLib.Data;
 using Code.SwfLib.Filters;
 using Code.SwfLib.Fonts;
 using Code.SwfLib.Shapes;

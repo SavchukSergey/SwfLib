@@ -24,44 +24,6 @@ namespace Code.SwfLib {
             return header;
         }
 
-        public static SwfRGB ReadRGB(this ISwfStreamReader reader) {
-            SwfRGB color;
-            reader.ReadRGB(out color);
-            return color;
-        }
-
-        public static void ReadRGB(this ISwfStreamReader reader, out SwfRGB color) {
-            color.Red = reader.ReadByte();
-            color.Green = reader.ReadByte();
-            color.Blue = reader.ReadByte();
-        }
-
-        public static void ReadRGBA(this ISwfStreamReader reader, out SwfRGBA color) {
-            color.Red = reader.ReadByte();
-            color.Green = reader.ReadByte();
-            color.Blue = reader.ReadByte();
-            color.Alpha = reader.ReadByte();
-        }
-
-        public static SwfRGBA ReadRGBA(this ISwfStreamReader reader) {
-            return new SwfRGBA {
-                Red = reader.ReadByte(),
-                Green = reader.ReadByte(),
-                Blue = reader.ReadByte(),
-                Alpha = reader.ReadByte()
-            };
-        }
-
-        public static SwfRGBA ReadARGB(this ISwfStreamReader reader) {
-            var rgb = new SwfRGBA {
-                Alpha = reader.ReadByte(),
-                Red = reader.ReadByte(),
-                Green = reader.ReadByte(),
-                Blue = reader.ReadByte()
-            };
-            return rgb;
-        }
-
         public static SwfRect ReadRect(this ISwfStreamReader reader) {
             SwfRect rect;
             ReadRect(reader, out rect);
@@ -112,9 +74,5 @@ namespace Code.SwfLib {
             };
 
         }
-
-
-
-
     }
 }

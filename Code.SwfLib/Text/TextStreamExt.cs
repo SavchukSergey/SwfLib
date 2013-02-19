@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Text {
     public static class TextStreamExt {

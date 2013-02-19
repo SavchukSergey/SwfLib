@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Gradients {
     public static class GradientStreamExt {
