@@ -60,6 +60,7 @@
     <Compile Include="Actions\ConstantPoolActionTest.cs" />
     <Compile Include="Actions\JumpActionTest.cs" />
     <Compile Include="Actions\IfActionTest.cs" />
+    <Compile Include="Actions\PushActionTest.cs" />
     <Compile Include="Actions\WithActionTest.cs" />
     <Compile Include="Actions\GotoFrame2ActionTest.cs" />
     <Compile Include="Actions\GetURL2ActionTest.cs" />
