@@ -7,7 +7,7 @@ namespace Code.SwfLib {
 
         private static readonly ShapeRecordWriter _shapeRecordWriter = new ShapeRecordWriter();
 
-        public static void WriteShapeRecordsRGB(this SwfStreamWriter writer, IList<IShapeRecordRGB> shapeRecords, uint fillStyleBits, uint lineStyleBits) {
+        public static void WriteShapeRecordsRGB(this ISwfStreamWriter writer, IList<IShapeRecordRGB> shapeRecords, uint fillStyleBits, uint lineStyleBits) {
             writer.WriteUnsignedBits(fillStyleBits, 4);
             writer.WriteUnsignedBits(lineStyleBits, 4);
             writer.FlushBits();
@@ -17,7 +17,7 @@ namespace Code.SwfLib {
 
         }
 
-        public static void WriteShapeRecordsRGBA(this SwfStreamWriter writer, IList<IShapeRecordRGBA> shapeRecords, uint fillStyleBits, uint lineStyleBits) {
+        public static void WriteShapeRecordsRGBA(this ISwfStreamWriter writer, IList<IShapeRecordRGBA> shapeRecords, uint fillStyleBits, uint lineStyleBits) {
             writer.WriteUnsignedBits(fillStyleBits, 4);
             writer.WriteUnsignedBits(lineStyleBits, 4);
             writer.FlushBits();
@@ -27,7 +27,7 @@ namespace Code.SwfLib {
 
         }
 
-        public static void WriteShapeRecordsEx(this SwfStreamWriter writer, IList<IShapeRecordEx> shapeRecords, uint fillStyleBits, uint lineStyleBits) {
+        public static void WriteShapeRecordsEx(this ISwfStreamWriter writer, IList<IShapeRecordEx> shapeRecords, uint fillStyleBits, uint lineStyleBits) {
             writer.WriteUnsignedBits(fillStyleBits, 4);
             writer.WriteUnsignedBits(lineStyleBits, 4);
             writer.FlushBits();

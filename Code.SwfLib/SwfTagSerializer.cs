@@ -15,13 +15,15 @@ using Code.SwfLib.Tags.ButtonTags;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.FontTags;
+using Code.SwfLib.Tags.ShapeMorphingTags;
 using Code.SwfLib.Tags.ShapeTags;
+using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
 using Code.SwfLib.Text;
 using Code.SwfLib.Utils;
 
 namespace Code.SwfLib {
-    public class SwfTagSerializer : ISwfTagVisitor<SwfStreamWriter, SwfTagData> {
+    public class SwfTagSerializer : ISwfTagVisitor<ISwfStreamWriter, SwfTagData> {
 
         private readonly SwfFile _file;
 
@@ -42,7 +44,7 @@ namespace Code.SwfLib {
 
         #region Display list tags
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(PlaceObjectTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(PlaceObjectTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteUInt16(tag.Depth);
             writer.WriteMatrix(ref tag.Matrix);
@@ -53,7 +55,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(PlaceObject2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(PlaceObject2Tag tag, ISwfStreamWriter writer) {
             writer.WriteBit(tag.HasClipActions);
             writer.WriteBit(tag.HasClipDepth);
             writer.WriteBit(tag.HasName);
@@ -75,7 +77,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(PlaceObject3Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(PlaceObject3Tag tag, ISwfStreamWriter writer) {
             writer.WriteBit(tag.HasClipActions);
             writer.WriteBit(tag.ClipDepth.HasValue);
             writer.WriteBit(tag.Name != null);
@@ -137,18 +139,18 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(RemoveObjectTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(RemoveObjectTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteUInt16(tag.Depth);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(RemoveObject2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(RemoveObject2Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.Depth);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ShowFrameTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(ShowFrameTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
@@ -156,26 +158,26 @@ namespace Code.SwfLib {
 
         #region Control tags
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(SetBackgroundColorTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(SetBackgroundColorTag tag, ISwfStreamWriter writer) {
             writer.WriteRGB(ref tag.Color);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(FrameLabelTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(FrameLabelTag tag, ISwfStreamWriter writer) {
             writer.WriteString(tag.Name);
             if (tag.AnchorFlag.HasValue) writer.WriteByte(tag.AnchorFlag.Value);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ProtectTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(ProtectTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(EndTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(EndTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ExportAssetsTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(ExportAssetsTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16((ushort)tag.Symbols.Count);
             foreach (var symbolref in tag.Symbols) {
                 writer.WriteUInt16(symbolref.SymbolID);
@@ -184,29 +186,29 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ImportAssetsTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(ImportAssetsTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(EnableDebuggerTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(EnableDebuggerTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(EnableDebugger2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(EnableDebugger2Tag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ScriptLimitsTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(ScriptLimitsTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.MaxRecursionDepth);
             writer.WriteUInt16(tag.ScriptTimeoutSeconds);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(SetTabIndexTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(SetTabIndexTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(FileAttributesTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(FileAttributesTag tag, ISwfStreamWriter writer) {
             writer.WriteBit(tag.Reserved0);
             writer.WriteBit(tag.UseDirectBlit);
             writer.WriteBit(tag.UseGPU);
@@ -219,11 +221,11 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ImportAssets2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(ImportAssets2Tag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(SymbolClassTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(SymbolClassTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16((ushort)tag.References.Count);
             foreach (var symbolRef in tag.References) {
                 writer.WriteUInt16(symbolRef.SymbolID);
@@ -232,16 +234,16 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(MetadataTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(MetadataTag tag, ISwfStreamWriter writer) {
             writer.WriteString(tag.Metadata);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineScalingGridTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineScalingGridTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineSceneAndFrameLabelDataTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineSceneAndFrameLabelDataTag tag, ISwfStreamWriter writer) {
             writer.WriteEncodedU32((uint)tag.Scenes.Count);
             foreach (var scene in tag.Scenes) {
                 writer.WriteEncodedU32(scene.Offset);
@@ -259,7 +261,7 @@ namespace Code.SwfLib {
 
         #region Action tags
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DoActionTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DoActionTag tag, ISwfStreamWriter writer) {
             var actionWriter = new ActionWriter(writer);
             foreach (var action in tag.ActionRecords) {
                 actionWriter.WriteAction(action);
@@ -267,7 +269,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DoInitActionTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DoInitActionTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.SpriteId);
             var actionWriter = new ActionWriter(writer);
             foreach (var action in tag.ActionRecords) {
@@ -276,14 +278,14 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DoABCTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DoABCTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt32(tag.Flags);
             writer.WriteString(tag.Name);
             writer.WriteBytes(tag.ABCData);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DoABCDefineTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DoABCDefineTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
@@ -291,7 +293,7 @@ namespace Code.SwfLib {
 
         #region Shape tags
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShapeTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineShapeTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
 
@@ -303,7 +305,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineShape2Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
 
@@ -315,7 +317,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape3Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineShape3Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
 
@@ -327,7 +329,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineShape4Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineShape4Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
             writer.WriteRect(ref tag.ShapeBounds);
             writer.WriteRect(ref tag.EdgeBounds);
@@ -346,24 +348,24 @@ namespace Code.SwfLib {
 
         #region Bitmap tags
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineBitsTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteBytes(tag.JPEGData);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(JPEGTablesTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(JPEGTablesTag tag, ISwfStreamWriter writer) {
             writer.WriteBytes(tag.JPEGData);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG2Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             if (tag.ImageData != null) writer.WriteBytes(tag.ImageData);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG3Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG3Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteUInt32((uint)tag.ImageData.Length);
             writer.WriteBytes(tag.ImageData);
@@ -371,7 +373,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG4Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG4Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteUInt32((uint)tag.ImageData.Length);
             writer.WriteUInt16(tag.DeblockParam);
@@ -380,7 +382,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsLosslessTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineBitsLosslessTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteByte(tag.BitmapFormat);
             writer.WriteUInt16(tag.BitmapWidth);
@@ -394,7 +396,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBitsLossless2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineBitsLossless2Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteByte(tag.BitmapFormat);
             writer.WriteUInt16(tag.BitmapWidth);
@@ -410,15 +412,15 @@ namespace Code.SwfLib {
 
         #endregion
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.ShapeMorphingTags.DefineMorphShapeTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineMorphShapeTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.ShapeMorphingTags.DefineMorphShape2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineMorphShape2Tag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineFontTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
             foreach (var offset in tag.OffsetTable) {
                 writer.WriteUInt16(offset);
@@ -426,22 +428,22 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontInfoTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineFontInfoTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontInfo2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineFontInfo2Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineFont2Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont3Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineFont3Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
 
             writer.WriteBit(tag.HasLayout);
@@ -506,7 +508,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        private void WriteOffsets(SwfStreamWriter writer, IEnumerable<uint> offsets, uint baseOffset, bool wideOffsets) {
+        private void WriteOffsets(ISwfStreamWriter writer, IEnumerable<uint> offsets, uint baseOffset, bool wideOffsets) {
             foreach (var offset in offsets) {
                 var resOffset = offset + baseOffset;
                 if (wideOffsets) {
@@ -528,12 +530,12 @@ namespace Code.SwfLib {
             return shapesStream.ToArray();
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFont4Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineFont4Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontAlignZonesTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineFontAlignZonesTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
             writer.WriteUnsignedBits((byte)tag.CsmTableHint, 2);
             writer.WriteUnsignedBits(tag.Reserved, 6);
@@ -552,7 +554,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineFontNameTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineFontNameTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.FontID);
             writer.WriteString(tag.FontName);
             writer.WriteString(tag.FontCopyright);
@@ -560,7 +562,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineTextTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineTextTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteRect(ref tag.TextBounds);
             writer.WriteMatrix(ref tag.TextMatrix);
@@ -585,7 +587,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineText2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineText2Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteRect(ref tag.TextBounds);
             writer.WriteMatrix(ref tag.TextMatrix);
@@ -610,7 +612,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineEditTextTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineEditTextTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteRect(tag.Bounds);
 
@@ -661,7 +663,7 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(CSMTextSettingsTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(CSMTextSettingsTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.TextID);
             writer.WriteUnsignedBits(tag.UseFlashType, 2);
             writer.WriteUnsignedBits(tag.GridFit, 3);
@@ -672,35 +674,35 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.DefineSoundTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineSoundTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.StartSoundTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(StartSoundTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.StartSound2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(StartSound2Tag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.SoundStreamHeadTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(SoundStreamHeadTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.SoundStreamHead2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(SoundStreamHead2Tag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.SoundTags.SoundStreamBlockTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(SoundStreamBlockTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineButtonTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineButtonTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineButton2Tag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineButton2Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.ButtonID);
             writer.WriteUnsignedBits(tag.ReservedFlags, 7);
             writer.WriteBit(tag.TrackAsMenu);
@@ -735,15 +737,15 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineButtonCxformTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineButtonCxformTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineButtonSoundTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineButtonSoundTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineSpriteTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineSpriteTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.SpriteID);
             writer.WriteUInt16(tag.FramesCount);
             foreach (var subtag in tag.Tags) {
@@ -753,27 +755,27 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.VideoTags.DefineVideoStreamTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(Tags.VideoTags.DefineVideoStreamTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(Tags.VideoTags.VideoFrameTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(Tags.VideoTags.VideoFrameTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DefineBinaryDataTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineBinaryDataTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(DebugIDTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DebugIDTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(ProductInfoTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(ProductInfoTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<SwfStreamWriter, SwfTagData>.Visit(UnknownTag tag, SwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(UnknownTag tag, ISwfStreamWriter writer) {
             writer.WriteBytes(tag.Data);
             return null;
         }

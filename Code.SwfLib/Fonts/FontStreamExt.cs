@@ -10,7 +10,7 @@
             return res;
         }
 
-        public static void WriteKerningRecord(this SwfStreamWriter writer, KerningRecord record, bool wideCodes) {
+        public static void WriteKerningRecord(this ISwfStreamWriter writer, KerningRecord record, bool wideCodes) {
             if (wideCodes) {
                 writer.WriteUInt16(record.LeftCode);
                 writer.WriteUInt16(record.RightCode);

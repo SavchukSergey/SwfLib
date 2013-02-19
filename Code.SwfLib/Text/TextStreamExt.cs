@@ -85,7 +85,7 @@ namespace Code.SwfLib.Text {
             return res;
         }
 
-        public static void WriteTextRecordRGB(this SwfStreamWriter writer, TextRecordRGB record, uint glyphBits, uint advanceBits) {
+        public static void WriteTextRecordRGB(this ISwfStreamWriter writer, TextRecordRGB record, uint glyphBits, uint advanceBits) {
             if (record == null) throw new ArgumentNullException("record");
             writer.WriteBit(record.Type);
             writer.WriteUnsignedBits(record.Reserved, 3);
@@ -127,7 +127,7 @@ namespace Code.SwfLib.Text {
             writer.FlushBits();
         }
 
-        public static void WriteTextRecordRGBA(this SwfStreamWriter writer, TextRecordRGBA record, uint glyphBits, uint advanceBits) {
+        public static void WriteTextRecordRGBA(this ISwfStreamWriter writer, TextRecordRGBA record, uint glyphBits, uint advanceBits) {
             if (record == null) throw new ArgumentNullException("record");
             writer.WriteBit(record.Type);
             writer.WriteUnsignedBits(record.Reserved, 3);
@@ -178,7 +178,7 @@ namespace Code.SwfLib.Text {
             return entry;
         }
 
-        public static void WriteGlyphEntry(this SwfStreamWriter writer, GlyphEntry glyph, uint glyphBits, uint advanceBits) {
+        public static void WriteGlyphEntry(this ISwfStreamWriter writer, GlyphEntry glyph, uint glyphBits, uint advanceBits) {
             writer.WriteUnsignedBits(glyph.GlyphIndex, glyphBits);
             writer.WriteSignedBits(glyph.GlyphAdvance, advanceBits);
         }

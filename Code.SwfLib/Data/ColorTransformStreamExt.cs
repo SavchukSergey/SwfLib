@@ -34,11 +34,11 @@ namespace Code.SwfLib.Data {
             return transform;
         }
 
-        public static void WriteColorTransformRGB(this SwfStreamWriter writer, ColorTransformRGB tranform) {
+        public static void WriteColorTransformRGB(this ISwfStreamWriter writer, ColorTransformRGB tranform) {
             writer.WriteColorTransformRGB(ref tranform);
         }
 
-        public static void WriteColorTransformRGB(this SwfStreamWriter writer, ref ColorTransformRGB tranform) {
+        public static void WriteColorTransformRGB(this ISwfStreamWriter writer, ref ColorTransformRGB tranform) {
             var bitsCounter = new SignedBitsCount(0);
             if (tranform.HasAddTerms) {
                 bitsCounter.AddValue(tranform.RedAddTerm);
@@ -106,11 +106,11 @@ namespace Code.SwfLib.Data {
             reader.AlignToByte();
         }
 
-        public static void WriteColorTransformRGBA(this SwfStreamWriter writer, ColorTransformRGBA transform) {
+        public static void WriteColorTransformRGBA(this ISwfStreamWriter writer, ColorTransformRGBA transform) {
             WriteColorTransformRGBA(writer, ref transform);
         }
 
-        public static void WriteColorTransformRGBA(this SwfStreamWriter writer, ref ColorTransformRGBA tranform) {
+        public static void WriteColorTransformRGBA(this ISwfStreamWriter writer, ref ColorTransformRGBA tranform) {
             var bitsCounter = new SignedBitsCount(0);
             if (tranform.HasAddTerms) {
                 bitsCounter.AddValue(tranform.RedAddTerm);

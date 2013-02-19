@@ -36,7 +36,7 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void WriteLineStylesRGB(this SwfStreamWriter writer, IList<LineStyleRGB> styles, bool allowBigArray) {
+        public static void WriteLineStylesRGB(this ISwfStreamWriter writer, IList<LineStyleRGB> styles, bool allowBigArray) {
             if (styles.Count < 255) {
                 writer.WriteByte((byte)styles.Count);
             } else {
@@ -52,7 +52,7 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void WriteLineStylesRGBA(this SwfStreamWriter writer, IList<LineStyleRGBA> styles) {
+        public static void WriteLineStylesRGBA(this ISwfStreamWriter writer, IList<LineStyleRGBA> styles) {
             if (styles.Count < 255) {
                 writer.WriteByte((byte)styles.Count);
             } else {
@@ -65,7 +65,7 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void WriteLineStylesEx(this SwfStreamWriter writer, IList<LineStyleEx> styles) {
+        public static void WriteLineStylesEx(this ISwfStreamWriter writer, IList<LineStyleEx> styles) {
             if (styles.Count < 255) {
                 writer.WriteByte((byte)styles.Count);
             } else {
@@ -79,31 +79,34 @@ namespace Code.SwfLib.Shapes {
         }
 
         public static LineStyleRGB ReadLineStyleRGB(this ISwfStreamReader reader) {
-            var lineStyle = new LineStyleRGB();
-            lineStyle.Width = reader.ReadUInt16();
-            reader.ReadRGB(out lineStyle.Color);
+            var lineStyle = new LineStyleRGB {
+                Width = reader.ReadUInt16(),
+                Color = reader.ReadRGB()
+            };
             return lineStyle;
         }
 
         public static LineStyleRGBA ReadLineStyleRGBA(this ISwfStreamReader reader) {
-            var lineStyle = new LineStyleRGBA();
-            lineStyle.Width = reader.ReadUInt16();
-            reader.ReadRGBA(out lineStyle.Color);
+            var lineStyle = new LineStyleRGBA {
+                Width = reader.ReadUInt16(),
+                Color = reader.ReadRGBA()
+            };
             return lineStyle;
         }
 
         public static LineStyleEx ReadLineStyleEx(this ISwfStreamReader reader) {
-            var lineStyle = new LineStyleEx();
-            lineStyle.Width = reader.ReadUInt16();
-            lineStyle.StartCapStyle = (CapStyle)reader.ReadUnsignedBits(2);
-            lineStyle.JoinStyle = (JoinStyle)reader.ReadUnsignedBits(2);
-            lineStyle.HasFill = reader.ReadBit();
-            lineStyle.NoHScale = reader.ReadBit();
-            lineStyle.NoVScale = reader.ReadBit();
-            lineStyle.PixelHinting = reader.ReadBit();
-            lineStyle.Reserved = (byte)reader.ReadUnsignedBits(5);
-            lineStyle.NoClose = reader.ReadBit();
-            lineStyle.EndCapStyle = (CapStyle)reader.ReadUnsignedBits(2);
+            var lineStyle = new LineStyleEx {
+                Width = reader.ReadUInt16(),
+                StartCapStyle = (CapStyle)reader.ReadUnsignedBits(2),
+                JoinStyle = (JoinStyle)reader.ReadUnsignedBits(2),
+                HasFill = reader.ReadBit(),
+                NoHScale = reader.ReadBit(),
+                NoVScale = reader.ReadBit(),
+                PixelHinting = reader.ReadBit(),
+                Reserved = (byte)reader.ReadUnsignedBits(5),
+                NoClose = reader.ReadBit(),
+                EndCapStyle = (CapStyle)reader.ReadUnsignedBits(2)
+            };
             if (lineStyle.JoinStyle == JoinStyle.Miter) {
                 lineStyle.MilterLimitFactor = reader.ReadFixedPoint8();
             }
@@ -115,17 +118,17 @@ namespace Code.SwfLib.Shapes {
             return lineStyle;
         }
 
-        public static void WriteLineStyleRGB(this SwfStreamWriter writer, LineStyleRGB lineStyle) {
+        public static void WriteLineStyleRGB(this ISwfStreamWriter writer, LineStyleRGB lineStyle) {
             writer.WriteUInt16(lineStyle.Width);
             writer.WriteRGB(ref lineStyle.Color);
         }
 
-        public static void WriteLineStyleRGBA(this SwfStreamWriter writer, LineStyleRGBA lineStyle) {
+        public static void WriteLineStyleRGBA(this ISwfStreamWriter writer, LineStyleRGBA lineStyle) {
             writer.WriteUInt16(lineStyle.Width);
             writer.WriteRGBA(ref lineStyle.Color);
         }
 
-        public static void WriteLineStyleEx(this SwfStreamWriter writer, LineStyleEx lineStyle) {
+        public static void WriteLineStyleEx(this ISwfStreamWriter writer, LineStyleEx lineStyle) {
             writer.WriteUInt16(lineStyle.Width);
             writer.WriteUnsignedBits((uint)lineStyle.StartCapStyle, 2);
             writer.WriteUnsignedBits((uint)lineStyle.JoinStyle, 2);

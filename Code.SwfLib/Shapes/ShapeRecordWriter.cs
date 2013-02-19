@@ -8,22 +8,22 @@ namespace Code.SwfLib.Shapes {
             public uint FillStyleBits;
             public uint LineStyleBits;
             public bool AllowBigArray;
-            public SwfStreamWriter Writer;
+            public ISwfStreamWriter Writer;
         }
 
-        public void WriteRGB(SwfStreamWriter writer, IShapeRecordRGB record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
+        public void WriteRGB(ISwfStreamWriter writer, IShapeRecordRGB record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
             Write(writer, record, allowBigArray, ref fillBitsCount, ref lineBitsCount);
         }
 
-        public void WriteRGBA(SwfStreamWriter writer, IShapeRecordRGBA record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
+        public void WriteRGBA(ISwfStreamWriter writer, IShapeRecordRGBA record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
             Write(writer, record, allowBigArray, ref fillBitsCount, ref lineBitsCount);
         }
 
-        public void WriteEx(SwfStreamWriter writer, IShapeRecordEx record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
+        public void WriteEx(ISwfStreamWriter writer, IShapeRecordEx record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
             Write(writer, record, allowBigArray, ref fillBitsCount, ref lineBitsCount);
         }
 
-        private void Write(SwfStreamWriter writer, IShapeRecord record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
+        private void Write(ISwfStreamWriter writer, IShapeRecord record, bool allowBigArray, ref uint fillBitsCount, ref uint lineBitsCount) {
             var ctx = new ShapeRecordWriteContext {
                 FillStyleBits = fillBitsCount,
                 LineStyleBits = lineBitsCount,
@@ -35,7 +35,7 @@ namespace Code.SwfLib.Shapes {
             lineBitsCount = ctx.LineStyleBits;
         }
 
-        private static void WriteStyleChangeShapeRecord(SwfStreamWriter writer, StyleChangeShapeRecord record, ref uint fillStylesBits, ref uint lineStylesBits) {
+        private static void WriteStyleChangeShapeRecord(ISwfStreamWriter writer, StyleChangeShapeRecord record, ref uint fillStylesBits, ref uint lineStylesBits) {
             writer.WriteBit(false);
             var stateNewStyles = record.StateNewStyles;
             var stateFillStyle0 = record.FillStyle0.HasValue;

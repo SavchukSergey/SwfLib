@@ -32,7 +32,7 @@ namespace Code.SwfLib.Gradients {
             return gradient;
         }
 
-        public static void WriteGradientRGBA(this SwfStreamWriter writer, GradientRGBA gradient) {
+        public static void WriteGradientRGBA(this ISwfStreamWriter writer, GradientRGBA gradient) {
             writer.WriteUnsignedBits((uint)gradient.SpreadMode, 2);
             writer.WriteUnsignedBits((uint)gradient.InterpolationMode, 2);
             var count = gradient.GradientRecords.Count;
@@ -45,7 +45,7 @@ namespace Code.SwfLib.Gradients {
             }
         }
 
-        public static void WriteGradientRGB(this SwfStreamWriter writer, GradientRGB gradient) {
+        public static void WriteGradientRGB(this ISwfStreamWriter writer, GradientRGB gradient) {
             writer.WriteUnsignedBits((uint)gradient.SpreadMode, 2);
             writer.WriteUnsignedBits((uint)gradient.InterpolationMode, 2);
             var count = gradient.GradientRecords.Count;
@@ -90,7 +90,7 @@ namespace Code.SwfLib.Gradients {
             return gradient;
         }
 
-        public static void WriteFocalGradientRGBA(this SwfStreamWriter writer, FocalGradientRGBA gradient) {
+        public static void WriteFocalGradientRGBA(this ISwfStreamWriter writer, FocalGradientRGBA gradient) {
             writer.WriteUnsignedBits((uint)gradient.SpreadMode, 2);
             writer.WriteUnsignedBits((uint)gradient.InterpolationMode, 2);
             var count = gradient.GradientRecords.Count;
@@ -104,7 +104,7 @@ namespace Code.SwfLib.Gradients {
             writer.WriteFixedPoint8(gradient.FocalPoint);
         }
 
-        public static void WriteFocalGradientRGB(this SwfStreamWriter writer, FocalGradientRGB gradient) {
+        public static void WriteFocalGradientRGB(this ISwfStreamWriter writer, FocalGradientRGB gradient) {
             writer.WriteUnsignedBits((uint)gradient.SpreadMode, 2);
             writer.WriteUnsignedBits((uint)gradient.InterpolationMode, 2);
             var count = gradient.GradientRecords.Count;
@@ -138,12 +138,12 @@ namespace Code.SwfLib.Gradients {
             return record;
         }
 
-        public static void WriteGradientRecordRGB(this SwfStreamWriter writer, ref GradientRecordRGB record) {
+        public static void WriteGradientRecordRGB(this ISwfStreamWriter writer, ref GradientRecordRGB record) {
             writer.WriteByte(record.Ratio);
             writer.WriteRGB(ref record.Color);
         }
 
-        public static void WriteGradientRecordRGBA(this SwfStreamWriter writer, ref GradientRecordRGBA record) {
+        public static void WriteGradientRecordRGBA(this ISwfStreamWriter writer, ref GradientRecordRGBA record) {
             writer.WriteByte(record.Ratio);
             writer.WriteRGBA(ref record.Color);
         }

@@ -32,7 +32,7 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void WriteFillStylesRGB(this SwfStreamWriter writer, IList<FillStyleRGB> styles, bool allowBigArray) {
+        public static void WriteFillStylesRGB(this ISwfStreamWriter writer, IList<FillStyleRGB> styles, bool allowBigArray) {
             if (styles.Count < 255) {
                 writer.WriteByte((byte)styles.Count);
             } else {
@@ -48,7 +48,7 @@ namespace Code.SwfLib.Shapes {
             }
         }
 
-        public static void WriteFillStylesRGBA(this SwfStreamWriter writer, IList<FillStyleRGBA> styles) {
+        public static void WriteFillStylesRGBA(this ISwfStreamWriter writer, IList<FillStyleRGBA> styles) {
             if (styles.Count < 255) {
                 writer.WriteByte((byte)styles.Count);
             } else {
@@ -71,11 +71,11 @@ namespace Code.SwfLib.Shapes {
             return _readerRGBA.Read(reader, type);
         }
 
-        public static void WriteFillStyleRGB(this SwfStreamWriter writer, FillStyleRGB fillStyle) {
+        public static void WriteFillStyleRGB(this ISwfStreamWriter writer, FillStyleRGB fillStyle) {
             _writerRGB.Write(writer, fillStyle);
         }
 
-        public static void WriteFillStyleRGBA(this SwfStreamWriter writer, FillStyleRGBA fillStyle) {
+        public static void WriteFillStyleRGBA(this ISwfStreamWriter writer, FillStyleRGBA fillStyle) {
             _writerRGBA.Write(writer, fillStyle);
         }
 

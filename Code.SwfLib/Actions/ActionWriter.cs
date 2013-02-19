@@ -5,9 +5,9 @@ using System.IO;
 namespace Code.SwfLib.Actions {
     public class ActionWriter : IActionVisitor<ISwfStreamWriter, object> {
 
-        private readonly SwfStreamWriter _writer;
+        private readonly ISwfStreamWriter _writer;
 
-        public ActionWriter(SwfStreamWriter writer) {
+        public ActionWriter(ISwfStreamWriter writer) {
             _writer = writer;
         }
 

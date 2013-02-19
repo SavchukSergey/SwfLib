@@ -5,7 +5,7 @@ using Code.SwfLib.Utils;
 namespace Code.SwfLib {
     public static class SwfStreamWriterExt {
 
-        public static void WriteSwfFileInfo(this SwfStreamWriter writer, SwfFileInfo fileInfo) {
+        public static void WriteSwfFileInfo(this ISwfStreamWriter writer, SwfFileInfo fileInfo) {
             string format = fileInfo.Format;
             if (format == null || format.Length != 3)
                 throw new InvalidOperationException("Format should be of length 3");
@@ -22,17 +22,17 @@ namespace Code.SwfLib {
             writer.WriteByte((byte)((len >> 24) & 0xff));
         }
 
-        public static void WriteSwfHeader(this SwfStreamWriter writer, SwfHeader header) {
+        public static void WriteSwfHeader(this ISwfStreamWriter writer, SwfHeader header) {
             writer.WriteRect(ref header.FrameSize);
             writer.WriteFixedPoint8(header.FrameRate);
             writer.WriteUInt16(header.FrameCount);
         }
 
-        public static void WriteRect(this SwfStreamWriter writer, SwfRect rect) {
+        public static void WriteRect(this ISwfStreamWriter writer, SwfRect rect) {
             writer.WriteRect(ref rect);
         }
 
-        public static void WriteRect(this SwfStreamWriter writer, ref SwfRect rect) {
+        public static void WriteRect(this ISwfStreamWriter writer, ref SwfRect rect) {
             var btCount = new SignedBitsCount(rect.XMin, rect.XMax, rect.YMin, rect.YMax);
             var bits = btCount.GetBits();
             if (bits < 1) bits = 1;
@@ -44,11 +44,11 @@ namespace Code.SwfLib {
             writer.FlushBits();
         }
 
-        public static void WriteMatrix(this SwfStreamWriter writer, SwfMatrix matrix) {
+        public static void WriteMatrix(this ISwfStreamWriter writer, SwfMatrix matrix) {
             writer.WriteMatrix(ref matrix);
         }
 
-        public static void WriteMatrix(this SwfStreamWriter writer, ref SwfMatrix matrix) {
+        public static void WriteMatrix(this ISwfStreamWriter writer, ref SwfMatrix matrix) {
             bool hasScale = matrix.HasScale;
             writer.WriteBit(hasScale);
             if (hasScale) {

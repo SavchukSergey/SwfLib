@@ -1,14 +1,14 @@
 ﻿using Code.SwfLib.Data;
 
 namespace Code.SwfLib.Filters {
-    public class FilterWriter : IFilterVisitor<SwfStreamWriter, object> {
+    public class FilterWriter : IFilterVisitor<ISwfStreamWriter, object> {
 
-        public void Write(SwfStreamWriter writer, BaseFilter filter) {
+        public void Write(ISwfStreamWriter writer, BaseFilter filter) {
             writer.WriteByte((byte)filter.Type);
             filter.AcceptVisitor(this, writer);
         }
 
-        object IFilterVisitor<SwfStreamWriter, object>.Visit(DropShadowFilter filter, SwfStreamWriter writer) {
+        object IFilterVisitor<ISwfStreamWriter, object>.Visit(DropShadowFilter filter, ISwfStreamWriter writer) {
             writer.WriteRGBA(ref filter.Color);
             writer.WriteFixed(filter.BlurX);
             writer.WriteFixed(filter.BlurY);
@@ -24,7 +24,7 @@ namespace Code.SwfLib.Filters {
             return null;
         }
 
-        object IFilterVisitor<SwfStreamWriter, object>.Visit(BlurFilter filter, SwfStreamWriter writer) {
+        object IFilterVisitor<ISwfStreamWriter, object>.Visit(BlurFilter filter, ISwfStreamWriter writer) {
             writer.WriteFixed(filter.BlurX);
             writer.WriteFixed(filter.BlurY);
 
@@ -33,7 +33,7 @@ namespace Code.SwfLib.Filters {
             return null;
         }
 
-        object IFilterVisitor<SwfStreamWriter, object>.Visit(GlowFilter filter, SwfStreamWriter writer) {
+        object IFilterVisitor<ISwfStreamWriter, object>.Visit(GlowFilter filter, ISwfStreamWriter writer) {
             writer.WriteRGBA(ref filter.Color);
             writer.WriteFixed(filter.BlurX);
             writer.WriteFixed(filter.BlurY);
@@ -45,7 +45,7 @@ namespace Code.SwfLib.Filters {
             return null;
         }
 
-        object IFilterVisitor<SwfStreamWriter, object>.Visit(BevelFilter filter, SwfStreamWriter writer) {
+        object IFilterVisitor<ISwfStreamWriter, object>.Visit(BevelFilter filter, ISwfStreamWriter writer) {
             writer.WriteRGBA(filter.ShadowColor);
             writer.WriteRGBA(filter.HighlightColor);
             writer.WriteFixed(filter.BlurX);
@@ -61,7 +61,7 @@ namespace Code.SwfLib.Filters {
             return null;
         }
 
-        object IFilterVisitor<SwfStreamWriter, object>.Visit(GradientGlowFilter filter, SwfStreamWriter writer) {
+        object IFilterVisitor<ISwfStreamWriter, object>.Visit(GradientGlowFilter filter, ISwfStreamWriter writer) {
             writer.WriteByte((byte)filter.GradientColors.Count);
             foreach (var record in filter.GradientColors) {
                 writer.WriteRGBA(record.Color);
@@ -84,7 +84,7 @@ namespace Code.SwfLib.Filters {
             return null;
         }
 
-        object IFilterVisitor<SwfStreamWriter, object>.Visit(ConvolutionFilter filter, SwfStreamWriter writer) {
+        object IFilterVisitor<ISwfStreamWriter, object>.Visit(ConvolutionFilter filter, ISwfStreamWriter writer) {
             writer.WriteByte((byte)filter.MatrixX);
             writer.WriteByte((byte)filter.MatrixY);
 
@@ -104,7 +104,7 @@ namespace Code.SwfLib.Filters {
             return null;
         }
 
-        object IFilterVisitor<SwfStreamWriter, object>.Visit(ColorMatrixFilter filter, SwfStreamWriter writer) {
+        object IFilterVisitor<ISwfStreamWriter, object>.Visit(ColorMatrixFilter filter, ISwfStreamWriter writer) {
             writer.WriteSingle((float)filter.R0);
             writer.WriteSingle((float)filter.R1);
             writer.WriteSingle((float)filter.R2);
@@ -131,7 +131,7 @@ namespace Code.SwfLib.Filters {
             return null;
         }
 
-        object IFilterVisitor<SwfStreamWriter, object>.Visit(GradientBevelFilter filter, SwfStreamWriter writer) {
+        object IFilterVisitor<ISwfStreamWriter, object>.Visit(GradientBevelFilter filter, ISwfStreamWriter writer) {
             writer.WriteByte((byte)filter.GradientColors.Count);
             foreach (var record in filter.GradientColors) {
                 writer.WriteRGBA(record.Color);

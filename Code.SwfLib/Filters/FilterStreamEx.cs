@@ -14,7 +14,7 @@ namespace Code.SwfLib.Filters {
             }
         }
 
-        public static void WriteFilterList(this SwfStreamWriter writer, IList<BaseFilter> source) {
+        public static void WriteFilterList(this ISwfStreamWriter writer, IList<BaseFilter> source) {
             writer.WriteByte((byte)source.Count);
             foreach (var filter in source) {
                 writer.WriteFilter(filter);
@@ -25,7 +25,7 @@ namespace Code.SwfLib.Filters {
             return _reader.Read(reader);
         }
 
-        public static void WriteFilter(this SwfStreamWriter writer, BaseFilter filter) {
+        public static void WriteFilter(this ISwfStreamWriter writer, BaseFilter filter) {
             _writer.Write(writer, filter);
         }
 

@@ -12,7 +12,7 @@ namespace Code.SwfLib.ClipActions {
 
         }
 
-        public static void WriteClipActions(this SwfStreamWriter writer, byte swfVersion, ClipActionsList clipActions) {
+        public static void WriteClipActions(this ISwfStreamWriter writer, byte swfVersion, ClipActionsList clipActions) {
             writer.WriteUInt16(clipActions.Reserved);
             writer.WriteClipEventFlags(swfVersion, clipActions.Flags);
             writer.WriteClipActionRecords(swfVersion, clipActions.Records);
@@ -26,7 +26,7 @@ namespace Code.SwfLib.ClipActions {
             } while (!record.Flags.IsEmpty);
         }
 
-        public static void WriteClipActionRecords(this SwfStreamWriter writer, byte swfVersion, IList<ClipActionRecord> source) {
+        public static void WriteClipActionRecords(this ISwfStreamWriter writer, byte swfVersion, IList<ClipActionRecord> source) {
             foreach (var record in source) {
                 writer.WriteClipActionRecord(swfVersion, record);
             }
@@ -52,7 +52,7 @@ namespace Code.SwfLib.ClipActions {
             return record;
         }
 
-        public static void WriteClipActionRecord(this SwfStreamWriter writer, byte swfVersion, ClipActionRecord record) {
+        public static void WriteClipActionRecord(this ISwfStreamWriter writer, byte swfVersion, ClipActionRecord record) {
             writer.WriteClipEventFlags(swfVersion, record.Flags);
             if (record.Flags.IsEmpty) return;
 
@@ -104,7 +104,7 @@ namespace Code.SwfLib.ClipActions {
             return res;
         }
 
-        public static void WriteClipEventFlags(this SwfStreamWriter writer, byte swfVersion, ClipEventFlags flags) {
+        public static void WriteClipEventFlags(this ISwfStreamWriter writer, byte swfVersion, ClipEventFlags flags) {
             writer.WriteBit(flags.ClipEventKeyUp);
             writer.WriteBit(flags.ClipEventKeyDown);
             writer.WriteBit(flags.ClipEventMouseUp);
