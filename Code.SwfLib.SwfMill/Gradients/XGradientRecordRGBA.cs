@@ -1,16 +1,15 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Gradients;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Gradients {
     public class XGradientRecordRGBA {
 
         public static GradientRecordRGBA FromXml(XElement xRecord) {
-            var xPosition = xRecord.Attribute("position");
-            var xColor = xRecord.Element("color");
             var record = new GradientRecordRGBA {
-                Ratio = byte.Parse(xPosition.Value),
-                Color = XColorRGBA.FromXml(xColor.Element("Color"))
+                Ratio = xRecord.RequiredByteAttribute("position"),
+                Color = XColorRGBA.FromXml(xRecord.RequiredElement("color").Element("Color"))
             };
             return record;
         }
