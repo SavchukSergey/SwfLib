@@ -10,7 +10,7 @@ namespace Code.SwfLib.Tests.Gradients {
             0, //Ratio 0 
             10, 150, 155, // Color 0,
             100, // Ratio 1,
-            120, 50, 55, //Color 2
+            120, 50, 55 //Color 2
         };
 
         [Test]

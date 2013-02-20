@@ -14,7 +14,7 @@ namespace Code.SwfLib.Tests.Actions {
 
         [Test]
         public void WriteTest() {
-            WriteAction(new ActionCall { }, _etalon);
+            WriteAction(new ActionCall (), _etalon);
         }
     }
 }

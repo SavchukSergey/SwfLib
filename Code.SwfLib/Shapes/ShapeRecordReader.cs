@@ -43,12 +43,8 @@ namespace Code.SwfLib.Shapes {
                     return Adapt(new EndShapeRecord());
                 }
             }
-            bool straight = reader.ReadBit();
-            if (straight) {
-                return Adapt(ReadStraigtEdgeShapeRecord(reader));
-            } else {
-                return Adapt(ReadCurvedEdgeShapeRecord(reader));
-            }
+            var straight = reader.ReadBit();
+            return straight ? Adapt(ReadStraigtEdgeShapeRecord(reader)) : Adapt(ReadCurvedEdgeShapeRecord(reader));
         }
 
         private StraightEdgeShapeRecord ReadStraigtEdgeShapeRecord(ISwfStreamReader reader) {

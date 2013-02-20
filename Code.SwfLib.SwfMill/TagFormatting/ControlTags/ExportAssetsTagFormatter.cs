@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.SwfMill.Utils;
 using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
@@ -31,8 +32,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         protected static SwfSymbolReference ParseSymbol(XElement element) {
             var symbol = new SwfSymbolReference {
-                SymbolID = ushort.Parse(element.Attribute("objectID").Value),
-                SymbolName = element.Attribute("name").Value
+                SymbolID = element.RequiredUShortAttribute("objectID"),
+                SymbolName = element.RequiredStringAttribute("name")
 
             };
             return symbol;
@@ -41,7 +42,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
         protected static XElement FormatSymbol(SwfSymbolReference symbol) {
             return new XElement(XName.Get("Symbol"),
                                 new XAttribute("objectID", symbol.SymbolID),
-                                new XAttribute(XName.Get("name"), symbol.SymbolName));
+                                new XAttribute("name", symbol.SymbolName));
         }
 
         public override string TagName {

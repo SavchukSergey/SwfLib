@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Fonts;
 using Code.SwfLib.SwfMill.Shapes;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Fonts {
     public static class XGlyph {
@@ -13,9 +14,8 @@ namespace Code.SwfLib.SwfMill.Fonts {
         }
 
         public static Glyph FromXml(XElement xGlyph) {
-            var xMap = xGlyph.Attribute("map");
             var res = new Glyph {
-                Code = ushort.Parse(xMap.Value),
+                Code = xGlyph.RequiredUShortAttribute("map"),
             };
             XGlyphShape.FromXml(xGlyph.Element("GlyphShape"), res);
             return res;

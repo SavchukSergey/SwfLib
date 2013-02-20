@@ -1,5 +1,4 @@
-﻿using System.Drawing.Imaging;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using Code.SwfLib.Actions;
 using Code.SwfLib.Buttons;

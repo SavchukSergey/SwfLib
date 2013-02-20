@@ -25,7 +25,7 @@ namespace Code.SwfLib.SwfMill.Filters {
         public static GlowFilter FromXml(XElement xFilter) {
             var xCompositeSource = xFilter.Attribute("compositeSource");
 
-            var xColor = xFilter.Element("color").Element("Color");
+            var xColor = xFilter.RequiredElement("color").Element("Color");
 
             return new GlowFilter {
                 BlurX = xFilter.RequiredDoubleAttribute("blurX"),

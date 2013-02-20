@@ -26,7 +26,7 @@ namespace Code.SwfLib.SwfMill.Filters {
         public static DropShadowFilter FromXml(XElement xFilter) {
             var xCompositeSource = xFilter.Attribute("compositeSource");
 
-            var xColor = xFilter.Element("color").Element("Color");
+            var xColor = xFilter.RequiredElement("color").Element("Color");
 
             return new DropShadowFilter {
                 Angle = xFilter.RequiredDoubleAttribute("angle"),

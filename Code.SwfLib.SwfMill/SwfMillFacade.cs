@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 using Code.SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill {
@@ -33,18 +34,18 @@ namespace Code.SwfLib.SwfMill {
             if (root == null || root.Name.LocalName != "swf") {
                 throw new FormatException("Expected swf as root");
             }
-            fileInfo.Version = byte.Parse(root.Attribute(XName.Get("version")).Value);
-            fileInfo.Format = root.Attribute(XName.Get("compressed")).Value == "1" ? "CWS" : "FWS";
+            fileInfo.Version = root.RequiredByteAttribute("version");
+            fileInfo.Format = root.RequiredBoolAttribute("compressed") ? "CWS" : "FWS";
             fileInfo.FileLength = 0;
             file.FileInfo = fileInfo;
 
-            var hdr = root.Element(XName.Get("Header"));
-            file.Header.FrameRate = double.Parse(hdr.Attribute(XName.Get("framerate")).Value);
-            file.Header.FrameCount = ushort.Parse(hdr.Attribute(XName.Get("frames")).Value);
-            file.Header.FrameSize = XRect.FromXml(hdr.Element(XName.Get("size")).Element("Rectangle"));
+            var hdr = root.RequiredElement("Header");
+            file.Header.FrameRate = hdr.RequiredDoubleAttribute("framerate");
+            file.Header.FrameCount = hdr.RequiredUShortAttribute("frames");
+            file.Header.FrameSize = XRect.FromXml(hdr.RequiredElement("size").Element("Rectangle"));
 
             var formatterFactory = new TagFormatterFactory(fileInfo.Version);
-            var tags = hdr.Element("tags");
+            var tags = hdr.RequiredElement("tags");
             foreach (var xTag in tags.Elements()) {
                 var tag = SwfTagNameMapping.CreateTagByXmlName(xTag.Name.LocalName);
                 var formatter = formatterFactory.GetFormatter(tag);
@@ -55,15 +56,15 @@ namespace Code.SwfLib.SwfMill {
         }
 
         private XElement GetRoot(SwfFile file) {
-            return new XElement(XName.Get("swf"),
-                                new XAttribute(XName.Get("version"), file.FileInfo.Version),
-                                new XAttribute(XName.Get("compressed"), IsCompressed(file) ? "1" : "0"),
+            return new XElement("swf",
+                                new XAttribute("version", file.FileInfo.Version),
+                                new XAttribute("compressed", IsCompressed(file) ? "1" : "0"),
                                 GetSwfHeaderXml(file)
                 );
         }
 
         private XElement GetTagsXml(IEnumerable<SwfTagBase> tags) {
-            return new XElement(XName.Get("tags"), tags.Select(BuildTagXml));
+            return new XElement("tags", tags.Select(BuildTagXml));
         }
 
         private XElement BuildTagXml(SwfTagBase tag) {
@@ -74,10 +75,10 @@ namespace Code.SwfLib.SwfMill {
 
         private XElement GetSwfHeaderXml(SwfFile file) {
             var header = file.Header;
-            return new XElement(XName.Get("Header"),
-                                new XAttribute(XName.Get("framerate"), header.FrameRate),
-                                new XAttribute(XName.Get("frames"), header.FrameCount),
-                                new XElement(XName.Get("size"), XRect.ToXml(header.FrameSize)),
+            return new XElement("Header",
+                                new XAttribute("framerate", header.FrameRate),
+                                new XAttribute("frames", header.FrameCount),
+                                new XElement("size", XRect.ToXml(header.FrameSize)),
                                 GetTagsXml(file.Tags));
         }
 

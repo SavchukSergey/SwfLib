@@ -14,7 +14,7 @@ namespace Code.SwfLib.Tests.Filters {
             0, 224, 4, 0, //Angle
             0, 128, 12, 0, //Distance
             192, 2, //Strength
-            229,
+            229
         };
 
         [Test]

@@ -5,7 +5,6 @@ using System.Linq;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tests.Asserts.Utils;
 using Code.SwfLib.Tests.Samples;
-using Code.SwfLib.Tests.Utils;
 using NUnit.Framework;
 
 namespace Code.SwfLib.Tests {
@@ -15,7 +14,7 @@ namespace Code.SwfLib.Tests {
         [Test]
         [Ignore]
         public void Sample1Test() {
-            var path = "Sample - 1.swf";
+            const string path = "Sample - 1.swf";
             var file = ReadSwfFile(path);
             var mem = new MemoryStream();
             file.WriteTo(mem);

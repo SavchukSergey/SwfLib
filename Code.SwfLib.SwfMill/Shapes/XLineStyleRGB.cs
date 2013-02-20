@@ -13,7 +13,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         public static LineStyleRGB FromXml(XElement xLineStyle) {
-            var xColor = xLineStyle.Element("color").Element("Color");
+            var xColor = xLineStyle.RequiredElement("color").Element("Color");
             return new LineStyleRGB {
                 Width = xLineStyle.RequiredUShortAttribute("width"),
                 Color = XColorRGB.FromXml(xColor)

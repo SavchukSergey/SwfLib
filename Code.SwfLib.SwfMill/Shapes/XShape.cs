@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using Code.SwfLib.Shapes.Records;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public class XShape {
@@ -45,21 +46,21 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         public static void FromXml(XElement xShape, IList<IShapeRecordRGB> records) {
-            var xEdges = xShape.Element("edges");
+            var xEdges = xShape.RequiredElement("edges");
             foreach (var xShapeRecord in xEdges.Elements()) {
                 records.Add(XShapeRecord.RGBFromXml(xShapeRecord));
             }
         }
 
         public static void FromXml(XElement xShape, IList<IShapeRecordRGBA> records) {
-            var xEdges = xShape.Element("edges");
+            var xEdges = xShape.RequiredElement("edges");
             foreach (var xShapeRecord in xEdges.Elements()) {
                 records.Add(XShapeRecord.RGBAFromXml(xShapeRecord));
             }
         }
 
         public static void FromXml(XElement xShape, IList<IShapeRecordEx> records) {
-            var xEdges = xShape.Element("edges");
+            var xEdges = xShape.RequiredElement("edges");
             foreach (var xShapeRecord in xEdges.Elements()) {
                 records.Add(XShapeRecord.ExFromXml(xShapeRecord));
             }

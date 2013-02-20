@@ -54,6 +54,13 @@ namespace Code.SwfLib.SwfMill.Utils {
             throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not an unsigned short integer. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
+        public static short RequiredShortAttribute(this XElement node, string attributeName) {
+            var str = node.RequiredAttribute(attributeName);
+            short val;
+            if (short.TryParse(str, out val)) return val;
+            throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not a signed short integer. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
+        }
+
         public static byte RequiredByteAttribute(this XElement node, string attributeName) {
             var str = node.RequiredAttribute(attributeName);
             byte val;

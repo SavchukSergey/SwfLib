@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Fonts;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public class XGlyphShape {
@@ -17,7 +18,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         public static Glyph FromXml(XElement xGlyph, Glyph glyph) {
-            var xEdges = xGlyph.Element("edges");
+            var xEdges = xGlyph.RequiredElement("edges");
             foreach (var xShapeRecord in xEdges.Elements()) {
                 glyph.Records.Add(XShapeRecord.RGBFromXml(xShapeRecord));
             }
