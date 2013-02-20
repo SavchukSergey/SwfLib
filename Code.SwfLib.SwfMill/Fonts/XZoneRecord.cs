@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Fonts;
 using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Fonts {
     public static class XZoneRecord {
@@ -16,7 +17,7 @@ namespace Code.SwfLib.SwfMill.Fonts {
                 zoneArray.Reserved = byte.Parse(xReserved.Value);
             }
 
-            foreach (var xZoneData in xZoneRecord.Element("zones").Elements()) {
+            foreach (var xZoneData in xZoneRecord.RequiredElement("zones").Elements()) {
                 zoneArray.Data.Add(XZoneData.FromXml(xZoneData));
             }
             return zoneArray;

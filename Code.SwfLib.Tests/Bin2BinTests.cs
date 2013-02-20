@@ -45,8 +45,7 @@ namespace Code.SwfLib.Tests {
             var stream = GetType().Assembly.GetManifestResourceStream(resourceName);
             var bytes = new byte[stream.Length];
             stream.Read(bytes, 0, bytes.Length);
-            var file = new SwfFile();
-            file.FileInfo.Version = 10;
+            var file = new SwfFile { FileInfo = { Version = 10 } };
 
             appendTagsCallback(file);
 
@@ -84,7 +83,7 @@ namespace Code.SwfLib.Tests {
                 Data = bytes
             };
             //TODO: There is no need in second instance of tag
-            return (T) new SwfTagDeserializer(file).ReadTag(tagData);
+            return (T)new SwfTagDeserializer(file).ReadTag(tagData);
         }
 
         protected string[] GetResourcesFromFolder(string resourceFolder) {

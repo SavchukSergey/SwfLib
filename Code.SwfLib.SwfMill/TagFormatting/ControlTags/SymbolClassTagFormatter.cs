@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Data;
+using Code.SwfLib.SwfMill.Utils;
 using Code.SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
@@ -30,8 +31,8 @@ namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
 
         protected SwfSymbolReference ParseReference(XElement xSymbol) {
             return new SwfSymbolReference {
-                SymbolID = ushort.Parse(xSymbol.Attribute("objectID").Value),
-                SymbolName = xSymbol.Attribute(NAME_ATTRIB).Value
+                SymbolID = xSymbol.RequiredUShortAttribute("objectID"),
+                SymbolName = xSymbol.RequiredStringAttribute(NAME_ATTRIB)
             };
         }
 

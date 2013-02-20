@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Text;
+using Code.SwfLib.SwfMill.Utils;
 using Code.SwfLib.Tags.TextTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
@@ -11,7 +12,7 @@ namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
         }
 
         protected override void ReadRecords(DefineText2Tag tag, XElement xRecords) {
-            var elem = xRecords.Element("TextRecord").Element("records");
+            var elem = xRecords.RequiredElement("TextRecord").RequiredElement("records");
             foreach (var recordElem in elem.Elements()) {
                 tag.TextRecords.Add(XTextRecord.FromXmlRGBA(recordElem));
             }

@@ -5,6 +5,7 @@ using Code.SwfLib.Gradients;
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Gradients;
+using Code.SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public static class XFocalGradientFillStyle {
@@ -76,7 +77,7 @@ namespace Code.SwfLib.SwfMill.Shapes {
         }
 
         private static SwfMatrix GetMatrix(XElement xFillStyle) {
-            var xMatrix = xFillStyle.Element("matrix");
+            var xMatrix = xFillStyle.RequiredElement("matrix");
             return XMatrix.FromXml(xMatrix.Element(XMatrix.TAG_NAME));
         }
 
