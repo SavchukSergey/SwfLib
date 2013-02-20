@@ -93,6 +93,8 @@
     <Compile Include="Filters\FilterFactoryTest.cs" />
     <Compile Include="Filters\ColorMatrixFilterTest.cs" />
     <Compile Include="Gradients\BaseGradientTest.cs" />
+    <Compile Include="Gradients\FocalGradientRGBATest.cs" />
+    <Compile Include="Gradients\FocalGradientRGBTest.cs" />
     <Compile Include="Gradients\GradientRGBATest.cs" />
     <Compile Include="Gradients\GradientRGBTest.cs" />
     <Compile Include="Tags\ControlTags\MetadataTagTest.cs" />
