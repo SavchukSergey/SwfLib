@@ -92,6 +92,8 @@
     <Compile Include="Filters\DropShadowFilterTest.cs" />
     <Compile Include="Filters\FilterFactoryTest.cs" />
     <Compile Include="Filters\ColorMatrixFilterTest.cs" />
+    <Compile Include="Gradients\BaseGradientTest.cs" />
+    <Compile Include="Gradients\GradientRGBATest.cs" />
     <Compile Include="Gradients\GradientRGBTest.cs" />
     <Compile Include="Tags\ControlTags\MetadataTagTest.cs" />
     <Compile Include="Tags\ControlTags\SetBackgroundColorTagTest.cs" />
