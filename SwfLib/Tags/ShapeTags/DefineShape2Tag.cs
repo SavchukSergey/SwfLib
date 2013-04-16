@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ShapeTags;
 using SwfLib.Shapes.FillStyles;
 using SwfLib.Shapes.LineStyles;
+using SwfLib.Shapes.Records;
 
 namespace SwfLib.Tags.ShapeTags {
     public class DefineShape2Tag : ShapeBaseTag {

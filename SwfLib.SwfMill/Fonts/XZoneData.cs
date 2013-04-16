@@ -1,9 +1,8 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Fonts;
-using Code.SwfLib.SwfMill.Data;
+using SwfLib.Fonts;
 using SwfLib.SwfMill.Data;
 
-namespace Code.SwfLib.SwfMill.Fonts {
+namespace SwfLib.SwfMill.Fonts {
     public static class XZoneData {
 
         public static ZoneData FromXml(XElement xZoneData) {

@@ -1,6 +1,4 @@
-﻿using SwfLib;
-
-namespace Code.SwfLib.Fonts {
+﻿namespace SwfLib.Fonts {
     public static class FontStreamExt {
 
         public static KerningRecord ReadKerningRecord(this ISwfStreamReader reader, bool wideCodes) {

@@ -1,9 +1,7 @@
-﻿using Code.SwfLib.Data;
-using SwfLib.Data;
+﻿using SwfLib.Data;
 using SwfLib.Gradients;
-using SwfLib.Shapes.FillStyles;
 
-namespace Code.SwfLib.Shapes.FillStyles {
+namespace SwfLib.Shapes.FillStyles {
     public class RadialGradientFillStyleRGB : FillStyleRGB {
 
         public SwfMatrix GradientMatrix;

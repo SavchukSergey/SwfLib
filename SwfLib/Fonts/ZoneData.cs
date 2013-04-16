@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Fonts {
+﻿namespace SwfLib.Fonts {
     public class ZoneData {
 
         public double Position;

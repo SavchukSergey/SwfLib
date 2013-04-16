@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Code.SwfLib;
-using Code.SwfLib.Tests.Samples;
 using NUnit.Framework;
 using SwfLib.Tags;
 using SwfLib.Tests.Asserts.Utils;
+using SwfLib.Tests.Samples;
 
 namespace SwfLib.Tests {
     [TestFixture]

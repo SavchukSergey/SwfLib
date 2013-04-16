@@ -1,8 +1,7 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Tags;
 using SwfLib.Tags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
+namespace SwfLib.SwfMill.TagFormatting {
 
     public interface ITagFormatter<T> : ITagFormatter where T : SwfTagBase {
 

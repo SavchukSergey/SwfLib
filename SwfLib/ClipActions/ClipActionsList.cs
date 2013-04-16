@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using SwfLib.ClipActions;
+using Code.SwfLib.ClipActions;
 
-namespace Code.SwfLib.ClipActions {
+namespace SwfLib.ClipActions {
     public class ClipActionsList {
 
         public ushort Reserved;

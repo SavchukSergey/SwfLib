@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
-using Code.SwfLib.Tags;
 using NUnit.Framework;
-using SwfLib;
 using SwfLib.Tags;
 
-namespace Code.SwfLib.Tests {
+namespace SwfLib.Tests {
     public class TestFixtureBase {
 
         protected void WriteBits(Stream stream, params string[] bits) {

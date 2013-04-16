@@ -1,9 +1,9 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.ClipActions;
 using Code.SwfLib.SwfMill.Actions;
+using Code.SwfLib.SwfMill.ClipActions;
 using SwfLib.ClipActions;
 
-namespace Code.SwfLib.SwfMill.ClipActions {
+namespace SwfLib.SwfMill.ClipActions {
     public static class XClipActionRecord {
 
         public static XElement ToXml(ClipActionRecord clipAction) {

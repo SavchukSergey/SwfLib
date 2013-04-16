@@ -1,7 +1,8 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.ClipActions;
+using SwfLib.ClipActions;
 
-namespace Code.SwfLib.SwfMill.ClipActions {
+namespace SwfLib.SwfMill.ClipActions {
     public static class XClipActionsList {
 
         public static XElement ToXml(ClipActionsList clipActions) {

@@ -1,5 +1,5 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Tags.ShapeMorphingTags;
+using SwfLib.Tags.ShapeMorphingTags;
 
 namespace SwfLib.SwfMill.TagFormatting.ShapeMorphingTags {
     public class DefineMorphShapeTagFormatter : TagFormatterBase<DefineMorphShapeTag> {

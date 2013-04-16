@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Code.SwfLib;
-using Code.SwfLib.Tests;
 using SwfLib.Tags;
 
 namespace SwfLib.Tests.ExternalEtalonTests {

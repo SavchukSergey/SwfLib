@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Code.SwfLib.Data;
-using Code.SwfLib.Shapes.LineStyles;
 using SwfLib;
 using SwfLib.Data;
 using SwfLib.Shapes.LineStyles;

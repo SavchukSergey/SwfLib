@@ -1,6 +1,4 @@
-﻿using SwfLib.Tags;
-
-namespace Code.SwfLib.Tags.ActionsTags {
+﻿namespace SwfLib.Tags.ActionsTags {
     public class DoABCDefineTag : ActionsBaseTag {
 
         public byte[] ABCData;

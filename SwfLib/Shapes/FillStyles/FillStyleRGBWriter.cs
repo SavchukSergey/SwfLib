@@ -1,5 +1,4 @@
 ﻿using Code.SwfLib;
-using Code.SwfLib.Shapes.FillStyles;
 using SwfLib.Data;
 using SwfLib.Gradients;
 

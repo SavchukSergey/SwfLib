@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
-using Code.SwfLib.Shapes.FillStyles;
-using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.SwfMill.Shapes;
 using SwfLib.Shapes.FillStyles;
 using SwfLib.Shapes.LineStyles;

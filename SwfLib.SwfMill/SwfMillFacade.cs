@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.Tags;
-using SwfLib;
 using SwfLib.SwfMill.Utils;
 using SwfLib.Tags;
 
-namespace Code.SwfLib.SwfMill {
+namespace SwfLib.SwfMill {
     public class SwfMillFacade {
 
         private TagFormatterFactory _formatterFactory;

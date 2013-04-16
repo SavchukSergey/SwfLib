@@ -1,6 +1,4 @@
-﻿using SwfLib.Tags;
-
-namespace Code.SwfLib.Tags.ActionsTags {
+﻿namespace SwfLib.Tags.ActionsTags {
     public abstract class ActionsBaseTag : SwfTagBase {
     }
 }

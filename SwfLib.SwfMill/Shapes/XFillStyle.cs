@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Linq;
-using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.SwfMill.Shapes;
 using SwfLib.Shapes.FillStyles;
 

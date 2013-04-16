@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using SwfLib;
-using SwfLib.Actions;
+using Code.SwfLib.Actions;
 
-namespace Code.SwfLib.Actions {
+namespace SwfLib.Actions {
     public class ActionWriter : IActionVisitor<ISwfStreamWriter, object> {
 
         private readonly ISwfStreamWriter _writer;

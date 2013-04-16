@@ -1,6 +1,4 @@
-﻿using Code.SwfLib.Shapes.FillStyles;
-
-namespace SwfLib.Shapes.FillStyles {
+﻿namespace SwfLib.Shapes.FillStyles {
     public interface IFillStyleRGBAVisitor<TArg, TResult> {
 
         TResult Visit(SolidFillStyleRGBA fillStyle, TArg arg);

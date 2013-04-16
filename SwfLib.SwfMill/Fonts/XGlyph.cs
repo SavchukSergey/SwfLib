@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Fonts;
 using Code.SwfLib.SwfMill.Shapes;
+using SwfLib.Fonts;
+using SwfLib.SwfMill.Shapes;
 using SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.Fonts {

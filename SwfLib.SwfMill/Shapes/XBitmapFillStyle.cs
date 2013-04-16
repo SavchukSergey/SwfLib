@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Xml.Linq;
-using Code.SwfLib.Data;
-using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.SwfMill.Data;
 using SwfLib.Data;
 using SwfLib.Shapes.FillStyles;
+using SwfLib.SwfMill.Data;
 
-namespace Code.SwfLib.SwfMill.Shapes {
+namespace SwfLib.SwfMill.Shapes {
     public static class XBitmapFillStyle {
 
         public const string CLIPPED_BITMAP = "ClippedBitmap";

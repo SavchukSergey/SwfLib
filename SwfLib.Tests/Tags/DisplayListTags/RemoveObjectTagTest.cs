@@ -1,11 +1,9 @@
 ﻿using System.IO;
-using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.DisplayListTags;
 using NUnit.Framework;
-using SwfLib;
 using SwfLib.Tags;
 
-namespace Code.SwfLib.Tests.Tags.DisplayListTags {
+namespace SwfLib.Tests.Tags.DisplayListTags {
     [TestFixture]
     public class RemoveObjectTagTest : TestFixtureBase {
 

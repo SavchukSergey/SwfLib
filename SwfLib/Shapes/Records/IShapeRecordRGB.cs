@@ -1,6 +1,4 @@
-﻿using SwfLib.Shapes.Records;
-
-namespace Code.SwfLib.Shapes.Records {
+﻿namespace SwfLib.Shapes.Records {
     public interface IShapeRecordRGB : IShapeRecord {
     }
 }

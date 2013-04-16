@@ -1,10 +1,9 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Fonts;
-using Code.SwfLib.SwfMill.Data;
+using SwfLib.Fonts;
 using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill.Fonts {
+namespace SwfLib.SwfMill.Fonts {
     public static class XZoneRecord {
 
         public static ZoneRecord FromXml(XElement xZoneRecord) {

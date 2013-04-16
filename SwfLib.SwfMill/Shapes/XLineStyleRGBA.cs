@@ -1,5 +1,5 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Shapes.LineStyles;
+using SwfLib.Shapes.LineStyles;
 using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 

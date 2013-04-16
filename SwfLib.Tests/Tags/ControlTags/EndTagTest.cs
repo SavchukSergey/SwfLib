@@ -1,11 +1,10 @@
 ﻿using System.IO;
-using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ControlTags;
 using NUnit.Framework;
-using SwfLib;
 using SwfLib.Tags;
+using SwfLib.Tags.ControlTags;
 
-namespace Code.SwfLib.Tests.Tags.ControlTags {
+namespace SwfLib.Tests.Tags.ControlTags {
     [TestFixture]
     public class EndTagTest : TestFixtureBase {
 

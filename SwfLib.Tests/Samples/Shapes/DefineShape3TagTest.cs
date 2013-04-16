@@ -1,16 +1,14 @@
 ﻿using System.Linq;
-using Code.SwfLib.Data;
-using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.Records;
-using Code.SwfLib.Tags.ShapeTags;
 using NUnit.Framework;
 using SwfLib.Data;
 using SwfLib.Gradients;
+using SwfLib.Shapes.FillStyles;
 using SwfLib.Shapes.Records;
 using SwfLib.Tags.ShapeTags;
 using SwfLib.Tests.Asserts.Shapes;
 
-namespace Code.SwfLib.Tests.Samples.Shapes {
+namespace SwfLib.Tests.Samples.Shapes {
     [TestFixture]
     public class DefineShape3TagTest : BaseSampleTest {
 

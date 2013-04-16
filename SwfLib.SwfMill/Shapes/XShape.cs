@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using Code.SwfLib.Shapes.Records;
+using SwfLib.Shapes.Records;
 using SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Shapes {

@@ -1,5 +1,5 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Fonts;
+using SwfLib.Fonts;
 using SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.Fonts {

@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using Code.SwfLib;
-using Code.SwfLib.Tags;
 using NUnit.Framework;
 using SwfLib.Tags;
 using SwfLib.Tags.DisplayListTags;

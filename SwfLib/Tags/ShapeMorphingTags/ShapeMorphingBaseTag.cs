@@ -1,6 +1,4 @@
-﻿using SwfLib.Tags;
-
-namespace Code.SwfLib.Tags.ShapeMorphingTags {
+﻿namespace SwfLib.Tags.ShapeMorphingTags {
     public abstract class ShapeMorphingBaseTag : SwfTagBase {
     }
 }

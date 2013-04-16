@@ -1,6 +1,4 @@
-﻿using Code.SwfLib.Shapes.FillStyles;
-
-namespace SwfLib.Shapes.FillStyles {
+﻿namespace SwfLib.Shapes.FillStyles {
     public abstract class FillStyleRGB {
 
         public abstract FillStyleType Type { get; }

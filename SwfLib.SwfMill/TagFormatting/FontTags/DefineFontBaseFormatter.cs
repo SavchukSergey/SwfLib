@@ -1,4 +1,4 @@
-﻿using Code.SwfLib.Tags.FontTags;
+﻿using SwfLib.Tags.FontTags;
 
 namespace SwfLib.SwfMill.TagFormatting.FontTags {
     public abstract class DefineFontBaseFormatter<T> : TagFormatterBase<T> where T : FontBaseTag {

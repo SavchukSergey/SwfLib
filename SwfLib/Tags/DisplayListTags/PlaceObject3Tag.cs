@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.ClipActions;
 using Code.SwfLib.Data;
+using SwfLib.ClipActions;
 using SwfLib.Data;
 using SwfLib.Filters;
 using SwfLib.Tags;

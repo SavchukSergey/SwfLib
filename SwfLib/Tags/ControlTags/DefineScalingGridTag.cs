@@ -1,7 +1,4 @@
-﻿using SwfLib.Tags;
-using SwfLib.Tags.ControlTags;
-
-namespace Code.SwfLib.Tags.ControlTags {
+﻿namespace SwfLib.Tags.ControlTags {
     public class DefineScalingGridTag : ControlBaseTag {
 
         public override SwfTagType TagType {

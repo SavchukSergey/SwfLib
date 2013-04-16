@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using SwfLib.Tags;
 
-namespace Code.SwfLib.Tags.FontTags {
+namespace SwfLib.Tags.FontTags {
     public class DefineFontTag : FontBaseTag {
 
         public readonly IList<ushort> OffsetTable = new List<ushort>();

@@ -3,6 +3,7 @@ using Code.SwfLib.SwfMill;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ControlTags;
 using SwfLib.SwfMill.Data;
+using SwfLib.Tags.ControlTags;
 
 namespace SwfLib.SwfMill.TagFormatting.ControlTags {
     public class FileAttributesTagFormatter : TagFormatterBase<FileAttributesTag> {

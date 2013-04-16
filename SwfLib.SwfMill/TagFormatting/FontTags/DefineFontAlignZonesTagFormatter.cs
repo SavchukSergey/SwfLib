@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Fonts;
-using Code.SwfLib.SwfMill.Fonts;
-using Code.SwfLib.Tags.FontTags;
+using SwfLib.Fonts;
+using SwfLib.SwfMill.Fonts;
+using SwfLib.Tags.FontTags;
 
 namespace SwfLib.SwfMill.TagFormatting.FontTags {
     public class DefineFontAlignZonesTagFormatter : DefineFontBaseFormatter<DefineFontAlignZonesTag> {

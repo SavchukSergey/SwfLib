@@ -1,10 +1,8 @@
 ﻿using System.IO;
-using Code.SwfLib.Data;
 using NUnit.Framework;
-using SwfLib;
 using SwfLib.Data;
 
-namespace Code.SwfLib.Tests.BasicTypes {
+namespace SwfLib.Tests.BasicTypes {
     [TestFixture]
     public class RectTest : TestFixtureBase {
 

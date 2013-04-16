@@ -1,5 +1,4 @@
 ﻿using System;
-using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.Shapes.Records;
 using NUnit.Framework;
 using SwfLib.Shapes.LineStyles;

@@ -1,12 +1,10 @@
 ﻿using System.IO;
-using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ControlTags;
 using NUnit.Framework;
-using SwfLib;
 using SwfLib.Tags;
 using SwfLib.Tests.Asserts.Tags;
 
-namespace Code.SwfLib.Tests.Tags.ControlTags {
+namespace SwfLib.Tests.Tags.ControlTags {
     [TestFixture]
     public class SetBackgroundColorTagTest : TestFixtureBase {
         private static readonly byte[] _etalon = new byte[] { 10, 20, 30 };

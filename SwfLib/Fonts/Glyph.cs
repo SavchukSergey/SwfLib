@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Data;
-using Code.SwfLib.Shapes.Records;
 using SwfLib.Data;
+using SwfLib.Shapes.Records;
 
-namespace Code.SwfLib.Fonts {
+namespace SwfLib.Fonts {
     public class Glyph {
 
         public ushort Code;

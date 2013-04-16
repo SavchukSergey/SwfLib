@@ -2,6 +2,7 @@
 using Code.SwfLib.Actions;
 using SwfLib.Actions;
 using SwfLib.Tags;
+using SwfLib.Tags.ActionsTags;
 
 namespace Code.SwfLib.Tags.ActionsTags {
     public class DoInitActionTag : ActionsBaseTag {

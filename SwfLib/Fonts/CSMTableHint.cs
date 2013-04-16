@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Fonts {
+﻿namespace SwfLib.Fonts {
     public enum CSMTableHint {
         Thin = 0,
         Medium = 1,

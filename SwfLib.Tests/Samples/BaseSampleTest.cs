@@ -2,11 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using Code.SwfLib.Tags;
-using SwfLib;
 using SwfLib.Tags;
 
-namespace Code.SwfLib.Tests.Samples {
+namespace SwfLib.Tests.Samples {
     public abstract class BaseSampleTest : TestFixtureBase {
 
         private readonly MD5 _md5 = MD5.Create();
