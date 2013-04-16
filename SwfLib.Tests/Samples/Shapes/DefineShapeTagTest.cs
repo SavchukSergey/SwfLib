@@ -6,6 +6,7 @@ using Code.SwfLib.Tests.Asserts.Shapes;
 using Code.SwfLib.Tests.Samples;
 using NUnit.Framework;
 using SwfLib.Shapes.Records;
+using SwfLib.Tags.ShapeTags;
 using SwfLib.Tests.Asserts.Shapes;
 
 namespace SwfLib.Tests.Samples.Shapes {

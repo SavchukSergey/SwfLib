@@ -1,7 +1,8 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Data;
+using SwfLib.Data;
 
-namespace Code.SwfLib.SwfMill.Data {
+namespace SwfLib.SwfMill.Data {
     public static class XColorTransformRGB {
 
         public const string TAG_NAME = "ColorTransform";

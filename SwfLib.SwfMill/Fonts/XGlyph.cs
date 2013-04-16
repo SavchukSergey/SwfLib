@@ -1,10 +1,9 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Fonts;
 using Code.SwfLib.SwfMill.Shapes;
-using Code.SwfLib.SwfMill.Utils;
 using SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill.Fonts {
+namespace SwfLib.SwfMill.Fonts {
     public static class XGlyph {
 
         public static XElement ToXml(Glyph glyph) {

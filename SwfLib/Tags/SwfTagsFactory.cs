@@ -1,4 +1,5 @@
-﻿using Code.SwfLib.Tags.ActionsTags;
+﻿using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
 using Code.SwfLib.Tags.ButtonTags;
 using Code.SwfLib.Tags.ControlTags;
@@ -8,7 +9,6 @@ using Code.SwfLib.Tags.ShapeMorphingTags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
-using SwfLib.Tags;
 using SwfLib.Tags.BitmapTags;
 using SwfLib.Tags.ButtonTags;
 using SwfLib.Tags.ControlTags;
@@ -17,7 +17,7 @@ using SwfLib.Tags.FontTags;
 using SwfLib.Tags.ShapeTags;
 using SwfLib.Tags.VideoTags;
 
-namespace Code.SwfLib.Tags {
+namespace SwfLib.Tags {
     public class SwfTagsFactory {
 
         public SwfTagBase Create(SwfTagType tagType) {

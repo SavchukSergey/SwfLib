@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using Code.SwfLib.Tags;
 using SwfLib;
+using SwfLib.Tags;
 
 namespace Code.SwfLib.Tests.ExternalEtalonTests {
     public abstract class ExternalEtalonTestFixtureBase : TestFixtureBase {

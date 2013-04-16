@@ -5,6 +5,7 @@ using Code.SwfLib.Tags;
 using Code.SwfLib.Tests;
 using Code.SwfLib.Utils;
 using NUnit.Framework;
+using SwfLib.Tags;
 
 namespace SwfLib.Tests {
     [TestFixture]

@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using Code.SwfLib.Tags;
 using NUnit.Framework;
 using SwfLib;
+using SwfLib.Tags;
 using SwfLib.Tests.Asserts.Utils;
 
 namespace Code.SwfLib.SwfMill.Tests {

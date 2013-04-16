@@ -2,8 +2,8 @@
 using Code.SwfLib.Buttons;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Filters;
-using Code.SwfLib.SwfMill.Utils;
 using SwfLib.Data;
+using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.Buttons {

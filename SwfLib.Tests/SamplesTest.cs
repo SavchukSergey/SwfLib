@@ -6,6 +6,7 @@ using Code.SwfLib.Tags;
 using Code.SwfLib.Tests.Samples;
 using NUnit.Framework;
 using SwfLib;
+using SwfLib.Tags;
 using SwfLib.Tests.Asserts.Utils;
 
 namespace Code.SwfLib.Tests {

@@ -1,5 +1,4 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.Utils {
     public static class XElementUtils {

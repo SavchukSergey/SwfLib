@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Shapes.FillStyles;
-using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.Shapes.Records;
+using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.ShapeTags;
 using SwfLib.Shapes.LineStyles;
-using SwfLib.Tags;
 
-namespace Code.SwfLib.Tags.ShapeTags {
+namespace SwfLib.Tags.ShapeTags {
     public class DefineShape2Tag : ShapeBaseTag {
 
         public readonly IList<LineStyleRGB> LineStyles = new List<LineStyleRGB>();

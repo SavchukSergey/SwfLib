@@ -1,4 +1,5 @@
 ﻿using SwfLib;
+using SwfLib.Tags;
 
 namespace Code.SwfLib.Tags {
     public static class TagStreamExt {

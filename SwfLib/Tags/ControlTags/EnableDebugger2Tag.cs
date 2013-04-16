@@ -1,7 +1,6 @@
-﻿using SwfLib.Tags;
-using SwfLib.Tags.ControlTags;
+﻿using Code.SwfLib.Tags;
 
-namespace Code.SwfLib.Tags.ControlTags {
+namespace SwfLib.Tags.ControlTags {
     public class EnableDebugger2Tag : ControlBaseTag {
 
         public byte[] Data { get; set; }

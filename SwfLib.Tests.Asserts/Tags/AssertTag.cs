@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Data;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
-using Code.SwfLib.Tags.ShapeTags;
-using Code.SwfLib.Tests.Asserts;
 using Code.SwfLib.Tests.Asserts.Shapes;
 using NUnit.Framework;
 using SwfLib.Data;
 using SwfLib.Tags.DisplayListTags;
+using SwfLib.Tags.ShapeTags;
 using SwfLib.Tests.Asserts.Shapes;
 
 namespace SwfLib.Tests.Asserts.Tags {

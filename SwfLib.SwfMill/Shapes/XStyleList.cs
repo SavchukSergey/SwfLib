@@ -3,7 +3,6 @@ using System.Xml.Linq;
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.SwfMill.Shapes;
-using Code.SwfLib.SwfMill.Utils;
 using SwfLib.Shapes.FillStyles;
 using SwfLib.Shapes.LineStyles;
 using SwfLib.SwfMill.Utils;

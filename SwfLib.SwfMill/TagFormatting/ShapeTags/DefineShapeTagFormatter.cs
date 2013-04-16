@@ -4,6 +4,7 @@ using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.SwfMill.TagFormatting.ShapeTags;
 using Code.SwfLib.Tags.ShapeTags;
 using SwfLib.SwfMill.Shapes;
+using SwfLib.Tags.ShapeTags;
 
 namespace SwfLib.SwfMill.TagFormatting.ShapeTags {
     public class DefineShapeTagFormatter : DefineShapeBaseFormatter<DefineShapeTag> {

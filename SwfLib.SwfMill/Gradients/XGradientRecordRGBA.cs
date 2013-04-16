@@ -1,7 +1,6 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Gradients;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.SwfMill.Utils;
 using SwfLib.Gradients;
 using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;

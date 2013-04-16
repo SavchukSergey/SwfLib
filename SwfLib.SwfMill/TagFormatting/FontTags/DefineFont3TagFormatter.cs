@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.SwfMill.Fonts;
+using SwfLib.SwfMill.Data;
+using SwfLib.SwfMill.Fonts;
 using SwfLib.Tags.FontTags;
 
 namespace SwfLib.SwfMill.TagFormatting.FontTags {

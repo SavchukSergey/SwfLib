@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Actions {
+﻿using Code.SwfLib.Actions;
+
+namespace SwfLib.Actions {
     public class ActionAsciiToChar : ActionBase {
 
         public override ActionCode ActionCode {

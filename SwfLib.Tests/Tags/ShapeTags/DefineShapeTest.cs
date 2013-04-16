@@ -11,6 +11,8 @@ using NUnit.Framework;
 using SwfLib.Data;
 using SwfLib.Shapes.LineStyles;
 using SwfLib.Shapes.Records;
+using SwfLib.Tags;
+using SwfLib.Tags.ShapeTags;
 using SwfLib.Tests.Asserts.Tags;
 
 namespace SwfLib.Tests.Tags.ShapeTags {

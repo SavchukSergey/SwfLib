@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.SwfLib.SwfMill.Data {
+namespace SwfLib.SwfMill.Data {
     public static class CommonFormatter {
 
         public static string Format(double val) {
