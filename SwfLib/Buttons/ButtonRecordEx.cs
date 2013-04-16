@@ -2,7 +2,7 @@
 using SwfLib.Data;
 using SwfLib.Filters;
 
-namespace Code.SwfLib.Buttons {
+namespace SwfLib.Buttons {
     public class ButtonRecordEx {
         public byte Reserved;
 

@@ -1,6 +1,4 @@
-﻿using Code.SwfLib.Tags;
-
-namespace SwfLib.Tags {
+﻿namespace SwfLib.Tags {
     public class DefineBinaryDataTag : SwfTagBase {
 
         public override SwfTagType TagType {

@@ -1,5 +1,4 @@
 ﻿using System;
-using Code.SwfLib.Tags;
 using NUnit.Framework;
 using SwfLib.Tags;
 

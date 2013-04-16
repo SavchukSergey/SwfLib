@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Shapes;
 using SwfLib.SwfMill.Shapes;
 using SwfLib.Tags.ShapeTags;
 

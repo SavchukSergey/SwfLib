@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
 using SwfLib.Actions;
-using SwfLib.SwfMill.Tests.Actions;
 
-namespace Code.SwfLib.SwfMill.Tests.Actions {
+namespace SwfLib.SwfMill.Tests.Actions {
     [TestFixture]
     public class ConstantPoolXActionTest : BaseXActionTest {
         

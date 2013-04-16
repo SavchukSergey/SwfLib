@@ -3,7 +3,7 @@ using SwfLib.Shapes.FillStyles;
 using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill.Shapes {
+namespace SwfLib.SwfMill.Shapes {
     public static class XSolidFillStyle {
 
         public const string SOLID = "Solid";

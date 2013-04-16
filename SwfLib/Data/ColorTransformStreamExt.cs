@@ -1,5 +1,4 @@
-﻿using Code.SwfLib;
-using SwfLib.Utils;
+﻿using SwfLib.Utils;
 
 namespace SwfLib.Data {
     public static class ColorTransformStreamExt {

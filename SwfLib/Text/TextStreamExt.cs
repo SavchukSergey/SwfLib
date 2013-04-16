@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SwfLib;
 using SwfLib.Data;
-using SwfLib.Text;
 
-namespace Code.SwfLib.Text {
+namespace SwfLib.Text {
     public static class TextStreamExt {
 
         public static IList<TextRecordRGB> ReadTextRecordsRGB(this ISwfStreamReader reader, uint glyphBits, uint advanceBits) {

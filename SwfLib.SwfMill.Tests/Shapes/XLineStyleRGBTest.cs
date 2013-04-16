@@ -1,11 +1,10 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Shapes;
 using NUnit.Framework;
 using SwfLib.Shapes.LineStyles;
-using SwfLib.SwfMill.Tests;
+using SwfLib.SwfMill.Shapes;
 using SwfLib.Tests.Asserts.Shapes;
 
-namespace Code.SwfLib.SwfMill.Tests.Shapes {
+namespace SwfLib.SwfMill.Tests.Shapes {
     [TestFixture]
     public class XLineStyleRGBTest {
 

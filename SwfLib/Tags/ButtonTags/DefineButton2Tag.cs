@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Buttons;
-using Code.SwfLib.Tags;
 using SwfLib.Buttons;
 
 namespace SwfLib.Tags.ButtonTags {

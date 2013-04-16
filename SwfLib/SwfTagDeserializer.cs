@@ -1,9 +1,7 @@
 ﻿using System.IO;
 using System.Text;
-using Code.SwfLib.Buttons;
-using Code.SwfLib.Tags;
-using Code.SwfLib.Text;
 using SwfLib.Actions;
+using SwfLib.Buttons;
 using SwfLib.ClipActions;
 using SwfLib.Data;
 using SwfLib.Filters;
@@ -21,6 +19,7 @@ using SwfLib.Tags.ShapeTags;
 using SwfLib.Tags.SoundTags;
 using SwfLib.Tags.TextTags;
 using SwfLib.Tags.VideoTags;
+using SwfLib.Text;
 
 namespace SwfLib {
     public class SwfTagDeserializer : ISwfTagVisitor<ISwfStreamReader, SwfTagBase> {

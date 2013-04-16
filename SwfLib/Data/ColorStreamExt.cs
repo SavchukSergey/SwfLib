@@ -1,6 +1,4 @@
-﻿using Code.SwfLib;
-
-namespace SwfLib.Data {
+﻿namespace SwfLib.Data {
     public static class ColorStreamExt {
         
         public static SwfRGB ReadRGB(this ISwfStreamReader reader) {

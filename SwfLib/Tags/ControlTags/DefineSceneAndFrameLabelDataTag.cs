@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Tags;
 using SwfLib.Data;
 
 namespace SwfLib.Tags.ControlTags {

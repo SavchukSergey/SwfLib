@@ -1,5 +1,4 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill;
 using SwfLib.SwfMill.Data;
 using SwfLib.Tags.ControlTags;
 

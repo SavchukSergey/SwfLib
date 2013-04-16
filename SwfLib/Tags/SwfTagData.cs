@@ -1,6 +1,4 @@
-﻿using Code.SwfLib.Tags;
-
-namespace SwfLib.Tags {
+﻿namespace SwfLib.Tags {
     public class SwfTagData {
 
         public SwfTagType Type { get; set; }

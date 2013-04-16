@@ -7,7 +7,7 @@ using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Gradients;
 using SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill.Shapes {
+namespace SwfLib.SwfMill.Shapes {
     public static class XRadialGradientFillStyle {
 
         public const string RADIAL_GRADIENT = "RadialGradient";

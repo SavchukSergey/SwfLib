@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
 using SwfLib.Actions;
-using SwfLib.Tests.Actions;
 
-namespace Code.SwfLib.Tests.Actions {
+namespace SwfLib.Tests.Actions {
     [TestFixture]
     public class SetTargetActionTest : BaseActionTest {
 

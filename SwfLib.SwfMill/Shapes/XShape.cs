@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using SwfLib.Shapes.Records;
 using SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill.Shapes {
+namespace SwfLib.SwfMill.Shapes {
     public class XShape {
 
         public static XElement ToXml(IList<IShapeRecordRGB> records) {

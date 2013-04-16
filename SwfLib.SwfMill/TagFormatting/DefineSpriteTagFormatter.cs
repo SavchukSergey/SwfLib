@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
-using Code.SwfLib.SwfMill;
-using Code.SwfLib.Tags;
 using SwfLib.Tags;
 
 namespace SwfLib.SwfMill.TagFormatting {

@@ -3,7 +3,7 @@ using SwfLib.Shapes.LineStyles;
 using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill.Shapes {
+namespace SwfLib.SwfMill.Shapes {
     public class XLineStyleRGB {
 
         public static XElement ToXml(LineStyleRGB lineStyle) {

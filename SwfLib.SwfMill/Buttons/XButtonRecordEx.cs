@@ -1,5 +1,5 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Buttons;
+using SwfLib.Buttons;
 using SwfLib.Data;
 using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Filters;

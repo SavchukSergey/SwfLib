@@ -1,5 +1,4 @@
-﻿using Code.SwfLib.Tags;
-using SwfLib.Tags.ActionsTags;
+﻿using SwfLib.Tags.ActionsTags;
 using SwfLib.Tags.BitmapTags;
 using SwfLib.Tags.ButtonTags;
 using SwfLib.Tags.ControlTags;

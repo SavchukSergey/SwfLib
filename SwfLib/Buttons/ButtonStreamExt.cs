@@ -1,10 +1,8 @@
-﻿using SwfLib;
-using SwfLib.Actions;
-using SwfLib.Buttons;
+﻿using SwfLib.Actions;
 using SwfLib.Data;
 using SwfLib.Filters;
 
-namespace Code.SwfLib.Buttons {
+namespace SwfLib.Buttons {
     public static class ButtonStreamExt {
 
         public static ButtonRecordEx ReadButtonRecordEx(this ISwfStreamReader reader) {
