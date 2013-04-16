@@ -1,6 +1,7 @@
 ﻿using System;
 using Code.SwfLib.Shapes.FillStyles;
 using NUnit.Framework;
+using SwfLib.Tests.Asserts;
 
 namespace Code.SwfLib.Tests.Asserts.Shapes {
     public static class AssertFillStyles {

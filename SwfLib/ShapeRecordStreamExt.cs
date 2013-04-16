@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Shapes;
 using Code.SwfLib.Shapes.Records;
+using SwfLib;
 
 namespace Code.SwfLib {
     public static class ShapeRecordStreamExt {

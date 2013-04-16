@@ -1,5 +1,6 @@
 ﻿using Code.SwfLib.ClipActions;
 using Code.SwfLib.Data;
+using SwfLib.Data;
 
 namespace Code.SwfLib.Tags.DisplayListTags {
     public class PlaceObject2Tag : PlaceObjectBaseTag {

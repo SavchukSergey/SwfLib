@@ -4,6 +4,7 @@ using Code.SwfLib.Data;
 using Code.SwfLib.Tests;
 using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
+using SwfLib.Data;
 
 namespace SwfLib.Tests.BasicTypes {
     [TestFixture]

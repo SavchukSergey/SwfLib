@@ -21,6 +21,7 @@ using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
 using Code.SwfLib.Text;
 using Code.SwfLib.Utils;
+using SwfLib.Data;
 
 namespace Code.SwfLib {
     public class SwfTagSerializer : ISwfTagVisitor<ISwfStreamWriter, SwfTagData> {

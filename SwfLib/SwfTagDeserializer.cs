@@ -20,6 +20,8 @@ using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
 using Code.SwfLib.Tags.VideoTags;
 using Code.SwfLib.Text;
+using SwfLib;
+using SwfLib.Data;
 
 namespace Code.SwfLib {
     public class SwfTagDeserializer : ISwfTagVisitor<ISwfStreamReader, SwfTagBase> {

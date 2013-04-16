@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Gradients;
 using NUnit.Framework;
+using SwfLib.Tests.Asserts;
 
 namespace Code.SwfLib.Tests.Asserts {
     public static class AssertGradients {

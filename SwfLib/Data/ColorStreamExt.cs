@@ -1,4 +1,7 @@
-﻿namespace Code.SwfLib.Data {
+﻿using Code.SwfLib;
+using Code.SwfLib.Data;
+
+namespace SwfLib.Data {
     public static class ColorStreamExt {
         
         public static SwfRGB ReadRGB(this ISwfStreamReader reader) {

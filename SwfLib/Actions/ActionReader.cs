@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using SwfLib;
 using SwfLib.Actions;
 
 namespace Code.SwfLib.Actions {

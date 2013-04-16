@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Tags {
+﻿using SwfLib;
+
+namespace Code.SwfLib.Tags {
     public static class TagStreamExt {
 
         public static SwfTagData ReadTagData(this ISwfStreamReader reader) {

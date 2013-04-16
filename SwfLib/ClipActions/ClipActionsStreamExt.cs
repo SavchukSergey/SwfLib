@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Code.SwfLib.Actions;
+using SwfLib;
 
 namespace Code.SwfLib.ClipActions {
     public static class ClipActionsStreamExt {

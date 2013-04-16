@@ -1,6 +1,7 @@
 ﻿using Code.SwfLib.Gradients;
 using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
+using SwfLib;
 using SwfLib.Tests.Gradients;
 
 namespace Code.SwfLib.Tests.Gradients {

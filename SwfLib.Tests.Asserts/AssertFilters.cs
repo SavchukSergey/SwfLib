@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Code.SwfLib.Filters;
 using NUnit.Framework;
+using SwfLib.Filters;
+using SwfLib.Tests.Asserts;
 
 namespace Code.SwfLib.Tests.Asserts {
     public static class AssertFilters {

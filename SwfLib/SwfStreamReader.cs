@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using SwfLib;
 
 namespace Code.SwfLib {
     public class SwfStreamReader : ISwfStreamReader {

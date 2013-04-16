@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib {
+﻿namespace SwfLib {
     public interface ISwfStreamReader {
         bool IsEOF { get; }
         long Position { get; }

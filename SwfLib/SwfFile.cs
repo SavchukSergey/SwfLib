@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
+using SwfLib;
 
 namespace Code.SwfLib {
     public class SwfFile {

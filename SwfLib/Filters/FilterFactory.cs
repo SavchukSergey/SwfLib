@@ -1,4 +1,5 @@
 ﻿using System;
+using SwfLib.Filters;
 
 namespace Code.SwfLib.Filters {
     public class FilterFactory {

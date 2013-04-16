@@ -1,4 +1,5 @@
 ﻿using Code.SwfLib.Shapes.Records;
+using SwfLib;
 
 namespace Code.SwfLib.Shapes {
     public class ShapeRecordRGBReader : ShapeRecordReader<IShapeRecordRGB, StyleChangeShapeRecordRGB> {

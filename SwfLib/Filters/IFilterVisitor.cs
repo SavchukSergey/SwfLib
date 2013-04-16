@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Filters {
+﻿using SwfLib.Filters;
+
+namespace Code.SwfLib.Filters {
     public interface IFilterVisitor<TArg, TResult> {
 
         TResult Visit(DropShadowFilter filter, TArg arg);
