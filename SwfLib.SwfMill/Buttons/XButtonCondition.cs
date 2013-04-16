@@ -1,11 +1,9 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Buttons;
-using Code.SwfLib.SwfMill.Data;
 using SwfLib.Buttons;
 using SwfLib.SwfMill.Actions;
 using SwfLib.SwfMill.Data;
 
-namespace Code.SwfLib.SwfMill.Buttons {
+namespace SwfLib.SwfMill.Buttons {
     public static class XButtonCondition {
 
         public static XElement ToXml(ButtonCondition condition) {

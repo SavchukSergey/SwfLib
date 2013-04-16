@@ -1,6 +1,6 @@
-﻿using Code.SwfLib.ClipActions;
+﻿using SwfLib.ClipActions;
 
-namespace Code.SwfLib.SwfMill.ClipActions {
+namespace SwfLib.SwfMill.ClipActions {
     public static class XClipEventFlags {
 
         public static int GetFlags1(ClipEventFlags flags) {

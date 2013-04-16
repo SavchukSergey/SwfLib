@@ -1,9 +1,8 @@
 ﻿using System.Xml.Linq;
 using SwfLib.SwfMill.Actions;
-using SwfLib.SwfMill.TagFormatting;
 using SwfLib.Tags.ActionsTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
+namespace SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoActionTagFormatter : TagFormatterBase<DoActionTag> {
         private const string ACTIONS_ELEM = "actions";
 

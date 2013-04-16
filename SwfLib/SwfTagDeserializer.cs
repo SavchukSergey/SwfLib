@@ -2,11 +2,6 @@
 using System.Text;
 using Code.SwfLib.Buttons;
 using Code.SwfLib.Tags;
-using Code.SwfLib.Tags.BitmapTags;
-using Code.SwfLib.Tags.ButtonTags;
-using Code.SwfLib.Tags.FontTags;
-using Code.SwfLib.Tags.SoundTags;
-using Code.SwfLib.Tags.TextTags;
 using Code.SwfLib.Text;
 using SwfLib.Actions;
 using SwfLib.ClipActions;
@@ -23,6 +18,8 @@ using SwfLib.Tags.DisplayListTags;
 using SwfLib.Tags.FontTags;
 using SwfLib.Tags.ShapeMorphingTags;
 using SwfLib.Tags.ShapeTags;
+using SwfLib.Tags.SoundTags;
+using SwfLib.Tags.TextTags;
 using SwfLib.Tags.VideoTags;
 
 namespace SwfLib {

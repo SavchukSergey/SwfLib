@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.SwfLib.Tags;
+using Code.SwfLib.SwfMill;
 using SwfLib.Tags;
 
-namespace Code.SwfLib.SwfMill {
+namespace SwfLib.SwfMill {
     public static class SwfTagNameMapping {
 
         private static readonly SwfTagsFactory _factory = new SwfTagsFactory();

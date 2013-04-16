@@ -1,10 +1,8 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.Tags.TextTags;
 using SwfLib.SwfMill.Data;
-using SwfLib.SwfMill.TagFormatting;
+using SwfLib.Tags.TextTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
+namespace SwfLib.SwfMill.TagFormatting.TextTags {
     public abstract class BaseDefineTextTagFormatter<T> : TagFormatterBase<T> where T: DefineTextBaseTag {
 
         private const string BOUNDS_ELEM = "bounds";

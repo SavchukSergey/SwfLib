@@ -1,5 +1,5 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Tags.SoundTags;
+using SwfLib.Tags.SoundTags;
 
 namespace SwfLib.SwfMill.TagFormatting.SoundTags {
     public class SoundStreamHeadTagFormatter : TagFormatterBase<SoundStreamHeadTag> {

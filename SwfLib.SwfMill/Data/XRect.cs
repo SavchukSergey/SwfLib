@@ -2,7 +2,7 @@
 using System.Xml.Linq;
 using SwfLib.Data;
 
-namespace Code.SwfLib.SwfMill.Data {
+namespace SwfLib.SwfMill.Data {
     public static class XRect {
 
         public static SwfRect FromXml(XElement xRect) {

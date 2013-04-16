@@ -1,7 +1,4 @@
-﻿using SwfLib.Tags;
-using SwfLib.Tags.ButtonTags;
-
-namespace Code.SwfLib.Tags.ButtonTags {
+﻿namespace SwfLib.Tags.ButtonTags {
     public class DefineButtonTag : DefineButtonBaseTag {
         
         public override SwfTagType TagType {

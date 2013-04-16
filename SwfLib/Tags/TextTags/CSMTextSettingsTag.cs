@@ -1,6 +1,4 @@
-﻿using SwfLib.Tags;
-
-namespace Code.SwfLib.Tags.TextTags {
+﻿namespace SwfLib.Tags.TextTags {
     public class CSMTextSettingsTag : TextBaseTag {
 
         public ushort TextID;

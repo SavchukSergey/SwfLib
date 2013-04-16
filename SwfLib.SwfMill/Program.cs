@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Linq;
-using SwfLib;
-using SwfLib.SwfMill;
 using SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill {
+namespace SwfLib.SwfMill {
     class Program {
         static void Main(string[] args) {
             if (args.Length < 1) {

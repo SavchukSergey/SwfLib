@@ -1,9 +1,8 @@
 ﻿using System;
-using Code.SwfLib.Tags;
 using NUnit.Framework;
 using SwfLib.Tags;
 
-namespace Code.SwfLib.SwfMill.Tests {
+namespace SwfLib.SwfMill.Tests {
     [TestFixture]
     public class TagFormatterFactoryTest {
 

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.Tags.ShapeTags;
+using SwfLib.SwfMill.Data;
+using SwfLib.Tags.ShapeTags;
 
 namespace SwfLib.SwfMill.TagFormatting.ShapeTags {
     public abstract class DefineShapeBaseFormatter<T> : TagFormatterBase<T> where T : ShapeBaseTag {

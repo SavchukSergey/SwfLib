@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
-using Code.SwfLib.Tags.TextTags;
 using SwfLib.SwfMill.Text;
 using SwfLib.SwfMill.Utils;
+using SwfLib.Tags.TextTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
+namespace SwfLib.SwfMill.TagFormatting.TextTags {
     public class DefineTextTagFormatter : BaseDefineTextTagFormatter<DefineTextTag> {
 
         protected override void ReadRecords(DefineTextTag tag, XElement xRecords) {

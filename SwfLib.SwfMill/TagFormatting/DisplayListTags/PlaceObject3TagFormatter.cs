@@ -1,6 +1,4 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.ClipActions;
-using Code.SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.ClipActions;
 using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Filters;

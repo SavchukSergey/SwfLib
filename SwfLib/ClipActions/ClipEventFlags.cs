@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.ClipActions {
+﻿namespace SwfLib.ClipActions {
     public struct ClipEventFlags {
 
         public bool ClipEventKeyUp;

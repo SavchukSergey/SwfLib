@@ -1,12 +1,9 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Buttons;
-using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.Tags.ButtonTags;
 using SwfLib.SwfMill.Buttons;
 using SwfLib.SwfMill.Data;
 using SwfLib.Tags.ButtonTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
+namespace SwfLib.SwfMill.TagFormatting.ButtonTags {
     public class DefineButton2TagFormatter : DefineButtonBaseTagFormatter<DefineButton2Tag> {
 
         private const string MENU_ATTRIB = "menu";

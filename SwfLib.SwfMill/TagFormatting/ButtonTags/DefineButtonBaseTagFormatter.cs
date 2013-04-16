@@ -1,8 +1,6 @@
-﻿using Code.SwfLib.Tags.ButtonTags;
-using SwfLib.SwfMill.TagFormatting;
-using SwfLib.Tags.ButtonTags;
+﻿using SwfLib.Tags.ButtonTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
+namespace SwfLib.SwfMill.TagFormatting.ButtonTags {
     public abstract class DefineButtonBaseTagFormatter<T> : TagFormatterBase<T> where T : DefineButtonBaseTag {
 
         protected override ushort? GetObjectID(T tag) {

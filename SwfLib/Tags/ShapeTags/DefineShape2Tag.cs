@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Tags;
-using Code.SwfLib.Tags.ShapeTags;
 using SwfLib.Shapes.FillStyles;
 using SwfLib.Shapes.LineStyles;
 using SwfLib.Shapes.Records;

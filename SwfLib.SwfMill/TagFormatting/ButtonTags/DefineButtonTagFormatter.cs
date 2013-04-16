@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Tags.ButtonTags;
+using SwfLib.Tags.ButtonTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
+namespace SwfLib.SwfMill.TagFormatting.ButtonTags {
     public class DefineButtonTagFormatter : DefineButtonBaseTagFormatter<DefineButtonTag> {
         
         protected override void FormatTagElement(DefineButtonTag tag, XElement xTag) {

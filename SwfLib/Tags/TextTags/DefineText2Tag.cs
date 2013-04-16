@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Text;
-using SwfLib.Tags;
 using SwfLib.Text;
 
-namespace Code.SwfLib.Tags.TextTags {
+namespace SwfLib.Tags.TextTags {
     public class DefineText2Tag : DefineTextBaseTag {
 
         public readonly IList<TextRecordRGBA> TextRecords = new List<TextRecordRGBA>();

@@ -1,5 +1,4 @@
-﻿using Code.SwfLib.Tags.BitmapTags;
-using SwfLib.Tags.BitmapTags;
+﻿using SwfLib.Tags.BitmapTags;
 
 namespace SwfLib.SwfMill.TagFormatting.BitmapTags {
     public abstract class DefineBitmapBaseTagFormatter<T> : TagFormatterBase<T> where T : BitmapBaseTag {

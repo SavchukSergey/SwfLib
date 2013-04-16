@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using Code.SwfLib.SwfMill;
-using Code.SwfLib.SwfMill.Data;
+using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 using SwfLib.Tags;
 

@@ -1,11 +1,9 @@
 ﻿using System.Globalization;
 using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.Tags.TextTags;
 using SwfLib.SwfMill.Data;
-using SwfLib.SwfMill.TagFormatting;
+using SwfLib.Tags.TextTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
+namespace SwfLib.SwfMill.TagFormatting.TextTags {
     public class CSMTextSettingsTagFormatter : TagFormatterBase<CSMTextSettingsTag> {
 
         private const string USE_FLASH_TYPE_ATTRIB = "useFlashType";

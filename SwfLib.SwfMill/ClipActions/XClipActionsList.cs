@@ -1,5 +1,4 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.ClipActions;
 using SwfLib.ClipActions;
 
 namespace SwfLib.SwfMill.ClipActions {

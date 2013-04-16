@@ -1,7 +1,6 @@
 ﻿using SwfLib.Data;
-using SwfLib.Tags;
 
-namespace Code.SwfLib.Tags.ShapeTags {
+namespace SwfLib.Tags.ShapeTags {
     public abstract class ShapeBaseTag : SwfTagBase {
 
         public ushort ShapeID { get; set; }
