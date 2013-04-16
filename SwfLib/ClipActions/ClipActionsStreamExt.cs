@@ -2,6 +2,7 @@
 using System.IO;
 using Code.SwfLib.Actions;
 using SwfLib;
+using SwfLib.Actions;
 
 namespace Code.SwfLib.ClipActions {
     public static class ClipActionsStreamExt {

@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Data;
+using Code.SwfLib.Tags;
 using SwfLib.Data;
-using SwfLib.Tags;
-using SwfLib.Tags.ControlTags;
 
-namespace Code.SwfLib.Tags.ControlTags {
+namespace SwfLib.Tags.ControlTags {
     public class DefineSceneAndFrameLabelDataTag : ControlBaseTag {
 
         public readonly IList<SceneOffsetData> Scenes = new List<SceneOffsetData>();

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Gradients;
 using SwfLib.Gradients;
 
-namespace Code.SwfLib.Filters {
+namespace SwfLib.Filters {
     public class GradientGlowFilter : BaseFilter {
 
         public readonly IList<GradientRecordRGBA> GradientColors = new List<GradientRecordRGBA>();

@@ -1,7 +1,6 @@
 ﻿using System;
-using SwfLib.Filters;
 
-namespace Code.SwfLib.Filters {
+namespace SwfLib.Filters {
     public class FilterFactory {
 
         public BaseFilter Create(FilterType type) {

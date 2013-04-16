@@ -1,10 +1,7 @@
-﻿namespace Code.SwfLib.Data
-{
-    public struct SwfRGBA
-    {
+﻿namespace SwfLib.Data {
+    public struct SwfRGBA {
 
-        public SwfRGBA(byte red, byte green, byte blue, byte alpha)
-        {
+        public SwfRGBA(byte red, byte green, byte blue, byte alpha) {
             Red = red;
             Green = green;
             Blue = blue;
@@ -17,7 +14,7 @@
         public byte Green;
 
         public byte Blue;
-        
+
         public byte Alpha;
 
     }

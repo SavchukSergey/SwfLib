@@ -1,6 +1,7 @@
 ﻿using System;
 using Code.SwfLib.Actions;
 using NUnit.Framework;
+using SwfLib.Actions;
 
 namespace SwfLib.Tests.Asserts {
     public static class AssertAction {

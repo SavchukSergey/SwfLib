@@ -1,5 +1,4 @@
-﻿using Code.SwfLib.Data;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SwfLib.Data;
 
 namespace SwfLib.Tests.Asserts {

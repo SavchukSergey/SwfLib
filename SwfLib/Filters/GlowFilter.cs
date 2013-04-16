@@ -1,6 +1,6 @@
-﻿using Code.SwfLib.Data;
+﻿using SwfLib.Data;
 
-namespace Code.SwfLib.Filters {
+namespace SwfLib.Filters {
     public class GlowFilter : BaseFilter {
 
         public SwfRGBA Color;

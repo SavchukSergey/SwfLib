@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Filters {
+﻿namespace SwfLib.Filters {
     public class BlurFilter : BaseFilter {
 
         public double BlurX;

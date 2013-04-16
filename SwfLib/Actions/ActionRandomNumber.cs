@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Actions {
+﻿using SwfLib.Actions;
+
+namespace Code.SwfLib.Actions {
     public class ActionRandomNumber : ActionBase {
 
         public override ActionCode ActionCode {

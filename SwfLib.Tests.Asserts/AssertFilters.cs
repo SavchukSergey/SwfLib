@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.SwfLib.Filters;
-using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 using SwfLib.Filters;
 

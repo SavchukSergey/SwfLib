@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using SwfLib;
+using Code.SwfLib;
 
-namespace Code.SwfLib.Filters {
+namespace SwfLib.Filters {
     public static class FilterStreamEx {
 
         private static readonly FilterReader _reader = new FilterReader();

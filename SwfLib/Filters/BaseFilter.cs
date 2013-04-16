@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Filters {
+﻿namespace SwfLib.Filters {
     public abstract class BaseFilter {
 
         public abstract FilterType Type { get; }

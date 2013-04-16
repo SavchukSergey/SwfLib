@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Actions {
+﻿using SwfLib.Actions;
+
+namespace Code.SwfLib.Actions {
     public class ActionEnumerate2 : ActionBase {
         public override ActionCode ActionCode {
             get { return ActionCode.Enumerate2; }

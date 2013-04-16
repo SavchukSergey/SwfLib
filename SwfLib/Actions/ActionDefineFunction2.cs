@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SwfLib.Actions;
 
 namespace Code.SwfLib.Actions {
     public class ActionDefineFunction2 : ActionBase {

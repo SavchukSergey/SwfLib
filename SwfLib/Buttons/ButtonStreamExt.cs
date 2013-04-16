@@ -1,9 +1,10 @@
 ﻿using Code.SwfLib.Actions;
 using Code.SwfLib.Data;
-using Code.SwfLib.Filters;
 using SwfLib;
+using SwfLib.Actions;
 using SwfLib.Buttons;
 using SwfLib.Data;
+using SwfLib.Filters;
 
 namespace Code.SwfLib.Buttons {
     public static class ButtonStreamExt {

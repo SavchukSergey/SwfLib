@@ -1,6 +1,6 @@
-﻿using Code.SwfLib.Data;
+﻿using SwfLib.Data;
 
-namespace Code.SwfLib.Filters {
+namespace SwfLib.Filters {
     public class ConvolutionFilter : BaseFilter {
 
         public double Divisor;

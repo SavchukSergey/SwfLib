@@ -1,5 +1,5 @@
 ﻿using Code.SwfLib.Data;
-using Code.SwfLib.Filters;
+using SwfLib.Data;
 
 namespace SwfLib.Filters {
     public class BevelFilter : BaseFilter {

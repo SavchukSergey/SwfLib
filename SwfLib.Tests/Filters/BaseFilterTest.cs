@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using Code.SwfLib;
-using Code.SwfLib.Filters;
 using Code.SwfLib.Tests;
 using NUnit.Framework;
+using SwfLib.Filters;
 
 namespace SwfLib.Tests.Filters {
     public abstract class BaseFilterTest : TestFixtureBase {

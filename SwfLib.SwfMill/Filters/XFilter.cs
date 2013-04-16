@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Linq;
-using Code.SwfLib.Filters;
 using SwfLib.Filters;
 
 namespace Code.SwfLib.SwfMill.Filters {

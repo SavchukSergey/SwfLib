@@ -1,6 +1,6 @@
-﻿using Code.SwfLib.Filters;
-using Code.SwfLib.Tests.Asserts;
+﻿using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
+using SwfLib.Filters;
 using SwfLib.Tests.Asserts;
 using SwfLib.Tests.Filters;
 

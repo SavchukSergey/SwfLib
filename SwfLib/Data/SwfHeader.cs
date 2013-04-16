@@ -1,6 +1,4 @@
-﻿using SwfLib.Data;
-
-namespace Code.SwfLib.Data {
+﻿namespace SwfLib.Data {
 
     public struct SwfHeader {
         public SwfRect FrameSize;

@@ -4,9 +4,8 @@ using Code.SwfLib.Shapes.Records;
 using NUnit.Framework;
 using SwfLib.Shapes.LineStyles;
 using SwfLib.Shapes.Records;
-using SwfLib.Tests.Asserts;
 
-namespace Code.SwfLib.Tests.Asserts.Shapes {
+namespace SwfLib.Tests.Asserts.Shapes {
     public static class AssertShape {
 
         public static void AreEqual(IShapeRecord expected, IShapeRecord actual, string message) {

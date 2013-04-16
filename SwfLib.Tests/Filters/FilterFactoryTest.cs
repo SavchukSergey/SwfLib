@@ -1,5 +1,4 @@
-﻿using Code.SwfLib.Filters;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SwfLib.Filters;
 
 namespace Code.SwfLib.Tests.Filters {

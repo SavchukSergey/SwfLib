@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Actions {
+﻿using SwfLib.Actions;
+
+namespace Code.SwfLib.Actions {
     public class ActionDelete : ActionBase {
         public override ActionCode ActionCode {
             get { return ActionCode.Delete; }

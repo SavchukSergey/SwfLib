@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Filters {
+﻿namespace SwfLib.Filters {
     public enum FilterType {
         DropShadow = 0,
         Blur = 1,

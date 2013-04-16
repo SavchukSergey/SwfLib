@@ -1,11 +1,7 @@
-﻿using Code.SwfLib.Data;
-using Code.SwfLib.Gradients;
-using SwfLib;
-using SwfLib.Data;
-using SwfLib.Filters;
+﻿using SwfLib.Data;
 using SwfLib.Gradients;
 
-namespace Code.SwfLib.Filters {
+namespace SwfLib.Filters {
     public class FilterReader : IFilterVisitor<ISwfStreamReader, BaseFilter> {
 
         private readonly FilterFactory _factory = new FilterFactory();
