@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Code.SwfLib;
-using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
 using SwfLib.Data;
 using SwfLib.Tags;

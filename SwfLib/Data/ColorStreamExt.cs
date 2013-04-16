@@ -1,5 +1,4 @@
 ﻿using Code.SwfLib;
-using Code.SwfLib.Data;
 
 namespace SwfLib.Data {
     public static class ColorStreamExt {

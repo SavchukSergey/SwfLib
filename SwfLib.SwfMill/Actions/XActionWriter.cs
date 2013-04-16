@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.Actions;
-using Code.SwfLib.SwfMill.Data;
 using SwfLib.Actions;
-using SwfLib.SwfMill.Actions;
 using SwfLib.SwfMill.Data;
 
-namespace Code.SwfLib.SwfMill.Actions {
+namespace SwfLib.SwfMill.Actions {
     public class XActionWriter : IActionVisitor<XElement, XElement> {
 
         public XElement Serialize(ActionBase action) {

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Shapes;
-using Code.SwfLib.Shapes.Records;
+using SwfLib.Shapes;
 using SwfLib.Shapes.Records;
 
 namespace SwfLib {

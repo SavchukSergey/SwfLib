@@ -1,5 +1,4 @@
 ﻿using Code.SwfLib.Actions;
-using Code.SwfLib.Data;
 using SwfLib;
 using SwfLib.Actions;
 using SwfLib.Buttons;

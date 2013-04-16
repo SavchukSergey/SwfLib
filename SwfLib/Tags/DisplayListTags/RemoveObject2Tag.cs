@@ -1,6 +1,4 @@
-﻿using SwfLib.Tags;
-
-namespace Code.SwfLib.Tags.DisplayListTags {
+﻿namespace SwfLib.Tags.DisplayListTags {
     public class RemoveObject2Tag : DisplayListBaseTag {
 
         public ushort Depth;

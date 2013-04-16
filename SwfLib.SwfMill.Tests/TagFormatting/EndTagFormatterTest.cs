@@ -1,6 +1,5 @@
-﻿using Code.SwfLib.SwfMill.TagFormatting.ControlTags;
-using Code.SwfLib.Tags.ControlTags;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using SwfLib.SwfMill.TagFormatting.ControlTags;
 using SwfLib.Tags.ControlTags;
 
 namespace SwfLib.SwfMill.Tests.TagFormatting {

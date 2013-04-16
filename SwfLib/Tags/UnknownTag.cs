@@ -1,6 +1,4 @@
-﻿using SwfLib.Tags;
-
-namespace Code.SwfLib.Tags {
+﻿namespace SwfLib.Tags {
     public class UnknownTag : SwfTagBase {
 
         private SwfTagType _type;

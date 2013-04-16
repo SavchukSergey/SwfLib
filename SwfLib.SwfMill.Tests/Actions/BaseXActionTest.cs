@@ -1,8 +1,8 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Actions;
 using Code.SwfLib.SwfMill.Tests;
 using NUnit.Framework;
 using SwfLib.Actions;
+using SwfLib.SwfMill.Actions;
 
 namespace SwfLib.SwfMill.Tests.Actions {
     public abstract class BaseXActionTest {

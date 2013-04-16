@@ -1,12 +1,10 @@
 ﻿using System.IO;
-using Code.SwfLib.Tags.ControlTags;
-using Code.SwfLib.Tags.DisplayListTags;
 using NUnit.Framework;
-using SwfLib;
 using SwfLib.Data;
 using SwfLib.Tags.ControlTags;
+using SwfLib.Tags.DisplayListTags;
 
-namespace Code.SwfLib.Tests {
+namespace SwfLib.Tests {
     [TestFixture]
     public class SwfFileTest {
 

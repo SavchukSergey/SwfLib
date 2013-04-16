@@ -1,6 +1,4 @@
-﻿using Code.SwfLib.Shapes.Records;
-
-namespace SwfLib.Shapes.Records {
+﻿namespace SwfLib.Shapes.Records {
     public interface IShapeRecordVisitor<TArg, TResult> {
 
         TResult Visit(EndShapeRecord record, TArg arg);

@@ -1,8 +1,6 @@
-﻿using Code.SwfLib.Data;
-using SwfLib.Data;
-using SwfLib.Tags;
+﻿using SwfLib.Data;
 
-namespace Code.SwfLib.Tags.DisplayListTags {
+namespace SwfLib.Tags.DisplayListTags {
     public class PlaceObjectTag : PlaceObjectBaseTag {
 
         public ColorTransformRGB? ColorTransform;

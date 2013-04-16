@@ -1,7 +1,6 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.Tags.DisplayListTags;
 using SwfLib.SwfMill.Data;
+using SwfLib.Tags.DisplayListTags;
 
 namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public abstract class PlaceObjectBaseFormatter<T> : TagFormatterBase<T> where T : PlaceObjectBaseTag {

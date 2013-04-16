@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Actions;
-using Code.SwfLib.Tags.ActionsTags;
+using SwfLib.SwfMill.Actions;
+using SwfLib.Tags.ActionsTags;
 
 namespace SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoInitActionTagFormatter : TagFormatterBase<DoInitActionTag> {

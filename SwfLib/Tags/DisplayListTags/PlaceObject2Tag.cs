@@ -1,5 +1,4 @@
-﻿using Code.SwfLib.Tags.DisplayListTags;
-using SwfLib.ClipActions;
+﻿using SwfLib.ClipActions;
 using SwfLib.Data;
 
 namespace SwfLib.Tags.DisplayListTags {

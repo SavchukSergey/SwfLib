@@ -1,10 +1,7 @@
-﻿using Code.SwfLib.Shapes.Records;
-using Code.SwfLib.Utils;
-using SwfLib;
-using SwfLib.Shapes.Records;
+﻿using SwfLib.Shapes.Records;
 using SwfLib.Utils;
 
-namespace Code.SwfLib.Shapes {
+namespace SwfLib.Shapes {
     public class ShapeRecordWriter : IShapeRecordVisitor<ShapeRecordWriter.ShapeRecordWriteContext, ShapeRecordWriter.ShapeRecordWriteContext> {
 
         private struct ShapeRecordWriteContext {

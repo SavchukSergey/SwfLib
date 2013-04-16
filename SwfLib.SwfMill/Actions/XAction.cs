@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
-using Code.SwfLib.Actions;
 using SwfLib.Actions;
-using SwfLib.SwfMill.Actions;
 
-namespace Code.SwfLib.SwfMill.Actions {
+namespace SwfLib.SwfMill.Actions {
     public static class XAction {
 
         private static readonly XActionReader _reader = new XActionReader();

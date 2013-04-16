@@ -1,11 +1,10 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
-using Code.SwfLib.Data;
-using Code.SwfLib.Tags.ControlTags;
-using SwfLib.SwfMill.TagFormatting;
+using SwfLib.Data;
 using SwfLib.SwfMill.Utils;
+using SwfLib.Tags.ControlTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
+namespace SwfLib.SwfMill.TagFormatting.ControlTags {
     public class ExportAssetsTagFormatter : TagFormatterBase<ExportAssetsTag> {
 
         private const string SYMBOLS_TAGS = "symbols";

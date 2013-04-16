@@ -1,5 +1,4 @@
 ﻿using System;
-using Code.SwfLib.Shapes.Records;
 
 namespace SwfLib.Shapes.Records {
     public class ShapeRecordFactory {

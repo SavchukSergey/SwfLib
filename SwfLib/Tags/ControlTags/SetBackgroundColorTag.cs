@@ -1,9 +1,6 @@
-﻿using Code.SwfLib.Data;
-using SwfLib.Data;
-using SwfLib.Tags;
-using SwfLib.Tags.ControlTags;
+﻿using SwfLib.Data;
 
-namespace Code.SwfLib.Tags.ControlTags {
+namespace SwfLib.Tags.ControlTags {
     public class SetBackgroundColorTag : ControlBaseTag {
 
         public SwfRGB Color;

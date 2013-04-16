@@ -1,14 +1,10 @@
-﻿using Code.SwfLib.Data;
-using Code.SwfLib.SwfMill.TagFormatting.ControlTags;
-using Code.SwfLib.Tags.ControlTags;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SwfLib.Data;
 using SwfLib.SwfMill.TagFormatting.ControlTags;
-using SwfLib.SwfMill.Tests.TagFormatting;
 using SwfLib.Tags.ControlTags;
 using SwfLib.Tests.Asserts.Tags;
 
-namespace Code.SwfLib.SwfMill.Tests.TagFormatting.ControlTags {
+namespace SwfLib.SwfMill.Tests.TagFormatting.ControlTags {
     [TestFixture]
     public class DefineSceneAndFrameLabelDataTagTest : BaseTagFormattingTest<DefineSceneAndFrameLabelDataTag, DefineSceneAndFrameLabelDataTagFormatter> {
 

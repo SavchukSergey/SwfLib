@@ -1,6 +1,4 @@
-﻿using SwfLib.Actions;
-
-namespace Code.SwfLib.Actions {
+﻿namespace SwfLib.Actions {
     public class ActionGotoFrame2 : ActionBase {
 
         public override ActionCode ActionCode {

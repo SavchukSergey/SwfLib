@@ -1,8 +1,6 @@
-﻿using Code.SwfLib.Shapes.Records;
-using SwfLib;
-using SwfLib.Shapes.Records;
+﻿using SwfLib.Shapes.Records;
 
-namespace Code.SwfLib.Shapes {
+namespace SwfLib.Shapes {
     public class ShapeRecordExReader : ShapeRecordReader<IShapeRecordEx, StyleChangeShapeRecordEx> {
         protected override StyleChangeShapeRecordEx CreateStyleChangeRecord() {
             return new StyleChangeShapeRecordEx();

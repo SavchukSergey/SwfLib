@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Actions;
-using Code.SwfLib.Tags.ActionsTags;
+using SwfLib.SwfMill.Actions;
 using SwfLib.SwfMill.TagFormatting;
+using SwfLib.Tags.ActionsTags;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoActionTagFormatter : TagFormatterBase<DoActionTag> {

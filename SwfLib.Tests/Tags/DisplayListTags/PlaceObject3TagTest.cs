@@ -1,9 +1,9 @@
 ﻿using System.IO;
-using Code.SwfLib.Tags.DisplayListTags;
 using NUnit.Framework;
 using SwfLib.Data;
 using SwfLib.Filters;
 using SwfLib.Tags;
+using SwfLib.Tags.DisplayListTags;
 using SwfLib.Tests.Asserts.Tags;
 
 namespace SwfLib.Tests.Tags.DisplayListTags {

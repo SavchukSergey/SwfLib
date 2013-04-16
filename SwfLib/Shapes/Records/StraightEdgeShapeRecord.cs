@@ -1,6 +1,4 @@
-﻿using SwfLib.Shapes.Records;
-
-namespace Code.SwfLib.Shapes.Records {
+﻿namespace SwfLib.Shapes.Records {
     public class StraightEdgeShapeRecord : IShapeRecordRGB, IShapeRecordRGBA, IShapeRecordEx {
 
         public int DeltaX;

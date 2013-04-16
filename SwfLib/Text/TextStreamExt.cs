@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.SwfLib.Data;
 using SwfLib;
 using SwfLib.Data;
 using SwfLib.Text;

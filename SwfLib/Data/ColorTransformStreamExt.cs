@@ -1,6 +1,4 @@
 ﻿using Code.SwfLib;
-using Code.SwfLib.Data;
-using Code.SwfLib.Utils;
 using SwfLib.Utils;
 
 namespace SwfLib.Data {

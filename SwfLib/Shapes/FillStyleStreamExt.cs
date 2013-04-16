@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SwfLib;
 using SwfLib.Shapes.FillStyles;
 
-namespace Code.SwfLib.Shapes {
+namespace SwfLib.Shapes {
     public static class FillStyleStreamExt {
 
         private static readonly FillStyleRGBReader _readerRGB = new FillStyleRGBReader();

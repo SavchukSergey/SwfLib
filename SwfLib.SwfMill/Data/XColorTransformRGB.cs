@@ -1,5 +1,4 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Data;
 using SwfLib.Data;
 
 namespace SwfLib.SwfMill.Data {

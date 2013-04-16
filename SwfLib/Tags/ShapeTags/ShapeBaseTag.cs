@@ -1,5 +1,4 @@
-﻿using Code.SwfLib.Data;
-using SwfLib.Data;
+﻿using SwfLib.Data;
 using SwfLib.Tags;
 
 namespace Code.SwfLib.Tags.ShapeTags {

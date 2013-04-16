@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Actions;
 using Code.SwfLib.SwfMill.ClipActions;
 using SwfLib.ClipActions;
+using SwfLib.SwfMill.Actions;
 
 namespace SwfLib.SwfMill.ClipActions {
     public static class XClipActionRecord {

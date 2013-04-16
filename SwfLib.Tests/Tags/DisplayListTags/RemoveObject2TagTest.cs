@@ -1,10 +1,7 @@
 ﻿using System.IO;
-using Code.SwfLib;
-using Code.SwfLib.Tags;
-using Code.SwfLib.Tags.DisplayListTags;
-using Code.SwfLib.Tests;
 using NUnit.Framework;
 using SwfLib.Tags;
+using SwfLib.Tags.DisplayListTags;
 
 namespace SwfLib.Tests.Tags.DisplayListTags {
     [TestFixture]

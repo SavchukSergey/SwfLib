@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Utils {
+﻿namespace SwfLib.Utils {
     public struct UnsignedBitsCount {
 
         private uint _positiveMask;

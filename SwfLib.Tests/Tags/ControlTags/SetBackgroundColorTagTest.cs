@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using Code.SwfLib.Tags.ControlTags;
 using NUnit.Framework;
 using SwfLib.Tags;
+using SwfLib.Tags.ControlTags;
 using SwfLib.Tests.Asserts.Tags;
 
 namespace SwfLib.Tests.Tags.ControlTags {

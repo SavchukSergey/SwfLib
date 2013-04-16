@@ -1,5 +1,4 @@
 ﻿using System;
-using Code.SwfLib.Utils;
 using SwfLib.Data;
 using SwfLib.Utils;
 

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Xml.Linq;
-using Code.SwfLib.Data;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.SwfMill.Gradients;
 using SwfLib.Data;
 using SwfLib.Gradients;
 using SwfLib.Shapes.FillStyles;
 using SwfLib.SwfMill.Data;
+using SwfLib.SwfMill.Gradients;
 using SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Shapes {

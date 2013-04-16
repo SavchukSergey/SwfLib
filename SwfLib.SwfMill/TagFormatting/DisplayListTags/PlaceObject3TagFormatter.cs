@@ -1,11 +1,10 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.ClipActions;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.SwfMill.Filters;
-using Code.SwfLib.Tags.DisplayListTags;
 using SwfLib.SwfMill.ClipActions;
 using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Filters;
+using SwfLib.Tags.DisplayListTags;
 
 namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class PlaceObject3TagFormatter : PlaceObjectBaseFormatter<PlaceObject3Tag> {

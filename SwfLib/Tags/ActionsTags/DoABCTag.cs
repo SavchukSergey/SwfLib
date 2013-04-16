@@ -1,7 +1,4 @@
-﻿using SwfLib.Tags;
-using SwfLib.Tags.ActionsTags;
-
-namespace Code.SwfLib.Tags.ActionsTags {
+﻿namespace SwfLib.Tags.ActionsTags {
     public class DoABCTag : ActionsBaseTag {
 
         public uint Flags;

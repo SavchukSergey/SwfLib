@@ -1,8 +1,8 @@
 ﻿using System;
 using Code.SwfLib.Actions;
-using Code.SwfLib.SwfMill.Actions;
 using NUnit.Framework;
 using SwfLib.Actions;
+using SwfLib.SwfMill.Actions;
 
 namespace SwfLib.SwfMill.Tests {
     [TestFixture]

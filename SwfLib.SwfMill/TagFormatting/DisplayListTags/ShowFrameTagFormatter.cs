@@ -1,8 +1,7 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Tags.DisplayListTags;
-using SwfLib.SwfMill.TagFormatting;
+using SwfLib.Tags.DisplayListTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
+namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class ShowFrameTagFormatter : TagFormatterBase<ShowFrameTag> {
 
         protected override void FormatTagElement(ShowFrameTag tag, XElement xTag) {

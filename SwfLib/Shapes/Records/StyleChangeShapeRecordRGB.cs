@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Shapes.Records;
 using SwfLib.Shapes.FillStyles;
 using SwfLib.Shapes.LineStyles;
 

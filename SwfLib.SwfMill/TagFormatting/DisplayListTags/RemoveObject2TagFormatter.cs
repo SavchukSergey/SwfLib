@@ -1,5 +1,5 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Tags.DisplayListTags;
+using SwfLib.Tags.DisplayListTags;
 
 namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class RemoveObject2TagFormatter : TagFormatterBase<RemoveObject2Tag> {

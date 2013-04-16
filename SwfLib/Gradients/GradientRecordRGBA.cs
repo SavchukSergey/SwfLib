@@ -1,5 +1,4 @@
-﻿using Code.SwfLib.Data;
-using SwfLib.Data;
+﻿using SwfLib.Data;
 
 namespace SwfLib.Gradients {
     public class GradientRecordRGBA {

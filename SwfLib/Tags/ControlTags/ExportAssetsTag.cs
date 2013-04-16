@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Data;
-using SwfLib.Tags;
-using SwfLib.Tags.ControlTags;
+using SwfLib.Data;
 
-namespace Code.SwfLib.Tags.ControlTags {
+namespace SwfLib.Tags.ControlTags {
     public class ExportAssetsTag : ControlBaseTag {
 
         public readonly IList<SwfSymbolReference> Symbols = new List<SwfSymbolReference>();

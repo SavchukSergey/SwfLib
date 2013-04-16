@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Code.SwfLib.Shapes.Records;
 using NUnit.Framework;
 using SwfLib.Data;
 using SwfLib.Shapes.FillStyles;
