@@ -2,7 +2,7 @@
 using System.Xml.Linq;
 using SwfLib.Gradients;
 
-namespace Code.SwfLib.SwfMill.Gradients {
+namespace SwfLib.SwfMill.Gradients {
     public static class XGradientRecords {
 
         public static void FromXml(XElement xRecords, IList<GradientRecordRGB> records) {

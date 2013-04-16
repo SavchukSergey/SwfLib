@@ -1,7 +1,5 @@
 ﻿using System.IO;
 using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Tests;
-using Code.SwfLib.Tags;
 using NUnit.Framework;
 using SwfLib.SwfMill.TagFormatting;
 using SwfLib.Tags;

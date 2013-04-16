@@ -1,8 +1,7 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Filters;
-using Code.SwfLib.SwfMill.Tests;
 using NUnit.Framework;
 using SwfLib.Filters;
+using SwfLib.SwfMill.Filters;
 using SwfLib.Tests.Asserts;
 
 namespace SwfLib.SwfMill.Tests.Filters {

@@ -1,11 +1,10 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
 using SwfLib.Filters;
 using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill.Filters {
+namespace SwfLib.SwfMill.Filters {
     public class XConvolutionFilter {
 
         public const string TAG_NAME = "ConvolutionFilter";
