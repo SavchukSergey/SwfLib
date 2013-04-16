@@ -1,6 +1,7 @@
 ﻿using Code.SwfLib.Data;
+using Code.SwfLib.Shapes.FillStyles;
 
-namespace Code.SwfLib.Shapes.FillStyles {
+namespace SwfLib.Shapes.FillStyles {
     public class SolidFillStyleRGBA : FillStyleRGBA {
 
         public SwfRGBA Color;

@@ -2,7 +2,7 @@
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.DisplayListTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
+namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public abstract class PlaceObjectBaseFormatter<T> : TagFormatterBase<T> where T : PlaceObjectBaseTag {
 
         private const string DEPTH_ATTRIB = "depth";

@@ -1,4 +1,7 @@
-﻿namespace Code.SwfLib.Tags.BitmapTags {
+﻿using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.BitmapTags;
+
+namespace SwfLib.Tags.BitmapTags {
     public class DefineBitsJPEG3Tag : DefineBitsJpegAlphaBase {
 
         public override SwfTagType TagType {

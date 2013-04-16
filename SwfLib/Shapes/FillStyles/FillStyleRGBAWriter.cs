@@ -1,6 +1,7 @@
 ﻿using Code.SwfLib.Data;
 using Code.SwfLib.Gradients;
 using SwfLib.Data;
+using SwfLib.Shapes.FillStyles;
 
 namespace Code.SwfLib.Shapes.FillStyles {
     public class FillStyleRGBAWriter : IFillStyleRGBAVisitor<ISwfStreamWriter, object> {

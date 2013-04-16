@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
+namespace SwfLib.SwfMill.TagFormatting {
     public class DefineBinaryDataTagFormatter : TagFormatterBase<DefineBinaryDataTag> {
         protected override void FormatTagElement(DefineBinaryDataTag tag, XElement xTag) {
         }

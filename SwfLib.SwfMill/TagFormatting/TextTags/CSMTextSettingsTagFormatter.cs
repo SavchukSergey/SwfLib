@@ -2,6 +2,7 @@
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.TextTags;
+using SwfLib.SwfMill.TagFormatting;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
     public class CSMTextSettingsTagFormatter : TagFormatterBase<CSMTextSettingsTag> {

@@ -22,6 +22,7 @@ using Code.SwfLib.Tags.TextTags;
 using Code.SwfLib.Text;
 using Code.SwfLib.Utils;
 using SwfLib.Data;
+using SwfLib.Tags.BitmapTags;
 using SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib {

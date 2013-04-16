@@ -9,6 +9,7 @@ using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
 using Code.SwfLib.Tags.VideoTags;
+using SwfLib.Tags.BitmapTags;
 using SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.Tags {

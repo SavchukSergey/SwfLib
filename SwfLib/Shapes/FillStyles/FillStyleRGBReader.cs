@@ -2,6 +2,7 @@
 using Code.SwfLib.Gradients;
 using SwfLib;
 using SwfLib.Data;
+using SwfLib.Shapes.FillStyles;
 
 namespace Code.SwfLib.Shapes.FillStyles {
     public class FillStyleRGBReader : IFillStyleRGBVisitor<ISwfStreamReader, FillStyleRGB> {

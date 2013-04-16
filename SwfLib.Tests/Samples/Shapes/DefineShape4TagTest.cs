@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using Code.SwfLib.Shapes.Records;
-using Code.SwfLib.Tags.ShapeTags;
+using Code.SwfLib.Tests.Samples;
 using NUnit.Framework;
+using SwfLib.Tags.ShapeTags;
 
-namespace Code.SwfLib.Tests.Samples.Shapes {
+namespace SwfLib.Tests.Samples.Shapes {
     [TestFixture]
     public class DefineShape4TagTest : BaseSampleTest {
 

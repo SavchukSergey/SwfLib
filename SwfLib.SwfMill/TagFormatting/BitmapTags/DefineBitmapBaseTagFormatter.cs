@@ -1,6 +1,6 @@
 ﻿using Code.SwfLib.Tags.BitmapTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
+namespace SwfLib.SwfMill.TagFormatting.BitmapTags {
     public abstract class DefineBitmapBaseTagFormatter<T> : TagFormatterBase<T> where T : BitmapBaseTag {
 
         protected override ushort? GetObjectID(T tag) {

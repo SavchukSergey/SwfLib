@@ -3,7 +3,7 @@ using Code.SwfLib.SwfMill.ClipActions;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.DisplayListTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
+namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
     //TODO: Unit test
     public class PlaceObject2TagFormatter : PlaceObjectBaseFormatter<PlaceObject2Tag> {
 

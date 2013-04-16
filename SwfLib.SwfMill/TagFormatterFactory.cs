@@ -23,6 +23,18 @@ using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
 using Code.SwfLib.Tags.VideoTags;
+using SwfLib.SwfMill.TagFormatting;
+using SwfLib.SwfMill.TagFormatting.ActionTags;
+using SwfLib.SwfMill.TagFormatting.BitmapTags;
+using SwfLib.SwfMill.TagFormatting.ControlTags;
+using SwfLib.SwfMill.TagFormatting.DisplayListTags;
+using SwfLib.SwfMill.TagFormatting.FontTags;
+using SwfLib.SwfMill.TagFormatting.ShapeMorphingTags;
+using SwfLib.SwfMill.TagFormatting.ShapeTags;
+using SwfLib.SwfMill.TagFormatting.SoundTags;
+using SwfLib.SwfMill.TagFormatting.TextTags;
+using SwfLib.SwfMill.TagFormatting.VideoTags;
+using SwfLib.Tags.BitmapTags;
 using SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.SwfMill {

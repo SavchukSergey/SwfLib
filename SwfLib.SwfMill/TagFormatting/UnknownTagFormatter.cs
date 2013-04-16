@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Xml.Linq;
 using Code.SwfLib.Tags;
+using SwfLib.SwfMill.TagFormatting;
 
 namespace Code.SwfLib.SwfMill.TagFormatting {
     public class UnknownTagFormatter : TagFormatterBase<UnknownTag> {

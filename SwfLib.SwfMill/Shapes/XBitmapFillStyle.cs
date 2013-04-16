@@ -4,6 +4,7 @@ using Code.SwfLib.Data;
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.SwfMill.Data;
 using SwfLib.Data;
+using SwfLib.Shapes.FillStyles;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public static class XBitmapFillStyle {

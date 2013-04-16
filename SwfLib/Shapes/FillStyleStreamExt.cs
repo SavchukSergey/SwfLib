@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Code.SwfLib.Shapes.FillStyles;
 using SwfLib;
+using SwfLib.Shapes.FillStyles;
 
 namespace Code.SwfLib.Shapes {
     public static class FillStyleStreamExt {

@@ -2,7 +2,7 @@
 using System.Xml.Linq;
 using Code.SwfLib.Tags.ActionsTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
+namespace SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoABCTagFormatter : TagFormatterBase<DoABCTag> {
 
         protected override void FormatTagElement(DoABCTag tag, XElement xTag) {

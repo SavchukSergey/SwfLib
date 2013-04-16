@@ -1,8 +1,9 @@
 ﻿using System.Xml.Linq;
+using Code.SwfLib.SwfMill;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ControlTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
+namespace SwfLib.SwfMill.TagFormatting.ControlTags {
     public class FileAttributesTagFormatter : TagFormatterBase<FileAttributesTag> {
         private readonly ushort _version;
 

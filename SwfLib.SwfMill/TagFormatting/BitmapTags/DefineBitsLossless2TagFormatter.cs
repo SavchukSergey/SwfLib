@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.BitmapTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
+namespace SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class DefineBitsLossless2TagFormatter : DefineBitmapBaseTagFormatter<DefineBitsLossless2Tag> {
 
         private const string FORMAT_ATTRIB = "format";

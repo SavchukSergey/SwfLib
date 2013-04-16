@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.TagFormatting;
 using Code.SwfLib.Tags;
+using SwfLib.SwfMill.Data;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
+namespace SwfLib.SwfMill.TagFormatting {
     public abstract class TagFormatterBase<T> : ITagFormatter<T> where T : SwfTagBase {
 
         private const string OBJECT_ID_ATTRIB = "objectID";

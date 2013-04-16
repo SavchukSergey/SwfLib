@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.ControlTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
+namespace SwfLib.SwfMill.TagFormatting.ControlTags {
     public class MetadataTagFormatter : TagFormatterBase<MetadataTag> {
 
         protected override void FormatTagElement(MetadataTag tag, XElement xTag) {

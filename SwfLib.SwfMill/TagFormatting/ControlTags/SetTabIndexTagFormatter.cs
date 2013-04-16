@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.ControlTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
+namespace SwfLib.SwfMill.TagFormatting.ControlTags {
     public class SetTabIndexTagFormatter : TagFormatterBase<SetTabIndexTag> {
         protected override void FormatTagElement(SetTabIndexTag tag, XElement xTag) {
         }

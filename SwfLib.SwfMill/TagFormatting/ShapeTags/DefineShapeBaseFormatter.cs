@@ -2,7 +2,7 @@
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ShapeTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
+namespace SwfLib.SwfMill.TagFormatting.ShapeTags {
     public abstract class DefineShapeBaseFormatter<T> : TagFormatterBase<T> where T : ShapeBaseTag {
 
         private const string BOUNDS_ELEM = "bounds";

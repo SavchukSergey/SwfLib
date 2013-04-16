@@ -1,8 +1,9 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.TagFormatting.BitmapTags;
 using Code.SwfLib.Tags.BitmapTags;
+using SwfLib.SwfMill.Data;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.BitmapTags {
+namespace SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class DefineBitsJPEG4TagFormatter : DefineBitmapBaseTagFormatter<DefineBitsJPEG4Tag> {
 
         protected override void FormatTagElement(DefineBitsJPEG4Tag tag, XElement xTag) {

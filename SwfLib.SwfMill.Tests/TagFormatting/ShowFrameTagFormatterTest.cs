@@ -2,7 +2,7 @@
 using Code.SwfLib.Tags.DisplayListTags;
 using NUnit.Framework;
 
-namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
+namespace SwfLib.SwfMill.Tests.TagFormatting {
     [TestFixture]
     public class ShowFrameTagFormatterTest : BaseTagFormattingTest<ShowFrameTag, ShowFrameTagFormatter> {
 

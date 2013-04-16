@@ -2,6 +2,7 @@
 using Code.SwfLib.SwfMill.Buttons;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ButtonTags;
+using SwfLib.SwfMill.Buttons;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.ButtonTags {
     public class DefineButton2TagFormatter : DefineButtonBaseTagFormatter<DefineButton2Tag> {

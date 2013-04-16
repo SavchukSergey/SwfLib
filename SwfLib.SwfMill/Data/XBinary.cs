@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 
-namespace Code.SwfLib.SwfMill.Data {
+namespace SwfLib.SwfMill.Data {
     public static class XBinary {
 
         public static byte[] FromXml(XElement element) {

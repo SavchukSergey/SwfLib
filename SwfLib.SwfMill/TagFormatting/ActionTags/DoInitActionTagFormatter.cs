@@ -2,7 +2,7 @@
 using Code.SwfLib.SwfMill.Actions;
 using Code.SwfLib.Tags.ActionsTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ActionTags {
+namespace SwfLib.SwfMill.TagFormatting.ActionTags {
     public class DoInitActionTagFormatter : TagFormatterBase<DoInitActionTag> {
 
         private const string ACTIONS_ELEM = "actions";

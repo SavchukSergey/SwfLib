@@ -1,10 +1,11 @@
 ﻿using System.IO;
 using System.Xml.Linq;
-using Code.SwfLib.SwfMill.TagFormatting;
+using Code.SwfLib.SwfMill.Tests;
 using Code.SwfLib.Tags;
 using NUnit.Framework;
+using SwfLib.SwfMill.TagFormatting;
 
-namespace Code.SwfLib.SwfMill.Tests.TagFormatting {
+namespace SwfLib.SwfMill.Tests.TagFormatting {
     public abstract class BaseTagFormattingTest<T, F>
         where T : SwfTagBase, new()
         where F : TagFormatterBase<T>, new() {

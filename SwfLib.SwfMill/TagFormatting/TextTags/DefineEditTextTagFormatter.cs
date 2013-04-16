@@ -1,8 +1,9 @@
 ﻿using System.Xml.Linq;
+using Code.SwfLib.SwfMill;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.TextTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
+namespace SwfLib.SwfMill.TagFormatting.TextTags {
     public class DefineEditTextTagFormatter : TagFormatterBase<DefineEditTextTag> {
 
         private const string WORD_WRAP_ATTRIB = "wordWrap";

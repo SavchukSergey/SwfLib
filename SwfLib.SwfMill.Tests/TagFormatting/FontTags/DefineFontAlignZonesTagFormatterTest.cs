@@ -2,7 +2,7 @@
 using Code.SwfLib.Tags.FontTags;
 using NUnit.Framework;
 
-namespace Code.SwfLib.SwfMill.Tests.TagFormatting.FontTags {
+namespace SwfLib.SwfMill.Tests.TagFormatting.FontTags {
     [TestFixture]
     public class DefineFontAlignZonesTagFormatterTest : BaseTagFormattingTest<DefineFontAlignZonesTag, DefineFontAlignZonesTagFormatter> {
 

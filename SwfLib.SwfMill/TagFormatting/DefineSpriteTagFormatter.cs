@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill;
 using Code.SwfLib.Tags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
+namespace SwfLib.SwfMill.TagFormatting {
     public class DefineSpriteTagFormatter : TagFormatterBase<DefineSpriteTag> {
         private readonly ushort _version;
         private readonly TagFormatterFactory _subFormatterFactory;

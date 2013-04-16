@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Data {
+﻿namespace SwfLib.Data {
     public enum BlendMode : byte {
         Normal = 0,
         Normal1 = 1,

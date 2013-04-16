@@ -4,7 +4,7 @@ using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Filters;
 using Code.SwfLib.Tags.DisplayListTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
+namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class PlaceObject3TagFormatter : PlaceObjectBaseFormatter<PlaceObject3Tag> {
 
         private const string REPLACE_ATTRIB = "replace";

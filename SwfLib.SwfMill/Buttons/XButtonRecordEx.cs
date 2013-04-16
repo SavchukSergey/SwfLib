@@ -1,11 +1,11 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Buttons;
-using Code.SwfLib.Data;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Filters;
 using Code.SwfLib.SwfMill.Utils;
+using SwfLib.Data;
 
-namespace Code.SwfLib.SwfMill.Buttons {
+namespace SwfLib.SwfMill.Buttons {
     public static class XButtonRecordEx {
 
         public static ButtonRecordEx FromXml(XElement xRecord) {

@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.VideoTags;
+using SwfLib.SwfMill.TagFormatting;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.VideoTags {
     public class DefineVideoStreamTagFormatter : TagFormatterBase<DefineVideoStreamTag> {

@@ -4,6 +4,7 @@ using Code.SwfLib.Data;
 using Code.SwfLib.Shapes.LineStyles;
 using SwfLib;
 using SwfLib.Data;
+using SwfLib.Shapes.LineStyles;
 
 namespace Code.SwfLib.Shapes {
     public static class LineStyleStreamExt {

@@ -2,7 +2,7 @@
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.DisplayListTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
+namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class PlaceObjectTagFormatter : PlaceObjectBaseFormatter<PlaceObjectTag> {
 
         private const string COLOR_TRANSFORM_ELEM = "colorTransform";
