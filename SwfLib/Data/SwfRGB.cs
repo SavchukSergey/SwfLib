@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Code.SwfLib.Data {
+namespace SwfLib.Data {
     [DebuggerDisplay("Red: {Red}, Green: {Green}, Blue:  {Blue}")]
     public struct SwfRGB {
 

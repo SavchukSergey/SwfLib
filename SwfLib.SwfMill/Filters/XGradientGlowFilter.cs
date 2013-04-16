@@ -3,6 +3,7 @@ using Code.SwfLib.Filters;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Gradients;
 using Code.SwfLib.SwfMill.Utils;
+using SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Filters {
     public static class XGradientGlowFilter {

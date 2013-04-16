@@ -2,6 +2,8 @@
 using Code.SwfLib.Gradients;
 using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
+using SwfLib.Gradients;
+using SwfLib.Tests.Asserts;
 using SwfLib.Tests.Filters;
 
 namespace Code.SwfLib.Tests.Filters {

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Code.SwfLib.Tags;
-using Code.SwfLib.Tests.Asserts.Utils;
 using Code.SwfLib.Tests.Samples;
 using NUnit.Framework;
+using SwfLib;
+using SwfLib.Tests.Asserts.Utils;
 
 namespace Code.SwfLib.Tests {
     [TestFixture]

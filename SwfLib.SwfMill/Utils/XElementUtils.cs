@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill.Utils {
+namespace SwfLib.SwfMill.Utils {
     public static class XElementUtils {
 
         public static string RequiredAttribute(this XElement node, string attributeName) {

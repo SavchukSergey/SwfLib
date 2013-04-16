@@ -32,6 +32,7 @@ using SwfLib.SwfMill.TagFormatting.TextTags;
 using SwfLib.SwfMill.TagFormatting.VideoTags;
 using SwfLib.Tags;
 using SwfLib.Tags.BitmapTags;
+using SwfLib.Tags.ButtonTags;
 using SwfLib.Tags.ControlTags;
 using SwfLib.Tags.DisplayListTags;
 using SwfLib.Tags.FontTags;

@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Text;
 using Code.SwfLib.SwfMill.Utils;
 using Code.SwfLib.Tags.TextTags;
+using SwfLib.SwfMill.Text;
+using SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.TagFormatting.TextTags {
     public class DefineText2TagFormatter : BaseDefineTextTagFormatter<DefineText2Tag> {

@@ -4,6 +4,7 @@ using Code.SwfLib.SwfMill.Filters;
 using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 using SwfLib.Filters;
+using SwfLib.Tests.Asserts;
 
 namespace Code.SwfLib.SwfMill.Tests.Filters {
     [TestFixture]

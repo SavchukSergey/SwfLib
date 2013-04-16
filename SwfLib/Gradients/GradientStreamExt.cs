@@ -2,6 +2,7 @@
 using Code.SwfLib.Data;
 using SwfLib;
 using SwfLib.Data;
+using SwfLib.Gradients;
 
 namespace Code.SwfLib.Gradients {
     public static class GradientStreamExt {

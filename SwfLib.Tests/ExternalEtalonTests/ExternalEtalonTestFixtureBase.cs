@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Code.SwfLib.Tags;
+using SwfLib;
 
 namespace Code.SwfLib.Tests.ExternalEtalonTests {
     public abstract class ExternalEtalonTestFixtureBase : TestFixtureBase {

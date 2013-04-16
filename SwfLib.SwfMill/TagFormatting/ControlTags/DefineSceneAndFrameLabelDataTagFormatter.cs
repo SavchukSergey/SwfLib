@@ -2,6 +2,8 @@
 using Code.SwfLib.Data;
 using Code.SwfLib.SwfMill.Utils;
 using Code.SwfLib.Tags.ControlTags;
+using SwfLib.Data;
+using SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.TagFormatting.ControlTags {
     public class DefineSceneAndFrameLabelDataTagFormatter : TagFormatterBase<DefineSceneAndFrameLabelDataTag> {

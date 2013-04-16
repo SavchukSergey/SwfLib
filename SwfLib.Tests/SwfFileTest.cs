@@ -3,6 +3,8 @@ using Code.SwfLib.Data;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using NUnit.Framework;
+using SwfLib;
+using SwfLib.Data;
 
 namespace Code.SwfLib.Tests {
     [TestFixture]

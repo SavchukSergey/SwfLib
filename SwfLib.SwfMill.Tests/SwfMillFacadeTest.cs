@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using Code.SwfLib.Tags;
-using Code.SwfLib.Tests.Asserts.Utils;
 using NUnit.Framework;
+using SwfLib;
+using SwfLib.Tests.Asserts.Utils;
 
 namespace Code.SwfLib.SwfMill.Tests {
     [TestFixture]

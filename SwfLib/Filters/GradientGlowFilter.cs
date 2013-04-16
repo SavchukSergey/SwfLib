@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Gradients;
+using SwfLib.Gradients;
 
 namespace Code.SwfLib.Filters {
     public class GradientGlowFilter : BaseFilter {

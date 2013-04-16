@@ -4,6 +4,8 @@ using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Utils;
 using SwfLib.Shapes.LineStyles;
+using SwfLib.SwfMill.Data;
+using SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.Shapes {
     public class XLineStyleEx {

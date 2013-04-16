@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Code.SwfLib.Filters;
+using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 using SwfLib.Filters;
-using SwfLib.Tests.Asserts;
 
-namespace Code.SwfLib.Tests.Asserts {
+namespace SwfLib.Tests.Asserts {
     public static class AssertFilters {
 
         public static void AreEqual(ConvolutionFilter expected, ConvolutionFilter actual, string message) {

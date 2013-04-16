@@ -6,6 +6,8 @@ using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Utils;
 using Code.SwfLib.Tags;
+using SwfLib;
+using SwfLib.SwfMill.Utils;
 using SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill {

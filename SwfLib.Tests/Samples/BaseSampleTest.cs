@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using Code.SwfLib.Tags;
+using SwfLib;
 using SwfLib.Tags;
 
 namespace Code.SwfLib.Tests.Samples {

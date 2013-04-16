@@ -1,4 +1,5 @@
 ﻿using Code.SwfLib.Data;
+using SwfLib.Data;
 
 namespace Code.SwfLib.Shapes.FillStyles {
     public class SolidFillStyleRGB : FillStyleRGB {

@@ -1,6 +1,6 @@
 ﻿using Code.SwfLib.Data;
 
-namespace Code.SwfLib.Gradients {
+namespace SwfLib.Gradients {
     public class GradientRecordRGBA {
 
         public byte Ratio;

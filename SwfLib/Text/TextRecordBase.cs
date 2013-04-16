@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Code.SwfLib.Text {
+namespace SwfLib.Text {
     public abstract class TextRecordBase {
 
         public bool Type;

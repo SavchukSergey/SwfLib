@@ -2,6 +2,7 @@
 using Code.SwfLib.Buttons;
 using Code.SwfLib.SwfMill.Actions;
 using Code.SwfLib.SwfMill.Data;
+using SwfLib.Buttons;
 
 namespace Code.SwfLib.SwfMill.Buttons {
     public static class XButtonCondition {

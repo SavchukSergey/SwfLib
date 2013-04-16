@@ -3,6 +3,7 @@ using Code.SwfLib.Gradients;
 using SwfLib;
 using SwfLib.Data;
 using SwfLib.Filters;
+using SwfLib.Gradients;
 
 namespace Code.SwfLib.Filters {
     public class FilterReader : IFilterVisitor<ISwfStreamReader, BaseFilter> {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Gradients;
 using NUnit.Framework;
-using SwfLib.Tests.Asserts;
+using SwfLib.Gradients;
 
-namespace Code.SwfLib.Tests.Asserts {
+namespace SwfLib.Tests.Asserts {
     public static class AssertGradients {
 
         public static void AreEqual(GradientRGB expected, GradientRGB actual, string message) {

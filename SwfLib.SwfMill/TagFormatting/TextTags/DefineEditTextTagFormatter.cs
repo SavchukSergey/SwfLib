@@ -2,6 +2,7 @@
 using Code.SwfLib.SwfMill;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.TextTags;
+using SwfLib.SwfMill.Data;
 
 namespace SwfLib.SwfMill.TagFormatting.TextTags {
     public class DefineEditTextTagFormatter : TagFormatterBase<DefineEditTextTag> {

@@ -23,6 +23,7 @@ using SwfLib;
 using SwfLib.Data;
 using SwfLib.Tags;
 using SwfLib.Tags.BitmapTags;
+using SwfLib.Tags.ButtonTags;
 using SwfLib.Tags.ControlTags;
 using SwfLib.Tags.DisplayListTags;
 using SwfLib.Tags.FontTags;

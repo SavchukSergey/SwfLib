@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Buttons {
+﻿namespace SwfLib.Buttons {
     public class ButtonRecord {
     }
 }

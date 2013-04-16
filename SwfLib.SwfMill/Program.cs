@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Utils;
+using SwfLib;
 
 namespace Code.SwfLib.SwfMill {
     class Program {

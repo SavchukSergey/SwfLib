@@ -6,6 +6,7 @@ using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.SwfMill.Utils;
 using SwfLib.Shapes.FillStyles;
 using SwfLib.Shapes.LineStyles;
+using SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.Shapes {
     public static class XStyleList {

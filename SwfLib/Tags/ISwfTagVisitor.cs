@@ -10,6 +10,7 @@ using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
 using SwfLib.Tags.BitmapTags;
+using SwfLib.Tags.ButtonTags;
 using SwfLib.Tags.ControlTags;
 using SwfLib.Tags.DisplayListTags;
 using SwfLib.Tags.FontTags;

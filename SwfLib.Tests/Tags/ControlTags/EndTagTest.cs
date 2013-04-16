@@ -2,6 +2,7 @@
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ControlTags;
 using NUnit.Framework;
+using SwfLib;
 
 namespace Code.SwfLib.Tests.Tags.ControlTags {
     [TestFixture]

@@ -2,6 +2,7 @@
 using Code.SwfLib.Tests.Asserts;
 using Code.SwfLib.Tests.Filters;
 using NUnit.Framework;
+using SwfLib.Tests.Asserts;
 
 namespace SwfLib.Tests.Filters {
     [TestFixture]

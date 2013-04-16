@@ -1,6 +1,6 @@
 ﻿using Code.SwfLib.Data;
 
-namespace Code.SwfLib.Text {
+namespace SwfLib.Text {
     public class TextRecordRGBA : TextRecordBase {
 
         public SwfRGBA? TextColor;

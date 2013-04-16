@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.LineStyles;
-using SwfLib.Shapes.Records;
+using Code.SwfLib.Shapes.Records;
+using SwfLib.Shapes.LineStyles;
 
-namespace Code.SwfLib.Shapes.Records {
+namespace SwfLib.Shapes.Records {
     public class StyleChangeShapeRecordRGB : StyleChangeShapeRecord, IShapeRecordRGB {
 
         public readonly IList<FillStyleRGB> FillStyles = new List<FillStyleRGB>();

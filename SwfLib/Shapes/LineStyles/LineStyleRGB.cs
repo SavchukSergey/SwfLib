@@ -1,6 +1,7 @@
 ﻿using Code.SwfLib.Data;
+using SwfLib.Data;
 
-namespace Code.SwfLib.Shapes.LineStyles {
+namespace SwfLib.Shapes.LineStyles {
     public struct LineStyleRGB {
 
         public ushort Width;

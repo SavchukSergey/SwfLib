@@ -2,6 +2,7 @@
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ControlTags;
 using NUnit.Framework;
+using SwfLib;
 using SwfLib.Tests.Asserts.Tags;
 
 namespace Code.SwfLib.Tests.Tags.ControlTags {

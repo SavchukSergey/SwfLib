@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.SwfLib.Tags.DisplayListTags
+namespace SwfLib.Tags.DisplayListTags
 {
     [Flags]
     public enum PlaceObject3Flags : byte

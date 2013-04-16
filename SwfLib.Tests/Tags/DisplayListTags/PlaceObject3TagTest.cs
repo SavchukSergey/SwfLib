@@ -4,6 +4,7 @@ using Code.SwfLib.Filters;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.DisplayListTags;
 using NUnit.Framework;
+using SwfLib;
 using SwfLib.Data;
 using SwfLib.Tests.Asserts.Tags;
 

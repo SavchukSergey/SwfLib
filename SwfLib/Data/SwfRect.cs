@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Code.SwfLib.Data {
+namespace SwfLib.Data {
     [DebuggerDisplay("X: ({XMin}, {XMax}), Y: ({YMin}, {YMax})")]
     public struct SwfRect {
 

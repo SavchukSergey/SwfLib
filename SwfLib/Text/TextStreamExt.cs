@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Code.SwfLib.Data;
 using SwfLib;
 using SwfLib.Data;
+using SwfLib.Text;
 
 namespace Code.SwfLib.Text {
     public static class TextStreamExt {

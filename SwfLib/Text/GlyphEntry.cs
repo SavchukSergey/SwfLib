@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Code.SwfLib.Text {
+namespace SwfLib.Text {
     [DebuggerDisplay("GlyphIndex = {GlyphIndex}, GlyphAdvance = {GlyphAdvance}")]
     public struct GlyphEntry {
         public uint GlyphIndex;

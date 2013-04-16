@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Data {
+﻿namespace SwfLib.Data {
     public class FrameLabelData {
 
         public string Label;

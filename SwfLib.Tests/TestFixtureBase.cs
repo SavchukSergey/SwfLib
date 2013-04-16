@@ -2,6 +2,7 @@
 using System.IO;
 using Code.SwfLib.Tags;
 using NUnit.Framework;
+using SwfLib;
 
 namespace Code.SwfLib.Tests {
     public class TestFixtureBase {

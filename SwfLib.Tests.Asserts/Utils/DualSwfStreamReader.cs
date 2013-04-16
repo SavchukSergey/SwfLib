@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
+using Code.SwfLib;
 
-namespace Code.SwfLib.Tests.Asserts.Utils {
+namespace SwfLib.Tests.Asserts.Utils {
     public class DualSwfStreamReader : SwfStreamReader {
 
         private readonly SwfStreamReader _first;

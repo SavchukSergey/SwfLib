@@ -2,9 +2,10 @@
 using System.Linq;
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
-using Code.SwfLib.Text;
+using SwfLib.SwfMill.Data;
+using SwfLib.Text;
 
-namespace Code.SwfLib.SwfMill.Text {
+namespace SwfLib.SwfMill.Text {
     public static class XTextRecord {
 
         public static XElement ToXmlRGB(TextRecordRGB entry) {

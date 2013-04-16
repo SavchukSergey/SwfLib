@@ -1,10 +1,10 @@
 ﻿using System;
 using Code.SwfLib.Shapes.FillStyles;
+using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 using SwfLib.Shapes.FillStyles;
-using SwfLib.Tests.Asserts;
 
-namespace Code.SwfLib.Tests.Asserts.Shapes {
+namespace SwfLib.Tests.Asserts.Shapes {
     public static class AssertFillStyles {
 
         public static void AreEqual(FillStyleRGB expected, FillStyleRGB actual, string message) {

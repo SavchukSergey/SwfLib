@@ -3,6 +3,7 @@ using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.Tests.Asserts.Shapes;
 using NUnit.Framework;
+using SwfLib.Shapes.LineStyles;
 
 namespace Code.SwfLib.SwfMill.Tests.Shapes {
     [TestFixture]

@@ -2,6 +2,7 @@
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.DisplayListTags;
 using NUnit.Framework;
+using SwfLib;
 
 namespace Code.SwfLib.Tests.Tags.DisplayListTags {
     [TestFixture]

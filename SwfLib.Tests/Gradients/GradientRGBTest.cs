@@ -2,6 +2,7 @@
 using Code.SwfLib.Gradients;
 using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
+using SwfLib.Tests.Asserts;
 
 namespace SwfLib.Tests.Gradients {
     [TestFixture]

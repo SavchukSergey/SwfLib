@@ -5,6 +5,7 @@ using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.SwfMill.Utils;
 using SwfLib.Shapes.Records;
 using SwfLib.SwfMill.Shapes;
+using SwfLib.SwfMill.Utils;
 
 namespace Code.SwfLib.SwfMill.Shapes {
     public static class XShapeRecord {

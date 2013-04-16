@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Data;
 
-namespace Code.SwfLib.SwfMill.Data {
+namespace SwfLib.SwfMill.Data {
     public static class XColorRGBA {
 
         public static SwfRGBA FromXml(XElement xColor) {

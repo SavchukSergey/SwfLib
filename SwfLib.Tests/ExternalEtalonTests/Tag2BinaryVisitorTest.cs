@@ -4,6 +4,7 @@ using System.Linq;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.BitmapTags;
 using NUnit.Framework;
+using SwfLib;
 
 namespace Code.SwfLib.Tests.ExternalEtalonTests {
     [TestFixture]

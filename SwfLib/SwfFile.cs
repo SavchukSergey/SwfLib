@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Code.SwfLib;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
-using SwfLib;
 using SwfLib.Tags;
 
-namespace Code.SwfLib {
+namespace SwfLib {
     public class SwfFile {
 
         public SwfFileInfo FileInfo;

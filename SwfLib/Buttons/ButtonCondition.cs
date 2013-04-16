@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Actions;
 
-namespace Code.SwfLib.Buttons {
+namespace SwfLib.Buttons {
     public class ButtonCondition {
 
         public bool IdleToOverDown;

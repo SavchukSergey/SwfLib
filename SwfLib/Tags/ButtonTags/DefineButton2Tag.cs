@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Buttons;
-using SwfLib.Tags;
+using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.ButtonTags;
+using SwfLib.Buttons;
 
-namespace Code.SwfLib.Tags.ButtonTags {
+namespace SwfLib.Tags.ButtonTags {
     public class DefineButton2Tag : DefineButtonBaseTag {
 
         public byte ReservedFlags;
