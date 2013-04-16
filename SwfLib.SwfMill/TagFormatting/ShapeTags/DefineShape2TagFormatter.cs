@@ -1,8 +1,10 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Shapes;
+using Code.SwfLib.SwfMill.TagFormatting.ShapeTags;
 using Code.SwfLib.Tags.ShapeTags;
+using SwfLib.SwfMill.Shapes;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
+namespace SwfLib.SwfMill.TagFormatting.ShapeTags {
     public class DefineShape2TagFormatter : DefineShapeBaseFormatter<DefineShape2Tag> {
 
         protected override XElement FormatStyles(DefineShape2Tag tag) {

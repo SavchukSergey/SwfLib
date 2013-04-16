@@ -3,8 +3,9 @@ using System.Xml.Linq;
 using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Utils;
+using SwfLib.Shapes.LineStyles;
 
-namespace Code.SwfLib.SwfMill.Shapes {
+namespace SwfLib.SwfMill.Shapes {
     public class XLineStyleEx {
 
         public static XElement ToXml(LineStyleEx lineStyle) {

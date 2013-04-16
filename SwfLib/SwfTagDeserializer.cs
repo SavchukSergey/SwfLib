@@ -22,6 +22,7 @@ using Code.SwfLib.Tags.VideoTags;
 using Code.SwfLib.Text;
 using SwfLib;
 using SwfLib.Data;
+using SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib {
     public class SwfTagDeserializer : ISwfTagVisitor<ISwfStreamReader, SwfTagBase> {

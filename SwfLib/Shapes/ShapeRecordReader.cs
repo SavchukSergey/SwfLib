@@ -1,5 +1,6 @@
 ﻿using Code.SwfLib.Shapes.Records;
 using SwfLib;
+using SwfLib.Shapes.Records;
 
 namespace Code.SwfLib.Shapes {
     public abstract class ShapeRecordReader<T, TStyleChange>

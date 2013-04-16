@@ -1,5 +1,6 @@
 ﻿using Code.SwfLib.Data;
 using SwfLib;
+using SwfLib.Data;
 
 namespace Code.SwfLib {
     public static class SwfStreamReaderExt {

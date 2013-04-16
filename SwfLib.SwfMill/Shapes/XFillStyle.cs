@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.Shapes.FillStyles;
+using Code.SwfLib.SwfMill.Shapes;
+using SwfLib.Shapes.FillStyles;
 
-namespace Code.SwfLib.SwfMill.Shapes {
+namespace SwfLib.SwfMill.Shapes {
     public class XFillStyle {
 
         public static XElement ToXml(FillStyleRGB fillStyle) {

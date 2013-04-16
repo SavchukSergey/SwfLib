@@ -6,6 +6,7 @@ using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tests.Asserts.Shapes;
 using NUnit.Framework;
+using SwfLib.Tags.ShapeTags;
 
 namespace Code.SwfLib.Tests.Samples.Shapes {
     [TestFixture]

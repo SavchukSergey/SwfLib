@@ -1,9 +1,11 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Shapes;
+using Code.SwfLib.SwfMill.TagFormatting.ShapeTags;
 using Code.SwfLib.Tags.ShapeTags;
+using SwfLib.SwfMill.Shapes;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ShapeTags {
+namespace SwfLib.SwfMill.TagFormatting.ShapeTags {
     public class DefineShape4TagFormatter : DefineShapeBaseFormatter<DefineShape4Tag> {
 
         private const string EDGE_BOUNDS_ELEM = "strokeBounds";

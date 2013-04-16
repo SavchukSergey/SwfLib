@@ -1,6 +1,7 @@
 ﻿using System;
+using Code.SwfLib.Shapes.FillStyles;
 
-namespace Code.SwfLib.Shapes.FillStyles {
+namespace SwfLib.Shapes.FillStyles {
     public class FillStyleFactory {
 
         public FillStyleRGB CreateRGB(FillStyleType type) {

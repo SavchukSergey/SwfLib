@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Code.SwfLib.Data {
+namespace SwfLib.Data {
     //TODO: Find usage. Make non - nullable. Set Scales to default values
     [DebuggerDisplay("Scale ({ScaleX}, {ScaleY}), RotateSkew({RotateSkew0}, {RotateSkew1}), Translate({TranslateX}, {TranslateY})")]
     public struct SwfMatrix {

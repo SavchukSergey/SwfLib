@@ -7,8 +7,9 @@ using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tests;
-using Code.SwfLib.Tests.Asserts.Tags;
 using NUnit.Framework;
+using SwfLib.Data;
+using SwfLib.Tests.Asserts.Tags;
 
 namespace SwfLib.Tests.Tags.ShapeTags {
     [TestFixture]

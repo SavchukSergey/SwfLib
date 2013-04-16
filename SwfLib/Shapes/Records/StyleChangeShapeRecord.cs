@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Shapes.Records {
+﻿using SwfLib.Shapes.Records;
+
+namespace Code.SwfLib.Shapes.Records {
     public abstract class StyleChangeShapeRecord : IShapeRecord {
 
         public uint? FillStyle0;

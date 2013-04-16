@@ -3,11 +3,11 @@ using Code.SwfLib.Data;
 using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.ShapeTags;
+using Code.SwfLib.Tests.Asserts;
 using Code.SwfLib.Tests.Asserts.Shapes;
 using NUnit.Framework;
-using SwfLib.Tests.Asserts;
 
-namespace Code.SwfLib.Tests.Asserts.Tags {
+namespace SwfLib.Tests.Asserts.Tags {
     public static class AssertTag {
 
         public static void AreEqual(PlaceObject2Tag expected, PlaceObject2Tag actual) {

@@ -1,5 +1,6 @@
 ﻿using Code.SwfLib.Shapes.Records;
 using SwfLib;
+using SwfLib.Shapes.Records;
 
 namespace Code.SwfLib.Shapes {
     public class ShapeRecordRGBAReader : ShapeRecordReader<IShapeRecordRGBA, StyleChangeShapeRecordRGBA> {

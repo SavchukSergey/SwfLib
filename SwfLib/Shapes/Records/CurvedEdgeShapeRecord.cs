@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Shapes.Records {
+﻿using Code.SwfLib.Shapes.Records;
+
+namespace SwfLib.Shapes.Records {
     public class CurvedEdgeShapeRecord : IShapeRecordRGB, IShapeRecordRGBA, IShapeRecordEx {
 
         public int ControlDeltaX;

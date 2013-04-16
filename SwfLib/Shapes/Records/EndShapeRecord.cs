@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Shapes.Records {
+﻿using SwfLib.Shapes.Records;
+
+namespace Code.SwfLib.Shapes.Records {
     public class EndShapeRecord : IShapeRecordRGB, IShapeRecordRGBA, IShapeRecordEx {
 
         public ShapeRecordType Type {

@@ -1,5 +1,6 @@
 ﻿using Code.SwfLib.Shapes.Records;
 using Code.SwfLib.Utils;
+using SwfLib.Shapes.Records;
 
 namespace Code.SwfLib.Shapes {
     public class ShapeRecordWriter : IShapeRecordVisitor<ShapeRecordWriter.ShapeRecordWriteContext, ShapeRecordWriter.ShapeRecordWriteContext> {

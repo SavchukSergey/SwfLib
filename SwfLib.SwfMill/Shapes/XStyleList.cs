@@ -2,9 +2,10 @@
 using System.Xml.Linq;
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.LineStyles;
+using Code.SwfLib.SwfMill.Shapes;
 using Code.SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill.Shapes {
+namespace SwfLib.SwfMill.Shapes {
     public static class XStyleList {
 
         public static XElement ToXml(IList<FillStyleRGB> fillStyles, IList<LineStyleRGB> lineStyles) {

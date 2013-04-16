@@ -1,6 +1,7 @@
 ﻿using System;
 using Code.SwfLib.Data;
 using Code.SwfLib.Utils;
+using SwfLib.Data;
 
 namespace Code.SwfLib {
     public static class SwfStreamWriterExt {

@@ -2,6 +2,7 @@
 using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.Shapes.Records;
 using NUnit.Framework;
+using SwfLib.Shapes.Records;
 using SwfLib.Tests.Asserts;
 
 namespace Code.SwfLib.Tests.Asserts.Shapes {

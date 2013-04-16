@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ControlTags;
-using Code.SwfLib.Tests.Asserts.Tags;
 using NUnit.Framework;
+using SwfLib.Tests.Asserts.Tags;
 
 namespace Code.SwfLib.Tests.Tags.ControlTags {
     [TestFixture]

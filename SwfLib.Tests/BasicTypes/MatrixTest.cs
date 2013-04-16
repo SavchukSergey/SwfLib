@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Code.SwfLib.Data;
 using NUnit.Framework;
+using SwfLib.Data;
 
 namespace Code.SwfLib.Tests.BasicTypes {
     public class MatrixTest : TestFixtureBase {

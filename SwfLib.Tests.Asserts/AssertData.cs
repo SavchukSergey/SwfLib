@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using SwfLib.Data;
 
-namespace Code.SwfLib.Tests.Asserts {
+namespace SwfLib.Tests.Asserts {
     public static class AssertData {
 
         public static void AreEqual(SwfMatrix expected, SwfMatrix actual, string message) {

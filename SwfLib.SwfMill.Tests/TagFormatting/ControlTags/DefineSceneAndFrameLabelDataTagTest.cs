@@ -1,8 +1,8 @@
 ﻿using Code.SwfLib.Data;
 using Code.SwfLib.SwfMill.TagFormatting.ControlTags;
 using Code.SwfLib.Tags.ControlTags;
-using Code.SwfLib.Tests.Asserts.Tags;
 using NUnit.Framework;
+using SwfLib.Tests.Asserts.Tags;
 
 namespace Code.SwfLib.SwfMill.Tests.TagFormatting.ControlTags {
     [TestFixture]
