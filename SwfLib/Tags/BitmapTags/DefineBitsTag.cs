@@ -1,4 +1,5 @@
 ﻿using SwfLib.Tags;
+using SwfLib.Tags.BitmapTags;
 
 namespace Code.SwfLib.Tags.BitmapTags {
     public class DefineBitsTag : BitmapBaseTag {

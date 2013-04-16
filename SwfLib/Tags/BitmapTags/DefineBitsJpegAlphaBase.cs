@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
+using Code.SwfLib.Tags.BitmapTags;
 
-namespace Code.SwfLib.Tags.BitmapTags {
+namespace SwfLib.Tags.BitmapTags {
     public abstract class DefineBitsJpegAlphaBase : DefineBitsJpegTagBase {
 
         public byte[] BitmapAlphaData;

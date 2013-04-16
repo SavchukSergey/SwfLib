@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Tags {
+﻿namespace SwfLib.Tags {
     /// <summary>
     /// http://www.m2osw.com/en/swf_alexref.html
     /// </summary>

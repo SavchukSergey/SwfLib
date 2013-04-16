@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Actions;
+using Code.SwfLib.ClipActions;
 using SwfLib.Actions;
 
-namespace Code.SwfLib.ClipActions {
+namespace SwfLib.ClipActions {
     public class ClipActionRecord {
 
         public ClipEventFlags Flags;

@@ -1,6 +1,6 @@
-﻿using SwfLib.Tags;
+﻿using Code.SwfLib.Tags;
 
-namespace Code.SwfLib.Tags {
+namespace SwfLib.Tags {
     public class ProductInfoTag : SwfTagBase {
         public uint ProductId { get; set; }
 

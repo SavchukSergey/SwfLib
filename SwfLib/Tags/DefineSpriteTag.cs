@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using SwfLib.Tags;
 
-namespace Code.SwfLib.Tags {
+namespace SwfLib.Tags {
     public class DefineSpriteTag : SwfTagBase {
 
         public ushort SpriteID;

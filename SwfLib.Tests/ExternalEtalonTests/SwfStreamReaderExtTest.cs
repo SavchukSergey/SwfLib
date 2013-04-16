@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Code.SwfLib;
 using Code.SwfLib.Tags;
-using Code.SwfLib.Tests.ExternalEtalonTests;
 using NUnit.Framework;
+using SwfLib.Tags;
 using SwfLib.Tags.DisplayListTags;
 
 namespace SwfLib.Tests.ExternalEtalonTests {

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Code.SwfLib;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.BitmapTags;
+using Code.SwfLib.Tests;
 using NUnit.Framework;
-using SwfLib;
+using SwfLib.Tags;
+using SwfLib.Tags.BitmapTags;
 
-namespace Code.SwfLib.Tests.ExternalEtalonTests {
+namespace SwfLib.Tests.ExternalEtalonTests {
     [TestFixture]
     public class Tag2BinaryVisitorTest : ExternalEtalonTestFixtureBase {
 

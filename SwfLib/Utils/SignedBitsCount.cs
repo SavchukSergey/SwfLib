@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Utils {
+﻿namespace SwfLib.Utils {
     public struct SignedBitsCount {
 
         private int _min;

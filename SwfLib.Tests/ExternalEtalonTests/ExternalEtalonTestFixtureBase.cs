@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Code.SwfLib.Tags;
-using SwfLib;
+using Code.SwfLib;
+using Code.SwfLib.Tests;
 using SwfLib.Tags;
 
-namespace Code.SwfLib.Tests.ExternalEtalonTests {
+namespace SwfLib.Tests.ExternalEtalonTests {
     public abstract class ExternalEtalonTestFixtureBase : TestFixtureBase {
 
         protected struct TagBinaryInfo {

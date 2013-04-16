@@ -1,6 +1,6 @@
-﻿using SwfLib.Actions;
+﻿using Code.SwfLib.Actions;
 
-namespace Code.SwfLib.Actions {
+namespace SwfLib.Actions {
     public interface IActionVisitor<TArg, TResult> {
 
         #region SWF 3

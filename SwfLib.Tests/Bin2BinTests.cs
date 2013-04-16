@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Code.SwfLib;
-using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.FontTags;
 using NUnit.Framework;
 using SwfLib.Tags;

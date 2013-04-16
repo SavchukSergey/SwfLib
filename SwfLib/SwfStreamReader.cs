@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using SwfLib;
 
-namespace Code.SwfLib {
+namespace SwfLib {
     public class SwfStreamReader : ISwfStreamReader {
 
         private readonly BinaryReader _reader;

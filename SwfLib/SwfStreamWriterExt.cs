@@ -1,10 +1,9 @@
 ﻿using System;
-using Code.SwfLib.Data;
 using Code.SwfLib.Utils;
-using SwfLib;
 using SwfLib.Data;
+using SwfLib.Utils;
 
-namespace Code.SwfLib {
+namespace SwfLib {
     public static class SwfStreamWriterExt {
 
         public static void WriteSwfFileInfo(this ISwfStreamWriter writer, SwfFileInfo fileInfo) {

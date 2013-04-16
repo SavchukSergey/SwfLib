@@ -1,5 +1,5 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Tags.BitmapTags;
+using SwfLib.Tags.BitmapTags;
 
 namespace SwfLib.SwfMill.TagFormatting.BitmapTags {
     public class DefineBitsLossless2TagFormatter : DefineBitmapBaseTagFormatter<DefineBitsLossless2Tag> {

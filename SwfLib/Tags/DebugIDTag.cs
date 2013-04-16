@@ -1,6 +1,4 @@
-﻿using SwfLib.Tags;
-
-namespace Code.SwfLib.Tags {
+﻿namespace SwfLib.Tags {
     public class DebugIDTag : SwfTagBase {
 
         public byte[] Data { get; set; }

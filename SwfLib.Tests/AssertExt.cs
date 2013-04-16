@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests {
+namespace SwfLib.Tests {
     public static class AssertExt {
 
         //TODO: remove

@@ -1,4 +1,5 @@
 ﻿using SwfLib.Tags;
+using SwfLib.Tags.ButtonTags;
 
 namespace Code.SwfLib.Tags.ButtonTags {
     public class DefineButtonSoundTag : DefineButtonBaseTag {

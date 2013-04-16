@@ -1,6 +1,4 @@
-﻿using SwfLib.Tags;
-
-namespace Code.SwfLib.Tags.BitmapTags {
+﻿namespace SwfLib.Tags.BitmapTags {
     public class DefineBitsJPEG4Tag : DefineBitsJpegAlphaBase {
 
         public ushort DeblockParam;

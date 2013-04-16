@@ -1,8 +1,7 @@
-﻿namespace Code.SwfLib {
+﻿namespace SwfLib {
     public struct SwfFileInfo {
         public string Format;
         public byte Version;
         public uint FileLength;
-
     }
 }

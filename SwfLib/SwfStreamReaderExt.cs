@@ -1,8 +1,7 @@
 ﻿using Code.SwfLib.Data;
-using SwfLib;
 using SwfLib.Data;
 
-namespace Code.SwfLib {
+namespace SwfLib {
     public static class SwfStreamReaderExt {
 
         public static SwfFileInfo ReadSwfFileInfo(this ISwfStreamReader writer) {

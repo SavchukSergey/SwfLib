@@ -2,7 +2,7 @@
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace Code.SwfLib.Tags.BitmapTags {
+namespace SwfLib.Tags.BitmapTags {
     public abstract class DefineBitsJpegTagBase : BitmapBaseTag {
 
         public byte[] ImageData;

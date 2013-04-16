@@ -4,7 +4,6 @@ using System.Text;
 using Code.SwfLib.Actions;
 using Code.SwfLib.Buttons;
 using Code.SwfLib.ClipActions;
-using Code.SwfLib.Data;
 using Code.SwfLib.Fonts;
 using Code.SwfLib.Shapes;
 using Code.SwfLib.Tags;
@@ -15,12 +14,11 @@ using Code.SwfLib.Tags.ControlTags;
 using Code.SwfLib.Tags.DisplayListTags;
 using Code.SwfLib.Tags.FontTags;
 using Code.SwfLib.Tags.ShapeMorphingTags;
-using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
 using Code.SwfLib.Text;
 using Code.SwfLib.Utils;
-using SwfLib;
+using SwfLib.ClipActions;
 using SwfLib.Data;
 using SwfLib.Filters;
 using SwfLib.Tags;
@@ -31,8 +29,9 @@ using SwfLib.Tags.DisplayListTags;
 using SwfLib.Tags.FontTags;
 using SwfLib.Tags.ShapeTags;
 using SwfLib.Tags.VideoTags;
+using SwfLib.Utils;
 
-namespace Code.SwfLib {
+namespace SwfLib {
     public class SwfTagSerializer : ISwfTagVisitor<ISwfStreamWriter, SwfTagData> {
 
         private readonly SwfFile _file;

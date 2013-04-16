@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using zlib;
 
-namespace Code.SwfLib {
+namespace SwfLib {
     public static class SwfZip {
 
         public static void Compress(Stream uncompressed, Stream target) {

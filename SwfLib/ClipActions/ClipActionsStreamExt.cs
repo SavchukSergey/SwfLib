@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Code.SwfLib.Actions;
-using SwfLib;
+using Code.SwfLib.ClipActions;
 using SwfLib.Actions;
 
-namespace Code.SwfLib.ClipActions {
+namespace SwfLib.ClipActions {
     public static class ClipActionsStreamExt {
 
         public static void ReadClipActions(this ISwfStreamReader reader, byte swfVersion, ClipActionsList clipActions) {

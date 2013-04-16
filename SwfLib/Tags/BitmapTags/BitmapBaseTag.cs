@@ -1,6 +1,4 @@
-﻿using SwfLib.Tags;
-
-namespace Code.SwfLib.Tags.BitmapTags {
+﻿namespace SwfLib.Tags.BitmapTags {
     public abstract class BitmapBaseTag : SwfTagBase {
 
         public ushort CharacterID;

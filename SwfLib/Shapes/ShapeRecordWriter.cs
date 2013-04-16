@@ -2,6 +2,7 @@
 using Code.SwfLib.Utils;
 using SwfLib;
 using SwfLib.Shapes.Records;
+using SwfLib.Utils;
 
 namespace Code.SwfLib.Shapes {
     public class ShapeRecordWriter : IShapeRecordVisitor<ShapeRecordWriter.ShapeRecordWriteContext, ShapeRecordWriter.ShapeRecordWriteContext> {

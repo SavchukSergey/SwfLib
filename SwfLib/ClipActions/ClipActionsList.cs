@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SwfLib.ClipActions;
 
 namespace Code.SwfLib.ClipActions {
     public class ClipActionsList {

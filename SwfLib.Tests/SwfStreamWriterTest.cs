@@ -3,9 +3,9 @@ using System.Linq;
 using Code.SwfLib;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tests;
-using Code.SwfLib.Utils;
 using NUnit.Framework;
 using SwfLib.Tags;
+using SwfLib.Utils;
 
 namespace SwfLib.Tests {
     [TestFixture]
