@@ -73,7 +73,7 @@ namespace SwfLib.Tests {
         }
 
         protected Stream OpenEmbeddedResource(string resourceName) {
-            var fullPath = "Code.SwfLib.Tests.Resources.";
+            var fullPath = "SwfLib.Tests.Resources.";
             if (!string.IsNullOrEmpty(EmbeddedResourceFolder)) fullPath += EmbeddedResourceFolder + ".";
             fullPath += resourceName;
             var stream = GetType().Assembly.GetManifestResourceStream(fullPath);

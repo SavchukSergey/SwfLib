@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Code.SwfLib;
 
 namespace SwfLib.Tests.Asserts.Utils {
     public class DualSwfStreamReader : SwfStreamReader {

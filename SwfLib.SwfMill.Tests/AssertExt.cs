@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Code.SwfLib.SwfMill.Tests {
+namespace SwfLib.SwfMill.Tests {
     public static class AssertExt {
 
         public static void AreEqual(byte[] expected, byte[] actual, string message) {

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using SwfLib.Filters;
 
-namespace Code.SwfLib.Tests.Filters {
+namespace SwfLib.Tests.Filters {
     [TestFixture]
     public class FilterFactoryTest {
 

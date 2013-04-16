@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib;
 
 namespace SwfLib.Filters {
     public static class FilterStreamEx {

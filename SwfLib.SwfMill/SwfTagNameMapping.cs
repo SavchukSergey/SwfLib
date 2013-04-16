@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.SwfLib.SwfMill;
 using SwfLib.Tags;
 
 namespace SwfLib.SwfMill {

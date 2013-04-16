@@ -17,7 +17,7 @@ namespace SwfLib.SwfMill.Tests.TagFormatting {
         }
 
         private Stream OpenEmbeddedResource(string name) {
-            return GetType().Assembly.GetManifestResourceStream("Code.SwfLib.SwfMill.Tests.Resources.TagFormatting." + name);
+            return GetType().Assembly.GetManifestResourceStream("SwfLib.SwfMill.Tests.Resources.TagFormatting." + name);
         }
 
         private static void XmlDifferenceHandler(string message) {

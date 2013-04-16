@@ -1,8 +1,5 @@
 ﻿using System.IO;
 using System.Linq;
-using Code.SwfLib;
-using Code.SwfLib.Tags;
-using Code.SwfLib.Tests;
 using NUnit.Framework;
 using SwfLib.Tags;
 using SwfLib.Utils;

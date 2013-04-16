@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Code.SwfLib;
 using NUnit.Framework;
 
 namespace SwfLib.Tests.BasicTypes {

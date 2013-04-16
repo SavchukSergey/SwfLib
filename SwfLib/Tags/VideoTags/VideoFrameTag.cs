@@ -1,6 +1,4 @@
-﻿using Code.SwfLib.Tags;
-
-namespace SwfLib.Tags.VideoTags {
+﻿namespace SwfLib.Tags.VideoTags {
     public class VideoFrameTag : SwfTagBase {
 
         public override SwfTagType TagType {

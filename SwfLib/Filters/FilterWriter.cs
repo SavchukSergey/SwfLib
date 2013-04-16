@@ -1,5 +1,4 @@
-﻿using Code.SwfLib;
-using SwfLib.Data;
+﻿using SwfLib.Data;
 
 namespace SwfLib.Filters {
     public class FilterWriter : IFilterVisitor<ISwfStreamWriter, object> {
