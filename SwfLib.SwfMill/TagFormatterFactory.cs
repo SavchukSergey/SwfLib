@@ -5,12 +5,9 @@ using Code.SwfLib.SwfMill.TagFormatting.BitmapTags;
 using Code.SwfLib.SwfMill.TagFormatting.ButtonTags;
 using Code.SwfLib.SwfMill.TagFormatting.ControlTags;
 using Code.SwfLib.SwfMill.TagFormatting.DisplayListTags;
-using Code.SwfLib.SwfMill.TagFormatting.FontTags;
-using Code.SwfLib.SwfMill.TagFormatting.ShapeMorphingTags;
 using Code.SwfLib.SwfMill.TagFormatting.ShapeTags;
 using Code.SwfLib.SwfMill.TagFormatting.SoundTags;
 using Code.SwfLib.SwfMill.TagFormatting.TextTags;
-using Code.SwfLib.SwfMill.TagFormatting.VideoTags;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
@@ -22,7 +19,6 @@ using Code.SwfLib.Tags.ShapeMorphingTags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
-using Code.SwfLib.Tags.VideoTags;
 using SwfLib.SwfMill.TagFormatting;
 using SwfLib.SwfMill.TagFormatting.ActionTags;
 using SwfLib.SwfMill.TagFormatting.BitmapTags;
@@ -34,8 +30,13 @@ using SwfLib.SwfMill.TagFormatting.ShapeTags;
 using SwfLib.SwfMill.TagFormatting.SoundTags;
 using SwfLib.SwfMill.TagFormatting.TextTags;
 using SwfLib.SwfMill.TagFormatting.VideoTags;
+using SwfLib.Tags;
 using SwfLib.Tags.BitmapTags;
+using SwfLib.Tags.ControlTags;
+using SwfLib.Tags.DisplayListTags;
+using SwfLib.Tags.FontTags;
 using SwfLib.Tags.ShapeTags;
+using SwfLib.Tags.VideoTags;
 
 namespace Code.SwfLib.SwfMill {
     public class TagFormatterFactory : ISwfTagVisitor<object, ITagFormatter> {

@@ -4,6 +4,7 @@ using Code.SwfLib.SwfMill.Tests;
 using Code.SwfLib.Tags;
 using NUnit.Framework;
 using SwfLib.SwfMill.TagFormatting;
+using SwfLib.Tags;
 
 namespace SwfLib.SwfMill.Tests.TagFormatting {
     public abstract class BaseTagFormattingTest<T, F>

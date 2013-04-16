@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Tags.BitmapTags {
+﻿using SwfLib.Tags;
+
+namespace Code.SwfLib.Tags.BitmapTags {
     public class JPEGTablesTag : SwfTagBase {
 
         public byte[] JPEGData;

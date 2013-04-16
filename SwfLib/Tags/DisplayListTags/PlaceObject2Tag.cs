@@ -1,8 +1,9 @@
 ﻿using Code.SwfLib.ClipActions;
-using Code.SwfLib.Data;
+using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.DisplayListTags;
 using SwfLib.Data;
 
-namespace Code.SwfLib.Tags.DisplayListTags {
+namespace SwfLib.Tags.DisplayListTags {
     public class PlaceObject2Tag : PlaceObjectBaseTag {
 
         public bool HasClipActions;

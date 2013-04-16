@@ -1,9 +1,8 @@
 ﻿using System.Globalization;
 using System.Xml.Linq;
 using Code.SwfLib.Tags;
-using SwfLib.SwfMill.TagFormatting;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
+namespace SwfLib.SwfMill.TagFormatting {
     public class UnknownTagFormatter : TagFormatterBase<UnknownTag> {
 
         private const string ID_ATTRIB = "id";

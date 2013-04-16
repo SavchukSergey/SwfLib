@@ -1,8 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.DisplayListTags;
-using SwfLib.SwfMill.TagFormatting;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.DisplayListTags {
+namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
     public class RemoveObject2TagFormatter : TagFormatterBase<RemoveObject2Tag> {
 
         private const string DEPTH_ATTRIB = "depth";

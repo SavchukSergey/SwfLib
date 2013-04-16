@@ -1,8 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.ControlTags;
-using SwfLib.SwfMill.TagFormatting;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
+namespace SwfLib.SwfMill.TagFormatting.ControlTags {
     public class ScriptLimitsTagFormatter : TagFormatterBase<ScriptLimitsTag> {
 
         private const string MAX_RECURSION_ATTRIB = "maxRecursionDepth";

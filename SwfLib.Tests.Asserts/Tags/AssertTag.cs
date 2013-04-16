@@ -6,6 +6,7 @@ using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tests.Asserts;
 using Code.SwfLib.Tests.Asserts.Shapes;
 using NUnit.Framework;
+using SwfLib.Tags.DisplayListTags;
 
 namespace SwfLib.Tests.Asserts.Tags {
     public static class AssertTag {

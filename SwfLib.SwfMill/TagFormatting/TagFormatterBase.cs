@@ -3,6 +3,7 @@ using System.Xml.Linq;
 using Code.SwfLib.SwfMill.TagFormatting;
 using Code.SwfLib.Tags;
 using SwfLib.SwfMill.Data;
+using SwfLib.Tags;
 
 namespace SwfLib.SwfMill.TagFormatting {
     public abstract class TagFormatterBase<T> : ITagFormatter<T> where T : SwfTagBase {

@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Tags.DisplayListTags {
+﻿using SwfLib.Tags;
+
+namespace Code.SwfLib.Tags.DisplayListTags {
     public class RemoveObjectTag : DisplayListBaseTag {
 
         public ushort CharacterID;

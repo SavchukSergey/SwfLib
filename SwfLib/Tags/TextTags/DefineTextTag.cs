@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Text;
+using SwfLib.Tags;
 
 namespace Code.SwfLib.Tags.TextTags {
     public class DefineTextTag : DefineTextBaseTag {

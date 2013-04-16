@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Tags.SoundTags {
+﻿using SwfLib.Tags;
+
+namespace Code.SwfLib.Tags.SoundTags {
     public class DefineSoundTag : SwfTagBase {
 
         public override SwfTagType TagType {

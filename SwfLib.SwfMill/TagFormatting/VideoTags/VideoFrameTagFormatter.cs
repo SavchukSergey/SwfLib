@@ -1,5 +1,5 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Tags.VideoTags;
+using SwfLib.Tags.VideoTags;
 
 namespace SwfLib.SwfMill.TagFormatting.VideoTags {
     public class VideoFrameTagFormatter : TagFormatterBase<VideoFrameTag> {

@@ -1,4 +1,5 @@
-﻿using Code.SwfLib.Tags.ActionsTags;
+﻿using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.ActionsTags;
 using Code.SwfLib.Tags.BitmapTags;
 using Code.SwfLib.Tags.ButtonTags;
 using Code.SwfLib.Tags.ControlTags;
@@ -8,11 +9,14 @@ using Code.SwfLib.Tags.ShapeMorphingTags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
-using Code.SwfLib.Tags.VideoTags;
 using SwfLib.Tags.BitmapTags;
+using SwfLib.Tags.ControlTags;
+using SwfLib.Tags.DisplayListTags;
+using SwfLib.Tags.FontTags;
 using SwfLib.Tags.ShapeTags;
+using SwfLib.Tags.VideoTags;
 
-namespace Code.SwfLib.Tags {
+namespace SwfLib.Tags {
     public interface ISwfTagVisitor<TArg, TResult> {
 
         #region Display list tags

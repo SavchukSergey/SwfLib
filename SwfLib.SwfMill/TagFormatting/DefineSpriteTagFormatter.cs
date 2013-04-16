@@ -2,6 +2,7 @@
 using System.Xml.Linq;
 using Code.SwfLib.SwfMill;
 using Code.SwfLib.Tags;
+using SwfLib.Tags;
 
 namespace SwfLib.SwfMill.TagFormatting {
     public class DefineSpriteTagFormatter : TagFormatterBase<DefineSpriteTag> {

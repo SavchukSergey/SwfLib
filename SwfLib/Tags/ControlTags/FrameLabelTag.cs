@@ -1,4 +1,7 @@
-﻿namespace Code.SwfLib.Tags.ControlTags {
+﻿using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.ControlTags;
+
+namespace SwfLib.Tags.ControlTags {
     public class FrameLabelTag : ControlBaseTag {
         
         public string Name { get; set; }

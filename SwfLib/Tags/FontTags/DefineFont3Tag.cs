@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Fonts;
+using Code.SwfLib.Tags;
+using Code.SwfLib.Tags.FontTags;
 
-namespace Code.SwfLib.Tags.FontTags {
+namespace SwfLib.Tags.FontTags {
     public class DefineFont3Tag : FontBaseTag {
 
         public byte Language;

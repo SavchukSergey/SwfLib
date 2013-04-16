@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Tags.FontTags {
+﻿using SwfLib.Tags;
+
+namespace Code.SwfLib.Tags.FontTags {
     public class DefineFontInfoTag : FontBaseTag {
 
         public override SwfTagType TagType {

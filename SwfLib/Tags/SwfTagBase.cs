@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Tags {
+﻿using Code.SwfLib.Tags;
+
+namespace SwfLib.Tags {
     public abstract class SwfTagBase {
 
         public abstract SwfTagType TagType { get; }

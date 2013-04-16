@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.FontTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
+namespace SwfLib.SwfMill.TagFormatting.FontTags {
     //TODO: format & parse
     public class DefineFontInfoTagFormatter : DefineFontBaseFormatter<DefineFontInfoTag> {
 

@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.FontTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
+namespace SwfLib.SwfMill.TagFormatting.FontTags {
     public class DefineFontNameTagFormatter : DefineFontBaseFormatter<DefineFontNameTag> {
 
         protected const string COPYRIGHT_ATTRIB = "copyright";

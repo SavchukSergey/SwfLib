@@ -3,6 +3,7 @@ using Code.SwfLib.ClipActions;
 using Code.SwfLib.Data;
 using Code.SwfLib.Filters;
 using SwfLib.Data;
+using SwfLib.Tags;
 
 namespace Code.SwfLib.Tags.DisplayListTags {
     public class PlaceObject3Tag : PlaceObjectBaseTag {

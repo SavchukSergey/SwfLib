@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Linq;
+using Code.SwfLib;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.FontTags;
 using NUnit.Framework;
+using SwfLib.Tags;
+using SwfLib.Tags.FontTags;
 
-namespace Code.SwfLib.Tests {
+namespace SwfLib.Tests {
     [TestFixture]
     public class Bin2BinTests {
 
         [Test]
         public void DefineFont3TagTest() {
-            Bin2BinBulkTest<DefineFont3Tag>("Code.SwfLib.Tests.Resources.Bin2Bin.DefineFont3Tag");
+            Bin2BinBulkTest<DefineFont3Tag>("SwfLib.Tests.Resources.Bin2Bin.DefineFont3Tag");
         }
 
         [Test]
         public void DefineFontAlignZonesTagTest() {
-            Bin2BinBulkTest<DefineFontAlignZonesTag>("Code.SwfLib.Tests.Resources.Bin2Bin.DefineFontAlignZonesTag", file => {
-                var resources = GetResourcesFromFolder("Code.SwfLib.Tests.Resources.Bin2Bin.DefineFont3Tag");
+            Bin2BinBulkTest<DefineFontAlignZonesTag>("SwfLib.Tests.Resources.Bin2Bin.DefineFontAlignZonesTag", file => {
+                var resources = GetResourcesFromFolder("SwfLib.Tests.Resources.Bin2Bin.DefineFont3Tag");
                 foreach (var resourceName in resources) {
                     var tag = DeserializeTag<DefineFont3Tag>(file, resourceName);
                     file.Tags.Add(tag);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Fonts;
+using SwfLib.Tags;
 
 namespace Code.SwfLib.Tags.FontTags {
     public class DefineFontAlignZonesTag : FontBaseTag {

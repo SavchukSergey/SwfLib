@@ -1,9 +1,11 @@
 ﻿using System.Linq;
+using Code.SwfLib;
 using Code.SwfLib.Tags;
-using Code.SwfLib.Tags.DisplayListTags;
+using Code.SwfLib.Tests.ExternalEtalonTests;
 using NUnit.Framework;
+using SwfLib.Tags.DisplayListTags;
 
-namespace Code.SwfLib.Tests.ExternalEtalonTests {
+namespace SwfLib.Tests.ExternalEtalonTests {
     [TestFixture]
     public class SwfStreamReaderExtTest : ExternalEtalonTestFixtureBase {
 

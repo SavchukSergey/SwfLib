@@ -8,9 +8,13 @@ using Code.SwfLib.Tags.ShapeMorphingTags;
 using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tags.SoundTags;
 using Code.SwfLib.Tags.TextTags;
-using Code.SwfLib.Tags.VideoTags;
+using SwfLib.Tags;
 using SwfLib.Tags.BitmapTags;
+using SwfLib.Tags.ControlTags;
+using SwfLib.Tags.DisplayListTags;
+using SwfLib.Tags.FontTags;
 using SwfLib.Tags.ShapeTags;
+using SwfLib.Tags.VideoTags;
 
 namespace Code.SwfLib.Tags {
     public class SwfTagsFactory {

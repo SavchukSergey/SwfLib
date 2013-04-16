@@ -1,4 +1,7 @@
-﻿namespace Code.SwfLib.Tags.ControlTags {
+﻿using SwfLib.Tags;
+using SwfLib.Tags.ControlTags;
+
+namespace Code.SwfLib.Tags.ControlTags {
     public class FileAttributesTag : ControlBaseTag {
 
         public bool Reserved0;

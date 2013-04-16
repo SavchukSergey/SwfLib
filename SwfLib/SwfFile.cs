@@ -4,6 +4,7 @@ using System.IO;
 using Code.SwfLib.Data;
 using Code.SwfLib.Tags;
 using SwfLib;
+using SwfLib.Tags;
 
 namespace Code.SwfLib {
     public class SwfFile {

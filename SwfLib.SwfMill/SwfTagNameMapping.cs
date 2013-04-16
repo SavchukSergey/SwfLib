@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Code.SwfLib.Tags;
+using SwfLib.Tags;
 
 namespace Code.SwfLib.SwfMill {
     public static class SwfTagNameMapping {

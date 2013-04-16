@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Tags.ShapeMorphingTags {
+﻿using SwfLib.Tags;
+
+namespace Code.SwfLib.Tags.ShapeMorphingTags {
     public class DefineMorphShape2Tag : ShapeMorphingBaseTag {
 
         public override SwfTagType TagType {

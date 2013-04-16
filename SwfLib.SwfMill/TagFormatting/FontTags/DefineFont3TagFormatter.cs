@@ -1,9 +1,9 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.SwfMill.Fonts;
-using Code.SwfLib.Tags.FontTags;
+using SwfLib.Tags.FontTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
+namespace SwfLib.SwfMill.TagFormatting.FontTags {
     public class DefineFont3TagFormatter : DefineFontBaseFormatter<DefineFont3Tag> {
 
         private const string SHIFT_JIS_ATTRIB = "isShiftJIS";

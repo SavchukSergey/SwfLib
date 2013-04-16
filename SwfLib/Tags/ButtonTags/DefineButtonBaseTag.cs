@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Tags.ButtonTags {
+﻿using SwfLib.Tags;
+
+namespace Code.SwfLib.Tags.ButtonTags {
     public abstract class DefineButtonBaseTag : SwfTagBase {
 
         public ushort ButtonID;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Buttons;
+using SwfLib.Tags;
 
 namespace Code.SwfLib.Tags.ButtonTags {
     public class DefineButton2Tag : DefineButtonBaseTag {

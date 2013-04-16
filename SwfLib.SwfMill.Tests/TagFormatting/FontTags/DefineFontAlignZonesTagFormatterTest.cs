@@ -1,6 +1,6 @@
-﻿using Code.SwfLib.SwfMill.TagFormatting.FontTags;
-using Code.SwfLib.Tags.FontTags;
+﻿using Code.SwfLib.Tags.FontTags;
 using NUnit.Framework;
+using SwfLib.SwfMill.TagFormatting.FontTags;
 
 namespace SwfLib.SwfMill.Tests.TagFormatting.FontTags {
     [TestFixture]

@@ -3,7 +3,7 @@ using Code.SwfLib.Fonts;
 using Code.SwfLib.SwfMill.Fonts;
 using Code.SwfLib.Tags.FontTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.FontTags {
+namespace SwfLib.SwfMill.TagFormatting.FontTags {
     public class DefineFontAlignZonesTagFormatter : DefineFontBaseFormatter<DefineFontAlignZonesTag> {
 
         private const string CSM_HINT_ATTRIB = "csmTableHint";

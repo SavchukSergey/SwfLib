@@ -2,6 +2,7 @@
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.Shapes.Records;
+using SwfLib.Tags;
 
 namespace Code.SwfLib.Tags.ShapeTags {
     public class DefineShape2Tag : ShapeBaseTag {

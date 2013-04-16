@@ -1,8 +1,8 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.ControlTags;
-using SwfLib.SwfMill.TagFormatting;
+using SwfLib.Tags.ControlTags;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
+namespace SwfLib.SwfMill.TagFormatting.ControlTags {
     public class FrameLabelTagFormatter : TagFormatterBase<FrameLabelTag> {
 
         private const string LABEL_ATTRIB = "label";

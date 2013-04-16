@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using Code.SwfLib.Tags;
+using SwfLib.Tags;
 
 namespace Code.SwfLib.Tests.Samples {
     public abstract class BaseSampleTest : TestFixtureBase {

@@ -1,8 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags.SoundTags;
-using SwfLib.SwfMill.TagFormatting;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.SoundTags {
+namespace SwfLib.SwfMill.TagFormatting.SoundTags {
     public class SoundStreamBlockTagFormatter : TagFormatterBase<SoundStreamBlockTag> {
         protected override void FormatTagElement(SoundStreamBlockTag tag, XElement xTag) {
         }

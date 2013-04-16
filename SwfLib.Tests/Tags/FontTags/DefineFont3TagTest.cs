@@ -1,9 +1,11 @@
 ﻿using System.Linq;
+using Code.SwfLib;
 using Code.SwfLib.Tags;
-using Code.SwfLib.Tags.FontTags;
+using Code.SwfLib.Tests;
 using NUnit.Framework;
+using SwfLib.Tags.FontTags;
 
-namespace Code.SwfLib.Tests.Tags.FontTags {
+namespace SwfLib.Tests.Tags.FontTags {
     [TestFixture]
     public class DefineFont3TagTest : TestFixtureBase {
 

@@ -1,8 +1,7 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.Tags;
-using SwfLib.SwfMill.TagFormatting;
 
-namespace Code.SwfLib.SwfMill.TagFormatting {
+namespace SwfLib.SwfMill.TagFormatting {
     public class DebugIDTagFormatter : TagFormatterBase<DebugIDTag> {
         protected override void FormatTagElement(DebugIDTag tag, XElement xTag) {
         }

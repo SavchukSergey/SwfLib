@@ -1,4 +1,6 @@
 ﻿using Code.SwfLib.Data;
+using SwfLib.Tags;
+using SwfLib.Tags.ControlTags;
 
 namespace Code.SwfLib.Tags.ControlTags {
     public class SetBackgroundColorTag : ControlBaseTag {

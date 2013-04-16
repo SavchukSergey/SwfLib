@@ -22,8 +22,13 @@ using Code.SwfLib.Tags.TextTags;
 using Code.SwfLib.Text;
 using Code.SwfLib.Utils;
 using SwfLib.Data;
+using SwfLib.Tags;
 using SwfLib.Tags.BitmapTags;
+using SwfLib.Tags.ControlTags;
+using SwfLib.Tags.DisplayListTags;
+using SwfLib.Tags.FontTags;
 using SwfLib.Tags.ShapeTags;
+using SwfLib.Tags.VideoTags;
 
 namespace Code.SwfLib {
     public class SwfTagSerializer : ISwfTagVisitor<ISwfStreamWriter, SwfTagData> {
@@ -758,11 +763,11 @@ namespace Code.SwfLib {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(Tags.VideoTags.DefineVideoStreamTag tag, ISwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineVideoStreamTag tag, ISwfStreamWriter writer) {
             return null;
         }
 
-        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(Tags.VideoTags.VideoFrameTag tag, ISwfStreamWriter writer) {
+        SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(VideoFrameTag tag, ISwfStreamWriter writer) {
             return null;
         }
 

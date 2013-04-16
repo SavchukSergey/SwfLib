@@ -1,9 +1,8 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Data;
 using Code.SwfLib.Tags.ControlTags;
-using SwfLib.SwfMill.TagFormatting;
 
-namespace Code.SwfLib.SwfMill.TagFormatting.ControlTags {
+namespace SwfLib.SwfMill.TagFormatting.ControlTags {
     public class SetBackgroundColorTagFormatter : TagFormatterBase<SetBackgroundColorTag> {
 
         private const string COLOR_ELEM = "color";
