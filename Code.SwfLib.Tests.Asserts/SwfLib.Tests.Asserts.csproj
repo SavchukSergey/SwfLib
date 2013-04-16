@@ -7,8 +7,8 @@
     <ProjectGuid>{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Code.SwfLib.Tests.Asserts</RootNamespace>
-    <AssemblyName>Code.SwfLib.Tests.Asserts</AssemblyName>
+    <RootNamespace>SwfLib.Tests.Asserts</RootNamespace>
+    <AssemblyName>SwfLib.Tests.Asserts</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -56,9 +56,9 @@
     <Compile Include="Utils\DualSwfStreamReader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Code.SwfLib\Code.SwfLib.csproj">
+    <ProjectReference Include="..\Code.SwfLib\SwfLib.csproj">
       <Project>{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}</Project>
-      <Name>Code.SwfLib</Name>
+      <Name>SwfLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

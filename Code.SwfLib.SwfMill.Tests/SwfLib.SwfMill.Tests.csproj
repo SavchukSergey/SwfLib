@@ -8,8 +8,8 @@
     <ProjectGuid>{4EAE1D32-3036-493F-8699-1A9A7D65B277}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Code.SwfLib.SwfMill.Tests</RootNamespace>
-    <AssemblyName>Code.SwfLib.SwfMill.Tests</AssemblyName>
+    <RootNamespace>SwfLib.SwfMill.Tests</RootNamespace>
+    <AssemblyName>SwfLib.SwfMill.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -119,17 +119,17 @@
     <Compile Include="XmlComparision.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Code.SwfLib.SwfMill\Code.SwfLib.SwfMill.csproj">
+    <ProjectReference Include="..\Code.SwfLib.SwfMill\SwfLib.SwfMill.csproj">
       <Project>{4CE22FF7-ABF5-4894-BCDE-402DBDD42B80}</Project>
-      <Name>Code.SwfLib.SwfMill</Name>
+      <Name>SwfLib.SwfMill</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Code.SwfLib.Tests.Asserts\Code.SwfLib.Tests.Asserts.csproj">
+    <ProjectReference Include="..\Code.SwfLib.Tests.Asserts\SwfLib.Tests.Asserts.csproj">
       <Project>{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}</Project>
-      <Name>Code.SwfLib.Tests.Asserts</Name>
+      <Name>SwfLib.Tests.Asserts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Code.SwfLib\Code.SwfLib.csproj">
+    <ProjectReference Include="..\Code.SwfLib\SwfLib.csproj">
       <Project>{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}</Project>
-      <Name>Code.SwfLib</Name>
+      <Name>SwfLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

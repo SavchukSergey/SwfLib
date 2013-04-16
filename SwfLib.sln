@@ -24,15 +24,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "swfmill", "swfmill", "{3850
 		References\swfmill\swfmill.exe = References\swfmill\swfmill.exe
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib", "Code.SwfLib\Code.SwfLib.csproj", "{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfLib", "Code.SwfLib\SwfLib.csproj", "{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.Tests", "Code.SwfLib.Tests\Code.SwfLib.Tests.csproj", "{F7862DFF-3B7F-4E5C-B448-9E6E4C04FBF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfLib.Tests", "Code.SwfLib.Tests\SwfLib.Tests.csproj", "{F7862DFF-3B7F-4E5C-B448-9E6E4C04FBF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill", "Code.SwfLib.SwfMill\Code.SwfLib.SwfMill.csproj", "{4CE22FF7-ABF5-4894-BCDE-402DBDD42B80}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfLib.SwfMill", "Code.SwfLib.SwfMill\SwfLib.SwfMill.csproj", "{4CE22FF7-ABF5-4894-BCDE-402DBDD42B80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.SwfMill.Tests", "Code.SwfLib.SwfMill.Tests\Code.SwfLib.SwfMill.Tests.csproj", "{4EAE1D32-3036-493F-8699-1A9A7D65B277}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfLib.SwfMill.Tests", "Code.SwfLib.SwfMill.Tests\SwfLib.SwfMill.Tests.csproj", "{4EAE1D32-3036-493F-8699-1A9A7D65B277}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.SwfLib.Tests.Asserts", "Code.SwfLib.Tests.Asserts\Code.SwfLib.Tests.Asserts.csproj", "{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfLib.Tests.Asserts", "Code.SwfLib.Tests.Asserts\SwfLib.Tests.Asserts.csproj", "{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

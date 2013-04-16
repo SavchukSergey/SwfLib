@@ -1,27 +1,27 @@
 syntax: glob
-Code.SwfLib.SwfMill.Tests/bin/
-Code.SwfLib.SwfMill.Tests/obj/
-Code.SwfLib.SwfMill.Tests/Code.SwfLib.SwfMill.Tests.csproj.user
+SwfLib.SwfMill.Tests/bin/
+SwfLib.SwfMill.Tests/obj/
+SwfLib.SwfMill.Tests/SwfLib.SwfMill.Tests.csproj.user
 
-Code.SwfLib.SwfMill/bin/
-Code.SwfLib.SwfMill/obj/
-Code.SwfLib.SwfMill/Code.SwfLib.SwfMill.csproj.user
+SwfLib.SwfMill/bin/
+SwfLib.SwfMill/obj/
+SwfLib.SwfMill/SwfLib.SwfMill.csproj.user
 
-Code.SwfLib.Tests/bin/
-Code.SwfLib.Tests/obj/
-Code.SwfLib.Tests/Code.SwfLib.Tests.csproj.user
+SwfLib.Tests/bin/
+SwfLib.Tests/obj/
+SwfLib.Tests/SwfLib.Tests.csproj.user
 
-Code.SwfLib/bin/
-Code.SwfLib/obj/
-Code.SwfLib/Code.SwfLib.csproj.user
+SwfLib/bin/
+SwfLib/obj/
+SwfLib/SwfLib.csproj.user
 
-Code.SwfLib.Tests.Asserts/bin/
-Code.SwfLib.Tests.Asserts/obj/
+SwfLib.Tests.Asserts/bin/
+SwfLib.Tests.Asserts/obj/
 
-_ReSharper.Code.SwfLib/
-Code.SwfLib.4.5.resharper.user
-Code.SwfLib.suo
-Code.SwfLib.v11.suo
+_ReSharper.SwfLib/
+SwfLib.4.5.resharper.user
+SwfLib.suo
+SwfLib.v11.suo
 
-Code.SwfLib.sln.DotSettings.user
-Code.SwfLib.sln.DotSettings
+SwfLib.sln.DotSettings.user
+SwfLib.sln.DotSettings
