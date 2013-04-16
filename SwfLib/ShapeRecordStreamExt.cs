@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using Code.SwfLib.Shapes;
 using Code.SwfLib.Shapes.Records;
-using SwfLib;
 using SwfLib.Shapes.Records;
 
-namespace Code.SwfLib {
+namespace SwfLib {
     public static class ShapeRecordStreamExt {
 
         private static readonly ShapeRecordWriter _shapeRecordWriter = new ShapeRecordWriter();

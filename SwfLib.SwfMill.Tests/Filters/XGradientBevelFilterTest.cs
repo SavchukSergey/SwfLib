@@ -1,5 +1,4 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Gradients;
 using Code.SwfLib.SwfMill.Filters;
 using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;

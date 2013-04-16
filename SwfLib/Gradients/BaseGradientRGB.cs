@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Gradients;
 
 namespace SwfLib.Gradients {
     public class BaseGradientRGB {

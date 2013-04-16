@@ -2,6 +2,7 @@
 using Code.SwfLib.Shapes.FillStyles;
 using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.Shapes.Records;
+using SwfLib.Shapes.FillStyles;
 using SwfLib.Shapes.LineStyles;
 
 namespace SwfLib.Shapes.Records {

@@ -1,6 +1,5 @@
 ﻿using System;
 using Code.SwfLib.Shapes.FillStyles;
-using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 using SwfLib.Shapes.FillStyles;
 

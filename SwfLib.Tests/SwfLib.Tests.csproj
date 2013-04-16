@@ -136,7 +136,7 @@
       <Project>{d41c8ad8-1272-4d29-8b5c-9a35d04bd688}</Project>
       <Name>SwfLib.Tests.Asserts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Code.SwfLib\SwfLib.csproj">
+    <ProjectReference Include="..\SwfLib\SwfLib.csproj">
       <Project>{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}</Project>
       <Name>SwfLib</Name>
     </ProjectReference>

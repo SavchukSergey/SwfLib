@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using SwfLib.Gradients;
 
-namespace Code.SwfLib.Gradients {
+namespace SwfLib.Gradients {
     public class BaseGradientRGBA {
 
         public SpreadMode SpreadMode;

@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Gradients {
+﻿namespace SwfLib.Gradients {
     public class GradientRGBA : BaseGradientRGBA {
 
     }

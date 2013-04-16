@@ -4,13 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using Code.SwfLib;
+using Code.SwfLib.SwfMill;
 using Code.SwfLib.Tags;
 using NUnit.Framework;
-using SwfLib;
 using SwfLib.Tags;
 using SwfLib.Tests.Asserts.Utils;
 
-namespace Code.SwfLib.SwfMill.Tests {
+namespace SwfLib.SwfMill.Tests {
     [TestFixture]
     public class SwfMillFacadeTest {
 

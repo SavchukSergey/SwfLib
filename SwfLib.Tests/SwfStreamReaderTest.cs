@@ -1,9 +1,11 @@
 ﻿using System.IO;
+using Code.SwfLib;
 using Code.SwfLib.Tags;
+using Code.SwfLib.Tests;
 using Code.SwfLib.Utils;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests {
+namespace SwfLib.Tests {
     [TestFixture]
     public class SwfStreamReaderTest : TestFixtureBase {
 

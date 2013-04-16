@@ -1,8 +1,9 @@
-﻿using Code.SwfLib.Data;
-using Code.SwfLib.Gradients;
+﻿using Code.SwfLib;
+using Code.SwfLib.Shapes.FillStyles;
 using SwfLib.Data;
+using SwfLib.Gradients;
 
-namespace Code.SwfLib.Shapes.FillStyles {
+namespace SwfLib.Shapes.FillStyles {
     public class FillStyleRGBWriter : IFillStyleRGBVisitor<ISwfStreamWriter, object> {
 
         public void Write(ISwfStreamWriter writer, FillStyleRGB fillStyle) {

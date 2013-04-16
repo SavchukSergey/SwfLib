@@ -1,10 +1,9 @@
-﻿using Code.SwfLib.Data;
-using Code.SwfLib.Gradients;
-using SwfLib;
+﻿using Code.SwfLib;
+using Code.SwfLib.Shapes.FillStyles;
 using SwfLib.Data;
-using SwfLib.Shapes.FillStyles;
+using SwfLib.Gradients;
 
-namespace Code.SwfLib.Shapes.FillStyles {
+namespace SwfLib.Shapes.FillStyles {
     public class FillStyleRGBAReader : IFillStyleRGBAVisitor<ISwfStreamReader, FillStyleRGBA> {
 
         private static readonly FillStyleFactory _factory = new FillStyleFactory();

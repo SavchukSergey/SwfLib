@@ -3,8 +3,9 @@ using System.Xml.Linq;
 using Code.SwfLib.Actions;
 using Code.SwfLib.SwfMill.Actions;
 using NUnit.Framework;
+using SwfLib.Actions;
 
-namespace Code.SwfLib.SwfMill.Tests.Actions {
+namespace SwfLib.SwfMill.Tests.Actions {
     [TestFixture]
     public class XActionCommonTest {
 

@@ -1,7 +1,8 @@
 ﻿using System.IO;
+using Code.SwfLib;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests.BasicTypes {
+namespace SwfLib.Tests.BasicTypes {
     [TestFixture]
     public class BitTest {
 

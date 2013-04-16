@@ -1,10 +1,8 @@
-﻿using Code.SwfLib.Data;
-using Code.SwfLib.Gradients;
+﻿using Code.SwfLib.Shapes.FillStyles;
 using SwfLib.Data;
 using SwfLib.Gradients;
-using SwfLib.Shapes.FillStyles;
 
-namespace Code.SwfLib.Shapes.FillStyles {
+namespace SwfLib.Shapes.FillStyles {
     public class FocalGradientFillStyleRGBA : FillStyleRGBA {
 
         public SwfMatrix GradientMatrix;

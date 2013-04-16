@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Gradients {
+﻿namespace SwfLib.Gradients {
     public enum SpreadMode : byte {
         Pad = 0x00,
         Reflect = 0x01,

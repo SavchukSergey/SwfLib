@@ -1,8 +1,8 @@
 ﻿using System;
-using Code.SwfLib.Data;
+using Code.SwfLib.Shapes.FillStyles;
 using SwfLib.Data;
 
-namespace Code.SwfLib.Shapes.FillStyles {
+namespace SwfLib.Shapes.FillStyles {
     public class BitmapFillStyleRGB : FillStyleRGB {
 
         public bool Smoothing { get; set; }

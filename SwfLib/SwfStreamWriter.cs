@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Code.SwfLib {
+namespace SwfLib {
 
     public class SwfStreamWriter : ISwfStreamWriter {
 

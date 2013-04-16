@@ -1,4 +1,6 @@
-﻿namespace Code.SwfLib.Shapes.FillStyles {
+﻿using Code.SwfLib.Shapes.FillStyles;
+
+namespace SwfLib.Shapes.FillStyles {
     public interface IFillStyleRGBVisitor<TArg, TResult> {
 
         TResult Visit(SolidFillStyleRGB fillStyle, TArg arg);

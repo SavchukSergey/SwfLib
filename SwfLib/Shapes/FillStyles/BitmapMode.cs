@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Shapes.FillStyles {
+﻿namespace SwfLib.Shapes.FillStyles {
     public enum BitmapMode {
         Repeat,
         Clip

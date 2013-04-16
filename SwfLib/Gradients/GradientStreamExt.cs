@@ -1,10 +1,7 @@
 ﻿using System;
-using Code.SwfLib.Data;
-using SwfLib;
 using SwfLib.Data;
-using SwfLib.Gradients;
 
-namespace Code.SwfLib.Gradients {
+namespace SwfLib.Gradients {
     public static class GradientStreamExt {
 
         #region Linear Gradient

@@ -1,7 +1,6 @@
-﻿using Code.SwfLib.Data;
-using SwfLib.Data;
+﻿using SwfLib.Data;
 
-namespace Code.SwfLib.Gradients {
+namespace SwfLib.Gradients {
     public class GradientRecordRGB {
 
         public byte Ratio;

@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Gradients {
+﻿namespace SwfLib.Gradients {
     public enum InterpolationMode : byte {
         Normal = 0x00,
         Linear = 0x01,

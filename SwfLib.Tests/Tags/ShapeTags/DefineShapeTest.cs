@@ -9,6 +9,7 @@ using Code.SwfLib.Tags.ShapeTags;
 using Code.SwfLib.Tests;
 using NUnit.Framework;
 using SwfLib.Data;
+using SwfLib.Shapes.FillStyles;
 using SwfLib.Shapes.LineStyles;
 using SwfLib.Shapes.Records;
 using SwfLib.Tags;

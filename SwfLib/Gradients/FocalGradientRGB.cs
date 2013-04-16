@@ -1,6 +1,4 @@
-﻿using SwfLib.Gradients;
-
-namespace Code.SwfLib.Gradients {
+﻿namespace SwfLib.Gradients {
     public class FocalGradientRGB : BaseGradientRGB {
 
         public double FocalPoint;

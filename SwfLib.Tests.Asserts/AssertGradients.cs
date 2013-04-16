@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Gradients;
 using NUnit.Framework;
 using SwfLib.Gradients;
 

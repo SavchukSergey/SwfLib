@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib {
+﻿namespace SwfLib {
     public interface ISwfStreamWriter {
         long Position { get; }
         long Length { get; }
