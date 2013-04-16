@@ -1,9 +1,9 @@
 ﻿using Code.SwfLib.Actions;
-using Code.SwfLib.Tests.Asserts;
+using Code.SwfLib.SwfMill.Tests.Actions;
 using NUnit.Framework;
 using SwfLib.Tests.Asserts;
 
-namespace Code.SwfLib.SwfMill.Tests.Actions {
+namespace SwfLib.SwfMill.Tests.Actions {
     public class PushXActionTest : BaseXActionTest {
 
         private const string ETALON = @"<PushData>

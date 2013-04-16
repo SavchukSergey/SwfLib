@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using SwfLib.Actions;
+using Code.SwfLib.Actions;
 
-namespace Code.SwfLib.Actions {
+namespace SwfLib.Actions {
     public class ActionDefineFunction : ActionBase {
 
         public string Name;

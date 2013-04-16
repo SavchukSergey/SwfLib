@@ -1,7 +1,8 @@
 ﻿using Code.SwfLib.Actions;
+using Code.SwfLib.SwfMill.Tests.Actions;
 using NUnit.Framework;
 
-namespace Code.SwfLib.SwfMill.Tests.Actions {
+namespace SwfLib.SwfMill.Tests.Actions {
     [TestFixture]
     public class GetURL2XActionTest : BaseXActionTest {
         private const string _etalon = @"<GetURL2 flags='128' />";

@@ -1,6 +1,5 @@
 ﻿using Code.SwfLib.Actions;
 using Code.SwfLib.Tests.Actions;
-using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 using SwfLib.Tests.Asserts;
 

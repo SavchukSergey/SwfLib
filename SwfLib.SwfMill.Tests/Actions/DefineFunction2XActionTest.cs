@@ -1,7 +1,9 @@
 ﻿using Code.SwfLib.Actions;
+using Code.SwfLib.SwfMill.Tests.Actions;
 using NUnit.Framework;
+using SwfLib.Actions;
 
-namespace Code.SwfLib.SwfMill.Tests.Actions {
+namespace SwfLib.SwfMill.Tests.Actions {
     [TestFixture]
     public class DefineFunction2XActionTest : BaseXActionTest {
         private const string _etalon = @"<DeclareFunction2 name='func' argc='2' regc='10' preloadParent='1' preloadRoot='0' suppressSuper='1' preloadSuper='0' suppressArguments='1' preloadArguments='0' suppressThis='1' preloadThis='0'

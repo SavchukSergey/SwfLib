@@ -1,11 +1,9 @@
-﻿using Code.SwfLib.Tests.Asserts;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SwfLib.Filters;
 using SwfLib.Gradients;
 using SwfLib.Tests.Asserts;
-using SwfLib.Tests.Filters;
 
-namespace Code.SwfLib.Tests.Filters {
+namespace SwfLib.Tests.Filters {
     [TestFixture]
     public class GradientGlowFilterTest : BaseFilterTest {
 

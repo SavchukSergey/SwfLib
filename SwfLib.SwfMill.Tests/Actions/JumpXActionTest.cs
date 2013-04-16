@@ -1,5 +1,6 @@
 ﻿using Code.SwfLib.Actions;
 using NUnit.Framework;
+using SwfLib.SwfMill.Tests.Actions;
 
 namespace Code.SwfLib.SwfMill.Tests.Actions {
     public class JumpXActionTest : BaseXActionTest {

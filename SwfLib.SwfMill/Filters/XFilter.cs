@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Xml.Linq;
+using Code.SwfLib.SwfMill.Filters;
 using SwfLib.Filters;
 
-namespace Code.SwfLib.SwfMill.Filters {
+namespace SwfLib.SwfMill.Filters {
     public static class XFilter {
 
         public class Writer : IFilterVisitor<object, XElement> {

@@ -1,7 +1,8 @@
 ﻿using Code.SwfLib.Actions;
+using Code.SwfLib.SwfMill.Tests.Actions;
 using NUnit.Framework;
 
-namespace Code.SwfLib.SwfMill.Tests.Actions {
+namespace SwfLib.SwfMill.Tests.Actions {
     [TestFixture]
     public class GotoFrameXActionTest : BaseXActionTest {
         private const string _etalon = @"<GotoFrame frame='4660' />";

@@ -1,7 +1,8 @@
 ﻿using Code.SwfLib.Actions;
+using Code.SwfLib.Tests.Actions;
 using NUnit.Framework;
 
-namespace Code.SwfLib.Tests.Actions {
+namespace SwfLib.Tests.Actions {
     [TestFixture]
     public class GotoFrame2ActionTest : BaseActionTest {
 

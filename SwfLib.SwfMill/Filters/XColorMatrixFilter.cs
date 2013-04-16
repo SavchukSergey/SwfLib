@@ -1,10 +1,9 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.SwfMill.Data;
 using SwfLib.Filters;
 using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill.Filters {
+namespace SwfLib.SwfMill.Filters {
     public static class XColorMatrixFilter {
 
         public const string TAG_NAME = "ColorMatrix";

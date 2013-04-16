@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Code.SwfLib.SwfMill.Tests {
+namespace SwfLib.SwfMill.Tests {
     public static class EnumerableExt {
 
         public static IEnumerable<TResult> FullOuterJoin<TInner, TOuter, TKey, TResult>(this IEnumerable<TInner> inner, IEnumerable<TOuter> outer,

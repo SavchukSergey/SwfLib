@@ -1,11 +1,11 @@
 ﻿using System.Xml.Linq;
 using Code.SwfLib.SwfMill.Filters;
-using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 using SwfLib.Filters;
+using SwfLib.SwfMill.Filters;
 using SwfLib.Tests.Asserts;
 
-namespace Code.SwfLib.SwfMill.Tests.Filters {
+namespace SwfLib.SwfMill.Tests.Filters {
     [TestFixture]
     public class XBevelFilterTest {
         private const string ETALON = @"<Bevel blurX='1.5' blurY='-2.4' strength='20.5' innerShadow='1' knockout='1' onTop='1' passes='2' angle='0.75' distance='2.9' compositeSource='1'>

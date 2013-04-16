@@ -1,8 +1,6 @@
 ﻿using System.IO;
 using Code.SwfLib;
-using Code.SwfLib.Data;
 using Code.SwfLib.Tests;
-using Code.SwfLib.Tests.Asserts;
 using NUnit.Framework;
 using SwfLib.Data;
 using SwfLib.Tests.Asserts;

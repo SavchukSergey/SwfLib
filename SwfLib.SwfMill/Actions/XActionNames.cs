@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.SwfLib.Actions;
 using SwfLib.Actions;
 
-namespace Code.SwfLib.SwfMill.Actions {
+namespace SwfLib.SwfMill.Actions {
     public static class XActionNames {
 
         private static readonly IDictionary<ActionCode, string> _codeToNodeName = new Dictionary<ActionCode, string>();

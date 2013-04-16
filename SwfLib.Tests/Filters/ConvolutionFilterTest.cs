@@ -1,5 +1,4 @@
-﻿using Code.SwfLib.Tests.Asserts;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SwfLib.Filters;
 using SwfLib.Tests.Asserts;
 

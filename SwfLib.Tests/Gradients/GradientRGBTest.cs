@@ -1,6 +1,4 @@
-﻿using Code.SwfLib;
-using Code.SwfLib.Tests.Asserts;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SwfLib.Gradients;
 using SwfLib.Tests.Asserts;
 

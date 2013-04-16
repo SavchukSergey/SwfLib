@@ -1,7 +1,8 @@
 ﻿using Code.SwfLib.Actions;
+using Code.SwfLib.SwfMill.Tests.Actions;
 using NUnit.Framework;
 
-namespace Code.SwfLib.SwfMill.Tests.Actions {
+namespace SwfLib.SwfMill.Tests.Actions {
     public class IfXActionTest : BaseXActionTest {
         private const string _etalon = @"<BranchIfTrue byteOffset='1' />";
 

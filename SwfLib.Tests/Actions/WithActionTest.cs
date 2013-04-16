@@ -1,9 +1,9 @@
 ﻿using Code.SwfLib.Actions;
-using Code.SwfLib.Tests.Asserts;
+using Code.SwfLib.Tests.Actions;
 using NUnit.Framework;
 using SwfLib.Tests.Asserts;
 
-namespace Code.SwfLib.Tests.Actions {
+namespace SwfLib.Tests.Actions {
     [TestFixture]
     public class WithActionTest : BaseActionTest {
 

@@ -1,11 +1,8 @@
-﻿using Code.SwfLib.Tests.Asserts;
-using NUnit.Framework;
-using SwfLib;
+﻿using NUnit.Framework;
 using SwfLib.Gradients;
 using SwfLib.Tests.Asserts;
-using SwfLib.Tests.Gradients;
 
-namespace Code.SwfLib.Tests.Gradients {
+namespace SwfLib.Tests.Gradients {
     [TestFixture]
     public class GradientRGBATest : BaseGradientTest<GradientRGBA> {
 

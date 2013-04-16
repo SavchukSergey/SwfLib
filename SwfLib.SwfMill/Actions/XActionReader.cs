@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Xml.Linq;
 using Code.SwfLib.Actions;
-using Code.SwfLib.SwfMill.Data;
+using Code.SwfLib.SwfMill.Actions;
 using SwfLib.Actions;
 using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 
-namespace Code.SwfLib.SwfMill.Actions {
+namespace SwfLib.SwfMill.Actions {
     public class XActionReader : IActionVisitor<XElement, ActionBase> {
 
         private readonly ActionsFactory _factory = new ActionsFactory();

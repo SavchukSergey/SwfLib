@@ -1,10 +1,10 @@
 ﻿using System.IO;
+using Code.SwfLib;
 using Code.SwfLib.Actions;
 using NUnit.Framework;
-using SwfLib;
 using SwfLib.Actions;
 
-namespace Code.SwfLib.Tests.Actions {
+namespace SwfLib.Tests.Actions {
     public abstract class BaseActionTest {
 
         protected T ReadAction<T>(byte[] source) where T : ActionBase {

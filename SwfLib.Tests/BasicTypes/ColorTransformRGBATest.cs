@@ -1,12 +1,11 @@
 ﻿using System.IO;
-using Code.SwfLib.Data;
-using Code.SwfLib.Tests.Asserts;
+using Code.SwfLib;
+using Code.SwfLib.Tests;
 using NUnit.Framework;
-using SwfLib;
 using SwfLib.Data;
 using SwfLib.Tests.Asserts;
 
-namespace Code.SwfLib.Tests.BasicTypes {
+namespace SwfLib.Tests.BasicTypes {
     [TestFixture]
     public class ColorTransformRGBATest : TestFixtureBase {
 

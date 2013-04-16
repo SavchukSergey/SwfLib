@@ -1,10 +1,10 @@
 ﻿using System.Xml.Linq;
-using Code.SwfLib.Actions;
 using Code.SwfLib.SwfMill.Actions;
+using Code.SwfLib.SwfMill.Tests;
 using NUnit.Framework;
 using SwfLib.Actions;
 
-namespace Code.SwfLib.SwfMill.Tests.Actions {
+namespace SwfLib.SwfMill.Tests.Actions {
     public abstract class BaseXActionTest {
 
         protected T ReadAction<T>(string source) where T : ActionBase {

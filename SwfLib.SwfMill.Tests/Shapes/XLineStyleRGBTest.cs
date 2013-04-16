@@ -3,6 +3,7 @@ using Code.SwfLib.Shapes.LineStyles;
 using Code.SwfLib.SwfMill.Shapes;
 using NUnit.Framework;
 using SwfLib.Shapes.LineStyles;
+using SwfLib.SwfMill.Tests;
 using SwfLib.Tests.Asserts.Shapes;
 
 namespace Code.SwfLib.SwfMill.Tests.Shapes {
