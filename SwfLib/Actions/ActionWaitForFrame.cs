@@ -1,6 +1,4 @@
-﻿using SwfLib.Actions;
-
-namespace Code.SwfLib.Actions {
+﻿namespace SwfLib.Actions {
     public class ActionWaitForFrame : ActionBase {
 
         public ushort Frame;

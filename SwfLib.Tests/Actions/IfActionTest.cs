@@ -1,5 +1,4 @@
-﻿using Code.SwfLib.Actions;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SwfLib.Actions;
 using SwfLib.Tests.Actions;
 

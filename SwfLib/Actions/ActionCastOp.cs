@@ -1,6 +1,4 @@
-﻿using Code.SwfLib.Actions;
-
-namespace SwfLib.Actions {
+﻿namespace SwfLib.Actions {
     public class ActionCastOp : ActionBase {
 
         public override ActionCode ActionCode {

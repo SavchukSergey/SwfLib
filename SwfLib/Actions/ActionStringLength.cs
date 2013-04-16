@@ -1,6 +1,4 @@
-﻿using SwfLib.Actions;
-
-namespace Code.SwfLib.Actions {
+﻿namespace SwfLib.Actions {
     public class ActionStringLength : ActionBase {
 
         public override ActionCode ActionCode {

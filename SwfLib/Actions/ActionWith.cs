@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using SwfLib.Actions;
 
-namespace Code.SwfLib.Actions {
+namespace SwfLib.Actions {
     public class ActionWith : ActionBase {
         
         public readonly IList<ActionBase> Actions = new List<ActionBase>();

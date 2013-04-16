@@ -1,6 +1,6 @@
-﻿using Code.SwfLib.Actions;
-using Code.SwfLib.SwfMill.Tests.Actions;
+﻿using Code.SwfLib.SwfMill.Tests.Actions;
 using NUnit.Framework;
+using SwfLib.Actions;
 using SwfLib.Tests.Asserts;
 
 namespace SwfLib.SwfMill.Tests.Actions {

@@ -1,6 +1,6 @@
-﻿using Code.SwfLib.Actions;
-using Code.SwfLib.Tests.Actions;
+﻿using Code.SwfLib.Tests.Actions;
 using NUnit.Framework;
+using SwfLib.Actions;
 
 namespace SwfLib.Tests.Actions {
     [TestFixture]

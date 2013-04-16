@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Code.SwfLib.Actions;
 
 namespace SwfLib.Actions {
     public class ActionWriter : IActionVisitor<ISwfStreamWriter, object> {

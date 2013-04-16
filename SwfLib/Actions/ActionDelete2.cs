@@ -1,6 +1,4 @@
-﻿using Code.SwfLib.Actions;
-
-namespace SwfLib.Actions {
+﻿namespace SwfLib.Actions {
     public class ActionDelete2 : ActionBase {
         
         public override ActionCode ActionCode {

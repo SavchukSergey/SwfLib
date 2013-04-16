@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Actions {
+﻿namespace SwfLib.Actions {
     public enum ActionPushItemType : byte {
         String = 0,
         Float = 1,

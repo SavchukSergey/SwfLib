@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Code.SwfLib;
-using Code.SwfLib.Actions;
 using NUnit.Framework;
 using SwfLib.Actions;
 

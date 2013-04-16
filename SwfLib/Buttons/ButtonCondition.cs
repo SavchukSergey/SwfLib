@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Code.SwfLib.Actions;
 using SwfLib.Actions;
 
 namespace SwfLib.Buttons {

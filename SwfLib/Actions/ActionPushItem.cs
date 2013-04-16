@@ -1,4 +1,4 @@
-﻿namespace Code.SwfLib.Actions {
+﻿namespace SwfLib.Actions {
     public struct ActionPushItem {
 
         public ActionPushItemType Type;

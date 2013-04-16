@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Text;
-using Code.SwfLib.Actions;
 using Code.SwfLib.Buttons;
 using Code.SwfLib.Tags;
 using Code.SwfLib.Tags.BitmapTags;
