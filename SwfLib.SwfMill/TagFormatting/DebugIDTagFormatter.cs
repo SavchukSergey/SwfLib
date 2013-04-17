@@ -2,6 +2,9 @@
 using SwfLib.Tags;
 
 namespace SwfLib.SwfMill.TagFormatting {
+    /// <summary>
+    /// Represents DebugID xml formatter.
+    /// </summary>
     public class DebugIDTagFormatter : TagFormatterBase<DebugIDTag> {
         protected override void FormatTagElement(DebugIDTag tag, XElement xTag) {
         }

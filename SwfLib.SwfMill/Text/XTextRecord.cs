@@ -5,6 +5,9 @@ using SwfLib.SwfMill.Data;
 using SwfLib.Text;
 
 namespace SwfLib.SwfMill.Text {
+    /// <summary>
+    /// Represents TextRecord xml formatter.
+    /// </summary>
     public static class XTextRecord {
 
         public static XElement ToXmlRGB(TextRecordRGB entry) {

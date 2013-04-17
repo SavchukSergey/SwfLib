@@ -1,14 +1,29 @@
 ﻿using System.Xml.Linq;
 
 namespace SwfLib.SwfMill.Utils {
+    /// <summary>
+    /// Represents utilities for accessing xml nodes.
+    /// </summary>
     public static class XElementUtils {
 
+        /// <summary>
+        /// Reads required attribute.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="attributeName">Attribute name.</param>
+        /// <returns></returns>
         public static string RequiredAttribute(this XElement node, string attributeName) {
             var xAttr = node.Attribute(attributeName);
             if (xAttr != null) return xAttr.Value;
             throw new SwfMillXmlException(string.Format("{0} is missing required '{1}' attribute. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
+        /// <summary>
+        /// Reads required element.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="elementName">Element name.</param>
+        /// <returns></returns>
         public static XElement RequiredElement(this XElement node, string elementName) {
             var xChild = node.Element(elementName);
             if (xChild != null) return xChild;
@@ -136,7 +151,7 @@ namespace SwfLib.SwfMill.Utils {
             }
         }
 
-        public static string BuildNodePath(XElement node) {
+        private static string BuildNodePath(XElement node) {
             string res = "";
             var child = node;
             while (node != null) {

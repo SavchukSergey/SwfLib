@@ -4,6 +4,9 @@ using SwfLib.SwfMill.Utils;
 using SwfLib.Tags.ControlTags;
 
 namespace SwfLib.SwfMill.TagFormatting.ControlTags {
+    /// <summary>
+    /// Represents SymbolClassTag xml formatter.
+    /// </summary>
     public class SymbolClassTagFormatter : TagFormatterBase<SymbolClassTag> {
         protected override void FormatTagElement(SymbolClassTag tag, XElement xTag) {
             var xSymbols = new XElement("symbols");
@@ -36,6 +39,9 @@ namespace SwfLib.SwfMill.TagFormatting.ControlTags {
             };
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "SymbolClass"; }
         }
