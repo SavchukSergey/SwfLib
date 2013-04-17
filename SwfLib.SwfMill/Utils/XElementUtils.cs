@@ -15,10 +15,22 @@ namespace SwfLib.SwfMill.Utils {
             throw new SwfMillXmlException(string.Format("{0} is missing required '{1}' element. Path: {2}", node.Name, elementName, BuildNodePath(node)));
         }
 
+        /// <summary>
+        /// Reads required String attribute.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="attributeName">Attribute name.</param>
+        /// <returns></returns>
         public static string RequiredStringAttribute(this XElement node, string attributeName) {
             return node.RequiredAttribute(attributeName);
         }
 
+        /// <summary>
+        /// Reads required Double attribute.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="attributeName">Attribute name.</param>
+        /// <returns></returns>
         public static double RequiredDoubleAttribute(this XElement node, string attributeName) {
             var str = node.RequiredAttribute(attributeName);
             double val;
@@ -26,6 +38,12 @@ namespace SwfLib.SwfMill.Utils {
             throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not a double. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
+        /// <summary>
+        /// Reads required Float attribute.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="attributeName">Attribute name.</param>
+        /// <returns></returns>
         public static float RequiredFloatAttribute(this XElement node, string attributeName) {
             var str = node.RequiredAttribute(attributeName);
             float val;
@@ -33,6 +51,12 @@ namespace SwfLib.SwfMill.Utils {
             throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not a float. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
+        /// <summary>
+        /// Reads required UInt attribute.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="attributeName">Attribute name.</param>
+        /// <returns></returns>
         public static uint RequiredUIntAttribute(this XElement node, string attributeName) {
             var str = node.RequiredAttribute(attributeName);
             uint val;
@@ -40,6 +64,12 @@ namespace SwfLib.SwfMill.Utils {
             throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not an unsigned integer. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
+        /// <summary>
+        /// Reads required Int attribute.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="attributeName">Attribute name.</param>
+        /// <returns></returns>
         public static int RequiredIntAttribute(this XElement node, string attributeName) {
             var str = node.RequiredAttribute(attributeName);
             int val;
@@ -47,6 +77,12 @@ namespace SwfLib.SwfMill.Utils {
             throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not an integer. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
+        /// <summary>
+        /// Reads required UShort attribute.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="attributeName">Attribute name.</param>
+        /// <returns></returns>
         public static ushort RequiredUShortAttribute(this XElement node, string attributeName) {
             var str = node.RequiredAttribute(attributeName);
             ushort val;
@@ -54,6 +90,12 @@ namespace SwfLib.SwfMill.Utils {
             throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not an unsigned short integer. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
+        /// <summary>
+        /// Reads required Short attribute.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="attributeName">Attribute name.</param>
+        /// <returns></returns>
         public static short RequiredShortAttribute(this XElement node, string attributeName) {
             var str = node.RequiredAttribute(attributeName);
             short val;
@@ -61,6 +103,12 @@ namespace SwfLib.SwfMill.Utils {
             throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not a signed short integer. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
+        /// <summary>
+        /// Reads required byte attribute.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="attributeName">Attribute name.</param>
+        /// <returns></returns>
         public static byte RequiredByteAttribute(this XElement node, string attributeName) {
             var str = node.RequiredAttribute(attributeName);
             byte val;
@@ -68,6 +116,12 @@ namespace SwfLib.SwfMill.Utils {
             throw new SwfMillXmlException(string.Format("{0}'s attribute '{1}' is not a byte. Path: {2}", node.Name, attributeName, BuildNodePath(node)));
         }
 
+        /// <summary>
+        /// Reads required bool attribute.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="attributeName">Attribute name.</param>
+        /// <returns></returns>
         public static bool RequiredBoolAttribute(this XElement node, string attributeName) {
             var str = node.RequiredAttribute(attributeName);
             switch (str) {

@@ -1,5 +1,8 @@
 ﻿namespace SwfLib.Actions {
     public class ActionCallMethod : ActionBase {
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.CallMethod; }
         }

@@ -5,6 +5,9 @@ namespace SwfLib.Actions {
 
         public readonly IList<string> ConstantPool = new List<string>();
 
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.ConstantPool; }
         }

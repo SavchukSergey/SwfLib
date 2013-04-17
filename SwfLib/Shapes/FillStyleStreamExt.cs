@@ -71,10 +71,20 @@ namespace SwfLib.Shapes {
             return _readerRGBA.Read(reader, type);
         }
 
+        /// <summary>
+        /// Writes fill style to the writer.
+        /// </summary>
+        /// <param name="writer">Writer where to serialize fill style.</param>
+        /// <param name="fillStyle">Fill style to be written.</param>
         public static void WriteFillStyleRGB(this ISwfStreamWriter writer, FillStyleRGB fillStyle) {
             _writerRGB.Write(writer, fillStyle);
         }
 
+        /// <summary>
+        /// Writes fill style to the writer.
+        /// </summary>
+        /// <param name="writer">Writer where to serialize fill style.</param>
+        /// <param name="fillStyle">Fill style to be written.</param>
         public static void WriteFillStyleRGBA(this ISwfStreamWriter writer, FillStyleRGBA fillStyle) {
             _writerRGBA.Write(writer, fillStyle);
         }

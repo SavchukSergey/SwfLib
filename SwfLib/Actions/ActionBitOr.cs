@@ -1,5 +1,11 @@
 ﻿namespace SwfLib.Actions {
+    /// <summary>
+    /// Represents BitOr action.
+    /// </summary>
     public class ActionBitOr : ActionBase {
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.BitOr; }
         }

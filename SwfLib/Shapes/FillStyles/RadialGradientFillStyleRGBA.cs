@@ -8,6 +8,9 @@ namespace SwfLib.Shapes.FillStyles {
 
         public GradientRGBA Gradient;
 
+        /// <summary>
+        /// Gets type of fill style.
+        /// </summary>
         public override FillStyleType Type {
             get { return FillStyleType.RadialGradient; }
         }

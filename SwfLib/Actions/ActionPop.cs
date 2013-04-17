@@ -1,6 +1,12 @@
 ﻿namespace SwfLib.Actions {
+    /// <summary>
+    /// Represents Pop action.
+    /// </summary>
     public class ActionPop : ActionBase {
 
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.Pop; }
         }

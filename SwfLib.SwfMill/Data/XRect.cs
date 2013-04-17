@@ -3,6 +3,9 @@ using System.Xml.Linq;
 using SwfLib.Data;
 
 namespace SwfLib.SwfMill.Data {
+    /// <summary>
+    /// Represents rectangle xml formatter.
+    /// </summary>
     public static class XRect {
 
         public static SwfRect FromXml(XElement xRect) {

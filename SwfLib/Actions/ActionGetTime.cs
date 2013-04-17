@@ -1,6 +1,12 @@
 ﻿namespace SwfLib.Actions {
+    /// <summary>
+    /// Represents GetTime action.
+    /// </summary>
     public class ActionGetTime : ActionBase {
 
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.GetTime; }
         }

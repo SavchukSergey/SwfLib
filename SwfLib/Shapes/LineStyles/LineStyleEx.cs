@@ -4,6 +4,9 @@ using SwfLib.Shapes.FillStyles;
 namespace SwfLib.Shapes.LineStyles {
     public struct LineStyleEx {
 
+        /// <summary>
+        /// Gets or sets line width.
+        /// </summary>
         public ushort Width { get; set; }
 
         public CapStyle StartCapStyle { get; set; }
@@ -26,6 +29,9 @@ namespace SwfLib.Shapes.LineStyles {
 
         public double MilterLimitFactor { get; set; }
 
+        /// <summary>
+        /// gets or sets line color.
+        /// </summary>
         public SwfRGBA Color { get; set; }
 
         public FillStyleRGBA FillStyle { get; set; }

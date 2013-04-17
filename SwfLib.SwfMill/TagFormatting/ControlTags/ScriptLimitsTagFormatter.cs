@@ -26,6 +26,9 @@ namespace SwfLib.SwfMill.TagFormatting.ControlTags {
             return true;
         }
 
+        /// <summary>
+        /// Gets the name of the tag.
+        /// </summary>
         public override string TagName {
             get { return "ScriptLimits"; }
         }

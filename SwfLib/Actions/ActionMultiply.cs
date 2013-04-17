@@ -1,6 +1,12 @@
 ﻿namespace SwfLib.Actions {
+    /// <summary>
+    /// Reprsents Multiply action.
+    /// </summary>
     public class ActionMultiply : ActionBase {
 
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.Multiply; }
         }

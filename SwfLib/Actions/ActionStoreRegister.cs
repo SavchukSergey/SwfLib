@@ -1,8 +1,17 @@
 ﻿namespace SwfLib.Actions {
+    /// <summary>
+    /// Represents StoreRegister action.
+    /// </summary>
     public class ActionStoreRegister : ActionBase {
-        
-        public byte RegisterNumber;
 
+        /// <summary>
+        /// Gets or sets register number;
+        /// </summary>
+        public byte RegisterNumber { get; set; }
+
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.StoreRegister; }
         }

@@ -14,6 +14,9 @@ namespace SwfLib.SwfMill.TagFormatting {
             tag.Data = data;
         }
 
+        /// <summary>
+        /// Gets the name of the tag.
+        /// </summary>
         public override string TagName {
             get { return "DebugID"; }
         }

@@ -3,6 +3,9 @@ using System.Xml.Linq;
 using SwfLib.Shapes.FillStyles;
 
 namespace SwfLib.SwfMill.Shapes {
+    /// <summary>
+    /// Represents fill style xml formatter.
+    /// </summary>
     public class XFillStyle {
 
         public static XElement ToXml(FillStyleRGB fillStyle) {

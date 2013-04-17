@@ -2,6 +2,9 @@
 using SwfLib.Data;
 
 namespace SwfLib.SwfMill.Data {
+    /// <summary>
+    /// Represents RGB Color xml formatter.
+    /// </summary>
     public static class XColorRGB {
 
         public static SwfRGB FromXml(XElement xColor) {

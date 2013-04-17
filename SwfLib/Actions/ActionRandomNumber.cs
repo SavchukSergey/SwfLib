@@ -1,6 +1,12 @@
 ﻿namespace SwfLib.Actions {
+    /// <summary>
+    /// Represents RandomNumber action.
+    /// </summary>
     public class ActionRandomNumber : ActionBase {
 
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.RandomNumber; }
         }

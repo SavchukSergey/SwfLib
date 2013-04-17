@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
 
 namespace SwfLib.Actions {
+    /// <summary>
+    /// Represents DefineFunction2 action.
+    /// </summary>
     public class ActionDefineFunction2 : ActionBase {
 
-        public string Name;
+        /// <summary>
+        /// Gets or sets function name.
+        /// </summary>
+        public string Name { get; set; }
 
-        public byte RegisterCount;
+        public byte RegisterCount { get; set; }
 
         public bool PreloadParent { get; set; }
 
@@ -29,6 +35,9 @@ namespace SwfLib.Actions {
 
         public readonly IList<RegisterParam> Parameters = new List<RegisterParam>();
 
+        /// <summary>
+        /// Gets list of actions.
+        /// </summary>
         public readonly List<ActionBase> Actions = new List<ActionBase>();
 
         /// <summary>

@@ -5,7 +5,10 @@ using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.Filters {
-    public class XConvolutionFilter {
+    /// <summary>
+    /// represents convolution filter xml formatter.
+    /// </summary>
+    public static class XConvolutionFilter {
 
         public const string TAG_NAME = "ConvolutionFilter";
 

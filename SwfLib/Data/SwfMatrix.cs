@@ -8,8 +8,14 @@ namespace SwfLib.Data {
     [DebuggerDisplay("Scale ({ScaleX}, {ScaleY}), RotateSkew({RotateSkew0}, {RotateSkew1}), Translate({TranslateX}, {TranslateY})")]
     public struct SwfMatrix {
 
+        /// <summary>
+        /// Gets or sets X Scale.
+        /// </summary>
         public double ScaleX;
 
+        /// <summary>
+        /// Gets or sets Y Scale.
+        /// </summary>
         public double ScaleY;
 
         public double RotateSkew0;

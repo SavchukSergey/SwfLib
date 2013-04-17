@@ -21,6 +21,9 @@ namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
             xTag.Add(new XAttribute(DEPTH_ATTRIB, tag.Depth));
         }
 
+        /// <summary>
+        /// Gets the name of the tag.
+        /// </summary>
         public override string TagName {
             get { return "RemoveObject2"; }
         }

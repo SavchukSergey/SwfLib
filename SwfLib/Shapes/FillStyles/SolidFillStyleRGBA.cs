@@ -3,8 +3,11 @@
 namespace SwfLib.Shapes.FillStyles {
     public class SolidFillStyleRGBA : FillStyleRGBA {
 
-        public SwfRGBA Color;
+        public SwfRGBA Color { get; set; }
 
+        /// <summary>
+        /// Gets type of fill style.
+        /// </summary>
         public override FillStyleType Type {
             get { return FillStyleType.SolidColor; }
         }

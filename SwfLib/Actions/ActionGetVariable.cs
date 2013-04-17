@@ -1,6 +1,12 @@
 ﻿namespace SwfLib.Actions {
+    /// <summary>
+    /// Represents GetVariable action.
+    /// </summary>
     public class ActionGetVariable : ActionBase {
 
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.GetVariable; }
         }

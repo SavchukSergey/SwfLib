@@ -15,6 +15,9 @@ namespace SwfLib.SwfMill.TagFormatting.ControlTags {
             tag.Data = data;
         }
 
+        /// <summary>
+        /// Gets the name of the tag.
+        /// </summary>
         public override string TagName {
             get { return "EnableDebugger2"; }
         }

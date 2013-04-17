@@ -1,8 +1,17 @@
 ﻿namespace SwfLib.Actions {
+    /// <summary>
+    /// Represents WaitForFrame2 action.
+    /// </summary>
     public class ActionWaitForFrame2 : ActionBase {
 
-        public byte SkipCount;
+        /// <summary>
+        /// Gets or sets count of frames to be skipped.
+        /// </summary>
+        public byte SkipCount { get; set; }
 
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.WaitForFrame2; }
         }

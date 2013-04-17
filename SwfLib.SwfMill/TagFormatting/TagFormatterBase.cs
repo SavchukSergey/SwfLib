@@ -97,6 +97,9 @@ namespace SwfLib.SwfMill.TagFormatting {
 
         #endregion
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public abstract string TagName { get; }
 
         protected virtual ushort? GetObjectID(T tag) {

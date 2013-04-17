@@ -11,6 +11,9 @@
             _type = type;
         }
 
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return _type; }
         }

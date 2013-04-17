@@ -1,6 +1,9 @@
 ﻿namespace SwfLib.Actions {
     public struct ActionPushItem {
 
+        /// <summary>
+        /// Gets type of item to be pushed.
+        /// </summary>
         public ActionPushItemType Type { get; set; }
 
         public string String { get; set; }

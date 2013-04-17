@@ -3,8 +3,14 @@
 namespace SwfLib.Actions {
     public class ActionWith : ActionBase {
         
+        /// <summary>
+        /// Gets or sets list of actions.
+        /// </summary>
         public readonly IList<ActionBase> Actions = new List<ActionBase>();
 
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.With; }
         }

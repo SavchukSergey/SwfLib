@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using SwfLib.Data;
 using SwfLib.Shapes.FillStyles;
 using SwfLib.Shapes.Records;
 using SwfLib.Tags.ShapeTags;
@@ -21,7 +22,7 @@ namespace SwfLib.Tests.Samples.Shapes {
 
             Assert.AreEqual(1, tag.FillStyles.Count);
             AssertFillStyles.AreEqual(new SolidFillStyleRGB {
-                Color = { Red = 255, Green = 255, Blue = 255 }
+                Color = new SwfRGB { Red = 255, Green = 255, Blue = 255 }
             }, tag.FillStyles[0], "FillStyles[0]");
 
             Assert.AreEqual(0, tag.LineStyles.Count);
@@ -66,7 +67,7 @@ namespace SwfLib.Tests.Samples.Shapes {
 
             Assert.AreEqual(1, tag.FillStyles.Count);
             AssertFillStyles.AreEqual(new SolidFillStyleRGB {
-                Color = { Red = 255, Green = 255, Blue = 255 }
+                Color = new SwfRGB { Red = 255, Green = 255, Blue = 255 }
             }, tag.FillStyles[0], "FillStyles[0]");
 
             Assert.AreEqual(0, tag.LineStyles.Count);

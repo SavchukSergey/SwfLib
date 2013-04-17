@@ -1,6 +1,11 @@
 ﻿namespace SwfLib.Actions {
     public class ActionsFactory {
 
+        /// <summary>
+        /// Creates action by its code.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public ActionBase Create(ActionCode code) {
             switch (code) {
                 #region SWF 3

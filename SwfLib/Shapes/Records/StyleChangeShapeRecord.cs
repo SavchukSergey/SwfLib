@@ -9,9 +9,18 @@
 
         public bool StateMoveTo;
 
-        public int MoveDeltaX;
+        /// <summary>
+        /// Gets or sets the move delta X.
+        /// </summary>
+        /// <value>
+        /// The move delta X.
+        /// </value>
+        public int MoveDeltaX { get; set; }
 
-        public int MoveDeltaY;
+        /// <summary>
+        /// Gets or sets the move delta Y.
+        /// </summary>
+        public int MoveDeltaY { get; set; }
 
         public bool StateNewStyles;
 

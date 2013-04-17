@@ -1,8 +1,11 @@
 ﻿namespace SwfLib.Actions {
     public class ActionJump : ActionBase {
 
-        public short BranchOffset;
+        public short BranchOffset { get; set; }
 
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.Jump; }
         }

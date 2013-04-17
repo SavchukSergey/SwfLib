@@ -149,6 +149,5 @@ namespace SwfLib.Shapes {
             }
         }
 
-
     }
 }

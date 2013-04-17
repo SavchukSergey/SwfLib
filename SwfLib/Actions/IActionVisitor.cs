@@ -260,6 +260,12 @@
 
         TResult Visit(ActionTry action, TArg arg);
 
+        /// <summary>
+        /// Visits Thow action.
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="arg"></param>
+        /// <returns></returns>
         TResult Visit(ActionThrow action, TArg arg);
 
         #endregion

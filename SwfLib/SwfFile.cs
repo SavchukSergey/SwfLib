@@ -11,6 +11,9 @@ namespace SwfLib {
 
         public SwfHeader Header;
 
+        /// <summary>
+        /// Gets list of tags.
+        /// </summary>
         public readonly IList<SwfTagBase> Tags = new List<SwfTagBase>();
 
         public static SwfFile ReadFrom(Stream stream) {

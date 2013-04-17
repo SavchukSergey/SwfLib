@@ -2,6 +2,7 @@
     /// <summary>
     /// http://www.m2osw.com/en/swf_alexref.html
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1028:EnumStorageShouldBeInt32")]
     public enum SwfTagType : ushort {
         /// <summary>
         /// Mark the end of the file. It can't appear anywhere else but the end of the file. 
