@@ -4,30 +4,30 @@ using SwfLib.Shapes.FillStyles;
 namespace SwfLib.Shapes.LineStyles {
     public struct LineStyleEx {
 
-        public ushort Width;
+        public ushort Width { get; set; }
 
-        public CapStyle StartCapStyle;
+        public CapStyle StartCapStyle { get; set; }
 
-        public JoinStyle JoinStyle;
+        public JoinStyle JoinStyle { get; set; }
 
-        public bool HasFill;
+        public bool HasFill { get; set; }
 
-        public bool NoHScale;
+        public bool NoHScale { get; set; }
 
-        public bool NoVScale;
+        public bool NoVScale { get; set; }
 
-        public bool PixelHinting;
+        public bool PixelHinting { get; set; }
 
-        public byte Reserved;
+        public byte Reserved { get; set; }
 
-        public bool NoClose;
+        public bool NoClose { get; set; }
 
-        public CapStyle EndCapStyle;
+        public CapStyle EndCapStyle { get; set; }
 
-        public double MilterLimitFactor;
+        public double MilterLimitFactor { get; set; }
 
-        public SwfRGBA Color;
+        public SwfRGBA Color { get; set; }
 
-        public FillStyleRGBA FillStyle;
+        public FillStyleRGBA FillStyle { get; set; }
     }
 }

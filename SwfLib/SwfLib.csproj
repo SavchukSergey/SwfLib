@@ -29,6 +29,8 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <DocumentationFile>bin\Debug\SwfLib.XML</DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -109,6 +111,7 @@
     <Compile Include="Actions\ActionWriter.cs" />
     <Compile Include="Actions\RegisterParam.cs" />
     <Compile Include="Data\ColorStreamExt.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Gradients\BaseGradientRGB.cs" />
     <Compile Include="Gradients\BaseGradientRGBA.cs" />
     <Compile Include="Gradients\FocalGradientRGBA.cs" />
