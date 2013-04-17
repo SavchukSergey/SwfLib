@@ -20,6 +20,7 @@ namespace SwfLib.SwfMill.Fonts {
             foreach (var xZoneData in xZoneRecord.RequiredElement("zones").Elements()) {
                 zoneArray.Data.Add(XZoneData.FromXml(xZoneData));
             }
+
             return zoneArray;
         }
 

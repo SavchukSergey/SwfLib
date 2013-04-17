@@ -69,7 +69,6 @@ namespace SwfLib.SwfMill.TagFormatting.ControlTags {
             }
         }
 
-
         public override string TagName {
             get { return "FileAttributes"; }
         }

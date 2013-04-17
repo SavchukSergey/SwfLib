@@ -57,6 +57,7 @@ namespace SwfLib.SwfMill.Shapes {
             foreach (var fillStyle in fillStyles) {
                 xFillStyles.Add(XFillStyle.ToXml(fillStyle));
             }
+
             foreach (var lineStyle in lineStyles) {
                 xLineStyles.Add(XLineStyleEx.ToXml(lineStyle));
             }

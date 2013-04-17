@@ -23,7 +23,6 @@ namespace SwfLib.SwfMill.TagFormatting.ControlTags {
                 xFrames.Add(xFrame);
             }
             xTag.Add(xFrames);
-
         }
 
         protected override bool AcceptTagElement(DefineSceneAndFrameLabelDataTag tag, XElement element) {
@@ -51,6 +50,7 @@ namespace SwfLib.SwfMill.TagFormatting.ControlTags {
                 default:
                     return false;
             }
+
             return true;
         }
 

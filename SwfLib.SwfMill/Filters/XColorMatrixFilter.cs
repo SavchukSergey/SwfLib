@@ -4,10 +4,18 @@ using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.Filters {
+    /// <summary>
+    /// Represents ColorMatrixFilter  formatter.
+    /// </summary>
     public static class XColorMatrixFilter {
 
         public const string TAG_NAME = "ColorMatrix";
 
+        /// <summary>
+        /// Formats color matrix to xml representation.
+        /// </summary>
+        /// <param name="filter">Filter to format.</param>
+        /// <returns>Filter xml representation.</returns>
         public static XElement ToXml(ColorMatrixFilter filter) {
             return new XElement(TAG_NAME,
                 new XAttribute("r0", CommonFormatter.Format(filter.R0)),
@@ -36,6 +44,11 @@ namespace SwfLib.SwfMill.Filters {
             );
         }
 
+        /// <summary>
+        /// Parse ColorMatrixFilter from xml element.
+        /// </summary>
+        /// <param name="xFilter">Xml element representing color matrix filter.</param>
+        /// <returns>Parsed ColorMatrixFilter.</returns>
         public static ColorMatrixFilter FromXml(XElement xFilter) {
             return new ColorMatrixFilter {
                 R0 = xFilter.RequiredDoubleAttribute("r0"),

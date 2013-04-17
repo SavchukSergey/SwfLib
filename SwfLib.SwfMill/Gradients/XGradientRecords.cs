@@ -3,6 +3,9 @@ using System.Xml.Linq;
 using SwfLib.Gradients;
 
 namespace SwfLib.SwfMill.Gradients {
+    /// <summary>
+    /// Represents gradient records xml formatter.
+    /// </summary>
     public static class XGradientRecords {
 
         public static void FromXml(XElement xRecords, IList<GradientRecordRGB> records) {

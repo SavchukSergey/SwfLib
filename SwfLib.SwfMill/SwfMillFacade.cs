@@ -16,7 +16,7 @@ namespace SwfLib.SwfMill {
         /// Converts to XML.
         /// </summary>
         /// <param name="file">The file.</param>
-        /// <returns></returns>
+        /// <returns>Convert SwfFile to xml.</returns>
         public XDocument ConvertToXml(SwfFile file) {
             _formatterFactory = new TagFormatterFactory(file.FileInfo.Version);
             var doc = new XDocument(GetRoot(file));

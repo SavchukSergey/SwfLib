@@ -5,6 +5,9 @@ using SwfLib.Shapes.FillStyles;
 using SwfLib.SwfMill.Data;
 
 namespace SwfLib.SwfMill.Shapes {
+    /// <summary>
+    /// Represents BitmapFillStyle xml formatter.
+    /// </summary>
     public static class XBitmapFillStyle {
 
         public const string CLIPPED_BITMAP = "ClippedBitmap";

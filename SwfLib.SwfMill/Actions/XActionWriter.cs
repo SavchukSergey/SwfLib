@@ -6,6 +6,11 @@ using SwfLib.SwfMill.Data;
 namespace SwfLib.SwfMill.Actions {
     public class XActionWriter : IActionVisitor<XElement, XElement> {
 
+        /// <summary>
+        /// Serializes action to xml node.
+        /// </summary>
+        /// <param name="action">Action to serialize.</param>
+        /// <returns>Xml node representing action.</returns>
         public XElement Serialize(ActionBase action) {
             var xAction = new XElement(XActionNames.FromAction(action));
             return action.AcceptVisitor(this, xAction);
@@ -450,7 +455,6 @@ namespace SwfLib.SwfMill.Actions {
         XElement IActionVisitor<XElement, XElement>.Visit(ActionReturn action, XElement arg) {
             return arg;
         }
-
 
         XElement IActionVisitor<XElement, XElement>.Visit(ActionStackSwap action, XElement arg) {
             return arg;

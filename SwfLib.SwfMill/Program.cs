@@ -98,7 +98,6 @@ namespace SwfLib.SwfMill {
             }
         }
 
-
         static void Compress(string[] args) {
             if (args.Length < 2) {
                 Console.WriteLine("Source file wasn't specified");

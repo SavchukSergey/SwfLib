@@ -4,6 +4,9 @@ using SwfLib.SwfMill.Data;
 using SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.Filters {
+    /// <summary>
+    /// Represents DropShadowFilter xml formatter.
+    /// </summary>
     public static class XDropShadowFilter {
 
         public const string TAG_NAME = "DropShadow";

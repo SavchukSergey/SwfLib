@@ -3,6 +3,9 @@ using SwfLib.Fonts;
 using SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.Shapes {
+    /// <summary>
+    /// Represents GlyphShape xml formatter.
+    /// </summary>
     public class XGlyphShape {
 
         public static XElement ToXml(Glyph glyph) {
