@@ -35,6 +35,9 @@ namespace SwfLib.SwfMill.TagFormatting {
             tag.Data = data;
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "UnknownTag"; }
         }

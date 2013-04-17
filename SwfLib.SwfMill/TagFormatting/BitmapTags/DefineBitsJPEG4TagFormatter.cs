@@ -40,6 +40,9 @@ namespace SwfLib.SwfMill.TagFormatting.BitmapTags {
             tag.ImageData = data;
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "DefineBitsJPEG4"; }
         }

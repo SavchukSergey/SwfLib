@@ -3,7 +3,10 @@
 namespace SwfLib.Filters {
     public class ConvolutionFilter : BaseFilter {
 
-        public double Divisor;
+        /// <summary>
+        /// Gets or sets filter dicisor.
+        /// </summary>
+        public double Divisor { get; set; }
 
         public double Bias;
 

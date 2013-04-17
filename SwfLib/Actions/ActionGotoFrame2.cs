@@ -8,6 +8,9 @@
 
         public byte Reserved { get; set; }
 
+        /// <summary>
+        /// Gets or sets scene bias.
+        /// </summary>
         public ushort? SceneBias { get; set; }
 
         /// <summary>

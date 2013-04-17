@@ -15,6 +15,9 @@ namespace SwfLib.SwfMill.TagFormatting.BitmapTags {
             tag.JPEGData = data;
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "JPEGTables"; }
         }

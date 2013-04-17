@@ -28,6 +28,9 @@ namespace SwfLib.SwfMill.TagFormatting.ActionTags {
             xTag.Add(actions);
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "DoAction"; }
         }

@@ -34,7 +34,7 @@ namespace SwfLib.Filters {
         }
 
         object IFilterVisitor<ISwfStreamWriter, object>.Visit(GlowFilter filter, ISwfStreamWriter writer) {
-            writer.WriteRGBA(ref filter.Color);
+            writer.WriteRGBA(filter.Color);
             writer.WriteFixed(filter.BlurX);
             writer.WriteFixed(filter.BlurY);
             writer.WriteFixedPoint8(filter.Strength);

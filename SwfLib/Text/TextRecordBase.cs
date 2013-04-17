@@ -19,6 +19,9 @@ namespace SwfLib.Text {
 
         public ushort? TextHeight;
 
+        /// <summary>
+        /// Gets list of glyphs.
+        /// </summary>
         public readonly IList<GlyphEntry> Glyphs = new List<GlyphEntry>();
 
     }

@@ -1,15 +1,30 @@
 ﻿using SwfLib.Data;
 
 namespace SwfLib.Filters {
+    /// <summary>
+    /// Represents Glow filter.
+    /// </summary>
     public class GlowFilter : BaseFilter {
 
-        public SwfRGBA Color;
+        /// <summary>
+        /// Gets or sets color of filter.
+        /// </summary>
+        public SwfRGBA Color { get; set; }
 
-        public double BlurX;
+        /// <summary>
+        /// Gets or sets the blur X.
+        /// </summary>
+        public double BlurX { get; set; }
 
-        public double BlurY;
+        /// <summary>
+        /// Gets or sets the blur Y.
+        /// </summary>
+        public double BlurY { get; set; }
 
-        public double Strength;
+        /// <summary>
+        /// Gets or sets strength of the filter.
+        /// </summary>
+        public double Strength { get; set; }
 
         public bool InnerGlow;
 
@@ -17,7 +32,10 @@ namespace SwfLib.Filters {
 
         public bool CompositeSource;
 
-        public uint Passes;
+        /// <summary>
+        /// Gets or sets count of passes to be applied.
+        /// </summary>
+        public uint Passes { get; set; }
 
         public override FilterType Type {
             get { return FilterType.Glow; }

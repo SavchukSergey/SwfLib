@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using SwfLib.Data;
 using SwfLib.Filters;
 using SwfLib.Tests.Asserts;
 
@@ -29,7 +30,7 @@ namespace SwfLib.Tests.Filters {
                 BlurX = 1.5,
                 BlurY = 2.75,
                 Passes = 5,
-                Color = { Red = 18, Green = 2, Blue = 8, Alpha = 250 },
+                Color = new SwfRGBA { Red = 18, Green = 2, Blue = 8, Alpha = 250 },
                 CompositeSource = true,
                 InnerGlow = false,
                 Knockout = true,

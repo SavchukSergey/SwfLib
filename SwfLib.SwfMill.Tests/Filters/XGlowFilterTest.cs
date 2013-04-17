@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using NUnit.Framework;
+using SwfLib.Data;
 using SwfLib.Filters;
 using SwfLib.SwfMill.Filters;
 using SwfLib.Tests.Asserts;
@@ -33,7 +34,7 @@ namespace SwfLib.SwfMill.Tests.Filters {
             return new GlowFilter {
                 BlurX = 1.5,
                 BlurY = -2.4,
-                Color = {
+                Color = new SwfRGBA {
                     Red = 137,
                     Green = 24,
                     Blue = 87,

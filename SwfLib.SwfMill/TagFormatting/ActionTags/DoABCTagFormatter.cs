@@ -36,6 +36,9 @@ namespace SwfLib.SwfMill.TagFormatting.ActionTags {
             return true;
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "DoABCDefine"; }
         }

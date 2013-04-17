@@ -6,6 +6,9 @@ namespace SwfLib.SwfMill.TagFormatting.VideoTags {
         protected override void FormatTagElement(VideoFrameTag tag, XElement xTag) {
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "VideoFrame"; }
         }

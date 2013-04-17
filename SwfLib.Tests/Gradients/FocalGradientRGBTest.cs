@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using SwfLib.Data;
 using SwfLib.Gradients;
 using SwfLib.Tests.Asserts;
 
@@ -32,8 +33,8 @@ namespace SwfLib.Tests.Gradients {
                 SpreadMode = SpreadMode.Repeat,
                 FocalPoint = (int)(0.2 * 256) / 256.0,
                 GradientRecords = {
-                    new GradientRecordRGB {Ratio = 0, Color = {Red = 10, Green = 150, Blue = 155}},
-                    new GradientRecordRGB {Ratio = 100, Color = {Red = 120, Green = 50, Blue = 55}},
+                    new GradientRecordRGB {Ratio = 0, Color = new SwfRGB{Red = 10, Green = 150, Blue = 155}},
+                    new GradientRecordRGB {Ratio = 100, Color = new SwfRGB {Red = 120, Green = 50, Blue = 55}},
                 }
             };
         }

@@ -8,7 +8,7 @@ namespace SwfLib.Shapes.FillStyles {
 
         public BitmapMode Mode { get; set; }
 
-        public ushort BitmapID;
+        public ushort BitmapID { get; set; }
 
         public SwfMatrix BitmapMatrix;
 

@@ -6,6 +6,11 @@ namespace SwfLib.Gradients {
 
         #region Linear Gradient
 
+        /// <summary>
+        /// Reads RGB gradient from the reader.
+        /// </summary>
+        /// <param name="reader">The reader from which to read gradient.</param>
+        /// <returns></returns>
         public static GradientRGB ReadGradientRGB(this ISwfStreamReader reader) {
             var gradient = new GradientRGB {
                 SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
@@ -19,6 +24,11 @@ namespace SwfLib.Gradients {
             return gradient;
         }
 
+        /// <summary>
+        /// Reads RGBA gradient from the reader.
+        /// </summary>
+        /// <param name="reader">The reader from which to read gradient.</param>
+        /// <returns></returns>
         public static GradientRGBA ReadGradientRGBA(this ISwfStreamReader reader) {
             var gradient = new GradientRGBA {
                 SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
@@ -62,6 +72,11 @@ namespace SwfLib.Gradients {
 
         #region Focal gradients
 
+        /// <summary>
+        /// Reads RGB focal gradient from the reader.
+        /// </summary>
+        /// <param name="reader">The reader from which to read focal gradient.</param>
+        /// <returns></returns>
         public static FocalGradientRGB ReadFocalGradientRGB(this ISwfStreamReader reader) {
             var gradient = new FocalGradientRGB {
                 SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
@@ -76,6 +91,11 @@ namespace SwfLib.Gradients {
             return gradient;
         }
 
+        /// <summary>
+        /// Reads RGBA focal gradient from the reader.
+        /// </summary>
+        /// <param name="reader">The reader from which to read focal gradient.</param>
+        /// <returns></returns>
         public static FocalGradientRGBA ReadFocalGradientRGBA(this ISwfStreamReader reader) {
             var gradient = new FocalGradientRGBA {
                 SpreadMode = (SpreadMode)reader.ReadUnsignedBits(2),
@@ -140,7 +160,7 @@ namespace SwfLib.Gradients {
 
         public static void WriteGradientRecordRGB(this ISwfStreamWriter writer, ref GradientRecordRGB record) {
             writer.WriteByte(record.Ratio);
-            writer.WriteRGB(ref record.Color);
+            writer.WriteRGB(record.Color);
         }
 
         public static void WriteGradientRecordRGBA(this ISwfStreamWriter writer, ref GradientRecordRGBA record) {

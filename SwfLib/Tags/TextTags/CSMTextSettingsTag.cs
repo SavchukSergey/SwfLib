@@ -15,6 +15,9 @@
 
         public byte Reserved;
 
+        /// <summary>
+        /// Gets swf tag type.
+        /// </summary>
         public override SwfTagType TagType {
             get { return SwfTagType.CSMTextSettings; }
         }

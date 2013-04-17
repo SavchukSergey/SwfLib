@@ -1,6 +1,9 @@
 ﻿namespace SwfLib.Tags.ShapeMorphingTags {
     public class DefineMorphShape2Tag : ShapeMorphingBaseTag {
 
+        /// <summary>
+        /// Gets swf tag type.
+        /// </summary>
         public override SwfTagType TagType {
             get { return SwfTagType.DefineMorphShape2; }
         }

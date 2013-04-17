@@ -102,10 +102,20 @@ namespace SwfLib.SwfMill.TagFormatting {
         /// </summary>
         public abstract string TagName { get; }
 
+        /// <summary>
+        /// Gets tag object id.
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
         protected virtual ushort? GetObjectID(T tag) {
             return null;
         }
 
+        /// <summary>
+        /// Sets tag object id.
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="value"></param>
         protected virtual void SetObjectID(T tag, ushort value) {
         }
 
