@@ -12,6 +12,11 @@ namespace SwfLib.SwfMill {
 
         private TagFormatterFactory _formatterFactory;
 
+        /// <summary>
+        /// Converts to XML.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <returns></returns>
         public XDocument ConvertToXml(SwfFile file) {
             _formatterFactory = new TagFormatterFactory(file.FileInfo.Version);
             var doc = new XDocument(GetRoot(file));
@@ -19,10 +24,20 @@ namespace SwfLib.SwfMill {
             return doc;
         }
 
+        /// <summary>
+        /// Decompresses the specified source.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="target">The target.</param>
         public void Decompress(Stream source, Stream target) {
             SwfFile.Decompress(source, target);
         }
 
+        /// <summary>
+        /// Compresses the specified source.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="target">The target.</param>
         public void Compress(Stream source, Stream target) {
             SwfFile.Compress(source,  target);
         }

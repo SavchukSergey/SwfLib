@@ -11,8 +11,16 @@ using SwfLib.Tags.TextTags;
 using SwfLib.Tags.VideoTags;
 
 namespace SwfLib.Tags {
+    /// <summary>
+    /// Represents swf tag factory.
+    /// </summary>
     public class SwfTagsFactory {
 
+        /// <summary>
+        /// Creates an instance of swf tag by its type.
+        /// </summary>
+        /// <param name="tagType"></param>
+        /// <returns></returns>
         public SwfTagBase Create(SwfTagType tagType) {
             switch (tagType) {
                 case SwfTagType.End:
