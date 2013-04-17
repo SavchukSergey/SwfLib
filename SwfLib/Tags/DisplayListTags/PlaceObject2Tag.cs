@@ -4,32 +4,41 @@ using SwfLib.Data;
 namespace SwfLib.Tags.DisplayListTags {
     public class PlaceObject2Tag : PlaceObjectBaseTag {
 
-        public bool HasClipActions;
+        public bool HasClipActions { get; set; }
 
-        public bool HasClipDepth;
+        public bool HasClipDepth { get; set; }
 
-        public bool HasName;
+        public bool HasName { get; set; }
 
-        public bool HasRatio;
+        public bool HasRatio { get; set; }
 
-        public bool HasColorTransform;
+        public bool HasColorTransform { get; set; }
 
-        public bool HasMatrix;
+        public bool HasMatrix { get; set; }
 
-        public bool HasCharacter;
+        public bool HasCharacter { get; set; }
 
-        public bool Move;
+        public bool Move { get; set; }
 
-        public ColorTransformRGBA ColorTransform;
+        /// <summary>
+        /// Gets or sets ColorTransform.
+        /// </summary>
+        public ColorTransformRGBA ColorTransform { get; set; }
 
-        public ushort Ratio;
+        public ushort Ratio { get; set; }
 
-        public string Name;
+        /// <summary>
+        /// Gets or sets name.
+        /// </summary>
+        public string Name { get; set; }
 
-        public ushort ClipDepth;
+        public ushort ClipDepth { get; set; }
 
         public readonly ClipActionsList ClipActions = new ClipActionsList();
 
+        /// <summary>
+        /// Gets swf tag type.
+        /// </summary>
         public override SwfTagType TagType {
             get { return SwfTagType.PlaceObject2; }
         }

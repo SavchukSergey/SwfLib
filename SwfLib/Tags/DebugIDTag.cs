@@ -3,6 +3,9 @@
 
         public byte[] Data { get; set; }
 
+        /// <summary>
+        /// Gets swf tag type.
+        /// </summary>
         public override SwfTagType TagType {
             get { return SwfTagType.DebugID; }
         }

@@ -4,14 +4,17 @@
 
         public uint Edition { get; set; }
 
-        public byte MajorVersion;
+        public byte MajorVersion { get; set; }
 
-        public byte MinorVersion;
+        public byte MinorVersion { get; set; }
 
-        public ulong BuildNumber;
+        public ulong BuildNumber { get; set; }
 
-        public ulong CompilationDate;
+        public ulong CompilationDate { get; set; }
 
+        /// <summary>
+        /// Gets swf tag type.
+        /// </summary>
         public override SwfTagType TagType {
             get { return SwfTagType.ProductInfo; }
         }

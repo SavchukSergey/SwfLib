@@ -82,7 +82,7 @@ namespace SwfLib {
                 tag.Matrix = reader.ReadMatrix();
             }
             if (tag.HasColorTransform) {
-                reader.ReadColorTransformRGBA(out tag.ColorTransform);
+                tag.ColorTransform = reader.ReadColorTransformRGBA();
             }
             if (tag.HasRatio) {
                 tag.Ratio = reader.ReadUInt16();

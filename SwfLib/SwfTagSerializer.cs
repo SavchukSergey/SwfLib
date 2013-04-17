@@ -68,7 +68,7 @@ namespace SwfLib {
             writer.WriteUInt16(tag.Depth);
             if (tag.HasCharacter) writer.WriteUInt16(tag.CharacterID);
             if (tag.HasMatrix) writer.WriteMatrix(ref tag.Matrix);
-            if (tag.HasColorTransform) writer.WriteColorTransformRGBA(ref tag.ColorTransform);
+            if (tag.HasColorTransform) writer.WriteColorTransformRGBA(tag.ColorTransform);
             if (tag.HasRatio) writer.WriteUInt16(tag.Ratio);
             if (tag.HasName) writer.WriteString(tag.Name);
             if (tag.HasClipDepth) writer.WriteUInt16(tag.ClipDepth);
@@ -498,7 +498,7 @@ namespace SwfLib {
                 }
 
                 foreach (var glyph in tag.Glyphs) {
-                    writer.WriteRect(ref glyph.Bounds);
+                    writer.WriteRect(glyph.Bounds);
                 }
 
                 writer.WriteUInt16((ushort)tag.KerningRecords.Count);

@@ -2,6 +2,9 @@
 
 namespace SwfLib.Data {
     //TODO: Find usage. Make non - nullable. Set Scales to default values
+    /// <summary>
+    /// Represents 2D transformation matrix.
+    /// </summary>
     [DebuggerDisplay("Scale ({ScaleX}, {ScaleY}), RotateSkew({RotateSkew0}, {RotateSkew1}), Translate({TranslateX}, {TranslateY})")]
     public struct SwfMatrix {
 

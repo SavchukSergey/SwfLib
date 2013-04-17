@@ -13,13 +13,6 @@
             color.Blue = reader.ReadByte();
         }
 
-        public static void ReadRGBA(this ISwfStreamReader reader, out SwfRGBA color) {
-            color.Red = reader.ReadByte();
-            color.Green = reader.ReadByte();
-            color.Blue = reader.ReadByte();
-            color.Alpha = reader.ReadByte();
-        }
-
         public static SwfRGBA ReadRGBA(this ISwfStreamReader reader) {
             return new SwfRGBA {
                 Red = reader.ReadByte(),

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using SwfLib.Data;
 using SwfLib.Filters;
 using SwfLib.Tests.Asserts;
 
@@ -38,8 +39,8 @@ namespace SwfLib.Tests.Filters {
                 CompositeSource = true,
                 Knockout = true,
                 Strength = 2.75,
-                HighlightColor = { Red = 200, Green = 150, Blue = 100, Alpha = 132 },
-                ShadowColor = { Red = 188, Green = 174, Blue = 240, Alpha = 232 },
+                HighlightColor = new SwfRGBA { Red = 200, Green = 150, Blue = 100, Alpha = 132 },
+                ShadowColor = new SwfRGBA { Red = 188, Green = 174, Blue = 240, Alpha = 232 },
                 InnerShadow = true,
                 OnTop = false
             };

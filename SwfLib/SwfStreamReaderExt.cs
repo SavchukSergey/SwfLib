@@ -17,10 +17,11 @@ namespace SwfLib {
         }
 
         public static SwfHeader ReadSwfHeader(this ISwfStreamReader reader) {
-            SwfHeader header;
-            reader.ReadRect(out header.FrameSize);
-            header.FrameRate = reader.ReadFixedPoint8();
-            header.FrameCount = reader.ReadUInt16();
+            var header = new SwfHeader {
+                FrameSize = reader.ReadRect(),
+                FrameRate = reader.ReadFixedPoint8(),
+                FrameCount = reader.ReadUInt16()
+            };
             return header;
         }
 

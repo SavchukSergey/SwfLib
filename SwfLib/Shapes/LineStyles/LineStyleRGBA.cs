@@ -1,11 +1,20 @@
 ﻿using SwfLib.Data;
 
 namespace SwfLib.Shapes.LineStyles {
+    /// <summary>
+    /// Represents line style if RGBA color.
+    /// </summary>
     public struct LineStyleRGBA {
 
-        public ushort Width;
+        /// <summary>
+        /// Gets or sets line width;
+        /// </summary>
+        public ushort Width { get; set; }
 
-        public SwfRGBA Color;
+        /// <summary>
+        /// Gets or sets line color.
+        /// </summary>
+        public SwfRGBA Color { get; set; }
 
     }
 }

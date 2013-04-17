@@ -1,4 +1,7 @@
 ﻿namespace SwfLib.Data {
+    /// <summary>
+    /// Represents RGBA color.
+    /// </summary>
     public struct SwfRGBA {
 
         public SwfRGBA(byte red, byte green, byte blue, byte alpha) {

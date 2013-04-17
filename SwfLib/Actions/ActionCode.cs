@@ -2,6 +2,7 @@
     /// <summary>
     /// Represents ActionScript 2.0 action codes.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1028:EnumStorageShouldBeInt32")]
     public enum ActionCode : byte {
 
         End = 0x00,
@@ -184,10 +185,13 @@
         /// ActionCharToAscii converts character code to ASCII.
         /// </summary>
         CharToAscii = 0x32,
+
         /// <summary>
         /// ActionAsciiToChar converts a value to an ASCII character code.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
         AsciiToChar = 0x33,
+
         /// <summary>
         /// ActionGetTime reports the milliseconds since Adobe Flash Player started.
         /// </summary>
@@ -201,11 +205,13 @@
         /// <summary>
         /// ActionMBCharToAscii converts character code to ASCII and is multi-byte aware.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
         MBCharToAscii = 0x36,
 
         /// <summary>
         /// ActionMBAsciiToChar converts ASCII to character code and is multi-byte aware.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
         MBAsciiToChar = 0x37,
         Delete = 0x3a,
         Delete2 = 0x3b,

@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using NUnit.Framework;
+using SwfLib.Data;
 using SwfLib.Shapes.LineStyles;
 using SwfLib.SwfMill.Shapes;
 using SwfLib.Tests.Asserts.Shapes;
@@ -28,7 +29,7 @@ namespace SwfLib.SwfMill.Tests.Shapes {
         }
 
         private static LineStyleRGBA GetLineStyle() {
-            return new LineStyleRGBA { Width = 2, Color = { Red = 143, Green = 96, Blue = 224, Alpha = 128} };
+            return new LineStyleRGBA { Width = 2, Color = new SwfRGBA { Red = 143, Green = 96, Blue = 224, Alpha = 128} };
         }
     }
 }

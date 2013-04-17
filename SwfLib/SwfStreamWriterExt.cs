@@ -23,7 +23,7 @@ namespace SwfLib {
         }
 
         public static void WriteSwfHeader(this ISwfStreamWriter writer, SwfHeader header) {
-            writer.WriteRect(ref header.FrameSize);
+            writer.WriteRect(header.FrameSize);
             writer.WriteFixedPoint8(header.FrameRate);
             writer.WriteUInt16(header.FrameCount);
         }

@@ -3,30 +3,42 @@
 namespace SwfLib.Filters {
     public class BevelFilter : BaseFilter {
 
-        public SwfRGBA ShadowColor;
+        /// <summary>
+        /// Gets ot sets shadow color.
+        /// </summary>
+        public SwfRGBA ShadowColor { get; set; }
 
-        public SwfRGBA HighlightColor;
+        /// <summary>
+        /// Gets or sets highlight color.
+        /// </summary>
+        public SwfRGBA HighlightColor { get; set; }
 
-        public double BlurX;
+        public double BlurX { get; set; }
 
-        public double BlurY;
+        public double BlurY { get; set; }
 
-        public double Angle;
+        public double Angle { get; set; }
 
-        public double Distance;
+        public double Distance { get; set; }
 
-        public double Strength;
+        /// <summary>
+        /// Gets or sets filter strength.
+        /// </summary>
+        public double Strength { get; set; }
 
-        public bool InnerShadow;
+        public bool InnerShadow { get; set; }
 
-        public bool Knockout;
+        public bool Knockout { get; set; }
 
-        public bool CompositeSource;
+        public bool CompositeSource { get; set; }
 
-        public bool OnTop;
+        public bool OnTop { get; set; }
 
-        public uint Passes;
+        public uint Passes { get; set; }
 
+        /// <summary>
+        /// Gets type of filter.
+        /// </summary>
         public override FilterType Type {
             get { return FilterType.Bevel; }
         }

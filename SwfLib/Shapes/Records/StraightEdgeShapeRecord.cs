@@ -1,9 +1,15 @@
 ﻿namespace SwfLib.Shapes.Records {
     public class StraightEdgeShapeRecord : IShapeRecordRGB, IShapeRecordRGBA, IShapeRecordEx {
 
-        public int DeltaX;
+        /// <summary>
+        /// Gets or sets delta X.
+        /// </summary>
+        public int DeltaX { get; set; }
 
-        public int DeltaY;
+        /// <summary>
+        /// Gets or sets the delta Y.
+        /// </summary>
+        public int DeltaY { get; set; }
 
         public ShapeRecordType Type {
             get { return ShapeRecordType.StraightEdge; }

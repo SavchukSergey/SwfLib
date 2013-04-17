@@ -15,8 +15,7 @@ namespace SwfLib.Tests.BasicTypes {
             mem.WriteByte(0x12);
             mem.Seek(0, SeekOrigin.Begin);
             var reader = new SwfStreamReader(mem);
-            SwfRGBA val;
-            reader.ReadRGBA(out val);
+            var val = reader.ReadRGBA();
             Assert.AreEqual(0x0a, val.Red, "Red");
             Assert.AreEqual(0xff, val.Green, "Green");
             Assert.AreEqual(0x83, val.Blue, "Blue");

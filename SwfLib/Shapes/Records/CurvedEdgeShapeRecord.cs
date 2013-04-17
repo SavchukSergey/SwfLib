@@ -1,13 +1,28 @@
 ﻿namespace SwfLib.Shapes.Records {
     public class CurvedEdgeShapeRecord : IShapeRecordRGB, IShapeRecordRGBA, IShapeRecordEx {
 
-        public int ControlDeltaX;
+        /// <summary>
+        /// Gets or sets the control delta X.
+        /// </summary>
+        /// <value>
+        /// The control delta X.
+        /// </value>
+        public int ControlDeltaX { get; set; }
 
-        public int ControlDeltaY;
+        /// <summary>
+        /// Gets or sets the control delta Y.
+        /// </summary>
+        public int ControlDeltaY { get; set; }
 
-        public int AnchorDeltaX;
+        /// <summary>
+        /// Gets or sets the anchor delta X.
+        /// </summary>
+        public int AnchorDeltaX { get; set; }
 
-        public int AnchorDeltaY;
+        /// <summary>
+        /// Gets or sets the anchor delta Y.
+        /// </summary>
+        public int AnchorDeltaY { get; set; }
 
         public ShapeRecordType Type {
             get { return ShapeRecordType.CurvedEdgeRecord; }

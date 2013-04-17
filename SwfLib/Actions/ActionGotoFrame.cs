@@ -1,8 +1,14 @@
 ﻿namespace SwfLib.Actions {
+    /// <summary>
+    /// Represents GoToFrame action.
+    /// </summary>
     public class ActionGotoFrame : ActionBase {
 
-        public ushort Frame;
+        public ushort Frame { get; set; }
 
+        /// <summary>
+        /// Gets code of action.
+        /// </summary>
         public override ActionCode ActionCode {
             get { return ActionCode.GotoFrame; }
         }

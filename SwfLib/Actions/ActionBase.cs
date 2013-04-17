@@ -5,7 +5,7 @@
     public abstract class ActionBase {
 
         /// <summary>
-        /// Gets ActionCode.
+        /// Gets code of action.
         /// </summary>
         public abstract ActionCode ActionCode { get; }
 

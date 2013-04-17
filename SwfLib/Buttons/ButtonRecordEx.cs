@@ -4,15 +4,15 @@ using SwfLib.Filters;
 
 namespace SwfLib.Buttons {
     public class ButtonRecordEx {
-        public byte Reserved;
+        public byte Reserved { get; set; }
 
-        public bool StateHitTest;
+        public bool StateHitTest { get; set; }
 
-        public bool StateDown;
+        public bool StateDown { get; set; }
 
-        public bool StateOver;
+        public bool StateOver { get; set; }
 
-        public bool StateUp;
+        public bool StateUp { get; set; }
 
         public bool IsEndButton {
             get {
@@ -20,16 +20,19 @@ namespace SwfLib.Buttons {
             }
         }
 
-        public ushort CharacterID;
+        public ushort CharacterID { get; set; }
 
-        public ushort PlaceDepth;
+        public ushort PlaceDepth { get; set; }
 
-        public SwfMatrix PlaceMatrix;
+        public SwfMatrix PlaceMatrix { get; set; }
 
-        public ColorTransformRGBA ColorTransform;
+        public ColorTransformRGBA ColorTransform { get; set; }
 
         public readonly IList<BaseFilter> Filters = new List<BaseFilter>();
 
-        public BlendMode? BlendMode;
+        /// <summary>
+        /// Gets or sets blend mode.
+        /// </summary>
+        public BlendMode? BlendMode { get; set; }
     }
 }

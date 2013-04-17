@@ -1,23 +1,23 @@
 ﻿namespace SwfLib.Actions {
     public struct ActionPushItem {
 
-        public ActionPushItemType Type;
+        public ActionPushItemType Type { get; set; }
 
-        public string String;
+        public string String { get; set; }
 
-        public byte Register;
+        public byte Register { get; set; }
 
-        public float Float;
+        public float Float { get; set; }
 
-        public byte Boolean;
+        public byte Boolean { get; set; }
 
-        public double Double;
+        public double Double { get; set; }
 
-        public int Integer;
+        public int Integer { get; set; }
 
-        public byte Constant8;
+        public byte Constant8 { get; set; }
 
-        public ushort Constant16;
+        public ushort Constant16 { get; set; }
 
         public override string ToString() {
             switch (Type) {

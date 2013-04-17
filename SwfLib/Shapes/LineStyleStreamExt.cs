@@ -125,7 +125,7 @@ namespace SwfLib.Shapes {
 
         public static void WriteLineStyleRGBA(this ISwfStreamWriter writer, LineStyleRGBA lineStyle) {
             writer.WriteUInt16(lineStyle.Width);
-            writer.WriteRGBA(ref lineStyle.Color);
+            writer.WriteRGBA(lineStyle.Color);
         }
 
         public static void WriteLineStyleEx(this ISwfStreamWriter writer, LineStyleEx lineStyle) {
@@ -145,7 +145,7 @@ namespace SwfLib.Shapes {
             if (lineStyle.HasFill) {
                 writer.WriteFillStyleRGBA(lineStyle.FillStyle);
             } else {
-                writer.WriteRGBA(ref lineStyle.Color);
+                writer.WriteRGBA(lineStyle.Color);
             }
         }
 

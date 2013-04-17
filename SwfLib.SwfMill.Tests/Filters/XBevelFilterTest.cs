@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using NUnit.Framework;
+using SwfLib.Data;
 using SwfLib.Filters;
 using SwfLib.SwfMill.Filters;
 using SwfLib.Tests.Asserts;
@@ -36,13 +37,13 @@ namespace SwfLib.SwfMill.Tests.Filters {
             return new BevelFilter {
                 BlurX = 1.5,
                 BlurY = -2.4,
-                ShadowColor = {
+                ShadowColor = new SwfRGBA {
                     Red = 137,
                     Green = 24,
                     Blue = 87,
                     Alpha = 20
                 },
-                HighlightColor = {
+                HighlightColor = new SwfRGBA {
                     Red = 237,
                     Green = 84,
                     Blue = 217,
