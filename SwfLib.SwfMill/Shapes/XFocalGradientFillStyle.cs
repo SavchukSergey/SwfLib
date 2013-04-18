@@ -8,6 +8,9 @@ using SwfLib.SwfMill.Gradients;
 using SwfLib.SwfMill.Utils;
 
 namespace SwfLib.SwfMill.Shapes {
+    /// <summary>
+    /// Represents FocalGradientFillStyle xml formatter.
+    /// </summary>
     public static class XFocalGradientFillStyle {
 
         public const string FOCAL_GRADIENT = "FocalGradient";

@@ -3,9 +3,12 @@ using System.Xml.Linq;
 using SwfLib.Filters;
 
 namespace SwfLib.SwfMill.Filters {
+    /// <summary>
+    /// Represents filters xml formatter.
+    /// </summary>
     public static class XFilter {
 
-        public class Writer : IFilterVisitor<object, XElement> {
+        private class Writer : IFilterVisitor<object, XElement> {
 
             public XElement Visit(DropShadowFilter filter, object arg) {
                 return XDropShadowFilter.ToXml(filter);
@@ -42,10 +45,20 @@ namespace SwfLib.SwfMill.Filters {
 
         private static readonly Writer _writer = new Writer();
 
+        /// <summary>
+        /// Formats filter to xml representation..
+        /// </summary>
+        /// <param name="filter">The filter to be formatted.</param>
+        /// <returns></returns>
         public static XElement ToXml(BaseFilter filter) {
             return filter.AcceptVisitor(_writer, null);
         }
 
+        /// <summary>
+        /// Parses filter from xml.
+        /// </summary>
+        /// <param name="xFilter">Xml element to be parsed.</param>
+        /// <returns></returns>
         public static BaseFilter FromXml(XElement xFilter) {
             switch (xFilter.Name.LocalName) {
                 case XDropShadowFilter.TAG_NAME:

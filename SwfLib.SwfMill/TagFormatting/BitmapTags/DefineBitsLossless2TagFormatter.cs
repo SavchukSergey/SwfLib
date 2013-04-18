@@ -44,6 +44,9 @@ namespace SwfLib.SwfMill.TagFormatting.BitmapTags {
             tag.ZlibBitmapData = data;
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "DefineBitsLossless2"; }
         }

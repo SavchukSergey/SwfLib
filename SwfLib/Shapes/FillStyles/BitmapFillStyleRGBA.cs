@@ -8,10 +8,14 @@ namespace SwfLib.Shapes.FillStyles {
 
         public BitmapMode Mode { get; set; }
 
-        public ushort BitmapID;
+        public ushort BitmapID { get; set; }
 
-        public SwfMatrix BitmapMatrix;
+        public SwfMatrix BitmapMatrix { get; set; }
 
+        /// <summary>
+        /// Gets type of fill style.
+        /// </summary>
+        /// <exception cref="System.NotSupportedException"></exception>
         public override FillStyleType Type {
             get {
                 switch (Mode) {

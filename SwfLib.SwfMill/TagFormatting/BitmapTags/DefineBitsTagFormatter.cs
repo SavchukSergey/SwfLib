@@ -2,6 +2,9 @@
 using SwfLib.Tags.BitmapTags;
 
 namespace SwfLib.SwfMill.TagFormatting.BitmapTags {
+    /// <summary>
+    /// Represents DefineBits tag formatter.
+    /// </summary>
     public class DefineBitsTagFormatter : TagFormatterBase<DefineBitsTag> {
 
         protected override void FormatTagElement(DefineBitsTag tag, XElement xTag) {
@@ -15,6 +18,9 @@ namespace SwfLib.SwfMill.TagFormatting.BitmapTags {
             tag.JPEGData = data;
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "DefineBits"; }
         }

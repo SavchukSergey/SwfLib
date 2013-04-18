@@ -565,8 +565,8 @@ namespace SwfLib {
 
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineTextTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
-            writer.WriteRect(ref tag.TextBounds);
-            writer.WriteMatrix(ref tag.TextMatrix);
+            writer.WriteRect(tag.TextBounds);
+            writer.WriteMatrix(tag.TextMatrix);
             var glyphBitsCounter = new UnsignedBitsCount(0);
             var advanceBitsCounter = new SignedBitsCount(0);
             foreach (var textRecord in tag.TextRecords) {
@@ -590,8 +590,8 @@ namespace SwfLib {
 
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineText2Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
-            writer.WriteRect(ref tag.TextBounds);
-            writer.WriteMatrix(ref tag.TextMatrix);
+            writer.WriteRect(tag.TextBounds);
+            writer.WriteMatrix(tag.TextMatrix);
             var glyphBitsCounter = new UnsignedBitsCount(0);
             var advanceBitsCounter = new SignedBitsCount(0);
             foreach (var textRecord in tag.TextRecords) {

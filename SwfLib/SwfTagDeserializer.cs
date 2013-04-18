@@ -570,7 +570,7 @@ namespace SwfLib {
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineTextTag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
-            reader.ReadRect(out tag.TextBounds);
+            tag.TextBounds = reader.ReadRect();
             tag.TextMatrix = reader.ReadMatrix();
             uint glyphBits = reader.ReadByte();
             uint advanceBits = reader.ReadByte();
@@ -582,7 +582,7 @@ namespace SwfLib {
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineText2Tag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
-            reader.ReadRect(out tag.TextBounds);
+            tag.TextBounds = reader.ReadRect();
             tag.TextMatrix = reader.ReadMatrix();
             uint glyphBits = reader.ReadByte();
             uint advanceBits = reader.ReadByte();

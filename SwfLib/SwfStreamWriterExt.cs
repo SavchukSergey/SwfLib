@@ -28,10 +28,20 @@ namespace SwfLib {
             writer.WriteUInt16(header.FrameCount);
         }
 
+        /// <summary>
+        /// Writes rectangle to the writer.
+        /// </summary>
+        /// <param name="writer">Writer to which to write rectangle.</param>
+        /// <param name="rect">Rectangle to be written.</param>
         public static void WriteRect(this ISwfStreamWriter writer, SwfRect rect) {
             writer.WriteRect(ref rect);
         }
 
+        /// <summary>
+        /// Writes rectangle to the writer.
+        /// </summary>
+        /// <param name="writer">Writer to which to write rectangle.</param>
+        /// <param name="rect">Rectangle to be written.</param>
         public static void WriteRect(this ISwfStreamWriter writer, ref SwfRect rect) {
             var btCount = new SignedBitsCount(rect.XMin, rect.XMax, rect.YMin, rect.YMax);
             var bits = btCount.GetBits();

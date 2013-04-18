@@ -5,6 +5,9 @@ using SwfLib.Tags.DisplayListTags;
 
 namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
     //TODO: Unit test
+    /// <summary>
+    /// Represents PlaceObject2 tag xml formatter.
+    /// </summary>
     public class PlaceObject2TagFormatter : PlaceObjectBaseFormatter<PlaceObject2Tag> {
 
         private const string REPLACE_ATTRIB = "replace";
