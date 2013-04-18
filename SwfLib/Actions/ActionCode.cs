@@ -274,6 +274,7 @@
         /// "_level1" special target names are used to load another SWF file into levels 0 and 1 
         /// respectively. 
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "URL")]
         GetURL = 0x83,
         StoreRegister = 0x87,
 

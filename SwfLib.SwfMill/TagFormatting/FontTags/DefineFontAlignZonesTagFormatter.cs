@@ -49,6 +49,9 @@ namespace SwfLib.SwfMill.TagFormatting.FontTags {
             xTag.Add(xZoneArrays);
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "DefineFontAlignZones"; }
         }

@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 
 namespace SwfLib.Actions {
+    /// <summary>
+    /// Represents ConstantPool action.
+    /// </summary>
     public class ActionConstantPool : ActionBase {
 
         public readonly IList<string> ConstantPool = new List<string>();

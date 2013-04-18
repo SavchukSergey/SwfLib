@@ -7,6 +7,9 @@ namespace SwfLib.SwfMill.TagFormatting.FontTags {
         protected override void FormatTagElement(DefineFont4Tag tag, XElement xTag) {
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "DefineFont4"; }
         }

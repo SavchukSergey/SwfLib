@@ -126,7 +126,7 @@ namespace SwfLib.Tests.Tags.ShapeTags {
         private static DefineShapeTag GetDefineShapeTag1() {
             return new DefineShapeTag {
                 ShapeID = 2,
-                ShapeBounds = { XMin = 0, XMax = 5354, YMin = 0, YMax = 1800 },
+                ShapeBounds = new SwfRect { XMin = 0, XMax = 5354, YMin = 0, YMax = 1800 },
                 FillStyles = {
                     new BitmapFillStyleRGB {
                         Mode = BitmapMode.Repeat,
@@ -155,7 +155,7 @@ namespace SwfLib.Tests.Tags.ShapeTags {
         private static DefineShapeTag GetDefineShapeTag2() {
             var tag = new DefineShapeTag {
                 ShapeID = 7,
-                ShapeBounds = { XMin = 0, XMax = 14560, YMin = 0, YMax = 1800 },
+                ShapeBounds = new SwfRect { XMin = 0, XMax = 14560, YMin = 0, YMax = 1800 },
                 FillStyles = {
                     new SolidFillStyleRGB { Color = new SwfRGB(255, 255, 255) }
                 },

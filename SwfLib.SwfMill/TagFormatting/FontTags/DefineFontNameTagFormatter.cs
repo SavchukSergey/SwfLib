@@ -2,6 +2,9 @@
 using SwfLib.Tags.FontTags;
 
 namespace SwfLib.SwfMill.TagFormatting.FontTags {
+    /// <summary>
+    /// Represents DefineFontNameTag xml formatter.
+    /// </summary>
     public class DefineFontNameTagFormatter : DefineFontBaseFormatter<DefineFontNameTag> {
 
         protected const string COPYRIGHT_ATTRIB = "copyright";
@@ -25,6 +28,9 @@ namespace SwfLib.SwfMill.TagFormatting.FontTags {
             xTag.Add(new XAttribute(XName.Get(COPYRIGHT_ATTRIB), tag.FontCopyright));
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "DefineFontName"; }
         }

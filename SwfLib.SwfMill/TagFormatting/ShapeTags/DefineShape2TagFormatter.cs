@@ -3,6 +3,9 @@ using SwfLib.SwfMill.Shapes;
 using SwfLib.Tags.ShapeTags;
 
 namespace SwfLib.SwfMill.TagFormatting.ShapeTags {
+    /// <summary>
+    /// Represents DefineShape2Tag xml formatter.
+    /// </summary>
     public class DefineShape2TagFormatter : DefineShapeBaseFormatter<DefineShape2Tag> {
 
         protected override XElement FormatStyles(DefineShape2Tag tag) {
@@ -21,6 +24,9 @@ namespace SwfLib.SwfMill.TagFormatting.ShapeTags {
             XStyleList.FromXml(xStyleList, tag.FillStyles, tag.LineStyles);
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "DefineShape2"; }
         }

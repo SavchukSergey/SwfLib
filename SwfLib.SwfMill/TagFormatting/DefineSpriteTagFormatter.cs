@@ -3,6 +3,9 @@ using System.Xml.Linq;
 using SwfLib.Tags;
 
 namespace SwfLib.SwfMill.TagFormatting {
+    /// <summary>
+    /// Represents DefineSpriteTag xml formatter.
+    /// </summary>
     public class DefineSpriteTagFormatter : TagFormatterBase<DefineSpriteTag> {
         private readonly ushort _version;
         private readonly TagFormatterFactory _subFormatterFactory;

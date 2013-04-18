@@ -4,6 +4,9 @@ using SwfLib.SwfMill.Data;
 using SwfLib.Tags.TextTags;
 
 namespace SwfLib.SwfMill.TagFormatting.TextTags {
+    /// <summary>
+    /// Represents CSMTextSettingsTag  xml formatter.
+    /// </summary>
     public class CSMTextSettingsTagFormatter : TagFormatterBase<CSMTextSettingsTag> {
 
         private const string USE_FLASH_TYPE_ATTRIB = "useFlashType";
@@ -51,6 +54,9 @@ namespace SwfLib.SwfMill.TagFormatting.TextTags {
             }
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "CSMTextSettings"; }
         }

@@ -4,26 +4,29 @@ using SwfLib.Actions;
 namespace SwfLib.Buttons {
     public class ButtonCondition {
 
-        public bool IdleToOverDown;
+        public bool IdleToOverDown { get; set; }
 
-        public bool OutDownToIdle;
+        public bool OutDownToIdle { get; set; }
 
-        public bool OutDownToOverDown;
+        public bool OutDownToOverDown { get; set; }
 
-        public bool OverDownToOutDown;
+        public bool OverDownToOutDown { get; set; }
 
-        public bool OverDownToOverUp;
+        public bool OverDownToOverUp { get; set; }
 
-        public bool OverUpToOverDown;
+        public bool OverUpToOverDown { get; set; }
 
-        public bool OverUpToIdle;
+        public bool OverUpToIdle { get; set; }
 
-        public bool IdleToOverUp;
+        public bool IdleToOverUp { get; set; }
 
-        public byte KeyPress;
+        public byte KeyPress { get; set; }
 
-        public bool OverDownToIdle;
+        public bool OverDownToIdle { get; set; }
 
+        /// <summary>
+        /// Gets list of actions.
+        /// </summary>
         public readonly IList<ActionBase> Actions = new List<ActionBase>();
     }
 }

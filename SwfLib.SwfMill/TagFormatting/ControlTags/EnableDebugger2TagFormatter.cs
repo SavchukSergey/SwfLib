@@ -2,6 +2,9 @@
 using SwfLib.Tags.ControlTags;
 
 namespace SwfLib.SwfMill.TagFormatting.ControlTags {
+    /// <summary>
+    /// Represents EnableDebugger2Tag xml formatter.
+    /// </summary>
     public class EnableDebugger2TagFormatter : TagFormatterBase<EnableDebugger2Tag> {
 
         protected override void FormatTagElement(EnableDebugger2Tag tag, XElement xTag) {

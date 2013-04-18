@@ -4,6 +4,9 @@ using SwfLib.SwfMill.Fonts;
 using SwfLib.Tags.FontTags;
 
 namespace SwfLib.SwfMill.TagFormatting.FontTags {
+    /// <summary>
+    /// Represents DefineFont3Tag xml formatter.
+    /// </summary>
     public class DefineFont3TagFormatter : DefineFontBaseFormatter<DefineFont3Tag> {
 
         private const string SHIFT_JIS_ATTRIB = "isShiftJIS";
@@ -144,6 +147,9 @@ namespace SwfLib.SwfMill.TagFormatting.FontTags {
 
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "DefineFont3"; }
         }

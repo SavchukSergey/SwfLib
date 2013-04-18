@@ -122,6 +122,9 @@ namespace SwfLib.SwfMill.TagFormatting.DisplayListTags {
             tag.HasMatrix = val;
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "PlaceObject3"; }
         }

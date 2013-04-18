@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using SwfLib.Data;
 
 namespace SwfLib.Text {
+    /// <summary>
+    /// Represents stream extensions for reading and writing text structures.
+    /// </summary>
     public static class TextStreamExt {
 
         public static IList<TextRecordRGB> ReadTextRecordsRGB(this ISwfStreamReader reader, uint glyphBits, uint advanceBits) {
@@ -169,7 +172,13 @@ namespace SwfLib.Text {
             writer.FlushBits();
         }
 
-
+        /// <summary>
+        /// Reads GlyphEntry from reader.
+        /// </summary>
+        /// <param name="reader">Reader from which to read GlyphEntry.</param>
+        /// <param name="glyphBits">Bits count used for reading glyph index.</param>
+        /// <param name="advanceBits">Bits count used for reading advance value.</param>
+        /// <returns></returns>
         public static GlyphEntry ReadGlyphEntry(this ISwfStreamReader reader, uint glyphBits, uint advanceBits) {
             var entry = new GlyphEntry {
                 GlyphIndex = reader.ReadUnsignedBits(glyphBits),
@@ -178,6 +187,13 @@ namespace SwfLib.Text {
             return entry;
         }
 
+        /// <summary>
+        /// Writes GlyphEntry to writer.
+        /// </summary>
+        /// <param name="writer">Writer to which to write GlyphEntry.</param>
+        /// <param name="glyph">Glyph to be written.</param>
+        /// <param name="glyphBits">Bits count used for writing glyph index.</param>
+        /// <param name="advanceBits">Bits count used for writing advance value.</param>
         public static void WriteGlyphEntry(this ISwfStreamWriter writer, GlyphEntry glyph, uint glyphBits, uint advanceBits) {
             writer.WriteUnsignedBits(glyph.GlyphIndex, glyphBits);
             writer.WriteSignedBits(glyph.GlyphAdvance, advanceBits);

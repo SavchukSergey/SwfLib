@@ -1,4 +1,7 @@
 ﻿namespace SwfLib.Actions {
+    /// <summary>
+    /// Represents BitURShift action.
+    /// </summary>
     public class ActionBitURShift : ActionBase {
 
         /// <summary>

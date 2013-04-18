@@ -3,6 +3,9 @@ using SwfLib.SwfMill.Data;
 using SwfLib.Tags.TextTags;
 
 namespace SwfLib.SwfMill.TagFormatting.TextTags {
+    /// <summary>
+    /// Represents DefineEditTextTag xml formatter.
+    /// </summary>
     public class DefineEditTextTagFormatter : TagFormatterBase<DefineEditTextTag> {
 
         private const string WORD_WRAP_ATTRIB = "wordWrap";
@@ -172,6 +175,9 @@ namespace SwfLib.SwfMill.TagFormatting.TextTags {
             }
         }
 
+        /// <summary>
+        /// Gets xml element name.
+        /// </summary>
         public override string TagName {
             get { return "DefineEditText"; }
         }

@@ -296,7 +296,7 @@ namespace SwfLib {
 
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineShapeTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
-            writer.WriteRect(ref tag.ShapeBounds);
+            writer.WriteRect(tag.ShapeBounds);
 
             writer.WriteFillStylesRGB(tag.FillStyles, false);
             writer.WriteLineStylesRGB(tag.LineStyles, false);
@@ -308,7 +308,7 @@ namespace SwfLib {
 
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineShape2Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
-            writer.WriteRect(ref tag.ShapeBounds);
+            writer.WriteRect(tag.ShapeBounds);
 
             writer.WriteFillStylesRGB(tag.FillStyles, true);
             writer.WriteLineStylesRGB(tag.LineStyles, true);
@@ -320,7 +320,7 @@ namespace SwfLib {
 
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineShape3Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
-            writer.WriteRect(ref tag.ShapeBounds);
+            writer.WriteRect(tag.ShapeBounds);
 
             writer.WriteFillStylesRGBA(tag.FillStyles);
             writer.WriteLineStylesRGBA(tag.LineStyles);
@@ -332,7 +332,7 @@ namespace SwfLib {
 
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineShape4Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.ShapeID);
-            writer.WriteRect(ref tag.ShapeBounds);
+            writer.WriteRect(tag.ShapeBounds);
             writer.WriteRect(ref tag.EdgeBounds);
             writer.FlushBits();
             writer.WriteByte(tag.Flags);

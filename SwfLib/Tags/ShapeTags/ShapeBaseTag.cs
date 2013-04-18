@@ -5,7 +5,7 @@ namespace SwfLib.Tags.ShapeTags {
 
         public ushort ShapeID { get; set; }
 
-        public SwfRect ShapeBounds;
+        public SwfRect ShapeBounds { get; set; }
 
     }
 }

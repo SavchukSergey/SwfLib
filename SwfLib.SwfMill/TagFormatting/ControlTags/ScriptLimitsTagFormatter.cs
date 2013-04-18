@@ -2,6 +2,9 @@
 using SwfLib.Tags.ControlTags;
 
 namespace SwfLib.SwfMill.TagFormatting.ControlTags {
+    /// <summary>
+    /// Represents ScriptLimitsTag xml formatter.
+    /// </summary>
     public class ScriptLimitsTagFormatter : TagFormatterBase<ScriptLimitsTag> {
 
         private const string MAX_RECURSION_ATTRIB = "maxRecursionDepth";
@@ -27,7 +30,7 @@ namespace SwfLib.SwfMill.TagFormatting.ControlTags {
         }
 
         /// <summary>
-        /// Gets the name of the tag.
+        /// Gets xml element name.
         /// </summary>
         public override string TagName {
             get { return "ScriptLimits"; }
