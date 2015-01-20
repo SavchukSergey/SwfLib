@@ -131,6 +131,14 @@ namespace SwfLib {
             _writer.Write(val);
         }
 
+
+        public void WriteEncodedU30(uint val) {
+            if (val >= (1 << 30)) {
+                throw new ArgumentOutOfRangeException("val");
+            }
+            WriteEncodedU32(val);
+        }
+
         public void WriteEncodedU32(uint val) {
             FlushBits();
 
@@ -162,6 +170,34 @@ namespace SwfLib {
                         }
                     }
                 }
+            }
+        }
+
+        public void WriteEncodedS32(int val) {
+            FlushBits();
+            var enc = (uint)val;
+            if (val >= 0) {
+                var hasNext = false;
+                do {
+                    if (enc < 0x40) {
+                        _writer.Write((byte)enc);
+                    } else {
+                        _writer.Write((byte)(enc | 0x80));
+                        hasNext = true;
+                    }
+                    enc >>= 7;
+                } while (hasNext);
+            } else {
+                var hasNext = false;
+                do {
+                    if (enc >= 0xffffffc0) {
+                        _writer.Write((byte)(enc & 0x7f));
+                    } else {
+                        _writer.Write((byte)(enc | 0x80));
+                        hasNext = true;
+                    }
+                    enc = (enc >> 7) | 0xfe000000;
+                } while (hasNext);
             }
         }
 

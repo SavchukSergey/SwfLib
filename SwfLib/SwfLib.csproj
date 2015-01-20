@@ -28,8 +28,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\Debug\SwfLib.XML</DocumentationFile>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <DocumentationFile>
+    </DocumentationFile>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\codeanalysis.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -61,6 +62,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Avm2\AbcFile.cs" />
+    <Compile Include="Avm2\AbcReader.cs" />
+    <Compile Include="Avm2\AbcWriter.cs" />
+    <Compile Include="Avm2\AsClass.cs" />
+    <Compile Include="Avm2\AsConstantPool.cs" />
+    <Compile Include="Avm2\AsExceptionInfo.cs" />
+    <Compile Include="Avm2\AsInstance.cs" />
+    <Compile Include="Avm2\AsInstanceFlags.cs" />
+    <Compile Include="Avm2\AsMetadata.cs" />
+    <Compile Include="Avm2\AsMethodBody.cs" />
+    <Compile Include="Avm2\AsMethodFlags.cs" />
+    <Compile Include="Avm2\AsMethodInfo.cs" />
+    <Compile Include="Avm2\AsMultiname.cs" />
+    <Compile Include="Avm2\AsNamespace.cs" />
+    <Compile Include="Avm2\AsNamespaceSet.cs" />
+    <Compile Include="Avm2\AsOptionDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Avm2\AsParamInfo.cs" />
+    <Compile Include="Avm2\AsScript.cs" />
+    <Compile Include="Avm2\AsTraitAttributes.cs" />
+    <Compile Include="Avm2\AsTraitKind.cs" />
+    <Compile Include="Avm2\AsTraitsInfo.cs" />
+    <Compile Include="Avm2\AsType.cs" />
     <Compile Include="Actions\ActionAdd2.cs" />
     <Compile Include="Actions\ActionBitAnd.cs" />
     <Compile Include="Actions\ActionBitLShift.cs" />

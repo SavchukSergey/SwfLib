@@ -41,6 +41,17 @@ namespace SwfLib {
             return _reader.ReadInt16();
         }
 
+        /// <summary>
+        /// Reads signed 24-bit integer
+        /// </summary>
+        /// <returns></returns>
+        public virtual int ReadSInt24() {
+            var i0 = _reader.ReadByte();
+            var i1 = _reader.ReadByte();
+            var i2 = _reader.ReadByte();
+            return (i2 << 16) | (i1 << 8) | i0;
+        }
+
         public virtual uint ReadUInt32() {
             return _reader.ReadUInt32();
         }
@@ -70,6 +81,18 @@ namespace SwfLib {
             get { return _reader.BaseStream.Length - _reader.BaseStream.Position; }
         }
 
+        /// <summary>
+        /// Reads variable-length encoded unsigned 30-bit integer
+        /// </summary>
+        /// <returns></returns>
+        public uint ReadEncodedU30() {
+            return ReadEncodedU32() & 0x3fffffff;
+        }
+
+        /// <summary>
+        /// Reads variable-length encoded unsigned 32-bit integer
+        /// </summary>
+        /// <returns></returns>
         public virtual uint ReadEncodedU32() {
             AlignToByte();
             uint val = 0;
@@ -92,6 +115,34 @@ namespace SwfLib {
             bt = _reader.ReadByte();
             val |= (bt & 0x7fu) << 28;
             return val;
+        }
+
+        /// <summary>
+        /// Reads variable-length encoded signed 32-bit integer
+        /// </summary>
+        /// <returns></returns>
+        public virtual int ReadEncodedS32() {
+            AlignToByte();
+            uint val = 0;
+            var bt = _reader.ReadByte();
+            val |= bt & 0x7fu;
+            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xffffff80);
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 7;
+            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xffffc000);
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 14;
+            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xffe00000);
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 21;
+            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xf0000000);
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 28;
+            return (int)val;
         }
 
         /// <summary>
