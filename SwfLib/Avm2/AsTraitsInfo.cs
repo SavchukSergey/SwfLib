@@ -83,8 +83,16 @@
 
     public struct AsMethodTraitsInfo {
         
+        /// <summary>
+        /// The disp_id field is a compiler assigned integer that is used by the AVM2 to optimize the resolution of
+        /// virtual function calls. An overridden method must have the same disp_id as that of the method in the
+        /// base class. A value of zero disables this optimization. 
+        /// </summary>
         public uint DispId;
 
+        /// <summary>
+        /// The method field is an index that points into the method array of the abcFile entry. 
+        /// </summary>
         public uint Method;
 
     }

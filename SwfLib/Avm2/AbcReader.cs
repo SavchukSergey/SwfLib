@@ -84,27 +84,27 @@ namespace SwfLib.Avm2 {
         private AsConstantPool ReadConstantPool() {
             var res = new AsConstantPool();
 
-            res.Integers = new int[_reader.ReadEncodedU30()];
+            res.Integers = new int[ReadU30()];
             for (var i = 1; i < res.Integers.Length; i++) {
                 res.Integers[i] = ReadS32();
             }
 
-            res.UnsignedIntegers = new uint[_reader.ReadEncodedU30()];
+            res.UnsignedIntegers = new uint[ReadU30()];
             for (var i = 1; i < res.UnsignedIntegers.Length; i++) {
                 res.UnsignedIntegers[i] = ReadU32();
             }
 
-            res.Doubles = new double[_reader.ReadEncodedU30()];
+            res.Doubles = new double[ReadU30()];
             for (var i = 1; i < res.Doubles.Length; i++) {
                 res.Doubles[i] = ReadD64();
             }
 
-            res.Strings = new string[_reader.ReadEncodedU30()];
+            res.Strings = new string[ReadU30()];
             for (var i = 1; i < res.Strings.Length; i++) {
                 res.Strings[i] = ReadString();
             }
 
-            res.Namespaces = new AsNamespace[_reader.ReadEncodedU30()];
+            res.Namespaces = new AsNamespace[ReadU30()];
             for (var i = 1; i < res.Namespaces.Length; i++) {
                 res.Namespaces[i] = ReadNamespace();
             }
@@ -114,7 +114,7 @@ namespace SwfLib.Avm2 {
                 res.NamespaceSets[i] = ReadNamespaceSet();
             }
 
-            res.Multinames = new AsMultiname[_reader.ReadEncodedU30()];
+            res.Multinames = new AsMultiname[ReadU30()];
             for (var i = 1; i < res.Multinames.Length; i++) {
                 res.Multinames[i] = ReadMultiname();
             }
@@ -136,7 +136,7 @@ namespace SwfLib.Avm2 {
         }
 
         private AsMultiname ReadMultiname() {
-            var r = new AsMultiname { Kind = (AsType)_reader.ReadByte() };
+            var r = new AsMultiname { Kind = (AsType)ReadU8() };
             switch (r.Kind) {
                 case AsType.QName:
                 case AsType.QNameA:
@@ -174,7 +174,7 @@ namespace SwfLib.Avm2 {
                     };
                     break;
                 default:
-                    throw new Exception("Unknown Multiname kind");
+                    throw new Exception("Unknown Multiname kind " + r.Kind);
             }
             return r;
         }
@@ -225,6 +225,7 @@ namespace SwfLib.Avm2 {
             AsMetadata r;
             r.Name = ReadU30();
             r.Items = new AsMetadataItem[ReadU30()];
+            //todo: first keys then values?
             for (var i = 0; i < r.Items.Length; i++) {
                 r.Items[i] = ReadMetadataItem();
             }
@@ -373,11 +374,8 @@ namespace SwfLib.Avm2 {
         }
 
         private uint[] ReadMultipleU30() {
-            var res = new uint[ReadU30()];
-            for (var i = 0; i < res.Length; i++) {
-                res[i] = ReadU30();
-            }
-            return res;
+            var len = ReadU30();
+            return ReadMultipleU30(len);
         }
 
         private uint[] ReadMultipleU30(uint cnt) {

@@ -8,10 +8,10 @@ namespace SwfLib.Tests {
     [TestFixture]
     public class Bin2BinTests {
 
-        [Test]
-        public void DefineFont3TagTest() {
-            Bin2BinBulkTest<DefineFont3Tag>("SwfLib.Tests.Resources.Bin2Bin.DefineFont3Tag");
-        }
+        //[Test]
+        //public void DefineFont3TagTest() {
+        //    Bin2BinBulkTest<DefineFont3Tag>("SwfLib.Tests.Resources.Bin2Bin.DefineFont3Tag");
+        //}
 
         [Test]
         public void DefineFontAlignZonesTagTest() {
