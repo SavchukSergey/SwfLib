@@ -17,11 +17,15 @@ namespace SwfLib.Avm2 {
 
             WriteMultipleMethods(abc.Methods);
             WriteMultipleMetadata(abc.Metadata);
-            WriteMultipleInstances(abc.Instances);
+
             if (abc.Classes.Length != abc.Instances.Length) {
                 throw new Exception("Number of Classes and Instances differs");
             }
+            var classCount = abc.Classes.Length;
+            WriteU30((uint) classCount);
+            WriteMultipleInstances(abc.Instances);
             WriteMultipleClasses(abc.Classes);
+
             WriteMultipleScripts(abc.Scripts);
             WriteMultipleBodies(abc.Bodies);
         }
@@ -41,14 +45,12 @@ namespace SwfLib.Avm2 {
         }
 
         private void WriteMultipleInstances(AsInstance[] vals) {
-            WriteU30((uint)vals.Length);
             foreach (var value in vals) {
                 WriteInstance(value);
             }
         }
 
         private void WriteMultipleClasses(AsClass[] vals) {
-            WriteU30((uint)vals.Length);
             foreach (var value in vals) {
                 WriteClass(value);
             }
@@ -138,7 +140,7 @@ namespace SwfLib.Avm2 {
                     WriteU30(multiname.MultinameL.NamespaceSet);
                     break;
                 case AsType.TypeName:
-                    WriteU30(multiname.TypeName.name);
+                    WriteU30(multiname.TypeName.Name);
                     WriteU30((uint)multiname.TypeName.Params.Length);
                     foreach (var value in multiname.TypeName.Params)
                         WriteU30(value);

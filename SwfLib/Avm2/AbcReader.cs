@@ -11,17 +11,19 @@ namespace SwfLib.Avm2 {
 
         public AbcFile ReadAbcFile() {
             try {
-                return new AbcFile {
+                var res =  new AbcFile {
                     MinorVersion = ReadU16(),
                     MajorVersion = ReadU16(),
                     ConstantPool = ReadConstantPool(),
                     Methods = ReadMultipleMethods(),
                     Metadata = ReadMutipleMetadata(),
-                    Instances = ReadMutipleInstances(),
-                    Classes = ReadMultipleClasses(),
-                    Scripts = ReadMultipleScripts(),
-                    Bodies = ReadMultipleBodies()
                 };
+                var classCount = ReadU30();
+                res.Instances = ReadMutipleInstances(classCount);
+                res.Classes = ReadMultipleClasses(classCount);
+                res.Scripts = ReadMultipleScripts();
+                res.Bodies = ReadMultipleBodies();
+                return res;
             } catch (Exception e) {
                 throw new Exception(string.Format("Error at {0} ({0:x}):", _reader.Position), e);
             }
@@ -36,10 +38,9 @@ namespace SwfLib.Avm2 {
             return res;
         }
 
-        private AsInstance[] ReadMutipleInstances() {
-            var len = ReadU30();
-            var res = new AsInstance[len];
-            for (var i = 0; i < len; i++) {
+        private AsInstance[] ReadMutipleInstances(uint count) {
+            var res = new AsInstance[count];
+            for (var i = 0; i < count; i++) {
                 res[i] = ReadInstance();
             }
             return res;
@@ -54,10 +55,9 @@ namespace SwfLib.Avm2 {
             return res;
         }
 
-        private AsClass[] ReadMultipleClasses() {
-            var len = ReadU30();
-            var res = new AsClass[len];
-            for (var i = 0; i < len; i++) {
+        private AsClass[] ReadMultipleClasses(uint count) {
+            var res = new AsClass[count];
+            for (var i = 0; i < count; i++) {
                 res[i] = ReadClass();
             }
             return res;
@@ -84,37 +84,37 @@ namespace SwfLib.Avm2 {
         private AsConstantPool ReadConstantPool() {
             var res = new AsConstantPool();
 
-            res.Integers = new int[ReadU30()];
+            res.Integers = new int[Math.Max(ReadU30(), 1)];
             for (var i = 1; i < res.Integers.Length; i++) {
                 res.Integers[i] = ReadS32();
             }
 
-            res.UnsignedIntegers = new uint[ReadU30()];
+            res.UnsignedIntegers = new uint[Math.Max(ReadU30(), 1)];
             for (var i = 1; i < res.UnsignedIntegers.Length; i++) {
                 res.UnsignedIntegers[i] = ReadU32();
             }
 
-            res.Doubles = new double[ReadU30()];
+            res.Doubles = new double[Math.Max(ReadU30(), 1)];
             for (var i = 1; i < res.Doubles.Length; i++) {
                 res.Doubles[i] = ReadD64();
             }
 
-            res.Strings = new string[ReadU30()];
+            res.Strings = new string[Math.Max(ReadU30(), 1)];
             for (var i = 1; i < res.Strings.Length; i++) {
                 res.Strings[i] = ReadString();
             }
 
-            res.Namespaces = new AsNamespace[ReadU30()];
+            res.Namespaces = new AsNamespace[Math.Max(ReadU30(), 1)];
             for (var i = 1; i < res.Namespaces.Length; i++) {
                 res.Namespaces[i] = ReadNamespace();
             }
 
-            res.NamespaceSets = new AsNamespaceSet[ReadU30()];
+            res.NamespaceSets = new AsNamespaceSet[Math.Max(ReadU30(), 1)];
             for (var i = 1; i < res.NamespaceSets.Length; i++) {
                 res.NamespaceSets[i] = ReadNamespaceSet();
             }
 
-            res.Multinames = new AsMultiname[ReadU30()];
+            res.Multinames = new AsMultiname[Math.Max(ReadU30(), 1)];
             for (var i = 1; i < res.Multinames.Length; i++) {
                 res.Multinames[i] = ReadMultiname();
             }
@@ -169,7 +169,7 @@ namespace SwfLib.Avm2 {
                     break;
                 case AsType.TypeName:
                     r.TypeName = new AsMultinameTypeName {
-                        name = ReadU30(),
+                        Name = ReadU30(),
                         Params = ReadMultipleU30()
                     };
                     break;

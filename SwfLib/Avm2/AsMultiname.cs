@@ -48,9 +48,14 @@
 
     }
 
-    //todo:???
+    /// <summary>
+    /// Vector
+    /// </summary>
     public struct AsMultinameTypeName {
-        public uint name;
+        
+        public uint Name;
+
         public uint[] Params;
+
     }
 }
