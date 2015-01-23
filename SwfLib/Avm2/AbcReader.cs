@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 
 namespace SwfLib.Avm2 {
 
@@ -81,7 +83,7 @@ namespace SwfLib.Avm2 {
             return res;
         }
 
-        private AsConstantPool ReadConstantPool() {
+        public AsConstantPool ReadConstantPool() {
             var res = new AsConstantPool();
 
             res.Integers = new int[Math.Max(ReadU30(), 1)];
@@ -95,11 +97,13 @@ namespace SwfLib.Avm2 {
             }
 
             res.Doubles = new double[Math.Max(ReadU30(), 1)];
+            res.Doubles[0] = double.NaN;
             for (var i = 1; i < res.Doubles.Length; i++) {
                 res.Doubles[i] = ReadD64();
             }
 
             res.Strings = new string[Math.Max(ReadU30(), 1)];
+            res.Strings[0] = string.Empty;
             for (var i = 1; i < res.Strings.Length; i++) {
                 res.Strings[i] = ReadString();
             }
@@ -393,7 +397,12 @@ namespace SwfLib.Avm2 {
         private string ReadString() {
             var len = ReadU30();
             if (len == 0) return "";
-            return _reader.ReadRawString((int)len);
+            var dataStream = new MemoryStream();
+            for (var i = 0; i < len; i++) {
+                var bt = _reader.ReadByte();
+                if (bt != 0) dataStream.WriteByte(bt);
+            }
+            return Encoding.UTF8.GetString(dataStream.ToArray());
         }
 
         #endregion

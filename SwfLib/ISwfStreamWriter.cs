@@ -44,7 +44,6 @@
         void WriteBit(bool val);
 
         void WriteString(string val);
-        void WriteRawString(string val);
 
         /// <summary>
         /// Writes the single value.

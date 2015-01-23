@@ -28,8 +28,6 @@
         /// <returns></returns>
         string ReadString();
 
-        string ReadRawString(int count);
-        
         float ReadSingle();
         double ReadDouble();
         float ReadShortFloat();

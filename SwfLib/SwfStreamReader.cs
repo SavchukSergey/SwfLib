@@ -159,15 +159,6 @@ namespace SwfLib {
             return Encoding.UTF8.GetString(dataStream.ToArray());
         }
 
-        public string ReadRawString(int count) {
-            var dataStream = new MemoryStream();
-            for (var i = 0; i < count; i++) {
-                var bt = _reader.ReadByte();
-                if (bt != 0) dataStream.WriteByte(bt);
-            }
-            return Encoding.UTF8.GetString(dataStream.ToArray());
-        }
-
         public virtual float ReadSingle() {
             return _reader.ReadSingle();
         }

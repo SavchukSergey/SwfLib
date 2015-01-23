@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace SwfLib.Avm2 {
 
@@ -70,7 +71,7 @@ namespace SwfLib.Avm2 {
             }
         }
 
-        private void WriteConstantPool(AsConstantPool constantPool) {
+        public void WriteConstantPool(AsConstantPool constantPool) {
             WriteU30((uint)(constantPool.Integers.Length <= 1 ? 0 : constantPool.Integers.Length));
             for (var i = 1; i < constantPool.Integers.Length; i++) {
                 WriteS32(constantPool.Integers[i]);
@@ -321,9 +322,10 @@ namespace SwfLib.Avm2 {
             _writer.WriteDouble(val);
         }
 
-        private void WriteString(string str) {
-            WriteU30((uint)str.Length);
-            _writer.WriteRawString(str);
+        private void WriteString(string val) {
+            WriteU30((uint)val.Length);
+            var bytes = Encoding.UTF8.GetBytes(val);
+            _writer.WriteBytes(bytes);
         }
 
         #endregion
