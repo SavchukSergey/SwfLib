@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SwfLib.Avm2.Opcodes {
-    class GetSuperOpcode {
+﻿namespace SwfLib.Avm2.Opcodes {
+    /// <summary>
+    /// Gets a property from a base class. 
+    /// </summary>
+    public class GetSuperOpcode : BaseAvm2Opcode {
     }
 }

@@ -159,6 +159,10 @@
     <Compile Include="Avm2\Opcodes\Arithmetics\SubtractOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\UrshiftOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Avm2Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\GetLocal3Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\GetLocal2Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\GetLocal1Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\GetLocal0Opcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\AsTypeLateOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\AsTypeOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\BitAndOpcode.cs" />
@@ -212,13 +216,12 @@
     <Compile Include="Avm2\Opcodes\Debug\DebugOpcode.cs" />
     <Compile Include="Avm2\Opcodes\DeletePropertyOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Stack\DupOpcode.cs" />
-    <Compile Include="Avm2\Opcodes\DxnsLateOpcode.cs" />
-    <Compile Include="Avm2\Opcodes\DxnsOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\Xml\DxnsLateOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\Xml\DxnsOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Branching\EqualsOpcode.cs" />
-    <Compile Include="Avm2\Opcodes\GetLocalNOpcode.cs" />
     <Compile Include="Avm2\Opcodes\GetLocalOpcode.cs" />
     <Compile Include="Avm2\Opcodes\GetPropertyOpcode.cs" />
-    <Compile Include="Avm2\Opcodes\GetScopeObject.cs" />
+    <Compile Include="Avm2\Opcodes\GetScopeObjectOpcode.cs" />
     <Compile Include="Avm2\Opcodes\GetSlotOpcode.cs" />
     <Compile Include="Avm2\Opcodes\GetSuperOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Branching\GreaterEqualsOpcode.cs" />

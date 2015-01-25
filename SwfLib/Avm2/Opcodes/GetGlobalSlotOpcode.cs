@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SwfLib.Avm2.Opcodes {
-    class GetGlobalSlotOpcode {
+﻿namespace SwfLib.Avm2.Opcodes {
+    /// <summary>
+    /// Get the value of a slot on the global scope. 
+    /// </summary>
+    public class GetGlobalSlotOpcode : BaseAvm2Opcode {
     }
 }

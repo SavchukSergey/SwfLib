@@ -2,7 +2,9 @@
 using SwfLib.Avm2.Opcodes.Arithmetics;
 using SwfLib.Avm2.Opcodes.Branching;
 using SwfLib.Avm2.Opcodes.Debug;
+using SwfLib.Avm2.Opcodes.Stack;
 using SwfLib.Avm2.Opcodes.TypeCasting;
+using SwfLib.Avm2.Opcodes.Xml;
 
 namespace SwfLib.Avm2 {
     public class Avm2OpcodeFactory {
@@ -41,6 +43,35 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.Debug: return new DebugOpcode();
                 case Avm2Opcode.DebugFile: return new DebugFileOpcode();
                 case Avm2Opcode.DebugLine: return new DebugLineOpcode();
+                case Avm2Opcode.DecLocal: return new DecLocalOpcode();
+                case Avm2Opcode.DecLocalI: return new DecLocalIOpcode();
+                case Avm2Opcode.Decrement: return new DecrementOpcode();
+                case Avm2Opcode.DecrementI: return new DecrementIOpcode();
+                case Avm2Opcode.DeleteProperty: return new DeletePropertyOpcode();
+                case Avm2Opcode.Divide: return new DivideOpcode();
+                case Avm2Opcode.Dup: return new DupOpcode();
+                case Avm2Opcode.Dxns: return new DxnsOpcode();
+                case Avm2Opcode.DxnsLate: return new DxnsLateOpcode();
+                case Avm2Opcode.Equal: return new EqualsOpcode();
+                case Avm2Opcode.EscXAttr: return new EscXAttrOpcode();
+                case Avm2Opcode.EscXElem: return new EscXElemOpcode();
+                case Avm2Opcode.FindProperty: return new FindPropertyOpcode();
+                case Avm2Opcode.FindPropStrict: return new FindPropStrictOpcode();
+                case Avm2Opcode.GetDescendants: return new GetDescendantsOpcode();
+                case Avm2Opcode.GetGlobalScope: return new GetGlobalScopeOpcode();
+                case Avm2Opcode.GetGlobalSlot: return new GetGlobalSlotOpcode();
+                case Avm2Opcode.GetLex: return new GetLexOpcode();
+                case Avm2Opcode.GetLocal: return new GetLocalOpcode();
+                case Avm2Opcode.GetLocal0: return new GetLocal0Opcode();
+                case Avm2Opcode.GteLocal1: return new GetLocal1Opcode();
+                case Avm2Opcode.GetLocal2: return new GetLocal2Opcode();
+                case Avm2Opcode.GetLocal3: return new GetLocal3Opcode();
+                case Avm2Opcode.GetProperty: return new GetPropertyOpcode();
+                case Avm2Opcode.GetScopeObject: return new GetScopeObjectOpcode();
+                case Avm2Opcode.GetSlot: return new GetSlotOpcode();
+                case Avm2Opcode.GetSuper: return new GetSuperOpcode();
+                case Avm2Opcode.GreaterEquals: return new GreaterEqualsOpcode();
+                case Avm2Opcode.GreaterThan: return new GreaterThanOpcode();
                 default: return new UnknownOpcode();
             }
         }

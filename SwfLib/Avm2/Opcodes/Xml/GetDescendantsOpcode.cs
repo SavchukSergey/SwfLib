@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SwfLib.Avm2.Opcodes.Xml {
-    class GetDescendantsOpcode {
+﻿namespace SwfLib.Avm2.Opcodes.Xml {
+    /// <summary>
+    /// Get descendants. 
+    /// </summary>
+    public class GetDescendantsOpcode : BaseAvm2Opcode {
     }
 }

@@ -2,6 +2,6 @@
     /// <summary>
     /// Get a local register. 
     /// </summary>
-    public class GetLocalOpcode : BaseAvm2Opcode {
+    public class GetLocal2Opcode : BaseAvm2Opcode {
     }
 }

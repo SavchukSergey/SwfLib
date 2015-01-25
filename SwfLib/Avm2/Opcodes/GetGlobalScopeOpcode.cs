@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SwfLib.Avm2.Opcodes {
-    class GetGlobalScopeOpcode {
+﻿namespace SwfLib.Avm2.Opcodes {
+    /// <summary>
+    /// Gets the global scope. 
+    /// </summary>
+    public class GetGlobalScopeOpcode : BaseAvm2Opcode {
     }
 }

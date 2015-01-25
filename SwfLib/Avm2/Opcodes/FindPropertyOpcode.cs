@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SwfLib.Avm2.Opcodes {
-    class FindPropertyOpcode {
+﻿namespace SwfLib.Avm2.Opcodes {
+    /// <summary>
+    /// Search the scope stack for a property. 
+    /// </summary>
+    public class FindPropertyOpcode : BaseAvm2Opcode {
     }
 }
