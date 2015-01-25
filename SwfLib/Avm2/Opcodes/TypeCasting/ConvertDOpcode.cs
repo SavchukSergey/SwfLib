@@ -1,4 +1,7 @@
 ﻿namespace SwfLib.Avm2.Opcodes.TypeCasting {
-    public class ConvertDOpcode : BaseAvm2Opcode{
+    /// <summary>
+    /// Convert a value to a double. 
+    /// </summary>
+    public class ConvertDOpcode : BaseAvm2Opcode {
     }
 }
