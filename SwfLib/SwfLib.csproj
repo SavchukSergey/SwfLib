@@ -135,6 +135,7 @@
     <Compile Include="Actions\ActionWith.cs" />
     <Compile Include="Actions\ActionWriter.cs" />
     <Compile Include="Actions\RegisterParam.cs" />
+    <Compile Include="Avm2\Avm2OpcodeFactory.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\AddIOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\AddOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\DecLocalIOpcode.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="Avm2\Opcodes\Arithmetics\SubtractIOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\SubtractOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\UrshiftOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\Avm2Opcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\AsTypeLateOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\AsTypeOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\BitAndOpcode.cs" />
@@ -264,6 +266,7 @@
     <Compile Include="Avm2\Opcodes\SwapOpcode.cs" />
     <Compile Include="Avm2\Opcodes\ThrowOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\TypeOfOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\UnknownOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Xml\EscXAttrOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Xml\EscXElemOpcode.cs" />
     <Compile Include="Avm2\Opcodes\FindPropertyOpcode.cs" />

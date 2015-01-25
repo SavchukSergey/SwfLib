@@ -1,6 +1,6 @@
-﻿namespace SwfLib.Avm2 {
-    public enum AsOpcode : byte {
-        OP_raw = 0x00, /// Used internally by RABCDAsm
+﻿namespace SwfLib.Avm2.Opcodes {
+    public enum Avm2Opcode : byte {
+        OP_raw = 0x00,
         OP_bkpt = 0x01,
         OP_nop = 0x02,
         OP_throw = 0x03,
@@ -124,8 +124,8 @@
         OP_coerce_i = 0x83,
         OP_coerce_d = 0x84,
         OP_coerce_s = 0x85,
-        OP_astype = 0x86,
-        OP_astypelate = 0x87,
+        AsType = 0x86,
+        AsTypeLate = 0x87,
         OP_coerce_u = 0x88,
         OP_coerce_o = 0x89,
         OP_negate_p = 0x8F,
@@ -136,14 +136,14 @@
         OP_declocal = 0x94,
         OP_typeof = 0x95,
         OP_not = 0x96,
-        OP_bitnot = 0x97,
+        BitNot = 0x97,
         OP_concat = 0x9A,
         OP_add_d = 0x9B,
         OP_increment_p = 0x9C,
         OP_inclocal_p = 0x9D,
         OP_decrement_p = 0x9E,
         OP_declocal_p = 0x9F,
-        OP_add = 0xA0,
+        Add = 0xA0,
         OP_subtract = 0xA1,
         OP_multiply = 0xA2,
         OP_divide = 0xA3,
@@ -151,9 +151,9 @@
         OP_lshift = 0xA5,
         OP_rshift = 0xA6,
         OP_urshift = 0xA7,
-        OP_bitand = 0xA8,
-        OP_bitor = 0xA9,
-        OP_bitxor = 0xAA,
+        BitAnd = 0xA8,
+        BitOr = 0xA9,
+        BitXor = 0xAA,
         OP_equals = 0xAB,
         OP_strictequals = 0xAC,
         OP_lessthan = 0xAD,
@@ -174,7 +174,7 @@
         OP_inclocal_i = 0xC2,
         OP_declocal_i = 0xC3,
         OP_negate_i = 0xC4,
-        OP_add_i = 0xC5,
+        AddI = 0xC5,
         OP_subtract_i = 0xC6,
         OP_multiply_i = 0xC7,
         OP_getlocal0 = 0xD0,
@@ -190,6 +190,6 @@
         OP_debugfile = 0xF1,
         OP_bkptline = 0xF2,
         OP_timestamp = 0xF3,
-    }
 
+    }
 }
