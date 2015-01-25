@@ -1,4 +1,4 @@
 ﻿namespace SwfLib.Avm2.Opcodes.Stack {
-    class PushNullOpcode : BaseAvm2Opcode {
+    public class PushNullOpcode : BaseAvm2Opcode {
     }
 }

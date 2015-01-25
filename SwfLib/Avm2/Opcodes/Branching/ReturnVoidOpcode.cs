@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SwfLib.Avm2.Opcodes {
-    class ConvertIOpcode {
+    class ReturnVoidOpcode {
     }
 }
