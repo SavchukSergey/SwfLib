@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 using SwfLib.Actions;
+using SwfLib.Avm2;
 using SwfLib.Buttons;
 using SwfLib.ClipActions;
 using SwfLib.Data;
@@ -323,6 +324,9 @@ namespace SwfLib {
             tag.Flags = reader.ReadUInt32();
             tag.Name = reader.ReadString();
             tag.ABCData = reader.ReadRest();
+
+//            var r = new AbcReader(new SwfStreamReader(new MemoryStream(tag.ABCData)));
+//            var file = r.ReadAbcFile();
             return tag;
         }
 
