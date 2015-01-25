@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SwfLib.Avm2.Opcodes {
-    class CheckFilterOpcode {
+﻿namespace SwfLib.Avm2.Opcodes {
+    /// <summary>
+    /// Check to make sure an object can have a filter operation performed on it. 
+    /// </summary>
+    public class CheckFilterOpcode : BaseAvm2Opcode {
     }
 }

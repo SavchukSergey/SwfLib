@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SwfLib.Avm2.Opcodes {
-    class ConstructPropOpcode {
+﻿namespace SwfLib.Avm2.Opcodes {
+    /// <summary>
+    /// Construct a property. 
+    /// </summary>
+    public class ConstructPropOpcode : BaseAvm2Opcode {
     }
 }
