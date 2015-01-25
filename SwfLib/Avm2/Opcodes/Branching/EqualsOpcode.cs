@@ -1,4 +1,4 @@
 ﻿namespace SwfLib.Avm2.Opcodes.Branching {
-    class EqualsOpcode {
+    public class EqualsOpcode : BaseAvm2Opcode {
     }
 }

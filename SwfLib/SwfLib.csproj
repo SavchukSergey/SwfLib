@@ -205,9 +205,9 @@
     <Compile Include="Avm2\Opcodes\TypeCasting\ConvertOOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\ConvertSOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\ConvertUOpcode.cs" />
-    <Compile Include="Avm2\Opcodes\DebugFileOpcode.cs" />
-    <Compile Include="Avm2\Opcodes\DebugLineOpcode.cs" />
-    <Compile Include="Avm2\Opcodes\DebugOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\Debug\DebugFileOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\Debug\DebugLineOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\Debug\DebugOpcode.cs" />
     <Compile Include="Avm2\Opcodes\DeletePropertyOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Stack\DupOpcode.cs" />
     <Compile Include="Avm2\Opcodes\DxnsLateOpcode.cs" />
@@ -224,7 +224,7 @@
     <Compile Include="Avm2\Opcodes\HasNextOpcode.cs" />
     <Compile Include="Avm2\Opcodes\InitPropertyOpcode.cs" />
     <Compile Include="Avm2\Opcodes\InOpcode.cs" />
-    <Compile Include="Avm2\Opcodes\InstanceOfOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\TypeCasting\InstanceOfOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\IsTypeLateOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\IsTypeOpcode.cs" />
     <Compile Include="Avm2\Opcodes\KillOpcode.cs" />
@@ -263,7 +263,7 @@
     <Compile Include="Avm2\Opcodes\SetSuperOpcode.cs" />
     <Compile Include="Avm2\Opcodes\SwapOpcode.cs" />
     <Compile Include="Avm2\Opcodes\ThrowOpcode.cs" />
-    <Compile Include="Avm2\Opcodes\TypeOfOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\TypeCasting\TypeOfOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Xml\EscXAttrOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Xml\EscXElemOpcode.cs" />
     <Compile Include="Avm2\Opcodes\FindPropertyOpcode.cs" />
