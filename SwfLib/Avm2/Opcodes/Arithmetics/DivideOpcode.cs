@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SwfLib.Avm2.Opcodes.Arithmetics {
-    class DivideOpcode {
+﻿namespace SwfLib.Avm2.Opcodes.Arithmetics {
+    public class DivideOpcode : BaseAvm2Opcode {
     }
 }
