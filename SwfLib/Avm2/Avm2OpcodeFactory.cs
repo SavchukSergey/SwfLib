@@ -161,6 +161,11 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.SetProperty: return new SetPropertyOpcode();
                 case Avm2Opcode.SetSlot: return new SetSlotOpcode();
                 case Avm2Opcode.SetSuper: return new SetSuperOpcode();
+                case Avm2Opcode.Sf32: return new Sf32Opcode();
+                case Avm2Opcode.Sf64: return new Sf64Opcode();
+                case Avm2Opcode.Si8: return new Si8Opcode();
+                case Avm2Opcode.Si16: return new Si16Opcode();
+                case Avm2Opcode.Si32: return new Si32Opcode();
                 case Avm2Opcode.StrictEquals: return new StrictEqualsOpcode();
                 case Avm2Opcode.Subtract: return new SubtractOpcode();
                 case Avm2Opcode.SubtractI: return new SubtractIOpcode();
@@ -169,12 +174,6 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.Timestamp: return new TimestampOpcode();
                 case Avm2Opcode.TypeOf: return new TypeOfOpcode();
                 case Avm2Opcode.UrShift: return new UrshiftOpcode();
-                
-                case Avm2Opcode.Sf32: return new Sf32Opcode();
-                case Avm2Opcode.Sf64: return new Sf64Opcode();
-                case Avm2Opcode.Si8: return new Si8Opcode();
-                case Avm2Opcode.Si16: return new Si16Opcode();
-                case Avm2Opcode.Si32: return new Si32Opcode();
                 /*
 sxi_1
 sxi_8
