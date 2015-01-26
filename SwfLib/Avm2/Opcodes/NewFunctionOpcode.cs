@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SwfLib.Avm2.Opcodes {
-    class NewFunctionOpcode {
+﻿namespace SwfLib.Avm2.Opcodes {
+    public class NewFunctionOpcode : BaseAvm2Opcode {
     }
 }

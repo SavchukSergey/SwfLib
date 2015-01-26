@@ -89,83 +89,89 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.IfStrictNe: return new IfStrictNeOpcode();
                 case Avm2Opcode.IfTrue: return new IfTrueOpcode();
                 case Avm2Opcode.In: return new InOpcode();
-
-                /*
-inclocal
-inclocal_i
-increment
-increment_i
-initproperty
-instanceof
-istype
-istypelate
-jump
-kill
-label
-lessequals
-lessthan
+                case Avm2Opcode.IncLocal: return new IncLocalOpcode();
+                case Avm2Opcode.IncLocalI: return new IncLocalIOpcode();
+                case Avm2Opcode.Increment: return new IncrementOpcode();
+                case Avm2Opcode.IncrementI: return new IncrementIOpcode();
+                case Avm2Opcode.InitProperty: return new InitPropertyOpcode();
+                case Avm2Opcode.InstanceOf: return new InstanceOfOpcode();
+                case Avm2Opcode.IsType: return new IsTypeOpcode();
+                case Avm2Opcode.IsTypeLate: return new IsTypeLateOpcode();
+                case Avm2Opcode.Jump: return new JumpOpcode();
+                case Avm2Opcode.Kill: return new KillOpcode();
+                case Avm2Opcode.Label: return new LabelOpcode();
+                case Avm2Opcode.LessEquals: return new LessEqualsOpcode();
+                case Avm2Opcode.LessThan: return new LessThanOpcode();
+/*
 lf32
 lf64
 li8
 li16
 li32
-lookupswitch
-lshift
-modulo
-multiply
-multiply_i
-negate
-negate_i
-newactivation
-newarray
-newcatch
-newclass
-newfunction
-newobject
-nextname
-nextvalue
-nop
-not
-pop
-popscope
-pushbyte
-pushdouble
-pushfalse
-pushint
-pushnamespace
-pushnan
-pushnull
-pushscope
-pushshort
-pushstring
-pushtrue
-pushuint
-pushundefined
-pushwith
-returnvalue
-returnvoid
-rshift
-setglobalslot
-setlocal
-setlocal_n
-setproperty
-setslot
-setsuper
+*/
+                case Avm2Opcode.LookupSwitch: return new LookupSwitchOpcode();
+                case Avm2Opcode.LShift: return new LShiftOpcode();
+                case Avm2Opcode.Modulo: return new ModuloOpcode();
+                case Avm2Opcode.Multiply: return new MultiplyOpcode();
+                case Avm2Opcode.MultiplyI: return new MultiplyIOpcode();
+                case Avm2Opcode.Negate: return new NegateOpcode();
+                case Avm2Opcode.NegateI: return new NegateIOpcode();
+                case Avm2Opcode.NewActivation: return new NewActivationOpcode();
+                case Avm2Opcode.NewArray: return new NewArrayOpcode();
+                case Avm2Opcode.NewCatch: return new NewCatchOpcode();
+                case Avm2Opcode.NewClass: return new NewClassOpcode();
+                case Avm2Opcode.NewFunction: return new NewFunctionOpcode();
+                case Avm2Opcode.NewObject: return new NewObjectOpcode();
+                case Avm2Opcode.NextName: return new NextNameOpcode();
+                case Avm2Opcode.NextValue: return new NextValueOpcode();
+                case Avm2Opcode.Nop: return new NopOpcode();
+                case Avm2Opcode.Not: return new NotOpcode();
+                case Avm2Opcode.Pop: return new PopOpcode();
+                case Avm2Opcode.PopScope: return new PopScopeOpcode();
+                case Avm2Opcode.PushByte: return new PushByteOpcode();
+                case Avm2Opcode.PushDouble: return new PushDoubleOpcode();
+                case Avm2Opcode.PushFalse: return new PushFalseOpcode();
+                case Avm2Opcode.PushInt: return new PushIntOpcode();
+                case Avm2Opcode.PushNamespace: return new PushNamespaceOpcode();
+                case Avm2Opcode.PushNan: return new PushNanOpcode();
+                case Avm2Opcode.PushNull: return new PushNullOpcode();
+                case Avm2Opcode.PushScope: return new PushScopeOpcode();
+                case Avm2Opcode.PushShort: return new PushShortOpcode();
+                case Avm2Opcode.PushString: return new PushStringOpcode();
+                case Avm2Opcode.PushTrue: return new PushTrueOpcode();
+                case Avm2Opcode.PushUInt: return new PushUIntOpcode();
+                case Avm2Opcode.PushUndefined: return new PushUndefinedOpcode();
+                case Avm2Opcode.PushWith: return new PushWithOpcode();
+                case Avm2Opcode.ReturnValue: return new ReturnValueOpcode();
+                case Avm2Opcode.ReturnVoid: return new ReturnVoidOpcode();
+                case Avm2Opcode.RShift: return new RShiftOpcode();
+                case Avm2Opcode.SetGlobalSlot: return new SetGlobalSlotOpcode();
+                case Avm2Opcode.SetLocal: return new SetLocalOpcode();
+                case Avm2Opcode.SetLocal0: return new SetLocal0Opcode();
+                case Avm2Opcode.SetLocal1: return new SetLocal1Opcode();
+                case Avm2Opcode.SetLocal2: return new SetLocal2Opcode();
+                case Avm2Opcode.SetLocal3: return new SetLocal3Opcode();
+                case Avm2Opcode.SetProperty: return new SetPropertyOpcode();
+                case Avm2Opcode.SetSlot: return new SetSlotOpcode();
+                case Avm2Opcode.SetSuper: return new SetSuperOpcode();
+                case Avm2Opcode.StrictEquals: return new StrictEqualsOpcode();
+                case Avm2Opcode.Subtract: return new SubtractOpcode();
+                case Avm2Opcode.SubtractI: return new SubtractIOpcode();
+                case Avm2Opcode.Swap: return new SwapOpcode();
+                case Avm2Opcode.Throw: return new ThrowOpcode();
+                case Avm2Opcode.TypeOf: return new TypeOfOpcode();
+                case Avm2Opcode.UrShift: return new UrshiftOpcode();
+                /*
 sf32
 sf64
 si8
 si16
 si32
-strictequals
-subtract
-subtract_i
-swap
+                 */
+                /*
 sxi_1
 sxi_8
 sxi_16
-throw
-typeof
-urshift
                  */
                 default: return new UnknownOpcode();
             }
