@@ -78,6 +78,7 @@
     <Compile Include="Actions\SwfActionFactoryTest.cs" />
     <Compile Include="AssertExt.cs" />
     <Compile Include="Avm2\AbcReadWriteTests.cs" />
+    <Compile Include="Avm2\OpcodesTest.cs" />
     <Compile Include="BasicTypes\BitTest.cs" />
     <Compile Include="BasicTypes\ColorRGBATest.cs" />
     <Compile Include="BasicTypes\ColorRGBTest.cs" />

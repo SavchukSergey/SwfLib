@@ -164,6 +164,10 @@
     <Compile Include="Avm2\Opcodes\GetLocal2Opcode.cs" />
     <Compile Include="Avm2\Opcodes\GetLocal1Opcode.cs" />
     <Compile Include="Avm2\Opcodes\GetLocal0Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\SetGlobalSlotOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\SetLocal3Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\SetLocal2Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\SetLocal1Opcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\AsTypeLateOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\AsTypeOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\BitAndOpcode.cs" />
@@ -240,7 +244,7 @@
     <Compile Include="Avm2\Opcodes\NewClassOpcode.cs" />
     <Compile Include="Avm2\Opcodes\NewFunctionOpcode.cs" />
     <Compile Include="Avm2\Opcodes\NewObjectOpcode.cs" />
-    <Compile Include="Avm2\Opcodes\NewValueOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\NextValueOpcode.cs" />
     <Compile Include="Avm2\Opcodes\NextNameOpcode.cs" />
     <Compile Include="Avm2\Opcodes\NopOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Stack\PopOpcode.cs" />
@@ -261,8 +265,7 @@
     <Compile Include="Avm2\Opcodes\Stack\PushWithOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Branching\ReturnValueOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Branching\ReturnVoidOpcode.cs" />
-    <Compile Include="Avm2\Opcodes\SetGlobalSlot.cs" />
-    <Compile Include="Avm2\Opcodes\SetLocalNOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\SetLocal0Opcode.cs" />
     <Compile Include="Avm2\Opcodes\SetLocalOpcode.cs" />
     <Compile Include="Avm2\Opcodes\SetPropertyOpcode.cs" />
     <Compile Include="Avm2\Opcodes\SetSlotOpcode.cs" />
