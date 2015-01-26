@@ -160,6 +160,16 @@
     <Compile Include="Avm2\Opcodes\Arithmetics\UrshiftOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Avm2Opcode.cs" />
     <Compile Include="Avm2\Opcodes\Branching\IfeqOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\ByteArray\Lf64Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\ByteArray\Li16Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\ByteArray\Lf32Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\ByteArray\Li32Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\ByteArray\Sf64Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\ByteArray\Sf32Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\ByteArray\Si32Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\ByteArray\Si16Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\ByteArray\Si8Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\ByteArray\Li8Opcode.cs" />
     <Compile Include="Avm2\Opcodes\GetLocal3Opcode.cs" />
     <Compile Include="Avm2\Opcodes\GetLocal2Opcode.cs" />
     <Compile Include="Avm2\Opcodes\GetLocal1Opcode.cs" />

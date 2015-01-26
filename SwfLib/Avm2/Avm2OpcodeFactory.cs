@@ -1,6 +1,7 @@
 ﻿using SwfLib.Avm2.Opcodes;
 using SwfLib.Avm2.Opcodes.Arithmetics;
 using SwfLib.Avm2.Opcodes.Branching;
+using SwfLib.Avm2.Opcodes.ByteArray;
 using SwfLib.Avm2.Opcodes.Debug;
 using SwfLib.Avm2.Opcodes.Stack;
 using SwfLib.Avm2.Opcodes.TypeCasting;
@@ -102,13 +103,11 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.Label: return new LabelOpcode();
                 case Avm2Opcode.LessEquals: return new LessEqualsOpcode();
                 case Avm2Opcode.LessThan: return new LessThanOpcode();
-/*
-lf32
-lf64
-li8
-li16
-li32
-*/
+                case Avm2Opcode.Lf32: return new Lf32Opcode();
+                case Avm2Opcode.Lf64: return new Lf64Opcode();
+                case Avm2Opcode.Li8: return new Li8Opcode();
+                case Avm2Opcode.Li16: return new Li16Opcode();
+                case Avm2Opcode.Li32: return new Li32Opcode();
                 case Avm2Opcode.LookupSwitch: return new LookupSwitchOpcode();
                 case Avm2Opcode.LShift: return new LShiftOpcode();
                 case Avm2Opcode.Modulo: return new ModuloOpcode();
@@ -161,13 +160,12 @@ li32
                 case Avm2Opcode.Throw: return new ThrowOpcode();
                 case Avm2Opcode.TypeOf: return new TypeOfOpcode();
                 case Avm2Opcode.UrShift: return new UrshiftOpcode();
-                /*
-sf32
-sf64
-si8
-si16
-si32
-                 */
+                
+                case Avm2Opcode.Sf32: return new Sf32Opcode();
+                case Avm2Opcode.Sf64: return new Sf64Opcode();
+                case Avm2Opcode.Si8: return new Si8Opcode();
+                case Avm2Opcode.Si16: return new Si16Opcode();
+                case Avm2Opcode.Si32: return new Si32Opcode();
                 /*
 sxi_1
 sxi_8
