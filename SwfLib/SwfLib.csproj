@@ -170,6 +170,9 @@
     <Compile Include="Avm2\Opcodes\ByteArray\Si16Opcode.cs" />
     <Compile Include="Avm2\Opcodes\ByteArray\Si8Opcode.cs" />
     <Compile Include="Avm2\Opcodes\ByteArray\Li8Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\Debug\BreakpointLineOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\Debug\BreakpointOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\FindDefinitionOpcode.cs" />
     <Compile Include="Avm2\Opcodes\GetLocal3Opcode.cs" />
     <Compile Include="Avm2\Opcodes\GetLocal2Opcode.cs" />
     <Compile Include="Avm2\Opcodes\GetLocal1Opcode.cs" />
@@ -178,6 +181,7 @@
     <Compile Include="Avm2\Opcodes\SetLocal3Opcode.cs" />
     <Compile Include="Avm2\Opcodes\SetLocal2Opcode.cs" />
     <Compile Include="Avm2\Opcodes\SetLocal1Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\TimestampOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\AsTypeLateOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\AsTypeOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\BitAndOpcode.cs" />
@@ -215,7 +219,12 @@
     <Compile Include="Avm2\Opcodes\Branching\StrictEqualsOpcode.cs" />
     <Compile Include="Avm2\Opcodes\CheckFilterOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\CoerceAOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\TypeCasting\CoerceOOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\TypeCasting\CoerceIOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\TypeCasting\CoerceDOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\CoerceOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\TypeCasting\CoerceBOpcode.cs" />
+    <Compile Include="Avm2\Opcodes\TypeCasting\CoerceUOpcode.cs" />
     <Compile Include="Avm2\Opcodes\TypeCasting\CoerceSOpcode.cs" />
     <Compile Include="Avm2\Opcodes\ConstructOpcode.cs" />
     <Compile Include="Avm2\Opcodes\ConstructPropOpcode.cs" />

@@ -20,6 +20,8 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.BitNot: return new BitNotOpcode();
                 case Avm2Opcode.BitOr: return new BitOrOpcode();
                 case Avm2Opcode.BitXor: return new BitXorOpcode();
+                case Avm2Opcode.Breakpoint: return new BreakpointOpcode();
+                case Avm2Opcode.BreakpointLine: return new BreakpointLineOpcode();
                 case Avm2Opcode.Call: return new CallOpcode();
                 case Avm2Opcode.CallMethod: return new CallMethodOpcode();
                 case Avm2Opcode.CallProperty: return new CallPropertyOpcode();
@@ -31,7 +33,12 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.CheckFilter: return new CheckFilterOpcode();
                 case Avm2Opcode.Coerce: return new CoerceOpcode();
                 case Avm2Opcode.CoerceA: return new CoerceAOpcode();
+                case Avm2Opcode.CoerceB: return new CoerceBOpcode();
+                case Avm2Opcode.CoerceD: return new CoerceDOpcode();
+                case Avm2Opcode.CoerceI: return new CoerceIOpcode();
+                case Avm2Opcode.CoerceO: return new CoerceOOpcode();
                 case Avm2Opcode.CoerceS: return new CoerceSOpcode();
+                case Avm2Opcode.CoerceU: return new CoerceUOpcode();
                 case Avm2Opcode.Construct: return new ConstructOpcode();
                 case Avm2Opcode.ConstructProp: return new ConstructPropOpcode();
                 case Avm2Opcode.ConstructSuper: return new ConstructSuperOpcode();
@@ -56,6 +63,7 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.Equal: return new EqualsOpcode();
                 case Avm2Opcode.EscXAttr: return new EscXAttrOpcode();
                 case Avm2Opcode.EscXElem: return new EscXElemOpcode();
+                case Avm2Opcode.FindDefinition: return new FindDefinitionOpcode();
                 case Avm2Opcode.FindProperty: return new FindPropertyOpcode();
                 case Avm2Opcode.FindPropStrict: return new FindPropStrictOpcode();
                 case Avm2Opcode.GetDescendants: return new GetDescendantsOpcode();
@@ -158,6 +166,7 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.SubtractI: return new SubtractIOpcode();
                 case Avm2Opcode.Swap: return new SwapOpcode();
                 case Avm2Opcode.Throw: return new ThrowOpcode();
+                case Avm2Opcode.Timestamp: return new TimestampOpcode();
                 case Avm2Opcode.TypeOf: return new TypeOfOpcode();
                 case Avm2Opcode.UrShift: return new UrshiftOpcode();
                 
