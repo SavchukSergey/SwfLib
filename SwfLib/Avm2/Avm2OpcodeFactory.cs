@@ -78,19 +78,19 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.IfFalse: return new IfFalseOpcode();
                 case Avm2Opcode.IfGe: return new IfgeOpcode();
                 case Avm2Opcode.IfGt: return new IfgtOpcode();
+                case Avm2Opcode.IfLe: return new IfleOpcode();
+                case Avm2Opcode.IfLt: return new IfltOpcode();
+                case Avm2Opcode.IfNe: return new IfneOpcode();
+                case Avm2Opcode.IfNge: return new IfngeOpcode();
+                case Avm2Opcode.IfNgt: return new IfngtOpcode();
+                case Avm2Opcode.IfNle: return new IfnleOpcode();
+                case Avm2Opcode.IfNlt: return new IfnltOpcode();
+                case Avm2Opcode.IfStrictEq: return new IfStrictEqOpcode();
+                case Avm2Opcode.IfStrictNe: return new IfStrictNeOpcode();
+                case Avm2Opcode.IfTrue: return new IfTrueOpcode();
+                case Avm2Opcode.In: return new InOpcode();
 
                 /*
-ifle
-iflt
-ifne
-ifnge
-ifngt
-ifnle
-ifnlt
-ifstricteq
-ifstrictne
-iftrue
-in
 inclocal
 inclocal_i
 increment
