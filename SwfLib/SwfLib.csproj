@@ -136,6 +136,7 @@
     <Compile Include="Actions\ActionWriter.cs" />
     <Compile Include="Actions\RegisterParam.cs" />
     <Compile Include="Avm2\Avm2OpcodeFactory.cs" />
+    <Compile Include="Avm2\IAvm2OpcodeVisitor.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\AddIOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\AddOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\DecLocalIOpcode.cs" />
