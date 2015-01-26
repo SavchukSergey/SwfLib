@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SwfLib.Avm2.Opcodes {
-    class HasNext2Opcode {
+﻿namespace SwfLib.Avm2.Opcodes {
+    public class HasNext2Opcode : BaseAvm2Opcode {
     }
 }

@@ -35,11 +35,11 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.ConstructProp: return new ConstructPropOpcode();
                 case Avm2Opcode.ConstructSuper: return new ConstructSuperOpcode();
                 case Avm2Opcode.ConvertB: return new ConvertBOpcode();
-                case Avm2Opcode.ConvertI: return new ConvertIOpcode();
                 case Avm2Opcode.ConvertD: return new ConvertDOpcode();
+                case Avm2Opcode.ConvertI: return new ConvertIOpcode();
                 case Avm2Opcode.ConvertO: return new ConvertOOpcode();
-                case Avm2Opcode.ConvertU: return new ConvertUOpcode();
                 case Avm2Opcode.ConvertS: return new ConvertSOpcode();
+                case Avm2Opcode.ConvertU: return new ConvertUOpcode();
                 case Avm2Opcode.Debug: return new DebugOpcode();
                 case Avm2Opcode.DebugFile: return new DebugFileOpcode();
                 case Avm2Opcode.DebugLine: return new DebugLineOpcode();
@@ -72,6 +72,101 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.GetSuper: return new GetSuperOpcode();
                 case Avm2Opcode.GreaterEquals: return new GreaterEqualsOpcode();
                 case Avm2Opcode.GreaterThan: return new GreaterThanOpcode();
+                case Avm2Opcode.HasNext: return new HasNextOpcode();
+                case Avm2Opcode.HasNext2: return new HasNext2Opcode();
+                case Avm2Opcode.IfEq: return new IfeqOpcode();
+                case Avm2Opcode.IfFalse: return new IfFalseOpcode();
+                case Avm2Opcode.IfGe: return new IfgeOpcode();
+                case Avm2Opcode.IfGt: return new IfgtOpcode();
+
+                /*
+ifle
+iflt
+ifne
+ifnge
+ifngt
+ifnle
+ifnlt
+ifstricteq
+ifstrictne
+iftrue
+in
+inclocal
+inclocal_i
+increment
+increment_i
+initproperty
+instanceof
+istype
+istypelate
+jump
+kill
+label
+lessequals
+lessthan
+lf32
+lf64
+li8
+li16
+li32
+lookupswitch
+lshift
+modulo
+multiply
+multiply_i
+negate
+negate_i
+newactivation
+newarray
+newcatch
+newclass
+newfunction
+newobject
+nextname
+nextvalue
+nop
+not
+pop
+popscope
+pushbyte
+pushdouble
+pushfalse
+pushint
+pushnamespace
+pushnan
+pushnull
+pushscope
+pushshort
+pushstring
+pushtrue
+pushuint
+pushundefined
+pushwith
+returnvalue
+returnvoid
+rshift
+setglobalslot
+setlocal
+setlocal_n
+setproperty
+setslot
+setsuper
+sf32
+sf64
+si8
+si16
+si32
+strictequals
+subtract
+subtract_i
+swap
+sxi_1
+sxi_8
+sxi_16
+throw
+typeof
+urshift
+                 */
                 default: return new UnknownOpcode();
             }
         }
