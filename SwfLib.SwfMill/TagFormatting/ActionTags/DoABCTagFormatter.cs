@@ -8,7 +8,7 @@ namespace SwfLib.SwfMill.TagFormatting.ActionTags {
         protected override void FormatTagElement(DoABCTag tag, XElement xTag) {
             xTag.Add(new XAttribute("flags", tag.Flags));
             xTag.Add(new XAttribute("name", tag.Name));
-            xTag.Add(new XElement("abc", Convert.ToBase64String(tag.ABCData)));
+            xTag.Add(new XElement("abc", FormatBase64(tag.ABCData)));
         }
 
         protected override bool AcceptTagAttribute(DoABCTag tag, XAttribute attrib) {
@@ -28,7 +28,7 @@ namespace SwfLib.SwfMill.TagFormatting.ActionTags {
         protected override bool AcceptTagElement(DoABCTag tag, XElement element) {
             switch (element.Name.LocalName) {
                 case "abc":
-                    tag.ABCData = Convert.FromBase64String(element.Value);
+                    tag.ABCData = ParseBase64(element.Value);
                     break;
                 default:
                     return false;

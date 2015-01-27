@@ -4,6 +4,10 @@ using SwfLib.SwfMill.Data;
 using SwfLib.Tags;
 
 namespace SwfLib.SwfMill.TagFormatting {
+    /// <summary>
+    /// Represents base swf tag formatter
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class TagFormatterBase<T> : ITagFormatter<T> where T : SwfTagBase {
 
         private const string OBJECT_ID_ATTRIB = "objectID";
@@ -14,6 +18,12 @@ namespace SwfLib.SwfMill.TagFormatting {
         protected const string WIDTH_ATTRIB = "width";
         protected const string HEIGHT_ATTRIB = "height";
 
+        /// <summary>
+        /// Parses tag from xml node
+        /// </summary>
+        /// <param name="xTag"></param>
+        /// <param name="tag"></param>
+        /// <returns></returns>
         public T ParseTo(XElement xTag, T tag) {
             InitTag(tag, xTag);
             foreach (var attrib in xTag.Attributes()) {
@@ -25,6 +35,11 @@ namespace SwfLib.SwfMill.TagFormatting {
             return tag;
         }
 
+        /// <summary>
+        /// Formats tag into xml
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
         public XElement FormatTag(T tag) {
             var xTag = new XElement(TagName);
             var objectID = GetObjectID(tag);
@@ -38,15 +53,25 @@ namespace SwfLib.SwfMill.TagFormatting {
 
             FormatTagElement(tag, xTag);
             if (tag.RestData != null && tag.RestData.Length > 0) {
-                xTag.Add(new XElement(REST_ELEM, Convert.ToBase64String(tag.RestData)));
+                xTag.Add(new XElement(REST_ELEM, FormatBase64(tag.RestData)));
             }
             return xTag;
         }
 
 
+        /// <summary>
+        /// Initilizaes tag before parsing xml node.
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="element"></param>
         protected virtual void InitTag(T tag, XElement element) {
         }
 
+        /// <summary>
+        /// Accepts xml attribute during parsing.
+        /// </summary>
+        /// <param name="tag">Tag to accept attribute</param>
+        /// <param name="attrib">Atribute to be accepted.</param>
         protected void AcceptAttribute(T tag, XAttribute attrib) {
             switch (attrib.Name.LocalName) {
                 case OBJECT_ID_ATTRIB:
@@ -59,6 +84,11 @@ namespace SwfLib.SwfMill.TagFormatting {
             }
         }
 
+        /// <summary>
+        /// Accepts xml element during parsing.
+        /// </summary>
+        /// <param name="tag">Tag to accept element</param>
+        /// <param name="element">Element to be accepted.</param>
         protected void AcceptElement(T tag, XElement element) {
             switch (element.Name.LocalName) {
                 case REST_ELEM:
@@ -75,14 +105,29 @@ namespace SwfLib.SwfMill.TagFormatting {
             }
         }
 
+        /// <summary>
+        /// Accepts xml attribute during parsing.
+        /// </summary>
+        /// <param name="tag">Tag to accept attribute</param>
+        /// <param name="attrib">Atribute to be accepted.</param>
         protected virtual bool AcceptTagAttribute(T tag, XAttribute attrib) {
             return false;
         }
 
+        /// <summary>
+        /// Accepts xml element during parsing.
+        /// </summary>
+        /// <param name="tag">Tag to accept element</param>
+        /// <param name="element">Element to be accepted.</param>
         protected virtual bool AcceptTagElement(T tag, XElement element) {
             return false;
         }
 
+        /// <summary>
+        /// Formats tag into xml
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
         protected abstract void FormatTagElement(T tag, XElement xTag);
 
         #region ITagFormatter
@@ -127,25 +172,12 @@ namespace SwfLib.SwfMill.TagFormatting {
 
         }
 
-        protected byte[] FromBase64(XElement dataElement) {
-            //TODO: why different depth??
-            var data1 = dataElement.Element("data");
-            if (data1 != null) dataElement = data1;
-            data1 = dataElement.Element("data");
-            if (data1 != null) dataElement = data1;
-            return Convert.FromBase64String(dataElement.Value);
+        protected string FormatBase64(byte[] data) {
+            return Convert.ToBase64String(data);
         }
 
-        protected static byte[] ReadBase64(XElement data) {
-            string val = data.Value
-                .Replace(" ", "")
-                .Replace("\r", "")
-                .Replace("\n", "");
+        protected byte[] ParseBase64(string val) {
             return Convert.FromBase64String(val);
-        }
-
-        protected static XElement GetBinary(byte[] data) {
-            return new XElement("data", Convert.ToBase64String(data));
         }
 
     }
