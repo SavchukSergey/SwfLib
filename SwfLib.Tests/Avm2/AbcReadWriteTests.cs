@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using NUnit.Framework;
 using SwfLib.Avm2;
+using SwfLib.Avm2.Data;
 
 namespace SwfLib.Tests.Avm2 {
     [TestFixture]
@@ -8,12 +9,12 @@ namespace SwfLib.Tests.Avm2 {
 
         [Test]
         public void ReadWriteConstantPoolTest() {
-            var pool = new AsConstantPool {
+            var pool = new AsConstantPoolInfo {
                 Doubles = new[] { double.NaN, 1.2, 5.3 },
                 Integers = new[] { 0, -123, 456 },
-                Multinames = new AsMultiname[0],
-                NamespaceSets = new AsNamespaceSet[0],
-                Namespaces = new AsNamespace[0],
+                Multinames = new AsMultinameInfo[0],
+                NamespaceSets = new AsNamespaceSetInfo[0],
+                Namespaces = new AsNamespaceInfo[0],
                 Strings = new[] { "", "abc", "def" },
                 UnsignedIntegers = new uint[] { 0, 1, uint.MaxValue }
             };

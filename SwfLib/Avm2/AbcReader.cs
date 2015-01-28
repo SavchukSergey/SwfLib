@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using SwfLib.Avm2.Data;
 
 namespace SwfLib.Avm2 {
 
@@ -11,9 +12,9 @@ namespace SwfLib.Avm2 {
             _reader = reader;
         }
 
-        public AbcFile ReadAbcFile() {
+        public AbcFileInfo ReadAbcFile() {
             try {
-                var res =  new AbcFile {
+                var res =  new AbcFileInfo {
                     MinorVersion = ReadU16(),
                     MajorVersion = ReadU16(),
                     ConstantPool = ReadConstantPool(),
@@ -31,17 +32,17 @@ namespace SwfLib.Avm2 {
             }
         }
 
-        private AsMetadata[] ReadMutipleMetadata() {
+        private AsMetadataInfo[] ReadMutipleMetadata() {
             var len = ReadU30();
-            var res = new AsMetadata[len];
+            var res = new AsMetadataInfo[len];
             for (var i = 0; i < len; i++) {
                 res[i] = ReadMetadata();
             }
             return res;
         }
 
-        private AsInstance[] ReadMutipleInstances(uint count) {
-            var res = new AsInstance[count];
+        private AsInstanceInfo[] ReadMutipleInstances(uint count) {
+            var res = new AsInstanceInfo[count];
             for (var i = 0; i < count; i++) {
                 res[i] = ReadInstance();
             }
@@ -57,34 +58,34 @@ namespace SwfLib.Avm2 {
             return res;
         }
 
-        private AsClass[] ReadMultipleClasses(uint count) {
-            var res = new AsClass[count];
+        private AsClassInfo[] ReadMultipleClasses(uint count) {
+            var res = new AsClassInfo[count];
             for (var i = 0; i < count; i++) {
                 res[i] = ReadClass();
             }
             return res;
         }
 
-        private AsScript[] ReadMultipleScripts() {
+        private AsScriptInfo[] ReadMultipleScripts() {
             var len = ReadU30();
-            var res = new AsScript[len];
+            var res = new AsScriptInfo[len];
             for (var i = 0; i < len; i++) {
                 res[i] = ReadScript();
             }
             return res;
         }
 
-        private AsMethodBody[] ReadMultipleBodies() {
+        private AsMethodBodyInfo[] ReadMultipleBodies() {
             var len = ReadU30();
-            var res = new AsMethodBody[len];
+            var res = new AsMethodBodyInfo[len];
             for (var i = 0; i < len; i++) {
                 res[i] = ReadMethodBody();
             }
             return res;
         }
 
-        public AsConstantPool ReadConstantPool() {
-            var res = new AsConstantPool();
+        public AsConstantPoolInfo ReadConstantPool() {
+            var res = new AsConstantPoolInfo();
 
             res.Integers = new int[Math.Max(ReadU30(), 1)];
             for (var i = 1; i < res.Integers.Length; i++) {
@@ -108,17 +109,17 @@ namespace SwfLib.Avm2 {
                 res.Strings[i] = ReadString();
             }
 
-            res.Namespaces = new AsNamespace[Math.Max(ReadU30(), 1)];
+            res.Namespaces = new AsNamespaceInfo[Math.Max(ReadU30(), 1)];
             for (var i = 1; i < res.Namespaces.Length; i++) {
                 res.Namespaces[i] = ReadNamespace();
             }
 
-            res.NamespaceSets = new AsNamespaceSet[Math.Max(ReadU30(), 1)];
+            res.NamespaceSets = new AsNamespaceSetInfo[Math.Max(ReadU30(), 1)];
             for (var i = 1; i < res.NamespaceSets.Length; i++) {
                 res.NamespaceSets[i] = ReadNamespaceSet();
             }
 
-            res.Multinames = new AsMultiname[Math.Max(ReadU30(), 1)];
+            res.Multinames = new AsMultinameInfo[Math.Max(ReadU30(), 1)];
             for (var i = 1; i < res.Multinames.Length; i++) {
                 res.Multinames[i] = ReadMultiname();
             }
@@ -126,21 +127,21 @@ namespace SwfLib.Avm2 {
             return res;
         }
 
-        private AsNamespace ReadNamespace() {
-            return new AsNamespace {
+        private AsNamespaceInfo ReadNamespace() {
+            return new AsNamespaceInfo {
                 Kind = (AsType)ReadU8(),
                 Name = ReadU30()
             };
         }
 
-        private AsNamespaceSet ReadNamespaceSet() {
-            return new AsNamespaceSet {
+        private AsNamespaceSetInfo ReadNamespaceSet() {
+            return new AsNamespaceSetInfo {
                 Namespaces = ReadMultipleU30()
             };
         }
 
-        private AsMultiname ReadMultiname() {
-            var r = new AsMultiname { Kind = (AsType)ReadU8() };
+        private AsMultinameInfo ReadMultiname() {
+            var r = new AsMultinameInfo { Kind = (AsType)ReadU8() };
             switch (r.Kind) {
                 case AsType.QName:
                 case AsType.QNameA:
@@ -193,7 +194,7 @@ namespace SwfLib.Avm2 {
             r.Name = ReadU30();
             r.Flags = ReadU8();
             if (r.HasOptional) {
-                r.Options = new AsOptionDetail[ReadU30()];
+                r.Options = new AsOptionDetailInfo[ReadU30()];
                 for (var i = 0; i < r.Options.Length; i++) {
                     r.Options[i] = ReadOptionDetail();
                 }
@@ -204,8 +205,8 @@ namespace SwfLib.Avm2 {
             return r;
         }
 
-        private AsOptionDetail ReadOptionDetail() {
-            return new AsOptionDetail {
+        private AsOptionDetailInfo ReadOptionDetail() {
+            return new AsOptionDetailInfo {
                 Value = ReadU30(),
                 Kind = (AsType)ReadU8()
             };
@@ -225,8 +226,8 @@ namespace SwfLib.Avm2 {
             };
         }
 
-        private AsMetadata ReadMetadata() {
-            AsMetadata r;
+        private AsMetadataInfo ReadMetadata() {
+            AsMetadataInfo r;
             r.Name = ReadU30();
             r.Items = new AsMetadataItem[ReadU30()];
             //todo: first keys then values?
@@ -243,8 +244,8 @@ namespace SwfLib.Avm2 {
             };
         }
 
-        private AsInstance ReadInstance() {
-            var r = new AsInstance {
+        private AsInstanceInfo ReadInstance() {
+            var r = new AsInstanceInfo {
                 Name = ReadU30(),
                 SuperName = ReadU30(),
                 Flags = ReadU8()
@@ -305,22 +306,22 @@ namespace SwfLib.Avm2 {
             return r;
         }
 
-        private AsClass ReadClass() {
-            return new AsClass {
+        private AsClassInfo ReadClass() {
+            return new AsClassInfo {
                 ClassInitializer = ReadU30(),
                 Traits = ReadMutlipleTraits()
             };
         }
 
-        private AsScript ReadScript() {
-            return new AsScript {
+        private AsScriptInfo ReadScript() {
+            return new AsScriptInfo {
                 ScriptInitializer = ReadU30(),
                 Traits = ReadMutlipleTraits()
             };
         }
 
-        private AsMethodBody ReadMethodBody() {
-            var r = new AsMethodBody {
+        private AsMethodBodyInfo ReadMethodBody() {
+            var r = new AsMethodBodyInfo {
                 Method = ReadU30(),
                 MaxStack = ReadU30(),
                 LocalCount = ReadU30(),

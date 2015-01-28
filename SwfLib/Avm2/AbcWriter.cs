@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using SwfLib.Avm2.Data;
 
 namespace SwfLib.Avm2 {
 
@@ -10,7 +11,7 @@ namespace SwfLib.Avm2 {
             _writer = writer;
         }
 
-        public void WriteAbcFile(AbcFile abc) {
+        public void WriteAbcFile(AbcFileInfo abc) {
             WriteU16(abc.MinorVersion);
             WriteU16(abc.MajorVersion);
 
@@ -38,40 +39,40 @@ namespace SwfLib.Avm2 {
             }
         }
 
-        private void WriteMultipleMetadata(AsMetadata[] vals) {
+        private void WriteMultipleMetadata(AsMetadataInfo[] vals) {
             WriteU30((uint)vals.Length);
             foreach (var value in vals) {
                 WriteMetadata(value);
             }
         }
 
-        private void WriteMultipleInstances(AsInstance[] vals) {
+        private void WriteMultipleInstances(AsInstanceInfo[] vals) {
             foreach (var value in vals) {
                 WriteInstance(value);
             }
         }
 
-        private void WriteMultipleClasses(AsClass[] vals) {
+        private void WriteMultipleClasses(AsClassInfo[] vals) {
             foreach (var value in vals) {
                 WriteClass(value);
             }
         }
 
-        private void WriteMultipleScripts(AsScript[] scripts) {
+        private void WriteMultipleScripts(AsScriptInfo[] scripts) {
             WriteU30((uint)scripts.Length);
             foreach (var value in scripts) {
                 WriteScript(value);
             }
         }
 
-        private void WriteMultipleBodies(AsMethodBody[] bodies) {
+        private void WriteMultipleBodies(AsMethodBodyInfo[] bodies) {
             WriteU30((uint)bodies.Length);
             foreach (var value in bodies) {
                 WriteMethodBody(value);
             }
         }
 
-        public void WriteConstantPool(AsConstantPool constantPool) {
+        public void WriteConstantPool(AsConstantPoolInfo constantPool) {
             WriteU30((uint)(constantPool.Integers.Length <= 1 ? 0 : constantPool.Integers.Length));
             for (var i = 1; i < constantPool.Integers.Length; i++) {
                 WriteS32(constantPool.Integers[i]);
@@ -107,16 +108,16 @@ namespace SwfLib.Avm2 {
 
         }
 
-        private void WriteNamespace(ref AsNamespace ns) {
+        private void WriteNamespace(ref AsNamespaceInfo ns) {
             WriteU8((byte)ns.Kind);
             WriteU30(ns.Name);
         }
 
-        private void WriteNamespaceSet(AsNamespaceSet nss) {
+        private void WriteNamespaceSet(AsNamespaceSetInfo nss) {
             WriteMutipleU30(nss.Namespaces);
         }
 
-        private void WriteMultiname(ref AsMultiname multiname) {
+        private void WriteMultiname(ref AsMultinameInfo multiname) {
             WriteU8((byte)multiname.Kind);
             switch (multiname.Kind) {
                 case AsType.QName:
@@ -174,7 +175,7 @@ namespace SwfLib.Avm2 {
             }
         }
 
-        private void WriteOptionDetail(AsOptionDetail optionDetail) {
+        private void WriteOptionDetail(AsOptionDetailInfo optionDetail) {
             WriteU30(optionDetail.Value);
             WriteU8((byte)optionDetail.Kind);
         }
@@ -183,7 +184,7 @@ namespace SwfLib.Avm2 {
             WriteU30(paramInfo.ParamName);
         }
 
-        private void WriteMetadata(AsMetadata metadata) {
+        private void WriteMetadata(AsMetadataInfo metadata) {
             WriteU30(metadata.Name);
             WriteU30((uint)metadata.Items.Length);
             foreach (var item in metadata.Items) {
@@ -196,7 +197,7 @@ namespace SwfLib.Avm2 {
             WriteU30(metadataItem.Value);
         }
 
-        private void WriteInstance(AsInstance instance) {
+        private void WriteInstance(AsInstanceInfo instance) {
             WriteU30(instance.Name);
             WriteU30(instance.SuperName);
             WriteU8(instance.Flags);
@@ -249,17 +250,17 @@ namespace SwfLib.Avm2 {
             }
         }
 
-        private void WriteClass(AsClass @class) {
+        private void WriteClass(AsClassInfo @class) {
             WriteU30(@class.ClassInitializer);
             WriteMultipleTraits(@class.Traits);
         }
 
-        private void WriteScript(AsScript script) {
+        private void WriteScript(AsScriptInfo script) {
             WriteU30(script.ScriptInitializer);
             WriteMultipleTraits(script.Traits);
         }
 
-        private void WriteMethodBody(AsMethodBody methodBody) {
+        private void WriteMethodBody(AsMethodBodyInfo methodBody) {
             WriteU30(methodBody.Method);
             WriteU30(methodBody.MaxStack);
             WriteU30(methodBody.LocalCount);
