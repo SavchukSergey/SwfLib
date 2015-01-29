@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Avm2\AbcFile.cs" />
     <Compile Include="Avm2\Data\AbcFileInfo.cs" />
     <Compile Include="Avm2\AbcReader.cs" />
     <Compile Include="Avm2\AbcWriter.cs" />

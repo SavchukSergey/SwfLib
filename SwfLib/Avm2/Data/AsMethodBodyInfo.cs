@@ -1,5 +1,5 @@
 ﻿namespace SwfLib.Avm2.Data {
-    public struct AsMethodBodyInfo {
+    public class AsMethodBodyInfo {
         
         public uint Method;
         

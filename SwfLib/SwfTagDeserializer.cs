@@ -325,8 +325,10 @@ namespace SwfLib {
             tag.Name = reader.ReadString();
             tag.ABCData = reader.ReadRest();
 
-//            var r = new AbcReader(new SwfStreamReader(new MemoryStream(tag.ABCData)));
-//            var file = r.ReadAbcFile();
+            //var r = new AbcReader(new SwfStreamReader(new MemoryStream(tag.ABCData)));
+            //var file = r.ReadAbcFile();
+
+            //var aa = AbcFile.From(file);
             return tag;
         }
 
