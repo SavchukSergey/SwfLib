@@ -71,7 +71,7 @@ namespace SwfLib {
                 SwfZip.Compress(new MemoryStream(rest), compressed);
                 outputWriter.WriteSwfFileInfo(new SwfFileInfo {
                     Format = "CWS",
-                    FileLength = (uint)(rest.Length),
+                    FileLength = (uint)(rest.Length) + 8,
                     Version = fileInfo.Version
                 });
 

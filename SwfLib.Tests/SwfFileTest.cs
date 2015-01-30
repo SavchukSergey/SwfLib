@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using NUnit.Framework;
 using SwfLib.Data;
 using SwfLib.Tags.ControlTags;
@@ -28,6 +29,24 @@ namespace SwfLib.Tests {
             var other = SwfFile.ReadFrom(mem);
             Assert.AreEqual(file.Tags.Count, other.Tags.Count);
 
+        }
+
+        [Test]
+        public void CompressTest() {
+            var source = new byte[] {
+                0x46, 0x57, 0x53, 0x09, 0x20, 0x00, 0x00, 0x00,
+                0x78, 0x00, 0x07, 0x08, 0x00, 0x00, 0x11, 0xf8,
+                0x00, 0x00, 0x14, 0x01, 0x00, 0x44, 0x11, 0x08,
+                0x00, 0x00, 0x00, 0x43, 0x02, 0xff, 0x00, 0x00};
+            var target = new MemoryStream();
+            SwfFile.Compress(new MemoryStream(source), target);
+
+            var res = target.ToArray();
+            Assert.AreEqual(0x09, res[3]);
+            Assert.AreEqual(0x20, res[4]);
+            Assert.AreEqual(0x00, res[5]);
+            Assert.AreEqual(0x00, res[6]);
+            Assert.AreEqual(0x00, res[7]);
         }
     }
 }
