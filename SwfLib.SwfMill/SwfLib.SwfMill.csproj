@@ -67,6 +67,7 @@
     <Compile Include="ClipActions\XClipActionsList.cs" />
     <Compile Include="ClipActions\XClipEventFlags.cs" />
     <Compile Include="Data\CommonFormatter.cs" />
+    <Compile Include="Data\XAbcFile.cs" />
     <Compile Include="Data\XBinary.cs" />
     <Compile Include="Data\XColorTransformRGBA.cs" />
     <Compile Include="Data\XColorRGBA.cs" />

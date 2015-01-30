@@ -1,4 +1,7 @@
 ﻿namespace SwfLib.Avm2.Data {
+    /// <summary>
+    /// Represents abc file relational database.
+    /// </summary>
     public class AbcFileInfo {
 
         public ushort MinorVersion;

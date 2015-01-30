@@ -5,7 +5,7 @@
 
         public uint SuperName;
 
-        public byte Flags; // todo: InstanceFlags bitmask
+        public AsInstanceFlags Flags;
 
         public uint ProtectedNs;
 
@@ -16,7 +16,7 @@
         public AsTraitsInfo[] Traits;
 
         public bool HasProtectedNs {
-            get { return (Flags & (int) AsInstanceFlags.ProtectedNs) != 0; }
+            get { return ((int)Flags & (int) AsInstanceFlags.ProtectedNs) != 0; }
         }
     }
 }

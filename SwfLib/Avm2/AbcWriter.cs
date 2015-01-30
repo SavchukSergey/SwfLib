@@ -200,7 +200,7 @@ namespace SwfLib.Avm2 {
         private void WriteInstance(AsInstanceInfo instance) {
             WriteU30(instance.Name);
             WriteU30(instance.SuperName);
-            WriteU8(instance.Flags);
+            WriteU8((byte) instance.Flags);
             if (instance.HasProtectedNs)
                 WriteU30(instance.ProtectedNs);
             WriteMutipleU30(instance.Interfaces);

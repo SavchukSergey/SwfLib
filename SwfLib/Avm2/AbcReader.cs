@@ -248,7 +248,7 @@ namespace SwfLib.Avm2 {
             var r = new AsInstanceInfo {
                 Name = ReadU30(),
                 SuperName = ReadU30(),
-                Flags = ReadU8()
+                Flags = (AsInstanceFlags) ReadU8()
             };
             if (r.HasProtectedNs)
                 r.ProtectedNs = ReadU30();

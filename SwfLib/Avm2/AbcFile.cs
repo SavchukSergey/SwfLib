@@ -8,6 +8,7 @@ namespace SwfLib.Avm2 {
 
         private readonly IList<AbcMethod> _methods = new List<AbcMethod>();
         private readonly IList<AbcClass> _classes = new List<AbcClass>();
+        private readonly IList<AbcScript> _scripts = new List<AbcScript>();
 
         public ushort MajorVersion;
 
@@ -25,6 +26,10 @@ namespace SwfLib.Avm2 {
             get { return _classes; }
         }
 
+        public IList<AbcScript> Scripts {
+            get { return _scripts; }
+        }
+
         public static AbcFile From(AbcFileInfo info) {
             var res = new AbcFile {
                 MajorVersion = info.MajorVersion,
@@ -38,9 +43,17 @@ namespace SwfLib.Avm2 {
                 bodies.TryGetValue((uint)i, out body);
                 var method = new AbcMethod {
                     Name = info.ConstantPool.Strings[methodInfo.Name],
-                    Body = body != null ? GetMethodBody(body) : null
+                    Body = body != null ? GetMethodBody(body) : null,
+                    ReturnType = GetMultiname(methodInfo.ReturnType, info)
                 };
                 res.Methods.Add(method);
+            }
+
+            for (var i = 0; i < info.Scripts.Length; i++) {
+                var scriptInfo = info.Scripts[i];
+                var script = new AbcScript();
+                AddTraits(script.Traits, scriptInfo.Traits);
+                res.Scripts.Add(script);
             }
 
             for (var i = 0; i < info.Classes.Length; i++) {
@@ -49,9 +62,13 @@ namespace SwfLib.Avm2 {
                 var cls = new AbcClass {
                     Instance = new AbcInstance {
                         Name = GetMultiname(iInfo.Name, info),
-                        SuperName = iInfo.SuperName > 0 ? GetMultiname(iInfo.SuperName, info) : null
+                        SuperName = iInfo.SuperName > 0 ? GetMultiname(iInfo.SuperName, info) : null,
                     }
                 };
+                AddTraits(cls.Traits, cInfo.Traits);
+                foreach (var index in iInfo.Interfaces) {
+                    cls.Instance.Interfaces.Add(GetMultiname(index, info));
+                }
                 res.Classes.Add(cls);
             }
 
@@ -66,16 +83,19 @@ namespace SwfLib.Avm2 {
         }
 
         private static AbcMethodBody GetMethodBody(AsMethodBodyInfo info) {
-            return new AbcMethodBody {
+            var res = new AbcMethodBody {
                 MaxStack = info.MaxStack,
                 LocalCount = info.LocalCount,
                 InitScopeDepth = info.InitScopeDepth,
                 MaxScopeDepth = info.MaxScopeDepth,
                 //todo: other fields
             };
+            AddTraits(res.Traits, info.Traits);
+            return res;
         }
 
         private static AbcMultiname GetMultiname(uint index, AbcFileInfo abc) {
+            if (index == 0) return new AbcMultinameVoid();
             var info = abc.ConstantPool.Multinames[index];
             switch (info.Kind) {
                 case AsType.QName:
@@ -95,39 +115,19 @@ namespace SwfLib.Avm2 {
                 Name = info.ConstantPool.Strings[inner.Name]
             };
         }
+
+        private static void AddTraits(ICollection<AbcTrait> target, IEnumerable<AsTraitsInfo> infos) {
+            foreach (var info in infos) {
+                target.Add(GetTrait(info));
+            }
+        }
+
+        private static AbcTrait GetTrait(AsTraitsInfo trait) {
+            return new AbcTrait();
+        }
+
     }
 
-    public class AbcClass {
-
-        public AbcInstance Instance { get; set; }
-
-        public AbcMethod ClassInitializer { get; set; }
-
-        //public AsTraitsInfo[] Traits;
-
-    }
-
-    public class AbcInstance {
-
-        //todo: must be QName
-        public AbcMultiname Name { get; set; }
-
-        public AbcMultiname SuperName { get; set; }
-
-        //public byte Flags; // todo: InstanceFlags bitmask
-
-        //public uint ProtectedNs;
-
-        //public uint[] Interfaces;
-
-        public AbcMethod InstanceInitializer;
-
-        //public AsTraitsInfo[] Traits;
-
-        //public bool HasProtectedNs {
-        //    get { return (Flags & (int)AsInstanceFlags.ProtectedNs) != 0; }
-        //}
-    }
 
     public class AbcMethod {
 
@@ -135,11 +135,11 @@ namespace SwfLib.Avm2 {
 
         public AbcMethodBody Body { get; set; }
 
+        //public uint[] ParamTypes;
+
+        public AbcMultiname ReturnType { get; set; }
+
         /*
-    public uint[] ParamTypes;
-
-        public uint ReturnType;
-
         public byte Flags; // todo: MethodFlags bitmask
 
         public AsOptionDetailInfo[] Options;
@@ -160,23 +160,6 @@ namespace SwfLib.Avm2 {
 
     }
 
-    public class AbcMethodBody {
-        public uint MaxStack { get; set; }
-
-        public uint LocalCount { get; set; }
-
-        public uint InitScopeDepth;
-
-        public uint MaxScopeDepth;
-
-        //todo:
-        //public AsExceptionInfo[] Exceptions;
-
-        //public AsTraitsInfo[] Traits;
-
-        //public byte[] Code;
-
-    }
 
     public abstract class AbcMultiname {
 
@@ -191,6 +174,10 @@ namespace SwfLib.Avm2 {
         public override string ToString() {
             return string.Format("{0}:{1}", Namespace, Name);
         }
+    }
+
+    public class AbcMultinameVoid : AbcMultiname {
+
     }
 
     public class AbcNamespace {
