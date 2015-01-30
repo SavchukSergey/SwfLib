@@ -65,6 +65,7 @@
     <Compile Include="Avm2\AbcClass.cs" />
     <Compile Include="Avm2\AbcFile.cs" />
     <Compile Include="Avm2\AbcInstance.cs" />
+    <Compile Include="Avm2\AbcMetadata.cs" />
     <Compile Include="Avm2\AbcMethod.cs" />
     <Compile Include="Avm2\AbcMethodBody.cs" />
     <Compile Include="Avm2\AbcMethodParam.cs" />

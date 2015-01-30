@@ -14,7 +14,7 @@ namespace SwfLib.Avm2 {
 
         public AbcFileInfo ReadAbcFile() {
             try {
-                var res =  new AbcFileInfo {
+                var res = new AbcFileInfo {
                     MinorVersion = ReadU16(),
                     MajorVersion = ReadU16(),
                     ConstantPool = ReadConstantPool(),
@@ -192,7 +192,7 @@ namespace SwfLib.Avm2 {
             };
             r.ParamTypes = ReadMultipleU30(paramCount);
             r.Name = ReadU30();
-            r.Flags = (AsMethodFlags) ReadU8();
+            r.Flags = (AsMethodFlags)ReadU8();
             if (r.HasOptional) {
                 r.Options = new AsOptionDetailInfo[ReadU30()];
                 for (var i = 0; i < r.Options.Length; i++) {
@@ -229,26 +229,23 @@ namespace SwfLib.Avm2 {
         private AsMetadataInfo ReadMetadata() {
             AsMetadataInfo r;
             r.Name = ReadU30();
-            r.Items = new AsMetadataItem[ReadU30()];
-            //todo: first keys then values?
-            for (var i = 0; i < r.Items.Length; i++) {
-                r.Items[i] = ReadMetadataItem();
+            var cnt = ReadU30();
+            r.Items = new AsMetadataItem[cnt];
+            var raw = ReadMultipleU30(cnt * 2);
+            for (var i = 0; i < cnt; i++) {
+                r.Items[i] = new AsMetadataItem {
+                    Key = raw[i],
+                    Value = raw[i + cnt]
+                };
             }
             return r;
-        }
-
-        private AsMetadataItem ReadMetadataItem() {
-            return new AsMetadataItem {
-                Key = ReadU30(),
-                Value = ReadU30()
-            };
         }
 
         private AsInstanceInfo ReadInstance() {
             var r = new AsInstanceInfo {
                 Name = ReadU30(),
                 SuperName = ReadU30(),
-                Flags = (AsInstanceFlags) ReadU8()
+                Flags = (AsInstanceFlags)ReadU8()
             };
             if (r.HasProtectedNs)
                 r.ProtectedNs = ReadU30();

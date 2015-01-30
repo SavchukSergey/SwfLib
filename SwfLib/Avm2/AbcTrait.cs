@@ -1,6 +1,9 @@
 ﻿namespace SwfLib.Avm2 {
     public class AbcTrait {
-        //todo:
+
+        public AbcMultiname Name { get; set; }
+
+        //todo: other fields
     }
 
 }

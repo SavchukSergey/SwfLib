@@ -35,6 +35,11 @@ namespace SwfLib.Avm2 {
         }
 
         public abstract AsConstantType Type { get; }
+
+        public static AbcMethodParamNull Null = new AbcMethodParamNull();
+
+        public static AbcMethodParamUndefined Undefined = new AbcMethodParamUndefined();
+
     }
 
     public class AbcMethodParamInt : AbcMethodParamDefaultValue {
@@ -99,6 +104,41 @@ namespace SwfLib.Avm2 {
 
         public override AsConstantType Type {
             get { return Value ? AsConstantType.True : AsConstantType.False; }
+        }
+    }
+
+    public class AbcMethodParamNull : AbcMethodParamDefaultValue {
+
+        public override string ToString() {
+            return "null";
+        }
+
+        public override AsConstantType Type {
+            get { return AsConstantType.Null; }
+        }
+    }
+
+    public class AbcMethodParamUndefined : AbcMethodParamDefaultValue {
+
+        public override string ToString() {
+            return "undefined";
+        }
+
+        public override AsConstantType Type {
+            get { return AsConstantType.Undefined; }
+        }
+    }
+
+    public class AbcMethodParamNamespace : AbcMethodParamDefaultValue {
+
+        public AbcNamespace Value { get; set; }
+
+        public override string ToString() {
+            return "namespace: " + Value;
+        }
+
+        public override AsConstantType Type {
+            get { return AsConstantType.Namespace; }
         }
     }
 }

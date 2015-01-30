@@ -9,12 +9,11 @@ namespace SwfLib.Avm2 {
         private readonly IList<AbcMethod> _methods = new List<AbcMethod>();
         private readonly IList<AbcClass> _classes = new List<AbcClass>();
         private readonly IList<AbcScript> _scripts = new List<AbcScript>();
+        private readonly IList<AbcMetadata> _metadata = new List<AbcMetadata>();
 
         public ushort MajorVersion;
 
         public ushort MinorVersion;
-
-        //public AsMetadataInfo[] Metadata;
 
         public IList<AbcMethod> Methods {
             get { return _methods; }
@@ -28,46 +27,67 @@ namespace SwfLib.Avm2 {
             get { return _scripts; }
         }
 
-        public static AbcFile From(AbcFileInfo info) {
+        public IList<AbcMetadata> Metadata {
+            get { return _metadata; }
+        }
+
+        public static AbcFile From(AbcFileInfo fileInfo) {
             var res = new AbcFile {
-                MajorVersion = info.MajorVersion,
-                MinorVersion = info.MinorVersion
+                MajorVersion = fileInfo.MajorVersion,
+                MinorVersion = fileInfo.MinorVersion
             };
 
-            var methods = GetMethods(info);
+            foreach (var metaInfo in fileInfo.Metadata) {
+                res.Metadata.Add(GetMetadata(metaInfo, fileInfo));
+
+            }
+            var methods = GetMethods(fileInfo);
             foreach (var method in methods) {
                 res.Methods.Add(method);
             }
 
-            for (var i = 0; i < info.Scripts.Length; i++) {
-                var scriptInfo = info.Scripts[i];
+            for (var i = 0; i < fileInfo.Scripts.Length; i++) {
+                var scriptInfo = fileInfo.Scripts[i];
                 var script = new AbcScript();
-                AddTraits(script.Traits, scriptInfo.Traits);
+                AddTraits(fileInfo, script.Traits, scriptInfo.Traits);
                 res.Scripts.Add(script);
             }
 
-            for (var i = 0; i < info.Classes.Length; i++) {
-                var cInfo = info.Classes[i];
-                var iInfo = info.Instances[i];
+            for (var i = 0; i < fileInfo.Classes.Length; i++) {
+                var cInfo = fileInfo.Classes[i];
+                var iInfo = fileInfo.Instances[i];
                 var cls = new AbcClass {
                     Instance = new AbcInstance {
-                        Name = GetMultiname(iInfo.Name, info),
-                        SuperName = iInfo.SuperName > 0 ? GetMultiname(iInfo.SuperName, info) : null,
+                        Name = GetMultiname(iInfo.Name, fileInfo),
+                        SuperName = iInfo.SuperName > 0 ? GetMultiname(iInfo.SuperName, fileInfo) : null,
                     }
                 };
-                AddTraits(cls.Traits, cInfo.Traits);
+                AddTraits(fileInfo, cls.Traits, cInfo.Traits);
                 foreach (var index in iInfo.Interfaces) {
-                    cls.Instance.Interfaces.Add(GetMultiname(index, info));
+                    cls.Instance.Interfaces.Add(GetMultiname(index, fileInfo));
                 }
                 res.Classes.Add(cls);
             }
 
             for (var i = 0; i < res.Classes.Count; i++) {
                 var cls = res.Classes[i];
-                var clsInfo = info.Classes[i];
-                var iInfo = info.Instances[i];
+                var clsInfo = fileInfo.Classes[i];
+                var iInfo = fileInfo.Instances[i];
                 cls.ClassInitializer = res.Methods[(int)clsInfo.ClassInitializer];
                 cls.Instance.InstanceInitializer = res.Methods[(int)iInfo.InstanceInitializer];
+            }
+            return res;
+        }
+
+        private static AbcMetadata GetMetadata(AsMetadataInfo metaInfo, AbcFileInfo info) {
+            var res = new AbcMetadata {
+                Name = info.ConstantPool.Strings[metaInfo.Name]
+            };
+            foreach (var item in metaInfo.Items) {
+                res.Items.Add(new AbcMetadataItem {
+                    Key = info.ConstantPool.Strings[item.Key],
+                    Value = info.ConstantPool.Strings[item.Value]
+                });
             }
             return res;
         }
@@ -81,7 +101,7 @@ namespace SwfLib.Avm2 {
                 bodies.TryGetValue((uint)i, out body);
                 var method = new AbcMethod {
                     Name = fileInfo.ConstantPool.Strings[methodInfo.Name],
-                    Body = body != null ? GetMethodBody(body) : null,
+                    Body = body != null ? GetMethodBody(fileInfo, body) : null,
                     ReturnType = GetMultiname(methodInfo.ReturnType, fileInfo),
                     NeedArguments = methodInfo.NeedArguments,
                     NeedActivation = methodInfo.NeedActivation,
@@ -118,13 +138,19 @@ namespace SwfLib.Avm2 {
                     return true;
                 case AsConstantType.False:
                     return false;
+                case AsConstantType.Null:
+                    return AbcMethodParamDefaultValue.Null;
+                case AsConstantType.Undefined:
+                    return AbcMethodParamDefaultValue.Undefined;
+                case AsConstantType.Namespace:
+                    return new AbcMethodParamNamespace { Value = GetNamespace(info.Value, fileInfo) };
                 //todo: other types
                 default:
                     throw new Exception("unknown default value");
             }
         }
 
-        private static AbcMethodBody GetMethodBody(AsMethodBodyInfo info) {
+        private static AbcMethodBody GetMethodBody(AbcFileInfo fileInfo, AsMethodBodyInfo info) {
             var res = new AbcMethodBody {
                 MaxStack = info.MaxStack,
                 LocalCount = info.LocalCount,
@@ -132,7 +158,7 @@ namespace SwfLib.Avm2 {
                 MaxScopeDepth = info.MaxScopeDepth,
                 //todo: other fields
             };
-            AddTraits(res.Traits, info.Traits);
+            AddTraits(fileInfo, res.Traits, info.Traits);
             return res;
         }
 
@@ -158,14 +184,16 @@ namespace SwfLib.Avm2 {
             };
         }
 
-        private static void AddTraits(ICollection<AbcTrait> target, IEnumerable<AsTraitsInfo> infos) {
+        private static void AddTraits(AbcFileInfo fileInfo, ICollection<AbcTrait> target, IEnumerable<AsTraitsInfo> infos) {
             foreach (var info in infos) {
-                target.Add(GetTrait(info));
+                target.Add(GetTrait(fileInfo, info));
             }
         }
 
-        private static AbcTrait GetTrait(AsTraitsInfo trait) {
-            return new AbcTrait();
+        private static AbcTrait GetTrait(AbcFileInfo fileInfo, AsTraitsInfo trait) {
+            return new AbcTrait {
+                Name = GetMultiname(trait.Name, fileInfo)
+            };
         }
 
     }
