@@ -2,8 +2,8 @@
     public struct AsOptionDetailInfo {
 
         public uint Value;
-        
-        public AsType Kind;
+
+        public AsConstantType Kind;
 
     }
 

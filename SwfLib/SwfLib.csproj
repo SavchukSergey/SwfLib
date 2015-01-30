@@ -74,6 +74,7 @@
     <Compile Include="Avm2\AbcWriter.cs" />
     <Compile Include="Avm2\Data\AsClassInfo.cs" />
     <Compile Include="Avm2\Data\AsConstantPoolInfo.cs" />
+    <Compile Include="Avm2\Data\AsConstantType.cs" />
     <Compile Include="Avm2\Data\AsExceptionInfo.cs" />
     <Compile Include="Avm2\Data\AsInstanceInfo.cs" />
     <Compile Include="Avm2\Data\AsInstanceFlags.cs" />

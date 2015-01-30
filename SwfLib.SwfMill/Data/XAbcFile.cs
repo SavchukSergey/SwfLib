@@ -6,9 +6,11 @@ using SwfLib.Avm2.Data;
 namespace SwfLib.SwfMill.Data {
     public static class XAbcFile {
 
+        public const string TAG_NAME = "abcFile";
+
         public static XElement ToXml(AbcFileInfo abcInfo) {
             var abc = AbcFile.From(abcInfo);
-            var res = new XElement("abcFile",
+            var res = new XElement(TAG_NAME,
                 new XAttribute("minorVersion", abc.MinorVersion),
                 new XAttribute("majorVersion", abc.MajorVersion)
             );
@@ -83,6 +85,9 @@ namespace SwfLib.SwfMill.Data {
             res.Add(new XAttribute("type", ToXml(param.Type)));
             if (!string.IsNullOrWhiteSpace(param.Name)) {
                 res.Add(new XAttribute("name", param.Name));
+            }
+            if (param.Default != null) {
+                res.Add(new XAttribute("default", param.Default.ToString())); //todo: format
             }
             return res;
         }

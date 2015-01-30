@@ -208,7 +208,7 @@ namespace SwfLib.Avm2 {
         private AsOptionDetailInfo ReadOptionDetail() {
             return new AsOptionDetailInfo {
                 Value = ReadU30(),
-                Kind = (AsType)ReadU8()
+                Kind = (AsConstantType)ReadU8()
             };
         }
 

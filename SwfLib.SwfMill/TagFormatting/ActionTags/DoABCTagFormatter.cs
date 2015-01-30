@@ -16,7 +16,6 @@ namespace SwfLib.SwfMill.TagFormatting.ActionTags {
             var reader = new AbcReader(new SwfStreamReader(new MemoryStream(tag.ABCData)));
             var info = reader.ReadAbcFile();
             xTag.Add(XAbcFile.ToXml(info));
-
         }
 
         protected override bool AcceptTagAttribute(DoABCTag tag, XAttribute attrib) {
@@ -37,11 +36,12 @@ namespace SwfLib.SwfMill.TagFormatting.ActionTags {
             switch (element.Name.LocalName) {
                 case "abc":
                     tag.ABCData = ParseBase64(element.Value);
-                    break;
+                    return true;
+                case XAbcFile.TAG_NAME:
+                    return true;
                 default:
                     return false;
             }
-            return true;
         }
 
         /// <summary>
