@@ -67,6 +67,25 @@ namespace SwfLib.SwfMill.Data {
                 res.Add(new XAttribute("returns", retType));
             }
 
+            if (method.NeedArguments) {
+                res.Add(new XAttribute("needArguments", CommonFormatter.Format(method.NeedArguments)));
+            }
+            if (method.NeedActivation) {
+                res.Add(new XAttribute("needActivation", CommonFormatter.Format(method.NeedActivation)));
+            }
+            if (method.NeedRest) {
+                res.Add(new XAttribute("needRest", CommonFormatter.Format(method.NeedRest)));
+            }
+            if (method.SetDxns) {
+                res.Add(new XAttribute("setDxns", CommonFormatter.Format(method.SetDxns)));
+            }
+            if (method.IgnoreRest) {
+                res.Add(new XAttribute("ignoreRest", CommonFormatter.Format(method.IgnoreRest)));
+            }
+            if (method.Native) {
+                res.Add(new XAttribute("native", CommonFormatter.Format(method.Native)));
+            }
+
             if (method.Params.Count > 0) {
                 var xParams = new XElement("params");
                 foreach (var param in method.Params) {

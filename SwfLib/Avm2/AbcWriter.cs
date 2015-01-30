@@ -158,7 +158,7 @@ namespace SwfLib.Avm2 {
             WriteU30(methodInfo.ReturnType);
             WriteMutipleU30(methodInfo.ParamTypes, true);
             WriteU30(methodInfo.Name);
-            WriteU8(methodInfo.Flags);
+            WriteU8((byte) methodInfo.Flags);
             if (methodInfo.HasOptional) {
                 WriteU30((uint)methodInfo.Options.Length);
                 foreach (var option in methodInfo.Options) {

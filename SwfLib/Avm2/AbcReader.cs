@@ -192,7 +192,7 @@ namespace SwfLib.Avm2 {
             };
             r.ParamTypes = ReadMultipleU30(paramCount);
             r.Name = ReadU30();
-            r.Flags = ReadU8();
+            r.Flags = (AsMethodFlags) ReadU8();
             if (r.HasOptional) {
                 r.Options = new AsOptionDetailInfo[ReadU30()];
                 for (var i = 0; i < r.Options.Length; i++) {

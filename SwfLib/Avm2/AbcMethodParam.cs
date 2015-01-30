@@ -1,4 +1,5 @@
-﻿using SwfLib.Avm2.Data;
+﻿using System.Globalization;
+using SwfLib.Avm2.Data;
 
 namespace SwfLib.Avm2 {
     public class AbcMethodParam {
@@ -23,6 +24,14 @@ namespace SwfLib.Avm2 {
 
         public static implicit operator AbcMethodParamDefaultValue(double val) {
             return new AbcMethodParamDouble { Value = val };
+        }
+
+        public static implicit operator AbcMethodParamDefaultValue(string val) {
+            return new AbcMethodParamString { Value = val };
+        }
+
+        public static implicit operator AbcMethodParamDefaultValue(bool val) {
+            return new AbcMethodParamBoolean { Value = val };
         }
 
         public abstract AsConstantType Type { get; }
@@ -64,6 +73,32 @@ namespace SwfLib.Avm2 {
 
         public override AsConstantType Type {
             get { return AsConstantType.Double; }
+        }
+    }
+
+    public class AbcMethodParamString : AbcMethodParamDefaultValue {
+
+        public string Value { get; set; }
+
+        public override string ToString() {
+            return "string: " + Value;
+        }
+
+        public override AsConstantType Type {
+            get { return AsConstantType.String; }
+        }
+    }
+
+    public class AbcMethodParamBoolean : AbcMethodParamDefaultValue {
+
+        public bool Value { get; set; }
+
+        public override string ToString() {
+            return "boolean: " + Value.ToString(CultureInfo.InvariantCulture);
+        }
+
+        public override AsConstantType Type {
+            get { return Value ? AsConstantType.True : AsConstantType.False; }
         }
     }
 }

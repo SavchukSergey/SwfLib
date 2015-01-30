@@ -16,8 +16,6 @@ namespace SwfLib.Avm2 {
 
         //public AsMetadataInfo[] Metadata;
 
-        //public AsScriptInfo[] Scripts;
-
         public IList<AbcMethod> Methods {
             get { return _methods; }
         }
@@ -36,25 +34,8 @@ namespace SwfLib.Avm2 {
                 MinorVersion = info.MinorVersion
             };
 
-            var bodies = info.Bodies.ToDictionary(item => item.Method);
-            for (var i = 0; i < info.Methods.Length; i++) {
-                var methodInfo = info.Methods[i];
-                AsMethodBodyInfo body;
-                bodies.TryGetValue((uint)i, out body);
-                var method = new AbcMethod {
-                    Name = info.ConstantPool.Strings[methodInfo.Name],
-                    Body = body != null ? GetMethodBody(body) : null,
-                    ReturnType = GetMultiname(methodInfo.ReturnType, info)
-                };
-                for (int index = 0; index < methodInfo.ParamTypes.Length; index++) {
-                    var paramInfo = methodInfo.ParamTypes[index];
-                    var param = new AbcMethodParam {
-                        Type = paramInfo != 0 ? GetMultiname(paramInfo, info) : AbcMultiname.Any,
-                        Name = methodInfo.HasParamNames ? info.ConstantPool.Strings[methodInfo.ParamNames[index].ParamName] : null,
-                        Default = methodInfo.HasOptional ? GetParamDefaultValue(methodInfo.Options[index], info) : null,
-                    };
-                    method.Params.Add(param);
-                }
+            var methods = GetMethods(info);
+            foreach (var method in methods) {
                 res.Methods.Add(method);
             }
 
@@ -91,6 +72,38 @@ namespace SwfLib.Avm2 {
             return res;
         }
 
+        private static IEnumerable<AbcMethod> GetMethods(AbcFileInfo fileInfo) {
+            var res = new List<AbcMethod>();
+            var bodies = fileInfo.Bodies.ToDictionary(item => item.Method);
+            for (var i = 0; i < fileInfo.Methods.Length; i++) {
+                var methodInfo = fileInfo.Methods[i];
+                AsMethodBodyInfo body;
+                bodies.TryGetValue((uint)i, out body);
+                var method = new AbcMethod {
+                    Name = fileInfo.ConstantPool.Strings[methodInfo.Name],
+                    Body = body != null ? GetMethodBody(body) : null,
+                    ReturnType = GetMultiname(methodInfo.ReturnType, fileInfo),
+                    NeedArguments = methodInfo.NeedArguments,
+                    NeedActivation = methodInfo.NeedActivation,
+                    NeedRest = methodInfo.NeedRest,
+                    SetDxns = methodInfo.SetDxns,
+                    IgnoreRest = methodInfo.IgnoreRest,
+                    Native = methodInfo.Native,
+                };
+                for (int index = 0; index < methodInfo.ParamTypes.Length; index++) {
+                    var paramInfo = methodInfo.ParamTypes[index];
+                    var param = new AbcMethodParam {
+                        Type = paramInfo != 0 ? GetMultiname(paramInfo, fileInfo) : AbcMultiname.Any,
+                        Name = methodInfo.HasParamNames ? fileInfo.ConstantPool.Strings[methodInfo.ParamNames[index].ParamName] : null,
+                        Default = methodInfo.HasOptional ? GetParamDefaultValue(methodInfo.Options[index], fileInfo) : null,
+                    };
+                    method.Params.Add(param);
+                }
+                res.Add(method);
+            }
+            return res;
+        }
+
         private static AbcMethodParamDefaultValue GetParamDefaultValue(AsOptionDetailInfo info, AbcFileInfo fileInfo) {
             switch (info.Kind) {
                 case AsConstantType.Integer:
@@ -99,6 +112,13 @@ namespace SwfLib.Avm2 {
                     return fileInfo.ConstantPool.UnsignedIntegers[info.Value];
                 case AsConstantType.Double:
                     return fileInfo.ConstantPool.Doubles[info.Value];
+                case AsConstantType.String:
+                    return fileInfo.ConstantPool.Strings[info.Value];
+                case AsConstantType.True:
+                    return true;
+                case AsConstantType.False:
+                    return false;
+                //todo: other types
                 default:
                     throw new Exception("unknown default value");
             }
@@ -151,36 +171,7 @@ namespace SwfLib.Avm2 {
     }
 
 
-    public class AbcMethod {
 
-        private readonly IList<AbcMethodParam> _params = new List<AbcMethodParam>();
-
-        public string Name { get; set; }
-
-        public AbcMethodBody Body { get; set; }
-
-        public IList<AbcMethodParam> Params {
-            get { return _params; }
-        }
-
-        public AbcMultiname ReturnType { get; set; }
-
-        /*
-        public byte Flags; // todo: MethodFlags bitmask
-
-        public AsOptionDetailInfo[] Options;
-
-        public AsParamInfo[] ParamNames;
-
-        public bool HasOptional {
-            get { return (Flags & (int)AsMethodFlags.HasOptional) != 0; }
-        }
-
-        public bool HasParamNames {
-            get { return (Flags & (int)AsMethodFlags.HasParamNames) != 0; }
-        }
-         */
-    }
 
     public abstract class AbcMultiname {
 
