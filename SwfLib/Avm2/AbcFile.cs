@@ -46,6 +46,14 @@ namespace SwfLib.Avm2 {
                     Body = body != null ? GetMethodBody(body) : null,
                     ReturnType = GetMultiname(methodInfo.ReturnType, info)
                 };
+                for (int index = 0; index < methodInfo.ParamTypes.Length; index++) {
+                    var paramInfo = methodInfo.ParamTypes[index];
+                    var param = new AbcMethodParam {
+                        Type = paramInfo != 0 ? GetMultiname(paramInfo, info) : AbcMultiname.Any,
+                        Name = methodInfo.HasParamNames ? info.ConstantPool.Strings[methodInfo.ParamNames[index].ParamName] : null
+                    };
+                    method.Params.Add(param);
+                }
                 res.Methods.Add(method);
             }
 
@@ -131,11 +139,15 @@ namespace SwfLib.Avm2 {
 
     public class AbcMethod {
 
+        private readonly IList<AbcMethodParam> _params = new List<AbcMethodParam>();
+
         public string Name { get; set; }
 
         public AbcMethodBody Body { get; set; }
 
-        //public uint[] ParamTypes;
+        public IList<AbcMethodParam> Params {
+            get { return _params; }
+        }
 
         public AbcMultiname ReturnType { get; set; }
 
@@ -156,12 +168,9 @@ namespace SwfLib.Avm2 {
          */
     }
 
-    public class AbcMethodParam {
-
-    }
-
-
     public abstract class AbcMultiname {
+
+        public static readonly AbcMultinameAny Any = new AbcMultinameAny();
 
     }
 
@@ -177,6 +186,10 @@ namespace SwfLib.Avm2 {
     }
 
     public class AbcMultinameVoid : AbcMultiname {
+
+    }
+
+    public class AbcMultinameAny : AbcMultiname {
 
     }
 

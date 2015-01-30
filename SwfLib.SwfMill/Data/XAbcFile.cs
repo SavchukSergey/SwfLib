@@ -8,7 +8,7 @@ namespace SwfLib.SwfMill.Data {
 
         public static XElement ToXml(AbcFileInfo abcInfo) {
             var abc = AbcFile.From(abcInfo);
-            var res = new XElement("abc",
+            var res = new XElement("abcFile",
                 new XAttribute("minorVersion", abc.MinorVersion),
                 new XAttribute("majorVersion", abc.MajorVersion)
             );
@@ -50,6 +50,7 @@ namespace SwfLib.SwfMill.Data {
 
         private static XElement ToXml(AbcTrait trait) {
             var res = new XElement("trait");
+            //todo:
             return res;
         }
 
@@ -63,8 +64,25 @@ namespace SwfLib.SwfMill.Data {
             if (!string.IsNullOrWhiteSpace(retType)) {
                 res.Add(new XAttribute("returns", retType));
             }
+
+            if (method.Params.Count > 0) {
+                var xParams = new XElement("params");
+                foreach (var param in method.Params) {
+                    xParams.Add(ToXml(param));
+                }
+                res.Add(xParams);
+            }
             if (method.Body != null) {
                 res.Add(ToXml(method.Body));
+            }
+            return res;
+        }
+
+        private static XElement ToXml(AbcMethodParam param) {
+            var res = new XElement("param");
+            res.Add(new XAttribute("type", ToXml(param.Type)));
+            if (!string.IsNullOrWhiteSpace(param.Name)) {
+                res.Add(new XAttribute("name", param.Name));
             }
             return res;
         }
@@ -121,6 +139,7 @@ namespace SwfLib.SwfMill.Data {
 
         private static string ToXml(AbcMultiname multiname) {
             if (multiname is AbcMultinameVoid) return "";
+            if (multiname is AbcMultinameAny) return "*";
             return multiname.ToString();
         }
     }
