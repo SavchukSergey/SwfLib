@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using SwfLib.Avm2;
 using SwfLib.Avm2.Data;
@@ -58,8 +59,47 @@ namespace SwfLib.SwfMill.Data {
         }
 
         private static XElement ToXml(AbcTrait trait) {
-            var res = new XElement("trait", new XAttribute("name", ToXml(trait.Name)));
-            //todo:
+            var res = new XElement("trait",
+                new XAttribute("name", ToXml(trait.Name)),
+                new XAttribute("kind", trait.Kind));
+
+            switch (trait.Kind) {
+                case AsTraitKind.Slot:
+                    var slot = (AbcSlotTrait)trait;
+                    res.Add(new XAttribute("slotId", slot.SlotId));
+                    res.Add(new XAttribute("typeName", ToXml(slot.TypeName)));
+                    res.Add(new XAttribute("value", ToXml(slot.Value)));
+                    break;
+                case AsTraitKind.Const:
+                    var con = (AbcSlotTrait)trait;
+                    res.Add(new XAttribute("slotId", con.SlotId));
+                    res.Add(new XAttribute("typeName", ToXml(con.TypeName)));
+                    res.Add(new XAttribute("value", ToXml(con.Value)));
+                    break;
+                case AsTraitKind.Class:
+                    var cl = (AbcClassTrait)trait;
+                    res.Add(new XAttribute("slotId", cl.SlotId));
+                    //todo: class ref
+                    break;
+                case AsTraitKind.Method:
+                    var met = (AbcMethodTrait)trait;
+                    res.Add(new XAttribute("dispId", met.DispId));
+                    //todo: method ref
+                    break;
+                case AsTraitKind.Getter:
+                    var getter = (AbcGetterTrait)trait;
+                    res.Add(new XAttribute("dispId", getter.DispId));
+                    //todo: method ref
+                    break;
+                case AsTraitKind.Setter:
+                    var setter = (AbcSetterTrait)trait;
+                    res.Add(new XAttribute("dispId", setter.DispId));
+                    //todo: method ref
+                    break;
+                default:
+                    throw new Exception("unsupported trait kind " + trait.Kind);
+            }
+            //todo: metadata
             return res;
         }
 
@@ -113,7 +153,7 @@ namespace SwfLib.SwfMill.Data {
                 res.Add(new XAttribute("name", param.Name));
             }
             if (param.Default != null) {
-                res.Add(new XAttribute("default", param.Default.ToString())); //todo: format
+                res.Add(new XAttribute("default", ToXml(param.Default)));
             }
             return res;
         }
@@ -128,6 +168,10 @@ namespace SwfLib.SwfMill.Data {
                 res.Add(xItems);
             }
             return res;
+        }
+
+        private static string ToXml(AbcConstant value) {
+            return value.ToString(); //todo:
         }
 
         private static XElement ToXml(AbcMethodBody body) {

@@ -16,8 +16,6 @@ namespace SwfLib.Avm2 {
 
         public AbcMultiname ReturnType { get; set; }
 
-        //public byte Flags; // todo: MethodFlags bitmask
-
         public bool HasOptional {
             get { return Params.Any(item => item.Default != null); }
         }

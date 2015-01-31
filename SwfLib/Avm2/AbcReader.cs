@@ -276,9 +276,9 @@ namespace SwfLib.Avm2 {
                     r.Slot.TypeName = ReadU30();
                     r.Slot.ValueIndex = ReadU30();
                     if (r.Slot.ValueIndex != 0)
-                        r.Slot.ValueKind = (AsType)ReadU8();
+                        r.Slot.ValueKind = (AsConstantType)ReadU8();
                     else
-                        r.Slot.ValueKind = AsType.Void;
+                        r.Slot.ValueKind = AsConstantType.Void;
                     break;
                 case AsTraitKind.Class:
                     r.Class.SlotId = ReadU30();
