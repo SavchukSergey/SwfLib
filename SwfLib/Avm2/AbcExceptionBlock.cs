@@ -1,16 +1,15 @@
 ﻿namespace SwfLib.Avm2 {
     public class AbcExceptionBlock {
-        //todo:
 
-        //public uint From;
+        public uint From { get; set; }
 
-        //public uint To;
+        public uint To { get; set; }
 
-        //public uint Target;
+        public uint Target { get; set; }
 
-        //public uint ExceptionType;
+        public AbcMultiname ExceptionType { get; set; }
 
-        //public uint VariableName;
+        public AbcMultiname VariableName { get; set; }
 
     }
 }

@@ -6,7 +6,7 @@ using SwfLib.Avm2.Data;
 namespace SwfLib.Avm2 {
     public class AbcFileLoader {
 
-        public AbcFileInfo FileInfo;
+        public readonly AbcFileInfo FileInfo;
 
         public readonly IList<AbcClass> Classes = new List<AbcClass>();
 
@@ -48,24 +48,28 @@ namespace SwfLib.Avm2 {
                 };
                 for (var paramIndex = 0; paramIndex < methodInfo.ParamTypes.Length; paramIndex++) {
                     var paramInfo = methodInfo.ParamTypes[paramIndex];
-                    var param = new AbcMethodParam {
+                    method.Params.Add(new AbcMethodParam {
                         Type = GetMultiname(paramInfo, AbcMultiname.Any),
                         Name = methodInfo.HasParamNames ? fileInfo.ConstantPool.Strings[methodInfo.ParamNames[paramIndex].ParamName] : null
-                    };
-                    if (method.HasOptional) {
-                        //todo: how param defaults are ordered???
-                        if (paramIndex < methodInfo.Options.Length) {
-                            var option = methodInfo.Options[paramIndex];
+                    });
+                }
+                if (methodInfo.HasOptional) {
+                    var paramShift = methodInfo.ParamTypes.Length - methodInfo.Options.Length;
+                    for (var i = 0; i < methodInfo.ParamTypes.Length; i++) {
+                        var defaultIndex = i - paramShift;
+                        if (defaultIndex >= 0) {
+                            var param = method.Params[i];
+                            var option = methodInfo.Options[defaultIndex];
                             param.Default = GetConstantValue(option.Kind, option.Value);
                         }
                     }
-                    method.Params.Add(param);
                 }
                 Methods.Add(method);
             }
             LoadClassInstances();
             LoadMethodBodies();
             LoadClassInitializers();
+            LoadScriptInitializers();
             LoadTraits();
         }
 
@@ -80,6 +84,14 @@ namespace SwfLib.Avm2 {
                 foreach (var index in instanceInfo.Interfaces) {
                     @class.Instance.Interfaces.Add(GetMultiname(index, null));
                 }
+            }
+        }
+
+        private void LoadScriptInitializers() {
+            for (var i = 0; i < FileInfo.Scripts.Length; i++) {
+                var scriptInfo = FileInfo.Scripts[i];
+                var script = Scripts[i];
+                script.ScriptInitializer = GetMethod(scriptInfo.ScriptInitializer);
             }
         }
 
@@ -198,14 +210,21 @@ namespace SwfLib.Avm2 {
                 LocalCount = info.LocalCount,
                 InitScopeDepth = info.InitScopeDepth,
                 MaxScopeDepth = info.MaxScopeDepth,
-                //todo: other fields
+                //todo: code
             };
+            foreach (var exc in info.Exceptions) {
+                res.Exceptions.Add(GetExceptionBlock(exc));
+            }
             return res;
         }
 
         private AbcExceptionBlock GetExceptionBlock(AsExceptionInfo info) {
             return new AbcExceptionBlock {
-
+                From = info.From,
+                To = info.To,
+                Target = info.Target,
+                ExceptionType = GetMultiname(info.ExceptionType, AbcMultiname.Any),
+                VariableName = GetMultiname(info.VariableName, AbcMultiname.Void)
             };
         }
 

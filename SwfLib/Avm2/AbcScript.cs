@@ -5,9 +5,7 @@ namespace SwfLib.Avm2 {
 
         private readonly IList<AbcTrait> _traits = new List<AbcTrait>();
 
-        //todo:
-        //public uint ScriptInitializer;
-
+        public AbcMethod ScriptInitializer { get; set; }
 
         public IList<AbcTrait> Traits {
             get { return _traits; }

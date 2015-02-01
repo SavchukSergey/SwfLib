@@ -2,6 +2,7 @@
 using System.Xml.Linq;
 using SwfLib.Avm2;
 using SwfLib.SwfMill.Data;
+using SwfLib.SwfMill.Data.Avm2;
 using SwfLib.Tags.ActionsTags;
 
 namespace SwfLib.SwfMill.TagFormatting.ActionTags {
