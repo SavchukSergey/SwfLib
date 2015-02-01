@@ -1,7 +1,7 @@
 ﻿namespace SwfLib.Avm2.Data {
     public struct AsMultinameInfo {
 
-        public AsType Kind;
+        public AsMultinameKind Kind;
 
         public AsMultinameQName QName;
 

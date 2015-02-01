@@ -3,7 +3,7 @@
 
         public uint Value;
 
-        public AsConstantType Kind;
+        public AsConstantKind Kind;
 
     }
 

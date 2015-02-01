@@ -18,13 +18,14 @@ namespace SwfLib.Avm2 {
 
         public readonly IList<AbcNamespace> Namespaces = new List<AbcNamespace>();
 
+        public readonly IList<AbcNamespaceSet> NamespaceSets = new List<AbcNamespaceSet>();
+
         public readonly IList<AbcMultiname> Multinames = new List<AbcMultiname>();
 
         public AbcFileLoader(AbcFileInfo fileInfo) {
             FileInfo = fileInfo;
 
             ReadConstants();
-
 
             for (var i = 0; i < fileInfo.Classes.Length; i++) {
                 Classes.Add(new AbcClass());
@@ -37,7 +38,7 @@ namespace SwfLib.Avm2 {
             foreach (var methodInfo in fileInfo.Methods) {
                 var method = new AbcMethod {
                     Name = fileInfo.ConstantPool.Strings[methodInfo.Name],
-                    ReturnType = methodInfo.ReturnType != 0 ? GetMultiname(methodInfo.ReturnType) : AbcMultiname.Void,
+                    ReturnType = GetMultiname(methodInfo.ReturnType, AbcMultiname.Void),
                     NeedArguments = methodInfo.NeedArguments,
                     NeedActivation = methodInfo.NeedActivation,
                     NeedRest = methodInfo.NeedRest,
@@ -48,10 +49,16 @@ namespace SwfLib.Avm2 {
                 for (var paramIndex = 0; paramIndex < methodInfo.ParamTypes.Length; paramIndex++) {
                     var paramInfo = methodInfo.ParamTypes[paramIndex];
                     var param = new AbcMethodParam {
-                        Type = paramInfo != 0 ? GetMultiname(paramInfo) : AbcMultiname.Any,
-                        Name = methodInfo.HasParamNames ? fileInfo.ConstantPool.Strings[methodInfo.ParamNames[paramIndex].ParamName] : null,
-                        Default = methodInfo.HasOptional ? GetConstantValue(methodInfo.Options[paramIndex].Kind, methodInfo.Options[paramIndex].Value) : null,
+                        Type = GetMultiname(paramInfo, AbcMultiname.Any),
+                        Name = methodInfo.HasParamNames ? fileInfo.ConstantPool.Strings[methodInfo.ParamNames[paramIndex].ParamName] : null
                     };
+                    if (method.HasOptional) {
+                        //todo: how param defaults are ordered???
+                        if (paramIndex < methodInfo.Options.Length) {
+                            var option = methodInfo.Options[paramIndex];
+                            param.Default = GetConstantValue(option.Kind, option.Value);
+                        }
+                    }
                     method.Params.Add(param);
                 }
                 Methods.Add(method);
@@ -67,11 +74,11 @@ namespace SwfLib.Avm2 {
                 var instanceInfo = FileInfo.Instances[i];
                 var @class = Classes[i];
                 @class.Instance = new AbcInstance {
-                    Name = GetMultiname(instanceInfo.Name),
-                    SuperName = GetMultiname(instanceInfo.SuperName),
+                    Name = GetMultiname(instanceInfo.Name, null),
+                    SuperName = GetMultiname(instanceInfo.SuperName, AbcMultiname.Void),
                 };
                 foreach (var index in instanceInfo.Interfaces) {
-                    @class.Instance.Interfaces.Add(GetMultiname(index));
+                    @class.Instance.Interfaces.Add(GetMultiname(index, null));
                 }
             }
         }
@@ -107,23 +114,60 @@ namespace SwfLib.Avm2 {
                 });
             }
 
+            foreach (var nssInfo in FileInfo.ConstantPool.NamespaceSets) {
+                var ns = new AbcNamespaceSet();
+                if (nssInfo.Namespaces != null) {
+                    foreach (var nsInfo in nssInfo.Namespaces) {
+                        ns.Namespaces.Add(GetNamespace(nsInfo, AbcNamespace.Any));
+                    }
+                }
+                NamespaceSets.Add(ns);
+            }
+
             foreach (var multiname in FileInfo.ConstantPool.Multinames) {
                 switch (multiname.Kind) {
-                    case AsType.QName:
+                    case AsMultinameKind.QName:
                         Multinames.Add(new AbcMultinameQName {
                             Name = FileInfo.ConstantPool.Strings[multiname.QName.Name],
-                            Namespace = GetNamespace(multiname.QName.Namespace)
+                            Namespace = GetNamespace(multiname.QName.Namespace, AbcNamespace.Any)
                         });
                         break;
-                    case AsType.Void:
+                    case AsMultinameKind.QNameA:
+                        Multinames.Add(new AbcMultinameQNameA {
+                            Name = FileInfo.ConstantPool.Strings[multiname.QName.Name],
+                            Namespace = GetNamespace(multiname.QName.Namespace, AbcNamespace.Any)
+                        });
+                        break;
+                    case AsMultinameKind.Void:
                         Multinames.Add(AbcMultiname.Void);
                         break;
-                    case AsType.Multiname:
-                    case AsType.MultinameL:
+                    case AsMultinameKind.Multiname:
+                        Multinames.Add(new AbcMultinameMultiname {
+                            Name = FileInfo.ConstantPool.Strings[multiname.Multiname.Name],
+                            NamespaceSet = GetNamespaceSet(multiname.Multiname.NamespaceSet, null)
+                        });
+                        break;
+                    case AsMultinameKind.MultinameA:
+                    case AsMultinameKind.MultinameL:
+                    case AsMultinameKind.MultinameLA:
+                    case AsMultinameKind.RTQName:
                         Multinames.Add(AbcMultiname.Void); //todo:
+                        break;
+                    case AsMultinameKind.Generic:
+                        Multinames.Add(new AbcMultinameGeneric());
                         break;
                     default:
                         throw new Exception("Unsupported multiname kind " + multiname.Kind);
+                }
+            }
+            for (var i = 0; i < FileInfo.ConstantPool.Multinames.Length; i++) {
+                var multiname = FileInfo.ConstantPool.Multinames[i];
+                if (multiname.Kind == AsMultinameKind.Generic) {
+                    var vector = (AbcMultinameGeneric)Multinames[i];
+                    vector.Name = GetMultiname(multiname.TypeName.Name, null);
+                    foreach (var arg in multiname.TypeName.Params) {
+                        vector.Params.Add(GetMultiname(arg, AbcMultiname.Any));
+                    }
                 }
             }
         }
@@ -159,6 +203,12 @@ namespace SwfLib.Avm2 {
             return res;
         }
 
+        private AbcExceptionBlock GetExceptionBlock(AsExceptionInfo info) {
+            return new AbcExceptionBlock {
+
+            };
+        }
+
         private void AddTraits(ICollection<AbcTrait> target, IEnumerable<AsTraitsInfo> infos) {
             foreach (var info in infos) {
                 target.Add(GetTrait(info));
@@ -171,14 +221,14 @@ namespace SwfLib.Avm2 {
                 case AsTraitKind.Const:
                     trait = new AbcConstTrait {
                         SlotId = traitInfo.Slot.SlotId,
-                        TypeName = GetMultiname(traitInfo.Slot.TypeName),
+                        TypeName = GetMultiname(traitInfo.Slot.TypeName, AbcMultiname.Any),
                         Value = GetConstantValue(traitInfo.Slot.ValueKind, traitInfo.Slot.ValueIndex)
                     };
                     break;
                 case AsTraitKind.Slot:
                     trait = new AbcSlotTrait {
                         SlotId = traitInfo.Slot.SlotId,
-                        TypeName = traitInfo.Slot.TypeName != 0 ? GetMultiname(traitInfo.Slot.TypeName) : AbcMultiname.Any,
+                        TypeName = GetMultiname(traitInfo.Slot.TypeName, AbcMultiname.Any),
                         Value = GetConstantValue(traitInfo.Slot.ValueKind, traitInfo.Slot.ValueIndex)
                     };
                     break;
@@ -210,30 +260,30 @@ namespace SwfLib.Avm2 {
                     throw new Exception("unsupported trait kind " + traitInfo.Kind);
             }
 
-            trait.Name = GetMultiname(traitInfo.Name);
+            trait.Name = GetMultiname(traitInfo.Name, null);
             return trait;
         }
 
-        private AbcConstant GetConstantValue(AsConstantType kind, uint value) {
+        private AbcConstant GetConstantValue(AsConstantKind kind, uint value) {
             switch (kind) {
-                case AsConstantType.Integer:
+                case AsConstantKind.Integer:
                     return FileInfo.ConstantPool.Integers[value];
-                case AsConstantType.UInteger:
+                case AsConstantKind.UInteger:
                     return FileInfo.ConstantPool.UnsignedIntegers[value];
-                case AsConstantType.Double:
+                case AsConstantKind.Double:
                     return FileInfo.ConstantPool.Doubles[value];
-                case AsConstantType.String:
+                case AsConstantKind.String:
                     return FileInfo.ConstantPool.Strings[value];
-                case AsConstantType.True:
+                case AsConstantKind.True:
                     return true;
-                case AsConstantType.False:
+                case AsConstantKind.False:
                     return false;
-                case AsConstantType.Null:
+                case AsConstantKind.Null:
                     return AbcConstant.Null;
-                case AsConstantType.Undefined:
+                case AsConstantKind.Undefined:
                     return AbcConstant.Undefined;
-                case AsConstantType.Namespace:
-                    return value != 0 ? GetNamespace(value) : AbcNamespace.Any;
+                case AsConstantKind.Namespace:
+                    return GetNamespace(value, AbcNamespace.Any);
                 //todo: other types
                 default:
                     throw new Exception("unknown constant");
@@ -252,14 +302,22 @@ namespace SwfLib.Avm2 {
             }
         }
 
-        public AbcMultiname GetMultiname(uint index) {
-            if (index == 0) throw new Exception("multiname index cannot be zero");
-            return Multinames[(int)index];
+        public AbcMultiname GetMultiname(uint index, AbcMultiname zeroMeaning) {
+            if (index != 0) return Multinames[(int)index];
+            if (zeroMeaning == null) throw new Exception("zero multiname is not allowed in current context");
+            return zeroMeaning;
         }
 
-        public AbcNamespace GetNamespace(uint index) {
-            if (index == 0) throw new Exception("ambigous zero multiname");
-            return Namespaces[(int)index];
+        public AbcNamespace GetNamespace(uint index, AbcNamespace zeroMeaning) {
+            if (index != 0) return Namespaces[(int)index];
+            if (zeroMeaning == null) throw new Exception("zero namespace is not allowed in current context");
+            return zeroMeaning;
+        }
+
+        public AbcNamespaceSet GetNamespaceSet(uint index, AbcNamespaceSet zeroMeaning) {
+            if (index != 0) return NamespaceSets[(int)index];
+            if (zeroMeaning == null) throw new Exception("zero namespace space is not allowed in current context");
+            return zeroMeaning;
         }
 
         private AbcMethod GetMethod(uint index) {

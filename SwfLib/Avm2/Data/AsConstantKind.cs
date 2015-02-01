@@ -1,5 +1,5 @@
 ﻿namespace SwfLib.Avm2.Data {
-    public enum AsConstantType {
+    public enum AsConstantKind {
         Void = 0x00,
         Undefined = 0x00,
         String = 0x01,

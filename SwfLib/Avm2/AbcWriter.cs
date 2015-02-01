@@ -120,28 +120,28 @@ namespace SwfLib.Avm2 {
         private void WriteMultiname(ref AsMultinameInfo multiname) {
             WriteU8((byte)multiname.Kind);
             switch (multiname.Kind) {
-                case AsType.QName:
-                case AsType.QNameA:
+                case AsMultinameKind.QName:
+                case AsMultinameKind.QNameA:
                     WriteU30(multiname.QName.Namespace);
                     WriteU30(multiname.QName.Name);
                     break;
-                case AsType.RTQName:
-                case AsType.RTQNameA:
+                case AsMultinameKind.RTQName:
+                case AsMultinameKind.RTQNameA:
                     WriteU30(multiname.RtqName.Name);
                     break;
-                case AsType.RTQNameL:
-                case AsType.RTQNameLA:
+                case AsMultinameKind.RTQNameL:
+                case AsMultinameKind.RTQNameLA:
                     break;
-                case AsType.Multiname:
-                case AsType.MultinameA:
+                case AsMultinameKind.Multiname:
+                case AsMultinameKind.MultinameA:
                     WriteU30(multiname.Multiname.Name);
                     WriteU30(multiname.Multiname.NamespaceSet);
                     break;
-                case AsType.MultinameL:
-                case AsType.MultinameLA:
+                case AsMultinameKind.MultinameL:
+                case AsMultinameKind.MultinameLA:
                     WriteU30(multiname.MultinameL.NamespaceSet);
                     break;
-                case AsType.TypeName:
+                case AsMultinameKind.Generic:
                     WriteU30(multiname.TypeName.Name);
                     WriteU30((uint)multiname.TypeName.Params.Length);
                     foreach (var value in multiname.TypeName.Params)

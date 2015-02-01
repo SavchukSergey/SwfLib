@@ -71,7 +71,7 @@ namespace SwfLib.SwfMill.Data {
                     res.Add(new XAttribute("value", ToXml(slot.Value)));
                     break;
                 case AsTraitKind.Const:
-                    var con = (AbcSlotTrait)trait;
+                    var con = (AbcConstTrait)trait;
                     res.Add(new XAttribute("slotId", con.SlotId));
                     res.Add(new XAttribute("typeName", ToXml(con.TypeName)));
                     res.Add(new XAttribute("value", ToXml(con.Value)));
@@ -208,7 +208,9 @@ namespace SwfLib.SwfMill.Data {
         private static XElement ToXml(AbcInstance instance) {
             var xInstance = new XElement("instance");
             xInstance.Add(new XAttribute("name", ToXml(instance.Name)));
-            xInstance.Add(new XAttribute("extends", ToXml(instance.SuperName)));
+            if (instance.SuperName != null && instance.SuperName != AbcMultiname.Void) {
+                xInstance.Add(new XAttribute("extends", ToXml(instance.SuperName)));
+            }
             if (instance.Traits.Count > 0) {
                 xInstance.Add(ToXml(instance.Traits));
             }

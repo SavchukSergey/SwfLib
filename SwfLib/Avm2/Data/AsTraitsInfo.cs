@@ -57,7 +57,7 @@
         /// This field exists only when vindex is non-zero. It is used to determine how vindex will be interpreted.
         /// See the “Constant Kind” table above for details. 
         /// </summary>
-        public AsConstantType ValueKind;
+        public AsConstantKind ValueKind;
     }
 
     public struct AsClassTraitsInfo {

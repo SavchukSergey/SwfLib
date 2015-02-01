@@ -141,38 +141,38 @@ namespace SwfLib.Avm2 {
         }
 
         private AsMultinameInfo ReadMultiname() {
-            var r = new AsMultinameInfo { Kind = (AsType)ReadU8() };
+            var r = new AsMultinameInfo { Kind = (AsMultinameKind)ReadU8() };
             switch (r.Kind) {
-                case AsType.QName:
-                case AsType.QNameA:
+                case AsMultinameKind.QName:
+                case AsMultinameKind.QNameA:
                     r.QName = new AsMultinameQName {
                         Namespace = ReadU30(),
                         Name = ReadU30()
                     };
                     break;
-                case AsType.RTQName:
-                case AsType.RTQNameA:
+                case AsMultinameKind.RTQName:
+                case AsMultinameKind.RTQNameA:
                     r.RtqName = new AsMultinameRTQName {
                         Name = ReadU30()
                     };
                     break;
-                case AsType.RTQNameL:
-                case AsType.RTQNameLA:
+                case AsMultinameKind.RTQNameL:
+                case AsMultinameKind.RTQNameLA:
                     break;
-                case AsType.Multiname:
-                case AsType.MultinameA:
+                case AsMultinameKind.Multiname:
+                case AsMultinameKind.MultinameA:
                     r.Multiname = new AsMultinameMultiname {
                         Name = ReadU30(),
                         NamespaceSet = ReadU30()
                     };
                     break;
-                case AsType.MultinameL:
-                case AsType.MultinameLA:
+                case AsMultinameKind.MultinameL:
+                case AsMultinameKind.MultinameLA:
                     r.MultinameL = new AsMultinameMultinameL {
                         NamespaceSet = ReadU30()
                     };
                     break;
-                case AsType.TypeName:
+                case AsMultinameKind.Generic:
                     r.TypeName = new AsMultinameTypeName {
                         Name = ReadU30(),
                         Params = ReadMultipleU30()
@@ -208,7 +208,7 @@ namespace SwfLib.Avm2 {
         private AsOptionDetailInfo ReadOptionDetail() {
             return new AsOptionDetailInfo {
                 Value = ReadU30(),
-                Kind = (AsConstantType)ReadU8()
+                Kind = (AsConstantKind)ReadU8()
             };
         }
 
@@ -276,9 +276,9 @@ namespace SwfLib.Avm2 {
                     r.Slot.TypeName = ReadU30();
                     r.Slot.ValueIndex = ReadU30();
                     if (r.Slot.ValueIndex != 0)
-                        r.Slot.ValueKind = (AsConstantType)ReadU8();
+                        r.Slot.ValueKind = (AsConstantKind)ReadU8();
                     else
-                        r.Slot.ValueKind = AsConstantType.Void;
+                        r.Slot.ValueKind = AsConstantKind.Void;
                     break;
                 case AsTraitKind.Class:
                     r.Class.SlotId = ReadU30();

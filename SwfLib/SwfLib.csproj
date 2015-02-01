@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Avm2\AbcClass.cs" />
     <Compile Include="Avm2\AbcConstant.cs" />
+    <Compile Include="Avm2\AbcExceptionBlock.cs" />
     <Compile Include="Avm2\AbcFile.cs" />
     <Compile Include="Avm2\AbcFileLoader.cs" />
     <Compile Include="Avm2\AbcInstance.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Avm2\AbcMethodParam.cs" />
     <Compile Include="Avm2\AbcMultiname.cs" />
     <Compile Include="Avm2\AbcNamespace.cs" />
+    <Compile Include="Avm2\AbcNamespaceSet.cs" />
     <Compile Include="Avm2\AbcTrait.cs" />
     <Compile Include="Avm2\AbcScript.cs" />
     <Compile Include="Avm2\Data\AbcFileInfo.cs" />
@@ -80,7 +82,7 @@
     <Compile Include="Avm2\AbcWriter.cs" />
     <Compile Include="Avm2\Data\AsClassInfo.cs" />
     <Compile Include="Avm2\Data\AsConstantPoolInfo.cs" />
-    <Compile Include="Avm2\Data\AsConstantType.cs" />
+    <Compile Include="Avm2\Data\AsConstantKind.cs" />
     <Compile Include="Avm2\Data\AsExceptionInfo.cs" />
     <Compile Include="Avm2\Data\AsInstanceInfo.cs" />
     <Compile Include="Avm2\Data\AsInstanceFlags.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Avm2\Data\AsMethodFlags.cs" />
     <Compile Include="Avm2\Data\AsMethodInfo.cs" />
     <Compile Include="Avm2\Data\AsMultinameInfo.cs" />
+    <Compile Include="Avm2\Data\AsMultinameKind.cs" />
     <Compile Include="Avm2\Data\AsNamespaceInfo.cs" />
     <Compile Include="Avm2\Data\AsNamespaceSetInfo.cs" />
     <Compile Include="Avm2\Data\AsOptionDetailInfo.cs">

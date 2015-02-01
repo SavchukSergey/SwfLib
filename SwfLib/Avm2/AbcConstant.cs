@@ -28,7 +28,7 @@ namespace SwfLib.Avm2 {
             return new AbcConstantNamespace { Value = val };
         }
 
-        public abstract AsConstantType Type { get; }
+        public abstract AsConstantKind Type { get; }
 
         public static AbcConstantNull Null = new AbcConstantNull();
 
@@ -44,8 +44,8 @@ namespace SwfLib.Avm2 {
             return "int: " + Value;
         }
 
-        public override AsConstantType Type {
-            get { return AsConstantType.Integer; }
+        public override AsConstantKind Type {
+            get { return AsConstantKind.Integer; }
         }
     }
 
@@ -57,8 +57,8 @@ namespace SwfLib.Avm2 {
             return "uint: " + Value;
         }
 
-        public override AsConstantType Type {
-            get { return AsConstantType.UInteger; }
+        public override AsConstantKind Type {
+            get { return AsConstantKind.UInteger; }
         }
     }
 
@@ -70,8 +70,8 @@ namespace SwfLib.Avm2 {
             return "double: " + Value;
         }
 
-        public override AsConstantType Type {
-            get { return AsConstantType.Double; }
+        public override AsConstantKind Type {
+            get { return AsConstantKind.Double; }
         }
     }
 
@@ -83,8 +83,8 @@ namespace SwfLib.Avm2 {
             return "string: " + Value;
         }
 
-        public override AsConstantType Type {
-            get { return AsConstantType.String; }
+        public override AsConstantKind Type {
+            get { return AsConstantKind.String; }
         }
     }
 
@@ -96,8 +96,8 @@ namespace SwfLib.Avm2 {
             return "boolean: " + Value.ToString(CultureInfo.InvariantCulture);
         }
 
-        public override AsConstantType Type {
-            get { return Value ? AsConstantType.True : AsConstantType.False; }
+        public override AsConstantKind Type {
+            get { return Value ? AsConstantKind.True : AsConstantKind.False; }
         }
     }
 
@@ -107,8 +107,8 @@ namespace SwfLib.Avm2 {
             return "null";
         }
 
-        public override AsConstantType Type {
-            get { return AsConstantType.Null; }
+        public override AsConstantKind Type {
+            get { return AsConstantKind.Null; }
         }
     }
 
@@ -118,8 +118,8 @@ namespace SwfLib.Avm2 {
             return "undefined";
         }
 
-        public override AsConstantType Type {
-            get { return AsConstantType.Undefined; }
+        public override AsConstantKind Type {
+            get { return AsConstantKind.Undefined; }
         }
     }
 
@@ -131,8 +131,8 @@ namespace SwfLib.Avm2 {
             return "namespace: " + Value;
         }
 
-        public override AsConstantType Type {
-            get { return AsConstantType.Namespace; }
+        public override AsConstantKind Type {
+            get { return AsConstantKind.Namespace; }
         }
     }
 }
