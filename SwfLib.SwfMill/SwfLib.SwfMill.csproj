@@ -69,6 +69,7 @@
     <Compile Include="Data\Avm2\XAbcClass.cs" />
     <Compile Include="Data\Avm2\XAbcCommon.cs" />
     <Compile Include="Data\Avm2\XAbcMethod.cs" />
+    <Compile Include="Data\Avm2\XAbcTrait.cs" />
     <Compile Include="Data\CommonFormatter.cs" />
     <Compile Include="Data\Avm2\XAbcFile.cs" />
     <Compile Include="Data\XBinary.cs" />

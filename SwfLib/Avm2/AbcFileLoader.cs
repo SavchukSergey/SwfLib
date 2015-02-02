@@ -22,6 +22,8 @@ namespace SwfLib.Avm2 {
 
         public readonly IList<AbcMultiname> Multinames = new List<AbcMultiname>();
 
+        private readonly IList<AbcMetadata> _metadata = new List<AbcMetadata>();
+
         public AbcFileLoader(AbcFileInfo fileInfo) {
             FileInfo = fileInfo;
 
@@ -33,6 +35,10 @@ namespace SwfLib.Avm2 {
 
             for (var i = 0; i < fileInfo.Scripts.Length; i++) {
                 Scripts.Add(new AbcScript());
+            }
+
+            foreach (var metaInfo in fileInfo.Metadata) {
+                _metadata.Add(ReadMetadata(metaInfo));
             }
 
             foreach (var methodInfo in fileInfo.Methods) {
@@ -117,6 +123,20 @@ namespace SwfLib.Avm2 {
                 AddTraits(@class.Traits, classInfo.Traits);
             }
         }
+
+        private AbcMetadata ReadMetadata(AsMetadataInfo metaInfo) {
+            var res = new AbcMetadata {
+                Name = FileInfo.ConstantPool.Strings[metaInfo.Name]
+            };
+            foreach (var item in metaInfo.Items) {
+                res.Items.Add(new AbcMetadataItem {
+                    Key = FileInfo.ConstantPool.Strings[item.Key],
+                    Value = FileInfo.ConstantPool.Strings[item.Value]
+                });
+            }
+            return res;
+        }
+
 
         private void ReadConstants() {
             foreach (var ns in FileInfo.ConstantPool.Namespaces) {
@@ -257,6 +277,12 @@ namespace SwfLib.Avm2 {
                         Class = GetClass(traitInfo.Class.Class)
                     };
                     break;
+                case AsTraitKind.Function:
+                    trait = new AbcFunctionTrait {
+                        SlotId = traitInfo.Function.SlotId,
+                        Method = GetMethod(traitInfo.Function.Function)
+                    };
+                    break;
                 case AsTraitKind.Method:
                     trait = new AbcMethodTrait {
                         DispId = traitInfo.Method.DispId,
@@ -280,6 +306,15 @@ namespace SwfLib.Avm2 {
             }
 
             trait.Name = GetMultiname(traitInfo.Name, null);
+            trait.Final = traitInfo.Final;
+            trait.Override = traitInfo.Override;
+
+            if (traitInfo.Metadata != null) {
+                foreach (var metaIndex in traitInfo.Metadata) {
+                    var meta = GetMetadata(metaIndex);
+                    trait.Metadata.Add(meta);
+                }
+            }
             return trait;
         }
 
@@ -346,5 +381,10 @@ namespace SwfLib.Avm2 {
         public AbcClass GetClass(uint index) {
             return Classes[(int)index];
         }
+
+        private AbcMetadata GetMetadata(uint index) {
+            return _metadata[(int) index];
+        }
+
     }
 }

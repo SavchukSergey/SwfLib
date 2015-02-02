@@ -78,8 +78,8 @@
     <Compile Include="Avm2\AbcTrait.cs" />
     <Compile Include="Avm2\AbcScript.cs" />
     <Compile Include="Avm2\Data\AbcFileInfo.cs" />
-    <Compile Include="Avm2\AbcReader.cs" />
-    <Compile Include="Avm2\AbcWriter.cs" />
+    <Compile Include="Avm2\Data\AbcDataReader.cs" />
+    <Compile Include="Avm2\Data\AbcDataWriter.cs" />
     <Compile Include="Avm2\Data\AsClassInfo.cs" />
     <Compile Include="Avm2\Data\AsConstantPoolInfo.cs" />
     <Compile Include="Avm2\Data\AsConstantKind.cs" />

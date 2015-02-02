@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Xml.Linq;
-using SwfLib.Avm2;
-using SwfLib.SwfMill.Data;
+using SwfLib.Avm2.Data;
 using SwfLib.SwfMill.Data.Avm2;
 using SwfLib.Tags.ActionsTags;
 
@@ -14,7 +12,7 @@ namespace SwfLib.SwfMill.TagFormatting.ActionTags {
             xTag.Add(new XAttribute("name", tag.Name));
             xTag.Add(new XElement("abc", FormatBase64(tag.ABCData)));
 
-            var reader = new AbcReader(new SwfStreamReader(new MemoryStream(tag.ABCData)));
+            var reader = new AbcDataReader(new SwfStreamReader(new MemoryStream(tag.ABCData)));
             var info = reader.ReadAbcFile();
             xTag.Add(XAbcFile.ToXml(info));
         }

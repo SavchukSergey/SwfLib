@@ -1,15 +1,25 @@
-﻿using SwfLib.Avm2.Data;
+﻿using System.Collections.Generic;
+using SwfLib.Avm2.Data;
 
 namespace SwfLib.Avm2 {
     public abstract class AbcTrait {
+
+        private readonly IList<AbcMetadata> _metadata = new List<AbcMetadata>();
 
         public AbcMultiname Name { get; set; }
 
         public abstract AsTraitKind Kind { get; }
 
-        //todo: other fields
+        public IList<AbcMetadata> Metadata {
+            get {
+                return _metadata;
+            }
+        }
 
-        //todo: metadata
+        public bool Final { get; set; }
+        
+        public bool Override { get; set; }
+
     }
 
     public class AbcConstTrait : AbcTrait {
@@ -47,6 +57,18 @@ namespace SwfLib.Avm2 {
 
         public override AsTraitKind Kind {
             get { return AsTraitKind.Class; }
+        }
+
+    }
+
+    public class AbcFunctionTrait : AbcTrait {
+
+        public uint SlotId { get; set; }
+
+        public AbcMethod Method { get; set; }
+
+        public override AsTraitKind Kind {
+            get { return AsTraitKind.Function; }
         }
 
     }

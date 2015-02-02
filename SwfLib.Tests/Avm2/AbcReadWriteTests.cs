@@ -19,10 +19,10 @@ namespace SwfLib.Tests.Avm2 {
                 UnsignedIntegers = new uint[] { 0, 1, uint.MaxValue }
             };
             var mem = new MemoryStream();
-            var writer = new AbcWriter(new SwfStreamWriter(mem));
+            var writer = new AbcDataWriter(new SwfStreamWriter(mem));
             writer.WriteConstantPool(pool);
             mem.Seek(0, SeekOrigin.Begin);
-            var reader = new AbcReader(new SwfStreamReader(mem));
+            var reader = new AbcDataReader(new SwfStreamReader(mem));
             var res = reader.ReadConstantPool();
 
             Assert.AreEqual(pool.Doubles.Length, res.Doubles.Length);

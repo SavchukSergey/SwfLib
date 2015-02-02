@@ -31,6 +31,14 @@
         public bool HasMetadata {
             get { return ((int)Attributes & (int)AsTraitAttributes.Metadata) != 0; }
         }
+
+        public bool Final {
+            get { return ((int)Attributes & (int)AsTraitAttributes.Final) != 0; }
+        }
+
+        public bool Override {
+            get { return ((int)Attributes & (int)AsTraitAttributes.Override) != 0; }
+        }
     }
 
     public struct AsSlotTraitsInfo {

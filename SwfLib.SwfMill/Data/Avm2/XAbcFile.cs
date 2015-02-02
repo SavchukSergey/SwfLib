@@ -14,13 +14,6 @@ namespace SwfLib.SwfMill.Data.Avm2 {
                 new XAttribute("majorVersion", abc.MajorVersion)
             );
 
-            if (abc.Metadata.Count > 0) {
-                var xMeta = new XElement("meta");
-                foreach (var meta in abc.Metadata) {
-                    xMeta.Add(ToXml(meta));
-                }
-                res.Add(xMeta);
-            }
             if (abc.Classes.Count > 0) {
                 var xClasses = new XElement("classes");
                 foreach (var cls in abc.Classes) {
@@ -45,18 +38,6 @@ namespace SwfLib.SwfMill.Data.Avm2 {
                 res.Add(xMethods);
             }
 
-            return res;
-        }
-
-        private static XElement ToXml(AbcMetadata meta) {
-            var res = new XElement("meta", new XAttribute("name", meta.Name));
-            if (meta.Items.Count > 0) {
-                var xItems = new XElement("items");
-                foreach (var item in meta.Items) {
-                    xItems.Add(new XElement("item", new XAttribute("key", item.Key), new XAttribute("value", item.Value)));
-                }
-                res.Add(xItems);
-            }
             return res;
         }
 
