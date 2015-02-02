@@ -10,7 +10,7 @@ using SwfLib.Avm2.Opcodes.Xml;
 namespace SwfLib.Avm2 {
     public interface IAvm2OpcodeVisitor<TArg, TResult> {
 
-        TResult Visit(AddOpcode action, TArg arg);
+        TResult Visit(AddOpcode opcode, TArg arg);
         TResult Visit(AddIOpcode opcode, TArg arg);
         TResult Visit(AsTypeOpcode opcode, TArg arg);
         TResult Visit(AsTypeLateOpcode opcode, TArg arg);

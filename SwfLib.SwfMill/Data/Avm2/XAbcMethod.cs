@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using SwfLib.Avm2;
 
 namespace SwfLib.SwfMill.Data.Avm2 {
@@ -57,10 +58,17 @@ namespace SwfLib.SwfMill.Data.Avm2 {
             if (body.Traits.Count > 0) {
                 xBody.Add(body.Traits.ToXml());
             }
+
+            var xCode = new XElement("code");
+            foreach (var instruction in body.Code) {
+                xBody.Add(instruction.ToXml());
+            }
+            xBody.Add(xCode);
+
             if (body.Exceptions.Count != 0) {
                 var xExcs = new XElement("exceptions");
                 foreach (var exc in body.Exceptions) {
-                    var xExc = new XElement("exception", 
+                    var xExc = new XElement("exception",
                         new XAttribute("from", exc.From),
                         new XAttribute("to", exc.To),
                         new XAttribute("target", exc.Target),
@@ -85,5 +93,10 @@ namespace SwfLib.SwfMill.Data.Avm2 {
             return res;
         }
 
+        public static XElement ToXml(this AbcMethodBodyInstruction instruction) {
+            return instruction.Opcode.AcceptVisitor(_writer, instruction);
+        }
+
+        private static readonly XAbcOpcodeWriter _writer = new XAbcOpcodeWriter();
     }
 }

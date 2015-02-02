@@ -30,7 +30,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\Debug\swflibmill.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <CodeAnalysisRuleSet>..\codeanalysis.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -69,6 +70,7 @@
     <Compile Include="Data\Avm2\XAbcClass.cs" />
     <Compile Include="Data\Avm2\XAbcCommon.cs" />
     <Compile Include="Data\Avm2\XAbcMethod.cs" />
+    <Compile Include="Data\Avm2\XAbcOpcodeWriter.cs" />
     <Compile Include="Data\Avm2\XAbcTrait.cs" />
     <Compile Include="Data\CommonFormatter.cs" />
     <Compile Include="Data\Avm2\XAbcFile.cs" />

@@ -11,6 +11,14 @@ namespace SwfLib.Avm2.Data {
             _reader = reader;
         }
 
+        public bool IsEOF {
+            get { return _reader.IsEOF; }
+        }
+
+        public long Position {
+            get { return _reader.Position; }
+        }
+
         public AbcFileInfo ReadAbcFile() {
             try {
                 var res = new AbcFileInfo {
@@ -354,7 +362,7 @@ namespace SwfLib.Avm2.Data {
 
         #region Primitives
 
-        private byte ReadU8() {
+        public byte ReadU8() {
             return _reader.ReadByte();
         }
 
@@ -362,7 +370,7 @@ namespace SwfLib.Avm2.Data {
             return _reader.ReadUInt16();
         }
 
-        private uint ReadU30() {
+        public uint ReadU30() {
             return _reader.ReadEncodedU30();
         }
 

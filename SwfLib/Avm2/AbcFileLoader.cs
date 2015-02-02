@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using SwfLib.Avm2.Data;
+using SwfLib.Avm2.Opcodes;
 
 namespace SwfLib.Avm2 {
     public class AbcFileLoader {
@@ -225,13 +228,26 @@ namespace SwfLib.Avm2 {
         }
 
         private AbcMethodBody GetMethodBody(AsMethodBodyInfo info) {
+            var opcodeReader = new Avm2OpcodeReader(this);
+
             var res = new AbcMethodBody {
                 MaxStack = info.MaxStack,
                 LocalCount = info.LocalCount,
                 InitScopeDepth = info.InitScopeDepth,
                 MaxScopeDepth = info.MaxScopeDepth,
-                //todo: code
             };
+            var reader = new AbcDataReader(new SwfStreamReader(new MemoryStream(info.Code)));
+            var factory = new Avm2OpcodeFactory();
+            while (!reader.IsEOF) {
+                var offset = reader.Position;
+                var code = (Avm2Opcode)reader.ReadU8();
+                var opcode = factory.CreateOpcode(code);
+                opcode.AcceptVisitor(opcodeReader, reader);
+                res.Code.Add(new AbcMethodBodyInstruction {
+                    Offset = (ushort)offset,
+                    Opcode = opcode
+                });
+            }
             foreach (var exc in info.Exceptions) {
                 res.Exceptions.Add(GetExceptionBlock(exc));
             }
@@ -383,8 +399,11 @@ namespace SwfLib.Avm2 {
         }
 
         private AbcMetadata GetMetadata(uint index) {
-            return _metadata[(int) index];
+            return _metadata[(int)index];
         }
 
+        public string GetString(uint index) {
+            return FileInfo.ConstantPool.Strings[index];
+        }
     }
 }
