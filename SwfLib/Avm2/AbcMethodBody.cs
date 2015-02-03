@@ -31,9 +31,12 @@ namespace SwfLib.Avm2 {
 
     public struct AbcMethodBodyInstruction {
 
-        public ushort Offset { get; set; }
+        public uint Offset { get; set; }
 
         public BaseAvm2Opcode Opcode { get; set; }
 
+        public override string ToString() {
+            return string.Format("{0:x6}: {1}", Offset, Opcode);
+        }
     }
 }

@@ -8,5 +8,8 @@
             return visitor.Visit(this, arg);
         }
 
+        public override string ToString() {
+            return "getlocal_0";
+        }
     }
 }

@@ -244,7 +244,7 @@ namespace SwfLib.Avm2 {
                 var opcode = factory.CreateOpcode(code);
                 opcode.AcceptVisitor(opcodeReader, reader);
                 res.Code.Add(new AbcMethodBodyInstruction {
-                    Offset = (ushort)offset,
+                    Offset = (uint)offset,
                     Opcode = opcode
                 });
             }

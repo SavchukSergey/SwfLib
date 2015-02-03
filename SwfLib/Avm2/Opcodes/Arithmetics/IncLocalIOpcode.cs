@@ -5,5 +5,10 @@
             return visitor.Visit(this, arg);
         }
 
+        public uint Register { get; set; }
+
+        public override string ToString() {
+            return "inclocal_i";
+        }
     }
 }

@@ -10,5 +10,8 @@
             return visitor.Visit(this, arg);
         }
 
+        public override string ToString() {
+            return string.Format("pushbyte 0x{0:x2}", Value);
+        }
     }
 }
