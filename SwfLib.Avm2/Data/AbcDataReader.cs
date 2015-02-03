@@ -368,6 +368,10 @@ namespace SwfLib.Avm2.Data {
             return _reader.ReadUInt16();
         }
 
+        /// <summary>
+        /// Reads variable-length encoded unsigned 30-bit integer
+        /// </summary>
+        /// <returns></returns>
         public uint ReadU30() {
             return ReadU32() & 0x3fffffff;
         }
@@ -395,6 +399,10 @@ namespace SwfLib.Avm2.Data {
             return val;
         }
 
+        /// <summary>
+        /// Reads signed 24-bit integer
+        /// </summary>
+        /// <returns></returns>
         public int ReadS24() {
             var i0 = _reader.ReadByte();
             var i1 = _reader.ReadByte();
@@ -404,6 +412,10 @@ namespace SwfLib.Avm2.Data {
             return res;
         }
 
+        /// <summary>
+        /// Reads variable-length encoded signed 32-bit integer
+        /// </summary>
+        /// <returns></returns>
         private int ReadS32() {
             uint val = 0;
             var bt = _reader.ReadByte();
