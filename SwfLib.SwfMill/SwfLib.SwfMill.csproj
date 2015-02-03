@@ -70,6 +70,7 @@
     <Compile Include="Data\Avm2\XAbcClass.cs" />
     <Compile Include="Data\Avm2\XAbcCommon.cs" />
     <Compile Include="Data\Avm2\XAbcMethod.cs" />
+    <Compile Include="Data\Avm2\XAbcOpcodeExts.cs" />
     <Compile Include="Data\Avm2\XAbcOpcodeWriter.cs" />
     <Compile Include="Data\Avm2\XAbcTrait.cs" />
     <Compile Include="Data\CommonFormatter.cs" />

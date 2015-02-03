@@ -400,7 +400,7 @@ namespace SwfLib.Avm2.Data {
         }
 
         private double ReadD64() {
-            return _reader.ReadDouble();
+            return BitConverter.Int64BitsToDouble((long)_reader.ReadUInt64());
         }
 
         private string ReadString() {

@@ -53,7 +53,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(CallOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("call", new XAttribute("args", opcode.ArgCount));
+            return new XElement("call").AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(CallMethodOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -61,15 +61,15 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(CallPropertyOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("callproperty", new XAttribute("name", opcode.Name.ToXml()), new XAttribute("args", opcode.ArgCount));
+            return new XElement("callproperty").AddName(opcode.Name).AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(CallPropLexOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("callproplex").AddName(opcode.Name).AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(CallPropVoidOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("callpropvoid", new XAttribute("name", opcode.Name.ToXml()), new XAttribute("args", opcode.ArgCount));
+            return new XElement("callpropvoid").AddName(opcode.Name).AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(CallStaticOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -77,15 +77,15 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(CallSuperOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("callsuper", new XAttribute("name", opcode.Name.ToXml()), new XAttribute("args", opcode.ArgCount));
+            return new XElement("callsuper").AddName(opcode.Name).AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(CallSuperVoidOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("callsupervoid", new XAttribute("name", opcode.Name.ToXml()), new XAttribute("args", opcode.ArgCount));
+            return new XElement("callsupervoid").AddName(opcode.Name).AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(CheckFilterOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("checkfilter");
         }
 
         public XElement Visit(CoerceOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -121,7 +121,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(ConstructOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("construct").AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(ConstructPropOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -149,18 +149,17 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(ConvertSOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("convert_s");
         }
 
         public XElement Visit(ConvertUOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("convert_u");
         }
 
         public XElement Visit(DebugOpcode opcode, AbcMethodBodyInstruction arg) {
             var res = new XElement("debug",
                 new XAttribute("type", opcode.DebugType),
-                new XAttribute("name", opcode.Name),
-                new XAttribute("reg", opcode.Register));
+                new XAttribute("name", opcode.Name)).AddRegister(opcode.Register);
             if (opcode.Extra != 0) {
                 res.Add(new XAttribute("extra", opcode.Extra));
             }
@@ -184,7 +183,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(DecrementOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("decrement");
         }
 
         public XElement Visit(DecrementIOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -192,7 +191,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(DeletePropertyOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("deleteproperty", new XAttribute("name", opcode.Name.ToXml()));
         }
 
         public XElement Visit(DivideOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -228,15 +227,15 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(FindPropertyOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("findproperty", new XAttribute("name", opcode.Name.ToXml()));
+            return new XElement("findproperty").AddName(opcode.Name);
         }
 
         public XElement Visit(FindPropStrictOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("findpropstrict", new XAttribute("name", opcode.Name.ToXml()));
+            return new XElement("findpropstrict").AddName(opcode.Name);
         }
 
         public XElement Visit(GetDescendantsOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("getdescendants").AddName(opcode.Name);
         }
 
         public XElement Visit(GetGlobalScopeOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -252,7 +251,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(GetLocalOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("getlocal", new XAttribute("register", opcode.Register));
+            return new XElement("getlocal").AddRegister(opcode.Register);
         }
 
         public XElement Visit(GetLocal0Opcode opcode, AbcMethodBodyInstruction arg) {
@@ -288,7 +287,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(GreaterEqualsOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("greaterequals");
         }
 
         public XElement Visit(GreaterThanOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -312,15 +311,15 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(IfgeOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return Branch("ifge", opcode, arg);
         }
 
         public XElement Visit(IfgtOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return Branch("ifgt", opcode, arg);
         }
 
         public XElement Visit(IfleOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return Branch("ifle", opcode, arg);
         }
 
         public XElement Visit(IfltOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -348,7 +347,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(IfStrictEqOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return Branch("ifstricteq", opcode, arg);
         }
 
         public XElement Visit(IfStrictNeOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -368,11 +367,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(IncLocalIOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("inclocal_i", new XAttribute("reg", opcode.Register));
+            return new XElement("inclocal_i").AddRegister(opcode.Register);
         }
 
         public XElement Visit(IncrementOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("increment");
         }
 
         public XElement Visit(IncrementIOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -400,7 +399,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(KillOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("kill", new XElement("register", opcode.Register));
+            return new XElement("kill").AddRegister(opcode.Register);
         }
 
         public XElement Visit(LabelOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -408,11 +407,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(LessEqualsOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("lessequals");
         }
 
         public XElement Visit(LessThanOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("lessthan");
         }
 
         public XElement Visit(Lf32Opcode opcode, AbcMethodBodyInstruction arg) {
@@ -445,11 +444,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(LShiftOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("lshift");
         }
 
         public XElement Visit(ModuloOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("modulo");
         }
 
         public XElement Visit(MultiplyOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -461,7 +460,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(NegateOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("negate");
         }
 
         public XElement Visit(NegateIOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -473,7 +472,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(NewArrayOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("newarray", new XAttribute("args", opcode.ArgCount));
+            return new XElement("newarray").AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(NewCatchOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -489,7 +488,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(NewObjectOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("newobject", new XAttribute("args", opcode.ArgCount));
+            return new XElement("newobject").AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(NextNameOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -497,11 +496,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(NextValueOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("nextvalue");
         }
 
         public XElement Visit(NopOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("nop");
         }
 
         public XElement Visit(NotOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -529,7 +528,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(PushIntOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("pushint", new XAttribute("value", opcode.Value));
         }
 
         public XElement Visit(PushNamespaceOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -569,7 +568,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(PushWithOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("pushwith");
         }
 
         public XElement Visit(ReturnValueOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -581,7 +580,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(RShiftOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("rshift");
         }
 
         public XElement Visit(SetGlobalSlotOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -589,7 +588,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(SetLocalOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("setlocal", new XAttribute("register", opcode.Register));
+            return new XElement("setlocal").AddRegister(opcode.Register);
         }
 
         public XElement Visit(SetLocal0Opcode opcode, AbcMethodBodyInstruction arg) {
@@ -609,7 +608,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(SetPropertyOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("setproperty", new XAttribute("name", opcode.Name.ToXml()));
+            return new XElement("setproperty").AddName(opcode.Name);
         }
 
         public XElement Visit(SetSlotOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -617,7 +616,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(SetSuperOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("setsuper").AddName(opcode.Name);
         }
 
         public XElement Visit(Sf32Opcode opcode, AbcMethodBodyInstruction arg) {
@@ -641,7 +640,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(StrictEqualsOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("strictequals");
         }
 
         public XElement Visit(SubtractOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -665,11 +664,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(TypeOfOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("typeof");
         }
 
         public XElement Visit(UrshiftOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("urshift");
         }
 
         public XElement Visit(UnknownOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -695,4 +694,5 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
     }
+
 }

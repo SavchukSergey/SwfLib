@@ -409,5 +409,9 @@ namespace SwfLib.Avm2 {
         public double GetDouble(uint index) {
             return FileInfo.ConstantPool.Doubles[index];
         }
+
+        public int GetInteger(uint index) {
+            return FileInfo.ConstantPool.Integers[index];
+        }
     }
 }

@@ -10,5 +10,8 @@
             return visitor.Visit(this, arg);
         }
 
+        public override string ToString() {
+            return string.Format("findproperty {0}", Name);
+        }
     }
 }

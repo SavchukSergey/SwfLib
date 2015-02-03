@@ -4,7 +4,7 @@ using SwfLib.Avm2;
 
 namespace SwfLib.SwfMill.Data.Avm2 {
     public static class XAbcCommon {
-        
+
         public static string ToXml(this AbcMultiname multiname) {
             if (multiname is AbcMultinameVoid) return "";
             if (multiname is AbcMultinameAny) return "*";

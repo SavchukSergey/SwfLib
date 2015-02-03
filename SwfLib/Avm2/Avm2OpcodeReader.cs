@@ -72,7 +72,9 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(CallPropLexOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            opcode.Name = _context.GetMultiname(arg.ReadU30(), null);
+            opcode.ArgCount = arg.ReadU30();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(CallPropVoidOpcode opcode, AbcDataReader arg) {
@@ -98,7 +100,7 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(CheckFilterOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(CoerceOpcode opcode, AbcDataReader arg) {
@@ -135,6 +137,7 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(ConstructOpcode opcode, AbcDataReader arg) {
+            opcode.ArgCount = arg.ReadU30();
             return opcode;
         }
 
@@ -166,11 +169,11 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(ConvertSOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(ConvertUOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(DebugOpcode opcode, AbcDataReader arg) {
@@ -200,7 +203,7 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(DecrementOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(DecrementIOpcode opcode, AbcDataReader arg) {
@@ -208,7 +211,8 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(DeletePropertyOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            opcode.Name = _context.GetMultiname(arg.ReadU30(), null);
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(DivideOpcode opcode, AbcDataReader arg) {
@@ -254,7 +258,8 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(GetDescendantsOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            opcode.Name = _context.GetMultiname(arg.ReadU30(), null);
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(GetGlobalScopeOpcode opcode, AbcDataReader arg) {
@@ -312,7 +317,7 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(GreaterEqualsOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(GreaterThanOpcode opcode, AbcDataReader arg) {
@@ -338,15 +343,15 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(IfgeOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return Branch(opcode, arg);
         }
 
         public BaseAvm2Opcode Visit(IfgtOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return Branch(opcode, arg);
         }
 
         public BaseAvm2Opcode Visit(IfleOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return Branch(opcode, arg);
         }
 
         public BaseAvm2Opcode Visit(IfltOpcode opcode, AbcDataReader arg) {
@@ -374,7 +379,7 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(IfStrictEqOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return Branch(opcode, arg);
         }
 
         public BaseAvm2Opcode Visit(IfStrictNeOpcode opcode, AbcDataReader arg) {
@@ -399,7 +404,7 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(IncrementOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(IncrementIOpcode opcode, AbcDataReader arg) {
@@ -437,11 +442,11 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(LessEqualsOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(LessThanOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(Lf32Opcode opcode, AbcDataReader arg) {
@@ -474,11 +479,11 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(LShiftOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(ModuloOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(MultiplyOpcode opcode, AbcDataReader arg) {
@@ -490,7 +495,7 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(NegateOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(NegateIOpcode opcode, AbcDataReader arg) {
@@ -531,11 +536,11 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(NextValueOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(NopOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(NotOpcode opcode, AbcDataReader arg) {
@@ -565,7 +570,8 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(PushIntOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            opcode.Value = _context.GetInteger(arg.ReadU30());
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(PushNamespaceOpcode opcode, AbcDataReader arg) {
@@ -607,7 +613,7 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(PushWithOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(ReturnValueOpcode opcode, AbcDataReader arg) {
@@ -619,7 +625,7 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(RShiftOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(SetGlobalSlotOpcode opcode, AbcDataReader arg) {
@@ -658,7 +664,8 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(SetSuperOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            opcode.Name = _context.GetMultiname(arg.ReadU30(), null);
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(Sf32Opcode opcode, AbcDataReader arg) {
@@ -682,7 +689,7 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(StrictEqualsOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(SubtractOpcode opcode, AbcDataReader arg) {
@@ -706,11 +713,11 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(TypeOfOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(UrshiftOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(UnknownOpcode opcode, AbcDataReader arg) {
