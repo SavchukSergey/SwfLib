@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace SwfLib {
@@ -49,7 +50,9 @@ namespace SwfLib {
             var i0 = _reader.ReadByte();
             var i1 = _reader.ReadByte();
             var i2 = _reader.ReadByte();
-            return (i2 << 16) | (i1 << 8) | i0;
+            var res =  (i2 << 16) | (i1 << 8) | i0;
+            if ((res & 0x800000) != 0) res = (int)(res | 0xff000000);
+            return res;
         }
 
         public virtual uint ReadUInt32() {

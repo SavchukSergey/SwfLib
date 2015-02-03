@@ -11,5 +11,9 @@
         /// <returns></returns>
         public abstract TResult AcceptVisitor<TArg, TResult>(IAvm2OpcodeVisitor<TArg, TResult> visitor, TArg arg);
 
+        //todo: abstract
+        public virtual Avm2Opcode Code {
+            get { return Avm2Opcode.Nop; }
+        }
     }
 }

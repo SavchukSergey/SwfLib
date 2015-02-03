@@ -174,12 +174,12 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.Timestamp: return new TimestampOpcode();
                 case Avm2Opcode.TypeOf: return new TypeOfOpcode();
                 case Avm2Opcode.UrShift: return new UrshiftOpcode();
-                /*
+                /*todo:
 sxi_1
 sxi_8
 sxi_16
                  */
-                default: return new UnknownOpcode();
+                default: return new UnknownOpcode(opcode);
             }
         }
     }

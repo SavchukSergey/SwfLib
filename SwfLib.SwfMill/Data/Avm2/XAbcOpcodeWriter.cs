@@ -89,7 +89,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(CoerceOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("coerce", new XAttribute("type", opcode.Type.ToXml()));
         }
 
         public XElement Visit(CoerceAOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -248,7 +248,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(GetLexOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("getlex", new XAttribute("name", opcode.Name.ToXml()));
         }
 
         public XElement Visit(GetLocalOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -280,7 +280,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(GetSlotOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("getslot", new XAttribute("index", opcode.Index));
         }
 
         public XElement Visit(GetSuperOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -344,7 +344,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(IfnltOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return Branch("ifnlt", opcode, arg);
         }
 
         public XElement Visit(IfStrictEqOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -516,7 +516,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(PushDoubleOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("pushdouble", new XAttribute("value", CommonFormatter.Format(opcode.Value)));
         }
 
         public XElement Visit(PushFalseOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -568,7 +568,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(ReturnValueOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("returnvalue");
         }
 
         public XElement Visit(ReturnVoidOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -668,7 +668,12 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(UnknownOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("unknown", new XAttribute("code", opcode.Code));
         }
+
+        private XElement Branch(string name, BaseAvm2BranchOpcode opcode, AbcMethodBodyInstruction arg) {
+            return new XElement(name, new XAttribute("relative", opcode.RelativeOffset)); //todo: format label
+        }
+
     }
 }

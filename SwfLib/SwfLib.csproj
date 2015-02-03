@@ -178,6 +178,7 @@
     <Compile Include="Avm2\Opcodes\Arithmetics\SubtractOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Arithmetics\UrshiftOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Avm2Opcode.cs" />
+    <Compile Include="Avm2\Opcodes\Branching\BaseAvm2BranchOpcode.cs" />
     <Compile Include="Avm2\Opcodes\Branching\IfeqOpcode.cs" />
     <Compile Include="Avm2\Opcodes\ByteArray\Lf64Opcode.cs" />
     <Compile Include="Avm2\Opcodes\ByteArray\Li16Opcode.cs" />

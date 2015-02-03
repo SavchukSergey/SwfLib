@@ -405,5 +405,9 @@ namespace SwfLib.Avm2 {
         public string GetString(uint index) {
             return FileInfo.ConstantPool.Strings[index];
         }
+
+        public double GetDouble(uint index) {
+            return FileInfo.ConstantPool.Doubles[index];
+        }
     }
 }

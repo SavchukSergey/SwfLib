@@ -378,6 +378,10 @@ namespace SwfLib.Avm2.Data {
             return _reader.ReadEncodedU32();
         }
 
+        public int ReadS24() {
+            return _reader.ReadSInt24();
+        }
+
         private int ReadS32() {
             return _reader.ReadEncodedS32();
         }
