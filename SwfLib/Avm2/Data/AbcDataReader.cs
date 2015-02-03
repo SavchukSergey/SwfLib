@@ -399,7 +399,7 @@ namespace SwfLib.Avm2.Data {
             return res;
         }
 
-        private double ReadD64() {
+        public double ReadD64() {
             return BitConverter.Int64BitsToDouble((long)_reader.ReadUInt64());
         }
 

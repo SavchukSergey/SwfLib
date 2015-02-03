@@ -1,11 +1,27 @@
 ﻿using System.IO;
 using NUnit.Framework;
-using SwfLib.Avm2;
 using SwfLib.Avm2.Data;
 
 namespace SwfLib.Tests.Avm2 {
     [TestFixture]
     public class AbcReadWriteTests {
+
+        [Test]
+        public void ReadD64Test() {
+            var mem = new MemoryStream();
+            mem.WriteByte(0x77);
+            mem.WriteByte(0xbe);
+            mem.WriteByte(0x9f);
+            mem.WriteByte(0x1a);
+            mem.WriteByte(0x2f);
+            mem.WriteByte(0xdd);
+            mem.WriteByte(0x5e);
+            mem.WriteByte(0x40);
+            mem.Seek(0, SeekOrigin.Begin);
+            var reader = new AbcDataReader(new SwfStreamReader(mem));
+            var d = reader.ReadD64();
+            Assert.AreEqual(123.456, d);
+        }
 
         [Test]
         public void ReadWriteConstantPoolTest() {

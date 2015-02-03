@@ -166,7 +166,6 @@ namespace SwfLib {
             return _reader.ReadSingle();
         }
 
-        //todo: why reverse order? for now I fix it just for avm2. but keep an eye on it...
         public virtual double ReadDouble() {
             ulong hi = ReadUInt32();
             ulong low = ReadUInt32();
