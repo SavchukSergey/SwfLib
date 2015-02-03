@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using SwfLib.Avm2;
 using SwfLib.Avm2.Opcodes;
 using SwfLib.Avm2.Opcodes.Arithmetics;
@@ -11,6 +12,12 @@ using SwfLib.Avm2.Opcodes.Xml;
 
 namespace SwfLib.SwfMill.Data.Avm2 {
     public class XAbcOpcodeWriter : IAvm2OpcodeVisitor<AbcMethodBodyInstruction, XElement> {
+        
+        private readonly Func<uint, string> _labelFormatter;
+
+        public XAbcOpcodeWriter(Func<uint, string> labelFormatter) {
+            _labelFormatter = labelFormatter;
+        }
 
         public XElement Visit(AddOpcode action, AbcMethodBodyInstruction arg) {
             return new XElement("add");
@@ -125,11 +132,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(ConstructPropOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("constructprop", new XAttribute("name", opcode.Name.ToXml()), new XAttribute("args", opcode.ArgCount));
+            return new XElement("constructprop").AddName(opcode.Name).AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(ConstructSuperOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("constructsuper", new XAttribute("args", opcode.ArgCount));
+            return new XElement("constructsuper").AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(ConvertBOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -191,7 +198,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(DeletePropertyOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("deleteproperty", new XAttribute("name", opcode.Name.ToXml()));
+            return new XElement("deleteproperty").AddName(opcode.Name); 
         }
 
         public XElement Visit(DivideOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -247,7 +254,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(GetLexOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("getlex", new XAttribute("name", opcode.Name.ToXml()));
+            return new XElement("getlex").AddName(opcode.Name);
         }
 
         public XElement Visit(GetLocalOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -271,7 +278,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(GetPropertyOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("getproperty", new XAttribute("name", opcode.Name.ToXml()));
+            return new XElement("getproperty").AddName(opcode.Name);
         }
 
         public XElement Visit(GetScopeObjectOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -283,7 +290,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(GetSuperOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("getsuper", new XAttribute("name", opcode.Name.ToXml()));
+            return new XElement("getsuper").AddName(opcode.Name);
         }
 
         public XElement Visit(GreaterEqualsOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -379,7 +386,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(InitPropertyOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("initproperty", new XAttribute("name", opcode.Name.ToXml()));
+            return new XElement("initproperty").AddName(opcode.Name);
         }
 
         public XElement Visit(InstanceOfOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -675,13 +682,13 @@ namespace SwfLib.SwfMill.Data.Avm2 {
             return new XElement("unknown", new XAttribute("code", opcode.Code));
         }
 
-        private static XElement Branch(string name, BaseAvm2BranchOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement(name, new XAttribute("target", FormatRelativeOffset(opcode.RelativeOffset, arg)));
+        private XElement Branch(string name, BaseAvm2BranchOpcode opcode, AbcMethodBodyInstruction arg) {
+            return new XElement(name, new XAttribute("target", FormatRelativeOffset(opcode.RelativeOffset + 4, arg)));
         }
 
-        private static string FormatRelativeOffset(int offset, AbcMethodBodyInstruction instruction) {
-            var target = offset + instruction.Offset; //todo: register label
-            return string.Format("lbl_{0:x6}", target);
+        private string FormatRelativeOffset(int offset, AbcMethodBodyInstruction instruction) {
+            var target = offset + instruction.Offset;
+            return _labelFormatter((uint)target);
         }
 
 

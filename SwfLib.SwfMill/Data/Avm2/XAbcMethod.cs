@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using SwfLib.Avm2;
 
@@ -48,7 +49,14 @@ namespace SwfLib.SwfMill.Data.Avm2 {
 
             return res;
         }
-        public static XElement ToXml(AbcMethodBody body) {
+
+        public static XElement ToXml(this AbcMethodBody body) {
+            var labels = new HashSet<uint>();
+            body.ToXml(labels);
+            return body.ToXml(labels);
+        }
+
+        public static XElement ToXml(this AbcMethodBody body, ISet<uint> labels) {
             var xBody = new XElement("body",
                 new XAttribute("maxStack", body.MaxStack),
                 new XAttribute("maxScopeDepth", body.MaxScopeDepth),
@@ -59,15 +67,27 @@ namespace SwfLib.SwfMill.Data.Avm2 {
                 xBody.Add(body.Traits.ToXml());
             }
 
+            var writer = new XAbcOpcodeWriter(target => {
+                labels.Add(target);
+                return string.Format("lbl_{0:x6}", target);
+            });
+
             var xCode = new XElement("code");
             foreach (var instruction in body.Code) {
-                xCode.Add(instruction.ToXml());
+                var xInstruction = instruction.Opcode.AcceptVisitor(writer, instruction);
+                if (labels.Contains(instruction.Offset)) {
+                    xInstruction.Add(new XAttribute("label", string.Format("lbl_{0:x6}", instruction.Offset)));
+                }
+                xCode.Add(xInstruction);
             }
             xBody.Add(xCode);
 
             if (body.Exceptions.Count != 0) {
                 var xExcs = new XElement("exceptions");
                 foreach (var exc in body.Exceptions) {
+                    labels.Add(exc.From);
+                    labels.Add(exc.To);
+                    labels.Add(exc.Target);
                     var xExc = new XElement("exception",
                         new XAttribute("from", exc.From),
                         new XAttribute("to", exc.To),
@@ -93,10 +113,5 @@ namespace SwfLib.SwfMill.Data.Avm2 {
             return res;
         }
 
-        public static XElement ToXml(this AbcMethodBodyInstruction instruction) {
-            return instruction.Opcode.AcceptVisitor(_writer, instruction);
-        }
-
-        private static readonly XAbcOpcodeWriter _writer = new XAbcOpcodeWriter();
     }
 }
