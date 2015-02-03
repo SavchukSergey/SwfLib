@@ -61,7 +61,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
 
             var xCode = new XElement("code");
             foreach (var instruction in body.Code) {
-                xBody.Add(instruction.ToXml());
+                xCode.Add(instruction.ToXml());
             }
             xBody.Add(xCode);
 

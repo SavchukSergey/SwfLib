@@ -17,7 +17,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(AddIOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("add_i");
         }
 
         public XElement Visit(AsTypeOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -25,23 +25,23 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(AsTypeLateOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("astypelate");
         }
 
         public XElement Visit(BitAndOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("bitand");
         }
 
         public XElement Visit(BitNotOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("bitnot");
         }
 
         public XElement Visit(BitOrOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("bitor");
         }
 
         public XElement Visit(BitXorOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("bitxor");
         }
 
         public XElement Visit(BreakpointOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -53,7 +53,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(CallOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("call", new XAttribute("args", opcode.ArgCount));
         }
 
         public XElement Visit(CallMethodOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -240,7 +240,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(GetGlobalScopeOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("getglobalscope");
         }
 
         public XElement Visit(GetGlobalSlotOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -400,7 +400,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(KillOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("kill", new XElement("register", opcode.Register));
         }
 
         public XElement Visit(LabelOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -448,11 +448,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(MultiplyOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("multiply");
         }
 
         public XElement Visit(MultiplyIOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("multiply_i");
         }
 
         public XElement Visit(NegateOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -476,11 +476,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(NewClassOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("newclass", new XAttribute("type", opcode.BaseType.Instance.Name)); //todo: class link?
+            return new XElement("newclass", new XAttribute("type", GetClassReference(opcode.BaseType)));
         }
 
         public XElement Visit(NewFunctionOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("newfunction", new XAttribute("method", GetMethodReference(opcode.Method)));
         }
 
         public XElement Visit(NewObjectOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -640,11 +640,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(SubtractOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("subtract");
         }
 
         public XElement Visit(SubtractIOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("subtract_i");
         }
 
         public XElement Visit(SwapOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -673,6 +673,14 @@ namespace SwfLib.SwfMill.Data.Avm2 {
 
         private XElement Branch(string name, BaseAvm2BranchOpcode opcode, AbcMethodBodyInstruction arg) {
             return new XElement(name, new XAttribute("relative", opcode.RelativeOffset)); //todo: format label
+        }
+
+        private string GetClassReference(AbcClass baseType) {
+            return baseType.Instance.Name.ToXml();
+        }
+
+        private string GetMethodReference(AbcMethod method) {
+            return method.Name;
         }
 
     }

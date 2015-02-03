@@ -390,7 +390,7 @@ namespace SwfLib.Avm2 {
             return zeroMeaning;
         }
 
-        private AbcMethod GetMethod(uint index) {
+        public AbcMethod GetMethod(uint index) {
             return Methods[(int)index];
         }
 
