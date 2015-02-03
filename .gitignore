@@ -14,6 +14,9 @@
 /SwfLib/obj/
 /SwfLib/SwfLib.csproj.user
 
+/SwfLib.Avm2/bin/
+/SwfLib.Avm2/obj/
+
 /SwfLib.Tests.Asserts/bin/
 /SwfLib.Tests.Asserts/obj/
 

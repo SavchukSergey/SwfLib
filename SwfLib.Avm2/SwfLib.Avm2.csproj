@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DDC5743E-99D3-4D80-8DA7-68DB23F9C89C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SwfLib.Avm2</RootNamespace>
+    <AssemblyName>SwfLib.Avm2</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbcClass.cs" />
+    <Compile Include="AbcConstant.cs" />
+    <Compile Include="AbcExceptionBlock.cs" />
+    <Compile Include="AbcFile.cs" />
+    <Compile Include="AbcFileLoader.cs" />
+    <Compile Include="AbcInstance.cs" />
+    <Compile Include="AbcMetadata.cs" />
+    <Compile Include="AbcMethod.cs" />
+    <Compile Include="AbcMethodBody.cs" />
+    <Compile Include="AbcMethodParam.cs" />
+    <Compile Include="AbcMultiname.cs" />
+    <Compile Include="AbcNamespace.cs" />
+    <Compile Include="AbcNamespaceSet.cs" />
+    <Compile Include="AbcScript.cs" />
+    <Compile Include="AbcTrait.cs" />
+    <Compile Include="Avm2OpcodeFactory.cs" />
+    <Compile Include="Avm2OpcodeReader.cs" />
+    <Compile Include="Data\AbcDataReader.cs" />
+    <Compile Include="Data\AbcDataWriter.cs" />
+    <Compile Include="Data\AbcFileInfo.cs" />
+    <Compile Include="Data\AsClassInfo.cs" />
+    <Compile Include="Data\AsConstantKind.cs" />
+    <Compile Include="Data\AsConstantPoolInfo.cs" />
+    <Compile Include="Data\AsExceptionInfo.cs" />
+    <Compile Include="Data\AsInstanceFlags.cs" />
+    <Compile Include="Data\AsInstanceInfo.cs" />
+    <Compile Include="Data\AsMetadataInfo.cs" />
+    <Compile Include="Data\AsMethodBodyInfo.cs" />
+    <Compile Include="Data\AsMethodFlags.cs" />
+    <Compile Include="Data\AsMethodInfo.cs" />
+    <Compile Include="Data\AsMultinameInfo.cs" />
+    <Compile Include="Data\AsMultinameKind.cs" />
+    <Compile Include="Data\AsNamespaceInfo.cs" />
+    <Compile Include="Data\AsNamespaceSetInfo.cs" />
+    <Compile Include="Data\AsOptionDetailInfo.cs" />
+    <Compile Include="Data\AsParamInfo.cs" />
+    <Compile Include="Data\AsScriptInfo.cs" />
+    <Compile Include="Data\AsTraitAttributes.cs" />
+    <Compile Include="Data\AsTraitKind.cs" />
+    <Compile Include="Data\AsTraitsInfo.cs" />
+    <Compile Include="Data\AsType.cs" />
+    <Compile Include="IAvm2OpcodeVisitor.cs" />
+    <Compile Include="Opcodes\Arithmetics\AddIOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\AddOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\BitAndOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\BitNotOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\BitOrOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\BitXorOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\DecLocalIOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\DecLocalOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\DecrementIOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\DecrementOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\DivideOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\IncLocalIOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\IncLocalOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\IncrementIOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\IncrementOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\LShiftOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\ModuloOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\MultiplyIOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\MultiplyOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\NegateIOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\NegateOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\NotOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\RShiftOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\SubtractIOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\SubtractOpcode.cs" />
+    <Compile Include="Opcodes\Arithmetics\UrshiftOpcode.cs" />
+    <Compile Include="Opcodes\Avm2Opcode.cs" />
+    <Compile Include="Opcodes\BaseAvm2Opcode.cs" />
+    <Compile Include="Opcodes\Branching\BaseAvm2BranchOpcode.cs" />
+    <Compile Include="Opcodes\Branching\CallMethodOpcode.cs" />
+    <Compile Include="Opcodes\Branching\CallOpcode.cs" />
+    <Compile Include="Opcodes\Branching\CallPropertyOpcode.cs" />
+    <Compile Include="Opcodes\Branching\CallPropLexOpcode.cs" />
+    <Compile Include="Opcodes\Branching\CallPropVoidOpcode.cs" />
+    <Compile Include="Opcodes\Branching\CallStaticOpcode.cs" />
+    <Compile Include="Opcodes\Branching\CallSuperOpcode.cs" />
+    <Compile Include="Opcodes\Branching\CallSuperVoidOpcode.cs" />
+    <Compile Include="Opcodes\Branching\EqualsOpcode.cs" />
+    <Compile Include="Opcodes\Branching\GreaterEqualsOpcode.cs" />
+    <Compile Include="Opcodes\Branching\GreaterThanOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfeqOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfFalseOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfgeOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfgtOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfleOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfltOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfneOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfngeOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfngtOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfnleOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfnltOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfStrictEqOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfStrictNeOpcode.cs" />
+    <Compile Include="Opcodes\Branching\IfTrueOpcode.cs" />
+    <Compile Include="Opcodes\Branching\JumpOpcode.cs" />
+    <Compile Include="Opcodes\Branching\LabelOpcode.cs" />
+    <Compile Include="Opcodes\Branching\LessEqualsOpcode.cs" />
+    <Compile Include="Opcodes\Branching\LessThanOpcode.cs" />
+    <Compile Include="Opcodes\Branching\LookupSwitchOpcode.cs" />
+    <Compile Include="Opcodes\Branching\ReturnValueOpcode.cs" />
+    <Compile Include="Opcodes\Branching\ReturnVoidOpcode.cs" />
+    <Compile Include="Opcodes\Branching\StrictEqualsOpcode.cs" />
+    <Compile Include="Opcodes\ByteArray\Lf32Opcode.cs" />
+    <Compile Include="Opcodes\ByteArray\Lf64Opcode.cs" />
+    <Compile Include="Opcodes\ByteArray\Li16Opcode.cs" />
+    <Compile Include="Opcodes\ByteArray\Li32Opcode.cs" />
+    <Compile Include="Opcodes\ByteArray\Li8Opcode.cs" />
+    <Compile Include="Opcodes\ByteArray\Sf32Opcode.cs" />
+    <Compile Include="Opcodes\ByteArray\Sf64Opcode.cs" />
+    <Compile Include="Opcodes\ByteArray\Si16Opcode.cs" />
+    <Compile Include="Opcodes\ByteArray\Si32Opcode.cs" />
+    <Compile Include="Opcodes\ByteArray\Si8Opcode.cs" />
+    <Compile Include="Opcodes\CheckFilterOpcode.cs" />
+    <Compile Include="Opcodes\ConstructOpcode.cs" />
+    <Compile Include="Opcodes\ConstructPropOpcode.cs" />
+    <Compile Include="Opcodes\ConstructSuperOpcode.cs" />
+    <Compile Include="Opcodes\Debug\BreakpointLineOpcode.cs" />
+    <Compile Include="Opcodes\Debug\BreakpointOpcode.cs" />
+    <Compile Include="Opcodes\Debug\DebugFileOpcode.cs" />
+    <Compile Include="Opcodes\Debug\DebugLineOpcode.cs" />
+    <Compile Include="Opcodes\Debug\DebugOpcode.cs" />
+    <Compile Include="Opcodes\DeletePropertyOpcode.cs" />
+    <Compile Include="Opcodes\FindDefinitionOpcode.cs" />
+    <Compile Include="Opcodes\FindPropertyOpcode.cs" />
+    <Compile Include="Opcodes\FindPropStrictOpcode.cs" />
+    <Compile Include="Opcodes\GetGlobalScopeOpcode.cs" />
+    <Compile Include="Opcodes\GetGlobalSlotOpcode.cs" />
+    <Compile Include="Opcodes\GetLexOpcode.cs" />
+    <Compile Include="Opcodes\GetLocal0Opcode.cs" />
+    <Compile Include="Opcodes\GetLocal1Opcode.cs" />
+    <Compile Include="Opcodes\GetLocal2Opcode.cs" />
+    <Compile Include="Opcodes\GetLocal3Opcode.cs" />
+    <Compile Include="Opcodes\GetLocalOpcode.cs" />
+    <Compile Include="Opcodes\GetPropertyOpcode.cs" />
+    <Compile Include="Opcodes\GetScopeObjectOpcode.cs" />
+    <Compile Include="Opcodes\GetSlotOpcode.cs" />
+    <Compile Include="Opcodes\GetSuperOpcode.cs" />
+    <Compile Include="Opcodes\HasNext2Opcode.cs" />
+    <Compile Include="Opcodes\HasNextOpcode.cs" />
+    <Compile Include="Opcodes\InitPropertyOpcode.cs" />
+    <Compile Include="Opcodes\InOpcode.cs" />
+    <Compile Include="Opcodes\KillOpcode.cs" />
+    <Compile Include="Opcodes\NewActivationOpcode.cs" />
+    <Compile Include="Opcodes\NewArrayOpcode.cs" />
+    <Compile Include="Opcodes\NewCatchOpcode.cs" />
+    <Compile Include="Opcodes\NewClassOpcode.cs" />
+    <Compile Include="Opcodes\NewFunctionOpcode.cs" />
+    <Compile Include="Opcodes\NewObjectOpcode.cs" />
+    <Compile Include="Opcodes\NextNameOpcode.cs" />
+    <Compile Include="Opcodes\NextValueOpcode.cs" />
+    <Compile Include="Opcodes\NopOpcode.cs" />
+    <Compile Include="Opcodes\SetGlobalSlotOpcode.cs" />
+    <Compile Include="Opcodes\SetLocal0Opcode.cs" />
+    <Compile Include="Opcodes\SetLocal1Opcode.cs" />
+    <Compile Include="Opcodes\SetLocal2Opcode.cs" />
+    <Compile Include="Opcodes\SetLocal3Opcode.cs" />
+    <Compile Include="Opcodes\SetLocalOpcode.cs" />
+    <Compile Include="Opcodes\SetPropertyOpcode.cs" />
+    <Compile Include="Opcodes\SetSlotOpcode.cs" />
+    <Compile Include="Opcodes\SetSuperOpcode.cs" />
+    <Compile Include="Opcodes\Stack\DupOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PopOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PopScopeOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushByteOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushDoubleOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushFalseOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushIntOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushNamespaceOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushNanOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushNullOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushScopeOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushShortOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushStringOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushTrueOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushUIntOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushUndefinedOpcode.cs" />
+    <Compile Include="Opcodes\Stack\PushWithOpcode.cs" />
+    <Compile Include="Opcodes\SwapOpcode.cs" />
+    <Compile Include="Opcodes\ThrowOpcode.cs" />
+    <Compile Include="Opcodes\TimestampOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\AsTypeLateOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\AsTypeOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\CoerceAOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\CoerceBOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\CoerceDOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\CoerceIOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\CoerceOOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\CoerceOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\CoerceSOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\CoerceUOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\ConvertBOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\ConvertDOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\ConvertIOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\ConvertOOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\ConvertSOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\ConvertUOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\InstanceOfOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\IsTypeLateOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\IsTypeOpcode.cs" />
+    <Compile Include="Opcodes\TypeCasting\TypeOfOpcode.cs" />
+    <Compile Include="Opcodes\UnknownOpcode.cs" />
+    <Compile Include="Opcodes\Xml\DxnsLateOpcode.cs" />
+    <Compile Include="Opcodes\Xml\DxnsOpcode.cs" />
+    <Compile Include="Opcodes\Xml\EscXAttrOpcode.cs" />
+    <Compile Include="Opcodes\Xml\EscXElemOpcode.cs" />
+    <Compile Include="Opcodes\Xml\GetDescendantsOpcode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

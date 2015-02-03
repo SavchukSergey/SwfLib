@@ -10,7 +10,7 @@ namespace SwfLib.SwfMill.TagFormatting.ActionTags {
         protected override void FormatTagElement(DoABCDefineTag tag, XElement xTag) {
             xTag.Add(new XElement("abc", FormatBase64(tag.ABCData)));
             
-            var reader = new AbcDataReader(new SwfStreamReader(new MemoryStream(tag.ABCData)));
+            var reader = new AbcDataReader(new MemoryStream(tag.ABCData));
             var info = reader.ReadAbcFile();
             xTag.Add(XAbcFile.ToXml(info));
         }

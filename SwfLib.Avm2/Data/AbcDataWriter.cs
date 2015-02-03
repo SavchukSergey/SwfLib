@@ -1,13 +1,14 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 
 namespace SwfLib.Avm2.Data {
 
     public class AbcDataWriter {
-        private readonly SwfStreamWriter _writer;
+        private readonly BinaryWriter _writer;
 
-        public AbcDataWriter(SwfStreamWriter writer) {
-            _writer = writer;
+        public AbcDataWriter(Stream stream) {
+            _writer = new BinaryWriter(stream);
         }
 
         public void WriteAbcFile(AbcFileInfo abc) {
@@ -23,7 +24,7 @@ namespace SwfLib.Avm2.Data {
                 throw new Exception("Number of Classes and Instances differs");
             }
             var classCount = abc.Classes.Length;
-            WriteU30((uint) classCount);
+            WriteU30((uint)classCount);
             WriteMultipleInstances(abc.Instances);
             WriteMultipleClasses(abc.Classes);
 
@@ -157,7 +158,7 @@ namespace SwfLib.Avm2.Data {
             WriteU30(methodInfo.ReturnType);
             WriteMutipleU30(methodInfo.ParamTypes, true);
             WriteU30(methodInfo.Name);
-            WriteU8((byte) methodInfo.Flags);
+            WriteU8((byte)methodInfo.Flags);
             if (methodInfo.HasOptional) {
                 WriteU30((uint)methodInfo.Options.Length);
                 foreach (var option in methodInfo.Options) {
@@ -199,7 +200,7 @@ namespace SwfLib.Avm2.Data {
         private void WriteInstance(AsInstanceInfo instance) {
             WriteU30(instance.Name);
             WriteU30(instance.SuperName);
-            WriteU8((byte) instance.Flags);
+            WriteU8((byte)instance.Flags);
             if (instance.HasProtectedNs)
                 WriteU30(instance.ProtectedNs);
             WriteMutipleU30(instance.Interfaces);
@@ -299,33 +300,88 @@ namespace SwfLib.Avm2.Data {
         }
 
         void WriteU8(byte v) {
-            _writer.WriteByte(v);
+            _writer.Write(v);
         }
 
         void WriteU16(ushort v) {
-            _writer.WriteUInt16(v);
+            _writer.Write(v);
         }
 
         private void WriteU30(uint val) {
-            _writer.WriteEncodedU30(val);
+            if (val >= (1 << 30)) {
+                throw new ArgumentOutOfRangeException("val");
+            }
+            WriteU32(val);
         }
 
-        private void WriteU32(ulong v) {
-            _writer.WriteEncodedU32((uint)v);
+        private void WriteU32(ulong val) {
+            if (val < 0x80) {
+                _writer.Write((byte)val);
+            } else {
+                _writer.Write((byte)((val & 0x7f) | 0x80));
+                val = val >> 7;
+
+                if (val < 0x80) {
+                    _writer.Write((byte)val);
+                } else {
+                    _writer.Write((byte)((val & 0x7f) | 0x80));
+                    val = val >> 7;
+
+                    if (val < 0x80) {
+                        _writer.Write((byte)val);
+                    } else {
+                        _writer.Write((byte)((val & 0x7f) | 0x80));
+                        val = val >> 7;
+
+                        if (val < 0x80) {
+                            _writer.Write((byte)val);
+                        } else {
+                            _writer.Write((byte)((val & 0x7f) | 0x80));
+                            val = val >> 7;
+
+                            _writer.Write((byte)(val & 0x7f));
+                        }
+                    }
+                }
+            }
         }
 
-        private void WriteS32(int v) {
-            _writer.WriteEncodedS32(v);
+        private void WriteS32(int val) {
+            var enc = (uint)val;
+            if (val >= 0) {
+                var hasNext = true;
+                do {
+                    if (enc < 0x40) {
+                        _writer.Write((byte)enc);
+                        hasNext = false;
+                    } else {
+                        _writer.Write((byte)(enc | 0x80));
+                    }
+                    enc >>= 7;
+                } while (hasNext);
+            } else {
+                var hasNext = true;
+                do {
+                    if (enc >= 0xffffffc0) {
+                        _writer.Write((byte)(enc & 0x7f));
+                        hasNext = false;
+                    } else {
+                        _writer.Write((byte)(enc | 0x80));
+                    }
+                    enc = (enc >> 7) | 0xfe000000;
+                } while (hasNext);
+            }
         }
 
         private void WriteD64(double val) {
-            _writer.WriteDouble(val);
+            var l = BitConverter.DoubleToInt64Bits(val);
+            _writer.Write(l);
         }
 
         private void WriteString(string val) {
             WriteU30((uint)val.Length);
             var bytes = Encoding.UTF8.GetBytes(val);
-            _writer.WriteBytes(bytes);
+            _writer.Write(bytes);
         }
 
         #endregion

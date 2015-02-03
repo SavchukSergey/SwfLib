@@ -134,6 +134,10 @@
     <Compile Include="TestFixtureBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SwfLib.Avm2\SwfLib.Avm2.csproj">
+      <Project>{ddc5743e-99d3-4d80-8da7-68db23f9c89c}</Project>
+      <Name>SwfLib.Avm2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SwfLib.Tests.Asserts\SwfLib.Tests.Asserts.csproj">
       <Project>{d41c8ad8-1272-4d29-8b5c-9a35d04bd688}</Project>
       <Name>SwfLib.Tests.Asserts</Name>

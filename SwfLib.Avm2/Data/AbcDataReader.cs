@@ -5,19 +5,17 @@ using System.Text;
 namespace SwfLib.Avm2.Data {
 
     public class AbcDataReader {
-        private readonly SwfStreamReader _reader;
+        private readonly BinaryReader _reader;
 
-        public AbcDataReader(SwfStreamReader reader) {
-            _reader = reader;
+        public AbcDataReader(MemoryStream stream) {
+            _reader = new BinaryReader(stream);
         }
 
         public bool IsEOF {
-            get { return _reader.IsEOF; }
+            get { return _reader.BaseStream.Position == _reader.BaseStream.Length; }
         }
 
-        public long Position {
-            get { return _reader.Position; }
-        }
+        public long Position { get { return _reader.BaseStream.Position; } }
 
         public AbcFileInfo ReadAbcFile() {
             try {
@@ -35,7 +33,7 @@ namespace SwfLib.Avm2.Data {
                 res.Bodies = ReadMultipleBodies();
                 return res;
             } catch (Exception e) {
-                throw new Exception(string.Format("Error at {0} ({0:x}):", _reader.Position), e);
+                throw new Exception(string.Format("Error at {0} ({0:x}):", Position), e);
             }
         }
 
@@ -371,19 +369,62 @@ namespace SwfLib.Avm2.Data {
         }
 
         public uint ReadU30() {
-            return _reader.ReadEncodedU30();
+            return ReadU32() & 0x3fffffff;
         }
 
         private uint ReadU32() {
-            return _reader.ReadEncodedU32();
+            uint val = 0;
+            var bt = _reader.ReadByte();
+            val |= bt & 0x7fu;
+            if ((bt & 0x80) == 0) return val;
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 7;
+            if ((bt & 0x80) == 0) return val;
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 14;
+            if ((bt & 0x80) == 0) return val;
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 21;
+            if ((bt & 0x80) == 0) return val;
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 28;
+            return val;
         }
 
         public int ReadS24() {
-            return _reader.ReadSInt24();
+            var i0 = _reader.ReadByte();
+            var i1 = _reader.ReadByte();
+            var i2 = _reader.ReadByte();
+            var res = (i2 << 16) | (i1 << 8) | i0;
+            if ((res & 0x800000) != 0) res = (int)(res | 0xff000000);
+            return res;
         }
 
         private int ReadS32() {
-            return _reader.ReadEncodedS32();
+            uint val = 0;
+            var bt = _reader.ReadByte();
+            val |= bt & 0x7fu;
+            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xffffff80);
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 7;
+            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xffffc000);
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 14;
+            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xffe00000);
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 21;
+            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xf0000000);
+
+            bt = _reader.ReadByte();
+            val |= (bt & 0x7fu) << 28;
+            return (int)val;
         }
 
         private uint[] ReadMultipleU30() {
@@ -409,7 +450,7 @@ namespace SwfLib.Avm2.Data {
             var dataStream = new MemoryStream();
             for (var i = 0; i < len; i++) {
                 var bt = _reader.ReadByte();
-                if (bt != 0) dataStream.WriteByte(bt);
+                if (bt != 0) dataStream.WriteByte((byte) bt);
             }
             return Encoding.UTF8.GetString(dataStream.ToArray());
         }

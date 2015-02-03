@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using SwfLib.Avm2.Data;
@@ -236,7 +235,7 @@ namespace SwfLib.Avm2 {
                 InitScopeDepth = info.InitScopeDepth,
                 MaxScopeDepth = info.MaxScopeDepth,
             };
-            var reader = new AbcDataReader(new SwfStreamReader(new MemoryStream(info.Code)));
+            var reader = new AbcDataReader(new MemoryStream(info.Code));
             var factory = new Avm2OpcodeFactory();
             while (!reader.IsEOF) {
                 var offset = reader.Position;

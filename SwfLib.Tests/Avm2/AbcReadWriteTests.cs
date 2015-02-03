@@ -18,7 +18,7 @@ namespace SwfLib.Tests.Avm2 {
             mem.WriteByte(0x5e);
             mem.WriteByte(0x40);
             mem.Seek(0, SeekOrigin.Begin);
-            var reader = new AbcDataReader(new SwfStreamReader(mem));
+            var reader = new AbcDataReader(mem);
             var d = reader.ReadD64();
             Assert.AreEqual(123.456, d);
         }
@@ -35,10 +35,10 @@ namespace SwfLib.Tests.Avm2 {
                 UnsignedIntegers = new uint[] { 0, 1, uint.MaxValue }
             };
             var mem = new MemoryStream();
-            var writer = new AbcDataWriter(new SwfStreamWriter(mem));
+            var writer = new AbcDataWriter(mem);
             writer.WriteConstantPool(pool);
             mem.Seek(0, SeekOrigin.Begin);
-            var reader = new AbcDataReader(new SwfStreamReader(mem));
+            var reader = new AbcDataReader(mem);
             var res = reader.ReadConstantPool();
 
             Assert.AreEqual(pool.Doubles.Length, res.Doubles.Length);

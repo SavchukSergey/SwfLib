@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{AFFA8CD0-B0EC-44C2-AB6D-64943CF12F3B}"
 	ProjectSection(SolutionItems) = preProject
 		References\zlib.net.dll = References\zlib.net.dll
@@ -34,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfLib.SwfMill.Tests", "Swf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfLib.Tests.Asserts", "SwfLib.Tests.Asserts\SwfLib.Tests.Asserts.csproj", "{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfLib.Avm2", "SwfLib.Avm2\SwfLib.Avm2.csproj", "{DDC5743E-99D3-4D80-8DA7-68DB23F9C89C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +64,10 @@ Global
 		{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC5743E-99D3-4D80-8DA7-68DB23F9C89C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC5743E-99D3-4D80-8DA7-68DB23F9C89C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC5743E-99D3-4D80-8DA7-68DB23F9C89C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC5743E-99D3-4D80-8DA7-68DB23F9C89C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
