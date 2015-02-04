@@ -24,5 +24,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
             node.Add(new XAttribute("method", method.Name));
             return node;
         }
+
+        public static XElement AddSlotIndex(this XElement node, uint slotIndex) {
+            node.Add(new XAttribute("slotIndex", slotIndex));
+            return node;
+        } 
+
     }
 }

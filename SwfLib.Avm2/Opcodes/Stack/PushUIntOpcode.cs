@@ -5,5 +5,6 @@
             return visitor.Visit(this, arg);
         }
 
+        public uint Value { get; set; }
     }
 }

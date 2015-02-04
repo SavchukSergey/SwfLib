@@ -412,5 +412,9 @@ namespace SwfLib.Avm2 {
         public int GetInteger(uint index) {
             return FileInfo.ConstantPool.Integers[index];
         }
+
+        public uint GetUInteger(uint index) {
+            return FileInfo.ConstantPool.UnsignedIntegers[index];
+        }
     }
 }
