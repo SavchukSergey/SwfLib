@@ -40,7 +40,7 @@ namespace SwfLib {
             WriteByte(low);
             WriteByte(hi);
         }
-
+        
         public void WriteFixedPoint16(double val, uint bits) {
             var integer = (int)Math.Floor(val * 65536);
             WriteSignedBits(integer, bits);

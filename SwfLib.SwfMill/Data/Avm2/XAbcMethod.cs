@@ -67,10 +67,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
                 xBody.Add(body.Traits.ToXml());
             }
 
-            var writer = new XAbcOpcodeWriter(target => {
+            Func<uint, string> labelFormatter = target => {
                 labels.Add(target);
                 return string.Format("lbl_{0:x6}", target);
-            });
+            };
+            var writer = new XAbcOpcodeWriter(labelFormatter);
 
             var xCode = new XElement("code");
             foreach (var instruction in body.Code) {
@@ -85,13 +86,10 @@ namespace SwfLib.SwfMill.Data.Avm2 {
             if (body.Exceptions.Count != 0) {
                 var xExcs = new XElement("exceptions");
                 foreach (var exc in body.Exceptions) {
-                    labels.Add(exc.From);
-                    labels.Add(exc.To);
-                    labels.Add(exc.Target);
                     var xExc = new XElement("exception",
-                        new XAttribute("from", exc.From),
-                        new XAttribute("to", exc.To),
-                        new XAttribute("target", exc.Target),
+                        new XAttribute("from", labelFormatter(exc.From)),
+                        new XAttribute("to", labelFormatter(exc.To)),
+                        new XAttribute("target", labelFormatter(exc.Target)),
                         new XAttribute("excType", exc.ExceptionType.ToXml()),
                         new XAttribute("varName", exc.VariableName.ToXml()));
                     xExcs.Add(xExc);

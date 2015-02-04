@@ -25,7 +25,8 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(AsTypeOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            opcode.Name = _context.GetMultiname(arg.ReadU30(), AbcMultiname.Any);
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(AsTypeLateOpcode opcode, AbcDataReader arg) {
@@ -84,7 +85,9 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(CallStaticOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            opcode.Method = _context.GetMethod(arg.ReadU30());
+            opcode.ArgCount = arg.ReadU30();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(CallSuperOpcode opcode, AbcDataReader arg) {

@@ -28,7 +28,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(AsTypeOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("astype").AddName(opcode.Name);
         }
 
         public XElement Visit(AsTypeLateOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -80,7 +80,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(CallStaticOpcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("callstatic").AddMethod(opcode.Method).AddArgsCount(opcode.ArgCount);
         }
 
         public XElement Visit(CallSuperOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -491,7 +491,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(NewFunctionOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("newfunction", new XAttribute("method", GetMethodReference(opcode.Method)));
+            return new XElement("newfunction").AddMethod(opcode.Method);
         }
 
         public XElement Visit(NewObjectOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -694,10 +694,6 @@ namespace SwfLib.SwfMill.Data.Avm2 {
 
         private string GetClassReference(AbcClass baseType) {
             return baseType.Instance.Name.ToXml();
-        }
-
-        private string GetMethodReference(AbcMethod method) {
-            return method.Name;
         }
 
     }

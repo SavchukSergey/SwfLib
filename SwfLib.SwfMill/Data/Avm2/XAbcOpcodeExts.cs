@@ -18,6 +18,11 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         public static XElement AddName(this XElement node, AbcMultiname multiname) {
             node.Add(new XAttribute("name", multiname.ToXml()));
             return node;
+        } 
+        
+        public static XElement AddMethod(this XElement node, AbcMethod method) {
+            node.Add(new XAttribute("method", method.Name));
+            return node;
         }
     }
 }
