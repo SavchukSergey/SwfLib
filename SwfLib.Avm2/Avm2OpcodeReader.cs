@@ -456,23 +456,23 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(Lf32Opcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(Lf64Opcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(Li8Opcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(Li16Opcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(Li32Opcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(LookupSwitchOpcode opcode, AbcDataReader arg) {
@@ -677,23 +677,23 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(Sf32Opcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(Sf64Opcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(Si8Opcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(Si16Opcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(Si32Opcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(StrictEqualsOpcode opcode, AbcDataReader arg) {

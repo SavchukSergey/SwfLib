@@ -12,7 +12,7 @@ using SwfLib.Avm2.Opcodes.Xml;
 
 namespace SwfLib.SwfMill.Data.Avm2 {
     public class XAbcOpcodeWriter : IAvm2OpcodeVisitor<AbcMethodBodyInstruction, XElement> {
-        
+
         private readonly Func<uint, string> _labelFormatter;
 
         public XAbcOpcodeWriter(Func<uint, string> labelFormatter) {
@@ -198,7 +198,7 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(DeletePropertyOpcode opcode, AbcMethodBodyInstruction arg) {
-            return new XElement("deleteproperty").AddName(opcode.Name); 
+            return new XElement("deleteproperty").AddName(opcode.Name);
         }
 
         public XElement Visit(DivideOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -422,23 +422,23 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(Lf32Opcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("lf32");
         }
 
         public XElement Visit(Lf64Opcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("lf64");
         }
 
         public XElement Visit(Li8Opcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("li8");
         }
 
         public XElement Visit(Li16Opcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("li16");
         }
 
         public XElement Visit(Li32Opcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("li32");
         }
 
         public XElement Visit(LookupSwitchOpcode opcode, AbcMethodBodyInstruction arg) {
@@ -627,23 +627,23 @@ namespace SwfLib.SwfMill.Data.Avm2 {
         }
 
         public XElement Visit(Sf32Opcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("sf32");
         }
 
         public XElement Visit(Sf64Opcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("sf64");
         }
 
         public XElement Visit(Si8Opcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("si8");
         }
 
         public XElement Visit(Si16Opcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("si16");
         }
 
         public XElement Visit(Si32Opcode opcode, AbcMethodBodyInstruction arg) {
-            throw new System.NotImplementedException();
+            return new XElement("si32");
         }
 
         public XElement Visit(StrictEqualsOpcode opcode, AbcMethodBodyInstruction arg) {
