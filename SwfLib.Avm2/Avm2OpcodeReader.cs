@@ -116,19 +116,19 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(CoerceBOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(CoerceDOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(CoerceIOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(CoerceOOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(CoerceSOpcode opcode, AbcDataReader arg) {
@@ -136,7 +136,7 @@ namespace SwfLib.Avm2 {
         }
 
         public BaseAvm2Opcode Visit(CoerceUOpcode opcode, AbcDataReader arg) {
-            throw new System.NotImplementedException();
+            return opcode;
         }
 
         public BaseAvm2Opcode Visit(ConstructOpcode opcode, AbcDataReader arg) {
