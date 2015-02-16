@@ -7,7 +7,7 @@ namespace SwfLib.Tags.TextTags {
 
         public SwfRect TextBounds { get; set; }
 
-        public SwfMatrix TextMatrix { get; set; }
+        public SwfMatrix TextMatrix = SwfMatrix.Identity;
 
     }
 }

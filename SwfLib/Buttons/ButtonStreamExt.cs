@@ -42,7 +42,7 @@ namespace SwfLib.Buttons {
             if (!button.IsEndButton) {
                 writer.WriteUInt16(button.CharacterID);
                 writer.WriteUInt16(button.PlaceDepth);
-                writer.WriteMatrix(button.PlaceMatrix);
+                writer.WriteMatrix(ref button.PlaceMatrix);
                 writer.WriteColorTransformRGBA(button.ColorTransform);
                 writer.FlushBits();
 

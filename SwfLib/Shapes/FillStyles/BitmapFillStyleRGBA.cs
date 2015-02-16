@@ -10,7 +10,7 @@ namespace SwfLib.Shapes.FillStyles {
 
         public ushort BitmapID { get; set; }
 
-        public SwfMatrix BitmapMatrix { get; set; }
+        public SwfMatrix BitmapMatrix = SwfMatrix.Identity;
 
         /// <summary>
         /// Gets type of fill style.

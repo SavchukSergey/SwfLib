@@ -14,8 +14,7 @@ namespace SwfLib.Tags.DisplayListTags {
 
         public ushort CharacterID;
 
-        public SwfMatrix Matrix;
-
+        public SwfMatrix Matrix = SwfMatrix.Identity;
 
     }
 }

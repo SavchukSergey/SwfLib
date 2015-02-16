@@ -34,7 +34,7 @@ namespace SwfLib.Shapes.FillStyles {
 
         object IFillStyleRGBAVisitor<ISwfStreamWriter, object>.Visit(BitmapFillStyleRGBA fillStyle, ISwfStreamWriter writer) {
             writer.WriteUInt16(fillStyle.BitmapID);
-            writer.WriteMatrix(fillStyle.BitmapMatrix);
+            writer.WriteMatrix(ref fillStyle.BitmapMatrix);
             return null;
         }
     }

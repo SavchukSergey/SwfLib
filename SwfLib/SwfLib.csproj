@@ -112,6 +112,7 @@
     <Compile Include="Actions\ActionWriter.cs" />
     <Compile Include="Actions\RegisterParam.cs" />
     <Compile Include="Data\ColorStreamExt.cs" />
+    <Compile Include="Data\SwfVector.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Gradients\BaseGradientRGB.cs" />
     <Compile Include="Gradients\BaseGradientRGBA.cs" />

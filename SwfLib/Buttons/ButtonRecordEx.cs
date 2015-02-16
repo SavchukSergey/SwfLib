@@ -24,7 +24,7 @@ namespace SwfLib.Buttons {
 
         public ushort PlaceDepth { get; set; }
 
-        public SwfMatrix PlaceMatrix { get; set; }
+        public SwfMatrix PlaceMatrix = SwfMatrix.Identity;
 
         public ColorTransformRGBA ColorTransform { get; set; }
 

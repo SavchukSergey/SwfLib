@@ -41,24 +41,18 @@ namespace SwfLib {
         }
 
         public static SwfMatrix ReadMatrix(this ISwfStreamReader reader) {
-            SwfMatrix matrix;
-            matrix.HasScale = reader.ReadBit();
-            if (matrix.HasScale) {
+            var matrix = SwfMatrix.Identity;
+            var hasScale = reader.ReadBit();
+            if (hasScale) {
                 var bits = (byte)reader.ReadUnsignedBits(5);
                 matrix.ScaleX = reader.ReadFixedPoint16(bits);
                 matrix.ScaleY = reader.ReadFixedPoint16(bits);
-            } else {
-                matrix.ScaleX = 1;
-                matrix.ScaleY = 1;
             }
-            matrix.HasRotate = reader.ReadBit();
-            if (matrix.HasRotate) {
+            var hasRotate = reader.ReadBit();
+            if (hasRotate) {
                 var bits = (byte)reader.ReadUnsignedBits(5);
                 matrix.RotateSkew0 = reader.ReadFixedPoint16(bits);
                 matrix.RotateSkew1 = reader.ReadFixedPoint16(bits);
-            } else {
-                matrix.RotateSkew0 = 0;
-                matrix.RotateSkew1 = 0;
             }
             var translateBits = (byte)reader.ReadUnsignedBits(5);
             matrix.TranslateX = reader.ReadSignedBits(translateBits);

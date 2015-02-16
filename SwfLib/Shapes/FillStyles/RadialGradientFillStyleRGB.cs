@@ -4,7 +4,7 @@ using SwfLib.Gradients;
 namespace SwfLib.Shapes.FillStyles {
     public class RadialGradientFillStyleRGB : FillStyleRGB {
 
-        public SwfMatrix GradientMatrix;
+        public SwfMatrix GradientMatrix = SwfMatrix.Identity;
 
         public GradientRGB Gradient;
 

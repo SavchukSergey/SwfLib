@@ -10,7 +10,7 @@ namespace SwfLib.Shapes.FillStyles {
 
         public ushort BitmapID { get; set; }
 
-        public SwfMatrix BitmapMatrix;
+        public SwfMatrix BitmapMatrix = SwfMatrix.Identity;
 
         public override FillStyleType Type {
             get {

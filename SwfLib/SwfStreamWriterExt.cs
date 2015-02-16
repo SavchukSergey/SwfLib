@@ -59,7 +59,7 @@ namespace SwfLib {
         }
 
         public static void WriteMatrix(this ISwfStreamWriter writer, ref SwfMatrix matrix) {
-            bool hasScale = matrix.HasScale;
+            var hasScale = matrix.HasScale;
             writer.WriteBit(hasScale);
             if (hasScale) {
                 var sx = (int)(matrix.ScaleX * 65536.0);
@@ -70,7 +70,7 @@ namespace SwfLib {
                 writer.WriteFixedPoint16(matrix.ScaleX, scaleBits);
                 writer.WriteFixedPoint16(matrix.ScaleY, scaleBits);
             }
-            bool hasRotate = matrix.HasRotate;
+            var hasRotate = matrix.HasRotate;
             writer.WriteBit(hasRotate);
             if (hasRotate) {
                 var rx = (int)(matrix.RotateSkew0 * 65536.0);

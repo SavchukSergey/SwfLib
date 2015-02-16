@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 
 namespace SwfLib.Data {
-    //TODO: Find usage. Make non - nullable. Set Scales to default values
     /// <summary>
     /// Represents 2D transformation matrix.
     /// </summary>
@@ -26,9 +25,33 @@ namespace SwfLib.Data {
 
         public int TranslateY;
 
-        public bool HasScale;
+        public bool HasScale {
+            get { return ScaleX != 1 || ScaleY != 1; }
+        }
 
-        public bool HasRotate;
+        public bool HasRotate {
+            get { return RotateSkew0 != 0 || RotateSkew1 != 0; }
+        }
+
+        public static SwfMatrix Identity {
+            get {
+                return new SwfMatrix {
+                    ScaleX = 1,
+                    ScaleY = 1,
+                    RotateSkew0 = 0,
+                    RotateSkew1 = 0,
+                    TranslateX = 0,
+                    TranslateY = 0
+                };
+            }
+        }
+
+        public SwfVector Transform(SwfVector vector) {
+            return new SwfVector {
+                X = (int)(vector.X * (HasScale ? ScaleX : 1) + vector.Y * (HasRotate ? RotateSkew1 : 0) + TranslateX),
+                Y = (int)(vector.Y * (HasScale ? ScaleY : 1) + vector.X * (HasRotate ? RotateSkew0 : 0) + TranslateY)
+            };
+        }
 
     }
 }
