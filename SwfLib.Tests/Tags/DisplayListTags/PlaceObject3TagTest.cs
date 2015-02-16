@@ -40,7 +40,7 @@ namespace SwfLib.Tests.Tags.DisplayListTags {
             return new PlaceObject3Tag {
                 Depth = 17,
                 HasMatrix = false,
-                Matrix = new SwfMatrix(),
+                Matrix = SwfMatrix.Identity,
                 Move = true,
                 ColorTransform = new ColorTransformRGBA(),
                 Filters = {

@@ -28,10 +28,8 @@ namespace SwfLib.Tests.Samples.Shapes {
                 GradientMatrix = {
                     ScaleX = 0,
                     ScaleY = 0,
-                    HasScale = true,
                     RotateSkew0 = 0.05499267578125000,
                     RotateSkew1 = -0.05493164062500000,
-                    HasRotate = true,
                     TranslateX = 7280,
                     TranslateY = 900
                 },

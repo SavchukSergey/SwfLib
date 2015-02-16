@@ -20,7 +20,8 @@ namespace SwfLib.Tests.BasicTypes {
         public void WriteEmptyMatrixTest() {
             var mem = new MemoryStream();
             var writer = new SwfStreamWriter(mem);
-            writer.WriteMatrix(new SwfMatrix ());
+            var matrix = SwfMatrix.Identity;
+            writer.WriteMatrix(ref matrix);
             Assert.AreEqual(new byte[] {0x02, 0x00}, mem.ToArray());
         }
 
@@ -46,10 +47,8 @@ namespace SwfLib.Tests.BasicTypes {
         public void WriteMatrixFromBitsTest() {
             var mem = new MemoryStream();
             var matrix = new SwfMatrix {
-                HasScale = true,
                 ScaleX = 2.5,
                 ScaleY = 1.75,
-                HasRotate = true,
                 RotateSkew0 = 3.25,
                 RotateSkew1 = 0.5,
                 TranslateX = 16,

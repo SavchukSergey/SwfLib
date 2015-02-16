@@ -137,7 +137,6 @@ namespace SwfLib.Tests.Tags.ShapeTags {
                             ScaleY = 20.0,
                             TranslateX = -9206,
                             TranslateY = 0,
-                            HasScale = true
                         }
                     }
                 },

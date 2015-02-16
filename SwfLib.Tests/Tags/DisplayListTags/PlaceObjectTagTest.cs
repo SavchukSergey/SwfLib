@@ -8,7 +8,7 @@ namespace SwfLib.Tests.Tags.DisplayListTags {
     [TestFixture]
     public class PlaceObjectTagTest : TestFixtureBase {
 
-        private static readonly byte[] _etalon = new byte[] { 0x10, 0x20, 0x30, 0x40, 0x02, 0x00, 0x04 };
+        private static readonly byte[] _etalon = { 0x10, 0x20, 0x30, 0x40, 0x02, 0x00, 0x04 };
 
         [Test]
         public void ReadTest() {
@@ -40,7 +40,7 @@ namespace SwfLib.Tests.Tags.DisplayListTags {
             var tag = new PlaceObjectTag {
                 CharacterID = 0x2010,
                 Depth = 0x4030,
-                Matrix = new SwfMatrix(),
+                Matrix = SwfMatrix.Identity,
                 ColorTransform = new ColorTransformRGB()
             };
 

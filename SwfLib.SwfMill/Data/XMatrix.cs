@@ -7,35 +7,24 @@ namespace SwfLib.SwfMill.Data {
 
         public const string TAG_NAME = "Transform";
 
-        public static SwfMatrix FromXml(XElement xMatrix)
-        {
+        public static SwfMatrix FromXml(XElement xMatrix) {
             var xMoveX = xMatrix.RequiredIntAttribute("transX");
             var xMoveY = xMatrix.RequiredIntAttribute("transY");
 
-            var scaleX = xMatrix.Attribute("scaleX");
-            var scaleY = xMatrix.Attribute("scaleY");
+            var xScaleX = xMatrix.Attribute("scaleX");
+            var xScaleY = xMatrix.Attribute("scaleY");
 
-            var skewX = xMatrix.Attribute("skewX");
-            var skewY = xMatrix.Attribute("skewY");
+            var xSkewX = xMatrix.Attribute("skewX");
+            var xSkewY = xMatrix.Attribute("skewY");
 
             var matrix = new SwfMatrix {
                 TranslateX = xMoveX,
                 TranslateY = xMoveY,
-                ScaleX = 1,
-                ScaleY = 1
+                ScaleX = xScaleX != null ? CommonFormatter.ParseDouble(xScaleX.Value) : 1,
+                ScaleY = xScaleY != null ? CommonFormatter.ParseDouble(xScaleY.Value) : 1,
+                RotateSkew0 = xSkewX != null ? CommonFormatter.ParseDouble(xSkewX.Value) : 0,
+                RotateSkew1 = xSkewY != null ? CommonFormatter.ParseDouble(xSkewY.Value) : 0,
             };
-
-            if (scaleX != null || scaleY != null) {
-                matrix.ScaleX = CommonFormatter.ParseDouble(scaleX.Value);
-                matrix.ScaleY = CommonFormatter.ParseDouble(scaleY.Value);
-                matrix.HasScale = true;
-            }
-
-            if (skewX != null || skewY != null) {
-                matrix.RotateSkew0 = CommonFormatter.ParseDouble(skewX.Value);
-                matrix.RotateSkew1 = CommonFormatter.ParseDouble(skewY.Value);
-                matrix.HasRotate = true;
-            }
 
             return matrix;
         }
