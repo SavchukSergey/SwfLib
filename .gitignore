@@ -23,10 +23,8 @@
 /_ReSharper.SwfLib/
 /_ReSharper.Caches/
 /SwfLib.4.5.resharper.user
-/SwfLib.suo
-/SwfLib.v11.suo
+/*.suo
 
 /SwfLib.sln.DotSettings.user
 /SwfLib.sln.DotSettings
-/*.suo
-/.vs/SwfLib/v14/*.suo
+/.vs/SwfLib/*/*.suo

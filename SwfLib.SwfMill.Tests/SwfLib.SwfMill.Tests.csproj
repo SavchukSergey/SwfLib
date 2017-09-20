@@ -1,174 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4EAE1D32-3036-493F-8699-1A9A7D65B277}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SwfLib.SwfMill.Tests</RootNamespace>
-    <AssemblyName>SwfLib.SwfMill.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkProfile />
+    <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.4.6.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\nUnit\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="NUnit" Version="3.8.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.8.0"></PackageReference>
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Actions\BaseXActionTest.cs" />
-    <Compile Include="Actions\CallXActionTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Actions\ConstantPoolXActionTest.cs" />
-    <Compile Include="Actions\PushXActionTest.cs" />
-    <Compile Include="Actions\DefineFunction2XActionTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Actions\GetURL2XActionTest.cs" />
-    <Compile Include="Actions\GetURLXActionTest.cs" />
-    <Compile Include="Actions\GotoFrame2XActionTest.cs" />
-    <Compile Include="Actions\GotoFrameXActionTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Actions\GoToLabelXActionTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Actions\IfXActionTest.cs" />
-    <Compile Include="Actions\JumpXActionTest.cs" />
-    <Compile Include="Actions\SetTargetXActionTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Actions\StoreRegisterXActionTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Actions\WaitForFrame2XActionTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Actions\WaitForFrameXActionTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Actions\WithXActionTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Actions\XActionCommonTest.cs" />
-    <Compile Include="AssertExt.cs" />
-    <Compile Include="ActionXmlSerializerTest.cs" />
-    <Compile Include="EnumerableExt.cs" />
-    <Compile Include="Filters\XBevelFilterTest.cs" />
-    <Compile Include="Filters\XGradientBevelFilterTest.cs" />
-    <Compile Include="Filters\XGradientGlowFilterTest.cs" />
-    <Compile Include="Filters\XDropShadowFilterTest.cs" />
-    <Compile Include="Filters\XGlowFilterTest.cs" />
-    <Compile Include="Filters\XColorMatrixFilterTest.cs" />
-    <Compile Include="Filters\XBlurFilterTest.cs" />
-    <Compile Include="Filters\XConvolutionFilterTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Resources\TagFormatting\FontTags\DefineFontAlignZones.xml" />
-    <Compile Include="Shapes\XLineStyleRGBATest.cs" />
-    <Compile Include="Shapes\XLineStyleRGBTest.cs" />
-    <Compile Include="SwfMillFacadeTest.cs" />
-    <Compile Include="TagFormatterFactoryTest.cs" />
-    <Compile Include="TagFormatting\BaseTagFormattingTest.cs" />
-    <Compile Include="TagFormatting\ControlTags\DefineSceneAndFrameLabelDataTagTest.cs" />
-    <Compile Include="TagFormatting\EndTagFormatterTest.cs" />
-    <Compile Include="TagFormatting\FontTags\DefineFontAlignZonesTagFormatterTest.cs" />
-    <Compile Include="TagFormatting\ControlTags\SetBackgroundColorTagFormatterTest.cs" />
-    <Compile Include="TagFormatting\ShowFrameTagFormatterTest.cs" />
-    <Compile Include="XmlComparision.cs" />
+    <ProjectReference Include="..\SwfLib.SwfMill\SwfLib.SwfMill.csproj" />
+    <ProjectReference Include="..\SwfLib.Tests.Asserts\SwfLib.Tests.Asserts.csproj" />
   </ItemGroup>
+  
   <ItemGroup>
-    <ProjectReference Include="..\SwfLib.SwfMill\SwfLib.SwfMill.csproj">
-      <Project>{4CE22FF7-ABF5-4894-BCDE-402DBDD42B80}</Project>
-      <Name>SwfLib.SwfMill</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SwfLib.Tests.Asserts\SwfLib.Tests.Asserts.csproj">
-      <Project>{D41C8AD8-1272-4D29-8B5C-9A35D04BD688}</Project>
-      <Name>SwfLib.Tests.Asserts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SwfLib\SwfLib.csproj">
-      <Project>{A09FB406-47B7-422A-A2EB-C3E0FA2CD736}</Project>
-      <Name>SwfLib</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="**\*.swf" />
+    <EmbeddedResource Include="Resources\**\*.xml" />
+    <EmbeddedResource Include="Resources\**\*.bin" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="FlashTest.swf" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\SimpleBackground.swf" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\SimpleBackground.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\TagFormatting\SetBackgroundColor.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\TagFormatting\ShowFrame.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\TagFormatting\End.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\HugeSwfXml.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\HugeSwfXml2.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\TagFormatting\FontTags\DefineFontAlignZones.bin" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\TagFormatting\ControlTags\DefineSceneAndFrameLabelDataTag.xml" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

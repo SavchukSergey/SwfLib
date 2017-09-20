@@ -1,6 +1,4 @@
-﻿using Microsoft.SqlServer.Server;
-
-namespace SwfLib.Avm2.Opcodes.Stack {
+﻿namespace SwfLib.Avm2.Opcodes.Stack {
     public class PushStringOpcode : BaseAvm2Opcode {
 
         public string Value { get; set; }

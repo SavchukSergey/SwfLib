@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        "**/obj": true,
+        "**/bin": true,
+        "**/*.suo": true,
+        "**/*.csproj.user": true,
+        "**/*.*.csproj.user": true
+    }
+}

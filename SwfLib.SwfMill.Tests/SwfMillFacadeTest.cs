@@ -13,7 +13,7 @@ namespace SwfLib.SwfMill.Tests {
     public class SwfMillFacadeTest {
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public void SwfToXmlTest() {
             var source = GetType().Assembly.GetManifestResourceStream("SwfLib.SwfMill.Tests.FlashTest.swf");
             var file = SwfFile.ReadFrom(source);
@@ -26,7 +26,7 @@ namespace SwfLib.SwfMill.Tests {
         }
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public void ReadHugeXml() {
             var sourceStream = OpenEmbeddedResource("HugeSwfXml.xml");
             var xml = XDocument.Load(new StreamReader(sourceStream));
@@ -36,7 +36,7 @@ namespace SwfLib.SwfMill.Tests {
         }
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public void ReadHugeXml2() {
             var sourceStream = OpenEmbeddedResource("HugeSwfXml2.xml");
             var xml = XDocument.Load(new StreamReader(sourceStream));
@@ -46,7 +46,7 @@ namespace SwfLib.SwfMill.Tests {
         }
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public void Sample2Test() {
             const string source = @"D:\Sergey\swf\first.swf";
             var secondTags = IterateTags(Cycle(source)).ToList();

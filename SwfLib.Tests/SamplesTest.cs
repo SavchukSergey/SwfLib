@@ -12,7 +12,7 @@ namespace SwfLib.Tests {
     public class SamplesTest : BaseSampleTest {
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public void Sample1Test() {
             const string path = "Sample - 1.swf";
             var file = ReadSwfFile(path);
@@ -38,7 +38,7 @@ namespace SwfLib.Tests {
         }
 
       
-        [Ignore]
+        [Ignore("")]
         [Test]
         public void Test() {
             const string source = @"D:\Sergey\swf\";
@@ -90,7 +90,7 @@ namespace SwfLib.Tests {
         }
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public void GrabAllSwfsFromMachine() {
             var source = @"D:\Sergey\Samples\";
             var target = Path.Combine(source, "tags");
