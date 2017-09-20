@@ -271,6 +271,7 @@ namespace SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineScalingGridTag tag, ISwfStreamReader reader) {
+            tag.CharacterID = reader.ReadUInt16();
             return tag;
         }
 
@@ -438,10 +439,12 @@ namespace SwfLib {
         #endregion
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineMorphShapeTag tag, ISwfStreamReader reader) {
+            tag.CharacterID = reader.ReadUInt16();
             return tag;
         }
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineMorphShape2Tag tag, ISwfStreamReader reader) {
+            tag.CharacterID = reader.ReadUInt16();
             return tag;
         }
 
@@ -488,6 +491,10 @@ namespace SwfLib {
             tag.Language = reader.ReadByte();
             int nameLength = reader.ReadByte();
             tag.FontName = Encoding.UTF8.GetString(reader.ReadBytes(nameLength));
+
+            if (reader.BytesLeft <= 0) {
+                return tag;
+            }
 
             int glyphsCount = reader.ReadUInt16();
 

@@ -1,6 +1,8 @@
 ﻿namespace SwfLib.Tags.ShapeMorphingTags {
     public class DefineMorphShapeTag : ShapeMorphingBaseTag {
 
+        public ushort CharacterID { get; set; }
+
         public override SwfTagType TagType {
             get { return SwfTagType.DefineMorphShape; }
         }

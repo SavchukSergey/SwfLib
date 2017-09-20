@@ -241,6 +241,7 @@ namespace SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineScalingGridTag tag, ISwfStreamWriter writer) {
+            writer.WriteUInt16(tag.CharacterID);
             return null;
         }
 
@@ -414,10 +415,12 @@ namespace SwfLib {
         #endregion
 
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineMorphShapeTag tag, ISwfStreamWriter writer) {
+            writer.WriteUInt16(tag.CharacterID);
             return null;
         }
 
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineMorphShape2Tag tag, ISwfStreamWriter writer) {
+            writer.WriteUInt16(tag.CharacterID);
             return null;
         }
 

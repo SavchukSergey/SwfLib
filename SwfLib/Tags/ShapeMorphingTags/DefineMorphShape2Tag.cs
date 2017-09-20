@@ -1,6 +1,8 @@
 ﻿namespace SwfLib.Tags.ShapeMorphingTags {
     public class DefineMorphShape2Tag : ShapeMorphingBaseTag {
 
+        public ushort CharacterID { get; set; }
+
         /// <summary>
         /// Gets swf tag type.
         /// </summary>

@@ -6,34 +6,34 @@ using SwfLib.Filters;
 namespace SwfLib.Tags.DisplayListTags {
     public class PlaceObject3Tag : PlaceObjectBaseTag {
 
-        public bool HasClipActions;
+        public bool HasClipActions { get; set; }
 
-        public bool HasCharacter;
+        public bool HasCharacter { get; set; }
 
-        public bool HasMatrix;
+        public bool HasMatrix { get; set; }
 
-        public bool Move;
+        public bool Move { get; set; }
 
-        public bool HasImage;
+        public bool HasImage { get; set; }
 
 
-        public string Name;
+        public string Name { get; set; }
 
-        public string ClassName;
+        public string ClassName { get; set; }
 
-        public byte Reserved;
+        public byte Reserved { get; set; }
 
-        public ushort? Ratio;
+        public ushort? Ratio { get; set; }
 
-        public byte? BitmapCache;
+        public byte? BitmapCache { get; set; }
 
-        public ushort? ClipDepth;
+        public ushort? ClipDepth { get; set; }
 
-        public ColorTransformRGBA? ColorTransform;
+        public ColorTransformRGBA? ColorTransform { get; set; }
 
         public readonly ClipActionsList ClipActions = new ClipActionsList();
 
-        public BlendMode? BlendMode;
+        public BlendMode? BlendMode { get; set; }
 
         public readonly IList<BaseFilter> Filters = new List<BaseFilter>();
 

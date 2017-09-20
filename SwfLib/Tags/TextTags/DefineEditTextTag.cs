@@ -3,60 +3,60 @@
 namespace SwfLib.Tags.TextTags {
     public class DefineEditTextTag : TextBaseTag {
 
-        public ushort CharacterID;
+        public ushort CharacterID { get; set; }
 
-        public SwfRect Bounds;
+        public SwfRect Bounds { get; set; }
 
-        public bool WordWrap;
+        public bool WordWrap { get; set; }
 
-        public bool Multiline;
+        public bool Multiline { get; set; }
 
-        public bool Password;
+        public bool Password { get; set; }
 
-        public bool ReadOnly;
+        public bool ReadOnly { get; set; }
 
-        public bool HasFont;
+        public bool HasFont { get; set; }
 
-        public bool HasFontClass;
+        public bool HasFontClass { get; set; }
 
-        public bool AutoSize;
+        public bool AutoSize { get; set; }
 
-        public bool HasLayout;
+        public bool HasLayout { get; set; }
 
-        public bool NoSelect;
+        public bool NoSelect { get; set; }
 
-        public bool Border;
+        public bool Border { get; set; }
 
-        public bool WasStatic;
+        public bool WasStatic { get; set; }
 
-        public bool HTML;
+        public bool HTML { get; set; }
 
-        public bool UseOutlines;
+        public bool UseOutlines { get; set; }
 
-        public ushort FontID;
+        public ushort FontID { get; set; }
 
-        public string FontClass;
+        public string FontClass { get; set; }
 
-        public ushort FontHeight;
+        public ushort FontHeight { get; set; }
 
-        public SwfRGBA? TextColor;
+        public SwfRGBA? TextColor { get; set; }
 
-        public ushort? MaxLength;
+        public ushort? MaxLength { get; set; }
 
         //TODO: Use enum
-        public byte Align;
+        public byte Align { get; set; }
 
-        public ushort LeftMargin;
+        public ushort LeftMargin { get; set; }
 
-        public ushort RightMargin;
+        public ushort RightMargin { get; set; }
 
-        public ushort Indent;
+        public ushort Indent { get; set; }
 
-        public short Leading;
+        public short Leading { get; set; }
 
-        public string VariableName;
+        public string VariableName { get; set; }
 
-        public string InitialText;
+        public string InitialText { get; set; }
 
         public override SwfTagType TagType {
             get { return SwfTagType.DefineEditText; }
