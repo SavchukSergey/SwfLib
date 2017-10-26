@@ -4,6 +4,8 @@
         "**/bin": true,
         "**/*.suo": true,
         "**/*.csproj.user": true,
-        "**/*.*.csproj.user": true
+        "**/*.*.csproj.user": true,
+        ".vs": true,
+        "_ReSharper.Caches": true
     }
 }
