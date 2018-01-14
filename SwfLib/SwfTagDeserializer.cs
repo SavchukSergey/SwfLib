@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using SwfLib.Actions;
@@ -153,15 +154,6 @@ namespace SwfLib {
                 reader.ReadFilterList(tag.Filters);
             }
 
-            if (reader.BytesLeft == 0)
-            {
-                return tag;
-            }
-            if (tag.HasCacheAsBitmap)
-            {
-                tag.BitmapCache = reader.ReadByte();
-            }
-
             if (tag.HasBlendMode) {
                 tag.BlendMode = (BlendMode?)reader.ReadByte();
             }
@@ -169,7 +161,11 @@ namespace SwfLib {
             if (tag.HasVisible)
             {
                 tag.Visible = reader.ReadByte();
-                tag.BackgroundColor = reader.ReadRGBA();
+                if (reader.BytesLeft > 0)
+                {
+                    tag.BackgroundColor = reader.ReadRGBA();
+                }
+                
             }
 
             if (tag.HasClipActions) {
@@ -747,7 +743,8 @@ namespace SwfLib {
             tag.SpriteID = reader.ReadUInt16();
             tag.FramesCount = reader.ReadUInt16();
             SwfTagBase subTag;
-            do {
+            do
+            {
                 subTag = ReadDefineSpriteSubTag(reader);
                 if (subTag != null) tag.Tags.Add(subTag);
             } while (subTag != null && subTag.TagType != SwfTagType.End && reader.BytesLeft > 0);
