@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace SwfLib {
@@ -7,6 +9,7 @@ namespace SwfLib {
 
         private readonly BinaryReader _reader;
         private readonly Stream _baseStream;
+        
 
         public bool IsEOF {
             get { return _reader.BaseStream.Position == _reader.BaseStream.Length; }
@@ -14,7 +17,8 @@ namespace SwfLib {
 
         public long Position { get { return _reader.BaseStream.Position; } }
 
-        public SwfStreamReader(Stream stream) {
+        public SwfStreamReader(Stream stream)
+        {
             _reader = new BinaryReader(stream);
             _baseStream = stream;
         }
@@ -33,7 +37,8 @@ namespace SwfLib {
             return value / 65536.0;
         }
 
-        public virtual ushort ReadUInt16() {
+        public virtual ushort ReadUInt16()
+        {
             return _reader.ReadUInt16();
         }
 
@@ -105,8 +110,7 @@ namespace SwfLib {
         public virtual string ReadString() {
             var dataStream = new MemoryStream();
             byte bt = 1;
-            while (bt > 0) {
-                bt = _reader.ReadByte();
+            while ((bt = _reader.ReadByte()) > 0) {
                 if (bt > 0) dataStream.WriteByte(bt);
             }
             return Encoding.UTF8.GetString(dataStream.ToArray());

@@ -26,18 +26,19 @@ namespace SwfLib {
             return file;
         }
 
-        public void WriteTo(Stream stream) {
-            WriteTo(stream, FileInfo.Format == "CWS");
+        public void WriteTo(Stream stream)
+        {
+            WriteTo(stream, FileInfo.Format);
         }
 
-        public void WriteTo(Stream stream, bool compress) {
+        public void WriteTo(Stream stream, SwfFormat swfFormat) {
             var outputWriter = new SwfStreamWriter(stream);
 
-            if (compress) {
+            if (swfFormat != SwfFormat.FWS) {
                 var res = new MemoryStream();
-                WriteTo(res, false);
+                WriteTo(res, SwfFormat.FWS);
                 res.Seek(0, SeekOrigin.Begin);
-                Compress(res, stream);
+                Compress(res, stream, swfFormat);
             } else {
                 var mem = new MemoryStream();
                 var writer = new SwfStreamWriter(mem);
@@ -50,7 +51,7 @@ namespace SwfLib {
                 mem.Seek(0, SeekOrigin.Begin);
 
                 outputWriter.WriteSwfFileInfo(new SwfFileInfo {
-                    Format = "FWS",
+                    Format = SwfFormat.FWS,
                     FileLength = (uint)(mem.Length + 8),
                     Version = FileInfo.Version
                 });
@@ -60,26 +61,36 @@ namespace SwfLib {
             stream.Flush();
         }
 
-        public static void Compress(Stream source, Stream target) {
+        public static void Compress(Stream source, Stream target, SwfFormat compressionFormat) {
+
             var reader = new SwfStreamReader(source);
             var outputWriter = new SwfStreamWriter(target);
 
             var fileInfo = reader.ReadSwfFileInfo();
             var rest = reader.ReadRest();
-            if (fileInfo.Format == "FWS") {
-                var compressed = new MemoryStream();
-                SwfZip.Compress(new MemoryStream(rest), compressed);
-                outputWriter.WriteSwfFileInfo(new SwfFileInfo {
-                    Format = "CWS",
-                    FileLength = (uint)(rest.Length) + 8,
-                    Version = fileInfo.Version
-                });
 
-                outputWriter.WriteBytes(compressed.ToArray());
-            } else {
-                outputWriter.WriteSwfFileInfo(fileInfo);
-                outputWriter.WriteBytes(rest);
+            if (fileInfo.Format != SwfFormat.FWS)
+            {
+                MemoryStream mem = new MemoryStream();
+                source.Seek(0, SeekOrigin.Begin);
+                Decompress(source, mem);
+                mem.Seek(0, SeekOrigin.Begin);
+                reader = new SwfStreamReader(mem);
+                fileInfo = reader.ReadSwfFileInfo();
+                rest = reader.ReadRest();
             }
+
+            outputWriter.WriteSwfFileInfo(new SwfFileInfo
+            {
+                Format = compressionFormat,
+                FileLength = (uint)(rest.Length) + 8,
+                Version = fileInfo.Version
+            });
+
+            var compressed = new MemoryStream();
+            SwfZip.Compress(new MemoryStream(rest), compressed, compressionFormat);
+            outputWriter.WriteBytes(compressed.ToArray());
+            
             outputWriter.Flush();
         }
 
@@ -88,23 +99,30 @@ namespace SwfLib {
             var outputWriter = new SwfStreamWriter(target);
 
             var fileInfo = reader.ReadSwfFileInfo();
-            var rest = reader.ReadRest();
-            if (fileInfo.Format == "CWS") {
-                var uncompressed = new MemoryStream();
-                SwfZip.Decompress(new MemoryStream(rest), uncompressed);
-                outputWriter.WriteSwfFileInfo(new SwfFileInfo {
-                    Format = "FWS",
-                    FileLength = (uint)(uncompressed.Length),
-                    Version = fileInfo.Version
-                });
 
-                outputWriter.WriteBytes(uncompressed.ToArray());
-            } else if (fileInfo.Format == "FWS") {
-                outputWriter.WriteSwfFileInfo(fileInfo);
-                outputWriter.WriteBytes(rest);
-            } else {
+            if (fileInfo.Format == SwfFormat.Unknown)
+            {
                 throw new NotSupportedException("Illegal file format");
             }
+
+            var rest = reader.ReadRest();
+            if (fileInfo.Format == SwfFormat.FWS)
+            {
+                outputWriter.WriteSwfFileInfo(fileInfo);
+                outputWriter.WriteBytes(rest);
+                return;
+            }
+
+            var uncompressed = new MemoryStream();
+            SwfZip.Decompress(new MemoryStream(rest), uncompressed, fileInfo.Format);
+
+            outputWriter.WriteSwfFileInfo(new SwfFileInfo
+            {
+                Format = SwfFormat.FWS,
+                FileLength = (uint)(uncompressed.Length + 8),
+                Version = fileInfo.Version
+            });
+            outputWriter.WriteBytes(uncompressed.ToArray());
             outputWriter.Flush();
         }
 
@@ -118,17 +136,16 @@ namespace SwfLib {
             }
         }
 
-        protected static ISwfStreamReader GetSwfStreamReader(SwfFileInfo info, Stream stream) {
-            switch (info.Format) {
-                case "CWS":
-                    var mem = new MemoryStream();
-                    SwfZip.Decompress(stream, mem);
-                    return new SwfStreamReader(mem);
-                case "FWS":
-                    return new SwfStreamReader(stream);
-                default:
-                    throw new NotSupportedException("Illegal file format");
+        protected static ISwfStreamReader GetSwfStreamReader(SwfFileInfo info, Stream stream)
+        {
+            if (info.Format == SwfFormat.FWS)
+            {
+                return new SwfStreamReader(stream);
             }
+            
+            MemoryStream memoryStream = new MemoryStream();
+            SwfZip.Decompress(stream, memoryStream, info.Format);
+            return new SwfStreamReader(memoryStream);
         }
 
     }

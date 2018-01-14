@@ -1,11 +1,17 @@
-﻿using SwfLib.Data;
+﻿using System;
+using SharpCompress.Common;
+using SwfLib.Data;
 
 namespace SwfLib {
     public static class SwfStreamReaderExt {
 
         public static SwfFileInfo ReadSwfFileInfo(this ISwfStreamReader writer) {
             SwfFileInfo header;
-            header.Format = new string(new[] { (char)writer.ReadByte(), (char)writer.ReadByte(), (char)writer.ReadByte() });
+            var sig = new string(new[] { (char)writer.ReadByte(), (char)writer.ReadByte(), (char)writer.ReadByte() });
+            if (!Enum.TryParse(sig, true, out header.Format))
+            {
+                throw new InvalidFormatException("Unsupported File Format");
+            }
             header.Version = writer.ReadByte();
             uint len = 0;
             len = len | ((uint)writer.ReadByte() << 0);

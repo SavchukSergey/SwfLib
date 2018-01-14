@@ -12,7 +12,7 @@ namespace SwfLib {
             writer.WriteUnsignedBits(lineStyleBits, 4);
             writer.FlushBits();
             foreach (var shapeRecord in shapeRecords) {
-                _shapeRecordWriter.WriteRGB(writer, shapeRecord, false, ref fillStyleBits, ref lineStyleBits);
+                _shapeRecordWriter.WriteRGB(writer, shapeRecord, true, ref fillStyleBits, ref lineStyleBits);
             }
 
         }

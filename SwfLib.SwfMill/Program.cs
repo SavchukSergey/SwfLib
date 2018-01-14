@@ -99,17 +99,31 @@ namespace SwfLib.SwfMill {
         }
 
         static void Compress(string[] args) {
-            if (args.Length < 2) {
-                Console.WriteLine("Source file wasn't specified");
+            if (args.Length < 3) {
+                Console.WriteLine("Invalid number of arguments");
+                ShowUsage();
+                return;
+            }
+            SwfFormat format;
+            if (!Enum.TryParse(args.Length < 4 ? args[2] : args[3], true, out format))
+            {
+                Console.WriteLine("Invalid output format signature");
+                ShowUsage();
+                return;
+            }
+            if (format == SwfFormat.FWS)
+            {
+                Console.WriteLine("FWS is an uncompressed format signature");
                 ShowUsage();
                 return;
             }
             var source = args[1];
-            var target = args.Length < 3 ? source : args[2];
+            var target = args.Length < 4 ? source : args[2];
+
             var mem = new MemoryStream();
             using (var file = File.Open(source, FileMode.Open, FileAccess.Read)) {
                 var facade = new SwfMillFacade();
-                facade.Compress(file, mem);
+                facade.Compress(file, mem, format);
             }
             mem.Seek(0, SeekOrigin.Begin);
             using (var file = File.Open(target, FileMode.Create, FileAccess.ReadWrite)) {
@@ -127,7 +141,7 @@ namespace SwfLib.SwfMill {
             Console.WriteLine("\t\tconverts xml to swf");
             Console.WriteLine("\tdecompress <sourcePath> [<targetPath>]");
             Console.WriteLine("\t\tdecompresses swf file");
-            Console.WriteLine("\tcompress <sourcePath> [<targetPath>]");
+            Console.WriteLine("\tcompress <sourcePath> [<targetPath>] <flashSignature>");
             Console.WriteLine("\t\tcompresses swf file");
             Console.WriteLine("help show this information");
         }

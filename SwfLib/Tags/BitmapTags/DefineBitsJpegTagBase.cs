@@ -30,7 +30,7 @@ namespace SwfLib.Tags.BitmapTags {
         }
 
         protected static Bitmap SetAlphas(Bitmap bmp, byte[] compressedAlpha) {
-            var alpha = SwfZip.Decompress(compressedAlpha);
+            var alpha = SwfZip.Decompress(compressedAlpha, SwfFormat.CWS);
             var index = 0;
             var res = new Bitmap(bmp.Width, bmp.Height, PixelFormat.Format32bppArgb);
             for (var y = 0; y < bmp.Height; y++) {

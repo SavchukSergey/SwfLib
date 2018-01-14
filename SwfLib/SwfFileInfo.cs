@@ -1,6 +1,6 @@
 ﻿namespace SwfLib {
     public struct SwfFileInfo {
-        public string Format;
+        public SwfFormat Format;
         public byte Version;
         public uint FileLength;
     }

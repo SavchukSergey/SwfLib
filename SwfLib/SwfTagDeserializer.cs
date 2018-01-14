@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using SwfLib.Actions;
 using SwfLib.Buttons;
@@ -100,25 +102,27 @@ namespace SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(PlaceObject3Tag tag, ISwfStreamReader reader) {
+
             tag.HasClipActions = reader.ReadBit();
-            var hasClipDepth = reader.ReadBit();
-            var hasName = reader.ReadBit();
-            var hasRatio = reader.ReadBit();
-            var hasColorMartix = reader.ReadBit();
+            tag.HasClipDepth = reader.ReadBit();
+            tag.HasName = reader.ReadBit();
+            tag.HasRatio = reader.ReadBit();
+            tag.HasColorTransform = reader.ReadBit();
             tag.HasMatrix = reader.ReadBit();
             tag.HasCharacter = reader.ReadBit();
             tag.Move = reader.ReadBit();
 
-            tag.Reserved = (byte)reader.ReadUnsignedBits(3);
+            tag.Reserved = reader.ReadBit();
+            tag.HasOpaqueBackground = reader.ReadBit();
+            tag.HasVisible = reader.ReadBit();
             tag.HasImage = reader.ReadBit();
-            var hasClassName = reader.ReadBit();
-            var hasCacheAsBitmap = reader.ReadBit();
-            var hasBlendMode = reader.ReadBit();
-            var hasFilterList = reader.ReadBit();
+            tag.HasClassName = reader.ReadBit();
+            tag.HasCacheAsBitmap = reader.ReadBit();
+            tag.HasBlendMode = reader.ReadBit();
+            tag.HasFilterList = reader.ReadBit();
 
             tag.Depth = reader.ReadUInt16();
-
-            if (hasClassName) { //Adobe says class name is also present when (hasImage && hasCharacter)
+            if (tag.HasClassName) { //Adobe says class name is also present when (hasImage && hasCharacter)
                 tag.ClassName = reader.ReadString();
             }
 
@@ -130,32 +134,38 @@ namespace SwfLib {
                 tag.Matrix = reader.ReadMatrix();
             }
 
-            if (hasColorMartix) {
+            if (tag.HasColorTransform) {
                 tag.ColorTransform = reader.ReadColorTransformRGBA();
             }
 
-            if (hasRatio) {
+            if (tag.HasRatio) {
                 tag.Ratio = reader.ReadUInt16();
             }
 
-            if (hasName) {
+            if (tag.HasName) {
                 tag.Name = reader.ReadString();
             }
 
-            if (hasClipDepth) {
+            if (tag.HasClipDepth) {
                 tag.ClipDepth = reader.ReadUInt16();
             }
 
-            if (hasFilterList) {
+            if (tag.HasFilterList) {
                 reader.ReadFilterList(tag.Filters);
             }
 
-            if (hasBlendMode) {
+            if (tag.HasBlendMode) {
                 tag.BlendMode = (BlendMode?)reader.ReadByte();
             }
-
-            if (hasCacheAsBitmap) {
-                tag.BitmapCache = reader.ReadByte();
+            
+            if (tag.HasVisible)
+            {
+                tag.Visible = reader.ReadByte();
+                if (reader.BytesLeft > 0)
+                {
+                    tag.BackgroundColor = reader.ReadRGBA();
+                }
+                
             }
 
             if (tag.HasClipActions) {
@@ -476,6 +486,7 @@ namespace SwfLib {
         }
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineFont3Tag tag, ISwfStreamReader reader) {
+
             tag.FontID = reader.ReadUInt16();
 
             tag.HasLayout = reader.ReadBit();
@@ -492,11 +503,15 @@ namespace SwfLib {
             int nameLength = reader.ReadByte();
             tag.FontName = Encoding.UTF8.GetString(reader.ReadBytes(nameLength));
 
-            if (reader.BytesLeft <= 0) {
+            if (reader.BytesLeft == 0) {
                 return tag;
             }
 
             int glyphsCount = reader.ReadUInt16();
+            if (glyphsCount < 1)
+            {
+                return tag;
+            }
 
             var offsetTable = new uint[glyphsCount];
             for (var i = 0; i < glyphsCount; i++) {
@@ -728,10 +743,11 @@ namespace SwfLib {
             tag.SpriteID = reader.ReadUInt16();
             tag.FramesCount = reader.ReadUInt16();
             SwfTagBase subTag;
-            do {
+            do
+            {
                 subTag = ReadDefineSpriteSubTag(reader);
                 if (subTag != null) tag.Tags.Add(subTag);
-            } while (subTag != null && subTag.TagType != SwfTagType.End);
+            } while (subTag != null && subTag.TagType != SwfTagType.End && reader.BytesLeft > 0);
             return tag;
         }
 

@@ -6,8 +6,8 @@ namespace SwfLib {
     public static class SwfStreamWriterExt {
 
         public static void WriteSwfFileInfo(this ISwfStreamWriter writer, SwfFileInfo fileInfo) {
-            string format = fileInfo.Format;
-            if (format == null || format.Length != 3)
+            string format = fileInfo.Format.ToString();
+            if (string.IsNullOrEmpty(format) || format.Length != 3)
                 throw new InvalidOperationException("Format should be of length 3");
             writer.WriteByte((byte)format[0]);
             writer.WriteByte((byte)format[1]);
