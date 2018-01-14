@@ -4,7 +4,6 @@ namespace SwfLib.Tags {
     public class DefineSpriteTag : SwfTagBase {
 
         public ushort SpriteID;
-
         public ushort FramesCount;
 
         //TODO: create collection that will test added tags

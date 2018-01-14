@@ -7,7 +7,8 @@ namespace SwfLib.Tests {
     public class SwfStreamReaderExtTest : TestFixtureBase {
 
         [Test]
-        public void ReadSwfFileInfoTest() {
+        public void ReadCwsFileInfoTest()
+        {
             var mem = new MemoryStream();
             mem.WriteByte((byte)'C');
             mem.WriteByte((byte)'W');
@@ -21,7 +22,33 @@ namespace SwfLib.Tests {
 
             var reader = new SwfStreamReader(mem);
             var fileInfo = reader.ReadSwfFileInfo();
-            Assert.AreEqual("CWS", fileInfo.Format);
+
+            Assert.AreEqual(SwfFormat.CWS, fileInfo.Format);
+            Assert.AreEqual(10, fileInfo.Version);
+            Assert.AreEqual(0x12345678, fileInfo.FileLength);
+
+            Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
+
+        }
+
+        [Test]
+        public void ReadZwsFileInfoTest()
+        {
+            var mem = new MemoryStream();
+            mem.WriteByte((byte)'Z');
+            mem.WriteByte((byte)'W');
+            mem.WriteByte((byte)'S');
+            mem.WriteByte(10);
+            mem.WriteByte(0x78);
+            mem.WriteByte(0x56);
+            mem.WriteByte(0x34);
+            mem.WriteByte(0x12);
+            mem.Seek(0, SeekOrigin.Begin);
+
+            var reader = new SwfStreamReader(mem);
+            var fileInfo = reader.ReadSwfFileInfo();
+
+            Assert.AreEqual(SwfFormat.ZWS, fileInfo.Format);
             Assert.AreEqual(10, fileInfo.Version);
             Assert.AreEqual(0x12345678, fileInfo.FileLength);
 

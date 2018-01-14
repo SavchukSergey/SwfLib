@@ -95,16 +95,17 @@ namespace SwfLib.SwfMill.Tests {
 
 
         protected static SwfStreamReader GetSwfStreamReader(SwfFileInfo info, Stream stream) {
-            switch (info.Format) {
-                case "CWS":
-                    var mem = new MemoryStream();
-                    SwfZip.Decompress(stream, mem);
-                    return new SwfStreamReader(mem);
-                case "FWS":
-                    return new SwfStreamReader(stream);
-                default:
-                    throw new NotSupportedException("Illegal file format");
+            if (info.Format == SwfFormat.Unknown)
+            {
+                throw new NotSupportedException("Illegal file format");
             }
+            if (info.Format == SwfFormat.FWS)
+            {
+                return new SwfStreamReader(stream);
+            }
+            var mem = new MemoryStream();
+            SwfZip.Decompress(stream, mem, info.Format);
+            return new SwfStreamReader(mem);
         }
 
         private static Stream OpenEmbeddedResource(string name) {

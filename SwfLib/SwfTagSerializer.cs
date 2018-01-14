@@ -79,6 +79,7 @@ namespace SwfLib {
         }
 
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(PlaceObject3Tag tag, ISwfStreamWriter writer) {
+
             writer.WriteBit(tag.HasClipActions);
             writer.WriteBit(tag.ClipDepth.HasValue);
             writer.WriteBit(tag.Name != null);
@@ -88,7 +89,9 @@ namespace SwfLib {
             writer.WriteBit(tag.HasCharacter);
             writer.WriteBit(tag.Move);
 
-            writer.WriteUnsignedBits(tag.Reserved, 3);
+            writer.WriteBit(tag.Reserved);
+            writer.WriteBit(tag.HasOpaqueBackground);
+            writer.WriteBit(tag.Visible.HasValue);
             writer.WriteBit(tag.HasImage);
             writer.WriteBit(tag.ClassName != null);
             writer.WriteBit(tag.BitmapCache.HasValue);
@@ -112,6 +115,7 @@ namespace SwfLib {
             if (tag.ColorTransform.HasValue) {
                 writer.WriteColorTransformRGBA(tag.ColorTransform.Value);
             }
+
             if (tag.Ratio.HasValue) {
                 writer.WriteUInt16(tag.Ratio.Value);
             }
@@ -132,6 +136,12 @@ namespace SwfLib {
 
             if (tag.BitmapCache.HasValue) {
                 writer.WriteByte(tag.BitmapCache.Value);
+            }
+
+            if (tag.Visible.HasValue)
+            {
+                writer.WriteByte(tag.Visible.Value);
+                writer.WriteRGBA(tag.BackgroundColor);
             }
 
             if (tag.HasClipActions) {

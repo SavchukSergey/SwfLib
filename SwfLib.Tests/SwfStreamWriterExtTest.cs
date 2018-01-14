@@ -9,7 +9,7 @@ namespace SwfLib.Tests {
         [Test]
         public void WriteSwfFileInfoTest() {
             var fileInfo = new SwfFileInfo {
-                Format = "CWS",
+                Format = SwfFormat.CWS,
                 Version = 10,
                 FileLength = 0x12345678
             };
@@ -31,7 +31,6 @@ namespace SwfLib.Tests {
             Assert.AreEqual(0x12, mem.ReadByte());
 
             Assert.AreEqual(mem.Length, mem.Position, "Should reach end of the stream");
-
         }
 
         [Test]
