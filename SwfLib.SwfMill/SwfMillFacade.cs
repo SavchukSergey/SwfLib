@@ -38,8 +38,8 @@ namespace SwfLib.SwfMill {
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="target">The target.</param>
-        public void Compress(Stream source, Stream target) {
-            SwfFile.Compress(source,  target);
+        public void Compress(Stream source, Stream target, SwfFormat format) {
+            SwfFile.Compress(source,  target, format);
         }
 
         public SwfFile ReadFromXml(XDocument doc) {
@@ -50,7 +50,15 @@ namespace SwfLib.SwfMill {
                 throw new FormatException("Expected swf as root");
             }
             fileInfo.Version = root.RequiredByteAttribute("version");
-            fileInfo.Format = root.RequiredBoolAttribute("compressed") ? "CWS" : "FWS";
+            if (!Enum.TryParse(root.RequiredAttribute("format"), false, out fileInfo.Format))
+            {
+                throw new FormatException("Unable to parse file format");
+            }
+            if (fileInfo.Format == SwfFormat.Unknown)
+            {
+                throw new FormatException("Unsupported file format");
+            }
+
             fileInfo.FileLength = 0;
             file.FileInfo = fileInfo;
 
@@ -73,7 +81,7 @@ namespace SwfLib.SwfMill {
         private XElement GetRoot(SwfFile file) {
             return new XElement("swf",
                                 new XAttribute("version", file.FileInfo.Version),
-                                new XAttribute("compressed", IsCompressed(file) ? "1" : "0"),
+                                new XAttribute("format", file.FileInfo.Format.ToString()),
                                 GetSwfHeaderXml(file)
                 );
         }
@@ -98,14 +106,11 @@ namespace SwfLib.SwfMill {
         }
 
         private static bool IsCompressed(SwfFile file) {
-            switch (file.FileInfo.Format) {
-                case "CWS":
-                    return true;
-                case "FWS":
-                    return false;
-                default:
-                    throw new InvalidOperationException();
+            if (file.FileInfo.Format == SwfFormat.Unknown)
+            {
+                throw new InvalidOperationException();
             }
+            return file.FileInfo.Format != SwfFormat.FWS;
         }
 
     }

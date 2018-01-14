@@ -73,16 +73,18 @@ namespace SwfLib.Tests.ExternalEtalonTests {
         }
 
         private static Stream DecompressIfNeeded(SwfFileInfo info, Stream stream) {
-            switch (info.Format) {
-                case "CWS":
-                    var mem = new MemoryStream();
-                    SwfZip.Decompress(stream, mem);
-                    return mem;
-                case "FWS":
-                    return stream;
-                default:
-                    throw new NotSupportedException("Illegal file format");
+            if (info.Format == SwfFormat.Unknown)
+            {
+                throw new NotSupportedException("Illegal file format");
             }
+            if (info.Format == SwfFormat.FWS)
+            {
+                return stream;
+            }
+
+            var mem = new MemoryStream();
+            SwfZip.Decompress(stream, mem, info.Format);
+            return mem;
         }
 
         protected string GetBinaryString(string resourceName) {

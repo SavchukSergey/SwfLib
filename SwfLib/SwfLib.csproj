@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="zlib.net" Version="1.0.4" />
+    <PackageReference Include="SharpCompress" Version="0.19.2" />
   </ItemGroup>
 
 </Project>
