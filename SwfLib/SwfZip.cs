@@ -78,7 +78,6 @@ namespace SwfLib {
         }
         private static void DecompressZlib(Stream compressed, Stream target)
         {
-
             var zip = new ZlibStream(compressed, CompressionMode.Decompress);
             int readBytes;
             var buffer = new byte[512];
@@ -100,9 +99,8 @@ namespace SwfLib {
         private static void DecompressLzma(Stream compressed, Stream target)
         {
             var lzmaProperties = new byte[5];
-            compressed.Seek(4, SeekOrigin.Begin);
+            compressed.Seek(4, SeekOrigin.Current);
             compressed.Read(lzmaProperties, 0, 5);
-            compressed.Seek(9, SeekOrigin.Begin);
             var lzmaStream = new LzmaStream(lzmaProperties, compressed);
             int readBytes;
             var buffer = new byte[512];
