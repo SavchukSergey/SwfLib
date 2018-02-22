@@ -398,7 +398,7 @@ namespace SwfLib {
             tag.JPEGData = reader.ReadRest();
             return tag;
         }
-
+#if NETFULL
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBitsJPEG2Tag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             tag.ImageData = reader.ReadRest();
@@ -421,7 +421,7 @@ namespace SwfLib {
             tag.BitmapAlphaData = reader.ReadRest();
             return tag;
         }
-
+#endif
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBitsLosslessTag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             tag.BitmapFormat = reader.ReadByte();
@@ -446,7 +446,7 @@ namespace SwfLib {
             return tag;
         }
 
-        #endregion
+#endregion
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineMorphShapeTag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
@@ -676,7 +676,7 @@ namespace SwfLib {
             return tag;
         }
 
-        #region Sound tags
+#region Sound tags
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineSoundTag tag, ISwfStreamReader reader) {
             return tag;
@@ -702,7 +702,7 @@ namespace SwfLib {
             return tag;
         }
 
-        #endregion
+#endregion
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineButtonTag tag, ISwfStreamReader reader) {
             return tag;
@@ -758,7 +758,7 @@ namespace SwfLib {
             return tag;
         }
 
-        #region Video tags
+#region Video tags
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineVideoStreamTag tag, ISwfStreamReader reader) {
             return tag;
@@ -768,7 +768,7 @@ namespace SwfLib {
             return tag;
         }
 
-        #endregion
+#endregion
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBinaryDataTag tag, ISwfStreamReader reader) {
             return tag;

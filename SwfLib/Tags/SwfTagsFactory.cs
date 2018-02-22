@@ -61,8 +61,10 @@ namespace SwfLib.Tags {
                     return new SoundStreamBlockTag();
                 case SwfTagType.DefineBitsLossless:
                     return new DefineBitsLosslessTag();
+#if NETFULL
                 case SwfTagType.DefineBitsJPEG2:
                     return new DefineBitsJPEG2Tag();
+#endif
                 case SwfTagType.DefineShape2:
                     return new DefineShape2Tag();
                 case SwfTagType.DefineButtonCxform:
@@ -79,8 +81,10 @@ namespace SwfLib.Tags {
                     return new DefineText2Tag();
                 case SwfTagType.DefineButton2:
                     return new DefineButton2Tag();
+#if NETFULL
                 case SwfTagType.DefineBitsJPEG3:
                     return new DefineBitsJPEG3Tag();
+#endif
                 case SwfTagType.DefineBitsLossless2:
                     return new DefineBitsLossless2Tag();
                 case SwfTagType.DefineEditText:
@@ -149,8 +153,10 @@ namespace SwfLib.Tags {
                     return new DefineFontNameTag();
                 case SwfTagType.StartSound2:
                     return new StartSound2Tag();
+#if NETFULL
                 case SwfTagType.DefineBitsJPEG4:
                     return new DefineBitsJPEG4Tag();
+#endif
                 case SwfTagType.DefineFont4:
                     return new DefineFont4Tag();
                 default:

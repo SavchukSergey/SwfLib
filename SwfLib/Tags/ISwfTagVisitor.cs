@@ -13,7 +13,7 @@ using SwfLib.Tags.VideoTags;
 namespace SwfLib.Tags {
     public interface ISwfTagVisitor<TArg, TResult> {
 
-        #region Display list tags
+#region Display list tags
 
         TResult Visit(PlaceObjectTag tag, TArg arg);
 
@@ -27,9 +27,9 @@ namespace SwfLib.Tags {
 
         TResult Visit(ShowFrameTag tag, TArg arg);
 
-        #endregion
+#endregion
 
-        #region Control tags
+#region Control tags
 
         TResult Visit(SetBackgroundColorTag tag, TArg arg);
 
@@ -63,9 +63,9 @@ namespace SwfLib.Tags {
 
         TResult Visit(DefineSceneAndFrameLabelDataTag tag, TArg arg);
 
-        #endregion
+#endregion
 
-        #region Action tags
+#region Action tags
 
         TResult Visit(DoActionTag tag, TArg arg);
 
@@ -75,9 +75,9 @@ namespace SwfLib.Tags {
 
         TResult Visit(DoABCDefineTag tag, TArg arg);
 
-        #endregion
+#endregion
 
-        #region Shape tags
+#region Shape tags
 
         TResult Visit(DefineShapeTag tag, TArg arg);
 
@@ -87,35 +87,35 @@ namespace SwfLib.Tags {
 
         TResult Visit(DefineShape4Tag tag, TArg arg);
 
-        #endregion
+#endregion
 
-        #region Bitmap tags
+#region Bitmap tags
 
         TResult Visit(DefineBitsTag tag, TArg arg);
 
         TResult Visit(JPEGTablesTag tag, TArg arg);
-
+#if NETFULL
         TResult Visit(DefineBitsJPEG2Tag tag, TArg arg);
 
         TResult Visit(DefineBitsJPEG3Tag tag, TArg arg);
-
+#endif
         TResult Visit(DefineBitsLosslessTag tag, TArg arg);
 
         TResult Visit(DefineBitsLossless2Tag tag, TArg arg);
-
+#if NETFULL
         TResult Visit(DefineBitsJPEG4Tag tag, TArg arg);
+#endif
+#endregion
 
-        #endregion
-
-        #region Shape morphing tags
+#region Shape morphing tags
 
         TResult Visit(DefineMorphShapeTag tag, TArg arg);
 
         TResult Visit(DefineMorphShape2Tag tag, TArg arg);
 
-        #endregion
+#endregion
 
-        #region Font tags
+#region Font tags
 
         TResult Visit(DefineFontTag tag, TArg arg);
 
@@ -131,9 +131,9 @@ namespace SwfLib.Tags {
 
         TResult Visit(DefineFontNameTag tag, TArg arg);
 
-        #endregion
+#endregion
 
-        #region Text tags
+#region Text tags
 
         TResult Visit(DefineTextTag tag, TArg arg);
 
@@ -145,9 +145,9 @@ namespace SwfLib.Tags {
 
         TResult Visit(DefineFont4Tag tag, TArg arg);
 
-        #endregion
+#endregion
 
-        #region Sound tags
+#region Sound tags
 
         TResult Visit(DefineSoundTag tag, TArg arg);
 
@@ -161,9 +161,9 @@ namespace SwfLib.Tags {
 
         TResult Visit(SoundStreamBlockTag tag, TArg arg);
 
-        #endregion
+#endregion
 
-        #region Button tags
+#region Button tags
 
         TResult Visit(DefineButtonTag tag, TArg arg);
 
@@ -173,21 +173,21 @@ namespace SwfLib.Tags {
 
         TResult Visit(DefineButtonSoundTag tag, TArg arg);
         
-        #endregion
+#endregion
 
-        #region Sprites and movie clips
+#region Sprites and movie clips
 
         TResult Visit(DefineSpriteTag tag, TArg arg);
         
-        #endregion
+#endregion
 
-        #region Video tags
+#region Video tags
 
         TResult Visit(DefineVideoStreamTag tag, TArg arg);
 
         TResult Visit(VideoFrameTag tag, TArg arg);
 
-        #endregion
+#endregion
 
         //TResult Visit(SwfTagBase tag, TArg arg);
 

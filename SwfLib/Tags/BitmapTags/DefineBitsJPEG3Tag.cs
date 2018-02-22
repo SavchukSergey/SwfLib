@@ -1,4 +1,6 @@
-﻿namespace SwfLib.Tags.BitmapTags {
+﻿namespace SwfLib.Tags.BitmapTags
+{
+#if NETFULL
     /// <summary>
     /// Represents DefineBitsJPEG3 tag.
     /// </summary>
@@ -24,4 +26,5 @@
         }
 
     }
+#endif
 }

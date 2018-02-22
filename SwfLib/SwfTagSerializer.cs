@@ -370,7 +370,7 @@ namespace SwfLib {
             writer.WriteBytes(tag.JPEGData);
             return null;
         }
-
+#if NETFULL
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineBitsJPEG2Tag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             if (tag.ImageData != null) writer.WriteBytes(tag.ImageData);
@@ -393,7 +393,7 @@ namespace SwfLib {
             writer.WriteBytes(tag.BitmapAlphaData);
             return null;
         }
-
+#endif
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineBitsLosslessTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
             writer.WriteByte(tag.BitmapFormat);
@@ -422,7 +422,7 @@ namespace SwfLib {
             return null;
         }
 
-        #endregion
+#endregion
 
         SwfTagData ISwfTagVisitor<ISwfStreamWriter, SwfTagData>.Visit(DefineMorphShapeTag tag, ISwfStreamWriter writer) {
             writer.WriteUInt16(tag.CharacterID);
