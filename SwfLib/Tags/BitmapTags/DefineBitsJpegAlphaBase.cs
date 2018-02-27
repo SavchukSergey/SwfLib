@@ -1,4 +1,5 @@
 ﻿#if NETFULL
+
 using System.Drawing;
 
 namespace SwfLib.Tags.BitmapTags {
@@ -14,4 +15,5 @@ namespace SwfLib.Tags.BitmapTags {
 
     }
 }
+
 #endif
