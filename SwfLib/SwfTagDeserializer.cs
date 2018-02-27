@@ -399,6 +399,8 @@ namespace SwfLib {
             return tag;
         }
 
+        #if NETFULL
+
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBitsJPEG2Tag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();
             tag.ImageData = reader.ReadRest();
@@ -421,6 +423,8 @@ namespace SwfLib {
             tag.BitmapAlphaData = reader.ReadRest();
             return tag;
         }
+
+        #endif
 
         SwfTagBase ISwfTagVisitor<ISwfStreamReader, SwfTagBase>.Visit(DefineBitsLosslessTag tag, ISwfStreamReader reader) {
             tag.CharacterID = reader.ReadUInt16();

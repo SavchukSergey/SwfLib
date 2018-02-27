@@ -95,15 +95,23 @@ namespace SwfLib.Tags {
 
         TResult Visit(JPEGTablesTag tag, TArg arg);
 
+        #if NETFULL
+
         TResult Visit(DefineBitsJPEG2Tag tag, TArg arg);
 
         TResult Visit(DefineBitsJPEG3Tag tag, TArg arg);
+
+        #endif
 
         TResult Visit(DefineBitsLosslessTag tag, TArg arg);
 
         TResult Visit(DefineBitsLossless2Tag tag, TArg arg);
 
+        #if NETFULL
+
         TResult Visit(DefineBitsJPEG4Tag tag, TArg arg);
+
+        #endif
 
         #endregion
 
