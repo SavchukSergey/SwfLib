@@ -1,5 +1,7 @@
-﻿using System.Drawing;
+﻿#if NETFULL
+using System.Drawing;
 using System.Drawing.Imaging;
+#endif
 using System.IO;
 
 namespace SwfLib.Tags.BitmapTags {
@@ -7,6 +9,8 @@ namespace SwfLib.Tags.BitmapTags {
 
         public byte[] ImageData;
 
+        #if NETFULL
+        
         public virtual Bitmap BuildBitmap() {
             MemoryStream mem;
             if (ImageData[0] == 0xff && ImageData[1] == 0xd8 && ImageData[2] == 0xff && ImageData[3] == 0xd9 &&
@@ -43,6 +47,8 @@ namespace SwfLib.Tags.BitmapTags {
             }
             return res;
         }
+
+        #endif
 
     }
 }

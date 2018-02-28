@@ -1,9 +1,13 @@
-﻿using System.Drawing;
+﻿#if NETFULL
+using System.Drawing;
+#endif
 
 namespace SwfLib.Tags.BitmapTags {
     public abstract class DefineBitsJpegAlphaBase : DefineBitsJpegTagBase {
 
         public byte[] BitmapAlphaData;
+
+        #if NETFULL
 
         public override Bitmap BuildBitmap() {
             var bmp = base.BuildBitmap();
@@ -11,5 +15,7 @@ namespace SwfLib.Tags.BitmapTags {
             return bmp;
         }
 
+        #endif
+        
     }
 }

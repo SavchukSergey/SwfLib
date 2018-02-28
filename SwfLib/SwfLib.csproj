@@ -1,7 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFrameworks>net461;netcoreapp2.0</TargetFrameworks>
+    <RepositoryUrl>https://github.com/SavchukSergey/SwfLib</RepositoryUrl>
+    <Authors>Sergey Savchuk</Authors>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
+  	<DefineConstants>NETFULL</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
