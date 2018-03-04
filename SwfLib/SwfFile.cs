@@ -26,8 +26,7 @@ namespace SwfLib {
             return file;
         }
 
-        public void WriteTo(Stream stream)
-        {
+        public void WriteTo(Stream stream) {
             WriteTo(stream, FileInfo.Format);
         }
 
@@ -69,8 +68,7 @@ namespace SwfLib {
             var fileInfo = reader.ReadSwfFileInfo();
             var rest = reader.ReadRest();
 
-            if (fileInfo.Format != SwfFormat.FWS)
-            {
+            if (fileInfo.Format != SwfFormat.FWS) {
                 MemoryStream mem = new MemoryStream();
                 source.Seek(0, SeekOrigin.Begin);
                 Decompress(source, mem);
@@ -80,8 +78,7 @@ namespace SwfLib {
                 rest = reader.ReadRest();
             }
 
-            outputWriter.WriteSwfFileInfo(new SwfFileInfo
-            {
+            outputWriter.WriteSwfFileInfo(new SwfFileInfo {
                 Format = compressionFormat,
                 FileLength = (uint)(rest.Length) + 8,
                 Version = fileInfo.Version
@@ -90,7 +87,7 @@ namespace SwfLib {
             var compressed = new MemoryStream();
             SwfZip.Compress(new MemoryStream(rest), compressed, compressionFormat);
             outputWriter.WriteBytes(compressed.ToArray());
-            
+
             outputWriter.Flush();
         }
 
@@ -100,14 +97,12 @@ namespace SwfLib {
 
             var fileInfo = reader.ReadSwfFileInfo();
 
-            if (fileInfo.Format == SwfFormat.Unknown)
-            {
+            if (fileInfo.Format == SwfFormat.Unknown) {
                 throw new NotSupportedException("Illegal file format");
             }
 
             var rest = reader.ReadRest();
-            if (fileInfo.Format == SwfFormat.FWS)
-            {
+            if (fileInfo.Format == SwfFormat.FWS) {
                 outputWriter.WriteSwfFileInfo(fileInfo);
                 outputWriter.WriteBytes(rest);
                 return;
@@ -116,8 +111,7 @@ namespace SwfLib {
             var uncompressed = new MemoryStream();
             SwfZip.Decompress(new MemoryStream(rest), uncompressed, fileInfo.Format);
 
-            outputWriter.WriteSwfFileInfo(new SwfFileInfo
-            {
+            outputWriter.WriteSwfFileInfo(new SwfFileInfo {
                 Format = SwfFormat.FWS,
                 FileLength = (uint)(uncompressed.Length + 8),
                 Version = fileInfo.Version
@@ -136,13 +130,11 @@ namespace SwfLib {
             }
         }
 
-        protected static ISwfStreamReader GetSwfStreamReader(SwfFileInfo info, Stream stream)
-        {
-            if (info.Format == SwfFormat.FWS)
-            {
+        protected static ISwfStreamReader GetSwfStreamReader(SwfFileInfo info, Stream stream) {
+            if (info.Format == SwfFormat.FWS) {
                 return new SwfStreamReader(stream);
             }
-            
+
             MemoryStream memoryStream = new MemoryStream();
             SwfZip.Decompress(stream, memoryStream, info.Format);
             return new SwfStreamReader(memoryStream);
