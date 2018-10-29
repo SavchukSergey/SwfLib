@@ -50,12 +50,11 @@ namespace SwfLib.SwfMill {
                 throw new FormatException("Expected swf as root");
             }
             fileInfo.Version = root.RequiredByteAttribute("version");
-            if (!Enum.TryParse(root.RequiredAttribute("format"), false, out fileInfo.Format))
-            {
+            if (!Enum.TryParse(root.RequiredAttribute("format"), false, out fileInfo.Format)) {
                 throw new FormatException("Unable to parse file format");
             }
-            if (fileInfo.Format == SwfFormat.Unknown)
-            {
+            
+            if (fileInfo.Format == SwfFormat.Unknown) {
                 throw new FormatException("Unsupported file format");
             }
 
