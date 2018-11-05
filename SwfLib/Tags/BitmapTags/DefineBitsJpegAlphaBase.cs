@@ -9,8 +9,8 @@ namespace SwfLib.Tags.BitmapTags {
 
         #if NETFULL
 
-        public override Bitmap BuildBitmap() {
-            var bmp = base.BuildBitmap();
+        public override Bitmap GetImage() {
+            var bmp = base.GetImage();
             bmp = SetAlphas(bmp, BitmapAlphaData);
             return bmp;
         }

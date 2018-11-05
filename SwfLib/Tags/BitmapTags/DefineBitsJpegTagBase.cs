@@ -11,7 +11,7 @@ namespace SwfLib.Tags.BitmapTags {
 
         #if NETFULL
         
-        public virtual Bitmap BuildBitmap() {
+        public virtual Bitmap GetImage() {
             MemoryStream mem;
             if (ImageData[0] == 0xff && ImageData[1] == 0xd8 && ImageData[2] == 0xff && ImageData[3] == 0xd9 &&
                 ImageData[4] == 0xff && ImageData[5] == 0xd8) {

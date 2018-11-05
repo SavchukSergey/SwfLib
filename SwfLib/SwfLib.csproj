@@ -4,7 +4,7 @@
     <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
     <RepositoryUrl>https://github.com/SavchukSergey/SwfLib</RepositoryUrl>
     <Authors>Sergey Savchuk</Authors>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 

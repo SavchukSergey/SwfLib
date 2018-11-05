@@ -1,4 +1,5 @@
 ﻿#if NETFULL
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 #endif
@@ -21,14 +22,21 @@ namespace SwfLib.Tags.BitmapTags {
 
         #if NETFULL
         
-        public virtual Bitmap BuildBitmap() {
+        public virtual Bitmap GetImage() {
             var data = SwfZip.DecompressZlib(ZlibBitmapData);
             var bmp = new Bitmap(BitmapWidth, BitmapHeight);
             var lineSize = BitmapWidth;
             for (var y = 0; y < bmp.Height; y++) {
                 for (var x = 0; x < bmp.Width; x++) {
                     var ind = (y * lineSize + x) * 4;
-                    var clr = Color.FromArgb(data[ind], data[ind + 1], data[ind + 2], data[ind + 3]);
+                    var alpha = data[ind];
+                    if (alpha <= 0) {
+                        alpha = 1;
+                    }
+                    var red = data[ind + 1] * 255 / alpha;
+                    var green = data[ind + 2] * 255 / alpha;
+                    var blue = data[ind + 3] * 255 / alpha;
+                    var clr = Color.FromArgb(alpha, red, green, blue);
                     bmp.SetPixel(x, y, clr);
                 }
             }
@@ -46,9 +54,9 @@ namespace SwfLib.Tags.BitmapTags {
                     var ind = (y * lineSize + x) * 4;
                     var clr = bmp.GetPixel(x, y);
                     data[ind] = clr.A;
-                    data[ind + 1] = clr.R;
-                    data[ind + 2] = clr.G;
-                    data[ind + 3] = clr.B;
+                    data[ind + 1] = (byte)(clr.R * clr.A / 255);
+                    data[ind + 2] = (byte)(clr.G * clr.A / 255);
+                    data[ind + 3] = (byte)(clr.B * clr.A / 255);
                 }
             }
             ZlibBitmapData = SwfZip.CompressZlib(data);
