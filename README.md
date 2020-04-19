@@ -8,6 +8,8 @@ It supports ActionScript 2.0.
 
 ActionScript 3.0. is planned.
 
+Donations: ```bitcoin:16pNhXV51kZBTzHZUTUnkLh9cEv5DQV3t3```
+
 ## Usage examples:
 
 ```c#
