@@ -188,13 +188,11 @@ namespace SwfLib.Avm2.Data {
             WriteU30(metadata.Name);
             WriteU30((uint)metadata.Items.Length);
             foreach (var item in metadata.Items) {
-                WriteMetadataItem(item);
+                WriteU30(item.Key);
             }
-        }
-
-        private void WriteMetadataItem(AsMetadataItem metadataItem) {
-            WriteU30(metadataItem.Key);
-            WriteU30(metadataItem.Value);
+            foreach (var item in metadata.Items) {
+                WriteU30(item.Value);
+            }
         }
 
         private void WriteInstance(AsInstanceInfo instance) {
