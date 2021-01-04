@@ -347,30 +347,7 @@ namespace SwfLib.Avm2.Data {
         }
 
         private void WriteS32(int val) {
-            var enc = (uint)val;
-            if (val >= 0) {
-                var hasNext = true;
-                do {
-                    if (enc < 0x40) {
-                        _writer.Write((byte)enc);
-                        hasNext = false;
-                    } else {
-                        _writer.Write((byte)(enc | 0x80));
-                    }
-                    enc >>= 7;
-                } while (hasNext);
-            } else {
-                var hasNext = true;
-                do {
-                    if (enc >= 0xffffffc0) {
-                        _writer.Write((byte)(enc & 0x7f));
-                        hasNext = false;
-                    } else {
-                        _writer.Write((byte)(enc | 0x80));
-                    }
-                    enc = (enc >> 7) | 0xfe000000;
-                } while (hasNext);
-            }
+            WriteU32((uint)val);
         }
 
         private void WriteD64(double val) {
