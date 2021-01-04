@@ -178,7 +178,7 @@
         SubtractI = 0xC6,
         MultiplyI = 0xC7,
         GetLocal0 = 0xD0,
-        GteLocal1 = 0xD1,
+        GetLocal1 = 0xD1,
         GetLocal2 = 0xD2,
         GetLocal3 = 0xD3,
         SetLocal0 = 0xD4,

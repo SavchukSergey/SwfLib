@@ -72,7 +72,7 @@ namespace SwfLib.Avm2 {
                 case Avm2Opcode.GetLex: return new GetLexOpcode();
                 case Avm2Opcode.GetLocal: return new GetLocalOpcode();
                 case Avm2Opcode.GetLocal0: return new GetLocal0Opcode();
-                case Avm2Opcode.GteLocal1: return new GetLocal1Opcode();
+                case Avm2Opcode.GetLocal1: return new GetLocal1Opcode();
                 case Avm2Opcode.GetLocal2: return new GetLocal2Opcode();
                 case Avm2Opcode.GetLocal3: return new GetLocal3Opcode();
                 case Avm2Opcode.GetProperty: return new GetPropertyOpcode();
