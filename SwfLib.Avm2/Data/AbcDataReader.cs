@@ -417,26 +417,7 @@ namespace SwfLib.Avm2.Data {
         /// </summary>
         /// <returns></returns>
         private int ReadS32() {
-            uint val = 0;
-            var bt = _reader.ReadByte();
-            val |= bt & 0x7fu;
-            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xffffff80);
-
-            bt = _reader.ReadByte();
-            val |= (bt & 0x7fu) << 7;
-            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xffffc000);
-
-            bt = _reader.ReadByte();
-            val |= (bt & 0x7fu) << 14;
-            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xffe00000);
-
-            bt = _reader.ReadByte();
-            val |= (bt & 0x7fu) << 21;
-            if ((bt & 0x80) == 0) return ((bt & 0x40) == 0) ? (int)val : (int)(val | 0xf0000000);
-
-            bt = _reader.ReadByte();
-            val |= (bt & 0x7fu) << 28;
-            return (int)val;
+            return (int) ReadU32();
         }
 
         private uint[] ReadMultipleU30() {
