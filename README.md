@@ -8,7 +8,7 @@ It supports ActionScript 2.0.
 
 ActionScript 3.0. is planned.
 
-Donations: ```bitcoin:16pNhXV51kZBTzHZUTUnkLh9cEv5DQV3t3```
+Donations: ```xmr:82mT5rwYg6AAdfFAAiSfdH9nhnSWNoPB71qGb6C5fvgYTL54PHAV24DQKaxu4pVMurG2CqPVxQ1aSXTTNdkApqnRTbu7CHy```
 
 ## Usage examples:
 
